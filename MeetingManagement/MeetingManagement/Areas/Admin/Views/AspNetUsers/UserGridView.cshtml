@@ -1,0 +1,71 @@
+﻿@model IEnumerable<MeetingManagement.Models.AspNetUser>
+
+<div class="col-sm-12">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>UserName</th>
+                <th>Email</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.UserName</td>
+                <td>@item.Email</td>
+                <td>
+                    @*<select class="form-control">*@
+                        @foreach (var role in item.AspNetRoles)
+                        {
+                            @role.Name
+                        }
+                    @*</select>*@
+                </td>
+                <td>
+                    <ul>
+                        <li>
+                            <span>&#10000; </span>
+                            <ul class="menu_thaotac">
+                                <li>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<style>
+    tr {
+        height: 50px;
+    }
+
+    * {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul > li > ul {
+        display: none;
+    }
+
+    ul > li:hover > ul {
+        display: block;
+    }
+
+    ul > li span {
+        font-size: 25px;
+    }
+</style>
