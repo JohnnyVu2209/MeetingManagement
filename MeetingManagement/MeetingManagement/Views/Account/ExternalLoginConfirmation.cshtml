@@ -13,12 +13,14 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <p class="text-info">
-        You've successfully authenticated with <strong>@ViewBag.LoginProvider</strong>.
+        <b>@Model.Email</b> is successfully authenticated with <b>@ViewBag.LoginProvider</b>.
         Please enter a user name for this site below and click the Register button to finish
         logging in.
     </p>
     <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <b class="col-md-2 control-label">
+            Email: 
+        </b>
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
