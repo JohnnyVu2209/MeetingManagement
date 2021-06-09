@@ -172,6 +172,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\categoriesController.cs" />
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
+    <Compile Include="Areas\User\Controllers\categoriesController.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -258,6 +259,9 @@
     <Content Include="Areas\HeadOfDepartment\Views\categories\Details.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\categories\Edit.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\categories\Index.cshtml" />
+    <Content Include="Areas\User\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\User\Views\categories\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -311,9 +315,7 @@
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\HeadOfDepartment\Data\" />
     <Folder Include="Areas\HeadOfDepartment\Views\Shared\" />
-    <Folder Include="Areas\User\Controllers\" />
     <Folder Include="Areas\User\Data\" />
-    <Folder Include="Areas\User\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
