@@ -175,7 +175,10 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetRolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
-    <Compile Include="Areas\HeadOfDepartment\BCN_KhoaAreaRegistration.cs" />
+    <Compile Include="Areas\HeadOfDepartment\Controllers\categoriesController.cs" />
+    <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
+    <Compile Include="Areas\User\Controllers\categoriesController.cs" />
+
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -242,6 +245,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\catalog-list.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -268,6 +272,7 @@
     <Content Include="Models\Models.edmx.diagram">
       <DependentUpon>Models.edmx</DependentUpon>
     </Content>
+
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\Create.cshtml" />
@@ -281,6 +286,14 @@
     <Content Include="Areas\Admin\Views\AspNetRoles\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\UserGridView.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\categories\Create.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\categories\Delete.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\categories\Details.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\categories\Edit.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\categories\Index.cshtml" />
+    <Content Include="Areas\User\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\User\Views\categories\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -331,11 +344,10 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\HeadOfDepartment\Controllers\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\HeadOfDepartment\Data\" />
     <Folder Include="Areas\HeadOfDepartment\Views\Shared\" />
-    <Folder Include="Areas\User\Controllers\" />
     <Folder Include="Areas\User\Data\" />
-    <Folder Include="Areas\User\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
