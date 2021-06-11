@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<MeetingManagement.Models.AspNetUser>
-
+@using MeetingManagement.Models
+@{
+    var Role = ViewBag.Role as AspNetRole;
+}
 <div class="col-sm-12">
     <table class="table">
         <thead>
@@ -10,14 +13,14 @@
             </tr>
         </thead>
 
-        @foreach (var item in Model)
+        @foreach (var users in Model)
         {
             <tr>
-                <td>@item.UserName</td>
-                <td>@item.Email</td>
+                <td>@users.UserName</td>
+                <td>@users.Email</td>
                 <td>
                     @*<select class="form-control">*@
-                        @foreach (var role in item.AspNetRoles)
+                        @foreach (var role in users.AspNetRoles)
                         {
                             @role.Name
                         }
@@ -28,14 +31,14 @@
                         <li>
                             <span>&#10000; </span>
                             <ul class="menu_thaotac">
+                                @*<li>
+                                    <a href="@Url.Action("Edit",new { id = item.Id })">Edit</a>
+                                </li>*@
                                 <li>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                    <a href="@Url.Action("Delete",new { id = users.Id })">Delete</a>
                                 </li>
                                 <li>
-                                    @Html.ActionLink("Details", "Details", new { id = item.Id })
-                                </li>
-                                <li>
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                    <a href="@Url.Action("Create","AspNetRoleUser",new { UserID = users.Id })">Add role</a>
                                 </li>
                             </ul>
                         </li>
