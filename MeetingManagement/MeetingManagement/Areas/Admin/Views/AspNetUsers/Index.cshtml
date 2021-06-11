@@ -5,10 +5,6 @@
 }
 
 <h2>Danh sách tài khoản</h2>
-<header>
-    <script language="JavaScript" type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
-</header>
-
 <div class="row">
     <div class="col-sm-12">
         <div style="margin-bottom:20px" class="form-inline pull-right">
@@ -29,7 +25,11 @@
 </div>
 <div id="grdUserView"></div>
 
-<script>
+@section scripts{
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('#grdUserView').append('#myTable');
+    });
     $(() => {
         getUser();
         $('#txtSearch').on('keyup', () => {
@@ -49,5 +49,7 @@
                 console.log(err);
             }
         })
-    }
-</script>
+    };
+    </script>
+
+}

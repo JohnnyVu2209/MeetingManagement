@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<MeetingManagement.Models.AspNetUser>
 
-<div class="col-sm-12">
+<div class="col-sm-12" id="myTable">
     <table class="table">
         <thead>
             <tr>
@@ -17,10 +17,10 @@
                 <td>@item.Email</td>
                 <td>
                     @*<select class="form-control">*@
-                        @foreach (var role in item.AspNetRoles)
-                        {
-                            @role.Name
-                        }
+                    @foreach (var role in item.AspNetRoles)
+                    {
+                        @role.Name
+                    }
                     @*</select>*@
                 </td>
                 <td>
@@ -29,7 +29,7 @@
                             <span>&#10000; </span>
                             <ul class="menu_thaotac">
                                 <li>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                    <button onclick="ShowResetPasswordPopUp('@item.Id');">Reset Password</button>
                                 </li>
                                 <li>
                                     @Html.ActionLink("Details", "Details", new { id = item.Id })
@@ -45,6 +45,7 @@
         }
     </table>
 </div>
+<div id="show-popup"></div>
 
 <style>
     tr {
@@ -69,3 +70,19 @@
         font-size: 25px;
     }
 </style>
+<script>
+
+    function ShowResetPasswordPopUp(userID) {
+        $.ajax({
+            type: "GET",
+            url: "ResetPassword",
+            data: { userID },
+            dataType: "html",
+            success: function (data) {
+                $("#show-popup").html(data);
+
+                $("#myResetPasswordModal").modal("show");
+            }
+        });
+    };
+</script>
