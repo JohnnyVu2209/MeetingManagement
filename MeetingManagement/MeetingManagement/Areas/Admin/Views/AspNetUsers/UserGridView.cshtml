@@ -20,10 +20,10 @@
                 <td>@users.Email</td>
                 <td>
                     @*<select class="form-control">*@
-                        @foreach (var role in users.AspNetRoles)
-                        {
-                            @role.Name
-                        }
+                    @foreach (var role in users.AspNetRoles)
+                    {
+                        @role.Name
+                    }
                     @*</select>*@
                 </td>
                 <td>
@@ -31,14 +31,19 @@
                         <li>
                             <span>&#10000; </span>
                             <ul class="menu_thaotac">
-                                @*<li>
-                                    <a href="@Url.Action("Edit",new { id = item.Id })">Edit</a>
-                                </li>*@
                                 <li>
                                     <a href="@Url.Action("Delete",new { id = users.Id })">Delete</a>
                                 </li>
                                 <li>
                                     <a href="@Url.Action("Create","AspNetRoleUser",new { UserID = users.Id })">Add role</a>
+                                </li>
+                                <li>
+                                    @foreach (var role in users.AspNetRoles)
+                                    {
+                                        <a type="submit"
+                                           onclick="return confirm('are you sure you want delete @role.Name from @users.Email ?')"
+                                           href="@Url.Action("Delete","AspNetRoleUser",new { RoleID = role.Id, UserID = users.Id  })">Delete role</a>
+                                    }
                                 </li>
                             </ul>
                         </li>

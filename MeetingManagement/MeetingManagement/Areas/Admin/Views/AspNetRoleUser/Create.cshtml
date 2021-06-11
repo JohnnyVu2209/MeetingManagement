@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Create";
     var Roles = ViewBag.Roles as SelectList;
-    var User = ViewBag.User as AspNetUser;
+    var User = ViewBag.Users as AspNetUser;
 }
 
 @using (Html.BeginForm())
@@ -10,7 +10,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Add to role</h4>
+        <h4>Add <b>@User.Email</b> to role</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -23,7 +23,9 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit"
+                       onclick="return confirm('are you sure you want add this role to @User.Email ?')"
+                       value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
