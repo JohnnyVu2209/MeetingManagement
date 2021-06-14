@@ -1,37 +1,44 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width" />
-    <title>VanLangMeeting</title>
-    <link href="~/css/style.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body>
-    <div class="top-nav">
-        <a href="#"><img class="logo" src="~/imgs/logo-vlu-en-8.png" height="60px" /></a>
-        </div>
-@*        <a class="openbtn" id="open"><img src="~/imgs/icons8-slider-48.png" height="40px" width="50px" /></a>*@
-        <div class="wrapper">
-            <input type="checkbox" id="btn" hidden>
-            <label for="btn" class="menu-btn">
-                <img src="~/imgs/icons8-slider-48.png"/>
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-times"></i>
-            </label>
-            <nav id="sidebar">
- @*               <div class="title">
-                    Side Menu
-                </div>*@
-                <ul class="list-items">
-                    <li><a href="#"><i class="fas fa-home"></i>Trang Chủ</a></li>
-                    <li><a href="#"><i class="fas fa-sliders-h"></i>Danh Mục</a></li>
-                    <li><a href="#"><i class="fas fa-address-book"></i>Cuộc Họp</a></li>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Meeting Management", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Roles", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Users", "Index", "Home")</li>
                 </ul>
-            </nav>
+                @Html.Partial("_LoginPartial")
+            </div>
         </div>
-
-        <div>
-        @RenderBody()
     </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

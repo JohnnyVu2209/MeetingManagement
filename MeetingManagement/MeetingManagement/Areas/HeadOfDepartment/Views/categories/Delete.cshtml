@@ -1,15 +1,15 @@
 ﻿@model MeetingManagement.Models.CATEGORY
 
 <div id="myDeleteModal" class="modal fade" role="dialog">
-    <div class="modal-dialog" style="width:460px;">
+    <div class="modal-dialog" style="width:500px;">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Xóa danh mục</h4>
+                <h4 class="modal-title">Xác Nhận Xoá Danh Mục</h4>
             </div>
             <div class="modal-body">
                 <form action="Delete">
                     @Html.HiddenFor(m => m.Category_id)
-                    Bạn thật sự muốn xóa "@Html.DisplayFor(m => m.Category_Name)" ?
+                    Bạn có thật sự muốn xóa danh mục "@Html.DisplayFor(m => m.Category_Name)" ?
                 </form>
 
             </div>
@@ -20,3 +20,7 @@
         </div>
     </div>
 </div>
+
+
+
+

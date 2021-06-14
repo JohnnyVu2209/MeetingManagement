@@ -49,6 +49,11 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         public JsonResult Create(CATEGORY cg)
         {
             /*link huong dan de lam phan nay https://www.youtube.com/watch?v=2ktFobQ4VmM */
+
+
+            SEP24Team7Entities db = new SEP24Team7Entities();
+            db.CATEGORies.Add(cg);
+            db.SaveChanges();
             return Json(cg, JsonRequestBehavior.AllowGet);
         }
 

@@ -175,8 +175,8 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetRolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
-    <Compile Include="Areas\HeadOfDepartment\Controllers\CATEGORies1Controller.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\categoriesController.cs" />
+    <Compile Include="Areas\HeadOfDepartment\Controllers\DanhMucController.cs" />
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\categoriesController.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
@@ -2214,11 +2214,6 @@
     <Content Include="Areas\User\Views\_ViewStart.cshtml" />
     <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\User\Views\categories\Index.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\CATEGORies1\Create.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\CATEGORies1\Delete.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\CATEGORies1\Details.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\CATEGORies1\Edit.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\CATEGORies1\Index.cshtml" />
     <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-brands-400.eot" />
     <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-brands-400.ttf" />
     <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-brands-400.woff" />
@@ -2261,6 +2256,11 @@
     <Content Include="assets\plugins\global\fonts\summernote\summernote.ttf" />
     <Content Include="assets\plugins\global\fonts\summernote\summernote.woff" />
     <Content Include="assets\plugins\global\fonts\summernote\summernote.woff2" />
+    <Content Include="Areas\HeadOfDepartment\Views\DanhMuc\Create.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\DanhMuc\Delete.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\DanhMuc\Details.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\DanhMuc\Edit.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\DanhMuc\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2308,7 +2308,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_VanLangMeeting.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Shared\HODLayout.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Shared\HODIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

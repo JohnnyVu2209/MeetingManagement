@@ -8,7 +8,7 @@
 <header>
     Danh mục
     <button class="btn modal-btn" onclick="ShowCreatePopUp();">
-        Tạo
+        Thêm Danh Mục
     </button>
 </header>
 <div class="wrapper">
@@ -40,7 +40,9 @@
 
     </ul>
 </div>
-<div id="show-popup"></div>
+<div id="show-popup">
+</div>
+
 <script type="text/javascript">
     function ShowCreatePopUp() {
         $.ajax({
@@ -50,7 +52,6 @@
             dataType: "html",
             success: function (data) {
                 $("#show-popup").html(data);
-
                 $("#myCreateModal").modal("show");
             },
             error: function (data) {
@@ -58,6 +59,8 @@
             }
         });
     };
+
+
 
     function ShowEditPopUp(categoryID) {
         $.ajax({

@@ -13,7 +13,8 @@ License: You must have a valid license purchased only from themeforest(the above
 -->
 <html lang="en">
 	<!--begin::Head-->
-	<head><base href="">
+	<head>
+		<base href="">
 		<meta charset="utf-8" />
 		<title>Metronic Live preview | Keenthemes</title>
 		<meta name="description" content="Metronic admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets." />
@@ -46,7 +47,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
 			<!--begin::Logo-->
 			<a href="index.html">
-				<img alt="Logo" src="assets/media/logos/logo-light.png" />
+				<img alt="Logo" src="~/assets/media/logos/logo-light.png" />
 			</a>
 			<!--end::Logo-->
 			<!--begin::Toolbar-->
@@ -9254,6 +9255,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		</ul>
 		<!--end::Sticky Toolbar-->
 		<!--begin::Demo Panel-->
+		@RenderBody()
 		<div id="kt_demo_panel" class="offcanvas offcanvas-right p-10">
 			<!--begin::Header-->
 			<div class="offcanvas-header d-flex align-items-center justify-content-between pb-7">

@@ -10,18 +10,18 @@ using MeetingManagement.Models;
 
 namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 {
-    public class CATEGORies1Controller : Controller
+    public class DanhMucController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
 
-        // GET: HeadOfDepartment/CATEGORies1
+        // GET: HeadOfDepartment/DanhMuc
         public ActionResult Index()
         {
             var cATEGORies = db.CATEGORies.Include(c => c.USER);
             return View(cATEGORies.ToList());
         }
 
-        // GET: HeadOfDepartment/CATEGORies1/Details/5
+        // GET: HeadOfDepartment/DanhMuc/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,14 +36,14 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return View(cATEGORY);
         }
 
-        // GET: HeadOfDepartment/CATEGORies1/Create
+        // GET: HeadOfDepartment/DanhMuc/Create
         public ActionResult Create()
         {
             ViewBag.Create_by = new SelectList(db.USERS, "User_id", "Full_name");
             return View();
         }
 
-        // POST: HeadOfDepartment/CATEGORies1/Create
+        // POST: HeadOfDepartment/DanhMuc/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -61,7 +61,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return View(cATEGORY);
         }
 
-        // GET: HeadOfDepartment/CATEGORies1/Edit/5
+        // GET: HeadOfDepartment/DanhMuc/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -77,7 +77,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return View(cATEGORY);
         }
 
-        // POST: HeadOfDepartment/CATEGORies1/Edit/5
+        // POST: HeadOfDepartment/DanhMuc/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -94,7 +94,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return View(cATEGORY);
         }
 
-        // GET: HeadOfDepartment/CATEGORies1/Delete/5
+        // GET: HeadOfDepartment/DanhMuc/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -109,7 +109,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return View(cATEGORY);
         }
 
-        // POST: HeadOfDepartment/CATEGORies1/Delete/5
+        // POST: HeadOfDepartment/DanhMuc/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

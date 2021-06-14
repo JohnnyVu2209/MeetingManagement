@@ -1,14 +1,14 @@
 ﻿@model MeetingManagement.Models.CATEGORY
 
 @{
-    ViewBag.Title = "Edit";
-    Layout = "~/Areas/HeadOfDepartment/Views/Shared/HODLayout.cshtml";
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/HeadOfDepartment/Views/Shared/HODIndex.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>Create</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
@@ -23,8 +23,6 @@
                 @Html.ValidationMessageFor(model => model.Create_by, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        @Html.HiddenFor(model => model.Category_id)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Category_Name, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -44,7 +42,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
