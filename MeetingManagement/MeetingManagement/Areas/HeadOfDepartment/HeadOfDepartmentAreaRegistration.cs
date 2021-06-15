@@ -1,22 +1,22 @@
 ﻿using System.Web.Mvc;
 
-namespace MeetingManagement.Areas.BCN_Khoa
+namespace MeetingManagement.Areas.HeadOfDepartment
 {
-    public class BCN_KhoaAreaRegistration : AreaRegistration 
+    public class HeadOfDepartmentaAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
         {
             get 
             {
-                return "BCN_Khoa";
+                return "HeadOfDepartment";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "BCN_Khoa_default",
-                "BCN_Khoa/{controller}/{action}/{id}",
+                "HeadOfDepartment_default",
+                "HeadOfDepartment/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
         }

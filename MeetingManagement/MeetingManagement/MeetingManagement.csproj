@@ -174,8 +174,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetRolesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AspNetRoleUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
-    <Compile Include="Areas\HeadOfDepartment\BCN_KhoaAreaRegistration.cs" />
+    <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -296,13 +297,7 @@
     <Content Include="Areas\Admin\Views\AspNetRoles\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\UserGridView.cshtml" />
-    <Content Include="login-form-05\css\.DS_Store" />
-    <Content Include="login-form-05\css\bootstrap.min.css.map" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.eot" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.ttf" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.woff" />
-    <Content Include="login-form-05\fonts\icomoon\selection.json" />
-    <Content Include="login-form-05\images\.DS_Store" />
+    <Content Include="Areas\Admin\Views\AspNetRoleUser\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
