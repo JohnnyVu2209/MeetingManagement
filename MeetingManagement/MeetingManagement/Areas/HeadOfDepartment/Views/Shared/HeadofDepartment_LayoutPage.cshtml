@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/normalize.css" />
     <link rel="stylesheet" href="~/Content/The-Last-Style-Blender.css" />
 </head>
 <body>
@@ -40,16 +41,18 @@
 
     <div id="menu">
         <ul>
-            <li><a href="@Url.Action("Index","Home")">Index</a></li>
-            <li><a href="@Url.Action("About","Home")">About</a></li>
-            <li><a href="@Url.Action("Contact","Home")">Contact</a></li>
+            <li><a href="#">Trang chính</a></li>
+            <li><a href="#">Danh mục</a></li>
+            <li><a href="#">Cuộc họp</a></li>
+            <li><a href="#">Công việc</a></li>
+
         </ul>
     </div> <!--Menu-->
 
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
+        <footer id="footer">
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
