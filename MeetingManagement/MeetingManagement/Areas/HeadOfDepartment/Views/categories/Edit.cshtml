@@ -8,7 +8,8 @@
                 <h4 class="modal-title">Sửa danh mục</h4>
             </div>
             <div class="modal-body">
-                <form action="Edit" method="post">
+                @using (Ajax.BeginForm("Edit", "categories", new AjaxOptions { HttpMethod = "Post", OnSuccess = "CreateSuccess" }, new { @class = "form-horizontal", @id = "editformid", role = "form" }))
+                {
                     @Html.HiddenFor(model => model.Category_id)
                     <div class="catalog-form_group form-group">
                         @Html.TextBoxFor(model => model.Category_Name, new { @class = "catalog-form_input" })
@@ -16,14 +17,28 @@
                     <div class="catalog-form_group form-group">
                         @Html.TextAreaFor(model => model.Category_Content, new { @class = "catalog-form_input", @style = "margin-top: 16px", @rows = "5", @cols = "20" })
                     </div>
-                    @Html.HiddenFor(m => m.CreateBy_id);
-                </form>
+                    @Html.HiddenFor(m => m.Create_by);
+                }
 
-            </div>
+                </div>
             <div class="modal-footer">
-                <button class="btn btn--primary">Sửa</button>
+                <button class="btn btn--primary" onclick="EditCat()">Sửa</button>
                 <button class="btn btn-normal " data-dismiss="modal">Hủy</button>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    function EditCat() {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Edit", "categories")',
+            data: $("#editformid").serialize(),
+            success: function () {
+    $("#myEditModal").modal("hide");
+alert("Sửa Thành Công");
+}
+})
+}
+</script>

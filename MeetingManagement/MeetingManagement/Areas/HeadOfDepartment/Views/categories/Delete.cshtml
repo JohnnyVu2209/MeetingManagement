@@ -7,6 +7,7 @@
                 <h4 class="modal-title">Xóa danh mục</h4>
             </div>
             <div class="modal-body">
+
                 <form action="Delete">
                     @Html.HiddenFor(m => m.Category_id)
                     Bạn thật sự muốn xóa "@Html.DisplayFor(m => m.Category_Name)" ?
@@ -14,7 +15,7 @@
 
             </div>
             <div class="modal-footer">
-                <button class="btn btn--delete" onclick="DeleteCat">Xóa</button>
+                <button class="btn btn--delete" onclick="DeleteCat()">Xóa</button>
                 <button class="btn btn-normal " data-dismiss="modal">Hủy</button>
             </div>
         </div>
@@ -24,29 +25,21 @@
     </div>
 </div>
 
+
 <script>
+    function DeleteCat() {
+        var id = $("#Category_id").val();
 
-    var ConfirmDelete = function (CategoryId) {
-
-        $("#hiddenEmployeeId").val(CategoryId;
-        $("#myModal").modal('show');
-
-    }
-
-    var DeleteEmployee = function () {
-        var empId = $("#hiddenCategoryId").val();
         $.ajax({
             type: "POST",
             url: '@Url.Action("Delete", "categories")',
-            data: { EmployeeId: empId },
-            success: function (result) {              
-                $("#myDeleteModal").modal("hide");
-                $("#row_" + empId).remove();
-            }
-
-        })
-
-    }
+            data: {id:id},
+success: function () {
+    $("#myDeleteModal").modal("hide");
+alert("Xoá Thành Công");
+}
+})
+}
 </script>
 
 
