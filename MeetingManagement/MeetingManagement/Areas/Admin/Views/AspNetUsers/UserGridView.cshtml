@@ -1,26 +1,30 @@
 ﻿@model IEnumerable<MeetingManagement.Models.AspNetUser>
 
 <div class="col-sm-12">
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
+
             <tr>
-                <th>UserName</th>
-                <th>Email</th>
-                <th>Role</th>
+                
+                <th scope="col">UserName</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
             </tr>
+
         </thead>
 
         @foreach (var item in Model)
         {
             <tr>
+                
                 <td>@item.UserName</td>
                 <td>@item.Email</td>
                 <td>
                     @*<select class="form-control">*@
-                        @foreach (var role in item.AspNetRoles)
-                        {
-                            @role.Name
-                        }
+                    @foreach (var role in item.AspNetRoles)
+                    {
+                        @role.Name
+                    }
                     @*</select>*@
                 </td>
                 <td>
