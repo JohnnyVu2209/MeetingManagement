@@ -4,13 +4,16 @@
     var Role = ViewBag.Role as AspNetRole;
 }
 <div class="col-sm-12">
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
+
             <tr>
-                <th>UserName</th>
-                <th>Email</th>
-                <th>Role</th>
+                
+                <th scope="col">UserName</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
             </tr>
+
         </thead>
 
         @foreach (var users in Model)
