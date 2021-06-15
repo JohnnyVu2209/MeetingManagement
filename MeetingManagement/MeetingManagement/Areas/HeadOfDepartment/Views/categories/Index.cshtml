@@ -8,7 +8,7 @@
 <header>
     Danh mục
     <button class="btn modal-btn" onclick="ShowCreatePopUp();">
-        Thêm Danh Mục
+        Tạo
     </button>
 </header>
 <div class="wrapper">
@@ -40,8 +40,10 @@
 
     </ul>
 </div>
-<div id="show-popup">
-</div>
+
+
+<div id="show-popup"></div>
+
 
 <script type="text/javascript">
     function ShowCreatePopUp() {
@@ -59,9 +61,6 @@
             }
         });
     };
-
-
-
     function ShowEditPopUp(categoryID) {
         $.ajax({
             type: "GET",
@@ -70,7 +69,6 @@
             dataType: "html",
             success: function (data) {
                 $("#show-popup").html(data);
-
                 $("#myEditModal").modal("show");
             },
             error: function (data) {
@@ -78,17 +76,15 @@
             }
         });
     };
-
-
     function ShowDeletePopUp(categoryID) {
+        $("#loader-div")       
         $.ajax({
             type: "GET",
             url: "Delete",
-            data: {id : categoryID },
+            data: { id: categoryID },
             dataType: "html",
             success: function (data) {
                 $("#show-popup").html(data);
-
                 $("#myDeleteModal").modal("show");
             },
             error: function (data) {
@@ -96,5 +92,4 @@
             }
         });
     };
-
 </script>

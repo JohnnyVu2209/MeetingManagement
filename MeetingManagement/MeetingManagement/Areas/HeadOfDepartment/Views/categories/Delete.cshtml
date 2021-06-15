@@ -4,23 +4,49 @@
     <div class="modal-dialog" style="width:500px;">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Xác Nhận Xoá Danh Mục</h4>
+                <h4 class="modal-title">Xóa danh mục</h4>
             </div>
             <div class="modal-body">
                 <form action="Delete">
                     @Html.HiddenFor(m => m.Category_id)
-                    Bạn có thật sự muốn xóa danh mục "@Html.DisplayFor(m => m.Category_Name)" ?
+                    Bạn thật sự muốn xóa "@Html.DisplayFor(m => m.Category_Name)" ?
                 </form>
 
             </div>
             <div class="modal-footer">
-                <button class="btn btn--delete">Xóa</button>
+                <button class="btn btn--delete" onclick="DeleteCat">Xóa</button>
                 <button class="btn btn-normal " data-dismiss="modal">Hủy</button>
             </div>
+        </div>
+        <div style="text-align:center;display:none" id="loader-div">
+            <img src="~/imgs/Walk.gif" style="height:100px;width:100px" />
         </div>
     </div>
 </div>
 
+<script>
 
+    var ConfirmDelete = function (CategoryId) {
+
+        $("#hiddenEmployeeId").val(CategoryId;
+        $("#myModal").modal('show');
+
+    }
+
+    var DeleteEmployee = function () {
+        var empId = $("#hiddenCategoryId").val();
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Delete", "categories")',
+            data: { EmployeeId: empId },
+            success: function (result) {              
+                $("#myDeleteModal").modal("hide");
+                $("#row_" + empId).remove();
+            }
+
+        })
+
+    }
+</script>
 
 

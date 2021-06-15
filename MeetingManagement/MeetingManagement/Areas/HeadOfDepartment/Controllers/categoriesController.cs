@@ -41,7 +41,6 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         {
             return PartialView("Create", new Models.CATEGORY());
         }
-
         // POST: HeadOfDepartment/categories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -49,11 +48,12 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         public JsonResult Create(CATEGORY cg)
         {
             /*link huong dan de lam phan nay https://www.youtube.com/watch?v=2ktFobQ4VmM */
-
-
-            SEP24Team7Entities db = new SEP24Team7Entities();
+            /*SEP24Team7Entities db = new SEP24Team7Entities();*/
+            cg.Create_by = "48e5a0b4-76ea-4619-bd6b-771bb9954c96";
             db.CATEGORies.Add(cg);
+           
             db.SaveChanges();
+            
             return Json(cg, JsonRequestBehavior.AllowGet);
         }
 

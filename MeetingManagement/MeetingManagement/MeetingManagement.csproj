@@ -205,6 +205,7 @@
     <Compile Include="Models\CATEGORY.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Crud.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MEETING.cs">
@@ -2171,6 +2172,7 @@
     <Content Include="imgs\icons8-slider-50.png" />
     <Content Include="imgs\logo-vlu-en-8.png" />
     <Content Include="imgs\logoVLU.png" />
+    <Content Include="imgs\Walk.gif" />
     <Content Include="Models\Models.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Models.edmx</DependentUpon>
