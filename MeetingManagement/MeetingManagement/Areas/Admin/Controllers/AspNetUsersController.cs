@@ -10,6 +10,8 @@ using System.Web.Mvc;
 using MeetingManagement.Controllers;
 using MeetingManagement.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+
 
 namespace MeetingManagement.Areas.Admin.Controllers
 {
@@ -18,7 +20,20 @@ namespace MeetingManagement.Areas.Admin.Controllers
     {
 
         private AccountController ac = new AccountController();
+        private ApplicationUserManager _userManager;
         private SEP24Team7Entities db = new SEP24Team7Entities();
+        private ApplicationSignInManager _signInManager;
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         // GET: Admin/AspNetUsers
         public ActionResult Index()
@@ -53,16 +68,45 @@ namespace MeetingManagement.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] AspNetUser aspNetUser)
+        public async Task<ActionResult> Create(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            /* if (ModelState.IsValid)
+             {
+                 db.AspNetUsers.Add(aspNetUser);
+                 db.SaveChanges();
+                 return RedirectToAction("Index");
+             }
+
+             return View(aspNetUser);*/
+
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            var result = await UserManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
             {
-                db.AspNetUsers.Add(aspNetUser);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                return RedirectToAction("Index", "AspNetUsers");
+            }
+            else
+            {
+                AddErrors(result);
             }
 
-            return View(aspNetUser);
+
+            // If we got this far, something failed, redisplay form
+            return View();
+        }
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
         }
 
         // GET: Admin/AspNetUsers/Edit/5
@@ -149,6 +193,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
             List<AspNetRole> roles = db.AspNetRoles.ToList();
             return roles;
         }
+
         [HttpGet]
         public ActionResult ResetPassword(string userID)
         {

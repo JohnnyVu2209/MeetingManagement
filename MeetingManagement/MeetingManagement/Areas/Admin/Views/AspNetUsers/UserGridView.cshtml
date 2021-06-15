@@ -1,23 +1,31 @@
 ﻿@model IEnumerable<MeetingManagement.Models.AspNetUser>
 
-<div class="col-sm-12" id="myTable">
-    <table class="table">
+@using MeetingManagement.Models
+@{
+    var Role = ViewBag.Role as AspNetRole;
+}
+<div class="col-sm-12">
+    <table class="table table-bordered">
         <thead>
+
             <tr>
-                <th>UserName</th>
-                <th>Email</th>
-                <th>Role</th>
+                
+                <th scope="col">UserName</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
             </tr>
+
         </thead>
 
-        @foreach (var item in Model)
+        @foreach (var users in Model)
         {
             <tr>
-                <td>@item.UserName</td>
-                <td>@item.Email</td>
+                <td>@users.UserName</td>
+                <td>@users.Email</td>
                 <td>
                     @*<select class="form-control">*@
-                    @foreach (var role in item.AspNetRoles)
+
+                    @foreach (var role in users.AspNetRoles)
                     {
                         @role.Name
                     }
@@ -29,13 +37,22 @@
                             <span>&#10000; </span>
                             <ul class="menu_thaotac">
                                 <li>
+
                                     <button onclick="ShowResetPasswordPopUp('@item.Id');">Reset Password</button>
+
+                                    <a href="@Url.Action("Delete",new { id = users.Id })">Delete</a>
+
                                 </li>
                                 <li>
-                                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                                    <a href="@Url.Action("Create","AspNetRoleUser",new { UserID = users.Id })">Add role</a>
                                 </li>
                                 <li>
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                    @foreach (var role in users.AspNetRoles)
+                                    {
+                                        <a type="submit"
+                                           onclick="return confirm('are you sure you want delete @role.Name from @users.Email ?')"
+                                           href="@Url.Action("Delete","AspNetRoleUser",new { RoleID = role.Id, UserID = users.Id  })">Delete role</a>
+                                    }
                                 </li>
                             </ul>
                         </li>
