@@ -10,35 +10,36 @@
     <div class="col-sm-12">
         <div style="margin-bottom:20px" class="form-inline pull-right">
             @*@Html.("Create New", "Create")*@
-            <a href="@Url.Action("Create", "AspNetUsers")">
+            @*<a href="@Url.Action("Create", "AspNetUsers")">
                 <input type="button" value="Create New" />
-            </a>
+            </a>*@
             <br />
         </div>
     </div>
 
     <div class="col-sm-12">
 
-<header>
-    <script language="JavaScript" type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</header>
+        <header>
+            <script language="JavaScript" type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        </header>
 
-<div class="row" style="margin-bottom:15px;">
+        <div class="row" style="margin-bottom:15px;">
             <div class="col-sm-12">
-        <div class="form-inline pull-right">
-            <label>Search</label>
-            <input type="text" class="form-control" id="txtSearch" />
-            <button type="button"  class="btn btn-success" data-toggle="modal" onclick="getCreateModal()" >Create New</button>
+                <div class="form-inline pull-right">
+                    <label>Search</label>
+                    <input type="text" class="form-control" id="txtSearch" />
+                    <button type="button" class="btn btn-success" data-toggle="modal" onclick="getCreateModal()">Create New</button>
+                </div>
+            </div>
         </div>
+        <div id="grdUserView"></div>
+        <div id="Popup"></div>
     </div>
 </div>
-<div id="grdUserView"></div>
-<div id="Popup"></div>
-
 @section scripts{
     <script type="text/javascript">
     $(document).ready(function () {
@@ -72,12 +73,13 @@
             data: {},
             success: function (data) {
                 $("#Popup").html(data);
-                
+
                 $("#modalCreate").modal("show");
             },
             error: function (err) {
                 console.log(err);
             }
         })
-    }
-</script>
+        }
+    </script>
+}

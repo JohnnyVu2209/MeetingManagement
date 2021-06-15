@@ -5,11 +5,11 @@
     var Role = ViewBag.Role as AspNetRole;
 }
 <div class="col-sm-12">
-    <table class="table table-bordered">
+    <table class="table">
         <thead>
 
             <tr>
-                
+
                 <th scope="col">UserName</th>
                 <th scope="col">Email</th>
                 <th scope="col">Role</th>
@@ -37,14 +37,14 @@
                             <span>&#10000; </span>
                             <ul class="menu_thaotac">
                                 <li>
-
-                                    <button onclick="ShowResetPasswordPopUp('@item.Id');">Reset Password</button>
-
-                                    <a href="@Url.Action("Delete",new { id = users.Id })">Delete</a>
-
+                                    @*<button onclick="ShowResetPasswordPopUp('@users.Id');">Reset Password</button>*@
+                                    <a onclick="ShowResetPasswordPopUp('@users.Id');">Reset Password</a>
                                 </li>
+                                @*<li>
+                                    <a href="@Url.Action("Delete",new { id = users.Id })">Delete</a>
+                                </li>*@
                                 <li>
-                                    <a href="@Url.Action("Create","AspNetRoleUser",new { UserID = users.Id })">Add role</a>
+                                    <a href="@Url.Action("Create","AspNetRoleUser",new { UserID = users.Id })">Add Role</a>
                                 </li>
                                 <li>
                                     @foreach (var role in users.AspNetRoles)
@@ -97,7 +97,6 @@
             dataType: "html",
             success: function (data) {
                 $("#show-popup").html(data);
-
                 $("#myResetPasswordModal").modal("show");
             }
         });
