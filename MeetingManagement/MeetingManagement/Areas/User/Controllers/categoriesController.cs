@@ -19,5 +19,9 @@ namespace MeetingManagement.Areas.User.Controllers
             var cATEGORies = db.CATEGORies.Include(c => c.USER);
             return View(cATEGORies.ToList());
         }
+        public ActionResult Home()
+        {
+            return View();
+        }
     }
 }

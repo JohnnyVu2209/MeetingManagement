@@ -7,15 +7,19 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using MeetingManagement.Controllers;
 using MeetingManagement.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+
 
 namespace MeetingManagement.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class AspNetUsersController : Controller
     {
+
+        private AccountController ac = new AccountController();
         private ApplicationUserManager _userManager;
         private SEP24Team7Entities db = new SEP24Team7Entities();
         private ApplicationSignInManager _signInManager;
@@ -190,5 +194,25 @@ namespace MeetingManagement.Areas.Admin.Controllers
             return roles;
         }
 
+        [HttpGet]
+        public ActionResult ResetPassword(string userID)
+        {
+            AspNetUser ac = db.AspNetUsers.Find(userID);
+            return PartialView(ac);
+        }
+
+        //
+        // POST: /Account/ResetPassword
+        [HttpPost]
+        public ActionResult ResetPassword(string Id, string password)
+        {
+            Password EncryptData = new Password();
+            AspNetUser aspNetUser = db.AspNetUsers.Find(Id);
+            aspNetUser.PasswordHash = EncryptData.Encode(password);
+            db.Entry(aspNetUser).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
     }
 }

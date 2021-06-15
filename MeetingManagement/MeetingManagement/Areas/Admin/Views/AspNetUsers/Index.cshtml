@@ -5,6 +5,20 @@
 }
 
 <h2>Danh sách tài khoản</h2>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div style="margin-bottom:20px" class="form-inline pull-right">
+            @*@Html.("Create New", "Create")*@
+            <a href="@Url.Action("Create", "AspNetUsers")">
+                <input type="button" value="Create New" />
+            </a>
+            <br />
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+
 <header>
     <script language="JavaScript" type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,7 +39,11 @@
 <div id="grdUserView"></div>
 <div id="Popup"></div>
 
-<script>
+@section scripts{
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('#grdUserView').append('#myTable');
+    });
     $(() => {
         getUser();
         $('#txtSearch').on('keyup', () => {
