@@ -60,6 +60,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -180,6 +181,8 @@
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
 
     <Compile Include="Areas\User\Controllers\categoriesController.cs" />
+    <Compile Include="Areas\HeadOfDepartment\Controllers\HomeController.cs" />
+    <Compile Include="Areas\HeadOfDepartment\Views\HeadOfDepartmentAreaRegistration.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2161,6 +2164,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\catalog-list.css" />
     <Content Include="css\style.css" />
+    <Content Include="Content\normalize.css" />
+    <Content Include="Content\outline_filter_alt_black_24dp.png" />
+    <Content Include="Content\The-Last-Style-Blender.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -2286,6 +2292,9 @@
     <Content Include="Areas\User\Views\categories\Home.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\categories\Create1.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoleUser\Create.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Home\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -2338,6 +2347,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_VanLangMeeting.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Shared\HODIndex.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Shared\HeadofDepartment_LayoutPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2347,8 +2357,8 @@
 
     <Folder Include="Areas\HeadOfDepartment\Controllers\" />
 
+    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\HeadOfDepartment\Data\" />
-    <Folder Include="Areas\HeadOfDepartment\Views\Shared\" />
     <Folder Include="Areas\User\Controllers\" />
 
     <Folder Include="Areas\User\Data\" />
