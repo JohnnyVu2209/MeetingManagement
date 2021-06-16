@@ -1,0 +1,85 @@
+﻿@model MeetingManagement.Models.RegisterViewModel
+
+<div class="modal fade" id="modalCreate" role="dialog">
+    <div class="modal-dialog  ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Thêm Tài Khoản</h4>
+            </div>
+            <div class="modal-body">
+                @using (Ajax.BeginForm("Create", "AspNetUsers", new AjaxOptions { HttpMethod = "Post", OnSuccess = "CreateSuccess" }, new { @class = "form-horizontal", @id = "createformid", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <hr />
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, new { @class = "col-md-4 control-label" })
+                        <div class="col-md-13">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password, new { @class = "col-md-4 control-label" })
+                        <div class="col-md-13">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-4 control-label" })
+                        <div class="col-md-13">
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <div class="col-sm-10">
+                            <input type="submit" class="btn btn-primary" onclick="Create" value="Tạo" />
+
+                        </div>
+                    </div>
+
+                }
+                @*<form action="Create">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Tên</label>
+
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Email</label>
+
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Mật Khẩu</label>
+
+                            @Html.PasswordFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PasswordHash, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Hũy</button>
+                            <button type="button" class="btn btn-primary"  onclick="Create" value="Tạo"</button>
+                        </div>
+                    </form>*@
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function Create() {
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Create", "AspNetUsers")',
+            data: $("#createformid").serialize(),
+                success: function () {
+                    $("#modalCreate").modal("hide");
+                alert("Tạo Thành Công");
+}
+})
+
+    }
+</script>

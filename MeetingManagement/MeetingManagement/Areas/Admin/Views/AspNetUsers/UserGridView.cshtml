@@ -1,0 +1,104 @@
+﻿@model IEnumerable<MeetingManagement.Models.AspNetUser>
+
+@using MeetingManagement.Models
+@{
+    var Role = ViewBag.Role as AspNetRole;
+}
+<div class="col-sm-12">
+    <table class="table">
+        <thead>
+
+            <tr>
+
+                <th scope="col">UserName</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+            </tr>
+
+        </thead>
+
+        @foreach (var users in Model)
+        {
+            <tr>
+                <td>@users.UserName</td>
+                <td>@users.Email</td>
+                <td>
+                    @*<select class="form-control">*@
+
+                    @foreach (var role in users.AspNetRoles)
+                    {
+                        @role.Name
+                    }
+                    @*</select>*@
+                </td>
+                <td>
+                    <ul>
+                        <li>
+                            <span>&#10000; </span>
+                            <ul class="menu_thaotac">
+                                <li>
+                                    @*<button onclick="ShowResetPasswordPopUp('@users.Id');">Reset Password</button>*@
+                                    <a onclick="ShowResetPasswordPopUp('@users.Id');">Reset Password</a>
+                                </li>
+                                @*<li>
+                                    <a href="@Url.Action("Delete",new { id = users.Id })">Delete</a>
+                                </li>*@
+                                <li>
+                                    <a href="@Url.Action("Create","AspNetRoleUser",new { UserID = users.Id })">Add Role</a>
+                                </li>
+                                <li>
+                                    @foreach (var role in users.AspNetRoles)
+                                    {
+                                        <a type="submit"
+                                           onclick="return confirm('are you sure you want delete @role.Name from @users.Email ?')"
+                                           href="@Url.Action("Delete","AspNetRoleUser",new { RoleID = role.Id, UserID = users.Id  })">Delete role</a>
+                                    }
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<div id="show-popup"></div>
+
+<style>
+    tr {
+        height: 50px;
+    }
+
+    * {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul > li > ul {
+        display: none;
+    }
+
+    ul > li:hover > ul {
+        display: block;
+    }
+
+    ul > li span {
+        font-size: 25px;
+    }
+</style>
+<script>
+
+    function ShowResetPasswordPopUp(userID) {
+        $.ajax({
+            type: "GET",
+            url: "ResetPassword",
+            data: { userID },
+            dataType: "html",
+            success: function (data) {
+                $("#show-popup").html(data);
+                $("#myResetPasswordModal").modal("show");
+            }
+        });
+    };
+</script>
