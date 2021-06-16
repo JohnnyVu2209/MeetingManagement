@@ -41,7 +41,6 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         {
             return PartialView("Create", new Models.CATEGORY());
         }
-
         // POST: HeadOfDepartment/categories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -49,6 +48,12 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         public JsonResult Create(CATEGORY cg)
         {
             /*link huong dan de lam phan nay https://www.youtube.com/watch?v=2ktFobQ4VmM */
+            /*SEP24Team7Entities db = new SEP24Team7Entities();*/
+            cg.Create_by = "48e5a0b4-76ea-4619-bd6b-771bb9954c96";
+            db.CATEGORies.Add(cg);
+           
+            db.SaveChanges();
+            
             return Json(cg, JsonRequestBehavior.AllowGet);
         }
 
@@ -65,23 +70,32 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return PartialView(category);
         }
         [HttpPost]
-        public JsonResult Edit(CATEGORY cg)
+        public ActionResult Edit(CATEGORY cg)
         {
-            CATEGORY old_cg = db.CATEGORies.Where(x => x.Category_id == cg.Category_id).FirstOrDefault();
-            CATEGORY new_cg = new CATEGORY();
-            return Json(new_cg, JsonRequestBehavior.AllowGet);
+           /* CATEGORY old_cg = db.CATEGORies.Where(x => x.Category_id == cg.Category_id).FirstOrDefault();*/
+            db.Entry(cg).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
+
+
+
+
         [HttpGet]
         public ActionResult Delete(int id)
         {
             CATEGORY cATEGORY = db.CATEGORies.Where(x => x.Category_id == id).FirstOrDefault();
             return PartialView(cATEGORY);
+
         }
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirm(int id)
         {
-
-            bool result = false;
+            CATEGORY cat = db.CATEGORies.Find(id);
+            if (cat != null) {
+                db.CATEGORies.Remove(cat);
+                db.SaveChanges();
+            }
             //link huong dan https://www.youtube.com/watch?v=YQnCkMAYDsQ
             return RedirectToAction("Index");
 

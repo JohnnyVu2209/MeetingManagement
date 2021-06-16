@@ -7,8 +7,11 @@
             <div class="modal-header">
                 <h4 class="modal-title">Tạo danh mục</h4>
             </div>
-            <div class="modal-body">
-                <form action="Create">
+            <div class="modal-body" style="margin-left:35px">
+                @using (Ajax.BeginForm("Create", "categories", new AjaxOptions { HttpMethod = "Post", OnSuccess = "CreateSuccess" }, new { @class = "form-horizontal", @id = "createformid", role = "form" }))
+                {
+                  @*@Html.HiddenFor(model => model.Category_id)*@
+                    @Html.HiddenFor(model => model.Create_by)
                     <div class="catalog-form_group form-group">
                         @Html.TextBoxFor(model => model.Category_Name, new { @class = "catalog-form_input", @placeholder = "Tên danh mục" })
                     </div>
@@ -16,14 +19,31 @@
                         @Html.TextAreaFor(model => model.Category_Content, new { @class = "catalog-form_input", @placeholder = "Mô tả", @style = "margin-top: 16px", @rows = "5", @cols = "20" })
 
                     </div>
-                </form>
-
+                }
             </div>
             <div class="modal-footer">
-                <button class="btn btn--primary">Tạo</button>
+                <button class="btn btn--primary" onclick="Create()">Tạo</button>
                 <button class="btn btn-normal " data-dismiss="modal">Hủy</button>
             </div>
         </div>
     </div>
 </div>
+
+
+<script>
+function Create() {
+$.ajax({
+type: "POST",
+url: '@Url.Action("Create", "categories")',
+data: $("#createformid").serialize(),
+success: function () {
+    $("#myCreateModal").modal("hide");
+alert("Tạo Thành Công");
+}
+})
+}
+</script>
+
+
+
 
