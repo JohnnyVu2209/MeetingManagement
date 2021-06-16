@@ -19,7 +19,6 @@ namespace MeetingManagement.Areas.Admin.Controllers
     public class AspNetUsersController : Controller
     {
 
-        private AccountController ac = new AccountController();
         private ApplicationUserManager _userManager;
         private SEP24Team7Entities db = new SEP24Team7Entities();
         private ApplicationSignInManager _signInManager;
@@ -200,19 +199,54 @@ namespace MeetingManagement.Areas.Admin.Controllers
             AspNetUser ac = db.AspNetUsers.Find(userID);
             return PartialView(ac);
         }
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         //
         // POST: /Account/ResetPassword
         [HttpPost]
-        public ActionResult ResetPassword(string Id, string password)
+        public async Task<ActionResult> ResetPassword(string Id, string password)
         {
-            Password EncryptData = new Password();
+            /*Password EncryptData = new Password();
             AspNetUser aspNetUser = db.AspNetUsers.Find(Id);
             aspNetUser.PasswordHash = EncryptData.Encode(password);
             db.Entry(aspNetUser).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index");*/
+            if (ModelState.IsValid)
+            {
+                var user = db.AspNetUsers.Find(Id);
+                var result = await UserManager.AddPasswordAsync(user.Id, password);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    AddErrors(result);
+                }
+               
+            }
 
+            // If we got this far, something failed, redisplay form
+            return View();
+
+        }
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
         }
     }
 }
