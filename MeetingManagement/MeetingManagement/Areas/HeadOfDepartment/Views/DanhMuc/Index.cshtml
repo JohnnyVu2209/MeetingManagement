@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MeetingManagement.Models.CATEGORY>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/HeadOfDepartment/Views/Shared/HODIndex.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Category_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category_Content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.USER.Full_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category_Content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.USER.Full_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Category_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Category_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Category_id })
+        </td>
+    </tr>
+}
+
+</table>
