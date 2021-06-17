@@ -4,19 +4,38 @@
 @{
     var Role = ViewBag.Role as AspNetRole;
 }
-<div class="col-sm-12">
-    <table class="table">
-        <thead>
 
-            <tr>
+<div class="table-zone">
+    <div class="table-header">
+        <div class="table-title">
+            <p>Danh sách tài khoản</p>
+        </div>
+        <ul>
+            <li class="col1">
+                UserName
+                @*<button class="filter">
+                        <img src="~/Content/Picture/outline_filter_alt_black_24dp.png">
+                    </button>*@
+            </li>
+            <li class="col2">
+                Email
+                @*<button class="filter">
+                        <img src="~/Content/Picture/outline_filter_alt_black_24dp.png">
+                    </button>*@
+            </li>
+            <li class="col3">
+                Role
+                @*<button class="filter">
+                        <img src="~/Content/Picture/outline_filter_alt_black_24dp.png">
+                    </button>*@
+            </li>
+            <li class="col4">
+                Thao tác
+            </li>
 
-                <th scope="col">UserName</th>
-                <th scope="col">Email</th>
-                <th scope="col">Role</th>
-            </tr>
-
-        </thead>
-
+        </ul>
+    </div>
+    <table>
         @foreach (var users in Model)
         {
             <tr>
@@ -34,15 +53,37 @@
                 <td>
                     <ul>
                         <li>
-                            <span>&#10000; </span>
+                            <button onclick="ShowResetPasswordPopUp('@users.Id');">
+                                Reset Password
+                            </button>
+                        </li>
+                        <li>
+                            <button href="@Url.Action("Create","AspNetRoleUser",new { UserID = users.Id })">Add Role</button>
+                        </li>
+                        <li>
+                            @foreach (var role in users.AspNetRoles)
+                            {
+                                <button type="submit"
+                                        onclick="return confirm('are you sure you want delete @role.Name from @users.Email ?')"
+                                        href="@Url.Action("Delete","AspNetRoleUser",new { RoleID = role.Id, UserID = users.Id  })">
+                                    Delete role
+                                </button>
+                            }
+                        </li>
+
+
+
+                        <li>
+                            @*<span>
+                                    &#10000;
+                                </span>*@
                             <ul class="menu_thaotac">
                                 <li>
-                                    @*<button onclick="ShowResetPasswordPopUp('@users.Id');">Reset Password</button>*@
                                     <a onclick="ShowResetPasswordPopUp('@users.Id');">Reset Password</a>
                                 </li>
                                 @*<li>
                                     <a href="@Url.Action("Delete",new { id = users.Id })">Delete</a>
-                                </li>*@
+                                     </li>*@
                                 <li>
                                     <a href="@Url.Action("Create","AspNetRoleUser",new { UserID = users.Id })">Add Role</a>
                                 </li>
@@ -61,9 +102,8 @@
             </tr>
         }
     </table>
+    <div id="show-popup"></div>
 </div>
-<div id="show-popup"></div>
-
 <style>
     tr {
         height: 50px;
@@ -79,9 +119,21 @@
         display: none;
     }
 
-    ul > li:hover > ul {
-        display: block;
+    table ul li {
+        display: inline;
     }
+
+    /*ul > li:active > ul {
+            display: block;
+        }*/
+
+    /*ul > li:after > ul{
+            display:block;
+        }*/
+
+    /*ul > li:hover > ul {
+            display: block;
+        }*/
 
     ul > li span {
         font-size: 25px;
@@ -97,7 +149,7 @@
             dataType: "html",
             success: function (data) {
                 $("#show-popup").html(data);
-                $("#myResetPasswordModal").modal("show");
+                $("#myResetPasswordModal").appendTo("body").modal("show");
             }
         });
     };
