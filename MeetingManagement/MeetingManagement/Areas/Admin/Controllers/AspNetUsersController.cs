@@ -11,7 +11,7 @@ using MeetingManagement.Controllers;
 using MeetingManagement.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-
+using EntityState = System.Data.Entity.EntityState;
 
 namespace MeetingManagement.Areas.Admin.Controllers
 {
@@ -21,18 +21,8 @@ namespace MeetingManagement.Areas.Admin.Controllers
 
         private ApplicationUserManager _userManager;
         private SEP24Team7Entities db = new SEP24Team7Entities();
-        private ApplicationSignInManager _signInManager;
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
+        //private ApplicationSignInManager _signInManager;
+
 
         // GET: Admin/AspNetUsers
         public ActionResult Index()
@@ -241,12 +231,12 @@ namespace MeetingManagement.Areas.Admin.Controllers
             return View();
 
         }
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
-            }
-        }
+        //private void AddErrors(IdentityResult result)
+        //{
+        //    foreach (var error in result.Errors)
+        //    {
+        //        ModelState.AddModelError("", error);
+        //    }
+        //}
     }
 }
