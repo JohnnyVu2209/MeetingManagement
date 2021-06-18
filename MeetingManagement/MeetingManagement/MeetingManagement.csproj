@@ -177,8 +177,8 @@
     <Compile Include="Areas\Admin\Controllers\AspNetRoleUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\categoriesController.cs" />
+    <Compile Include="Areas\HeadOfDepartment\Controllers\MeetingsController.cs" />
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
-
     <Compile Include="Areas\User\Controllers\categoriesController.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -2190,7 +2190,6 @@
     <Content Include="login-form-05\js\main.js" />
     <Content Include="login-form-05\js\owl.carousel.min.js" />
     <Content Include="login-form-05\js\popper.min.js" />
-
     <Content Include="Models\Models.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Models.edmx</DependentUpon>
@@ -2228,13 +2227,11 @@
     <Content Include="Areas\Admin\Views\AspNetUsers\UserGridView.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\categories\Create.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\categories\Delete.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\categories\Details.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\categories\Edit.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\categories\Index.cshtml" />
     <Content Include="Areas\User\Views\_ViewStart.cshtml" />
     <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\User\Views\categories\Index.cshtml" />
-
     <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-brands-400.eot" />
     <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-brands-400.ttf" />
     <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-brands-400.woff" />
@@ -2277,15 +2274,10 @@
     <Content Include="assets\plugins\global\fonts\summernote\summernote.ttf" />
     <Content Include="assets\plugins\global\fonts\summernote\summernote.woff" />
     <Content Include="assets\plugins\global\fonts\summernote\summernote.woff2" />
-    <Content Include="Areas\HeadOfDepartment\Views\DanhMuc\Create.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\DanhMuc\Delete.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\DanhMuc\Details.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\DanhMuc\Edit.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\DanhMuc\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\ResetPassword.cshtml" />
     <Content Include="Areas\User\Views\categories\Home.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\categories\Create1.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoleUser\Create.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingIndex.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -2343,16 +2335,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\HeadOfDepartment\Data\" />
-
-
-    <Folder Include="Areas\HeadOfDepartment\Controllers\" />
-
-    <Folder Include="Areas\HeadOfDepartment\Data\" />
-    <Folder Include="Areas\HeadOfDepartment\Views\Shared\" />
-    <Folder Include="Areas\User\Controllers\" />
-
     <Folder Include="Areas\User\Data\" />
-    <Folder Include="Areas\User\Views\Shared\" />
     <Folder Include="Content\login\" />
   </ItemGroup>
   <ItemGroup>
