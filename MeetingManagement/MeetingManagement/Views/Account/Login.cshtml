@@ -1,63 +1,120 @@
 ﻿@using MeetingManagement.Models
 @model LoginViewModel
 @{
-    ViewBag.Title = "Log in";
+    Layout = null;
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
-                </div>
-                @*<p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>*@
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="~/Content/normalize.css" />
+    <link href="~/Content/The-Last-Style-Blender.css" rel="stylesheet"/>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+
+
+    <link href="~/login-form-05/css/style.css" rel="stylesheet" />
+
+    <link href="~/login-form-05/css/owl.carousel.min.css" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+
+    <link href="~/login-form-05/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Style -->
+   
+
+    <link href="~/login-form-05/fonts/icomoon/style.css" rel="stylesheet" />
+    <title>Login </title>
+</head>
+<body class="me-body">
+    <div id="nav-bar">
+        <div>
+            <a href="@Url.Action("Index","Home",new { Area = "" })"><img src="https://www.vanlanguni.edu.vn/images/2020/HE_THONG_LOGO_CUA_TRUONG-02.png" alt="Văn Lang University"></a>
+        </div>
+        @*<div class="login">
+            @Html.Partial("_LoginPartial")
+        </div>*@
     </div>
+    <div class="container content">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-12">
+                <div class="form-block mx-auto">
+                    <div class="text-center mb-5">
+                        <h3 class="text-uppercase"> Đăng Nhập Tài Khoản</h3>
+                    </div>
+                    <form action="@Url.Action("Login","Account")" method="post">
+                        @Html.AntiForgeryToken()
+                        <div class="form-group first">
+                            @Html.LabelFor(m => m.Email)
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+
+                        </div>
+                        <div class="form-group last mb-3">
+                            @Html.LabelFor(m => m.Password)
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        </div>
+
+                        <div class="d-sm-flex mb-5 align-items-center">
+                            <label class="control control--checkbox mb-3 mb-sm-0">
+
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                @Html.LabelFor(m => m.RememberMe)
+
+                                @*<div class="control__indicator"></div>*@
+                            </label>
+
+                        </div>
+
+                        <div class="form-inline pull-right">
+
+                            <button type="submit" value="Log In" class="btn col-md-6 btn-success">Đăng Nhập</button>
+
+                            @*login with Vanlang
+                                <a href="#" class="btn col-md-6 btn-primary">
+                                    <span class="icon-windows mr-3"></span>  Emai Van Lang
+                                </a>*@
+
+
+
+                            @*</div>
+                                <button type="submit" value="Log In" class="btn col-md-6 btn-primary">Primary</button>
+                                <span class="text-center my-3 d-block">or</span>
+
+
+                                <div class="">
+
+                                    <a href="#socialLoginForm" class="btn btn-block py-2 btn-facebook">
+                                        <span class="icon-facebook mr-3"></span> Use your VanLang email.
+                                    </a>*@
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="col-md-4">
         <section id="socialLoginForm">
             @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
         </section>
     </div>
-</div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+
+    <script src="~/login-form-05/js/jquery-3.3.1.min.js"></script>
+
+    <script src="~/login-form-05/js/popper.min.js"></script>
+
+
+    <script src="~/login-form-05/js/bootstrap.min.js"></script>
+
+    <script src="~/login-form-05/js/owl.carousel.min.js"></script>
+    <script src="~/login-form-05/js/main.js"></script>
+</body>
+</html>
