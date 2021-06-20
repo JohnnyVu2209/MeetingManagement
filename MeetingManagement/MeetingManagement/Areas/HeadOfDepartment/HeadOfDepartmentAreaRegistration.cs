@@ -2,7 +2,7 @@
 
 namespace MeetingManagement.Areas.HeadOfDepartment
 {
-    public class HeadOfDepartmentaAreaRegistration : AreaRegistration 
+    public class HeadOfDepartmentAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
         {
