@@ -177,9 +177,8 @@
     <Compile Include="Areas\Admin\Controllers\AspNetRoleUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
-
     <Compile Include="Areas\User\Controllers\categoriesController.cs" />
-
+    <Compile Include="Areas\User\Controllers\HomePageController.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -247,6 +246,11 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\logo-vlu-en-8.png" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\normalize.css" />
+    <Content Include="Content\outline_filter_alt_black_24dp.png" />
+    <Content Include="Content\The-Last-Style-Blender.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -313,6 +317,7 @@
     <Content Include="Areas\User\Views\categories\Home.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\categories\Create1.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoleUser\Create.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -366,14 +371,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-
     <Folder Include="Areas\HeadOfDepartment\Controllers\" />
-
     <Folder Include="Areas\HeadOfDepartment\Data\" />
     <Folder Include="Areas\HeadOfDepartment\Views\Shared\" />
-    <Folder Include="Areas\User\Controllers\" />
     <Folder Include="Areas\User\Data\" />
-    <Folder Include="Areas\User\Views\Shared\" />
     <Folder Include="Content\login\" />
   </ItemGroup>
   <ItemGroup>
