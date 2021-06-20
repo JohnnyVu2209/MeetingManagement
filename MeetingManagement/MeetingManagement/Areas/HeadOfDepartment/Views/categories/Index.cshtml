@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
+
 }
 <link href="~/Content/catalog-list.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -40,7 +42,11 @@
 
     </ul>
 </div>
+
+
 <div id="show-popup"></div>
+
+
 <script type="text/javascript">
     function ShowCreatePopUp() {
         $.ajax({
@@ -50,7 +56,6 @@
             dataType: "html",
             success: function (data) {
                 $("#show-popup").html(data);
-
                 $("#myCreateModal").modal("show");
             },
             error: function (data) {
@@ -58,7 +63,6 @@
             }
         });
     };
-
     function ShowEditPopUp(categoryID) {
         $.ajax({
             type: "GET",
@@ -67,7 +71,6 @@
             dataType: "html",
             success: function (data) {
                 $("#show-popup").html(data);
-
                 $("#myEditModal").modal("show");
             },
             error: function (data) {
@@ -76,14 +79,14 @@
         });
     };
     function ShowDeletePopUp(categoryID) {
+        $("#loader-div")       
         $.ajax({
             type: "GET",
             url: "Delete",
-            data: {id : categoryID },
+            data: { id: categoryID },
             dataType: "html",
             success: function (data) {
                 $("#show-popup").html(data);
-
                 $("#myDeleteModal").modal("show");
             },
             error: function (data) {
@@ -91,5 +94,4 @@
             }
         });
     };
-
 </script>
