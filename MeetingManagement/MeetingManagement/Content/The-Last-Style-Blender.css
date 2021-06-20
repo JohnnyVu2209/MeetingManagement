@@ -86,6 +86,7 @@ container {
     left: 0px;
 }
 
+
 /*--#header--*/
 #nav-bar {
     text-align: center;
@@ -100,6 +101,8 @@ container {
 
 
     #nav-bar img {
+        position:fixed;
+        left:750px;
         width: 116.537px;
         height: 45px;
     }

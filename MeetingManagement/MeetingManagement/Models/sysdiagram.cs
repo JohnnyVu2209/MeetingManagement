@@ -12,17 +12,12 @@ namespace MeetingManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TASK
+    public partial class sysdiagram
     {
-        public int Task_id { get; set; }
-        public int Meeting_id { get; set; }
-        public string Task_name { get; set; }
-        public string Assignee { get; set; }
-        public Nullable<bool> Task_Status { get; set; }
-        public Nullable<System.DateTime> Task_Deadline { get; set; }
-        public Nullable<bool> Notify { get; set; }
-    
-        public virtual MEETING MEETING { get; set; }
-        public virtual MEMBER MEMBER { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

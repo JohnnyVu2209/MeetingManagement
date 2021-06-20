@@ -1,46 +1,167 @@
-﻿@model IEnumerable<MeetingManagement.Models.CATEGORY>
-
+﻿@model IEnumerable<MeetingManagement.Models.MEETING>
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
-}
+}   
+    <body>
 
-<h2>Index</h2>
+        <div class="row" style="margin-bottom:15px;">
+            <div class="col-sm-12">
+                <div class="form-inline pull-right">
+                    <label>Search</label>
+                    <input type="text" class="form-control" id="txtSearch" />
+                    <button type="button" class="btn btn-success" data-toggle="modal" onclick="getCreateModal()">Create New</button>
+                </div>
+            </div>
+        </div>
+        <div class="table-zone">
+            <div class="table-title">
+                <p>Cuộc Họp Chờ Duyệt</p>
+            </div>
+            <div class="table-header">
+                <ul>
+                    <li class="col1">
+                        Danh mục
+                        <button class="filter">
+                            @*<img src="~/Content/outline_filter_alt_black_24dp.png">*@
+                        </button>
+                    </li>
+                    <li class="col2">
+                        Cuộc họp
+                        <button class="filter">
+                            @*<img src="~/Content/outline_filter_alt_black_24dp.png">*@
+                        </button>
+                    </li>
+                    <li class="col3">
+                        Người chủ trì
+                        <button class="filter">
+                            @*<img src="~/Content/outline_filter_alt_black_24dp.png">*@
+                        </button>
+                    </li>
+                    <li class="col4">
+                        Ngày tạo
+                        <button class="filter">
+                            @*<img src="~/Content/outline_filter_alt_black_24dp.png">*@
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <table>
+                @foreach (var meeting in Model)
+                {
+                    if (meeting.Meeting_Confirmed == false)
+                    {
+                        <tr>
+                            <td>@meeting.Category_id</td>
+                            <td>@meeting.Meeting_name</td>
+                            <td>@meeting.Create_by_name</td>
+                            <td>@meeting.Date_Start</td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div> <!---Table 1-->
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Category_Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category_Content)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.USER.Full_name)
-        </th>
-        <th></th>
-    </tr>
+        <div class="table-zone">
+            <div class="table-title">
+                <p>Cuộc Họp Chưa Hoàn Thành</p>
+            </div>
+            <div class="table-header">
+                <ul>
+                    <li class="col1">
+                        Danh mục
+                        <button class="filter">
+                            @*<img src="~/Content/outline_filter_alt_black_24dp.png">*@
+                        </button>
+                    </li>
+                    <li class="col2">
+                        Cuộc họp
+                        <button class="filter">
+                            @*<img src="~/Content/outline_filter_alt_black_24dp.png">*@
+                        </button>
+                    </li>
+                    <li class="col3">
+                        Ngày đến hạn
+                        <button class="filter">
+                            @*<img src="~/Content/outline_filter_alt_black_24dp.png">*@
+                        </button>
+                    </li>
+                    <li class="col4">
+                        Tình trạng
+                        <button class="filter">
+                            @*<img src="~/Content/outline_filter_alt_black_24dp.png">*@
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <table>
+                @foreach (var meeting in Model)
+                {
+                    <tr>
+                        <td>@meeting.Category_id</td>
+                        <td>@meeting.Meeting_name</td>
+                        <td>@meeting.Date_End</td>
+                        <td>@meeting.Status</td>
+                    </tr>
+                }
+            </table>
+        </div> <!---Table 2-->
+        @*<div id="footer">
+            <div class="pure-g footer-col">
+                <div class="pure-u-1-3 ">
+                    INFO
+                    <p></p>
+                </div>
+                <div class="pure-u-1-3 "> CONTACT US </div>
+                <div class="pure-u-1-3 "> GET SOCIAL </div>
+            </div>
+        </div>*@ <!--Footer-->
+        <div id="Popup"></div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category_Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category_Content)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.USER.Full_name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Category_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Category_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Category_id })
-        </td>
-    </tr>
-}
+        <script type="text/javascript">
+            //$(document).ready(function () {
+            //    getCreateModal()
+            //});
+            function getCreateModal() {
+                $.ajax({
+                    url: '@Url.Action("Create", "MainPage")',
+                    datatype: 'html',
+                    method: 'GET',
+                    data: {},
+                    success: function (data) {
+                        $("#Popup").html(data);
 
-</table>
+                        $("#modalCreate").modal("show");
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                })
+            }
+        </script>
+
+        @*<div id="grdMeetingView"></div>*@
+        @*@section scripts{
+        <script type="text/javascript">
+        $(document).ready(function () {
+            $('#grdMeetingView').append('#myTable');
+        });
+            $(() => {
+                getMeetings()
+            });
+            function getMeetings()
+            {
+                    $.ajax({
+                        url: '@Url.Action("GetMeetings", "MainPage")',
+                        datatype: 'html',
+                        method: 'GET',
+                        data: {  },
+                        success: function (res) {
+                            $('#grdUserView').html('').html(res);
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    })
+            }
+        </script>}*@
+    </body>
