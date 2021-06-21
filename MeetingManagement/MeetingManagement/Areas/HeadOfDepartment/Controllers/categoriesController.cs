@@ -18,7 +18,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         // GET: HeadOfDepartment/categories
         public ActionResult Index()
         {
-            var cATEGORies = db.CATEGORies.Include(c => c.USER);
+            var cATEGORies = db.CATEGORies.ToList();
             return View(cATEGORies.ToList());
         }
 

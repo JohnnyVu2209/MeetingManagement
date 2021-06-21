@@ -18,7 +18,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         // GET: HeadOfDepartment/dsCuocHop
         public ActionResult Index()
         {
-            var mEETINGs = db.MEETINGs.Include(m => m.CATEGORY).Include(m => m.ATTACHMENT).Include(m => m.USER);
+            var mEETINGs = db.MEETINGs.ToList();
             return View(mEETINGs.ToList());
         }
 
@@ -42,7 +42,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         {
             ViewBag.Category_id = new SelectList(db.CATEGORies, "Category_id", "Create_by");
             ViewBag.Meeting_id = new SelectList(db.ATTACHMENTs, "Meeting_id", "Attachment1");
-            ViewBag.Create_by = new SelectList(db.USERS, "User_id", "Full_name");
+           /* ViewBag.Create_by = new SelectList(db.USERS, "User_id", "Full_name");*/
             return View();
         }
 
@@ -62,7 +62,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 
             ViewBag.Category_id = new SelectList(db.CATEGORies, "Category_id", "Create_by", mEETING.Category_id);
             ViewBag.Meeting_id = new SelectList(db.ATTACHMENTs, "Meeting_id", "Attachment1", mEETING.Meeting_id);
-            ViewBag.Create_by = new SelectList(db.USERS, "User_id", "Full_name", mEETING.Create_by);
+            /*ViewBag.Create_by = new SelectList(db.USERS, "User_id", "Full_name", mEETING.Create_by);*/
             return View(mEETING);
         }
 
@@ -80,7 +80,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             }
             ViewBag.Category_id = new SelectList(db.CATEGORies, "Category_id", "Create_by", mEETING.Category_id);
             ViewBag.Meeting_id = new SelectList(db.ATTACHMENTs, "Meeting_id", "Attachment1", mEETING.Meeting_id);
-            ViewBag.Create_by = new SelectList(db.USERS, "User_id", "Full_name", mEETING.Create_by);
+          /*  ViewBag.Create_by = new SelectList(db.USERS, "User_id", "Full_name", mEETING.Create_by);*/
             return View(mEETING);
         }
 
@@ -99,7 +99,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             }
             ViewBag.Category_id = new SelectList(db.CATEGORies, "Category_id", "Create_by", mEETING.Category_id);
             ViewBag.Meeting_id = new SelectList(db.ATTACHMENTs, "Meeting_id", "Attachment1", mEETING.Meeting_id);
-            ViewBag.Create_by = new SelectList(db.USERS, "User_id", "Full_name", mEETING.Create_by);
+            /*ViewBag.Create_by = new SelectList(db.USERS, "User_id", "Full_name", mEETING.Create_by);*/
             return View(mEETING);
         }
 
