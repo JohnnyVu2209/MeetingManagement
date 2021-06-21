@@ -10,7 +10,7 @@ using MeetingManagement.Models;
 
 namespace MeetingManagement.Areas.User.Controllers
 {
-    public class categoriesController : Controller
+    public class CategoriesController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
         // GET: User/categories
@@ -18,6 +18,10 @@ namespace MeetingManagement.Areas.User.Controllers
         {
             var cATEGORies = db.CATEGORies.Include(c => c.USER);
             return View(cATEGORies.ToList());
+        }
+        public ActionResult Home()
+        {
+            return View();
         }
     }
 }
