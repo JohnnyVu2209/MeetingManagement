@@ -26,5 +26,23 @@ namespace MeetingManagement.Controllers
 
             return View();
         }
+        public ActionResult Taocuochop()
+        {
+           
+
+            return View();
+        }
+        public ActionResult CreateUser()
+        {
+
+
+            return View();
+        }
+        public ActionResult CreateUser2()
+        {
+
+
+            return View();
+        }
     }
 }

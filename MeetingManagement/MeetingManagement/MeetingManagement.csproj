@@ -238,6 +238,23 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="taocuochop\css\main.css" />
+    <Content Include="taocuochop\css\main.min.css" />
+    <Content Include="taocuochop\js\global.js" />
+    <Content Include="taocuochop\vendor\datepicker\daterangepicker.css" />
+    <Content Include="taocuochop\vendor\datepicker\daterangepicker.js" />
+    <Content Include="taocuochop\vendor\datepicker\moment.min.js" />
+    <Content Include="taocuochop\vendor\font-awesome-4.7\css\font-awesome.css" />
+    <Content Include="taocuochop\vendor\font-awesome-4.7\css\font-awesome.min.css" />
+    <Content Include="taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.svg" />
+    <Content Include="taocuochop\vendor\font-awesome-4.7\HELP-US-OUT.txt" />
+    <Content Include="taocuochop\vendor\jquery\jquery.js" />
+    <Content Include="taocuochop\vendor\jquery\jquery.min.js" />
+    <Content Include="taocuochop\vendor\mdi-font\css\material-design-iconic-font.css" />
+    <Content Include="taocuochop\vendor\mdi-font\css\material-design-iconic-font.min.css" />
+    <Content Include="taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.svg" />
+    <Content Include="taocuochop\vendor\select2\select2.min.css" />
+    <Content Include="taocuochop\vendor\select2\select2.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -303,6 +320,17 @@
     <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.woff" />
     <Content Include="login-form-05\fonts\icomoon\selection.json" />
     <Content Include="login-form-05\images\.DS_Store" />
+    <Content Include="Areas\User\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
+    <Content Include="taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.eot" />
+    <Content Include="taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.ttf" />
+    <Content Include="taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.woff" />
+    <Content Include="taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.woff2" />
+    <Content Include="taocuochop\vendor\font-awesome-4.7\fonts\FontAwesome.otf" />
+    <Content Include="taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.eot" />
+    <Content Include="taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff" />
+    <Content Include="taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -352,6 +380,9 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\Taocuochop.cshtml" />
+    <Content Include="Views\Home\CreateUser.cshtml" />
+    <Content Include="Views\Home\CreateUser2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -361,7 +392,7 @@
     <Folder Include="Areas\HeadOfDepartment\Views\Shared\" />
     <Folder Include="Areas\User\Controllers\" />
     <Folder Include="Areas\User\Data\" />
-    <Folder Include="Areas\User\Views\Shared\" />
+    <Folder Include="Areas\User\Views\user\" />
     <Folder Include="Content\login\" />
   </ItemGroup>
   <ItemGroup>
