@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MeetingManagement.Models.MEETING>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/catalog-list.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<br/>
+<ul class="nav nav-tabs" style="font-size:25px">
+    <li class="active"><a data-toggle="tab" href="#choduyet">Cuộc họp chờ duyệt</a></li>
+    <li><a data-toggle="tab" href="#thamdu">Cuộc họp tham dự</a></li>
+    <li><a data-toggle="tab" href="#myMeetings">Cuộc họp của tôi</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="choduyet" class="tab-pane fade in active">
+        <br />
+        <ul class="catalogList"  style="margin-left:50px">
+            @foreach (var item in Model)
+            {
+                <li>
+                    @item.Meeting_name
+                </li>
+            }
+        </ul>
+    </div>
+    <div id="thamdu" class="tab-pane fade">
+        <br />
+        <ul class="catalogList">
+            @foreach (var item in Model)
+            {
+                <li>
+                    @item.Meeting_id
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+

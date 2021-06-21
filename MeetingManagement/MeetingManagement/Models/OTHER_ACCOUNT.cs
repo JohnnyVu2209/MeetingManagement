@@ -20,15 +20,11 @@ namespace MeetingManagement.Models
             this.MEMBERs = new HashSet<MEMBER>();
         }
     
-        public string Create_by { get; set; }
         public string othUser_name { get; set; }
         public string othUser_password { get; set; }
-        public string othUser_id { get; set; }
-        public string othUser_Password_Confirmed { get; set; }
-        public string othUser_Position { get; set; }
+        public string othUser_position { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MEMBER> MEMBERs { get; set; }
-        public virtual USER USER { get; set; }
     }
 }

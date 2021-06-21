@@ -18,8 +18,8 @@ namespace MeetingManagement.Models
         public USER()
         {
             this.CATEGORies = new HashSet<CATEGORY>();
+            this.MEETINGs = new HashSet<MEETING>();
             this.MEMBERs = new HashSet<MEMBER>();
-            this.OTHER_ACCOUNT = new HashSet<OTHER_ACCOUNT>();
         }
     
         public string User_id { get; set; }
@@ -27,11 +27,12 @@ namespace MeetingManagement.Models
         public Nullable<System.DateTime> Birth_day { get; set; }
         public Nullable<bool> Gender { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CATEGORY> CATEGORies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MEMBER> MEMBERs { get; set; }
+        public virtual ICollection<MEETING> MEETINGs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OTHER_ACCOUNT> OTHER_ACCOUNT { get; set; }
+        public virtual ICollection<MEMBER> MEMBERs { get; set; }
     }
 }
