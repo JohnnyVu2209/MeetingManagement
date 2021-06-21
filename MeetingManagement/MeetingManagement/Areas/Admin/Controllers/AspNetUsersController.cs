@@ -199,7 +199,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
             AspNetUser ac = db.AspNetUsers.Find(userID);
             return PartialView(ac);
         }
-        public ApplicationUserManager UserManager
+/*        public ApplicationUserManager UserManager
         {
             get
             {
@@ -210,7 +210,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
                 _userManager = value;
             }
         }
-
+*/
         //
         // POST: /Account/ResetPassword
         [HttpPost]
@@ -241,12 +241,12 @@ namespace MeetingManagement.Areas.Admin.Controllers
             return View();
 
         }
-        private void AddErrors(IdentityResult result)
+/*        private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError("", error);
             }
         }
-    }
+*/    }
 }
