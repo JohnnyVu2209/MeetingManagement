@@ -7,10 +7,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MeetingManagement.Models;
+using EntityState = System.Data.Entity.EntityState;
 
 namespace MeetingManagement.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
+
     public class AspNetRolesController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();

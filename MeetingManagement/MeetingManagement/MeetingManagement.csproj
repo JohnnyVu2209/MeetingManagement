@@ -60,6 +60,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -176,10 +177,10 @@
     <Compile Include="Areas\Admin\Controllers\AspNetRolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetRoleUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
-    <Compile Include="Areas\HeadOfDepartment\Controllers\categoriesController.cs" />
+    <Compile Include="Areas\HeadOfDepartment\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
-    <Compile Include="Areas\HeadOfDepartment\MEETINGsController.cs" />
-    <Compile Include="Areas\User\Controllers\categoriesController.cs" />
+    <Compile Include="Areas\User\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\HeadOfDepartment\Controllers\MainPageController.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -188,33 +189,17 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AspNetRole.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserClaim.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AspNetUserLogin.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ATTACHMENT.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CATEGORY.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\AspNetRole.cs" />
+    <Compile Include="Models\AspNetUser.cs" />
+    <Compile Include="Models\AspNetUserClaim.cs" />
+    <Compile Include="Models\AspNetUserLogin.cs" />
+    <Compile Include="Models\ATTACHMENT.cs" />
+    <Compile Include="Models\CATEGORY.cs" />
     <Compile Include="Models\Crud.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\MEETING.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MEMBER.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\MEETING.cs" />
+    <Compile Include="Models\MEMBER.cs" />
     <Compile Include="Models\Models.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -230,15 +215,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\OTHER_ACCOUNT.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TASK.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\USER.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\OTHER_ACCOUNT.cs" />
+    <Compile Include="Models\TASK.cs" />
+    <Compile Include="Models\USER.cs" />
     <Compile Include="Password.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -2160,7 +2139,10 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\catalog-list.css" />
-    <Content Include="Content\style.css" />
+    <Content Include="css\style.css" />
+    <Content Include="Content\normalize.css" />
+    <Content Include="Content\outline_filter_alt_black_24dp.png" />
+    <Content Include="Content\The-Last-Style-Blender.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -2225,13 +2207,14 @@
     <Content Include="Areas\Admin\Views\AspNetRoles\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\UserGridView.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\categories\Create.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\categories\Delete.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\categories\Edit.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\categories\Index.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Categories\Create.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Categories\Delete.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Categories\Details.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Categories\Edit.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Categories\Index.cshtml" />
     <Content Include="Areas\User\Views\_ViewStart.cshtml" />
     <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\User\Views\categories\Index.cshtml" />
+    <Content Include="Areas\User\Views\Categories\Index.cshtml" />
     <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-brands-400.eot" />
     <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-brands-400.ttf" />
     <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-brands-400.woff" />
@@ -2275,13 +2258,11 @@
     <Content Include="assets\plugins\global\fonts\summernote\summernote.woff" />
     <Content Include="assets\plugins\global\fonts\summernote\summernote.woff2" />
     <Content Include="Areas\Admin\Views\AspNetUsers\ResetPassword.cshtml" />
-    <Content Include="Areas\User\Views\categories\Home.cshtml" />
+    <Content Include="Areas\User\Views\Categories\Home.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Categories\Create1.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoleUser\Create.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\Create.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\Delete.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\Details.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\Edit.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\Index.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MainPage\IndexTest.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -2333,7 +2314,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_VanLangMeeting.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Shared\HODIndex.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

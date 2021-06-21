@@ -7,10 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MeetingManagement.Models;
+using EntityState = System.Data.Entity.EntityState;
 
 namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 {
-    public class categoriesController : Controller
+    public class CategoriesController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
 
@@ -77,9 +78,6 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-
-
 
         [HttpGet]
         public ActionResult Delete(int id)
