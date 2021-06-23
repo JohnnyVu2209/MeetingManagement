@@ -178,6 +178,7 @@
     <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\categoriesController.cs" />
+    <Compile Include="Areas\User\Controllers\MEETINGsController.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -209,6 +210,9 @@
     <Compile Include="Models\MEETING.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MEETING_STATUS.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MEMBER.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -233,9 +237,6 @@
     <Compile Include="Models\TASK.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\USER.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
     <Compile Include="Password.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -245,6 +246,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\catalog-list.css" />
     <Content Include="Content\normalize.css" />
     <Content Include="Content\Picture\outline_filter_alt_black_24dp.png" />
     <Content Include="Content\The-Last-Style-Blender.css" />
@@ -314,6 +316,13 @@
     <Content Include="Areas\User\Views\categories\Home.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\categories\Create1.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoleUser\Create.cshtml" />
+    <Content Include="Areas\User\Views\MEETINGs\Create.cshtml" />
+    <Content Include="Areas\User\Views\MEETINGs\Delete.cshtml" />
+    <Content Include="Areas\User\Views\MEETINGs\Details.cshtml" />
+    <Content Include="Areas\User\Views\MEETINGs\Edit.cshtml" />
+    <Content Include="Areas\User\Views\MEETINGs\Index.cshtml" />
+    <Content Include="Areas\User\Views\MEETINGs\MyMeetingGridView.cshtml" />
+    <Content Include="Areas\User\Views\MEETINGs\JoinedMeetingGridView.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
