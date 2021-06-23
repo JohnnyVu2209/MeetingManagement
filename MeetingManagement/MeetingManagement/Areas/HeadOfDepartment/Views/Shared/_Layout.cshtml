@@ -6,9 +6,10 @@
     <title>@ViewBag.Title - VanLangMeeting</title>
     <link rel="stylesheet" href="~/Content/normalize.css" />
     <link rel="stylesheet" href="~/Content/The-Last-Style-Blender.css" />
+@*    <link rel="stylesheet" href="~/Content/quyhung/slide-bar.css">*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div id="nav-bar">
@@ -21,16 +22,16 @@
     </div>
     <div id="menu">
         <ul>
-            <li><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
-            <li><a href="@Url.Action("Index","Home")">Công việc</a></li>
-            <li><a href="@Url.Action("Index","Home")">Hồ sơ</a></li>
+            <li><a href="@Url.Action("Index","Home")" style="margin-top:10px">Trang chủ</a></li>
+            <li><a href="@Url.Action("Index","Home")" style="margin-top:10px">Công việc</a></li>
+            <li><a href="@Url.Action("Index","Home")" style="margin-top:10px">Hồ sơ</a></li>
         </ul>
-    </div> <!--Menu-->
+    </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            @*<p>&copy; @DateTime.Now.Year - VanLangMeeting</p>*@
+            <p>&copy; @DateTime.Now.Year - VanLangMeeting</p>
         </footer>
     </div>
     @RenderSection("scripts", required: false)
@@ -38,3 +39,12 @@
 
 </body>
 </html>
+
+    <div id="menu">
+        <ul>
+            <li><a href="@Url.Action("Index","Home")"style="margin-top:10px">Trang chủ</a></li>
+            <li><a href="@Url.Action("Index","Home")" style="margin-top:10px">Công việc</a></li>
+            <li><a href="@Url.Action("Index","Home")" style="margin-top:10px">Hồ sơ</a></li>
+        </ul>
+    </div>
+

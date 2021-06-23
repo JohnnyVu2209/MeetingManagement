@@ -256,6 +256,7 @@
     <Content Include="Content\catalog-list.css" />
     <Content Include="Content\normalize.css" />
     <Content Include="Content\outline_filter_alt_black_24dp.png" />
+    <Content Include="Content\quyhung\slide-bar.css" />
     <Content Include="Content\The-Last-Style-Blender.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -399,7 +400,6 @@
     <Folder Include="Areas\HeadOfDepartment\Views\MainPage\" />
     <Folder Include="Areas\User\Data\" />
     <Folder Include="Content\login\" />
-    <Folder Include="css\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
