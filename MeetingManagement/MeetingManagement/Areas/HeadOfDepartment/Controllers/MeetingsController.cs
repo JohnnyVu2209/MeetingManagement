@@ -9,111 +9,114 @@ using System.Web.Mvc;
 using MeetingManagement.Models;
 using EntityState = System.Data.Entity.EntityState;
 
-namespace MeetingManagement.Areas.Admin.Controllers
+namespace MeetingManagement.Areas.HeadOfDepartment
 {
-    [Authorize(Roles = "Admin")]
-
-    public class AspNetRolesController : Controller
+    public class MEETINGsController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
 
-        // GET: Admin/AspNetRoles
+        // GET: HeadOfDepartment/MEETINGs
         public ActionResult Index()
         {
-            return View(db.AspNetRoles.ToList());
+            var mEETINGs = db.MEETINGs.Include(m => m.CATEGORY);
+            return View(mEETINGs.ToList());
         }
 
-        // GET: Admin/AspNetRoles/Details/5
-        public ActionResult Details(string id)
+        // GET: HeadOfDepartment/MEETINGs/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetRole aspNetRole = db.AspNetRoles.Find(id);
-            if (aspNetRole == null)
+            MEETING mEETING = db.MEETINGs.Find(id);
+            if (mEETING == null)
             {
                 return HttpNotFound();
             }
-            return View(aspNetRole);
+            return View(mEETING);
         }
 
-        // GET: Admin/AspNetRoles/Create
+        // GET: HeadOfDepartment/MEETINGs/Create
         public ActionResult Create()
         {
+            ViewBag.Category_id = new SelectList(db.CATEGORies, "Category_id", "Create_by");
             return View();
         }
 
-        // POST: Admin/AspNetRoles/Create
+        // POST: HeadOfDepartment/MEETINGs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] AspNetRole aspNetRole)
+        public ActionResult Create([Bind(Include = "CreateBy_id,Meeting_name,Date_Start,Date_End,Meeting_Confirmed,Category_id,Meeting_id,Lacation,Status,Meeting_report")] MEETING mEETING)
         {
             if (ModelState.IsValid)
             {
-                db.AspNetRoles.Add(aspNetRole);
+                db.MEETINGs.Add(mEETING);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(aspNetRole);
+            ViewBag.Category_id = new SelectList(db.CATEGORies, "Category_id", "Create_by", mEETING.Category_id);
+            return View(mEETING);
         }
 
-        // GET: Admin/AspNetRoles/Edit/5
-        public ActionResult Edit(string id)
+        // GET: HeadOfDepartment/MEETINGs/Edit/5
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetRole aspNetRole = db.AspNetRoles.Find(id);
-            if (aspNetRole == null)
+            MEETING mEETING = db.MEETINGs.Find(id);
+            if (mEETING == null)
             {
                 return HttpNotFound();
             }
-            return View(aspNetRole);
+            ViewBag.Category_id = new SelectList(db.CATEGORies, "Category_id", "Create_by", mEETING.Category_id);
+            return View(mEETING);
         }
 
-        // POST: Admin/AspNetRoles/Edit/5
+        // POST: HeadOfDepartment/MEETINGs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] AspNetRole aspNetRole)
+        public ActionResult Edit([Bind(Include = "CreateBy_id,Meeting_name,Date_Start,Date_End,Meeting_Confirmed,Category_id,Meeting_id,Lacation,Status,Meeting_report")] MEETING mEETING)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(aspNetRole).State = EntityState.Modified;
+                db.Entry(mEETING).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(aspNetRole);
+            ViewBag.Category_id = new SelectList(db.CATEGORies, "Category_id", "Create_by", mEETING.Category_id);
+            return View(mEETING);
         }
 
-        // GET: Admin/AspNetRoles/Delete/5
-        public ActionResult Delete(string id)
+        // GET: HeadOfDepartment/MEETINGs/Delete/5
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetRole aspNetRole = db.AspNetRoles.Find(id);
-            if (aspNetRole == null)
+            MEETING mEETING = db.MEETINGs.Find(id);
+            if (mEETING == null)
             {
                 return HttpNotFound();
             }
-            return View(aspNetRole);
+            return View(mEETING);
         }
 
-        // POST: Admin/AspNetRoles/Delete/5
+        // POST: HeadOfDepartment/MEETINGs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            AspNetRole aspNetRole = db.AspNetRoles.Find(id);
-            db.AspNetRoles.Remove(aspNetRole);
+            MEETING mEETING = db.MEETINGs.Find(id);
+            db.MEETINGs.Remove(mEETING);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
