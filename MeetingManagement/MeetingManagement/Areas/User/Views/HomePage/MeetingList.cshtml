@@ -1,31 +1,48 @@
-﻿
+﻿@{ 
+    var status0 = "Chưa họp";
+}
 
-        
-        <table style="border:solid;border-top:none;">
-            <thead>
-                <tr>
-                    <th>Tên cuộc họp</th>
-                    <th>Người chủ trì</th>
-                    <th>Ngày diễn ra</th>
-                    <th>Tình trạng</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        Họp với mentor-Team 1
-                    </td>
-                    <td>
-                        Hương Khôn Vũ
-                    </td>
-                    <td>
-                        20/6/2021
-                    </td>
-                    <td>
-                      <div class="unstart-status">chưa họp</div>  
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+<table style="border:solid;border-top:none;">
+    <thead>
+        <tr>
+            <th>Tên cuộc họp</th>
+            <th>Người chủ trì</th>
+            <th>Ngày diễn ra</th>
+            <th>Tình trạng</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Họp với mentor-Team 1
+            </td>
+            <td>
+                Hương Khôn Vũ
+            </td>
+            <td>
+                20/6/2021
+            </td>
+            <td>
+                @if(status0 == "Chưa họp")
+                {
+                    <div class="waiting-status">@status0</div>
+                }
+                else if(status0 == "Chờ duyệt")
+                {
+                    <div class="pending-status">@status0</div>
+                }
+                else if(status0 == "Thiếu biên bản")
+                {
+                    <div class="missing-status">@status0</div>
+                }
+                else if(status0 == "Chưa hoàn thành")
+                {
+                    <div class="incomplete-status">@status0</div>
+                }
+            </td>
+        </tr>
+    </tbody>
+</table>
+
 
 
