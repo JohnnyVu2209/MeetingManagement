@@ -17,8 +17,7 @@ namespace MeetingManagement.Areas.User.Controllers
         // GET: User/categories
         public ActionResult Index()
         {
-            var cATEGORies = db.CATEGORies.ToList();
-            return View(cATEGORies);
+            return View(db.CATEGORies.ToList());
         }
         public ActionResult Home()
         {
