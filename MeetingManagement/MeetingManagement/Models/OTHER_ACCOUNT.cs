@@ -14,17 +14,8 @@ namespace MeetingManagement.Models
     
     public partial class OTHER_ACCOUNT
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public OTHER_ACCOUNT()
-        {
-            this.MEMBERs = new HashSet<MEMBER>();
-        }
-    
         public string othUser_name { get; set; }
         public string othUser_password { get; set; }
         public string othUser_position { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MEMBER> MEMBERs { get; set; }
     }
 }

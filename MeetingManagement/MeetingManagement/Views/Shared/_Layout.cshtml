@@ -10,7 +10,7 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body>
+<body id="yuki-body">
     @*<div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -31,18 +31,20 @@
                 </div>
             </div>
         </div>*@
-    <div id="nav-bar">
+    <div id="yuki-nav-bar">
         <div>
             <a href="@Url.Action("Index","Home",new { Area = "" })"><img src="https://www.vanlanguni.edu.vn/images/2020/HE_THONG_LOGO_CUA_TRUONG-02.png" alt="Văn Lang University"></a>
         </div>
-        <div class="login">
+        <div class="yuki-login-info">
             @Html.Partial("_LoginPartial")
         </div>
-    </div>
+    </div><!--Nav-bar-->
 
-    <div id="menu">
+    <div id="yuki-menu">
         <ul>
-            <li><a href="@Url.Action("Index","Home")">Trang chính</a></li>
+            <li><a href="@Url.Action("Index","MainPage")">Trang chính</a></li>
+            <li><a href="@Url.Action("Index","Categories")">Danh mục</a></li>
+            <li><a href="@Url.Action("Index","Meetings")">Cuộc họp</a></li>
         </ul>
     </div> <!--Menu-->
     <div class="container body-content">

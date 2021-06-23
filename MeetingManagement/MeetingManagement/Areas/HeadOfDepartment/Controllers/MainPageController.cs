@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 {
+    [Authorize]
     public class MainPageController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
@@ -17,14 +18,21 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             var model = db.MEETINGs.ToList();
             return View(model);
         }
-
-
-        public ActionResult Create()
+        public PartialViewResult _Create()
         {
-            return View();
+            var model = db.MEETINGs.ToList();
+            return PartialView(model);
         }
 
+        [HttpGet]
+        public PartialViewResult _MeetingInfo(int meetingID)
+        {
+            MEETING mEETING = db.MEETINGs.Find(meetingID);
+            return PartialView(mEETING);
+        }
         
+
+
         //private void AddErrors(object result)
         //{
         //    throw new NotImplementedException();

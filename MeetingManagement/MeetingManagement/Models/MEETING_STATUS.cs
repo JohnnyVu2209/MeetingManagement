@@ -12,27 +12,18 @@ namespace MeetingManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class USER
+    public partial class MEETING_STATUS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public USER()
+        public MEETING_STATUS()
         {
-            this.CATEGORies = new HashSet<CATEGORY>();
             this.MEETINGs = new HashSet<MEETING>();
-            this.MEMBERs = new HashSet<MEMBER>();
         }
     
-        public string User_id { get; set; }
-        public string Full_name { get; set; }
-        public Nullable<System.DateTime> Birth_day { get; set; }
-        public Nullable<bool> Gender { get; set; }
+        public string Status_name { get; set; }
+        public int Status_id { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CATEGORY> CATEGORies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MEETING> MEETINGs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MEMBER> MEMBERs { get; set; }
     }
 }

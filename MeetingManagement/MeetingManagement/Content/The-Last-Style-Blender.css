@@ -9,7 +9,7 @@
 }
 
 
-.me-body{
+#yuki-body{
     font-family: 'Open Sans', sans-serif !important;
     font-size: 14px;
     font-weight: 300;
@@ -20,26 +20,26 @@
 }
 
 
-a {
+.yuki-a {
     text-decoration: none;
     color: #28aae1;
 }
 
-    a:hover, a :visited {
+    .yuki-a:hover, .yuki-a :visited {
         color: #265778;
     }
 
 
 /*==Chia cột website==*/
-container {
+/*.yuki-container {
     position: relative;
     left: 0px;
     width: 100%;
     height: 2000px;
-}
+}*/
 
 /*==Menu==*/
-#menu {
+#yuki-menu {
     position: fixed;
     z-index: 10;
     height: 100%;
@@ -49,13 +49,13 @@ container {
     top: 50px;
 }
 
-    #menu ul {
+    #yuki-menu ul {
         list-style-type: none;
         padding: 0px;
         margin: 0px;
     }
 
-        #menu ul li {
+        #yuki-menu ul li {
             line-height: 2.9em;
             height: 2.9em;
             position: relative;
@@ -65,30 +65,30 @@ container {
             font-family: 'Open Sans', sans-serif;
         }
 
-            #menu ul li a {
+            #yuki-menu ul li a {
                 display: block;
                 color: #ffffff;
                 padding: 0px 1em;
                 text-decoration: none;
             }
 
-            #menu ul li:hover {
+            #yuki-menu ul li:hover {
                 background-color: #454545;
             }
 
 /*==Content==*/
-#content {
+/*.yuki-body-content {
     position: absolute;
     width:100%;
     height: 100%;
     margin: 0px;
     padding: 0px;
     left: 0px;
-}
+}*/
 
 
 /*--#header--*/
-#nav-bar {
+#yuki-nav-bar {
     text-align: center;
     position: fixed;
     top: 0px;
@@ -100,21 +100,21 @@ container {
 }
 
 
-    #nav-bar img {
+    #yuki-nav-bar img {
         position:fixed;
         left:750px;
         width: 116.537px;
         height: 45px;
     }
 
-    .login {
+    .yuki-login-info {
         position:absolute;
         left:1000px;
         top:0px;
     }
  
 /*--#table--*/
-.table-zone {
+.yuki-table-zone {
     position: relative;
     left: 100px;
     margin-bottom: 20px;
@@ -127,15 +127,16 @@ container {
 }
 
 
-table {
+.yuki-table {
     display: block;
     width: 100%;
-    height: 300px;
-    max-height: 300px;
-    overflow-y: scroll;
+    height: 315px;
+    max-height: 400px;
+    overflow-y:scroll;
+
 }
 
-.table-title {
+.yuki-table-title {
     background: #009FE5;
     height: 35px;
     width: 100%;
@@ -143,13 +144,13 @@ table {
     position: absolute;
 }
 
-    .table-title p {
+    .yuki-table-title p {
         color: white;
         font-weight: bold;
         margin: 7.5px;
     }
 
-.table-header {
+.yuki-table-out-header {
     background-color: #f1f1f1;
     width: 100%;
     height: 48px;
@@ -176,49 +177,40 @@ table {
         background: #bfbfbf;
     }
 
-.table-header ul {
+.yuki-table-out-header ul {
     padding: 0px;
     margin: 0px;
     height: 100%;
 }
 
-    .table-header ul li {
+    .yuki-table-out-header ul li {
         display: block;
         width: 283px;
         height: 48px;
         line-height: 48px;
     }
 
-.col1 {
+.yuki-col1 {
     position: absolute;
     left: 0px;
 }
 
-.col2 {
+.yuki-col2 {
     position: absolute;
     left: 283px;
 }
 
-.col3 {
+.yuki-col3 {
     position: absolute;
     left: 566px;
 }
 
-.col4 {
+.yuki-col4 {
     position: absolute;
     left: 849px;
 }
 
-table thead {
-}
-
-table tbody {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
-table th {
+.yuki-table th {
     width: 400px;
     height: 50px;
     text-align: center;
@@ -227,14 +219,20 @@ table th {
     top: 0px;
 }
 
-table tbody tr {
+.yuki-table tbody {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.yuki-table tbody tr {
     width: 100%;
     height: 48px;
     font-size: 14px;
     display: block;
 }
 
-td {
+.yuki-table tr td {
     width: 300px;
     height: 48px;
     border-top: 1px solid #f1f1f1;
@@ -244,12 +242,12 @@ td {
     word-break: break-all;
 }
 
-tr:hover td {
+.yuki-table tr:hover td {
     background-color: #f1f1f1;
 }
 
 /*--#footer--*/
-#footer {
+#yuki-footer {
     display: block;
     position: relative;
     width: 100%;
@@ -259,12 +257,12 @@ tr:hover td {
     border-top: 10px solid #009FE5;
 }
 
-.footer-col {
+#yuki-footer-col {
     height: 100%;
     padding: 20px;
 }
 
-    .footer-col div {
+    #yuki-footer-col div {
         height: 100%;
         width: 30%;
         padding: 20px;
@@ -276,6 +274,6 @@ tr:hover td {
         font-family: 'Open Sans', sans-serif !important;
     }
 
-        .footer-col div p {
+        #yuki-footer-col div p {
             font-size: 14px;
         }
