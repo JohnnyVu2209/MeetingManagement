@@ -244,6 +244,13 @@ td {
     text-align: center;
     word-break: break-all;
 }
+td .unstart-status{
+    background: #FEC400;
+    border-radius:10px;
+    width:30%;
+    color:white;
+    margin:auto;
+}
 
 tr:hover td {
     background-color: #f1f1f1;

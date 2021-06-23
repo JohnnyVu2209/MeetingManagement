@@ -18,7 +18,7 @@ namespace MeetingManagement.Models
         public int Meeting_id { get; set; }
         public string Task_name { get; set; }
         public string Assignee { get; set; }
-        public bool Task_Status { get; set; }
+        public Nullable<bool> Task_Status { get; set; }
         public Nullable<System.DateTime> Task_Deadline { get; set; }
         public Nullable<bool> Notify { get; set; }
     

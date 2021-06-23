@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link rel="stylesheet" href="~/Content/normalize.css" />
     <link rel="stylesheet" href="~/Content/The-Last-Style-Blender.css" />
+    <link href="~/Content/HomePage.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -45,8 +46,8 @@
 
     <div id="menu">
         <ul>
-            <li><a href="@Url.Action("Home","Categories")">Trang chính</a></li>
-            <li><a href="@Url.Action("Index","Categories")">Danh mục</a></li>
+            <li><a href="@Url.Action("Index","HomePage")">Trang chính</a></li>
+            <li><a href="@Url.Action("Index","categories")">Danh mục</a></li>
         </ul>
     </div> <!--Menu-->
 
