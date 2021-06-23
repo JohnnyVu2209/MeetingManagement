@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12" style="width:90%">
+        <div class="table-head">Cuộc họp sắp tới</div>
+        @Html.Partial("MeetingList")
+    </div>
+</div>
+<div class="row" style="padding-top:50px;width:90%;">
+    <div class="col-md-6">
+        <div class="table-head">Công việc chưa hoàn thành</div>
+        @Html.Partial("TaskList")
+    </div>
+    <div class="col-md-6">
+        <div class="table-head ">Danh sách danh mục</div>
+        @Html.Action("CategoriesList", "HomePage")
+    </div>
+</div>
+
+
+

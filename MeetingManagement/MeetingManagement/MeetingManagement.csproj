@@ -180,8 +180,9 @@
     <Compile Include="Areas\HeadOfDepartment\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\dsCuocHopController.cs" />
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
-    <Compile Include="Areas\User\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\User\Controllers\categoriesController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\MainPageController.cs" />
+    <Compile Include="Areas\User\Controllers\HomePageController.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -208,13 +209,12 @@
     <Compile Include="Models\CATEGORY.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Crud.cs" />
-    <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MEETING.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MEETING_STATUS.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MEMBER.cs">
@@ -235,12 +235,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\OTHER_ACCOUNT.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TASK.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -252,12 +246,14 @@
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\catalog-list.css" />
+    <Content Include="Content\HomePage.css" />
+    <Content Include="css\style.css" />
     <Content Include="Content\normalize.css" />
     <Content Include="Content\outline_filter_alt_black_24dp.png" />
     <Content Include="Content\quyhung\slide-bar.css" />
     <Content Include="Content\The-Last-Style-Blender.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -330,16 +326,56 @@
     <Content Include="Areas\User\Views\_ViewStart.cshtml" />
     <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\User\Views\Categories\Index.cshtml" />
+    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-brands-400.eot" />
+    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-brands-400.ttf" />
+    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-brands-400.woff" />
+    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-brands-400.woff2" />
+    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-regular-400.eot" />
+    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-regular-400.ttf" />
+    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-regular-400.woff" />
+    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-regular-400.woff2" />
+    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-solid-900.eot" />
+    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-solid-900.ttf" />
+    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-solid-900.woff" />
+    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-solid-900.woff2" />
+    <Content Include="assets\plugins\global\fonts\flaticon2\Flaticon2.eot" />
+    <Content Include="assets\plugins\global\fonts\flaticon2\Flaticon2.ttf" />
+    <Content Include="assets\plugins\global\fonts\flaticon2\Flaticon2.woff" />
+    <Content Include="assets\plugins\global\fonts\flaticon2\Flaticon2.woff2" />
+    <Content Include="assets\plugins\global\fonts\flaticon\Flaticon.eot" />
+    <Content Include="assets\plugins\global\fonts\flaticon\Flaticon.ttf" />
+    <Content Include="assets\plugins\global\fonts\flaticon\Flaticon.woff" />
+    <Content Include="assets\plugins\global\fonts\keenthemes-icons\Ki.eot" />
+    <Content Include="assets\plugins\global\fonts\keenthemes-icons\Ki.ttf" />
+    <Content Include="assets\plugins\global\fonts\keenthemes-icons\Ki.woff" />
+    <Content Include="assets\plugins\global\fonts\keenthemes-icons\Ki.woff2" />
+    <Content Include="assets\plugins\global\fonts\line-awesome\la-brands-400.eot" />
+    <Content Include="assets\plugins\global\fonts\line-awesome\la-brands-400.ttf" />
+    <Content Include="assets\plugins\global\fonts\line-awesome\la-brands-400.woff" />
+    <Content Include="assets\plugins\global\fonts\line-awesome\la-brands-400.woff2" />
+    <Content Include="assets\plugins\global\fonts\line-awesome\la-regular-400.eot" />
+    <Content Include="assets\plugins\global\fonts\line-awesome\la-regular-400.ttf" />
+    <Content Include="assets\plugins\global\fonts\line-awesome\la-regular-400.woff" />
+    <Content Include="assets\plugins\global\fonts\line-awesome\la-regular-400.woff2" />
+    <Content Include="assets\plugins\global\fonts\line-awesome\la-solid-900.eot" />
+    <Content Include="assets\plugins\global\fonts\line-awesome\la-solid-900.ttf" />
+    <Content Include="assets\plugins\global\fonts\line-awesome\la-solid-900.woff" />
+    <Content Include="assets\plugins\global\fonts\line-awesome\la-solid-900.woff2" />
+    <Content Include="assets\plugins\global\fonts\socicon\socicon.eot" />
+    <Content Include="assets\plugins\global\fonts\socicon\socicon.ttf" />
+    <Content Include="assets\plugins\global\fonts\socicon\socicon.woff" />
+    <Content Include="assets\plugins\global\fonts\summernote\summernote.eot" />
+    <Content Include="assets\plugins\global\fonts\summernote\summernote.ttf" />
+    <Content Include="assets\plugins\global\fonts\summernote\summernote.woff" />
+    <Content Include="assets\plugins\global\fonts\summernote\summernote.woff2" />
     <Content Include="Areas\Admin\Views\AspNetUsers\ResetPassword.cshtml" />
-    <Content Include="Areas\User\Views\Categories\Home.cshtml" />
-    <Content Include="Areas\Admin\Views\AspNetRoleUser\Create.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\dsCuocHop\Create.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\dsCuocHop\Delete.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\dsCuocHop\Details.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\dsCuocHop\Edit.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\dsCuocHop\Index.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Shared\Index.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MainPage\IndexTest.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetRoleUser\Create.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\Index.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\MeetingList.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\TaskList.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\CategoriesList.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -395,9 +431,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\HeadOfDepartment\Data\" />
-    <Folder Include="Areas\HeadOfDepartment\Views\MainPage\" />
     <Folder Include="Areas\User\Data\" />
     <Folder Include="Content\login\" />
   </ItemGroup>

@@ -22,17 +22,17 @@ namespace MeetingManagement.Areas.Admin.Controllers
         private ApplicationUserManager _userManager;
         private SEP24Team7Entities db = new SEP24Team7Entities();
         //private ApplicationSignInManager _signInManager;
-        //public ApplicationUserManager UserManager
-        //{
-        //    get
-        //    {
-        //        return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-        //    }
-        //    private set
-        //    {
-        //        _userManager = value;
-        //    }
-        //}
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         // GET: Admin/AspNetUsers
         public ActionResult Index()
@@ -199,18 +199,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
             AspNetUser ac = db.AspNetUsers.Find(userID);
             return PartialView(ac);
         }
-/*        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
-*/
+
         //
         // POST: /Account/ResetPassword
         [HttpPost]
@@ -241,12 +230,5 @@ namespace MeetingManagement.Areas.Admin.Controllers
             return View();
 
         }
-/*        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
-            }
-        }
-*/    }
+    }
 }

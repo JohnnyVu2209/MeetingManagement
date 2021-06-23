@@ -20,10 +20,10 @@ namespace MeetingManagement.Models
             this.MEETINGs = new HashSet<MEETING>();
         }
     
-        public string Create_by { get; set; }
         public int Category_id { get; set; }
         public string Category_Name { get; set; }
         public string Category_Content { get; set; }
+        public string Create_by { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

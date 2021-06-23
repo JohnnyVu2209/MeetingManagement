@@ -12,19 +12,18 @@ namespace MeetingManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class OTHER_ACCOUNT
+    public partial class MEETING_STATUS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public OTHER_ACCOUNT()
+        public MEETING_STATUS()
         {
-            this.MEMBERs = new HashSet<MEMBER>();
+            this.MEETINGs = new HashSet<MEETING>();
         }
     
-        public string othUser_name { get; set; }
-        public string othUser_password { get; set; }
-        public string othUser_position { get; set; }
+        public string Status_name { get; set; }
+        public int Status_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MEMBER> MEMBERs { get; set; }
+        public virtual ICollection<MEETING> MEETINGs { get; set; }
     }
 }

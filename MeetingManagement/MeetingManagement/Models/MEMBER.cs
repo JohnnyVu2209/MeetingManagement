@@ -25,7 +25,6 @@ namespace MeetingManagement.Models
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual MEETING MEETING { get; set; }
-        public virtual OTHER_ACCOUNT OTHER_ACCOUNT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TASK> TASKs { get; set; }
     }
