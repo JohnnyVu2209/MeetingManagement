@@ -3,8 +3,8 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
-
 }
+
 <link href="~/Content/catalog-list.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <header>
@@ -17,8 +17,9 @@
     <ul class="catalogList">
         @foreach (var item in Model)
         {
-            <li>
-                @item.Category_Name
+            <li style="display:flex";>
+
+                <div onclick="location.href = '@Url.Action("Details","Categories", new { id = item.Category_id})';">@item.Category_Name</div>
                 <span>
                     <i class="fa fa-ellipsis-h">
                         <ul class="sublist">
@@ -79,7 +80,7 @@
         });
     };
     function ShowDeletePopUp(categoryID) {
-        $("#loader-div")       
+        $("#loader-div")
         $.ajax({
             type: "GET",
             url: "Delete",

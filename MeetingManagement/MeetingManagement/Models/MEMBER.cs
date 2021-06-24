@@ -23,9 +23,9 @@ namespace MeetingManagement.Models
         public int Meeting_id { get; set; }
         public string Member_id { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         public virtual MEETING MEETING { get; set; }
         public virtual OTHER_ACCOUNT OTHER_ACCOUNT { get; set; }
-        public virtual USER USER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TASK> TASKs { get; set; }
     }

@@ -25,8 +25,9 @@ namespace MeetingManagement.Models
         public string Category_Name { get; set; }
         public string Category_Content { get; set; }
     
-        public virtual USER USER { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MEETING> MEETINGs { get; set; }
+        public object USER { get; internal set; }
     }
 }

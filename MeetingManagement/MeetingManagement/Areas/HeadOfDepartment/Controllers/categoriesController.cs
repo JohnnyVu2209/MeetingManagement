@@ -18,7 +18,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         // GET: HeadOfDepartment/categories
         public ActionResult Index()
         {
-            var cATEGORies = db.CATEGORies.Include(c => c.USER);
+            var cATEGORies = db.CATEGORies;
             return View(cATEGORies.ToList());
         }
 
@@ -35,6 +35,11 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
                 return HttpNotFound();
             }
             return View(cATEGORY);
+        }
+
+        public ActionResult MeetingList()
+        {
+            return PartialView() ;
         }
 
         // GET: HeadOfDepartment/categories/Create

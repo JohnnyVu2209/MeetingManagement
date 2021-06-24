@@ -17,25 +17,26 @@ namespace MeetingManagement.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MEETING()
         {
-            this.ATTACHMENTs = new HashSet<ATTACHMENT>();
             this.MEMBERs = new HashSet<MEMBER>();
             this.TASKs = new HashSet<TASK>();
         }
     
-        public string CreateBy_id { get; set; }
+        public string Create_by { get; set; }
         public string Meeting_name { get; set; }
         public Nullable<System.DateTime> Date_Start { get; set; }
         public Nullable<System.DateTime> Date_End { get; set; }
-        public Nullable<bool> Meeting_Confirmed { get; set; }
+        public bool Meeting_Confirmed { get; set; }
         public int Category_id { get; set; }
         public int Meeting_id { get; set; }
         public string Lacation { get; set; }
         public string Status { get; set; }
         public string Meeting_report { get; set; }
+        public string Create_by_name { get; set; }
+        public Nullable<System.DateTime> Date_Create { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         public virtual CATEGORY CATEGORY { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ATTACHMENT> ATTACHMENTs { get; set; }
+        public virtual ATTACHMENT ATTACHMENT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MEMBER> MEMBERs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
