@@ -197,6 +197,7 @@
     <Compile Include="Models\AspNetUser.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AspNetUserBase.cs" />
     <Compile Include="Models\AspNetUserClaim.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -235,6 +236,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\OTHER_ACCOUNT.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TASK.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -248,7 +255,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\catalog-list.css" />
     <Content Include="Content\HomePage.css" />
-    <Content Include="css\style.css" />
     <Content Include="Content\normalize.css" />
     <Content Include="Content\outline_filter_alt_black_24dp.png" />
     <Content Include="Content\quyhung\slide-bar.css" />
@@ -320,7 +326,6 @@
     <Content Include="Areas\Admin\Views\AspNetUsers\UserGridView.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Create.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Delete.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Categories\Details.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Edit.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Index.cshtml" />
     <Content Include="Areas\User\Views\_ViewStart.cshtml" />
@@ -389,7 +394,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <None Include="Views\Shared\dashbroad.cshtml" />
     <Content Include="Scripts\owl.carousel.min.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Web.config" />

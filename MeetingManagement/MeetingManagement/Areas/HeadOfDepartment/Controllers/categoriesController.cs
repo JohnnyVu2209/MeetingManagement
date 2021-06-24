@@ -22,20 +22,8 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return View(cATEGORies);
         }
 
-        // GET: HeadOfDepartment/categories/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CATEGORY cATEGORY = db.CATEGORies.Find(id);
-            if (cATEGORY == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cATEGORY);
-        }
+      
+        
 
         // GET: HeadOfDepartment/categories/Create
         public PartialViewResult Create()

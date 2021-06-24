@@ -17,7 +17,7 @@ namespace MeetingManagement.Areas.User.Controllers
         }
         public PartialViewResult MeetingList()
         {
-            /*var meetinglist = db.MEETINGs.ToList();*/
+            var meetinglist = db.MEETINGs.ToList();
             return PartialView();
         }
         public ActionResult TaskList()
