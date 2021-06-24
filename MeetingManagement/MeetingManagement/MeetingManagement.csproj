@@ -2158,6 +2158,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\catalog-list.css" />
     <Content Include="Content\HomePage.css" />
+    <Content Include="css\Details.css" />
     <Content Include="css\style.css" />
     <Content Include="Content\normalize.css" />
     <Content Include="Content\outline_filter_alt_black_24dp.png" />
@@ -2229,7 +2230,6 @@
     <Content Include="Areas\Admin\Views\AspNetUsers\UserGridView.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Create.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Delete.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Categories\Details.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Edit.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Index.cshtml" />
     <Content Include="Areas\User\Views\_ViewStart.cshtml" />
@@ -2285,6 +2285,9 @@
     <Content Include="Areas\User\Views\HomePage\MeetingList.cshtml" />
     <Content Include="Areas\User\Views\HomePage\TaskList.cshtml" />
     <Content Include="Areas\User\Views\HomePage\CategoriesList.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Categories\Details.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Categories\MeetingList.cshtml" />
+    <Content Include="Areas\User\Views\Categories\Details.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

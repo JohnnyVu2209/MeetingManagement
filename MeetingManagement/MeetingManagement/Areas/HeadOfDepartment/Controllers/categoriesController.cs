@@ -37,6 +37,11 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return View(cATEGORY);
         }
 
+        public ActionResult MeetingList()
+        {
+            return PartialView() ;
+        }
+
         // GET: HeadOfDepartment/categories/Create
         public PartialViewResult Create()
         {
