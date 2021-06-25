@@ -23,6 +23,22 @@ namespace MeetingManagement.Areas.User.Controllers
         {
             return View();
         }
+        public ActionResult Taocuochop()
+        {
+            return View();
+        }
+        public ActionResult CreateUser()
+        {
+
+
+            return View();
+        }
+        public ActionResult CreateUser2()
+        {
+
+
+            return View();
+        }
         // GET: HeadOfDepartment/categories/Details/5
         public ActionResult Details(int? id)
         {

@@ -15,6 +15,8 @@ namespace MeetingManagement.Models
     
     public partial class SEP24Team7Entities : DbContext
     {
+        internal object MEETING;
+
         public SEP24Team7Entities()
             : base("name=SEP24Team7Entities")
         {

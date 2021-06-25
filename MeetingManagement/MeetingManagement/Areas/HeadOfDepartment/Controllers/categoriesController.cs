@@ -103,5 +103,36 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return RedirectToAction("Index");
 
         }
+        public ActionResult Taocuochop()
+        {
+            var meeting = db.MEETING;
+
+            return View(meeting);
+        }
+        [HttpPost]
+        public ActionResult Taocuochop(MEETING model)
+        {
+            if (ModelState.IsValid)
+            {
+                db.MEETING.Add(model);
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+        public ActionResult CreateUser()
+        {
+
+
+            return View();
+        }
+        public ActionResult CreateUser2()
+        {
+
+
+            return View();
+        }
     }
 }
