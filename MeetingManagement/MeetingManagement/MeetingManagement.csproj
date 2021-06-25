@@ -189,17 +189,39 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AspNetRole.cs" />
-    <Compile Include="Models\AspNetUser.cs" />
-    <Compile Include="Models\AspNetUserClaim.cs" />
-    <Compile Include="Models\AspNetUserLogin.cs" />
-    <Compile Include="Models\ATTACHMENT.cs" />
-    <Compile Include="Models\CATEGORY.cs" />
+    <Compile Include="Models\AspNetRole.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaim.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ATTACHMENT.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CATEGORY.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Crud.cs" />
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\MEETING.cs" />
-    <Compile Include="Models\MEMBER.cs" />
+    <Compile Include="Models\MEETING.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MEETING_STATUS.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MEMBER.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Models.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -215,8 +237,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\OTHER_ACCOUNT.cs" />
-    <Compile Include="Models\TASK.cs" />
+    <Compile Include="Models\OTHER_ACCOUNT.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TASK.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\USER.cs" />
     <Compile Include="Password.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -2292,17 +2321,18 @@
     <Content Include="assets\plugins\global\fonts\summernote\summernote.ttf" />
     <Content Include="assets\plugins\global\fonts\summernote\summernote.woff" />
     <Content Include="assets\plugins\global\fonts\summernote\summernote.woff2" />
-    <Content Include="Areas\HeadOfDepartment\Views\DanhMuc\Create.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\DanhMuc\Delete.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\DanhMuc\Details.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\DanhMuc\Edit.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\DanhMuc\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\ResetPassword.cshtml" />
     <Content Include="Areas\User\Views\Categories\Home.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Create1.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoleUser\Create.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MainPage\IndexTest.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MainPage\Index.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Categories\Taocuochop.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Categories\CreateUser.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Categories\CreateUser2.cshtml" />
+    <Content Include="Areas\User\Views\Categories\CreateUser.cshtml" />
+    <Content Include="Areas\User\Views\Categories\CreateUser2.cshtml" />
+    <Content Include="Areas\User\Views\Categories\Taocuochop.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -2353,9 +2383,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\Taocuochop.cshtml" />
-    <Content Include="Views\Home\CreateUser.cshtml" />
-    <Content Include="Views\Home\CreateUser2.cshtml" />
     <Content Include="Views\Shared\_VanLangMeeting.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Shared\_Layout.cshtml" />
   </ItemGroup>

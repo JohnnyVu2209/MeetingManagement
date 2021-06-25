@@ -1,6 +1,9 @@
-﻿
+﻿@model MeetingManagement.Models.MEETING
 @{
     ViewBag.Title = "Taocuochop";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -34,16 +37,20 @@
                 <div class="card-heading">
                     <h2 class="title">Tạo Cuộc Họp</h2>
                 </div>
+
                 <div class="card-body">
-                    <div class="form-row">
-                        <div class="name">Tên Cuộc Họp</div>
-                        <div class="value">
-                            <div class="input-group">
-                                <input class="input--style-5" type="text" name="company">
+                    @using (Ajax.BeginForm("Taocuochop", "categories", new AjaxOptions { HttpMethod = "Post", OnSuccess = "CreateSuccess" }, new { @class = "form-horizontal", @id = "createformid", role = "form" }))
+                    {
+                        @Html.HiddenFor(model => model.Create_by)
+                        <div class="form-row">
+                            <div class="name">Tên Cuộc Họp</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.Meeting_name, new { @class = "input--style-5" })
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <form method="POST">
+
                         <div class="form-row m-b-55">
                             <div class="name">Ngày/Giờ</div>
                             <div class="value">
@@ -51,14 +58,14 @@
                                 <div class="row row-space">
                                     <div class="col-2">
                                         <div class="input-group-desc">
-                                            <input class="input--style-5" type="text" name="first_name">
+                                            @Html.TextBoxFor(model => model.Date_Start, new { @class= "input--style-5",  @type = "date" })
                                             <label class="label--desc">Ngày Họp</label>
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="input-group-desc">
-                                            <input class="input--style-5" type="text" name="last_name">
-                                            <label class="label--desc">Thời Gian</label>
+                                            @Html.TextBoxFor(model => model.Time_Start, new { @class = "input--style-5", @type = "time" })
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -68,7 +75,7 @@
                             <div class="name">Địa Điểm</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="text" name="company">
+                                    @Html.TextBoxFor(model => model.Location, new { @class = "input--style-5"})
                                 </div>
                             </div>
                         </div>
@@ -76,7 +83,7 @@
                             <div class="name">Mục Tiêu Buổi Họp</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <textarea class="input--style-5" rows="5" id="comment" style="margin: 0px; width: 400px; height: 73px;"></textarea>
+                                    @Html.TextAreaFor(model => model.Meeting_goal, new { @class = "input--style-5", @rows = "5" ,@id = "comment" ,@style = "margin: 0px; width: 400px; height: 73px;" })
                                 </div>
                             </div>
                         </div>
@@ -84,7 +91,7 @@
                             <div class="name">Nội Dung Cuộc Họp</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <textarea class="input--style-5" rows="5" id="comment" style="margin: 0px; width: 400px; height: 73px;"></textarea>
+                                    @Html.TextAreaFor(model => model.Meeting_content, new { @class = "input--style-5", @rows = "5" ,@id = "comment" ,@style = "margin: 0px; width: 400px; height: 73px;" })
                                 </div>
                             </div>
                         </div>
@@ -112,7 +119,7 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    }
                 </div>
                 <div>
                     <button type="button" class="btn btn--blue btn-lg btn-block" data-toggle="modal" onclick="()">Tạo</button>
@@ -120,6 +127,7 @@
             </div>
         </div>
     </div>
+                    
     <div id="Popup"></div>
     <div id="Popup2"></div>
 
