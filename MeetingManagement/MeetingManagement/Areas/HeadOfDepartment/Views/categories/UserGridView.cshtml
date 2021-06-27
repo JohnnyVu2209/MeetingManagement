@@ -1,0 +1,20 @@
+﻿@model IEnumerable<MeetingManagement.Models.AspNetUser>
+@{
+    var i = 0;
+}
+<div class="w3-container my-container" id="usertable">
+    <ul class="w3-ul w3-border create-user-scroll" id="userbox">
+        @foreach (var users in Model)
+        {
+            <li style="cursor: pointer;" onclick="getUser(id)" id="li@(++i)">
+                @users.Email
+            </li>
+
+        }
+    </ul>
+</div>
+@section scripts{
+    <script type="text/javascript">
+      
+    </script>
+}

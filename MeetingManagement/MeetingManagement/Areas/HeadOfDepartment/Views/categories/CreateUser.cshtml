@@ -1,4 +1,5 @@
 ﻿
+
 @{
     ViewBag.Title = "CreateUser";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,31 +19,11 @@
                 <div class="form-inline">
 
                     <label>Mời bạn nhập tên Email vào đây.</label>
-                    <input type="text" class="form-control" id="" />
-                    <button type="button" class="btn btn-success" data-toggle="modal" onclick="()">Thêm</button>
+                    <input type="text" class="form-control" id="txtSearch" />
+                    <button type="button" class="btn btn-success" data-toggle="modal" >Thêm</button>
 
                 </div>
-                <div class="w3-container my-container">
-                    <ul class="w3-ul w3-border">
-                        <li class="create-user-header"><h2>Các Thành Viên Đã Thêm</h2></li>
-                        @*<li class="create-user-title"><h2>Name</h2></li>*@
-                    </ul>
-                    <ul class="w3-ul w3-border create-user-scroll">
-                        <li>thong.187pm06719@vanlanguni</li>
-                        <li>thongabc@gmail.com</li>
-                        <li>thongabc@gmail.com</li>
-                        <li>thongabc@gmail.com</li>
-                        <li>thongabc@gmail.com</li>
-                        <li>thongabc@gmail.com</li>
-                        <li>thongabc@gmail.com</li>
-                        <li>thongabc@gmail.com</li>
-                        <li>thongabc@gmail.com</li>
-                        <li>thongabc@gmail.com</li>
-                        <li>thongabc@gmail.com</li>
-                        <li>thongabc@gmail.com</li>
-                        <li>Adam</li>
-                    </ul>
-                </div>
+                <div id="grdUserView"></div>
             </div>
 
             <!-- Modal footer -->
@@ -66,12 +47,13 @@
         padding: 0px !important;
         height: 57px;
     }
+
         .create-user-header h2 {
-        font-size: 18px;
-        margin: 0 0 0 16px;
-        height: 57px;
-        line-height: 57px;
-    }
+            font-size: 18px;
+            margin: 0 0 0 16px;
+            height: 57px;
+            line-height: 57px;
+        }
 
     .create-user-title {
         background: #f1f1f1;
@@ -94,7 +76,6 @@
 
     .create-user-modalheader {
         padding: 0px !important;
-        
     }
 
         .create-user-modalheader h4 {
@@ -109,6 +90,33 @@
             right: 20px;
         }
 </style>
-
+@section scripts{
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('#grdUserView').append('#myTable');
+    });
+    $(() => {
+        getUser();
+        $('#txtSearch').on('keyup', () => {
+            getUser();
+        })
+    });
+    function getUser() {
+        $.ajax({
+            url: '@Url.Action("SearchUser", "Categories")',
+            datatype: 'html',
+            method: 'GET',
+            data: { searchText: $('#txtSearch').val() },
+            success: function (res) {
+                $('#grdUserView').html('').html(res);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+        }
+    
+    </script>
+}
 
 

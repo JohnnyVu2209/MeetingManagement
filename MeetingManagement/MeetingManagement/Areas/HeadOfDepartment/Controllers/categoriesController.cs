@@ -14,12 +14,26 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
     public class CategoriesController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
-
+        private List<String> member = null;
+        
+        public void getMember()
+        {
+            var session = System.Web.HttpContext.Current.Session;
+            if (session["member"] != null)
+            {
+                member = session["member"] as List<String>;
+            }
+            else
+            {
+                member = new List<String>();
+                session["member"] = member;
+            }
+        }
         // GET: HeadOfDepartment/categories
         public ActionResult Index()
         {
-            var cATEGORies = db.CATEGORies.ToList();
-            return View(cATEGORies);
+            var categories = db.CATEGORies.ToList();
+            return View(categories);
         }
 
         // GET: HeadOfDepartment/categories/Details/5
@@ -103,19 +117,17 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return RedirectToAction("Index");
 
         }
-        public ActionResult Taocuochop()
+        public ActionResult MeetingForm()
         {
-            var meeting = db.MEETING;
-
-            return View(meeting);
+            return View();
         }
         [HttpPost]
-        public ActionResult Taocuochop(MEETING model)
+        public ActionResult MeetingForm(MEETING model)
         {
             if (ModelState.IsValid)
             {
-                db.MEETING.Add(model);
-                db.SaveChanges();
+                /*db.MEETING.Add(model);
+                db.SaveChanges();*/
 
                 return RedirectToAction("Index");
             }
@@ -128,6 +140,15 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 
             return View();
         }
+        public PartialViewResult SearchUser(String searchText)
+        {
+            List<AspNetUser> model = db.AspNetUsers.ToList();
+            var result = model.Where(a => a.UserName.ToLower().Contains(searchText) || a.Email.ToLower().Contains(searchText)).ToList();
+           
+            return PartialView("UserGridView", result);
+        }
+
+       
         public ActionResult CreateUser2()
         {
 

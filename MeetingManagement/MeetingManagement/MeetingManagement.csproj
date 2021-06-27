@@ -2330,6 +2330,8 @@
     <Content Include="Areas\User\Views\Categories\CreateUser.cshtml" />
     <Content Include="Areas\User\Views\Categories\CreateUser2.cshtml" />
     <Content Include="Areas\User\Views\Categories\Taocuochop.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Categories\MeetingForm.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Categories\UserGridView.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

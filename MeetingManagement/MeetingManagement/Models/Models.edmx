@@ -65,6 +65,7 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Full_name" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -260,7 +261,7 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="MEMBER">
-              <PropertyRef Name="Meeting_id" />
+              <PropertyRef Name="Member_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -486,6 +487,7 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Full_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="SEP24Team7Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="SEP24Team7Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="CATEGORies" Relationship="SEP24Team7Model.FK_CATEGORY_AspNetUsers" FromRole="AspNetUser" ToRole="CATEGORY" />
@@ -758,6 +760,7 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="SEP24Team7Model.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Full_name" ColumnName="Full_name" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
