@@ -1,0 +1,422 @@
+﻿@*@model MeetingManagement.Models.MEETING
+
+    @{
+        ViewBag.Title = "MeetingInfo";
+        Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
+    }
+
+    <h2>MeetingInfo</h2>
+
+    <div>
+        <h4>MEETING</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Meeting_name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Meeting_name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Meeting_goal)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Meeting_goal)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Meeting_content)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Meeting_content)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Date_Start)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Date_Start)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Time_Start)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Time_Start)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Location)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Location)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Meeting_report)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Meeting_report)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Date_Create)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Date_Create)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AspNetUser.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AspNetUser.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CATEGORY.Category_Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CATEGORY.Category_Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ATTACHMENT.Attachment_link)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ATTACHMENT.Attachment_link)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MEETING_STATUS.Status_name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MEETING_STATUS.Status_name)
+            </dd>
+        </dl>
+    </div>
+    <button class="btn btn-outline-primary">Duyệt</button>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Meeting_id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@
+
+@model MeetingManagement.Models.MEETING
+@{
+    ViewBag.Title = "Taocuochop";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Icons font CSS-->
+
+    <link href="~/Content/taocuochop/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/taocuochop/vendor/font-awesome-4.7/css/font-awesome.css" rel="stylesheet" />
+
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- Vendor CSS-->
+
+    <link href="~/Content/taocuochop/vendor/select2/select2.min.css" rel="stylesheet" />
+
+    <link href="~/Content/taocuochop/vendor/datepicker/daterangepicker.css" rel="stylesheet" />
+    <!-- Main CSS-->
+
+    <link href="~/Content//taocuochop/css/main.css" rel="stylesheet" />
+</head>
+
+<body>
+    <button type="button" onclick="window.location.href='@Url.Action("Index","MainPage")'" class=" back-button">
+        ❮   Back to List
+    </button>
+
+    <style>
+        .back-button {
+            font-family: Mulish;
+            background: #009FE5;
+            color: white;
+            width: 150px;
+            height: 50px;
+            border-radius: 10px;
+        }
+
+        .card-heading-fixed {
+            background: #009FE5 !important;
+        }
+    </style>
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper @*wrapper--w790*@">
+            <div class="card card-5">
+                <div class="card-heading card-heading-fixed">
+                    <h2 class="title">Chi tiết cuộc họp</h2>
+                </div>
+                <div class="card-body">
+                    @using (Ajax.BeginForm("Taocuochop", "Categories", new AjaxOptions { HttpMethod = "Post", OnSuccess = "CreateSuccess" }, new { @class = "form-horizontal", @id = "createformid", role = "form" }))
+                    {
+                        @Html.HiddenFor(model => model.Create_by)
+                        <div class="form-row form-row-fixed">
+                            @*<div class="name">Tên Cuộc Họp</div>*@
+                            <div> <img src="~/Content/Picture/outline_title_black_24dp.png" /></div>
+                            <div class="value value-fixed">
+                                <div class="input-group input_fixed">
+                                    @Html.TextBoxFor(model => model.Meeting_name, new { @class = "input--style-5-fixed" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row form-row-fixed">
+                            <div><img src="~/Content/Picture/outline_schedule_black_24dp.png" /></div>
+                            <div class="value value-fixed">
+                                <div class="row row-space row-space-fixed">
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            @Html.TextBoxFor(model => model.Date_Start, "{0:dd/MM/yyyy}", new { @class = "input--style-5-fixed" })
+                                            @*<label class="label--desc">Ngày Họp</label>*@
+                                            @*@Html.DisplayFor(model => model.Date_Start)*@
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="input-group-desc">
+                                            @Html.TextBoxFor(model => model.Time_Start, new { @class = "input--style-5-fixed" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row form-row-fixed">
+                            <div> <img src="~/Content/Picture/outline_place_black_24dp.png" /></div>
+                            <div class="value value-fixed">
+                                <div class="input-group input_fixed">
+                                    @Html.TextBoxFor(model => model.Location, new { @class = "input--style-5-fixed" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row form-row-fixed">
+                            <div> <img src="~/Content/Picture/outline_edit_black_24dp.png" /></div>
+                            <div class="value value-fixed">
+                                <div class="input-group input_fixed">
+                                    @Html.TextAreaFor(model => model.Meeting_content, new { @class = "input--style-5-fixed area-input", @rows = "5", @id = "comment" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row form-row-fixed">
+                            <div><img src="~/Content/Picture/outline_people_black_24dp.png" /></div>
+                            <div class="value-fixed">
+                                <div id="Popup"></div>
+                            </div>
+                            @*<div>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" onclick="getGrdMemberListModal(@Model.Meeting_id)">
+                                    Chi tiết
+                                    </button>
+                                </div>*@
+                        </div>
+                        <div class="form-row form-row-fixed">
+                            <div><img src="~/Content/Picture/outline_person_add_black_24dp.png" /></div>
+                        </div>
+                        <div class="form-row form-row-fixed">
+                            <div class="name">Tài Liệu Đính Kèm:</div>
+                            <div>
+                                <div class="form-group">
+                                    <input type="file" class="form-control-file border" name="file">
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="yuki-card-footer">
+                    <button type="button" class="btn btn-fixed yuki-btn-blue">
+                        <p>
+                            Duyệt
+                        </p>
+                    </button>
+                    <button type="button" class="btn btn-fixed yuki-btn-gray">
+                        <p>
+                            Hủy
+                        </p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="Popup"></div>
+</body>
+</html>
+
+@*override site.css*@
+<style>
+    input {
+        max-width: none;
+    }
+
+    textarea {
+        max-width: none;
+    }
+</style>
+
+@*override button.less*@
+<style>
+    .yuki-card-footer {
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    .btn-fixed {
+        color: white;
+        font-size: 14px;
+        display: inline-block;
+        width: 8em;
+        height: 4em;
+        text-align: center;
+        border-radius: 4px;
+    }
+
+    .yuki-btn-blue {
+        background-color: #008CBA !important;
+    }
+
+    .yuki-btn-gray {
+        background-color: #808080 !important;
+    }
+
+        .yuki-btn-gray:hover {
+        }
+</style>
+<style>
+    textarea:focus{
+        outline: 0px !important;
+        border: 2px solid #009fe5 !important;
+    }
+</style>
+
+<style>
+    .input--style-5-fixed {
+        background: #e5e5e5;
+        height: 40px;
+        line-height: 40px;
+        border: 2px solid white;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        padding: 0 22px;
+        font-size: 16px;
+        color: #555;
+    }
+
+    .value-fixed {
+        margin: 0 auto;
+    }
+
+    .form-row-fixed {
+        margin: 0 0 20px 0;
+    }
+
+    .form-row img {
+        position: relative;
+        left: 30px;
+        position:relative;
+        height: 24px;
+    }
+
+    .area-input {
+        margin: 0px;
+        width: 100%;
+        height: 250px;
+        border: 2px solid white;
+    }
+
+    .input_fixed {
+        width: 100%;
+        height: 30px;
+    }
+
+    .row-space-fixed:after {
+        content: none;
+    }
+
+    .row-space-fixed:before {
+        content: none;
+    }
+
+    .row-space-fixed {
+        margin: 0px;
+    }
+
+    .input-new:focus {
+        border: 2px solid #009fe5;
+    }
+
+    .input--style-5-fixed:focus {
+        border: 2px solid #009fe5;
+    }
+</style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        getGrdMemberListModal(@Model.Meeting_id);
+        });
+          function getGrdMemberListModal(id) {
+            $.ajax({
+                url: '@Url.Action("GrdMemberTable","MainPage")',
+                method: 'GET',
+                data: { id },
+                success: function (data) {
+                    $("#Popup").html(data);
+
+                    $("#modalMember").appendTo("MeetingInfo");
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        }
+
+        //function getCreateModal() {
+        //    $.ajax({
+        //        url: "GrdMemberTable",
+        //        datatype: 'html',
+        //        method: 'GET',
+        //        data: {},
+        //        success: function (data) {
+        //            $("#Popup").html(data);
+
+        //            $("#modalCreate").modal("show");
+        //        },
+        //        error: function (err) {
+        //            console.log(err);
+        //        }
+        //    })
+        //}
+        //function getCreateModal2() {
+        //    $.ajax({
+        //        url: "CreateUser2",
+        //        datatype: 'html',
+        //        method: 'GET',
+        //        data: {},
+        //        success: function (data) {
+        //            $("#Popup2").html(data);
+
+        //            $("#modalCreate2").modal("show");
+        //        },
+        //        error: function (err) {
+        //            console.log(err);
+        //        }
+        //    })
+        //}
+</script>

@@ -2,7 +2,7 @@
 @{
         ViewBag.Title = "Index";
 }
-    <body>
+    <body id="yuki-body">
         @*<div class="row" style="margin-bottom:15px;">
             <div class="col-sm-12">
                 <div class="form-inline pull-right">
@@ -17,30 +17,30 @@
                 <p>Cuộc Họp Chờ Duyệt</p>
             </div>
             <div class="yuki-table-out-header">
-                <ul>
-                    <li class="yuki-col1">
+                <ul class="yuki-column-4">
+                    <li>
                         Danh mục
                         @*<button class="filter">
-                            <img src="~/Content/outline_filter_alt_black_24dp.png">
-                        </button>*@
+                        <img src="~/Content/outline_filter_alt_black_24dp.png">
+                    </button>*@
                     </li>
-                    <li class="yuki-col2">
+                    <li>
                         Cuộc họp
                         @*<button class="filter">
-                            <img src="~/Content/outline_filter_alt_black_24dp.png">
-                        </button>*@
+                        <img src="~/Content/outline_filter_alt_black_24dp.png">
+                    </button>*@
                     </li>
-                    <li class="yuki-col3">
+                    <li>
                         Người chủ trì
                         @*<button class="filter">
-                            <img src="~/Content/outline_filter_alt_black_24dp.png">
-                        </button>*@
+                        <img src="~/Content/outline_filter_alt_black_24dp.png">
+                    </button>*@
                     </li>
-                    <li class="yuki-col4">
+                    <li>
                         Ngày tạo
                         @*<button class="filter">
-                            <img src="~/Content/outline_filter_alt_black_24dp.png">
-                        </button>*@
+                        <img src="~/Content/outline_filter_alt_black_24dp.png">
+                    </button>*@
                     </li>
                 </ul>
             </div>
@@ -49,11 +49,11 @@
                 {
                     if (meeting.Status == 1)
                     {
-                        <tr onclick="getMeetingInfoModal()">
+                        <tr class="yuki-column-4" onclick="location.href = '@Url.Action("VerifyMeeting","MainPage", new { id = meeting.Meeting_id })';" style="cursor: pointer;">
                             <td>@meeting.CATEGORY.Category_Name</td>
                             <td>@meeting.Meeting_name</td>
-                            <td>Minh Hiếu</td>
-                            <td>@meeting.Date_Create</td>
+                            <td>@meeting.AspNetUser.Full_name</td>
+                            <td>@meeting.Date_Create.GetValueOrDefault().ToShortDateString()</td>
                         </tr>
                     }
                 }
@@ -65,26 +65,26 @@
                 <p>Cuộc Họp Chưa Hoàn Thành</p>
             </div>
             <div class="yuki-table-out-header">
-                <ul>
-                    <li class="yuki-col1">
+                <ul class="yuki-column-4">
+                    <li>
                         Danh mục
                         @*<button class="filter">
                             <img src="~/Content/outline_filter_alt_black_24dp.png">
                         </button>*@
                     </li>
-                    <li class="yuki-col2">
+                    <li>
                         Cuộc họp
                         @*<button class="filter">
                             <img src="~/Content/outline_filter_alt_black_24dp.png">
                         </button>*@
                     </li>
-                    <li class="yuki-col3">
+                    <li>
                         Ngày đến hạn
                         @*<button class="filter">
                             <img src="~/Content/outline_filter_alt_black_24dp.png">
                         </button>*@
                     </li>
-                    <li class="yuki-col4">
+                    <li>
                         Tình trạng
                         @*<button class="filter">
                             <img src="~/Content/outline_filter_alt_black_24dp.png">
@@ -95,12 +95,15 @@
             <table class="yuki-table">
                 @foreach (var meeting in Model)
                 {
-                    <tr onclick="getMeetingInfoModal(@meeting.Meeting_id)">
+                    if (meeting.Status > 2 && meeting.Status < 5)
+                    {
+                    <tr class="yuki-column-4" onclick="location.href = '@Url.Action("VerifyMeeting", "MainPage", new { id = meeting.Meeting_id })';" style="cursor: pointer;">
                         <td>@meeting.CATEGORY.Category_Name</td>
                         <td>@meeting.Meeting_name</td>
-                        <td>@meeting.Date_Start</td>
+                        <td>@meeting.Date_Start.ToShortDateString()</td>
                         <td>@meeting.MEETING_STATUS.Status_name</td>
                     </tr>
+                    }
                 }
             </table>
         </div> <!---Table 2-->
@@ -114,12 +117,11 @@
                 <div class="pure-u-1-3 "> GET SOCIAL </div>
             </div>
         </div>*@ <!--Footer-->
+
         <div id="Create-Modal"></div>
-        <div id="MeetingInfo-Modal"></div>
+        @*<div id="MeetingInfo-Modal"></div>*@
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-        <script type="text/javascript">
+    <script type="text/javascript">
             //$(document).ready(function () {
             //    getCreateModal()
             //});
@@ -139,18 +141,9 @@
                     }
                 })
             }
-            //$(document).ready(function () {
-            //    $('div.table-zone table tr').on('click', function () {
-            //        alert('Hello tui ne');
-            //    })
-            //})
 
-            //var row = document.getElementsByClassName('tr-clickable');
-            //$(row).on('click', function () {
-            //    alert('tui ne ong');
-            //});
 
-            function getMeetingInfoModal(meetingID) {
+            @*function getMeetingInfoModal(meetingID) {
                 $.ajax({
                     url: '@Url.Action("_MeetingInfo", "MainPage")',
                     datatype: 'html',
@@ -165,32 +158,6 @@
                         console.log(err);
                     }
                 })
-            }
-        </script>
-
-        @*<div id="grdMeetingView"></div>*@
-        @*@section scripts{
-        <script type="text/javascript">
-        $(document).ready(function () {
-            $('#grdMeetingView').append('#myTable');
-        });
-            $(() => {
-                getMeetings()
-            });
-            function getMeetings()
-            {
-                    $.ajax({
-                        url: '@Url.Action("GetMeetings", "MainPage")',
-                        datatype: 'html',
-                        method: 'GET',
-                        data: {  },
-                        success: function (res) {
-                            $('#grdUserView').html('').html(res);
-                        },
-                        error: function (err) {
-                            console.log(err);
-                        }
-                    })
-            }
-        </script>}*@
+            }*@
+    </script>
     </body>

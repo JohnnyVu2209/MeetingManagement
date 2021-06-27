@@ -1,16 +1,20 @@
-﻿body {
-}
+﻿@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@600&display=swap');
+
 
 
 * {
+    padding: 0;
+    margin: 0;
+    font-family: Mulish;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
 }
 
+body {
+}
 
 #yuki-body{
-    font-family: 'Open Sans', sans-serif !important;
     font-size: 14px;
     font-weight: 300;
     color: #333;
@@ -119,20 +123,58 @@
     margin-bottom: 20px;
     display: block;
     padding-top: 35px;
-    width: 1152px;
+    width: 1150px;
     height: 400px;
     z-index: 0;
-    border: 1px solid black;
+    border: 1px solid #e5e5e5;
 }
 
 
-.yuki-table {
-    display: block;
-    width: 100%;
-    height: 315px;
-    max-height: 400px;
-    overflow-y:scroll;
-}
+    .yuki-table-zone > table {
+        display: block;
+        width: 100%;
+        height: calc(100% - 48px);
+        max-height: 400px;
+        overflow-y: overlay;
+        table-layout:fixed;
+    }
+
+    .yuki-table-zone > table > th {
+        width: 400px;
+        height: 50px;
+        text-align: center;
+        position: sticky;
+        background: #f1f1f1;
+        top: 0px;
+    }
+
+    .yuki-table-zone > table > tbody {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+        .yuki-table-zone > table > tbody > tr {
+            display: block;
+            max-height: 48px;
+        }
+
+            .yuki-table-zone > table > tbody > tr > td {
+                height: 48px;
+                border-top: 1px solid #f1f1f1;
+                border-bottom: 1px solid #f1f1f1;
+                background: white;
+                text-align: center;
+                word-break: break-all;
+                display: block;
+                line-height: 48px;
+                overflow: hidden;
+            }
+
+
+        .yuki-table-zone > table > tbody > tr:hover > td {
+            background-color: #f1f1f1;
+        }
 
 .yuki-table-title {
     background: #009FE5;
@@ -153,8 +195,8 @@
     width: 100%;
     height: 48px;
     text-align: center;
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
+    border-bottom: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
 
 .filter {
@@ -178,70 +220,21 @@
 .yuki-table-out-header ul {
     padding: 0px;
     margin: 0px;
-    height: 100%;
 }
 
     .yuki-table-out-header ul li {
         display: block;
-        width: 283px;
         height: 48px;
         line-height: 48px;
     }
-
-.yuki-col1 {
-    position: absolute;
-    left: 0px;
+.yuki-column-4{
+    column-count:4;
+    column-gap:0px;
 }
 
-.yuki-col2 {
-    position: absolute;
-    left: 283px;
-}
-
-.yuki-col3 {
-    position: absolute;
-    left: 566px;
-}
-
-.yuki-col4 {
-    position: absolute;
-    left: 849px;
-}
-
-.yuki-table th {
-    width: 400px;
-    height: 50px;
-    text-align: center;
-    position: sticky;
-    background: #f1f1f1;
-    top: 0px;
-}
-
-.yuki-table tbody {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
-.yuki-table tbody tr {
-    width: 100%;
-    height: 48px;
-    font-size: 14px;
-    display: block;
-}
-
-.yuki-table tr td {
-    width: 300px;
-    height: 48px;
-    border-top: 1px solid #f1f1f1;
-    border-bottom: 1px solid #f1f1f1;
-    background: white;
-    text-align: center;
-    word-break: break-all;
-}
-
-.yuki-table tr:hover td {
-    background-color: #f1f1f1;
+.yuki-column-3 {
+    column-count: 3;
+    column-gap: 0px;
 }
 
 /*--#footer--*/

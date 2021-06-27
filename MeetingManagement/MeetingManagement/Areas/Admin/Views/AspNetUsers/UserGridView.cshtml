@@ -5,31 +5,31 @@
     var Role = ViewBag.Role as AspNetRole;
 }
 
-<div class="table-zone">
-    <div class="table-header">
-        <div class="table-title">
+<div class="yuki-table-zone">
+    <div class="yuki-table-out-header">
+        <div class="yuki-table-title">
             <p>Danh sách tài khoản</p>
         </div>
         <ul>
-            <li class="col1">
+            <li class="yuki-col1">
                 UserName
                 @*<button class="filter">
                     <img src="~/Content/Picture/outline_filter_alt_black_24dp.png">
                 </button>*@
             </li>
-            <li class="col2">
+            <li class="yuki-col2">
                 Email
                 @*<button class="filter">
                     <img src="~/Content/Picture/outline_filter_alt_black_24dp.png">
                 </button>*@
             </li>
-            <li class="col3">
+            <li class="yuki-col3">
                 Role
                 @*<button class="filter">
                     <img src="~/Content/Picture/outline_filter_alt_black_24dp.png">
                 </button>*@
             </li>
-            <li class="col4">
+            <li class="yuki-col4">
                 Thao tác
             </li>
 
@@ -53,33 +53,12 @@
                 <td>
                     <ul>
                         <li>
-                            <button onclick="ShowResetPasswordPopUp('@users.Id');">
-                                Reset Password
-                            </button>
-                        </li>
-                        <li>
-                            <button href="@Url.Action("Create","AspNetRoleUser",new { UserID = users.Id })">Add Role</button>
-                        </li>
-                        <li>
-                            @foreach (var role in users.AspNetRoles)
-                            {
-                                <button type="submit"
-                                        onclick="return confirm('are you sure you want delete @role.Name from @users.Email ?')"
-                                        href="@Url.Action("Delete","AspNetRoleUser",new { RoleID = role.Id, UserID = users.Id  })">
-                                    Delete role
-                                </button>
-                            }
-                        </li>
-
-
-
-                        <li>
                             @*<span>
                                     &#10000;
                                 </span>*@
                             <ul class="menu_thaotac">
                                 <li>
-                                    <a onclick="ShowResetPasswordPopUp('@users.Id');">Reset Password</a>
+                                    <a onclick="ShowResetPasswordPopUp('@users.Id')";>Reset Password  |</a>
                                 </li>
                                 @*<li>
                                     <a href="@Url.Action("Delete",new { id = users.Id })">Delete</a>
@@ -92,7 +71,7 @@
                                     {
                                         <a type="submit"
                                            onclick="return confirm('are you sure you want delete @role.Name from @users.Email ?')"
-                                           href="@Url.Action("Delete","AspNetRoleUser",new { RoleID = role.Id, UserID = users.Id  })">Delete role</a>
+                                           href="@Url.Action("Delete","AspNetRoleUser",new { RoleID = role.Id, UserID = users.Id  })">|  Delete role</a>
                                     }
                                 </li>
                             </ul>

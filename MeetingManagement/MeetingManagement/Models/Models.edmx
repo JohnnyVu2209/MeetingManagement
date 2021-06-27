@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SEP24Team7Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -55,6 +65,7 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Full_name" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -113,6 +124,16 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
           <Property Name="othUser_name" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="othUser_password" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="othUser_position" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TASK">
           <Key>
@@ -305,6 +326,7 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SEP24Team7ModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
@@ -315,6 +337,7 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
           <EntitySet Name="MEETING-STATUS" EntityType="Self.MEETING-STATUS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MEMBER" EntityType="Self.MEMBER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OTHER ACCOUNT" EntityType="Self.OTHER ACCOUNT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TASK" EntityType="Self.TASK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ATTACHMENT" EntityType="Self.ATTACHMENT" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -396,11 +419,13 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="C__MigrationHistory" EntityType="SEP24Team7Model.C__MigrationHistory" />
           <EntitySet Name="CATEGORies" EntityType="SEP24Team7Model.CATEGORY" />
           <EntitySet Name="MEETINGs" EntityType="SEP24Team7Model.MEETING" />
           <EntitySet Name="MEETING_STATUS" EntityType="SEP24Team7Model.MEETING_STATUS" />
           <EntitySet Name="MEMBERs" EntityType="SEP24Team7Model.MEMBER" />
           <EntitySet Name="OTHER_ACCOUNTs" EntityType="SEP24Team7Model.OTHER_ACCOUNT" />
+          <EntitySet Name="sysdiagrams" EntityType="SEP24Team7Model.sysdiagram" />
           <EntitySet Name="TASKs" EntityType="SEP24Team7Model.TASK" />
           <EntitySet Name="ATTACHMENTs" EntityType="SEP24Team7Model.ATTACHMENT" />
           <AssociationSet Name="FK_CATEGORY_AspNetUsers" Association="SEP24Team7Model.FK_CATEGORY_AspNetUsers">
@@ -488,6 +513,7 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
           <NavigationProperty Name="AspNetUserClaims" Relationship="SEP24Team7Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="SEP24Team7Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="AspNetRoles" Relationship="SEP24Team7Model.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+          <Property Name="Full_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CATEGORies" Relationship="SEP24Team7Model.FK_CATEGORY_AspNetUsers" FromRole="AspNetUser" ToRole="CATEGORY" />
           <NavigationProperty Name="MEETINGs" Relationship="SEP24Team7Model.FK_MEETING_AspNetUsers" FromRole="AspNetUser" ToRole="MEETING" />
           <NavigationProperty Name="MEMBERs" Relationship="SEP24Team7Model.FK_MEMBER_AspNetUsers" FromRole="AspNetUser" ToRole="MEMBER" />
@@ -524,6 +550,16 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
           <End Type="SEP24Team7Model.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="SEP24Team7Model.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="CATEGORY">
           <Key>
             <PropertyRef Name="Category_id" />
@@ -584,6 +620,16 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
           <Property Name="othUser_name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="othUser_password" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="othUser_position" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TASK">
           <Key>
@@ -765,6 +811,7 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="SEP24Team7Model.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Full_name" ColumnName="Full_name" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
@@ -788,6 +835,16 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="SEP24Team7Model.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CATEGORies">
             <EntityTypeMapping TypeName="SEP24Team7Model.CATEGORY">
               <MappingFragment StoreEntitySet="CATEGORY">
@@ -838,6 +895,17 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
                 <ScalarProperty Name="othUser_position" ColumnName="othUser_position" />
                 <ScalarProperty Name="othUser_password" ColumnName="othUser_password" />
                 <ScalarProperty Name="othUser_name" ColumnName="othUser_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SEP24Team7Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
