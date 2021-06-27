@@ -64,6 +64,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -178,6 +179,7 @@
     <Compile Include="Areas\Admin\Controllers\AspNetRoleUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\HeadOfDepartment\Controllers\MEETINGsController.cs" />
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\categoriesController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\MainPageController.cs" />
@@ -2321,17 +2323,20 @@
     <Content Include="Areas\User\Views\HomePage\TaskList.cshtml" />
     <Content Include="Areas\User\Views\HomePage\CategoriesList.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Details.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Categories\MeetingList.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\MeetingList.cshtml" />
     <Content Include="Areas\User\Views\Categories\Details.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\Index.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Categories\Taocuochop.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Categories\CreateUser.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Categories\CreateUser2.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\CreateUser.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\CreateUser2.cshtml" />
     <Content Include="Areas\User\Views\Categories\CreateUser.cshtml" />
     <Content Include="Areas\User\Views\Categories\CreateUser2.cshtml" />
     <Content Include="Areas\User\Views\Categories\Taocuochop.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Categories\MeetingForm.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Categories\UserGridView.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\MeetingForm.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\Create.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\Delete.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\Details.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\Edit.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -2389,6 +2394,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\User\Data\" />
     <Folder Include="Content\login\" />
+    <Folder Include="Upload\Attachments\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

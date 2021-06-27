@@ -30,13 +30,15 @@
             </div>
 
             <div class="card-body">
-                @using (Html.BeginForm())
+                @using (Html.BeginForm("MeetingForm", "MEETINGs", FormMethod.Post, new { enctype = "multipart/form-data"}))
                 {
+                    @Html.ValidationSummary(true,"", new { @class = "text-danger" })
                     <div class="form-row">
                         <div class="name">Tên Cuộc Họp</div>
                         <div class="value">
                             <div class="input-group">
                                 @Html.TextBoxFor(model => model.Meeting_name, new { @class = "input--style-5" })
+                                @Html.ValidationMessageFor(model => model.Meeting_name,"", new {@class = "text-danger"})
                             </div>
                         </div>
                     </div>
@@ -49,12 +51,14 @@
                                 <div class="col-2">
                                     <div class="input-group-desc">
                                         @Html.TextBoxFor(model => model.Date_Start, new { @class = "input--style-5", @type = "date" })
+                                        @Html.ValidationMessageFor(model => model.Date_Start, "", new { @class = "text-danger" })
                                         <label class="label--desc">Ngày Họp</label>
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <div class="input-group-desc">
                                         @Html.TextBoxFor(model => model.Time_Start, new { @class = "input--style-5", @type = "time" })
+                                        @Html.ValidationMessageFor(model => model.Time_Start, "", new { @class = "text-danger" })
 
                                     </div>
                                 </div>
@@ -88,6 +92,7 @@
                     <div class="form-row">
                         <div class="name">Người Tham Dự:</div>
                         <div>
+                            <ul class="w3-ul w3-border create-user-scroll" id="pickedUser"></ul>
                             <button type="button" class="btn btn-primary" data-toggle="modal" onclick="getCreateModal()">
                                 Thêm
                             </button>
@@ -105,7 +110,7 @@
                         <div class="name">Tài Liệu Đính Kèm:</div>
                         <div>
                             <div class="form-group">
-                                <input type="file" class="form-control-file border" name="file">
+                                <input type="file" class="form-control-file border" multiple name="file" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
                             </div>
                         </div>
                     </div>
@@ -137,6 +142,12 @@
 
 <script src="~/taocuochop/js/global.js"></script>
 <script>
+    $(() => {
+        if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+            sessionStorage.clear();
+        }
+        
+    })
     function getCreateModal() {
         $.ajax({
             url: "CreateUser",
