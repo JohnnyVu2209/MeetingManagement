@@ -11,7 +11,7 @@ using MeetingManagement.Controllers;
 using MeetingManagement.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-
+using EntityState = System.Data.Entity.EntityState;
 
 namespace MeetingManagement.Areas.Admin.Controllers
 {
@@ -32,7 +32,6 @@ namespace MeetingManagement.Areas.Admin.Controllers
                 _userManager = value;
             }
         }
-
         // GET: Admin/AspNetUsers
         public ActionResult Index()
         {

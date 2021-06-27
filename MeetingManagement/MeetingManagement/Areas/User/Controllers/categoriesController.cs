@@ -10,7 +10,8 @@ using MeetingManagement.Models;
 
 namespace MeetingManagement.Areas.User.Controllers
 {
-    public class categoriesController : Controller
+    [Authorize]
+    public class CategoriesController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
         // GET: User/categories

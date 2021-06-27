@@ -10,8 +10,9 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="~/Content/The-Last-Style-Blender.css" rel="stylesheet"/>
+    <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-
 
 
     <link href="~/login-form-05/css/style.css" rel="stylesheet" />
@@ -20,15 +21,21 @@
     <!-- Bootstrap CSS -->
 
     <link href="~/login-form-05/css/bootstrap.min.css" rel="stylesheet" />
-
     <!-- Style -->
    
-
     <link href="~/login-form-05/fonts/icomoon/style.css" rel="stylesheet" />
     <title>Login </title>
 </head>
 <body>
-    <div class="container">
+    <div id="yuki-nav-bar">
+        <div>
+            <a href="@Url.Action("Index","Home",new { Area = "" })"><img src="https://www.vanlanguni.edu.vn/images/2020/HE_THONG_LOGO_CUA_TRUONG-02.png" alt="Văn Lang University"></a>
+        </div>
+        <div class="yuki-login-info">
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+    <div class="container content">
         <div class="row align-items-center justify-content-center">
             <div class="col-md-12">
                 <div class="form-block mx-auto">
@@ -53,7 +60,7 @@
                                 @Html.CheckBoxFor(m => m.RememberMe)
                                 @Html.LabelFor(m => m.RememberMe)
 
-                                <div class="control__indicator"></div>
+                                @*<div class="control__indicator"></div>*@
                             </label>
 
                         </div>
@@ -61,19 +68,24 @@
                         <div class="form-inline pull-right">
 
                             <button type="submit" value="Log In" class="btn col-md-6 btn-success">Đăng Nhập</button>
-                            <a href="#" class="btn col-md-6 btn-primary">
-                                <span class="icon-windows mr-3"></span>  Emai Van Lang 
-                            </a>
-                        @*</div>
-                        <button type="submit" value="Log In" class="btn col-md-6 btn-primary">Primary</button>
-                        <span class="text-center my-3 d-block">or</span>
+
+                            @*login with Vanlang
+                                <a href="#" class="btn col-md-6 btn-primary">
+                                    <span class="icon-windows mr-3"></span>  Emai Van Lang
+                                </a>*@
 
 
-                        <div class="">
 
-                            <a href="#socialLoginForm" class="btn btn-block py-2 btn-facebook">
-                                <span class="icon-facebook mr-3"></span> Use your VanLang email.
-                            </a>*@
+                            @*</div>
+                                <button type="submit" value="Log In" class="btn col-md-6 btn-primary">Primary</button>
+                                <span class="text-center my-3 d-block">or</span>
+
+
+                                <div class="">
+
+                                    <a href="#socialLoginForm" class="btn btn-block py-2 btn-facebook">
+                                        <span class="icon-facebook mr-3"></span> Use your VanLang email.
+                                    </a>*@
 
                         </div>
                     </form>
@@ -82,22 +94,15 @@
         </div>
     </div>
 
-
-
     <div class="col-md-4">
         <section id="socialLoginForm">
             @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
         </section>
     </div>
 
-
     <script src="~/login-form-05/js/jquery-3.3.1.min.js"></script>
-
     <script src="~/login-form-05/js/popper.min.js"></script>
-
-
     <script src="~/login-form-05/js/bootstrap.min.js"></script>
-
     <script src="~/login-form-05/js/owl.carousel.min.js"></script>
     <script src="~/login-form-05/js/main.js"></script>
 </body>
