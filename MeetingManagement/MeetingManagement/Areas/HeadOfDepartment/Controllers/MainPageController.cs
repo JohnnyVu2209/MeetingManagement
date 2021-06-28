@@ -19,19 +19,6 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             var model = db.MEETINGs.ToList();
             return View(model);
         }
-        public PartialViewResult Create()
-        {
-            var model = db.MEETINGs.ToList();
-            return PartialView(model);
-        }
-
-        //public PartialViewResult _MeetingInfo(int meetingID)
-        //{
-        //    MEETING mEETING = db.MEETINGs.Find(meetingID);
-        //    return PartialView(mEETING);
-        //}
-
-        
 
         public PartialViewResult GrdMemberTable(int id)
         {

@@ -398,8 +398,6 @@
     <Content Include="Areas\User\Views\Meetings\MyMeetingGridView.cshtml" />
     <Content Include="Areas\User\Views\Meetings\JoinedMeetingGridView.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MainPage\Create.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MainPage\_MeetingInfo.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\Index.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\Create.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\VerifyMeeting.cshtml" />
@@ -413,7 +411,6 @@
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff" />
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\GrdMemberTable.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MainPage\Edit.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

@@ -10,7 +10,7 @@
         <div class="yuki-table-title">
             <p>Danh sách tài khoản</p>
         </div>
-        <ul>
+        <ul class="yuki-column-4">
             <li class="yuki-col1">
                 UserName
                 @*<button class="filter">
@@ -38,7 +38,7 @@
     <table>
         @foreach (var users in Model)
         {
-            <tr>
+            <tr class="yuki-column-4">
                 <td>@users.UserName</td>
                 <td>@users.Email</td>
                 <td>
@@ -51,32 +51,26 @@
                     @*</select>*@
                 </td>
                 <td>
-                    <ul>
+                    @*<span>&#10000;</span>*@
+                    <ul class="menu_thaotac">
                         <li>
-                            @*<span>
-                                    &#10000;
-                                </span>*@
-                            <ul class="menu_thaotac">
-                                <li>
-                                    <a onclick="ShowResetPasswordPopUp('@users.Id')";>Reset Password  |</a>
-                                </li>
-                                @*<li>
-                                    <a href="@Url.Action("Delete",new { id = users.Id })">Delete</a>
-                                     </li>*@
-                                <li>
-                                    <a href="@Url.Action("Create","AspNetRoleUser",new { UserID = users.Id })">Add Role</a>
-                                </li>
-                                <li>
-                                    @foreach (var role in users.AspNetRoles)
-                                    {
-                                        <a type="submit"
-                                           onclick="return confirm('are you sure you want delete @role.Name from @users.Email ?')"
-                                           href="@Url.Action("Delete","AspNetRoleUser",new { RoleID = role.Id, UserID = users.Id  })">|  Delete role</a>
-                                    }
-                                </li>
-                            </ul>
+                            <a onclick="ShowResetPasswordPopUp('@users.Id')";>Reset Password  |</a>
                         </li>
-                    </ul>
+                        @*<li>
+                            <a href="@Url.Action("Delete",new { id = users.Id })">Delete</a>
+                        </li>*@
+                        <li>
+                            <a href="@Url.Action("Create","AspNetRoleUser",new { UserID = users.Id })">Add Role</a>
+                        </li>
+                        <li>
+                            @foreach (var role in users.AspNetRoles)
+                                {
+                                    <a type="submit"
+                                    onclick="return confirm('are you sure you want delete @role.Name from @users.Email ?')"
+                                    href="@Url.Action("Delete","AspNetRoleUser",new { RoleID = role.Id, UserID = users.Id  })">|  Delete role</a>
+                                }
+                        </li>
+                     </ul>
                 </td>
             </tr>
         }
@@ -85,20 +79,20 @@
 </div>
 <style>
     tr {
-        height: 50px;
+        height: 48px;
     }
 
         table ul li {
             display:inline;
         }
 
-        /*ul > li:active > ul {
-            display: block;
-        }*/
-
-    table ul li {
-        display: inline;
+    ul > li span {
+        font-size: 25px;
     }
+
+    /*ul > li:active > ul {
+        display: block;
+    }*/
 
     /*ul > li:active > ul {
             display: block;
@@ -112,16 +106,13 @@
             display: block;
         }*/
 
-    ul > li span {
-        font-size: 25px;
-    }
+
 </style>
 <script>
-
     function ShowResetPasswordPopUp(userID) {
         $.ajax({
             type: "GET",
-            url: "ResetPassword",
+            url: "ResetPassword","AspNetUsers",
             data: { userID },
             dataType: "html",
             success: function (data) {
