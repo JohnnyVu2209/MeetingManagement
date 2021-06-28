@@ -119,11 +119,10 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
         </EntityType>
         <EntityType Name="OTHER ACCOUNT">
           <Key>
-            <PropertyRef Name="othUser_name" />
+            <PropertyRef Name="othUser_id" />
           </Key>
-          <Property Name="othUser_name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="othUser_password" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="othUser_position" Type="nvarchar" MaxLength="128" />
+          <Property Name="othUser_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="othUser_office" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -297,6 +296,20 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OTHER ACCOUNT_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OTHER ACCOUNT" Type="Self.OTHER ACCOUNT" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OTHER ACCOUNT">
+              <PropertyRef Name="othUser_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TASK_MEETING1">
           <End Role="MEETING" Type="Self.MEETING" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -389,6 +402,10 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
             <End Role="MEETING" EntitySet="MEETING" />
             <End Role="MEMBER" EntitySet="MEMBER" />
           </AssociationSet>
+          <AssociationSet Name="FK_OTHER ACCOUNT_AspNetUsers" Association="Self.FK_OTHER ACCOUNT_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="OTHER ACCOUNT" EntitySet="OTHER ACCOUNT" />
+          </AssociationSet>
           <AssociationSet Name="FK_TASK_MEETING1" Association="Self.FK_TASK_MEETING1">
             <End Role="MEETING" EntitySet="MEETING" />
             <End Role="TASK" EntitySet="TASK" />
@@ -439,6 +456,10 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
           <AssociationSet Name="FK_MEMBER_AspNetUsers" Association="SEP24Team7Model.FK_MEMBER_AspNetUsers">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="MEMBER" EntitySet="MEMBERs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OTHER_ACCOUNT_AspNetUsers" Association="SEP24Team7Model.FK_OTHER_ACCOUNT_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="OTHER_ACCOUNT" EntitySet="OTHER_ACCOUNTs" />
           </AssociationSet>
           <AssociationSet Name="FK_Meeting_CATEGORY" Association="SEP24Team7Model.FK_Meeting_CATEGORY">
             <End Role="CATEGORY" EntitySet="CATEGORies" />
@@ -517,6 +538,7 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
           <NavigationProperty Name="CATEGORies" Relationship="SEP24Team7Model.FK_CATEGORY_AspNetUsers" FromRole="AspNetUser" ToRole="CATEGORY" />
           <NavigationProperty Name="MEETINGs" Relationship="SEP24Team7Model.FK_MEETING_AspNetUsers" FromRole="AspNetUser" ToRole="MEETING" />
           <NavigationProperty Name="MEMBERs" Relationship="SEP24Team7Model.FK_MEMBER_AspNetUsers" FromRole="AspNetUser" ToRole="MEMBER" />
+          <NavigationProperty Name="OTHER_ACCOUNT" Relationship="SEP24Team7Model.FK_OTHER_ACCOUNT_AspNetUsers" FromRole="AspNetUser" ToRole="OTHER_ACCOUNT" />
           </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="SEP24Team7Model.AspNetUser" Role="AspNetUser" Multiplicity="1">
@@ -615,11 +637,11 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
         </EntityType>
         <EntityType Name="OTHER_ACCOUNT">
           <Key>
-            <PropertyRef Name="othUser_name" />
+            <PropertyRef Name="othUser_id" />
           </Key>
-          <Property Name="othUser_name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="othUser_password" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="othUser_position" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="othUser_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="othUser_office" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="SEP24Team7Model.FK_OTHER_ACCOUNT_AspNetUsers" FromRole="OTHER_ACCOUNT" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -690,6 +712,20 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
             </Principal>
             <Dependent Role="MEMBER">
               <PropertyRef Name="Member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OTHER_ACCOUNT_AspNetUsers">
+          <End Type="SEP24Team7Model.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SEP24Team7Model.OTHER_ACCOUNT" Role="OTHER_ACCOUNT" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OTHER_ACCOUNT">
+              <PropertyRef Name="othUser_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -892,9 +928,8 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
           <EntitySetMapping Name="OTHER_ACCOUNTs">
             <EntityTypeMapping TypeName="SEP24Team7Model.OTHER_ACCOUNT">
               <MappingFragment StoreEntitySet="OTHER ACCOUNT">
-                <ScalarProperty Name="othUser_position" ColumnName="othUser_position" />
-                <ScalarProperty Name="othUser_password" ColumnName="othUser_password" />
-                <ScalarProperty Name="othUser_name" ColumnName="othUser_name" />
+                <ScalarProperty Name="othUser_office" ColumnName="othUser_office" />
+                <ScalarProperty Name="othUser_id" ColumnName="othUser_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

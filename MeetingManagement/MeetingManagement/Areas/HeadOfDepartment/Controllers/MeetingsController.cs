@@ -82,16 +82,15 @@ namespace MeetingManagement.Areas.HeadOfDepartment
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CreateBy_id,Meeting_name,Date_Start,Date_End,Meeting_Confirmed,Category_id,Meeting_id,Lacation,Status,Meeting_report")] MEETING mEETING)
+        public ActionResult Edit([Bind(Include = "Category_id,Meeting_id,Meeting_name,Meeting_goal,Meeting_content,Date_Start,Time_Start,Location,Status,Meeting_report,Date_Create,Create_by")] MEETING mEETING)
         {
             if (ModelState.IsValid)
-            {
+            {   
                 db.Entry(mEETING).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Category_id = new SelectList(db.CATEGORies, "Category_id", "Create_by", mEETING.Category_id);
+            //ViewBag.Category_id = new SelectList(db.CATEGORies, "Category_id", "Create_by", mEETING.Category_id);
             return View(mEETING);
         }
 

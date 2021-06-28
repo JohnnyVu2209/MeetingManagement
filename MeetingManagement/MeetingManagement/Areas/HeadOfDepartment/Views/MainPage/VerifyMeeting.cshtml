@@ -141,121 +141,115 @@
     <link href="~/Content//taocuochop/css/main.css" rel="stylesheet" />
 </head>
 
-<body>
-    <button type="button" onclick="window.location.href='@Url.Action("Index","MainPage")'" class=" back-button">
-        ❮   Back to List
-    </button>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-    <style>
-        .back-button {
-            font-family: Mulish;
-            background: #009FE5;
-            color: white;
-            width: 150px;
-            height: 50px;
-            border-radius: 10px;
-        }
+    <body>
+        <button type="button" onclick="window.location.href='@Url.Action("Index", "MainPage")'" class=" back-button">
+            ❮   Back to List
+        </button>
+        <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+            <div class="wrapper @*wrapper--w790*@">
+                <div class="card card-5">
+                    <div class="card-heading card-heading-fixed">
+                        <h2 class="title">Chi tiết cuộc họp</h2>
+                    </div>
+                    <div class="card-body">
+                        @using (Ajax.BeginForm("Taocuochop", "Categories", new AjaxOptions { HttpMethod = "Post", OnSuccess = "CreateSuccess" }, new { @class = "form-horizontal", @id = "createformid", role = "form" }))
+                        {
+                            @Html.HiddenFor(model => model.Category_id, new { @id = "category_id" })
+                            @Html.HiddenFor(model => model.Meeting_id, new { @id = "meeting_id" })
+                            @Html.HiddenFor(model => model.Status, new { @id = "status" })
 
-        .card-heading-fixed {
-            background: #009FE5 !important;
-        }
-    </style>
-    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-        <div class="wrapper @*wrapper--w790*@">
-            <div class="card card-5">
-                <div class="card-heading card-heading-fixed">
-                    <h2 class="title">Chi tiết cuộc họp</h2>
-                </div>
-                <div class="card-body">
-                    @using (Ajax.BeginForm("Taocuochop", "Categories", new AjaxOptions { HttpMethod = "Post", OnSuccess = "CreateSuccess" }, new { @class = "form-horizontal", @id = "createformid", role = "form" }))
-                    {
-                        @Html.HiddenFor(model => model.Create_by)
-                        <div class="form-row form-row-fixed">
-                            @*<div class="name">Tên Cuộc Họp</div>*@
-                            <div> <img src="~/Content/Picture/outline_title_black_24dp.png" /></div>
-                            <div class="value value-fixed">
-                                <div class="input-group input_fixed">
-                                    @Html.TextBoxFor(model => model.Meeting_name, new { @class = "input--style-5-fixed" })
+                            @Html.HiddenFor(model => model.Create_by)
+                            <div class="form-row form-row-fixed">
+                                @*<div class="name">Tên Cuộc Họp</div>*@
+                                <div> <img src="~/Content/Picture/outline_title_black_24dp.png" /></div>
+                                <div class="value value-fixed">
+                                    <div class="input-group input_fixed">
+                                        @Html.TextBoxFor(model => model.Meeting_name, new { @class = "input--style-5-fixed", @id = "meeting_name" })
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-row form-row-fixed">
-                            <div><img src="~/Content/Picture/outline_schedule_black_24dp.png" /></div>
-                            <div class="value value-fixed">
-                                <div class="row row-space row-space-fixed">
-                                    <div class="col-2">
-                                        <div class="input-group-desc">
-                                            @Html.TextBoxFor(model => model.Date_Start, "{0:dd/MM/yyyy}", new { @class = "input--style-5-fixed" })
-                                            @*<label class="label--desc">Ngày Họp</label>*@
-                                            @*@Html.DisplayFor(model => model.Date_Start)*@
+                            <div class="form-row form-row-fixed">
+                                <div><img src="~/Content/Picture/outline_schedule_black_24dp.png" /></div>
+                                <div class="value value-fixed">
+                                    <div class="row row-space row-space-fixed">
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                @Html.TextBoxFor(model => model.Date_Start, "{0:dd/MM/yyyy}", new { @class = "input--style-5-fixed", @id = "date_start" })
+                                                @*<label class="label--desc">Ngày Họp</label>*@
+                                                @*@Html.DisplayFor(model => model.Date_Start)*@
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="input-group-desc">
-                                            @Html.TextBoxFor(model => model.Time_Start, new { @class = "input--style-5-fixed" })
+                                        <div class="col-2">
+                                            <div class="input-group-desc">
+                                                @Html.TextBoxFor(model => model.Time_Start, new { @class = "input--style-5-fixed", @id = "time_start" })
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-row form-row-fixed">
-                            <div> <img src="~/Content/Picture/outline_place_black_24dp.png" /></div>
-                            <div class="value value-fixed">
-                                <div class="input-group input_fixed">
-                                    @Html.TextBoxFor(model => model.Location, new { @class = "input--style-5-fixed" })
+                            <div class="form-row form-row-fixed">
+                                <div> <img src="~/Content/Picture/outline_place_black_24dp.png" /></div>
+                                <div class="value value-fixed">
+                                    <div class="input-group input_fixed">
+                                        @Html.TextBoxFor(model => model.Location, new { @class = "input--style-5-fixed", @id = "location" })
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-row form-row-fixed">
-                            <div> <img src="~/Content/Picture/outline_edit_black_24dp.png" /></div>
-                            <div class="value value-fixed">
-                                <div class="input-group input_fixed">
-                                    @Html.TextAreaFor(model => model.Meeting_content, new { @class = "input--style-5-fixed area-input", @rows = "5", @id = "comment" })
+                            <div class="form-row form-row-fixed">
+                                <div> <img src="~/Content/Picture/outline_edit_black_24dp.png" /></div>
+                                <div class="value value-fixed">
+                                    <div class="input-group input_fixed">
+                                        @Html.TextAreaFor(model => model.Meeting_content, new { @class = "input--style-5-fixed area-input", @rows = "5", @id = "content" })
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-row form-row-fixed">
-                            <div><img src="~/Content/Picture/outline_people_black_24dp.png" /></div>
-                            <div class="value-fixed">
-                                <div id="Popup"></div>
-                            </div>
-                            @*<div>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" onclick="getGrdMemberListModal(@Model.Meeting_id)">
-                                    Chi tiết
-                                    </button>
-                                </div>*@
-                        </div>
-                        <div class="form-row form-row-fixed">
-                            <div><img src="~/Content/Picture/outline_person_add_black_24dp.png" /></div>
-                        </div>
-                        <div class="form-row form-row-fixed">
-                            <div class="name">Tài Liệu Đính Kèm:</div>
-                            <div>
-                                <div class="form-group">
-                                    <input type="file" class="form-control-file border" name="file">
+                            <div class="form-row form-row-fixed">
+                                <div><img src="~/Content/Picture/outline_people_black_24dp.png" /></div>
+                                <div class="value-fixed">
+                                    <div id="Popup"></div>
                                 </div>
-                            </div>
-                        </div>
-                    }
-                </div>
-                <div class="yuki-card-footer">
-                    <button type="button" class="btn btn-fixed yuki-btn-blue">
-                        <p>
-                            Duyệt
-                        </p>
+                                @*<div>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" onclick="getGrdMemberListModal(@Model.Meeting_id)">
+                    Chi tiết
                     </button>
-                    <button type="button" class="btn btn-fixed yuki-btn-gray">
-                        <p>
-                            Hủy
-                        </p>
-                    </button>
+                </div>*@
+                            </div>
+                            <div class="form-row form-row-fixed">
+                                <div><img src="~/Content/Picture/outline_person_add_black_24dp.png" /></div>
+                            </div>
+                            <div class="form-row form-row-fixed">
+                                <div class="name">Tài Liệu Đính Kèm:</div>
+                                <div>
+                                    <div class="form-group">
+                                        <input type="file" class="form-control-file border" name="file">
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="yuki-card-footer">
+                        <button onclick="VerifyMeeting()" class="btn btn-fixed yuki-btn-blue">
+                            <p>
+                                Duyệt
+                            </p>
+                        </button>
+                        <button type="button" class="btn btn-fixed yuki-btn-gray">
+                            <p>
+                                Hủy
+                            </p>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div id="Popup"></div>
-</body>
+        <div id="Popup"></div>
+    </body>
+}
 </html>
 
 @*override site.css*@
@@ -303,7 +297,20 @@
         border: 2px solid #009fe5 !important;
     }
 </style>
+<style>
+    .back-button {
+        font-family: Mulish;
+        background: #009FE5;
+        color: white;
+        width: 150px;
+        height: 50px;
+        border-radius: 10px;
+    }
 
+    .card-heading-fixed {
+        background: #009FE5 !important;
+    }
+</style>
 <style>
     .input--style-5-fixed {
         background: #e5e5e5;
@@ -371,7 +378,7 @@
     $(document).ready(function () {
         getGrdMemberListModal(@Model.Meeting_id);
         });
-          function getGrdMemberListModal(id) {
+            function getGrdMemberListModal(id) {
             $.ajax({
                 url: '@Url.Action("GrdMemberTable","MainPage")',
                 method: 'GET',
@@ -385,7 +392,27 @@
                     console.log(err);
                 }
             })
-        }
+    }
+                function VerifyMeeting() {
+                    var category_id = $("#category_id").val();
+                    var meeting_id = $("#meeting_id").val();
+                    var meeting_name = $("#meeting_name").val();
+                    var date_start = $("#date_start").val();
+                    var time_start = $("#time_start").val();
+                    var location = $("#location").val();
+                    var content = $("#content").val();
+                    var status = $("#status").val('2');
+                }
+                    $.ajax({
+                        url: '@Url.Action("VerifyMeeting","MainPage")',
+                        method: 'POST',
+                        data: (category_id,meeting_id, meeting_name, date_start, time_start, location, content, status),
+                        success: function (data) {
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    })
 
         //function getCreateModal() {
         //    $.ajax({

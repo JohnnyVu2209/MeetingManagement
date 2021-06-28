@@ -14,8 +14,9 @@ namespace MeetingManagement.Models
     
     public partial class OTHER_ACCOUNT
     {
-        public string othUser_name { get; set; }
-        public string othUser_password { get; set; }
-        public string othUser_position { get; set; }
+        public string othUser_id { get; set; }
+        public string othUser_office { get; set; }
+    
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }
