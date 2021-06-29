@@ -11,13 +11,16 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            
+            @foreach (var meeting in Model)
+            {
+                <tr>
+                    <td>@meeting.Meeting_name</td>
+                    <td>@meeting.AspNetUser.UserName</td>
+                    <td>@meeting.Date_Start</td>
+                    <td>@meeting.Status</td>
+                </tr>
+            }
+
         </tbody>
     </table>
 </div>

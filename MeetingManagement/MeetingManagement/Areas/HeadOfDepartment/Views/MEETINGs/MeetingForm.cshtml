@@ -1,5 +1,7 @@
 ﻿@model MeetingManagement.Models.MEETING
+@using MeetingManagement.Models;
 @{
+    var userArr = new List<string>();
     ViewBag.Title = "MeetingForm";
     Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
 }
@@ -28,17 +30,17 @@
             <div class="card-heading">
                 <h2 class="title">Tạo Cuộc Họp</h2>
             </div>
+            <form id="createMeeting" method="post" enctype="multipart/form-data">
+               
+                <div class="card-body">
 
-            <div class="card-body">
-                @using (Html.BeginForm("MeetingForm", "MEETINGs", FormMethod.Post, new { enctype = "multipart/form-data"}))
-                {
-                    @Html.ValidationSummary(true,"", new { @class = "text-danger" })
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-row">
                         <div class="name">Tên Cuộc Họp</div>
                         <div class="value">
                             <div class="input-group">
                                 @Html.TextBoxFor(model => model.Meeting_name, new { @class = "input--style-5" })
-                                @Html.ValidationMessageFor(model => model.Meeting_name,"", new {@class = "text-danger"})
+                                @Html.ValidationMessageFor(model => model.Meeting_name, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -74,28 +76,25 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="name">Mục Tiêu Buổi Họp</div>
-                        <div class="value">
-                            <div class="input-group">
-                                @Html.TextAreaFor(model => model.Meeting_goal, new { @class = "input--style-5", @rows = "5", @id = "comment", @style = "margin: 0px; width: 400px; height: 73px;" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
                         <div class="name">Nội Dung Cuộc Họp</div>
                         <div class="value">
                             <div class="input-group">
                                 @Html.TextAreaFor(model => model.Meeting_content, new { @class = "input--style-5", @rows = "5", @id = "comment1", @style = "margin: 0px; width: 400px; height: 73px;" })
                             </div>
+                            @Html.HiddenFor(m => m.Category_id)
+                            
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="name">Người Tham Dự:</div>
                         <div>
-                            <ul class="w3-ul w3-border create-user-scroll" id="pickedUser"></ul>
+                            <ul class="w3-ul w3-border create-user-scroll" id="pickedUser">
+                                @Html.HiddenFor(m => m.AspNetUsers)
+                            </ul>
                             <button type="button" class="btn btn-primary" data-toggle="modal" onclick="getCreateModal()">
                                 Thêm
                             </button>
+
                         </div>
                     </div>
                     <div class="form-row">
@@ -105,21 +104,23 @@
                                 Thêm
                             </button>
                         </div>
+
                     </div>
                     <div class="form-row">
                         <div class="name">Tài Liệu Đính Kèm:</div>
                         <div>
                             <div class="form-group">
-                                <input type="file" class="form-control-file border" multiple name="file" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                                <input type="file" class="form-control-file border" multiple id="file" name="Files" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
                             </div>
                         </div>
                     </div>
-                }
-            </div>
-            <div>
-                <button type="button" class="btn btn--blue btn-lg btn-block" data-toggle="modal" onclick="()">Tạo</button>
-            </div>
-        </div>
+
+                </div>
+                <div>
+                    <button type="submit" class="btn btn--blue btn-lg btn-block" id="create" onclick="createFrom()" data-toggle="modal">Tạo</button>
+                </div>
+            </form>
+</div>
     </div>
 </div>
 
@@ -141,16 +142,16 @@
 <!-- Main JS-->
 
 <script src="~/taocuochop/js/global.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>
     $(() => {
         if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
             sessionStorage.clear();
         }
-        
-    })
+    });
     function getCreateModal() {
         $.ajax({
-            url: "CreateUser",
+            url: "@Url.Action("CreateUSer", "MEETINGs")",
             datatype: 'html',
             method: 'GET',
             data: {},
@@ -163,7 +164,7 @@
                 console.log(err);
             }
         })
-    }
+    };
     function getCreateModal2() {
         $.ajax({
             url: "CreateUser2",
@@ -179,5 +180,33 @@
                 console.log(err);
             }
         })
-    }
+    };
+    function createFrom() {
+
+        @*var userArr = [];
+        var formData = new FormData($('#createMeeting')[0]);
+        var file = document.getElementById("file")[0];
+        var formData = new FormData();
+        var other_data = $('#createMeeting').serializeArray();
+        $.each(other_data, function (key, input) {
+            formData.append(input.name, input.value);
+        });
+
+
+        formData.append("Files", file);
+
+        ul = document.getElementById("pickedUser");
+        li = ul.getElementsByTagName("li");
+        for (var i = 0; i < li.length; i++) {
+            userArr.push(li[i].innerText)
+        }
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("MeetingForm", "MEETINGs")',
+            data: formData + "&userArr=" + userArr,
+            success: function () {
+                alert("Tạo Thành Công");
+            }
+        });*@
+    };
 </script>

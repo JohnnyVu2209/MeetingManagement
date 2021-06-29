@@ -1,5 +1,4 @@
-﻿
-
+﻿@using MeetingManagement.Models;
 @{
     ViewBag.Title = "CreateUser";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -112,7 +111,7 @@
 </style>
 @section scripts{
     <script type="text/javascript">
-        
+
         $(() => {
             $('#txtSearch').on('keyup', () => {
                 var input, filter, ul, li, i, txtValue;
@@ -134,11 +133,11 @@
                 sessionStorage.clear();
             });
     });
-       
+
         $(() => {
 
             if (sessionStorage.getItem("user") != null) {
-                
+
                 var user = JSON.parse(sessionStorage.getItem("user"));
                 var user_length = Object.keys(user).length;
                 for (var i = 0; i < user_length; i++) {
@@ -154,7 +153,15 @@
                 var user_length = Object.keys(user).length;
                 for (var i = 0; i < user_length; i++) {
                     $("#pickedUser").append('<li id= "li' + i + '">' + JSON.parse(sessionStorage.getItem("user"))[i] + '</li>')
+                    
                 }
+                var userArr = [];
+                ul = document.getElementById("pickedUser");
+                li = ul.getElementsByTagName("li");
+                for (var i = 0; i < li.length; i++) {
+                    userArr.push(li[i].innerText)
+                }
+                $("#AspNetUsers").val(userArr);
                 $("#modalCreate").modal("hide");
             }
             else {
@@ -170,6 +177,7 @@
                 sessionStorage.setItem("user", JSON.stringify(userArray));
                 $("#pickbox").append('<li id= "li' + id + '">' + item.val() + '</li>');
                 $("#hiden").show();
+                
             }
             else if (item.prop("checked") == true) {
                 item.prop("checked", false);
@@ -182,7 +190,7 @@
                     $("#hiden").hide();
                 }
                 sessionStorage.setItem("user", JSON.stringify(userArray));
-                
+
             }
         }
 

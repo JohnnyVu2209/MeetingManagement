@@ -11,6 +11,7 @@ using EntityState = System.Data.Entity.EntityState;
 
 namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 {
+    [Authorize(Roles = "BCN")]
     public class CategoriesController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
@@ -29,6 +30,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            Session["categoryID"] = id;
             CATEGORY cATEGORY = db.CATEGORies.Find(id);
             if (cATEGORY == null)
             {
@@ -37,10 +39,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return View(cATEGORY);
         }
 
-        public ActionResult MeetingList()
-        {
-            return PartialView() ;
-        }
+        
 
         // GET: HeadOfDepartment/categories/Create
         public PartialViewResult Create()
@@ -103,6 +102,6 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return RedirectToAction("Index");
 
         }
-        
+       
     }
 }

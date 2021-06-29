@@ -12,12 +12,11 @@ namespace MeetingManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ATTACHMENT
+    public partial class OTHER_ACCOUNT
     {
-        public int Meeting_id { get; set; }
-        public int Attachment_id { get; set; }
-        public string Attachment_path { get; set; }
+        public string othUser_id { get; set; }
+        public string othUser_office { get; set; }
     
-        public virtual MEETING MEETING { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

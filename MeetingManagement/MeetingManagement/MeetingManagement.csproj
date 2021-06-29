@@ -236,6 +236,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\OTHER_ACCOUNT.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TASK.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -2269,8 +2272,6 @@
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Delete.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Edit.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Index.cshtml" />
-    <Content Include="Areas\User\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\User\Views\Categories\Index.cshtml" />
     <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-brands-400.eot" />
     <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-brands-400.ttf" />
@@ -2337,6 +2338,7 @@
     <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\Details.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\Edit.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\Index.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\pickedUser.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
