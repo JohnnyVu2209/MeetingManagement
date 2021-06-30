@@ -244,6 +244,8 @@ td {
     text-align: center;
     word-break: break-all;
 }
+
+
 /*Thanh tinh trang*/
     td .pending-status {
         background: #C0C0C0;
@@ -264,7 +266,7 @@ td {
     td .missing-status {
         background: #F12B2C;
         border-radius: 10px;
-        width: 37%;
+        width: 45%;
         color: white;
         margin: auto;
     }
@@ -272,7 +274,15 @@ td {
     td .incomplete-status {
         background: #FF9900;
         border-radius: 10px;
-        width: 43%;
+        width: 45%;
+        color: white;
+        margin: auto;
+    }
+
+    td .complete-status {
+        background: #18e750;
+        border-radius: 10px;
+        width: 30%;
         color: white;
         margin: auto;
     }
@@ -280,7 +290,7 @@ td {
     td .complete-status {
         background: #29CC97;
         border-radius: 10px;
-        width: 43%;
+        width: 30%;
         color: white;
         margin: auto;
     }

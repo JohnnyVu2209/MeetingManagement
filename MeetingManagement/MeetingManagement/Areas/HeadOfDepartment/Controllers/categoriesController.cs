@@ -15,7 +15,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
     public class CategoriesController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
-        
+
         // GET: HeadOfDepartment/categories
         public ActionResult Index()
         {

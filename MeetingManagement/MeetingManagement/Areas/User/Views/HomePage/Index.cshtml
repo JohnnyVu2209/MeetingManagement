@@ -5,17 +5,19 @@
 <div class="row">
     <div class="col-md-12" style="width:88%">
         <div class="table-head">Cuộc họp sắp tới</div>
-        @Html.Partial("MeetingList")
+        @Html.Action("IndexML")
     </div>
 </div>
+
 <div class="row" style="padding-top:50px;width:90%;">
     <div class="col-md-6">
-        <div class="table-head">Công việc chưa hoàn thành</div>
-        @Html.Partial("TaskList")
+        <div class="table-head">Danh Sách Danh Mục</div>
+        @Html.Action("CategoriesList")
     </div>
+
     <div class="col-md-6">
-        <div class="table-head ">Danh sách danh mục</div>
-        @Html.Action("CategoriesList", "HomePage")
+        <div class="table-head ">Danh Sách Công Việc</div>
+        @Html.Action("TaskList")        
     </div>
 </div>
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - VanLangMeeting</title>
     <link rel="stylesheet" href="~/Content/normalize.css" />
     <link rel="stylesheet" href="~/Content/The-Last-Style-Blender.css" />
     <link href="~/Content/HomePage.css" rel="stylesheet" />
@@ -48,17 +48,20 @@
         <ul>
             <li><a href="@Url.Action("Index","HomePage")">Trang chính</a></li>
             <li><a href="@Url.Action("Index","categories")">Danh mục</a></li>
+            <li><a href="#">Cuộc họp của tôi</a></li>
+            <li><a href="#">Công việc</a></li>
         </ul>
-    </div> <!--Menu-->
-
+    </div>
+    Menu
     <div class="container body-content">
         @RenderBody()
-        @*<hr />
-            <footer id="footer">
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>*@
+        <hr />
+        <footer id="footer">
+            <p>&copy; @DateTime.Now.Year - VanLangMeeting</p>
+        </footer>
     </div>
-    
+
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

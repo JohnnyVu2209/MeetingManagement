@@ -19,39 +19,18 @@ namespace MeetingManagement.Areas.User.Controllers
             var cATEGORies = db.CATEGORies.ToList();
             return View(cATEGORies);
         }
-        public ActionResult Home()
+        public ActionResult CategoriesListDetail(int id)
         {
-            return View();
-        }
-        public ActionResult Taocuochop()
-        {
-            return View();
-        }
-        public ActionResult CreateUser()
-        {
-
-
-            return View();
-        }
-        public ActionResult CreateUser2()
-        {
-
-
-            return View();
-        }
-        // GET: HeadOfDepartment/categories/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
+            List<CATEGORY> cate = db.CATEGORies.ToList();
+            CategoryListVM categoryListVM = new CategoryListVM();
+            List<CategoryListVM> categoryListVMList = cate.Select(x => new CategoryListVM
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CATEGORY cATEGORY = db.CATEGORies.Find(id);
-            if (cATEGORY == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cATEGORY);
+                CateContent = x.Category_Content,
+                CateId = x.Category_id,
+                CateName = x.Category_Name,
+                CateCreateBy = x.Create_by
+            }).ToList();
+            return View(categoryListVMList);
         }
 
     }
