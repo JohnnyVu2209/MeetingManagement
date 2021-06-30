@@ -1,0 +1,156 @@
+﻿@model IEnumerable<MeetingManagement.Models.AspNetUser>
+
+@using MeetingManagement.Models
+@{
+    var Role = ViewBag.Role as AspNetRole;
+}
+
+<div class="table-zone">
+    <div class="table-header">
+        <div class="table-title">
+            <p>Danh sách tài khoản</p>
+        </div>
+        <ul>
+            <li class="col1">
+                UserName
+                @*<button class="filter">
+                    <img src="~/Content/Picture/outline_filter_alt_black_24dp.png">
+                </button>*@
+            </li>
+            <li class="col2">
+                Email
+                @*<button class="filter">
+                    <img src="~/Content/Picture/outline_filter_alt_black_24dp.png">
+                </button>*@
+            </li>
+            <li class="col3">
+                Role
+                @*<button class="filter">
+                    <img src="~/Content/Picture/outline_filter_alt_black_24dp.png">
+                </button>*@
+            </li>
+            <li class="col4">
+                Thao tác
+            </li>
+
+        </ul>
+    </div>
+    <table>
+        @foreach (var users in Model)
+        {
+            <tr>
+                <td>@users.UserName</td>
+                <td>@users.Email</td>
+                <td>
+                    @*<select class="form-control">*@
+
+                    @foreach (var role in users.AspNetRoles)
+                    {
+                        @role.Name
+                    }
+                    @*</select>*@
+                </td>
+                <td>
+                    <ul>
+                        <li>
+                            <a onclick="ShowResetPasswordPopUp('@users.Id');">
+                                Reset Password   |
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Create","AspNetRoleUser",new { UserID = users.Id })">Add Role   |</a>
+                        </li>
+                        <li>
+                            @foreach (var role in users.AspNetRoles)
+                            {
+                                <a type="submit"
+                                        onclick="return confirm('are you sure you want delete @role.Name from @users.Email ?')"
+                                        href="@Url.Action("Delete","AspNetRoleUser",new { RoleID = role.Id, UserID = users.Id  })">
+                                    Delete role
+                                </a>
+                            }
+                        </li>
+
+
+
+                        <li>
+                            @*<span>
+                                &#10000;
+                            </span>*@
+                            <ul class="menu_thaotac">
+                                <li>
+                                    <a onclick="ShowResetPasswordPopUp('@users.Id');">Reset Password</a>
+                                </li>
+                                @*<li>
+                                    <a href="@Url.Action("Delete",new { id = users.Id })">Delete</a>
+                                </li>*@
+                                <li>
+                                    <a href="@Url.Action("Create","AspNetRoleUser",new { UserID = users.Id })">Add Role</a>
+                                </li>
+                                <li>
+                                    @foreach (var role in users.AspNetRoles)
+                                    {
+                                        <a type="submit"
+                                           onclick="return confirm('are you sure you want delete @role.Name from @users.Email ?')"
+                                           href="@Url.Action("Delete","AspNetRoleUser",new { RoleID = role.Id, UserID = users.Id  })">Delete role</a>
+                                    }
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        }
+    </table>
+    <div id="show-popup"></div>
+    </div>
+    <style>
+        tr {
+            height: 50px;
+        }
+
+        * {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul > li > ul {
+            display: none;
+        }
+
+        table ul li {
+            display:inline;
+        }
+
+        /*ul > li:active > ul {
+            display: block;
+        }*/
+
+        /*ul > li:after > ul{
+            display:block;
+        }*/
+
+        /*ul > li:hover > ul {
+            display: block;
+        }*/
+
+        ul > li span {
+            font-size: 25px;
+        }
+    </style>
+    <script>
+
+        function ShowResetPasswordPopUp(userID) {
+            $.ajax({
+                type: "GET",
+                url: "ResetPassword",
+                data: { userID },
+                dataType: "html",
+                success: function (data) {
+                    $("#show-popup").html(data);
+                    $("#myResetPasswordModal").appendTo("body").modal("show");
+                }
+            });
+        };
+    </script>
