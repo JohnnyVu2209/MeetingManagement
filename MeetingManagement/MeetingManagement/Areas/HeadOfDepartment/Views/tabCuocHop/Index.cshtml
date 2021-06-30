@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MeetingManagement.Models.CATEGORY>
+﻿@model IEnumerable<MeetingManagement.Models.MEETING>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
@@ -9,18 +9,18 @@
 
 <br />
 <div class="tab">
-    <button class="tablinks" onclick="openTab(event, 'mycate')">Danh sách danh mục</button>
-    <button class="tablinks" onclick="openTab(event, 'mymeeting')">Danh sách cuộc họp</button>
-    <button class="tablinks" onclick="openTab(event, 'mywork')">Danh sách công việc</button>
+    <button class="tablinks" onclick="openTab(event, 'mycate')">Cuộc họp chờ duyệt</button>
+    <button class="tablinks" onclick="openTab(event, 'mymeeting')">Cuộc họp tham dự</button>
+    <button class="tablinks" onclick="openTab(event, 'mywork')">Cuộc họp của tôi</button>
 </div>
 
 
 <div id="mycate" class="tabcontent">
     <ul class="catalogList">
-        @foreach (var item in Model)
+        @foreach (var item in ViewBag.pendingMeeting)
         {
             <li>
-                @item.Category_Name
+                @item.Meeting_name
             </li>
         }
     </ul>
@@ -28,11 +28,11 @@
 
 <div id="mymeeting" class="tabcontent">
     <ul class="catalogList">
-        @foreach (var item in Model)
+        @foreach (var item in ViewBag.attendMeeting)
         {
-            <li>
-                @item.MEETINGs
-            </li>
+        <li>
+            @item.Meeting_name
+        </li>
         }
     </ul>
 </div>
@@ -40,12 +40,12 @@
 
 <div id="mywork" class="tabcontent">
     <ul class="catalogList">
-       
-        
+        @foreach (var item in ViewBag.myMeeting)
+        {
             <li>
-                Tối nay code chức năng Tạo danh mục
+                @item.Meeting_name
             </li>
-        
+        }
     </ul>
 </div>
 

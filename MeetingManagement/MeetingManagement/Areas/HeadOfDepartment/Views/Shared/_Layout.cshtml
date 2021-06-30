@@ -15,7 +15,7 @@
 <body>
     <div id="nav-bar">
         <div>
-            <a href="@Url.Action("Index","Home",new { Area = "" })"><img src="https://www.vanlanguni.edu.vn/images/2020/HE_THONG_LOGO_CUA_TRUONG-02.png" alt="Văn Lang University"></a>
+            <a href="@Url.Action("Index","MainPage")"><img src="https://www.vanlanguni.edu.vn/images/2020/HE_THONG_LOGO_CUA_TRUONG-02.png" alt="Văn Lang University"></a>
         </div>
         <div class="login">
             @Html.Partial("_LoginPartial")
@@ -23,9 +23,9 @@
     </div>
     <div id="menu">
         <ul>
-            <li><a href="@Url.Action("Index","Home")" style="margin-top:10px">Trang chủ</a></li>
-            <li><a href="@Url.Action("Index","Home")" style="margin-top:10px">Công việc</a></li>
-            <li><a href="@Url.Action("Index","Home")" style="margin-top:10px">Hồ sơ</a></li>
+            <li><a href="@Url.Action("Index","MainPage")" style="margin-top:10px">Trang chủ</a></li>
+            <li><a href="@Url.Action("Index","Categories")" style="margin-top:10px">Danh mục</a></li>
+            <li><a href="@Url.Action("Index","tabCuocHop")" style="margin-top:10px">Cuộc họp</a></li>
         </ul>
     </div>
     <div class="container body-content">
@@ -35,8 +35,6 @@
             <p>&copy; @DateTime.Now.Year - VanLangMeeting</p>
         </footer>
     </div>
-    @RenderSection("scripts", required: false)
-    @Scripts.Render("~/bundles/bootstrap")
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

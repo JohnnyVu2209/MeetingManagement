@@ -16,6 +16,7 @@ namespace MeetingManagement.Models
     {
         public string othUser_id { get; set; }
         public string othUser_office { get; set; }
+        public string othUser_Email { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
     }

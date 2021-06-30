@@ -61,7 +61,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
                         //store link file to db
                         ATTACHMENT newAtt = new ATTACHMENT();
                         newAtt.Meeting_id = meetings.Meeting_id;
-                        newAtt.Attachment_path = path + Files.FileName;
+                        newAtt.Attachment_path = File_Path + Files.FileName;
                         db.ATTACHMENTs.Add(newAtt);
                         db.SaveChanges();
                         //}
