@@ -7,6 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MeetingManagement.Models;
+using Microsoft.AspNet.Identity;
+
+
 
 namespace MeetingManagement.Areas.User.Controllers
 {
@@ -23,21 +26,27 @@ namespace MeetingManagement.Areas.User.Controllers
         {
             return View();
         }
-        public ActionResult Taocuochop()
+        public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CATEGORY cATEGORY = db.CATEGORies.Find(id);
+            if (cATEGORY == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cATEGORY);
+
         }
-        public ActionResult CreateUser()
+
+        public ActionResult MeetingList(int id)
         {
-
-
-            return View();
+            var UserId = User.Identity.GetUserId();
+            var meetings = db.MEETINGs.Where(x => x.Category_id == id && x.Create_by == UserId).ToList();
+            return PartialView(meetings);
         }
-        public ActionResult CreateUser2()
-        {
-
-
-            return View();
-        }
+        
     }
-}
+}  

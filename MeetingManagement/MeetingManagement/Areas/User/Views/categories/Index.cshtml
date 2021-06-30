@@ -14,10 +14,11 @@
     <ul class="catalogList">
         @foreach (var item in Model)
         {
+
             <li>
-                @item.Category_Name
+                <div onclick="location.href = '@Url.Action("Details","Categories", new { id = item.Category_id})';">@item.Category_Name</div>
             </li>
         }
-
+        
     </ul>
 </div>

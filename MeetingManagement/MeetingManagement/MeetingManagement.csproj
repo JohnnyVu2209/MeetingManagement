@@ -64,6 +64,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -181,6 +182,7 @@
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\MainPageController.cs" />
+    <Compile Include="Areas\User\Controllers\MEETINGsController.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2327,12 +2329,11 @@
     <Content Include="Areas\Admin\Views\AspNetRoleUser\Create.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\_ViewStart.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\Index.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Categories\Taocuochop.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Categories\CreateUser.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Categories\CreateUser2.cshtml" />
-    <Content Include="Areas\User\Views\Categories\CreateUser.cshtml" />
-    <Content Include="Areas\User\Views\Categories\CreateUser2.cshtml" />
-    <Content Include="Areas\User\Views\Categories\Taocuochop.cshtml" />
+    <Content Include="Areas\User\Views\MEETINGs\MeetingForm.cshtml" />
+    <Content Include="Areas\User\Views\MEETINGs\CreateUser.cshtml" />
+    <Content Include="Areas\User\Views\MEETINGs\CreateUser2.cshtml" />
+    <Content Include="Areas\User\Views\Categories\MeetingList.cshtml" />
+    <Content Include="Areas\User\Views\Categories\Details.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -2392,6 +2393,7 @@
     <Folder Include="Areas\HeadOfDepartment\Data\" />
     <Folder Include="Areas\User\Data\" />
     <Folder Include="Content\login\" />
+    <Folder Include="Upload\Attachments\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
