@@ -178,7 +178,7 @@
     <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\categoriesController.cs" />
-    <Compile Include="Areas\User\Controllers\MEETINGsController.cs" />
+    <Compile Include="Areas\User\Controllers\MeetingsController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\MeetingsController.cs" />
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
@@ -210,7 +210,9 @@
     <Compile Include="Models\CATEGORY.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\C__MigrationHistory.cs" />
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MEETING.cs">
@@ -240,6 +242,9 @@
     <Compile Include="Models\OTHER_ACCOUNT.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TASK.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -254,7 +259,30 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\catalog-list.css" />
     <Content Include="Content\normalize.css" />
+    <Content Include="Content\Picture\outline_edit_black_24dp.png" />
     <Content Include="Content\Picture\outline_filter_alt_black_24dp.png" />
+    <Content Include="Content\Picture\outline_people_black_24dp.png" />
+    <Content Include="Content\Picture\outline_person_add_black_24dp.png" />
+    <Content Include="Content\Picture\outline_place_black_24dp.png" />
+    <Content Include="Content\Picture\outline_schedule_black_24dp.png" />
+    <Content Include="Content\Picture\outline_title_black_24dp.png" />
+    <Content Include="Content\taocuochop\css\main.css" />
+    <Content Include="Content\taocuochop\css\main.min.css" />
+    <Content Include="Content\taocuochop\js\global.js" />
+    <Content Include="Content\taocuochop\vendor\datepicker\daterangepicker.css" />
+    <Content Include="Content\taocuochop\vendor\datepicker\daterangepicker.js" />
+    <Content Include="Content\taocuochop\vendor\datepicker\moment.min.js" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\css\font-awesome.css" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\css\font-awesome.min.css" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\HELP-US-OUT.txt" />
+    <Content Include="Content\taocuochop\vendor\jquery\jquery.js" />
+    <Content Include="Content\taocuochop\vendor\jquery\jquery.min.js" />
+    <Content Include="Content\taocuochop\vendor\mdi-font\css\material-design-iconic-font.css" />
+    <Content Include="Content\taocuochop\vendor\mdi-font\css\material-design-iconic-font.min.css" />
+    <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.svg" />
+    <Content Include="Content\taocuochop\vendor\select2\select2.min.css" />
+    <Content Include="Content\taocuochop\vendor\select2\select2.min.js" />
     <Content Include="Content\The-Last-Style-Blender.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -362,19 +390,28 @@
     <Content Include="Areas\Admin\Views\AspNetUsers\ResetPassword.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Create1.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoleUser\Create.cshtml" />
-    <Content Include="Areas\User\Views\MEETINGs\Create.cshtml" />
-    <Content Include="Areas\User\Views\MEETINGs\Delete.cshtml" />
-    <Content Include="Areas\User\Views\MEETINGs\Details.cshtml" />
-    <Content Include="Areas\User\Views\MEETINGs\Edit.cshtml" />
-    <Content Include="Areas\User\Views\MEETINGs\Index.cshtml" />
-    <Content Include="Areas\User\Views\MEETINGs\MyMeetingGridView.cshtml" />
-    <Content Include="Areas\User\Views\MEETINGs\JoinedMeetingGridView.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\Create.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\Delete.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\Details.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\Edit.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\Index.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\MyMeetingGridView.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\JoinedMeetingGridView.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MainPage\Index.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MainPage\_Create.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MainPage\_MeetingInfo.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\Index.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\Create.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MainPage\VerifyMeeting.cshtml" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\FontAwesome.otf" />
+    <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.eot" />
+    <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff" />
+    <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
+    <Content Include="Areas\HeadOfDepartment\Views\MainPage\GrdMemberTable.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MainPage\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -429,11 +466,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\HeadOfDepartment\Controllers\" />
     <Folder Include="Areas\HeadOfDepartment\Data\" />
-    <Folder Include="Areas\HeadOfDepartment\Views\Shared\" />
     <Folder Include="Areas\User\Data\" />
-    <Folder Include="Content\login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

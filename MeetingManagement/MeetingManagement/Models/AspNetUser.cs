@@ -37,6 +37,7 @@ namespace MeetingManagement.Models
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
         public string UserName { get; set; }
+        public string Full_name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
@@ -50,5 +51,6 @@ namespace MeetingManagement.Models
         public virtual ICollection<MEETING> MEETINGs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MEMBER> MEMBERs { get; set; }
+        public virtual OTHER_ACCOUNT OTHER_ACCOUNT { get; set; }
     }
 }

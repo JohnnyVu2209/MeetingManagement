@@ -12,7 +12,7 @@ using Microsoft.AspNet.Identity;
 namespace MeetingManagement.Areas.User.Controllers
 {
     [Authorize]
-    public class MEETINGsController : Controller
+    public class MeetingsController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
         private string currentUser;

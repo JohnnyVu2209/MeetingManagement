@@ -1,0 +1,75 @@
+﻿@model IEnumerable<MeetingManagement.Models.MEMBER>
+<div id="modalMember">
+    <div class="yuki-table-zone yuki-table-zone-3col-left0-pad0 yuki-table-0-out-header">
+        <div class="yuki-table-out-header">
+            <ul class="yuki-column-3">
+                <li>
+                    STT
+                    @*<button class="filter">
+                        <img src="~/Content/outline_filter_alt_black_24dp.png">
+                    </button>*@
+                </li>
+                <li>
+                    Tên
+                    @*<button class="filter">
+                        <img src="~/Content/outline_filter_alt_black_24dp.png">
+                    </button>*@
+                </li>
+                <li>
+                    Email
+                    @*<button class="filter">
+                        <img src="~/Content/outline_filter_alt_black_24dp.png">
+                    </button>*@
+                </li>
+            </ul>
+        </div>
+        <table>
+            @foreach (var meeting in Model.Select((value,i) => new { i, value }))
+            {
+                var value = meeting.value;
+                var index = meeting.i + 1;
+                <tr class="yuki-column-3">
+                    <td>
+                        @index
+                    </td>
+                    <td>
+                        @value.AspNetUser.Full_name
+                    </td>
+                    <td>
+                        @value.AspNetUser.UserName
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<style>
+    
+    #modalMember{
+        width: calc(1130px - 125px) !important;
+    }
+
+    .yuki-table-0-out-header{
+        height: calc(100% - 48px)
+    }
+
+    .yuki-ul-column2 {
+        column-count: 2;
+    }
+    .yuki-ul-column3 {
+        column-count: 3;
+    }
+    .yuki-table-zone-2col-left0-pad0 {
+        padding-top: 0px;
+        width: 600px;
+        left: 0px;
+    }
+
+    .yuki-table-zone-3col-left0-pad0 {
+        padding-top: 0px;
+        width: 100%;
+        left: 0px;
+    }
+
+</style>
