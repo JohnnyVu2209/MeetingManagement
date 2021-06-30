@@ -14,7 +14,6 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 {
     public class MEETINGsController : Controller
     {
-        private int cateid = 0;
         private SEP24Team7Entities db = new SEP24Team7Entities();
         public ActionResult MeetingList(int id)
         {
@@ -25,23 +24,9 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         {
             MEETING newMeet = new MEETING();
             newMeet.Category_id = id;
-            cateid = id;
             return View(newMeet);
         }
-        public ActionResult MeetingFormUser(List<AspNetUser> list_user)
-        {
-            MEETING newMeet = new MEETING();
-            newMeet.Category_id = cateid;
-            List<MEMBER> member = new List<MEMBER>();
-            foreach (var u in list_user)
-            {
-                MEMBER mem = new MEMBER();
-                mem.Member_id = u.Id;
-                member.Add(mem);
-            }
-            ViewBag.Member = member;
-            return View("MeetingForm", newMeet);
-        }
+        
         [HttpPost]
         public ActionResult MeetingForm(MEETING model, HttpPostedFileBase Files)
         {
@@ -109,22 +94,6 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             List<AspNetUser> model = db.AspNetUsers.ToList();
             ViewBag.result = model;
             return View();
-        }
-        [HttpPost]
-        public ActionResult CreateUser(string[] listuser)
-        {
-            List<AspNetUser> model = new List<AspNetUser>();
-            foreach (var users in listuser)
-            {
-                AspNetUser user = db.AspNetUsers.Where(x => x.Email == users).FirstOrDefault();
-                model.Add(user);
-            }
-            MEETING mEETING = new MEETING();
-            return PartialView("pickedUser", mEETING);
-        }
-        public PartialViewResult pickedUser()
-        {
-            return PartialView();
         }
         public ActionResult CreateUser2()
         {

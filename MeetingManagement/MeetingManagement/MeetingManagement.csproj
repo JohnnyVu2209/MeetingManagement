@@ -2338,7 +2338,6 @@
     <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\Details.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\Edit.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\Index.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\pickedUser.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

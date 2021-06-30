@@ -117,7 +117,7 @@
 
                 </div>
                 <div>
-                    <button type="submit" class="btn btn--blue btn-lg btn-block" id="create" onclick="createFrom()" data-toggle="modal">Tạo</button>
+                    <button type="submit" class="btn btn--blue btn-lg btn-block" id="create" data-toggle="modal">Tạo</button>
                 </div>
             </form>
 </div>
@@ -180,33 +180,5 @@
                 console.log(err);
             }
         })
-    };
-    function createFrom() {
-
-        @*var userArr = [];
-        var formData = new FormData($('#createMeeting')[0]);
-        var file = document.getElementById("file")[0];
-        var formData = new FormData();
-        var other_data = $('#createMeeting').serializeArray();
-        $.each(other_data, function (key, input) {
-            formData.append(input.name, input.value);
-        });
-
-
-        formData.append("Files", file);
-
-        ul = document.getElementById("pickedUser");
-        li = ul.getElementsByTagName("li");
-        for (var i = 0; i < li.length; i++) {
-            userArr.push(li[i].innerText)
-        }
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("MeetingForm", "MEETINGs")',
-            data: formData + "&userArr=" + userArr,
-            success: function () {
-                alert("Tạo Thành Công");
-            }
-        });*@
     };
 </script>
