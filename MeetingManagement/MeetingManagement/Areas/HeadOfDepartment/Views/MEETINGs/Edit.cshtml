@@ -7,6 +7,7 @@
 
 <h2>Edit</h2>
 
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -54,6 +55,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Date_Start, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Date_Start, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
@@ -64,6 +66,8 @@
                 @Html.ValidationMessageFor(model => model.Time_Start, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        @Html.HiddenFor(model => model.Meeting_id)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -116,3 +120,7 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

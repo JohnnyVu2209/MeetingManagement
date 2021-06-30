@@ -21,7 +21,7 @@
 
                 <div onclick="location.href = '@Url.Action("Details","Categories", new { id = item.Category_id})';">@item.Category_Name</div>
                 <span>
-                    <i class="fa fa-ellipsis-h">
+                    <i class="fa fa-ellipsis-h"> 
                         <ul class="sublist">
                             <li>
                                 <button onclick="ShowEditPopUp(@item.Category_id)" class="edit-btn" data-modal="modal1">

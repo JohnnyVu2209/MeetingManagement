@@ -79,7 +79,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
              return View(aspNetUser);*/
 
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-            var result = await UserManager.CreateAsync(user, model.Password);
+            var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -214,7 +214,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var user = db.AspNetUsers.Find(Id);
-                var result = await UserManager.AddPasswordAsync(user.Id, password);
+                var result = await _userManager.AddPasswordAsync(user.Id, password);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index");

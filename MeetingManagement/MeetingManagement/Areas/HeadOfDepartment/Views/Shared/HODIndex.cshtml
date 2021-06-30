@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VanLangMeeting</title>
+    <link rel="stylesheet" href="~/css/style.css" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -20,7 +21,7 @@
                 @Html.ActionLink("Meeting Management", "Index", "", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse" ">
-                <ul class="nav navbar-nav" style="color:blue>
+                <ul class="nav navbar-nav" style="color:blue">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Roles", "Index", "Home")</li>
                     <li>@Html.ActionLink("Users", "Index", "Home")</li>

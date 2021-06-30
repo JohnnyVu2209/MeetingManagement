@@ -179,6 +179,7 @@
     <Compile Include="Areas\Admin\Controllers\AspNetRoleUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\HeadOfDepartment\Controllers\dsCuocHopController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\MEETINGsController.cs" />
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\categoriesController.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Models\AspNetUser.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AspNetUserBase.cs" />
     <Compile Include="Models\AspNetUserClaim.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -2184,6 +2186,7 @@
     <Content Include="css\style.css" />
     <Content Include="Content\normalize.css" />
     <Content Include="Content\outline_filter_alt_black_24dp.png" />
+    <Content Include="Content\quyhung\slide-bar.css" />
     <Content Include="Content\The-Last-Style-Blender.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -2351,7 +2354,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <None Include="Views\Shared\dashbroad.cshtml" />
     <Content Include="Scripts\owl.carousel.min.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Web.config" />

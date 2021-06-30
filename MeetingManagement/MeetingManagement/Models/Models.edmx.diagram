@@ -29,6 +29,7 @@
         <AssociationConnector Association="SEP24Team7Model.FK_TASK_MEETING1" />
         <AssociationConnector Association="SEP24Team7Model.FK_TASK_MEMBER" />
         <AssociationConnector Association="SEP24Team7Model.AspNetUserRoles" />
+        <EntityTypeShape EntityType="SEP24Team7Model.OTHER_ACCOUNT" Width="1.5" PointX="0.75" PointY="8.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
