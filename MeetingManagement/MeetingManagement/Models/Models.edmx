@@ -65,42 +65,48 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Full_name" Type="nvarchar" MaxLength="128" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ATTACHMENT">
           <Key>
-            <PropertyRef Name="Meeting_id" />
+            <PropertyRef Name="Attachment_id" />
           </Key>
           <Property Name="Meeting_id" Type="int" Nullable="false" />
-          <Property Name="Attachment" Type="xml" />
-          <Property Name="Attachment_Name" Type="nvarchar" MaxLength="128" />
+          <Property Name="Attachment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Attachment_path" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="CATEGORY">
           <Key>
             <PropertyRef Name="Category_id" />
           </Key>
-          <Property Name="Create_by" Type="nvarchar" MaxLength="128" />
           <Property Name="Category_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Category_Name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Category_Content" Type="nvarchar(max)" />
+          <Property Name="Category_Content" Type="nvarchar" MaxLength="500" />
+          <Property Name="Create_by" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="MEETING">
           <Key>
             <PropertyRef Name="Meeting_id" />
           </Key>
-          <Property Name="Create_by" Type="nvarchar" MaxLength="128" />
-          <Property Name="Meeting_name" Type="nvarchar" MaxLength="128" />
-          <Property Name="Date_Start" Type="datetime" />
-          <Property Name="Date_End" Type="datetime" />
-          <Property Name="Meeting_Confirmed" Type="bit" Nullable="false" />
           <Property Name="Category_id" Type="int" Nullable="false" />
           <Property Name="Meeting_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Lacation" Type="nvarchar" MaxLength="128" />
-          <Property Name="Status" Type="nvarchar" MaxLength="128" />
-          <Property Name="Meeting_report" Type="xml" />
-          <Property Name="Create_by_name" Type="nvarchar" MaxLength="128" />
+          <Property Name="Meeting_name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Meeting_content" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Date_Start" Type="date" Nullable="false" />
+          <Property Name="Time_Start" Type="time" Precision="7" />
+          <Property Name="Location" Type="nvarchar" MaxLength="128" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Meeting_report" Type="nvarchar" MaxLength="128" />
           <Property Name="Date_Create" Type="date" />
+          <Property Name="Create_by" Type="nvarchar" MaxLength="128" />
+          <Property Name="Feedback" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="MEETING-STATUS">
+          <Key>
+            <PropertyRef Name="Status_id" />
+          </Key>
+          <Property Name="Status_name" Type="nvarchar" MaxLength="128" />
+          <Property Name="Status_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="MEMBER">
           <Key>
@@ -112,11 +118,10 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
         </EntityType>
         <EntityType Name="OTHER ACCOUNT">
           <Key>
-            <PropertyRef Name="othUser_name" />
+            <PropertyRef Name="othUser_id" />
           </Key>
-          <Property Name="othUser_name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="othUser_password" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="othUser_position" Type="nvarchar" MaxLength="128" />
+          <Property Name="othUser_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="othUser_office" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -146,7 +151,7 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
           <End Role="MEETING" Type="Self.MEETING" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="ATTACHMENT" Type="Self.ATTACHMENT" Multiplicity="0..1" />
+          <End Role="ATTACHMENT" Type="Self.ATTACHMENT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEETING">
               <PropertyRef Name="Meeting_id" />
@@ -250,6 +255,18 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MEETING_MEETING-STATUS">
+          <End Role="MEETING-STATUS" Type="Self.MEETING-STATUS" Multiplicity="1" />
+          <End Role="MEETING" Type="Self.MEETING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEETING-STATUS">
+              <PropertyRef Name="Status_id" />
+            </Principal>
+            <Dependent Role="MEETING">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_MEMBER_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -278,17 +295,17 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MEMBER_OTHER ACCOUNT">
-          <End Role="OTHER ACCOUNT" Type="Self.OTHER ACCOUNT" Multiplicity="1">
+        <Association Name="FK_OTHER ACCOUNT_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="*" />
+          <End Role="OTHER ACCOUNT" Type="Self.OTHER ACCOUNT" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="OTHER ACCOUNT">
-              <PropertyRef Name="othUser_name" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="MEMBER">
-              <PropertyRef Name="Member_id" />
+            <Dependent Role="OTHER ACCOUNT">
+              <PropertyRef Name="othUser_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -327,19 +344,14 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ATTACHMENT" EntityType="Self.ATTACHMENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MEETING" EntityType="Self.MEETING" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MEETING-STATUS" EntityType="Self.MEETING-STATUS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MEMBER" EntityType="Self.MEMBER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OTHER ACCOUNT" EntityType="Self.OTHER ACCOUNT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TASK" EntityType="Self.TASK" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ATTACHMENT" EntityType="Self.ATTACHMENT" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ATTACHMENT].[Meeting_id] AS [Meeting_id], 
-    [ATTACHMENT].[Attachment] AS [Attachment], 
-    [ATTACHMENT].[Attachment_Name] AS [Attachment_Name]
-    FROM [dbo].[ATTACHMENT] AS [ATTACHMENT]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Attachment_MEETING" Association="Self.FK_Attachment_MEETING">
             <End Role="MEETING" EntitySet="MEETING" />
             <End Role="ATTACHMENT" EntitySet="ATTACHMENT" />
@@ -372,6 +384,10 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
             <End Role="CATEGORY" EntitySet="CATEGORY" />
             <End Role="MEETING" EntitySet="MEETING" />
           </AssociationSet>
+          <AssociationSet Name="FK_MEETING_MEETING-STATUS" Association="Self.FK_MEETING_MEETING-STATUS">
+            <End Role="MEETING-STATUS" EntitySet="MEETING-STATUS" />
+            <End Role="MEETING" EntitySet="MEETING" />
+          </AssociationSet>
           <AssociationSet Name="FK_MEMBER_AspNetUsers" Association="Self.FK_MEMBER_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="MEMBER" EntitySet="MEMBER" />
@@ -380,9 +396,9 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
             <End Role="MEETING" EntitySet="MEETING" />
             <End Role="MEMBER" EntitySet="MEMBER" />
           </AssociationSet>
-          <AssociationSet Name="FK_MEMBER_OTHER ACCOUNT" Association="Self.FK_MEMBER_OTHER ACCOUNT">
+          <AssociationSet Name="FK_OTHER ACCOUNT_AspNetUsers" Association="Self.FK_OTHER ACCOUNT_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="OTHER ACCOUNT" EntitySet="OTHER ACCOUNT" />
-            <End Role="MEMBER" EntitySet="MEMBER" />
           </AssociationSet>
           <AssociationSet Name="FK_TASK_MEETING1" Association="Self.FK_TASK_MEETING1">
             <End Role="MEETING" EntitySet="MEETING" />
@@ -415,13 +431,14 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
           <EntitySet Name="C__MigrationHistory" EntityType="SEP24Team7Model.C__MigrationHistory" />
+          <EntitySet Name="ATTACHMENTs" EntityType="SEP24Team7Model.ATTACHMENT" />
           <EntitySet Name="CATEGORies" EntityType="SEP24Team7Model.CATEGORY" />
           <EntitySet Name="MEETINGs" EntityType="SEP24Team7Model.MEETING" />
+          <EntitySet Name="MEETING_STATUS" EntityType="SEP24Team7Model.MEETING_STATUS" />
           <EntitySet Name="MEMBERs" EntityType="SEP24Team7Model.MEMBER" />
           <EntitySet Name="OTHER_ACCOUNTs" EntityType="SEP24Team7Model.OTHER_ACCOUNT" />
           <EntitySet Name="sysdiagrams" EntityType="SEP24Team7Model.sysdiagram" />
           <EntitySet Name="TASKs" EntityType="SEP24Team7Model.TASK" />
-          <EntitySet Name="ATTACHMENTs" EntityType="SEP24Team7Model.ATTACHMENT" />
           <AssociationSet Name="FK_CATEGORY_AspNetUsers" Association="SEP24Team7Model.FK_CATEGORY_AspNetUsers">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="CATEGORY" EntitySet="CATEGORies" />
@@ -434,13 +451,21 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="MEMBER" EntitySet="MEMBERs" />
           </AssociationSet>
-          <AssociationSet Name="FK_Meeting_CATEGORY" Association="SEP24Team7Model.FK_Meeting_CATEGORY">
-            <End Role="CATEGORY" EntitySet="CATEGORies" />
-            <End Role="MEETING" EntitySet="MEETINGs" />
+          <AssociationSet Name="FK_OTHER_ACCOUNT_AspNetUsers" Association="SEP24Team7Model.FK_OTHER_ACCOUNT_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="OTHER_ACCOUNT" EntitySet="OTHER_ACCOUNTs" />
           </AssociationSet>
           <AssociationSet Name="FK_Attachment_MEETING" Association="SEP24Team7Model.FK_Attachment_MEETING">
             <End Role="MEETING" EntitySet="MEETINGs" />
             <End Role="ATTACHMENT" EntitySet="ATTACHMENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Meeting_CATEGORY" Association="SEP24Team7Model.FK_Meeting_CATEGORY">
+            <End Role="CATEGORY" EntitySet="CATEGORies" />
+            <End Role="MEETING" EntitySet="MEETINGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MEETING_MEETING_STATUS" Association="SEP24Team7Model.FK_MEETING_MEETING_STATUS">
+            <End Role="MEETING_STATUS" EntitySet="MEETING_STATUS" />
+            <End Role="MEETING" EntitySet="MEETINGs" />
           </AssociationSet>
           <AssociationSet Name="FK_MEMBER_MEETING" Association="SEP24Team7Model.FK_MEMBER_MEETING">
             <End Role="MEETING" EntitySet="MEETINGs" />
@@ -450,15 +475,11 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
             <End Role="MEETING" EntitySet="MEETINGs" />
             <End Role="TASK" EntitySet="TASKs" />
           </AssociationSet>
-          <AssociationSet Name="FK_MEMBER_OTHER_ACCOUNT" Association="SEP24Team7Model.FK_MEMBER_OTHER_ACCOUNT">
-            <End Role="OTHER_ACCOUNT" EntitySet="OTHER_ACCOUNTs" />
-            <End Role="MEMBER" EntitySet="MEMBERs" />
-          </AssociationSet>
           <AssociationSet Name="FK_TASK_MEMBER" Association="SEP24Team7Model.FK_TASK_MEMBER">
             <End Role="MEMBER" EntitySet="MEMBERs" />
             <End Role="TASK" EntitySet="TASKs" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -507,10 +528,12 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
           <NavigationProperty Name="AspNetUserClaims" Relationship="SEP24Team7Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="SEP24Team7Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="AspNetRoles" Relationship="SEP24Team7Model.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+          <Property Name="Full_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CATEGORies" Relationship="SEP24Team7Model.FK_CATEGORY_AspNetUsers" FromRole="AspNetUser" ToRole="CATEGORY" />
           <NavigationProperty Name="MEETINGs" Relationship="SEP24Team7Model.FK_MEETING_AspNetUsers" FromRole="AspNetUser" ToRole="MEETING" />
           <NavigationProperty Name="MEMBERs" Relationship="SEP24Team7Model.FK_MEMBER_AspNetUsers" FromRole="AspNetUser" ToRole="MEMBER" />
-        </EntityType>
+          <NavigationProperty Name="OTHER_ACCOUNT" Relationship="SEP24Team7Model.FK_OTHER_ACCOUNT_AspNetUsers" FromRole="AspNetUser" ToRole="OTHER_ACCOUNT" />
+          </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="SEP24Team7Model.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -553,14 +576,23 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
           <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="ATTACHMENT">
+          <Key>
+            <PropertyRef Name="Attachment_id" />
+          </Key>
+          <Property Name="Meeting_id" Type="Int32" Nullable="false" />
+          <Property Name="Attachment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Attachment_path" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MEETING" Relationship="SEP24Team7Model.FK_Attachment_MEETING" FromRole="ATTACHMENT" ToRole="MEETING" />
+        </EntityType>
         <EntityType Name="CATEGORY">
           <Key>
             <PropertyRef Name="Category_id" />
           </Key>
-          <Property Name="Create_by" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Category_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Category_Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Category_Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Category_Content" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Create_by" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="SEP24Team7Model.FK_CATEGORY_AspNetUsers" FromRole="CATEGORY" ToRole="AspNetUser" />
           <NavigationProperty Name="MEETINGs" Relationship="SEP24Team7Model.FK_Meeting_CATEGORY" FromRole="CATEGORY" ToRole="MEETING" />
         </EntityType>
@@ -568,23 +600,32 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
           <Key>
             <PropertyRef Name="Meeting_id" />
           </Key>
-          <Property Name="Create_by" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Meeting_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Date_Start" Type="DateTime" Precision="3" />
-          <Property Name="Date_End" Type="DateTime" Precision="3" />
-          <Property Name="Meeting_Confirmed" Type="Boolean" Nullable="false" />
           <Property Name="Category_id" Type="Int32" Nullable="false" />
           <Property Name="Meeting_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Lacation" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Meeting_report" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Create_by_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Meeting_name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Meeting_content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Start" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time_Start" Type="Time" Precision="7" />
+          <Property Name="Location" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Meeting_report" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Date_Create" Type="DateTime" Precision="0" />
+          <Property Name="Create_by" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Feedback" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="SEP24Team7Model.FK_MEETING_AspNetUsers" FromRole="MEETING" ToRole="AspNetUser" />
+          <NavigationProperty Name="ATTACHMENTs" Relationship="SEP24Team7Model.FK_Attachment_MEETING" FromRole="MEETING" ToRole="ATTACHMENT" />
           <NavigationProperty Name="CATEGORY" Relationship="SEP24Team7Model.FK_Meeting_CATEGORY" FromRole="MEETING" ToRole="CATEGORY" />
-          <NavigationProperty Name="ATTACHMENT" Relationship="SEP24Team7Model.FK_Attachment_MEETING" FromRole="MEETING" ToRole="ATTACHMENT" />
+          <NavigationProperty Name="MEETING_STATUS" Relationship="SEP24Team7Model.FK_MEETING_MEETING_STATUS" FromRole="MEETING" ToRole="MEETING_STATUS" />
           <NavigationProperty Name="MEMBERs" Relationship="SEP24Team7Model.FK_MEMBER_MEETING" FromRole="MEETING" ToRole="MEMBER" />
           <NavigationProperty Name="TASKs" Relationship="SEP24Team7Model.FK_TASK_MEETING1" FromRole="MEETING" ToRole="TASK" />
+        </EntityType>
+        <EntityType Name="MEETING_STATUS">
+          <Key>
+            <PropertyRef Name="Status_id" />
+          </Key>
+          <Property Name="Status_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="MEETINGs" Relationship="SEP24Team7Model.FK_MEETING_MEETING_STATUS" FromRole="MEETING_STATUS" ToRole="MEETING" />
         </EntityType>
         <EntityType Name="MEMBER">
           <Key>
@@ -595,17 +636,15 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
           <Property Name="Member_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="SEP24Team7Model.FK_MEMBER_AspNetUsers" FromRole="MEMBER" ToRole="AspNetUser" />
           <NavigationProperty Name="MEETING" Relationship="SEP24Team7Model.FK_MEMBER_MEETING" FromRole="MEMBER" ToRole="MEETING" />
-          <NavigationProperty Name="OTHER_ACCOUNT" Relationship="SEP24Team7Model.FK_MEMBER_OTHER_ACCOUNT" FromRole="MEMBER" ToRole="OTHER_ACCOUNT" />
           <NavigationProperty Name="TASKs" Relationship="SEP24Team7Model.FK_TASK_MEMBER" FromRole="MEMBER" ToRole="TASK" />
         </EntityType>
         <EntityType Name="OTHER_ACCOUNT">
           <Key>
-            <PropertyRef Name="othUser_name" />
+            <PropertyRef Name="othUser_id" />
           </Key>
-          <Property Name="othUser_name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="othUser_password" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="othUser_position" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="MEMBERs" Relationship="SEP24Team7Model.FK_MEMBER_OTHER_ACCOUNT" FromRole="OTHER_ACCOUNT" ToRole="MEMBER" />
+          <Property Name="othUser_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="othUser_office" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="SEP24Team7Model.FK_OTHER_ACCOUNT_AspNetUsers" FromRole="OTHER_ACCOUNT" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -632,15 +671,6 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
           <Property Name="Notify" Type="Boolean" />
           <NavigationProperty Name="MEETING" Relationship="SEP24Team7Model.FK_TASK_MEETING1" FromRole="TASK" ToRole="MEETING" />
           <NavigationProperty Name="MEMBER" Relationship="SEP24Team7Model.FK_TASK_MEMBER" FromRole="TASK" ToRole="MEMBER" />
-        </EntityType>
-        <EntityType Name="ATTACHMENT">
-          <Key>
-            <PropertyRef Name="Meeting_id" />
-          </Key>
-          <Property Name="Meeting_id" Type="Int32" Nullable="false" />
-          <Property Name="Attachment1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Attachment_Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="MEETING" Relationship="SEP24Team7Model.FK_Attachment_MEETING" FromRole="ATTACHMENT" ToRole="MEETING" />
         </EntityType>
         <Association Name="FK_CATEGORY_AspNetUsers">
           <End Type="SEP24Team7Model.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
@@ -680,6 +710,34 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OTHER_ACCOUNT_AspNetUsers">
+          <End Type="SEP24Team7Model.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SEP24Team7Model.OTHER_ACCOUNT" Role="OTHER_ACCOUNT" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OTHER_ACCOUNT">
+              <PropertyRef Name="othUser_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attachment_MEETING">
+          <End Type="SEP24Team7Model.MEETING" Role="MEETING" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SEP24Team7Model.ATTACHMENT" Role="ATTACHMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEETING">
+              <PropertyRef Name="Meeting_id" />
+            </Principal>
+            <Dependent Role="ATTACHMENT">
+              <PropertyRef Name="Meeting_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Meeting_CATEGORY">
           <End Type="SEP24Team7Model.CATEGORY" Role="CATEGORY" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -694,17 +752,15 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Attachment_MEETING">
-          <End Type="SEP24Team7Model.MEETING" Role="MEETING" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="SEP24Team7Model.ATTACHMENT" Role="ATTACHMENT" Multiplicity="0..1" />
+        <Association Name="FK_MEETING_MEETING_STATUS">
+          <End Type="SEP24Team7Model.MEETING_STATUS" Role="MEETING_STATUS" Multiplicity="1" />
+          <End Type="SEP24Team7Model.MEETING" Role="MEETING" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="MEETING">
-              <PropertyRef Name="Meeting_id" />
+            <Principal Role="MEETING_STATUS">
+              <PropertyRef Name="Status_id" />
             </Principal>
-            <Dependent Role="ATTACHMENT">
-              <PropertyRef Name="Meeting_id" />
+            <Dependent Role="MEETING">
+              <PropertyRef Name="Status" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -736,20 +792,6 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MEMBER_OTHER_ACCOUNT">
-          <End Type="SEP24Team7Model.OTHER_ACCOUNT" Role="OTHER_ACCOUNT" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="SEP24Team7Model.MEMBER" Role="MEMBER" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OTHER_ACCOUNT">
-              <PropertyRef Name="othUser_name" />
-            </Principal>
-            <Dependent Role="MEMBER">
-              <PropertyRef Name="Member_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TASK_MEMBER">
           <End Type="SEP24Team7Model.MEMBER" Role="MEMBER" Multiplicity="1" />
           <End Type="SEP24Team7Model.TASK" Role="TASK" Multiplicity="*" />
@@ -764,7 +806,7 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -800,6 +842,7 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="SEP24Team7Model.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Full_name" ColumnName="Full_name" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
@@ -833,31 +876,48 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ATTACHMENTs">
+            <EntityTypeMapping TypeName="SEP24Team7Model.ATTACHMENT">
+              <MappingFragment StoreEntitySet="ATTACHMENT">
+                <ScalarProperty Name="Attachment_path" ColumnName="Attachment_path" />
+                <ScalarProperty Name="Attachment_id" ColumnName="Attachment_id" />
+                <ScalarProperty Name="Meeting_id" ColumnName="Meeting_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CATEGORies">
             <EntityTypeMapping TypeName="SEP24Team7Model.CATEGORY">
               <MappingFragment StoreEntitySet="CATEGORY">
+                <ScalarProperty Name="Create_by" ColumnName="Create_by" />
                 <ScalarProperty Name="Category_Content" ColumnName="Category_Content" />
                 <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
                 <ScalarProperty Name="Category_id" ColumnName="Category_id" />
-                <ScalarProperty Name="Create_by" ColumnName="Create_by" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MEETINGs">
             <EntityTypeMapping TypeName="SEP24Team7Model.MEETING">
               <MappingFragment StoreEntitySet="MEETING">
+                <ScalarProperty Name="Feedback" ColumnName="Feedback" />
+                <ScalarProperty Name="Create_by" ColumnName="Create_by" />
                 <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
-                <ScalarProperty Name="Create_by_name" ColumnName="Create_by_name" />
                 <ScalarProperty Name="Meeting_report" ColumnName="Meeting_report" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Lacation" ColumnName="Lacation" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Time_Start" ColumnName="Time_Start" />
+                <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+                <ScalarProperty Name="Meeting_content" ColumnName="Meeting_content" />
+                <ScalarProperty Name="Meeting_name" ColumnName="Meeting_name" />
                 <ScalarProperty Name="Meeting_id" ColumnName="Meeting_id" />
                 <ScalarProperty Name="Category_id" ColumnName="Category_id" />
-                <ScalarProperty Name="Meeting_Confirmed" ColumnName="Meeting_Confirmed" />
-                <ScalarProperty Name="Date_End" ColumnName="Date_End" />
-                <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
-                <ScalarProperty Name="Meeting_name" ColumnName="Meeting_name" />
-                <ScalarProperty Name="Create_by" ColumnName="Create_by" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MEETING_STATUS">
+            <EntityTypeMapping TypeName="SEP24Team7Model.MEETING_STATUS">
+              <MappingFragment StoreEntitySet="MEETING-STATUS">
+                <ScalarProperty Name="Status_id" ColumnName="Status_id" />
+                <ScalarProperty Name="Status_name" ColumnName="Status_name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -872,9 +932,8 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
           <EntitySetMapping Name="OTHER_ACCOUNTs">
             <EntityTypeMapping TypeName="SEP24Team7Model.OTHER_ACCOUNT">
               <MappingFragment StoreEntitySet="OTHER ACCOUNT">
-                <ScalarProperty Name="othUser_position" ColumnName="othUser_position" />
-                <ScalarProperty Name="othUser_password" ColumnName="othUser_password" />
-                <ScalarProperty Name="othUser_name" ColumnName="othUser_name" />
+                <ScalarProperty Name="othUser_office" ColumnName="othUser_office" />
+                <ScalarProperty Name="othUser_id" ColumnName="othUser_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -902,16 +961,7 @@ warning 6002: The table/view 'SEP24Team7.dbo.ATTACHMENT' does not have a primary
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ATTACHMENTs">
-            <EntityTypeMapping TypeName="SEP24Team7Model.ATTACHMENT">
-              <MappingFragment StoreEntitySet="ATTACHMENT">
-                <ScalarProperty Name="Attachment_Name" ColumnName="Attachment_Name" />
-                <ScalarProperty Name="Attachment1" ColumnName="Attachment" />
-                <ScalarProperty Name="Meeting_id" ColumnName="Meeting_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

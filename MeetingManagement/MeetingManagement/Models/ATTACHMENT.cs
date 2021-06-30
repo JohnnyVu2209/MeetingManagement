@@ -15,8 +15,8 @@ namespace MeetingManagement.Models
     public partial class ATTACHMENT
     {
         public int Meeting_id { get; set; }
-        public string Attachment1 { get; set; }
-        public string Attachment_Name { get; set; }
+        public int Attachment_id { get; set; }
+        public string Attachment_path { get; set; }
     
         public virtual MEETING MEETING { get; set; }
     }

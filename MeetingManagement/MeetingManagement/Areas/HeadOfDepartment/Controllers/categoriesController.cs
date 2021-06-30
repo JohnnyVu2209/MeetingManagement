@@ -35,11 +35,13 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
                 return HttpNotFound();
             }
             return View(cATEGORY);
+
         }
 
-        public ActionResult MeetingList()
+        public ActionResult MeetingList(int id)
         {
-            return PartialView() ;
+            var meetings = db.MEETINGs.Where(x => x.Category_id == id).ToList(); 
+            return PartialView(meetings) ;
         }
 
         // GET: HeadOfDepartment/categories/Create
