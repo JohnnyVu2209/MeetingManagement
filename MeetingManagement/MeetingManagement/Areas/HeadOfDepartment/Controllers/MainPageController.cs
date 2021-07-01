@@ -26,7 +26,6 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return PartialView(member);
         }
 
-        [HttpGet]
         public ActionResult VerifyMeeting(int id)
         {
             MEETING meeting = db.MEETINGs.Find(id);
@@ -50,6 +49,32 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        
+        //public PartialViewResult GrdOtherTable()
+        //{
+        //    var member = db.OTHER_ACCOUNTs.ToList();
+        //    return PartialView(member);
+        //}
+
+        public PartialViewResult Feedback(int id)
+        {
+            var meeting = db.MEETINGs.Find(id);
+            return PartialView(meeting);
+        }
+
+        [HttpPost]
+        public ActionResult Feedback(int meeting_id, string feedback, int status)
+        {
+            var meeting = db.MEETINGs.Find(meeting_id);
+            meeting.Status = 6;
+            meeting.Feedback = feedback;
+
+            db.Entry(meeting).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
 
         //private void AddErrors(object result)
         //{
