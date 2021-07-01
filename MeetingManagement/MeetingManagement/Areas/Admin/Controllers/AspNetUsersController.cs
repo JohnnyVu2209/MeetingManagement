@@ -22,6 +22,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
         private ApplicationUserManager _userManager;
         private SEP24Team7Entities db = new SEP24Team7Entities();
         //private ApplicationSignInManager _signInManager;
+
         public ApplicationUserManager UserManager
         {
             get
@@ -33,7 +34,6 @@ namespace MeetingManagement.Areas.Admin.Controllers
                 _userManager = value;
             }
         }
-
         // GET: Admin/AspNetUsers
         public ActionResult Index()
         {
@@ -223,7 +223,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
                 {
                     AddErrors(result);
                 }
-               
+
             }
 
             // If we got this far, something failed, redisplay form

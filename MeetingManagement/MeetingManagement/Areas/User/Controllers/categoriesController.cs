@@ -10,13 +10,13 @@ using MeetingManagement.Models;
 
 namespace MeetingManagement.Areas.User.Controllers
 {
+    [Authorize]
     public class CategoriesController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
         // GET: User/categories
         public ActionResult Index()
-        {
-            var cATEGORies = db.CATEGORies.ToList();
+        {            var cATEGORies = db.CATEGORies.ToList();
             return View(cATEGORies);
         }
         public ActionResult CategoriesListDetail(int id)
