@@ -1,0 +1,74 @@
+﻿@model IEnumerable<MeetingManagement.Models.MeetingListVM>
+@{
+    Layout = null;
+}
+<table style="border:solid;border-top:none;">
+    <thead>
+        <tr>
+            <th>Tên cuộc họp</th>
+            <th>Người chủ trì</th>
+            <th>Ngày diễn ra</th>
+            <th>Tình trạng</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.MeetingName
+                </td>
+                <td>
+                    @item.FullName
+                </td>
+                <td>
+                    @item.DateStart
+                </td>
+                <td>
+                    @if (@item.Status == 1)
+                    {
+                        <div class="waiting-status">@item.StatusName</div>
+                    }
+                    else if (@item.Status == 2)
+                    {
+                        <div class="pending-status">@item.StatusName</div>
+                    }
+                    else if (@item.Status == 3)
+                    {
+                        <div class="missing-status">@item.StatusName</div>
+                    }
+                    else if (@item.Status == 4)
+                    {
+                        <div class="incomplete-status">@item.StatusName</div>
+                    }
+                    else if (@item.Status == 5)
+                    {
+                        <div class="complete-status">@item.StatusName</div>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@*@if (@item.Status == "1")
+    {
+        <div class="waiting-status">@item.StatusName</div>
+    }
+    else if (@item.Status == "2")
+    {
+        <div class="pending-status">@item.StatusName</div>
+    }
+    else if (@item.Status == 3)
+    {
+        <div class="missing-status">@item.StatusName</div>
+    }
+    else if (@item.Status == 4)
+    {
+        <div class="incomplete-status">@item.StatusName</div>
+    }
+    else if (@item.Status == 5)
+    {
+        <div class="incomplete-status">@item.StatusName</div>
+    }*@
+

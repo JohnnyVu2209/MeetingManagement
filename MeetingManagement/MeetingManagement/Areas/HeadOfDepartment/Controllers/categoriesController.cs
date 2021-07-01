@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 
 namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 {
+    [Authorize(Roles = "BCN")]
     public class CategoriesController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
@@ -19,24 +20,13 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         // GET: HeadOfDepartment/categories
         public ActionResult Index()
         {
-            var cATEGORies = db.CATEGORies.ToList();
-            return View(cATEGORies);
-        }
+            var categories = db.CATEGORies.ToList();
+            return View(categories);
 
-        // GET: HeadOfDepartment/categories/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CATEGORY cATEGORY = db.CATEGORies.Find(id);
-            if (cATEGORY == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cATEGORY);
-        }
+      
+        
+
+        
 
         // GET: HeadOfDepartment/categories/Create
         public PartialViewResult Create()
@@ -97,5 +87,6 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return RedirectToAction("Index");
 
         }
+       
     }
 }

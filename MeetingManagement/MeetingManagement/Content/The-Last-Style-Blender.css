@@ -102,6 +102,10 @@ body {
     background-color: #0073A5;
 }
 
+    #nav-bar div {
+        position: absolute;
+        left: 701px;
+    }
 
     #yuki-nav-bar img {
         position:fixed;
@@ -231,6 +235,58 @@ body {
     column-gap:0px;
 }
 
+/*Thanh tinh trang*/
+    td .pending-status {
+        background: #C0C0C0;
+        border-radius: 10px;
+        width: 30%;
+        color: white;
+        margin: auto;
+    }
+
+    td .waiting-status {
+        background: #FFC400;
+        border-radius: 10px;
+        width: 30%;
+        color: white;
+        margin: auto;
+    }
+
+    td .missing-status {
+        background: #F12B2C;
+        border-radius: 10px;
+        width: 45%;
+        color: white;
+        margin: auto;
+    }
+
+    td .incomplete-status {
+        background: #FF9900;
+        border-radius: 10px;
+        width: 45%;
+        color: white;
+        margin: auto;
+    }
+
+    td .complete-status {
+        background: #18e750;
+        border-radius: 10px;
+        width: 30%;
+        color: white;
+        margin: auto;
+    }
+
+    td .complete-status {
+        background: #29CC97;
+        border-radius: 10px;
+        width: 30%;
+        color: white;
+        margin: auto;
+    }
+
+tr:hover td {
+    background-color: #f1f1f1;
+  
 .yuki-column-3 {
     column-count: 3;
     column-gap: 0px;

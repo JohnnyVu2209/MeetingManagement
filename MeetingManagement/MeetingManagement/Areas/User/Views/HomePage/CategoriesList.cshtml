@@ -1,0 +1,18 @@
+﻿@model IEnumerable<MeetingManagement.Models.CATEGORY>
+
+<div class="catalog-wrapper">
+    <ul class="catalogList">
+        @foreach (var item in Model)
+        {       
+            <li >               
+                <details>
+                    <summary>@item.Category_Name</summary>
+                    <p>ABCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                </details>
+
+            <li onclick="ShowCategoryDetails">
+                @item.Category_Name
+            </li>       
+        }
+    </ul>
+</div>
