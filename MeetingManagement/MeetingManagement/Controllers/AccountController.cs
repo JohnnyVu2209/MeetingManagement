@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MeetingManagement.Models;
+using System.Web.Security;
 
 namespace MeetingManagement.Controllers
 {
@@ -55,9 +56,12 @@ namespace MeetingManagement.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+#pragma warning disable CS8632 // The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+        public ActionResult Login(string? returnUrl)
+#pragma warning restore CS8632 // The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
         {
-            ViewBag.ReturnUrl = returnUrl;
+            if(returnUrl != null)
+                ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
@@ -66,19 +70,33 @@ namespace MeetingManagement.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+#pragma warning disable CS8632 // The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+        public async Task<ActionResult> Login(LoginViewModel model, string? returnUrl)
+#pragma warning restore CS8632 // The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-
+            
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            //get user ID role
+            
+           
             switch (result)
             {
                 case SignInStatus.Success:
+                    if(returnUrl == null)
+                    {
+                        if (Roles.IsUserInRole(User.Identity.Name, "BCN"))
+                            return RedirectToAction("Index", "MainPage");
+                        else if (Roles.IsUserInRole(User.Identity.Name, "Admin"))
+                            return RedirectToAction("Index", "AspNetUsers");
+                        else
+                            return RedirectToAction("Index", "HomePage");
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -276,10 +294,10 @@ namespace MeetingManagement.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult ExternalLogin(string provider, string returnUrl)
+        public ActionResult ExternalLogin(string provider)
         {
             // Request a redirect to the external login provider
-            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account"));
         }
 
         //
@@ -320,7 +338,9 @@ namespace MeetingManagement.Controllers
         //
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
-        public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
+#pragma warning disable CS8632 // The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+        public async Task<ActionResult> ExternalLoginCallback(string? returnUrl)
+#pragma warning restore CS8632 // The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
@@ -333,6 +353,15 @@ namespace MeetingManagement.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    if (returnUrl == null)
+                    {
+                        if (Roles.IsUserInRole(User.Identity.Name, "BCN"))
+                            return RedirectToAction("Index", "MainPage",new { area = "HeadOfDepartment" });
+                        else if (Roles.IsUserInRole(User.Identity.Name, "Admin"))
+                            return RedirectToAction("Index", "AspNetUsers", new { area = "Admin" });
+                        else
+                            return RedirectToAction("Index", "HomePage", new { area = "User" });
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

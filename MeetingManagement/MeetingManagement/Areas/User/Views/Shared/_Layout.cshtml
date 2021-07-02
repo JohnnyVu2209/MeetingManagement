@@ -3,9 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - VanLangMeeting</title>
     <link rel="stylesheet" href="~/Content/normalize.css" />
     <link rel="stylesheet" href="~/Content/The-Last-Style-Blender.css" />
+    <link href="~/Content/HomePage.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -28,35 +29,35 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
-                    @Html.Partial("_LoginPartial")
-                </div>
+                @Html.Partial("_LoginPartial");
             </div>
         </div>*@
 
-    <div id="nav-bar">
+    <div id="yuki-nav-bar">
         <div>
-            <a href="@Url.Action("Index","Home",new { Area = "" })"><img src="https://www.vanlanguni.edu.vn/images/2020/HE_THONG_LOGO_CUA_TRUONG-02.png" alt="Văn Lang University"></a>
+            <a href="#"><img src="https://www.vanlanguni.edu.vn/images/2020/HE_THONG_LOGO_CUA_TRUONG-02.png" alt="Văn Lang University"></a>
         </div>
-        <div class="login">
-            @Html.Partial("_LoginPartial")
+        <div class="yuki-login-info">
+            @Html.Partial("_LoginPartial");
         </div>
-
     </div>
 
-    <div id="menu">
+    <div id="yuki-menu">
         <ul>
-            <li><a href="@Url.Action("Home","Categories")">Trang chính</a></li>
-            <li><a href="@Url.Action("Index","Categories")">Danh mục</a></li>
+            <li><a href="@Url.Action("Index","HomePage")">Trang chính</a></li>
+            <li><a href="@Url.Action("Index","categories")">Danh mục</a></li>
+            <li><a href="#">Cuộc họp của tôi</a></li>
+            <li><a href="#">Công việc</a></li>
         </ul>
-    </div> <!--Menu-->
-
+    </div>
+    Menu
     <div class="container body-content">
         @RenderBody()
-        @*<hr />
-        <footer id="footer">
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>*@
+            <footer id="yuki-footer">
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
     </div>
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

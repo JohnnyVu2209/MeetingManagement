@@ -1,0 +1,14 @@
+﻿@model IEnumerable<MeetingManagement.Models.MEETING>
+
+<link href="~/Content/catalog-list.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<ul class="catalogList">
+    @foreach (var item in Model)
+    {
+        <li>
+            @item.Meeting_name
+        </li>
+    }
+</ul>
+

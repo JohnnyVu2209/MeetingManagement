@@ -288,11 +288,13 @@ dd {
  * Addresses paddings set differently in IE 6/7.
  */
  
-/*menu,
+/*Hieu override 16/06/2021*/
+menu,
 ol,
 ul {
-    padding: 0 0 0 40px;
-}*/
+    padding: 0 0 0 0px;
+    /*padding: 0 0 0 40px;*/
+}
  
 /*
  * Corrects list images handled incorrectly in IE 7.
