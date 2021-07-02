@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using MeetingManagement.Models;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -11,26 +12,6 @@
 
 </head>
 <body>
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Meeting Management", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Roles", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Users", "Index", "Home")</li>
-                    </ul>
-                    @Html.Partial("_LoginPartial");
-                </div>
-            </div>
-        </div>*@
     <div id="nav-bar">
         <div>
             <a href="@Url.Action("Index","Home",new { Area = "" })"><img src="https://www.vanlanguni.edu.vn/images/2020/HE_THONG_LOGO_CUA_TRUONG-02.png" alt="Văn Lang University"></a>
@@ -44,6 +25,20 @@
         <ul>
             <li><a href="@Url.Action("Index","Home")">Trang chính</a></li>
         </ul>
+        @{
+            var userRoles = Roles.GetRolesForUser(User.Identity.Name);
+        }
+        @foreach (var role in userRoles)
+        {
+            if (role == "BCN")
+            {
+                <ul>
+                    <li><a href="@Url.Action("Index","MainPage")" style="margin-top:10px">Trang chủ</a></li>
+                    <li><a href="@Url.Action("Index","Categories")" style="margin-top:10px">Danh mục</a></li>
+                    <li><a href="@Url.Action("Index","tabCuocHop")" style="margin-top:10px">Cuộc họp</a></li>
+                </ul>
+            }
+        }
     </div> <!--Menu-->
     <div class="container body-content">
         @RenderBody()
@@ -52,6 +47,7 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
+    @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
     @Scripts.Render("~/bundles/bootstrap")
 

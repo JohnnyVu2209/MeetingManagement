@@ -1,5 +1,4 @@
 ﻿@model MeetingManagement.Models.MEETING
-@using MeetingManagement.Models;
 @{
     var userArr = new List<string>();
     ViewBag.Title = "MeetingForm";
@@ -31,7 +30,7 @@
                 <h2 class="title">Tạo Cuộc Họp</h2>
             </div>
             <form id="createMeeting" method="post" enctype="multipart/form-data">
-               
+
                 <div class="card-body">
 
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -82,7 +81,7 @@
                                 @Html.TextAreaFor(model => model.Meeting_content, new { @class = "input--style-5", @rows = "5", @id = "comment1", @style = "margin: 0px; width: 400px; height: 73px;" })
                             </div>
                             @Html.HiddenFor(m => m.Category_id)
-                            
+
                         </div>
                     </div>
                     <div class="form-row">
@@ -110,7 +109,8 @@
                         <div class="name">Tài Liệu Đính Kèm:</div>
                         <div>
                             <div class="form-group">
-                                <input type="file" class="form-control-file border" multiple id="file" name="Files" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                                <input type="file" class="form-control-file border" multiple id="file"  name="Files" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                                @Html.ValidationMessage("File", "", new { @class = "text-danger" , @id ="ValidateFile" })
                             </div>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
                     <button type="submit" class="btn btn--blue btn-lg btn-block" id="create" data-toggle="modal">Tạo</button>
                 </div>
             </form>
-</div>
+        </div>
     </div>
 </div>
 
@@ -148,7 +148,22 @@
         if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
             sessionStorage.clear();
         }
+        $('#file').bind('change', function () {
+            var maxsize = 5 * 1024 * 1024;
+            if ($('#file')[0].files[0].size <= maxsize) {
+                $('#file').prop('disabled', false);
+                return true;
+            }
+            else {
+                $('#ValidateFile').text("Không thể upload quá 5MB");
+                return false;
+            }
+        });
     });
+    function setUploadButtonState() {
+
+        
+    };
     function getCreateModal() {
         $.ajax({
             url: "@Url.Action("CreateUSer", "MEETINGs")",

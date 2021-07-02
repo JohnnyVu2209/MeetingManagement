@@ -11,7 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="~/Content/normalize.css" />
-    <link href="~/Content/The-Last-Style-Blender.css" rel="stylesheet"/>
+    <link href="~/Content/The-Last-Style-Blender.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
@@ -25,7 +25,7 @@
     <link href="~/login-form-05/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Style -->
-   
+
 
     <link href="~/login-form-05/fonts/icomoon/style.css" rel="stylesheet" />
     <title>Login </title>
@@ -36,8 +36,8 @@
             <a href="@Url.Action("Index","Home",new { Area = "" })"><img src="https://www.vanlanguni.edu.vn/images/2020/HE_THONG_LOGO_CUA_TRUONG-02.png" alt="Văn Lang University"></a>
         </div>
         @*<div class="login">
-            @Html.Partial("_LoginPartial")
-        </div>*@
+                @Html.Partial("_LoginPartial")
+            </div>*@
     </div>
     <div class="container content">
         <div class="row align-items-center justify-content-center">
@@ -79,11 +79,14 @@
                                 </a>*@
 
 
-
-                           
-
                         </div>
+
                     </form>
+                    <div class="col-md-4">
+                        <section id="socialLoginForm">
+                            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                        </section>
+                    </div>
                 </div>
             </div>
         </div>
@@ -91,11 +94,7 @@
 
 
 
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
+
 
 
     <script src="~/login-form-05/js/jquery-3.3.1.min.js"></script>
