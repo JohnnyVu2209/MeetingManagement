@@ -18,7 +18,7 @@ namespace MeetingManagement.Areas.User.Controllers
             var cATEGORies = db.CATEGORies.ToList();
             return View(cATEGORies);
         }
-        public ActionResult CategoriesListDetail(int id)
+        /*public ActionResult CategoriesListDetail(int id)
         {
             List<CATEGORY> cate = db.CATEGORies.ToList();
             CategoryListVM categoryListVM = new CategoryListVM();
@@ -30,7 +30,7 @@ namespace MeetingManagement.Areas.User.Controllers
                 CateCreateBy = x.Create_by
             }).ToList();
             return View(categoryListVMList);
-        }
+        }*/
 
     }
 }

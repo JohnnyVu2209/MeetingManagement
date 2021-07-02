@@ -383,12 +383,12 @@
     <Content Include="Areas\Admin\Views\AspNetRoleUser\Create.cshtml" />
     <Content Include="Areas\User\Views\HomePage\Index.cshtml" />
     <Content Include="Areas\User\Views\HomePage\MeetingList.cshtml" />
-    <Content Include="Areas\User\Views\HomePage\TaskList.cshtml" />
-    <Content Include="Areas\User\Views\HomePage\CategoriesList.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\IndexTaskList.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\IndexCateList.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\Index.cshtml" />
-    <Content Include="Areas\User\Views\HomePage\IndexML.cshtml" />
-    <Content Include="Areas\User\Views\Categories\CategoriesListDetail.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\IndexMeetingList.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\tabCuocHop\Index.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\IndexCateDetail.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
