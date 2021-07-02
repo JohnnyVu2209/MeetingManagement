@@ -65,7 +65,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
                         db.ATTACHMENTs.Add(newAtt);
                         db.SaveChanges();
                         //}
-                        string[] users = model.AspNetUsers.Split(',');
+                        string[] users = model.AspNetUser.ToString().Split(',');
                         foreach (string user in users)
                         {
                             AspNetUser account = db.AspNetUsers.Where(x => x.Email == user).FirstOrDefault();
