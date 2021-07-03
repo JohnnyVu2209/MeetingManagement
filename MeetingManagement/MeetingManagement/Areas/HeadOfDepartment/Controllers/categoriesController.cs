@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MeetingManagement.Models;
 using EntityState = System.Data.Entity.EntityState;
+using Microsoft.AspNet.Identity;
 
 namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 {
@@ -52,11 +53,9 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         {
             /*link huong dan de lam phan nay https://www.youtube.com/watch?v=2ktFobQ4VmM */
             /*SEP24Team7Entities db = new SEP24Team7Entities();*/
-            cg.Create_by = "48e5a0b4-76ea-4619-bd6b-771bb9954c96";
+            cg.Create_by = HttpContext.User.Identity.GetUserId();
             db.CATEGORies.Add(cg);
-           
             db.SaveChanges();
-            
             return Json(cg, JsonRequestBehavior.AllowGet);
         }
 

@@ -64,7 +64,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -182,11 +181,14 @@
     <Compile Include="Areas\Admin\Controllers\AspNetRolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetRoleUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
+    <Compile Include="Areas\User\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\User\Controllers\MeetingsController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\MEETINGsController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\tabCuocHopController.cs" />
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\categoriesController.cs" />
+
     <Compile Include="Areas\HeadOfDepartment\Controllers\MainPageController.cs" />
     <Compile Include="Areas\User\Controllers\HomePageController.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
@@ -217,12 +219,16 @@
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoryListVM.cs" />
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MEETING.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MeetingListVM.cs" />
+
     <Compile Include="Models\MEETING_STATUS.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -234,37 +240,77 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Models.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Models.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Models1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OTHER_ACCOUNT.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TASK.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+
     <Compile Include="Models\OTHER_ACCOUNT.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TASK.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+
     <Compile Include="Password.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+
     <Content Include="Content\quyhung\css\tabcuochop.css" />
+
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\catalog-list.css" />
+
     <Content Include="Content\HomePage.css" />
     <Content Include="css\Details.css" />
     <Content Include="css\style.css" />
+
     <Content Include="Content\normalize.css" />
-    <Content Include="Content\outline_filter_alt_black_24dp.png" />
+    <Content Include="Content\Picture\outline_edit_black_24dp.png" />
+    <Content Include="Content\Picture\outline_file_upload_black_24dp.png" />
+    <Content Include="Content\Picture\outline_filter_alt_black_24dp.png" />
+    <Content Include="Content\Picture\outline_people_black_24dp.png" />
+    <Content Include="Content\Picture\outline_person_add_black_24dp.png" />
+    <Content Include="Content\Picture\outline_place_black_24dp.png" />
+    <Content Include="Content\Picture\outline_schedule_black_24dp.png" />
+    <Content Include="Content\Picture\outline_title_black_24dp.png" />
+    <Content Include="Content\Picture\users_meeting.png" />
+    <Content Include="Content\taocuochop\css\main.css" />
+    <Content Include="Content\taocuochop\css\main.min.css" />
+    <Content Include="Content\taocuochop\js\global.js" />
+    <Content Include="Content\taocuochop\vendor\datepicker\daterangepicker.css" />
+    <Content Include="Content\taocuochop\vendor\datepicker\daterangepicker.js" />
+    <Content Include="Content\taocuochop\vendor\datepicker\moment.min.js" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\css\font-awesome.css" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\css\font-awesome.min.css" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\HELP-US-OUT.txt" />
+    <Content Include="Content\taocuochop\vendor\jquery\jquery.js" />
+    <Content Include="Content\taocuochop\vendor\jquery\jquery.min.js" />
+    <Content Include="Content\taocuochop\vendor\mdi-font\css\material-design-iconic-font.css" />
+    <Content Include="Content\taocuochop\vendor\mdi-font\css\material-design-iconic-font.min.css" />
+    <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.svg" />
+    <Content Include="Content\taocuochop\vendor\select2\select2.min.css" />
+    <Content Include="Content\taocuochop\vendor\select2\select2.min.js" />
     <Content Include="Content\The-Last-Style-Blender.css" />
     <Content Include="Content\quyhung\css\sb-admin-2.css" />
     <Content Include="Content\quyhung\css\sb-admin-2.min.css" />
@@ -274,16 +320,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="imgs\icons8-home-24.png" />
-    <Content Include="imgs\icons8-home-64.png" />
-    <Content Include="imgs\icons8-office-365-48.png" />
-    <Content Include="imgs\icons8-search-64.png" />
-    <Content Include="imgs\icons8-slider-48.png" />
-    <Content Include="imgs\icons8-slider-50 %281%29.png" />
-    <Content Include="imgs\icons8-slider-50.png" />
-    <Content Include="imgs\logo-vlu-en-8.png" />
-    <Content Include="imgs\logoVLU.png" />
-    <Content Include="imgs\Walk.gif" />
     <Content Include="login-form-05\css\bootstrap.min.css" />
     <Content Include="login-form-05\css\bootstrap\bootstrap-reboot.css" />
     <Content Include="login-form-05\css\bootstrap\bootstrap.css" />
@@ -306,8 +342,7 @@
     </Content>
     <Content Include="Models\Models.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Models.edmx</DependentUpon>
-      <LastGenOutput>Models.cs</LastGenOutput>
+      <LastGenOutput>Models1.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -450,6 +485,30 @@
       <DependentUpon>Models.edmx</DependentUpon>
     </Content>
     <Content Include="Areas\HeadOfDepartment\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Categories\Create1.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\Create.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\Delete.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\Details.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\Edit.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\Index.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\MyMeetingGridView.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\JoinedMeetingGridView.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Index.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Create.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MainPage\VerifyMeeting.cshtml" />
+
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\FontAwesome.otf" />
+    <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.eot" />
+    <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff" />
+    <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
+    <Content Include="Areas\HeadOfDepartment\Views\MainPage\GrdMemberTable.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MainPage\Index.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -499,7 +558,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\_VanLangMeeting.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\Login - Copy.cshtml" />
     <Content Include="Views\Error\PageNotFound.cshtml" />
@@ -507,10 +565,12 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\User\Data\" />
+
     <Folder Include="Content\login\" />
     <Folder Include="Content\quyhung\img\" />
     <Folder Include="Content\quyhung\js\" />
     <Folder Include="Upload\Attachments\" />
+
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
