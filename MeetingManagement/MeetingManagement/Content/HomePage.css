@@ -6,12 +6,11 @@
     width: 100%;
     height: 48px;
     text-align: left;
-    border: solid;
     font-weight: bold;
     color: white;
-    border-color: black;
     padding: 13px;
     border-radius: 2px;
+    border: 1px solid black;
 }
 .catalog-wrapper {
     margin: auto;

@@ -1,27 +1,42 @@
 ﻿@model MeetingManagement.Models.MEETING
+@using MeetingManagement.Models;
 @{
     var userArr = new List<string>();
     ViewBag.Title = "MeetingForm";
-    Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
 }
+
+
 
 <!-- Icons font CSS-->
 
+
+
 <link href="~/taocuochop/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" />
 <link href="~/taocuochop/vendor/font-awesome-4.7/css/font-awesome.css" rel="stylesheet" />
+
+
 
 <!-- Font special for pages-->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Vendor CSS-->
 
+
+
 <link href="~/taocuochop/vendor/select2/select2.min.css" rel="stylesheet" />
+
+
 
 
 <link href="~/taocuochop/vendor/datepicker/daterangepicker.css" rel="stylesheet" />
 <!-- Main CSS-->
 
+
+
 <link href="~/taocuochop/css/main.css" rel="stylesheet" />
+
+
 
 <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
     <div class="wrapper wrapper--w790">
@@ -32,6 +47,8 @@
             <form id="createMeeting" method="post" enctype="multipart/form-data">
 
                 <div class="card-body">
+
+
 
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-row">
@@ -44,9 +61,13 @@
                         </div>
                     </div>
 
+
+
                     <div class="form-row m-b-55">
                         <div class="name">Ngày/Giờ</div>
                         <div class="value">
+
+
 
                             <div class="row row-space">
                                 <div class="col-2">
@@ -60,6 +81,8 @@
                                     <div class="input-group-desc">
                                         @Html.TextBoxFor(model => model.Time_Start, new { @class = "input--style-5", @type = "time" })
                                         @Html.ValidationMessageFor(model => model.Time_Start, "", new { @class = "text-danger" })
+
+
 
                                     </div>
                                 </div>
@@ -88,11 +111,13 @@
                         <div class="name">Người Tham Dự:</div>
                         <div>
                             <ul class="w3-ul w3-border create-user-scroll" id="pickedUser">
-                                @Html.HiddenFor(m => m.AspNetUser)
+                                @Html.HiddenFor(m => m.AspNetUser.Full_name)
                             </ul>
                             <button type="button" class="btn btn-primary" data-toggle="modal" onclick="getCreateModal()">
                                 Thêm
                             </button>
+
+
 
                         </div>
                     </div>
@@ -104,16 +129,19 @@
                             </button>
                         </div>
 
+
+
                     </div>
                     <div class="form-row">
                         <div class="name">Tài Liệu Đính Kèm:</div>
                         <div>
                             <div class="form-group">
-                                <input type="file" class="form-control-file border" multiple id="file"  name="Files" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-                                @Html.ValidationMessage("File", "", new { @class = "text-danger" , @id ="ValidateFile" })
+                                <input type="file" class="form-control-file border" multiple id="file" name="Files" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
                             </div>
                         </div>
                     </div>
+
+
 
                 </div>
                 <div>
@@ -124,52 +152,50 @@
     </div>
 </div>
 
+
+
 <div id="Popup"></div>
 <div id="Popup2"></div>
 
 
 
+
+
 <!-- Jquery JS-->
+
+
 
 <script src="~/taocuochop/vendor/jquery/jquery.min.js"></script>
 <!-- Vendor JS-->
 
+
+
 <script src="~/taocuochop/vendor/select2/select2.min.js"></script>
 
+
+
 <script src="~/taocuochop/vendor/datepicker/moment.min.js"></script>
+
+
 
 <script src="~/taocuochop/vendor/datepicker/daterangepicker.js"></script>
 <!-- Main JS-->
 
+
+
 <script src="~/taocuochop/js/global.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script>
+<script type="text/javascript">
     $(() => {
         if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
             sessionStorage.clear();
         }
-        $('#file').bind('change', function () {
-            var maxsize = 5 * 1024 * 1024;
-            if ($('#file')[0].files[0].size <= maxsize) {
-                $('#file').prop('disabled', false);
-                return true;
-            }
-            else {
-                $('#ValidateFile').text("Không thể upload quá 5MB");
-                return false;
-            }
-        });
     });
-    function setUploadButtonState() {
-
-        
-    };
     function getCreateModal() {
         $.ajax({
-            url: "@Url.Action("CreateUSer", "MEETINGs")",
+            url: "@Url.Action("CreateUser", "MEETINGs")",
             datatype: 'html',
             method: 'GET',
-            data: {},
             success: function (data) {
                 $("#Popup").html(data);
 
@@ -178,8 +204,9 @@
             error: function (err) {
                 console.log(err);
             }
-        })
-    };
+        });
+    }
+    ;
     function getCreateModal2() {
         $.ajax({
             url: "CreateUser2",
@@ -194,6 +221,7 @@
             error: function (err) {
                 console.log(err);
             }
-        })
-    };
+        });
+    }
+    ;
 </script>

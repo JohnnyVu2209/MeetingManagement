@@ -2,11 +2,8 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
 }
-<div class="row">
-    <div class="col-md-12" style="width:88%">
-        <div class="table-head">Cuộc họp sắp tới</div>
-        @Html.Action("IndexML")
-    </div>
+<div>
+    @Html.Action("IndexML")
 </div>
 
 <div class="row" style="padding-top:50px;width:90%;">
@@ -21,5 +18,11 @@
     </div>
 </div>
 
+<style>
+    .body-content {
+        position: absolute;
+        top: 0px;
+    }
+</style>
 
 
