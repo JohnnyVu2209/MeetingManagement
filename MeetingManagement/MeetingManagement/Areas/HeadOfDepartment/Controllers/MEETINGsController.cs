@@ -7,151 +7,126 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MeetingManagement.Models;
-using System.Transactions;
-using Microsoft.AspNet.Identity;
-using System.IO;
+using EntityState = System.Data.Entity.EntityState;
 
-namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
+namespace MeetingManagement.Areas.HeadOfDepartment
 {
     public class MEETINGsController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
-        public ActionResult MeetingList(int id)
+
+        // GET: HeadOfDepartment/MEETINGs
+        public ActionResult Index()
         {
-            var all = db.MEETINGs.Where(x => x.Category_id == id).ToList();
-            return PartialView(all);
-        }
-        public ActionResult MeetingForm(int id)
-        {
-            MEETING newMeet = new MEETING();
-            CATEGORY cate = db.CATEGORies.Find(id);
-            if (cate == null)
-            {
-                throw new Exception("Category Not Exist");
-            }
-            newMeet.Category_id = id;
-            return View(newMeet);
+            var mEETINGs = db.MEETINGs.Include(m => m.CATEGORY);
+            return View(mEETINGs.ToList());
         }
 
-        [HttpPost]
-        public ActionResult MeetingForm(MEETING model, HttpPostedFileBase Files)
+        // GET: HeadOfDepartment/MEETINGs/Details/5
+        public ActionResult Details(int? id)
         {
-            ValidateMeeting(model);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            MEETING mEETING = db.MEETINGs.Find(id);
+            if (mEETING == null)
+            {
+                return HttpNotFound();
+            }
+            return View(mEETING);
+        }
+
+        // GET: HeadOfDepartment/MEETINGs/Create
+        public ActionResult Create()
+        {
+            ViewBag.Category_id = new SelectList(db.CATEGORies, "Category_id", "Create_by");
+            return View();
+        }
+
+        // POST: HeadOfDepartment/MEETINGs/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "CreateBy_id,Meeting_name,Date_Start,Date_End,Meeting_Confirmed,Category_id,Meeting_id,Lacation,Status,Meeting_report")] MEETING mEETING)
+        {
             if (ModelState.IsValid)
             {
-                if (Files != null)
-                {
-
-
-                    using (var scope = new TransactionScope())
-                    {
-                        
-
-                        if (ValidateFile(Files))
-                        {
-                            AddMeeting(model);
-
-                            //store file
-
-                            MEETING meetings = db.MEETINGs.Where(x => x.Meeting_name == model.Meeting_name).FirstOrDefault();
-
-                            ATTACHMENT newAtt = new ATTACHMENT();
-                            newAtt.Meeting_id = meetings.Meeting_id;
-                            newAtt.Attachment_path = File_Path + meetings.Meeting_id;
-                            newAtt.Attachment_name = Files.FileName;
-                            db.ATTACHMENTs.Add(newAtt);
-                            db.SaveChanges();
-
-                            //store link file to db
-                            var path = Server.MapPath(File_Path);
-                            string extension = Path.GetExtension(Files.FileName);
-                            Files.SaveAs(path + meetings.Meeting_id + extension);
-                            scope.Complete();
-                            return RedirectToAction("Details", "Categories", new { id = model.Category_id });
-                        }
-
-                        ModelState.AddModelError("File", "Dung lượng tối đa cho phép là 5MB");
-
-
-                    }
-
-
-                }
-                else
-                {
-                    using (var scope = new TransactionScope())
-                    {
-                        AddMeeting(model);
-                        scope.Complete();
-                        return RedirectToAction("Details", "Categories", new { id = model.Category_id });
-                    }
-                }
-
-
-            }
-
-            return View(model);
-        }
-
-        private void AddMeeting(MEETING model)
-        {
-            MEETING newMeet = new MEETING();
-            newMeet.Category_id = model.Category_id;
-            newMeet.Meeting_name = model.Meeting_name;
-            newMeet.Meeting_content = model.Meeting_content;
-            newMeet.Date_Start = model.Date_Start;
-            newMeet.Time_Start = model.Time_Start;
-            newMeet.Location = model.Location;
-            newMeet.Status = 2;
-            newMeet.Date_Create = DateTime.Today;
-            newMeet.Create_by = User.Identity.GetUserId();
-            db.MEETINGs.Add(newMeet);
-            db.SaveChanges();
-
-            var meeting = db.MEETINGs.Where(x => x.Meeting_name == newMeet.Meeting_name).FirstOrDefault();
-            string[] users = model.AspNetUsers.Split(',');
-            foreach (string user in users)
-            {
-                AspNetUser account = db.AspNetUsers.Where(x => x.Email == user).FirstOrDefault();
-                MEMBER member = new MEMBER();
-                member.Meeting_id = meeting.Meeting_id;
-                member.Member_id = account.Id;
-                db.MEMBERs.Add(member);
+                db.MEETINGs.Add(mEETING);
                 db.SaveChanges();
+                return RedirectToAction("Index");
             }
-        }
-        private bool ValidateFile(HttpPostedFileBase files)
-        {
-            var filesize = files.ContentLength;
-            if (filesize > 5 * 1024 * 1024)
-                return false;
-            return true;
+
+            ViewBag.Category_id = new SelectList(db.CATEGORies, "Category_id", "Create_by", mEETING.Category_id);
+            return View(mEETING);
         }
 
-        private const string File_Path = "~/Upload/Attachments/";
-        private void ValidateMeeting(MEETING meeting)
+        // GET: HeadOfDepartment/MEETINGs/Edit/5
+        public ActionResult Edit(int? id)
         {
-            if (meeting.Date_Start <= DateTime.Today)
+            if (id == null)
             {
-                ModelState.AddModelError("Date_Start", "Không được tạo cuộc họp trong cùng ngày hoặc trước đó");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TimeSpan twentyoneHour = new TimeSpan(21, 0, 0);
-            TimeSpan seventhHour = new TimeSpan(07, 0, 0);
-            if (meeting.Time_Start < seventhHour || meeting.Time_Start >= twentyoneHour)
+            MEETING mEETING = db.MEETINGs.Find(id);
+            if (mEETING == null)
             {
-                ModelState.AddModelError("Time_Start", "Không thể mở cuộc họp vào thời gian đó");
+                return HttpNotFound();
             }
+            ViewBag.Category_id = new SelectList(db.CATEGORies, "Category_id", "Create_by", mEETING.Category_id);
+            return View(mEETING);
         }
-        public ActionResult CreateUser()
+
+        // POST: HeadOfDepartment/MEETINGs/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        public ActionResult Edit([Bind(Include = "Category_id,Meeting_id,Meeting_name,Meeting_goal,Meeting_content,Date_Start,Time_Start,Location,Status,Meeting_report,Date_Create,Create_by")] MEETING mEETING)
         {
-            var userId = User.Identity.GetUserId();
-            List<AspNetUser> model = db.AspNetUsers.Where(x => x.Id != userId).ToList();
-            ViewBag.result = model;
-            return View();
+            if (ModelState.IsValid)
+            {   
+                db.Entry(mEETING).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            //ViewBag.Category_id = new SelectList(db.CATEGORies, "Category_id", "Create_by", mEETING.Category_id);
+            return View(mEETING);
         }
-        public ActionResult CreateUser2()
+
+        // GET: HeadOfDepartment/MEETINGs/Delete/5
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            MEETING mEETING = db.MEETINGs.Find(id);
+            if (mEETING == null)
+            {
+                return HttpNotFound();
+            }
+            return View(mEETING);
+        }
+
+        // POST: HeadOfDepartment/MEETINGs/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            MEETING mEETING = db.MEETINGs.Find(id);
+            db.MEETINGs.Remove(mEETING);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
