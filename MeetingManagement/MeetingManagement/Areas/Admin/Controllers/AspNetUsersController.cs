@@ -73,7 +73,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
                  db.SaveChanges();
                  return RedirectToAction("Index");
              }
-
+             S
              return View(aspNetUser);*/
 
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
@@ -85,7 +85,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
                 // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                 // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                 // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                AddOtherAccount(user.Id);
                 return RedirectToAction("Index", "AspNetUsers");
             }
             else
@@ -93,11 +93,20 @@ namespace MeetingManagement.Areas.Admin.Controllers
                 AddErrors(result);
             }
 
-
             // If we got this far, something failed, redisplay form
             return View();
         }
 
+        private void AddOtherAccount(string id)
+        {
+            var user = db.AspNetUsers.Find(id);
+            db.OTHER_ACCOUNTs.Add(new OTHER_ACCOUNT
+            {
+                othUser_id = user.Id,
+                othUser_office = user.Email
+            }) ;
+            db.SaveChanges();
+        }
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)

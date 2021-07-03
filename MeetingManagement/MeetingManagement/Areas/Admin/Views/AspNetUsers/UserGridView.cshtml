@@ -13,21 +13,12 @@
         <ul class="yuki-column-4">
             <li class="yuki-col1">
                 UserName
-                @*<button class="filter">
-                    <img src="~/Content/Picture/outline_filter_alt_black_24dp.png">
-                </button>*@
             </li>
             <li class="yuki-col2">
                 Email
-                @*<button class="filter">
-                    <img src="~/Content/Picture/outline_filter_alt_black_24dp.png">
-                </button>*@
             </li>
             <li class="yuki-col3">
                 Role
-                @*<button class="filter">
-                    <img src="~/Content/Picture/outline_filter_alt_black_24dp.png">
-                </button>*@
             </li>
             <li class="yuki-col4">
                 Thao tác
@@ -42,35 +33,35 @@
                 <td>@users.UserName</td>
                 <td>@users.Email</td>
                 <td>
-                    @*<select class="form-control">*@
-
                     @foreach (var role in users.AspNetRoles)
                     {
                         @role.Name
                     }
-                    @*</select>*@
                 </td>
                 <td>
                     @*<span>&#10000;</span>*@
                     <ul class="menu_thaotac">
                         <li>
-                            <a onclick="ShowResetPasswordPopUp('@users.Id')";>Reset Password  |</a>
+                            <a onclick="ShowResetPasswordPopUp('@users.Id')" ;>Reset Password  |</a>
                         </li>
                         @*<li>
-                            <a href="@Url.Action("Delete",new { id = users.Id })">Delete</a>
-                        </li>*@
+                                <a href="@Url.Action("Delete",new { id = users.Id })">Delete</a>
+                            </li>*@
                         <li>
-                            <a href="@Url.Action("Create","AspNetRoleUser",new { UserID = users.Id })">Add Role</a>
+                            @if (users.AspNetRoles.Count() == 0)
+                            {
+                                <a href="@Url.Action("Create","AspNetRoleUser",new { UserID = users.Id })">Add Role</a>
+                            }
                         </li>
                         <li>
                             @foreach (var role in users.AspNetRoles)
-                                {
-                                    <a type="submit"
-                                    onclick="return confirm('are you sure you want delete @role.Name from @users.Email ?')"
-                                    href="@Url.Action("Delete","AspNetRoleUser",new { RoleID = role.Id, UserID = users.Id  })">|  Delete role</a>
-                                }
+                            {
+                                <a type="submit"
+                                   onclick="return confirm('are you sure you want delete @role.Name from @users.Email ?')"
+                                   href="@Url.Action("Delete","AspNetRoleUser",new { RoleID = role.Id, UserID = users.Id  })">|  Delete role</a>
+                            }
                         </li>
-                     </ul>
+                    </ul>
                 </td>
             </tr>
         }
@@ -82,9 +73,9 @@
         height: 48px;
     }
 
-        table ul li {
-            display:inline;
-        }
+    table ul li {
+        display: inline;
+    }
 
     ul > li span {
         font-size: 25px;
@@ -112,7 +103,7 @@
     function ShowResetPasswordPopUp(userID) {
         $.ajax({
             type: "GET",
-            url: "ResetPassword","AspNetUsers",
+            url: "ResetPassword", "AspNetUsers",
             data: { userID },
             dataType: "html",
             success: function (data) {
