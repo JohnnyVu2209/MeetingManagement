@@ -103,7 +103,7 @@
     function ShowResetPasswordPopUp(userID) {
         $.ajax({
             type: "GET",
-            url: "ResetPassword", "AspNetUsers",
+            url: '@Url.Action("ResetPassword","AspNetUsers")',
             data: { userID },
             dataType: "html",
             success: function (data) {

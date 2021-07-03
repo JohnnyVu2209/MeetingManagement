@@ -23,11 +23,12 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             var categories = db.CATEGORies.ToList();
             return View(categories);
         }
+        [HandleError]
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception();
             }
             CATEGORY cATEGORY = db.CATEGORies.Find(id);
             if (cATEGORY == null)

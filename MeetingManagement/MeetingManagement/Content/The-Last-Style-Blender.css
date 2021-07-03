@@ -236,7 +236,7 @@ body {
 }
 
 /*Thanh tinh trang*/
-    td .pending-status {
+    /*td .pending-status {
         background: #C0C0C0;
         border-radius: 10px;
         width: 30%;
@@ -282,7 +282,7 @@ body {
         width: 30%;
         color: white;
         margin: auto;
-    }
+    }*/
 
 tr:hover td {
     background-color: #f1f1f1;
@@ -332,6 +332,7 @@ td .pending-status {
     width: 30%;
     color: white;
     margin: auto;
+    text-align:center;
 }
 
 td .waiting-status {
@@ -340,6 +341,7 @@ td .waiting-status {
     width: 30%;
     color: white;
     margin: auto;
+    text-align: center;
 }
 
 td .missing-status {
@@ -348,6 +350,7 @@ td .missing-status {
     width: 37%;
     color: white;
     margin: auto;
+    text-align: center;
 }
 
 td .incomplete-status {
@@ -356,6 +359,7 @@ td .incomplete-status {
     width: 43%;
     color: white;
     margin: auto;
+    text-align: center;
 }
 
 td .complete-status {
@@ -364,4 +368,5 @@ td .complete-status {
     width: 43%;
     color: white;
     margin: auto;
+    text-align: center;
 }

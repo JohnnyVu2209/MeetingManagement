@@ -91,11 +91,11 @@ namespace MeetingManagement.Controllers
                     if(returnUrl == null)
                     {
                         if (Roles.IsUserInRole(User.Identity.Name, "BCN"))
-                            return RedirectToAction("Index", "MainPage");
+                            return RedirectToAction("Index", "MainPage", new { area = "HeadOfDepartment" });
                         else if (Roles.IsUserInRole(User.Identity.Name, "Admin"))
-                            return RedirectToAction("Index", "AspNetUsers");
+                            return RedirectToAction("Index", "AspNetUsers", new { area = "Admin" });
                         else
-                            return RedirectToAction("Index", "HomePage");
+                            return RedirectToAction("Index", "HomePage", new { area = "User" });
                     }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
@@ -421,7 +421,7 @@ namespace MeetingManagement.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //

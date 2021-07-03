@@ -38,7 +38,7 @@
             <a href="#"><img src="https://www.vanlanguni.edu.vn/images/2020/HE_THONG_LOGO_CUA_TRUONG-02.png" alt="Văn Lang University"></a>
         </div>
         <div class="yuki-login-info">
-            @Html.Partial("_LoginPartial");
+            @{Html.RenderPartial("~/Views/Shared/_LoginPartial.cshtml");}
         </div>
     </div>
 
@@ -46,7 +46,7 @@
         <ul>
             <li><a href="@Url.Action("Index","HomePage")">Trang chính</a></li>
             <li><a href="@Url.Action("Index","categories")">Danh mục</a></li>
-            <li><a href="#">Cuộc họp của tôi</a></li>
+            <li><a href="@Url.Action("Index","Meetings")">Cuộc họp của tôi</a></li>
             <li><a href="#">Công việc</a></li>
         </ul>
     </div>

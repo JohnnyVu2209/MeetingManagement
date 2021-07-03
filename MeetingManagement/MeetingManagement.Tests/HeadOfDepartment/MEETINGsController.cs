@@ -70,7 +70,7 @@ namespace MeetingManagement.Tests.HeadOfDepartment
         }
 
         [TestMethod]
-        public void Test_MeetingForm_Post_With_Validate_Meetinh()
+        public void Test_MeetingForm_Post_With_Validate_Meeting()
         {
             var rand = new Random();
             var meeting = new MEETING()
@@ -156,7 +156,7 @@ namespace MeetingManagement.Tests.HeadOfDepartment
                 Category_id = 44,
                 Meeting_content = rand.NextDouble().ToString(),
                 Date_Create = DateTime.Today,
-                Date_Start = new DateTime(2021, 7, 4),
+                Date_Start = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day+1),
                 Time_Start = new TimeSpan(8, 0, 0),
                 Status = 2,
                 Location = rand.NextDouble().ToString(),
@@ -200,7 +200,7 @@ namespace MeetingManagement.Tests.HeadOfDepartment
                 Category_id = 44,
                 Meeting_content = rand.NextDouble().ToString(),
                 Date_Create = DateTime.Today,
-                Date_Start = new DateTime(2021, 7, 4),
+                Date_Start = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day + 1),
                 Time_Start = new TimeSpan(8, 0, 0),
                 Status = 2,
                 Location = rand.NextDouble().ToString(),

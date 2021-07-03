@@ -11,16 +11,15 @@
     <div id="container">
         <div class="user-ctg-index-header">
             <h2>Danh mục</h2>
-            <button class="user-ctg-index-button">Tạo</button>
         </div>
         <div id="time-table" class="user-ctg-index-table-zone">
             <div class="table user-ctg-index-table">
                 @foreach (var item in Model)
                 {
-                    <div>
-                        <p>
+                    <div onclick="location.href = '@Url.Action("Details","Categories", new { id = item.Category_id})';">
+                        
                             @item.Category_Name
-                        </p>
+                        
                         @*<button onclick="ShowEditPopUp(@item.Category_id)" class="edit-btn user-ctg-index-manipulation" data-modal="modal1">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                                 Sửa

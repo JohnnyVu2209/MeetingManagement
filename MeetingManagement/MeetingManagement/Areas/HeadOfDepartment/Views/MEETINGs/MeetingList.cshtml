@@ -23,11 +23,11 @@
                     <td>
                         @if (@item.Status == 1)
                         {
-                            <div class="waiting-status">@item.MEETING_STATUS.Status_name</div>
+                            <div class="pending-status">@item.MEETING_STATUS.Status_name</div>
                         }
                         else if (@item.Status == 2)
                         {
-                            <div class="pending-status">@item.MEETING_STATUS.Status_name</div>
+                            <div class="waiting-status">@item.MEETING_STATUS.Status_name</div>
                         }
                         else if (@item.Status == 3)
                         {

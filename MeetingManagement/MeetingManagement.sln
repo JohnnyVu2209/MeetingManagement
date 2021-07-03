@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingManagement", "Meetin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingManagement.Tests", "MeetingManagement.Tests\MeetingManagement.Tests.csproj", "{295BB393-D44E-4DDD-9FB1-80BDD79E307B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingManagementTest", "MeetingManagementTest\MeetingManagementTest.csproj", "{015B4547-CAF7-46C6-A74A-0618A74191A6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,10 +17,6 @@ Global
 		{03FDBEE0-B3AA-45D9-A0B3-3FBBF0EAD586}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03FDBEE0-B3AA-45D9-A0B3-3FBBF0EAD586}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03FDBEE0-B3AA-45D9-A0B3-3FBBF0EAD586}.Release|Any CPU.Build.0 = Release|Any CPU
-		{015B4547-CAF7-46C6-A74A-0618A74191A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{015B4547-CAF7-46C6-A74A-0618A74191A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{015B4547-CAF7-46C6-A74A-0618A74191A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{015B4547-CAF7-46C6-A74A-0618A74191A6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{295BB393-D44E-4DDD-9FB1-80BDD79E307B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{295BB393-D44E-4DDD-9FB1-80BDD79E307B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{295BB393-D44E-4DDD-9FB1-80BDD79E307B}.Release|Any CPU.ActiveCfg = Release|Any CPU

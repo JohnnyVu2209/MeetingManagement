@@ -5,34 +5,34 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-    <div class="col-sm-12 col-sm-12-fix01">
-        <div class="create-and-search">
-            <div class="form-inline pull-right">
-                <label>Search</label>
-                <input type="text" class="form-control" id="txtSearch" />
-                <button type="button" class="btn btn-success" data-toggle="modal" onclick="getCreateModal()">Create New</button>
-            </div>
+<div class="col-sm-12 col-sm-12-fix01">
+    <div class="create-and-search">
+        <div class="form-inline pull-right">
+            <label>Search</label>
+            <input type="text" class="form-control" id="txtSearch" />
+            <button type="button" class="btn btn-success" data-toggle="modal" onclick="getCreateModal()">Create New</button>
         </div>
-        <div id="grdUserView"></div>
-        <div id="Popup"></div>
     </div>
-    
-    
-    <style>
-        .create-and-search {
-            padding-left: 0px;
-            padding-right: 0px;
-            width: 1252px;
-            height: 50px;
-        }
+    <div id="grdUserView"></div>
+    <div id="Popup"></div>
+</div>
 
-        .col-sm-12-fix01{
-            position:relative;
-            top:100px;
-        }
-    </style>
-    @section scripts{
-        <script type="text/javascript">
+
+<style>
+    .create-and-search {
+        padding-left: 0px;
+        padding-right: 0px;
+        width: 1252px;
+        height: 50px;
+    }
+
+    .col-sm-12-fix01 {
+        position: relative;
+        top: 100px;
+    }
+</style>
+@section scripts{
+    <script type="text/javascript">
     $(document).ready(function () {
         $('#grdUserView').append('#myTable');
     });
@@ -55,7 +55,7 @@
                 console.log(err);
             }
         })
-    }
+            };
      function getCreateModal() {
         $.ajax({
             url: "Create",
@@ -72,5 +72,5 @@
             }
         })
         }
-        </script>
-    }
+    </script>
+}

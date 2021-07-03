@@ -101,8 +101,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HeadOfDepartment\MainPageTest.cs" />
     <Compile Include="HeadOfDepartment\MEETINGsController.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

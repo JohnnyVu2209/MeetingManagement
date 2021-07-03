@@ -237,20 +237,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Models.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Models.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Models1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\OTHER_ACCOUNT.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TASK.cs">
@@ -268,8 +265,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\catalog-list.css" />
     <Content Include="Content\HomePage.css" />
-    <Content Include="css\Details.css" />
-    <Content Include="css\style.css" />
     <Content Include="Content\normalize.css" />
     <Content Include="Content\Picture\outline_edit_black_24dp.png" />
     <Content Include="Content\Picture\outline_file_upload_black_24dp.png" />
@@ -328,7 +323,8 @@
     </Content>
     <Content Include="Models\Models.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Models1.cs</LastGenOutput>
+      <DependentUpon>Models.edmx</DependentUpon>
+      <LastGenOutput>Models.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -436,13 +432,6 @@
     <Content Include="Areas\User\Views\HomePage\IndexMeetingList.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\tabCuocHop\Index.cshtml" />
     <Content Include="Areas\User\Views\HomePage\IndexCateDetail.cshtml" />
-    <EntityDeploy Include="Models\Models.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Models.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Models.edmx.diagram">
-      <DependentUpon>Models.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\HeadOfDepartment\Views\Shared\Error.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Create1.cshtml" />
     <Content Include="Areas\User\Views\Meetings\Create.cshtml" />
@@ -471,6 +460,13 @@
     <Content Include="Areas\User\Views\MEETINGs\CreateUser2.cshtml" />
     <Content Include="Areas\User\Views\Categories\MeetingList.cshtml" />
     <Content Include="Areas\User\Views\Categories\Details.cshtml" />
+    <EntityDeploy Include="Models\Models.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Models.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Models.edmx.diagram">
+      <DependentUpon>Models.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -528,7 +524,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\HeadOfDepartment\Data\" />
-    <Folder Include="Areas\HeadOfDepartment\Views\MEETINGs\" />
     <Folder Include="Areas\User\Data\" />
     <Folder Include="Content\login\" />
     <Folder Include="Content\quyhung\img\" />
