@@ -557,6 +557,7 @@
           <NavigationProperty Name="AspNetRoles" Relationship="SEP24Team7Model.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
         </EntityType>
         <EntityType Name="ATTACHMENT">
+
           <Key>
             <PropertyRef Name="Attachment_id" />
           </Key>
@@ -564,6 +565,15 @@
           <Property Name="Attachment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Attachment_path" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Attachment_name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MEETING" Relationship="SEP24Team7Model.FK_Attachment_MEETING" FromRole="ATTACHMENT" ToRole="MEETING" />
+        </EntityType>
+        <EntityType Name="ATTACHMENT">
+          <Key>
+            <PropertyRef Name="Attachment_id" />
+          </Key>
+          <Property Name="Meeting_id" Type="Int32" Nullable="false" />
+          <Property Name="Attachment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Attachment_path" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MEETING" Relationship="SEP24Team7Model.FK_Attachment_MEETING" FromRole="ATTACHMENT" ToRole="MEETING" />
         </EntityType>
         <EntityType Name="CATEGORY">
@@ -744,11 +754,11 @@
           </End>
           <End Type="SEP24Team7Model.MEETING" Role="MEETING" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CATEGORY">
-              <PropertyRef Name="Category_id" />
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="MEETING">
-              <PropertyRef Name="Category_id" />
+            <Dependent Role="OTHER_ACCOUNT">
+              <PropertyRef Name="othUser_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

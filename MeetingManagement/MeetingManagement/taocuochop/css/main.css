@@ -467,16 +467,13 @@ input[type="date" i] {
    #FORM
    ========================================================================== */
 input {
-  outline: none;
-  margin: 0;
-  border: none;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  width: 100%;
-  font-size: 14px;
-  font-family: inherit;
+  
+    border: none;
+    width: 100%;
+    font-size: 14px;
+    max-width: none;
 }
+
 
 .radio-container {
   display: inline-block;

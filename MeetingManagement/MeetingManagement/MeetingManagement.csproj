@@ -189,6 +189,7 @@
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\MainPageController.cs" />
     <Compile Include="Areas\User\Controllers\HomePageController.cs" />
+    <Compile Include="Areas\User\Controllers\MEETINGsController.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -479,6 +480,11 @@
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\GrdMemberTable.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
+    <Content Include="Areas\User\Views\MEETINGs\MeetingForm.cshtml" />
+    <Content Include="Areas\User\Views\MEETINGs\CreateUser.cshtml" />
+    <Content Include="Areas\User\Views\MEETINGs\CreateUser2.cshtml" />
+    <Content Include="Areas\User\Views\Categories\MeetingList.cshtml" />
+    <Content Include="Areas\User\Views\Categories\Details.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -537,6 +543,7 @@
     <Folder Include="Content\login\" />
     <Folder Include="Content\quyhung\img\" />
     <Folder Include="Content\quyhung\js\" />
+    <Folder Include="Upload\Attachments\" />
     <Folder Include="Upload\Attachments\" />
   </ItemGroup>
   <ItemGroup>
