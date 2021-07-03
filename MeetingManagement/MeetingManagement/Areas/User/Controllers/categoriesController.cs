@@ -35,14 +35,11 @@ namespace MeetingManagement.Areas.User.Controllers
             }).ToList();
             return View(categoryListVMList);
         }
-
-    }
-
-}
         public ActionResult Home()
         {
             return View();
         }
+
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -64,6 +61,7 @@ namespace MeetingManagement.Areas.User.Controllers
             var meetings = db.MEETINGs.Where(x => x.Category_id == id && x.Create_by == UserId).ToList();
             return PartialView(meetings);
         }
-        
+
     }
-}  
+
+}

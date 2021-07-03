@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 using MeetingManagement.Models;
@@ -150,7 +151,6 @@ namespace MeetingManagement.Areas.User.Controllers
                            select m;
             return PartialView("JoinedMeetingGridView", meetings);
         }
-         private SEP24Team7Entities db = new SEP24Team7Entities();
         public ActionResult MeetingList(int id)
         {
             var all = db.MEETINGs.Where(x => x.Category_id == id).ToList();
@@ -209,7 +209,7 @@ namespace MeetingManagement.Areas.User.Controllers
                         db.ATTACHMENTs.Add(newAtt);
                         db.SaveChanges();
                         //}
-                        string[] users = model.AspNetUsers.Split(',');
+                        string[] users = model.AspNetUser.ToString().Split(',');
                         foreach (string user in users)
                         {
                             AspNetUser account = db.AspNetUsers.Where(x => x.Email == user).FirstOrDefault();
