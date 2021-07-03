@@ -35,8 +35,14 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
                 throw new Exception();
             }
             return View(cATEGORY);
+
         }
 
+        public ActionResult MeetingList(int id)
+        {
+            var meetings = db.MEETINGs.Where(x => x.Category_id == id).ToList(); 
+            return PartialView(meetings) ;
+        }
 
 
 

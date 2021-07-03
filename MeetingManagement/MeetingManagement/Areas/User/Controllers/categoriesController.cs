@@ -19,8 +19,9 @@ namespace MeetingManagement.Areas.User.Controllers
         private SEP24Team7Entities db = new SEP24Team7Entities();
         // GET: User/categories
         public ActionResult Index()
-        {            var cATEGORies = db.CATEGORies.ToList();
-            return View(cATEGORies);
+        {
+            var cATEGORies = db.CATEGORies;
+            return View(cATEGORies.ToList());
         }
         /*public ActionResult CategoriesListDetail(int id)
         {

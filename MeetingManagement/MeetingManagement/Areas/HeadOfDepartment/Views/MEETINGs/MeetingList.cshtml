@@ -11,16 +11,49 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var meeting in Model)
-            {
-                <tr>
-                    <td>@meeting.Meeting_name</td>
-                    <td>@meeting.AspNetUser.UserName</td>
-                    <td>@meeting.Date_Start</td>
-                    <td>@meeting.Status</td>
-                </tr>
-            }
+            @foreach (var item in Model)
+            {   
+                <tr class="w400">
+                    
+                
+                
+                    <td>@item.Meeting_name</td>
+                    <td>@item.AspNetUser.Full_name</td>
+                    <td>@Convert.ToDateTime(item.Date_Start).ToString("dd/MM/yyyy")</td>
+                    <td>
+                        @if (@item.Status == 1)
+                        {
+                            <div class="waiting-status">@item.MEETING_STATUS.Status_name</div>
+                        }
+                        else if (@item.Status == 2)
+                        {
+                            <div class="pending-status">@item.MEETING_STATUS.Status_name</div>
+                        }
+                        else if (@item.Status == 3)
+                        {
+                            <div class="missing-status">@item.MEETING_STATUS.Status_name</div>
+                        }
+                        else if (@item.Status == 4)
+                        {
+                            <div class="incomplete-status">@item.MEETING_STATUS.Status_name</div>
+                        }
+                        else if (@item.Status == 5)
+                        {
+                            <div class="complete-status">@item.MEETING_STATUS.Status_name</div>
+                        }
 
+                    </td>
+                </tr>
+                
+                
+            }
         </tbody>
+
+            
     </table>
 </div>
+<style>
+    .w400 td {
+        width:400px;
+    }
+</style>

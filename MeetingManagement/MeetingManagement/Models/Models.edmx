@@ -703,11 +703,11 @@
           </End>
           <End Role="MEETING" Type="Self.MEETING" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CATEGORY">
-              <PropertyRef Name="Category_id" />
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="MEETING">
-              <PropertyRef Name="Category_id" />
+            <Dependent Role="OTHER_ACCOUNT">
+              <PropertyRef Name="othUser_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
