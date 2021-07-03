@@ -49,7 +49,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] AspNetRole aspNetRole)
+        public ActionResult Create(AspNetRole aspNetRole)
         {
             if (ModelState.IsValid)
             {
