@@ -261,6 +261,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\User\Views\Categories\Index.cshtml" />
+    <Content Include="Content\Picture\student_3.jpg" />
     <Content Include="Content\quyhung\css\tabcuochop.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
