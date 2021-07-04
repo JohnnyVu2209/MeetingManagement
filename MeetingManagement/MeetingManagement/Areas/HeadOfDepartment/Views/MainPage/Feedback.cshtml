@@ -20,7 +20,7 @@
                             <div class="input-group input_fixed text-danger">
                                 @*<input type="text" id="meeting_feedback" />*@
 
-                                @Html.TextAreaFor(model => model.Feedback, new { @class = "input--style-5-fixed area-input", @rows = "5", @id = "meeting_feedback" })
+                                @Html.TextAreaFor(model => model.Feedback, new { @class = "input--style-5-fixed area-input area-feedback", @rows = "5", @id = "meeting_feedback" })
                             </div>
                         </div>
                     </div>
@@ -37,6 +37,10 @@
 
 
 <style>
+    .area-feedback {
+        width: 100% !important;
+    }
+
     .yuki-card-footer {
         text-align: center;
         padding-bottom: 20px;

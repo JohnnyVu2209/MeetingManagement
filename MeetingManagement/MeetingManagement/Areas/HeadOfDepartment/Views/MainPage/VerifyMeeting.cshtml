@@ -1,120 +1,4 @@
-﻿@*@model MeetingManagement.Models.MEETING
-
-    @{
-        ViewBag.Title = "MeetingInfo";
-        Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
-    }
-
-    <h2>MeetingInfo</h2>
-
-    <div>
-        <h4>MEETING</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Meeting_name)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Meeting_name)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Meeting_goal)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Meeting_goal)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Meeting_content)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Meeting_content)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Date_Start)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Date_Start)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Time_Start)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Time_Start)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Location)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Location)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Meeting_report)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Meeting_report)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Date_Create)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Date_Create)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.AspNetUser.Email)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.AspNetUser.Email)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.CATEGORY.Category_Name)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.CATEGORY.Category_Name)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.ATTACHMENT.Attachment_link)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ATTACHMENT.Attachment_link)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.MEETING_STATUS.Status_name)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.MEETING_STATUS.Status_name)
-            </dd>
-        </dl>
-    </div>
-    <button class="btn btn-outline-primary">Duyệt</button>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Meeting_id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>*@
-
-@model MeetingManagement.Models.MEETING
+﻿@model MeetingManagement.Models.MEETING
 @{
     ViewBag.Title = "Chi tiết cuộc hop";
 }
@@ -145,8 +29,7 @@
 {
     @Html.AntiForgeryToken()
 
-    <body>
-        
+    <body class="body-img">
         <div class="body-navbar">
             @*<button type="button" onclick="window.location.href='@Url.Action("Index", "MainPage")'" class="btn yuki-btn-blue>
             ❮   Back to List
@@ -178,19 +61,19 @@
                 @Html.HiddenFor(model => model.Status, new { @id = "status" })
 
                 @Html.HiddenFor(model => model.Create_by)
-                <div class="form-row form-row-fixed">
+                <div class="form-row form-row-fixed form-row-fixed-title">
                     <div>
                         <img src="~/Content/Picture/outline_title_black_24dp.png" />
                     </div>
                     <div class="value value-fixed">
-                        <div class="input-group input_fixed">
+                        <div class="input-group input_fixed value-fixed-title">
                             @Html.TextBoxFor(model => model.Meeting_name, new { @class = "input--style-5-fixed", @id = "meeting_name" })
                         </div>
                     </div>
                 </div>
-                <div class="form-row form-row-fixed">
-                    <div><img src="~/Content/Picture/outline_schedule_black_24dp.png" /></div>
-                    <div class="value value-fixed">
+                <div class="form-row form-row-fixed datetime-inline">
+                    <img src="~/Content/Picture/outline_schedule_black_24dp.png" />
+                    <div class="value value-fixed" style="width: calc(100% - 34px)">
                         <div class="inline-datetime">
                             <div class="col-2">
                                 <div class="input-group-desc">
@@ -205,12 +88,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="inline-location" style="display:inline-block">
-                                <img src="~/Content/Picture/outline_place_black_24dp.png" />
-                            <div class="col-500">
-                                <div class="input-group input_fixed">
-                                    @Html.TextBoxFor(model => model.Location, new { @class = "input--style-5-fixed", @id = "location" })
-                                </div>
+                    </div>
+                </div><!--
+                --><div class="form-row form-row-fixed datetime-inline">
+                    <img src="~/Content/Picture/outline_place_black_24dp.png" />
+                    <div class="value value-fixed value-fixed-location">
+                        <div style="width:100%">
+                            <div class="input-group input_fixed">
+                                @Html.TextBoxFor(model => model.Location, new { @class = "input--style-5-fixed", @id = "location" })
                             </div>
                         </div>
                     </div>
@@ -274,12 +159,14 @@
         display:inline-block;
         position:absolute;
     }
+
+
 </style>
 
 @*override button.less*@
 <style>
     .inline-datetime {
-        display:inline-block;
+        display:inline-flex;
     }
     .inline-location {
         margin-left: 50px;
@@ -301,6 +188,10 @@
         color: black;
         line-height: 40px;
     }
+    .lable-zone label {
+        font-size: 18px !important;
+    }
+
     .body-navbar {
         width: calc(100% - 150px);
         height: 60px;
@@ -382,8 +273,13 @@
     }
 </style>
 <style>
+    .datetime-inline {
+        width: 500px;
+        display: inline-flex;
+        align-items: center;
+    }
     .input--style-5-fixed {
-        background: #e5e5e5;
+        background: #f1f1f1;
         height: 40px;
         line-height: 40px;
         border: 2px solid white;
@@ -391,8 +287,14 @@
         -moz-border-radius: 5px;
         border-radius: 5px;
         padding: 0 22px;
-        font-size: 16px;
         color: #555;
+    }
+
+    .value-fixed-title {
+        width: calc(1000px - 34px) !important;
+    }
+    .value-fixed-location {
+        width: calc(100% - 34px) !important
     }
 
     .value-fixed {
@@ -403,14 +305,20 @@
         margin: 0 0 10px 0;
     }
 
+    .form-row-fixed-title {
+        width: calc(1000px - 34px);
+    }
+
     .form-row img {
         height: 24px;
         opacity: 0.7;
+        display: inline-block;
+        width:24px;
     }
 
     .area-input {
         margin: 0px;
-        width: 100%;
+        width: calc(1000px - 34px);
         height: 250px;
         border: 2px solid white;
     }
@@ -443,6 +351,9 @@
     .input-margin {
         margin-left: 50px;
     }
+/*    .body-content {
+        background-image: url("https://img.wallpapersafari.com/desktop/1920/1080/51/78/dltnIv.jpg");
+    }*/
 </style>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
