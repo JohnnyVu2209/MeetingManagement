@@ -38,7 +38,7 @@ namespace MeetingManagement.Areas.User.Controllers
         // GET: User/Tasks/Create
         public ActionResult Create()
         {
-            ViewBag.Meeting_id = new SelectList(db.MEMBERs, "Meeting_id", "Member_id");
+            ViewBag.Meeting_id = new SelectList(db.MEMBERs.Where(x => x.Meeting_id == 37), "Member_id", "AspNetUser.Full_name");
             return View();
         }
 
