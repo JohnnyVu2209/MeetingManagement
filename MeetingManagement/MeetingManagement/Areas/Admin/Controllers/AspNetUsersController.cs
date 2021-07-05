@@ -191,8 +191,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
 
         public List<AspNetUser> GetUsers()
         {
-            List<AspNetUser> users = new List<AspNetUser>();
-            users = db.AspNetUsers.ToList();
+            List<AspNetUser> users = db.AspNetUsers.ToList();
             return users;
         }
 
