@@ -1,0 +1,21 @@
+﻿@model MeetingManagement.Models.CATEGORY
+
+@{
+    ViewBag.Title = "Details";
+   Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="container">
+    <div style="text-transform: uppercase;font-size:20px;margin-bottom:20px" ; class="header">
+        @Html.Label(Model.Category_Name)
+        <button onclick="location.href = '@Url.Action("MeetingForm","MEETINGs", new { id = Model.Category_id})';" style="float: right; width: 90px; height: 45px; background-color: #009FE5; color: white; border-radius: 5px;font-size:16px">Tạo</button>
+        
+        <!--</ul>-->
+    </div>
+    <div style="margin-left:20px;margin-bottom:10px" id="time-table">
+            @Html.DisplayFor(m => m.Category_Content)
+    </div>
+</div>
+@Html.Action("MeetingList", "Categories", new { id = Model.Category_id });
+

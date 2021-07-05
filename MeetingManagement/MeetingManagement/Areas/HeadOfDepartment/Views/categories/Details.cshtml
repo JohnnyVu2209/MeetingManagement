@@ -2,41 +2,19 @@
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-<h2>Details</h2>
+<div id="container">
+    <div style="text-transform: uppercase;font-size:20px;margin-bottom:20px" ; class="header">
+        @Html.Label(Model.Category_Name)
+        <button style="float: right; width: 90px; height: 45px; background-color: #009FE5; color: white; border-radius: 5px;font-size:16px" onclick="location.href = '@Url.Action("MeetingForm","MEETINGs", new { id = Model.Category_id})';">Tạo</button>
+        <!--</ul>-->
+    </div>
+    <div style="margin-left:20px;margin-bottom:10px" id="time-table">
+        @Html.DisplayFor(m => m.Category_Content)
 
-<div>
-    <h4>CATEGORY</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Category_Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Category_Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Category_Content)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Category_Content)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.USER.Full_name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.USER.Full_name)
-        </dd>
-
-    </dl>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Category_id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+@Html.Action("MeetingList", "MEETINGs", new { id = Model.Category_id })

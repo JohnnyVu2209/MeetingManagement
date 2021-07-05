@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MeetingManagement.Models.MEETING>
+
+<div id="table-content">
+    <table class="table">
+        <thead >
+            <tr >
+                <th style="background-color: #009FE5;color:white"; scope="col">Tên cuộc họp</th>
+                <th style="background-color: #009FE5;color:white"; scope="col">Người chủ trì</th>
+                <th style="background-color: #009FE5;color:white"; scope="col">Ngày họp</th>
+                <th style="background-color: #009FE5;color:white"; scope="col">Trình trạng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {   
+                <tr class="w400">
+                    
+                
+                
+                    <td>@item.Meeting_name</td>
+                    <td>@item.AspNetUser.Full_name</td>
+                    <td>@Convert.ToDateTime(item.Date_Start).ToString("dd/MM/yyyy")</td>
+                    <td>
+                        @if (@item.Status == 1)
+                        {
+                            <div class="pending-status">@item.MEETING_STATUS.Status_name</div>
+                        }
+                        else if (@item.Status == 2)
+                        {
+                            <div class="waiting-status">@item.MEETING_STATUS.Status_name</div>
+                        }
+                        else if (@item.Status == 3)
+                        {
+                            <div class="missing-status">@item.MEETING_STATUS.Status_name</div>
+                        }
+                        else if (@item.Status == 4)
+                        {
+                            <div class="incomplete-status">@item.MEETING_STATUS.Status_name</div>
+                        }
+                        else if (@item.Status == 5)
+                        {
+                            <div class="complete-status">@item.MEETING_STATUS.Status_name</div>
+                        }
+
+                    </td>
+                </tr>
+                
+                
+            }
+        </tbody>
+
+            
+    </table>
+</div>
+<style>
+    .w400 td {
+        width:400px;
+    }
+</style>

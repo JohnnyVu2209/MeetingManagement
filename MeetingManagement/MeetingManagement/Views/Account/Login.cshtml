@@ -10,7 +10,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="~/Content/The-Last-Style-Blender.css" rel="stylesheet"/>
+    <link href="~/Content/normalize.css" />
+    <link href="~/Content/The-Last-Style-Blender.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
@@ -72,30 +73,22 @@
                                 </a>*@
 
 
-
-                            @*</div>
-                                <button type="submit" value="Log In" class="btn col-md-6 btn-primary">Primary</button>
-                                <span class="text-center my-3 d-block">or</span>
-
-
-                                <div class="">
-
-                                    <a href="#socialLoginForm" class="btn btn-block py-2 btn-facebook">
-                                        <span class="icon-facebook mr-3"></span> Use your VanLang email.
-                                    </a>*@
-
                         </div>
+
                     </form>
+                    <div class="col-md-12">
+                        <section id="socialLoginForm">
+                            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                        </section>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
+
+
+
 
     <script src="~/login-form-05/js/jquery-3.3.1.min.js"></script>
     <script src="~/login-form-05/js/popper.min.js"></script>

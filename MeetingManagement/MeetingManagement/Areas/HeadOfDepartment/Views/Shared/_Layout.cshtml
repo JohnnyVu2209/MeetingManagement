@@ -28,7 +28,7 @@
         <ul>
             <li><a href="@Url.Action("Index","MainPage")">Trang chính</a></li>
             <li><a href="@Url.Action("Index","Categories")">Danh mục</a></li>
-            <li><a href="@Url.Action("Index","Meetings")">Cuộc họp</a></li>
+            <li><a href="@Url.Action("Index","tabCuocHop")">Cuộc họp</a></li>
         </ul>
     </div> <!--Menu-->
 
@@ -42,5 +42,15 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
 </body>
 </html>
+
+@*    <div id="menu">
+        <ul>
+            <li><a href="@Url.Action("Index","Home")"style="margin-top:10px">Trang chủ</a></li>
+            <li><a href="@Url.Action("Index","Home")" style="margin-top:10px">Công việc</a></li>
+            <li><a href="@Url.Action("Index","Home")" style="margin-top:10px">Hồ sơ</a></li>
+        </ul>
+    </div>*@
+

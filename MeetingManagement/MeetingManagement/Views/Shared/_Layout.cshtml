@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using MeetingManagement.Models;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -44,6 +45,20 @@
             <li><a href="@Url.Action("About","Home")">About</a></li>
             <li><a href="@Url.Action("Contact","Home")">Contact</a></li>
         </ul>
+        @{
+            var userRoles = Roles.GetRolesForUser(User.Identity.Name);
+        }
+        @foreach (var role in userRoles)
+        {
+            if (role == "BCN")
+            {
+                <ul>
+                    <li><a href="@Url.Action("Index","MainPage")" style="margin-top:10px">Trang chủ</a></li>
+                    <li><a href="@Url.Action("Index","Categories")" style="margin-top:10px">Danh mục</a></li>
+                    <li><a href="@Url.Action("Index","tabCuocHop")" style="margin-top:10px">Cuộc họp</a></li>
+                </ul>
+            }
+        }
     </div> <!--Menu-->
     <div class="container body-content">
         @RenderBody()
@@ -51,6 +66,7 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
+    @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
     @Scripts.Render("~/bundles/bootstrap")
 

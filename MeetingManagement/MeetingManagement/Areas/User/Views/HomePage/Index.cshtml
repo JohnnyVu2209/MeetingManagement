@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-12" style="width:88%">
+        @Html.Action("IndexMeetingList")
+    </div>
+</div>
+
+<div class="row" style="padding-top:50px;width:90%;">
+    <div class="col-md-6">
+        <div class="table-head">Danh Sách Danh Mục</div>
+        @Html.Action("IndexCateList")
+    </div>
+
+    <div class="col-md-6">
+        <div class="table-head ">Danh Sách Công Việc</div>
+        @Html.Action("IndexTaskList")        
+    </div>
+</div>
+
+<style>
+    .body-content {
+        position: absolute;
+        top: 0px;
+    }
+</style>
+
+

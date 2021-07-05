@@ -22,6 +22,7 @@ namespace MeetingManagement.Models
             this.TASKs = new HashSet<TASK>();
         }
     
+        public string AspNetUsers { get; set; }
         public int Category_id { get; set; }
         public int Meeting_id { get; set; }
         public string Meeting_name { get; set; }
