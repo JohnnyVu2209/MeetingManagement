@@ -105,8 +105,8 @@ namespace MeetingManagement.Areas.Admin.Controllers
             db.OTHER_ACCOUNTs.Add(new OTHER_ACCOUNT
             {
                 othUser_id = user.Id,
-                othUser_office = user.Email
-            }) ;
+                othUser_Email = user.Email
+            });
             db.SaveChanges();
         }
         private void AddErrors(IdentityResult result)
@@ -201,6 +201,14 @@ namespace MeetingManagement.Areas.Admin.Controllers
             return roles;
         }
 
+        public ActionResult GetOtherUser()
+        {
+            var otherUser = from u in db.AspNetUsers
+                            from o in db.OTHER_ACCOUNTs
+                            where u.Id == o.othUser_id
+                            select u;
+            return PartialView("OtherUserGridView", otherUser);
+        }
         [HttpGet]
         public ActionResult ResetPassword(string userID)
         {
