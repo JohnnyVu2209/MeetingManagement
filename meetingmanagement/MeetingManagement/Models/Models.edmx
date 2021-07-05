@@ -125,6 +125,16 @@
           <Property Name="othUser_office" Type="nvarchar" MaxLength="128" />
           <Property Name="othUser_Email" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="TASK">
           <Key>
             <PropertyRef Name="Task_id" />
@@ -476,8 +486,8 @@
           <Property Name="Meeting_id" Type="Int32" Nullable="false" />
           <Property Name="Attachment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Attachment_path" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Attachment_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="MEETING" Relationship="Self.FK_Attachment_MEETING" FromRole="ATTACHMENT" ToRole="MEETING" />
+          <Property Name="Attachment_name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MEETING" Relationship="SEP24Team7Model.FK_Attachment_MEETING" FromRole="ATTACHMENT" ToRole="MEETING" />
         </EntityType>
         <EntityType Name="CATEGORY">
           <Key>
@@ -539,7 +549,7 @@
           <Property Name="othUser_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="othUser_office" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="othUser_Email" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_OTHER_ACCOUNT_AspNetUsers" FromRole="OTHER_ACCOUNT" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUser" Relationship="SEP24Team7Model.FK_OTHER_ACCOUNT_AspNetUsers" FromRole="OTHER_ACCOUNT" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="TASK">
           <Key>
@@ -854,6 +864,9 @@
           <EntitySetMapping Name="ATTACHMENTs">
             <EntityTypeMapping TypeName="SEP24Team7Model.ATTACHMENT">
               <MappingFragment StoreEntitySet="ATTACHMENT">
+                <ScalarProperty Name="Attachment_name" ColumnName="Attachment_name" />
+                <ScalarProperty Name="Attachment_path" ColumnName="Attachment_path" />
+                <ScalarProperty Name="Attachment_id" ColumnName="Attachment_id" />
                 <ScalarProperty Name="Meeting_id" ColumnName="Meeting_id" />
                 <ScalarProperty Name="Attachment_id" ColumnName="Attachment_id" />
                 <ScalarProperty Name="Attachment_path" ColumnName="Attachment_path" />
@@ -908,6 +921,8 @@
           <EntitySetMapping Name="OTHER_ACCOUNTs">
             <EntityTypeMapping TypeName="SEP24Team7Model.OTHER_ACCOUNT">
               <MappingFragment StoreEntitySet="OTHER ACCOUNT">
+                <ScalarProperty Name="othUser_Email" ColumnName="othUser_Email" />
+                <ScalarProperty Name="othUser_office" ColumnName="othUser_office" />
                 <ScalarProperty Name="othUser_id" ColumnName="othUser_id" />
                 <ScalarProperty Name="othUser_office" ColumnName="othUser_office" />
                 <ScalarProperty Name="othUser_Email" ColumnName="othUser_Email" />

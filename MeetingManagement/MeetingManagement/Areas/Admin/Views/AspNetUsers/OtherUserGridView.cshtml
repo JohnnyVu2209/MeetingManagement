@@ -20,7 +20,7 @@
                 Role
             </li>
             <li class="yuki-col4">
-                Phân quyền
+                Thao tác
             </li>
 
         </ul>
@@ -39,6 +39,9 @@
                 </td>
                 <td>
                     <ul class="menu_thaotac">
+                        <li>
+                            <a onclick="ShowResetPasswordPopUp('@users.Id')" ;>Reset Password  |</a>
+                        </li>
                         @*<li>
                                 <a href="@Url.Action("Delete",new { id = users.Id })">Delete</a>
                             </li>*@
@@ -53,7 +56,7 @@
                             {
                                 <a type="submit"
                                    onclick="return confirm('are you sure you want delete @role.Name from @users.Email ?')"
-                                   href="@Url.Action("Delete","AspNetRoleUser",new { RoleID = role.Id, UserID = users.Id  })">Delete role</a>
+                                   href="@Url.Action("Delete","AspNetRoleUser",new { RoleID = role.Id, UserID = users.Id  })">|  Delete role</a>
                             }
                         </li>
                     </ul>
@@ -63,6 +66,8 @@
     </table>
     <div id="show-popup"></div>
 </div>
+
+
 <style>
     tr {
         height: 48px;
@@ -76,3 +81,17 @@
         font-size: 25px;
     }
 </style>
+<script>
+    function ShowResetPasswordPopUp(userID) {
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("ResetPassword", "AspNetUsers")",
+            data: { userID },
+            dataType: "html",
+            success: function (data) {
+                $("#show-popup").html(data);
+                $("#myResetPasswordModal").appendTo("body").modal("show");
+            }
+        });
+    };
+</script>

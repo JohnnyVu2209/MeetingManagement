@@ -1,10 +1,11 @@
-﻿@model IEnumerable<MeetingManagement.Models.AspNetUser>
+@model IEnumerable<MeetingManagement.Models.AspNetUser>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
+@*search component*@
 <div class="col-sm-12 col-sm-12-fix01">
     <div class="create-and-search">
         <div class="form-inline pull-right">
@@ -13,10 +14,30 @@
             <button type="button" class="btn btn-success" data-toggle="modal" onclick="getCreateModal()">Create New</button>
         </div>
     </div>
-    <div id="grdUserView"></div>
+
+
+    @*table component*@
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#listAccount">Danh sách tài khoản</a></li>
+        <li><a data-toggle="tab" href="#otherAccount">Tài khoản khách</a></li>
+    </ul>
+
+    <div class="tab-content">
+
+        @*account tab*@
+        <div id="listAccount" class="tab-pane fade in active">
+            <br />
+            <div id="grdUserView"></div>
+        </div>
+
+        @*other account tab*@
+        <div id="otherAccount" class="tab-pane fade">
+            <br />
+            @Html.Action("GetOtherUser", "AspNetUsers")
+        </div>
+    </div>
     <div id="Popup"></div>
 </div>
-
 
 <style>
     .create-and-search {
@@ -64,7 +85,6 @@
             data: {},
             success: function (data) {
                 $("#Popup").html(data);
-
                 $("#modalCreate").modal("show");
             },
             error: function (err) {

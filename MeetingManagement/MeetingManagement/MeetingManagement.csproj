@@ -259,7 +259,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\User\Views\Categories\Index.cshtml" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -272,11 +271,10 @@
     <Content Include="Content\bootstrap-utilities.min.css" />
     <Content Include="Content\bootstrap-utilities.rtl.css" />
     <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
-    <Content Include="Content\quyhung\css\tabcuochop.css" />
-    <Content Include="Content\bootstrap.css" />
     <Content Include="Content\catalog-list.css" />
     <Content Include="Content\HomePage.css" />
     <Content Include="Content\normalize.css" />
@@ -470,19 +468,8 @@
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff" />
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\GrdMemberTable.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
-    <Content Include="Areas\User\Views\MEETINGs\MeetingForm.cshtml" />
-    <Content Include="Areas\User\Views\MEETINGs\CreateUser.cshtml" />
-    <Content Include="Areas\User\Views\MEETINGs\CreateUser2.cshtml" />
-    <Content Include="Areas\User\Views\Categories\MeetingList.cshtml" />
-    <Content Include="Areas\User\Views\Categories\Details.cshtml" />
-    <EntityDeploy Include="Models\Models.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Models.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Models.edmx.diagram">
-      <DependentUpon>Models.edmx</DependentUpon>
-    </Content>
+    <Content Include="Areas\HeadOfDepartment\Views\MainPage\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetUsers\OtherUserGridView.cshtml" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.esm.min.js.map" />
