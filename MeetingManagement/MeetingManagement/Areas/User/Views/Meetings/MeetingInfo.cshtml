@@ -1,0 +1,88 @@
+﻿@model MeetingManagement.Models.MEETING
+
+
+    @Html.HiddenFor(model => model.Category_id, new { @id = "category_id" })
+    @Html.HiddenFor(model => model.Meeting_id, new { @id = "meeting_id" })
+    @Html.HiddenFor(model => model.Status, new { @id = "status" })
+
+    @Html.HiddenFor(model => model.Create_by)
+    <div class="form-row form-row-fixed form-row-fixed-title">
+        <div>
+            <img src="~/Content/Picture/outline_title_black_24dp.png" />
+        </div>
+        <div class="value value-fixed">
+            <div class="input-group input_fixed value-fixed-title">
+                @Html.TextBoxFor(model => model.Meeting_name, new { @class = "input--style-5-fixed", @id = "meeting_name" })
+            </div>
+        </div>
+    </div>
+    <div class="form-row form-row-fixed datetime-inline">
+        <img src="~/Content/Picture/outline_schedule_black_24dp.png" />
+        <div class="value value-fixed" style="width: calc(100% - 34px)">
+            <div class="inline-datetime">
+                <div class="col-2">
+                    <div class="input-group-desc">
+                        @Html.TextBoxFor(model => model.Date_Start, "{0:dd/MM/yyyy}", new { @class = "input--style-5-fixed", @id = "date_start" })
+                        @*<label class="label--desc">Ngày Họp</label>*@
+                        @*@Html.DisplayFor(model => model.Date_Start)*@
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="input-group-desc">
+                        @Html.TextBoxFor(model => model.Time_Start, new { @class = "input--style-5-fixed", @id = "time_start" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--
+    --><div class="form-row form-row-fixed datetime-inline">
+        <img src="~/Content/Picture/outline_place_black_24dp.png" />
+        <div class="value value-fixed value-fixed-location">
+            <div style="width:100%">
+                <div class="input-group input_fixed">
+                    @Html.TextBoxFor(model => model.Location, new { @class = "input--style-5-fixed", @id = "location" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row form-row-fixed">
+        <div> <img src="~/Content/Picture/outline_edit_black_24dp.png" /></div>
+        <div class="value value-fixed">
+            <div class="input-group input_fixed">
+                @Html.TextAreaFor(model => model.Meeting_content, new { @class = "input--style-5-fixed area-input", @rows = "5", @id = "content" })
+            </div>
+        </div>
+    </div>
+    <div class="form-row form-row-fixed">
+        <div>
+            <img src="~/Content/Picture/outline_people_black_24dp.png" />
+        </div>
+        <div class="value-fixed">
+            <div class="space" id="Popup"></div>
+        </div>
+        @*<div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" onclick="getGrdMemberListModal(@Model.Meeting_id)">
+                Chi tiết
+                </button>
+            </div>*@
+    </div>
+    <div class="form-row form-row-fixed">
+        <div>
+            <img src="~/Content/Picture/outline_person_add_black_24dp.png" />
+        </div>
+        <div class="space">
+
+        </div>
+    </div>
+    <div class="form-row form-row-fixed">
+        <img src="~/Content/Picture/outline_file_upload_black_24dp.png" />
+        <div class="input-margin">
+            <input type="file" class="form-control-file border" name="file">
+        </div>
+    </div>
+
+    <style>
+        .space{
+            width:966px;
+        }
+    </style>

@@ -1,0 +1,138 @@
+﻿@model IEnumerable<MeetingManagement.Models.TASK>
+
+<div id="container">
+    <div class="progress-bar-zone">
+        <p>Tiến độ</p>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+    <div id="table-content" class="table-pos">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Tóm lược</th>
+                    <th class="col-align"></th>
+                    <th class="col-align" scope="col">Giao cho</th>
+                    <th class="col-align" scope="col">Ngày đến hạn</th>
+                    <th class="col-align" scope="col">Tình trạng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Select((value, i) => new { i, value }))
+                {
+                    var value = item.value;
+                    var index = item.i + 1;
+                    var tr_bg = (value.Task_Status == true) ? "background-color:#f1f1f1;" : "cursor: pointer;";
+
+                    <tr id="this_tr" style="@tr_bg" onclick="status_change()">
+                        <td>@index</td>
+                        <td>@value.Task_name</td>
+                        <td class="col-align">
+                            @if (value.Notify == true)
+                            {
+                                <img src="~/Content/Picture/outline_notifications_active_black_24dp.png" />
+                            }
+                        </td>
+                        <td class="col-align">@value.MEMBER.AspNetUser.Full_name</td>
+                        <td class="col-align">@value.Task_Deadline</td>
+
+                        <td class="col-align" id="status">
+                            @if (@value.Task_Status == false)
+                            {
+                                <div class="unfinished-status">Chưa hoàn thành</div>
+                            }
+                            else if (@value.Task_Status == true)
+                            {
+                                <div class="finished-status">Hoàn thành</div>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        function status_change() {
+            alert("Chuyển Status thành True, Notify về False");
+        }
+        $(document).ready(function () {
+            $('#table-content').DataTable();
+        });
+    </script>
+    <style>
+        .progress-bar-zone {
+            display: inline-flex;
+            width: 25%;
+            position: absolute;
+            /* top: 0px; */
+            right: 0px;
+        }
+
+            .progress-bar-zone p {
+                width: inherit;
+            }
+
+            .progress-bar-zone div {
+                height: 20px;
+                width: 100%;
+                display: inline-flex;
+            }
+
+                .progress-bar-zone div div {
+                    background-color: #009FE5;
+                }
+
+        .w400 td {
+            width: 400px;
+        }
+
+        .table-pos {
+            position: relative;
+            top: 40px;
+        }
+
+        table {
+        }
+
+            table thead tr {
+                background-color: #009FE5;
+                color: white;
+            }
+
+            table tbody tr {
+            }
+
+                table tbody tr td img {
+                    width: 24px;
+                }
+
+        .finished-status {
+            background: #18e750;
+            border-radius: 10px;
+            color: white;
+            margin: auto;
+            text-align: center;
+            width: 100px;
+        }
+
+
+        .unfinished-status {
+            background: #FF9900;
+            border-radius: 10px;
+            color: white;
+            margin: auto;
+            text-align: center;
+            width: 140px;
+        }
+
+        .col-align {
+            text-align: center;
+        }
+    </style>
+</div>

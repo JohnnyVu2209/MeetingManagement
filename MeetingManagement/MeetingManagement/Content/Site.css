@@ -8,12 +8,12 @@
     /*padding-left: 15px;
     padding-right: 15px;*/
     /*override-Hiếu*/
-    padding-right: 0px;
-    padding-left: 0px;
-    width: calc(100% - 150px );
+    padding-right: 0px ;
+    padding-left: 0px ;
+    width: calc(100% - 150px ) ;
     height: 2000px;
-    margin-left: 150px;
-    margin-top: 50px;
+    margin-left: 150px ;
+    margin-top: 50px ;
     padding: 30px;
     background: white;
 }

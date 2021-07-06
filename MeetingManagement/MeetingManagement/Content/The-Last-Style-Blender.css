@@ -11,8 +11,11 @@
 
 body {
 }
-
-#yuki-body{
+.body-content{
+    position:absolute;
+    top:0px;
+}
+#yuki-body {
     font-size: 14px;
     font-weight: 300;
     color: #333;
@@ -199,7 +202,6 @@ body {
     height: 48px;
     text-align: center;
     border-bottom: 1px solid #e5e5e5;
-    border-top: 1px solid #e5e5e5;
 }
 
 .filter {
@@ -329,17 +331,19 @@ tr:hover td {
 td .pending-status {
     background: #C0C0C0;
     border-radius: 10px;
-    width: 30%;
+    width: fit-content;
     color: white;
+    padding: 0 5px;
     margin: auto;
-    text-align:center;
+    text-align: center;
 }
 
 td .waiting-status {
     background: #FFC400;
     border-radius: 10px;
-    width: 30%;
+    width: fit-content;
     color: white;
+    padding: 0 5px;
     margin: auto;
     text-align: center;
 }
@@ -347,8 +351,9 @@ td .waiting-status {
 td .missing-status {
     background: #F12B2C;
     border-radius: 10px;
-    width: 37%;
+    width: fit-content;
     color: white;
+    padding: 0 5px;
     margin: auto;
     text-align: center;
 }
@@ -356,7 +361,8 @@ td .missing-status {
 td .incomplete-status {
     background: #FF9900;
     border-radius: 10px;
-    width: 43%;
+    width: fit-content;
+    padding: 0 5px;
     color: white;
     margin: auto;
     text-align: center;
@@ -365,7 +371,8 @@ td .incomplete-status {
 td .complete-status {
     background: #29CC97;
     border-radius: 10px;
-    width: 43%;
+    width: fit-content;
+    padding: 0 5px;
     color: white;
     margin: auto;
     text-align: center;

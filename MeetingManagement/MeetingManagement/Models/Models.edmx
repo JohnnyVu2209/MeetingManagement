@@ -10,24 +10,24 @@
             <PropertyRef Name="MigrationId" />
             <PropertyRef Name="ContextKey" />
           </Key>
-          <Property Name="MigrationId" Nullable="false" MaxLength="150" Type="nvarchar" />
-          <Property Name="ContextKey" Nullable="false" MaxLength="300" Type="nvarchar" />
-          <Property Name="Model" Nullable="false" Type="varbinary(max)" />
-          <Property Name="ProductVersion" Nullable="false" MaxLength="32" Type="nvarchar" />
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="Name" Nullable="false" MaxLength="256" Type="nvarchar" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetUserClaims">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="UserId" Nullable="false" MaxLength="128" Type="nvarchar" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="ClaimType" Type="nvarchar(max)" />
           <Property Name="ClaimValue" Type="nvarchar(max)" />
         </EntityType>
@@ -37,93 +37,94 @@
             <PropertyRef Name="ProviderKey" />
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="LoginProvider" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="ProviderKey" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="UserId" Nullable="false" MaxLength="128" Type="nvarchar" />
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetUserRoles">
           <Key>
             <PropertyRef Name="UserId" />
             <PropertyRef Name="RoleId" />
           </Key>
-          <Property Name="UserId" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="RoleId" Nullable="false" MaxLength="128" Type="nvarchar" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="Email" MaxLength="256" Type="nvarchar" />
-          <Property Name="EmailConfirmed" Nullable="false" Type="bit" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
           <Property Name="PasswordHash" Type="nvarchar(max)" />
           <Property Name="SecurityStamp" Type="nvarchar(max)" />
           <Property Name="PhoneNumber" Type="nvarchar(max)" />
-          <Property Name="PhoneNumberConfirmed" Nullable="false" Type="bit" />
-          <Property Name="TwoFactorEnabled" Nullable="false" Type="bit" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
           <Property Name="LockoutEndDateUtc" Type="datetime" />
-          <Property Name="LockoutEnabled" Nullable="false" Type="bit" />
-          <Property Name="AccessFailedCount" Nullable="false" Type="int" />
-          <Property Name="UserName" Nullable="false" MaxLength="256" Type="nvarchar" />
-          <Property Name="Full_name" MaxLength="128" Type="nvarchar" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Full_name" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="ATTACHMENT">
           <Key>
             <PropertyRef Name="Attachment_id" />
           </Key>
-          <Property Name="Meeting_id" Nullable="false" Type="int" />
-          <Property Name="Attachment_id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Attachment_path" MaxLength="128" Type="nvarchar" />
-          <Property Name="Attachment_name" Nullable="false" MaxLength="128" Type="nvarchar" />
+          <Property Name="Meeting_id" Type="int" Nullable="false" />
+          <Property Name="Attachment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Attachment_path" Type="nvarchar" MaxLength="128" />
+          <Property Name="Attachment_name" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="CATEGORY">
           <Key>
             <PropertyRef Name="Category_id" />
           </Key>
-          <Property Name="Category_id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Category_Name" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="Category_Content" MaxLength="500" Type="nvarchar" />
-          <Property Name="Create_by" MaxLength="128" Type="nvarchar" />
+          <Property Name="Category_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category_Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Category_Content" Type="nvarchar" MaxLength="500" />
+          <Property Name="Create_by" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="MEETING">
           <Key>
             <PropertyRef Name="Meeting_id" />
           </Key>
-          <Property Name="Category_id" Nullable="false" Type="int" />
-          <Property Name="Meeting_id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Meeting_name" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="Meeting_content" MaxLength="1000" Type="nvarchar" />
-          <Property Name="Date_Start" Nullable="false" Type="date" />
-          <Property Name="Time_Start" Precision="7" Type="time" />
-          <Property Name="Location" MaxLength="128" Type="nvarchar" />
-          <Property Name="Status" Nullable="false" Type="int" />
-          <Property Name="Meeting_report" MaxLength="128" Type="nvarchar" />
+          <Property Name="Category_id" Type="int" Nullable="false" />
+          <Property Name="Meeting_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Meeting_name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Meeting_content" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Date_Start" Type="date" Nullable="false" />
+          <Property Name="Time_Start" Type="time" Precision="7" />
+          <Property Name="Location" Type="nvarchar" MaxLength="128" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Meeting_report" Type="nvarchar" MaxLength="128" />
           <Property Name="Date_Create" Type="date" />
-          <Property Name="Create_by" MaxLength="128" Type="nvarchar" />
-          <Property Name="Feedback" MaxLength="1000" Type="nvarchar" />
+          <Property Name="Create_by" Type="nvarchar" MaxLength="128" />
+          <Property Name="Feedback" Type="nvarchar" MaxLength="1000" />
+          <Property Name="AspNetUsers" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="MEETING-STATUS">
           <Key>
             <PropertyRef Name="Status_id" />
           </Key>
-          <Property Name="Status_name" MaxLength="128" Type="nvarchar" />
-          <Property Name="Status_id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Status_name" Type="nvarchar" MaxLength="128" />
+          <Property Name="Status_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="MEMBER">
           <Key>
             <PropertyRef Name="Meeting_id" />
             <PropertyRef Name="Member_id" />
           </Key>
-          <Property Name="Meeting_id" Nullable="false" Type="int" />
-          <Property Name="Member_id" Nullable="false" MaxLength="128" Type="nvarchar" />
+          <Property Name="Meeting_id" Type="int" Nullable="false" />
+          <Property Name="Member_id" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="OTHER ACCOUNT">
           <Key>
             <PropertyRef Name="othUser_id" />
           </Key>
-          <Property Name="othUser_id" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="othUser_office" MaxLength="128" Type="nvarchar" />
-          <Property Name="othUser_Email" MaxLength="128" Type="nvarchar" />
+          <Property Name="othUser_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="othUser_office" Type="nvarchar" MaxLength="128" />
+          <Property Name="othUser_Email" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -138,22 +139,20 @@
         <EntityType Name="TASK">
           <Key>
             <PropertyRef Name="Task_id" />
-            <PropertyRef Name="Meeting_id" />
-            <PropertyRef Name="Assignee" />
           </Key>
-          <Property Name="Task_id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Meeting_id" Nullable="false" Type="int" />
-          <Property Name="Task_name" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="Assignee" Nullable="false" MaxLength="128" Type="nvarchar" />
+          <Property Name="Task_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Meeting_id" Type="int" Nullable="false" />
+          <Property Name="Task_name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Assignee" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Task_Status" Type="bit" />
           <Property Name="Task_Deadline" Type="datetime" />
           <Property Name="Notify" Type="bit" />
         </EntityType>
         <Association Name="FK_Attachment_MEETING">
-          <End Type="Self.MEETING" Multiplicity="1" Role="MEETING">
+          <End Role="MEETING" Type="Self.MEETING" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="Self.ATTACHMENT" Multiplicity="*" Role="ATTACHMENT" />
+          <End Role="ATTACHMENT" Type="Self.ATTACHMENT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEETING">
               <PropertyRef Name="Meeting_id" />
@@ -164,8 +163,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CATEGORY_AspNetUsers">
-          <End Type="Self.AspNetUsers" Multiplicity="0..1" Role="AspNetUsers" />
-          <End Type="Self.CATEGORY" Multiplicity="*" Role="CATEGORY" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -176,10 +175,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Type="Self.AspNetUsers" Multiplicity="1" Role="AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="Self.AspNetUserClaims" Multiplicity="*" Role="AspNetUserClaims" />
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -190,10 +189,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Type="Self.AspNetUsers" Multiplicity="1" Role="AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="Self.AspNetUserLogins" Multiplicity="*" Role="AspNetUserLogins" />
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -204,10 +203,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-          <End Type="Self.AspNetRoles" Multiplicity="1" Role="AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="Self.AspNetUserRoles" Multiplicity="*" Role="AspNetUserRoles" />
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetRoles">
               <PropertyRef Name="Id" />
@@ -218,10 +217,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-          <End Type="Self.AspNetUsers" Multiplicity="1" Role="AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="Self.AspNetUserRoles" Multiplicity="*" Role="AspNetUserRoles" />
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -232,8 +231,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEETING_AspNetUsers">
-          <End Type="Self.AspNetUsers" Multiplicity="0..1" Role="AspNetUsers" />
-          <End Type="Self.MEETING" Multiplicity="*" Role="MEETING" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="MEETING" Type="Self.MEETING" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -244,10 +243,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Meeting_CATEGORY">
-          <End Type="Self.CATEGORY" Multiplicity="1" Role="CATEGORY">
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="Self.MEETING" Multiplicity="*" Role="MEETING" />
+          <End Role="MEETING" Type="Self.MEETING" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CATEGORY">
               <PropertyRef Name="Category_id" />
@@ -258,8 +257,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEETING_MEETING-STATUS">
-          <End Type="Self.MEETING-STATUS" Multiplicity="1" Role="MEETING-STATUS" />
-          <End Type="Self.MEETING" Multiplicity="*" Role="MEETING" />
+          <End Role="MEETING-STATUS" Type="Self.MEETING-STATUS" Multiplicity="1" />
+          <End Role="MEETING" Type="Self.MEETING" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEETING-STATUS">
               <PropertyRef Name="Status_id" />
@@ -270,10 +269,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEMBER_AspNetUsers">
-          <End Type="Self.AspNetUsers" Multiplicity="1" Role="AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="Self.MEMBER" Multiplicity="*" Role="MEMBER" />
+          <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -284,10 +283,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEMBER_MEETING">
-          <End Type="Self.MEETING" Multiplicity="1" Role="MEETING">
+          <End Role="MEETING" Type="Self.MEETING" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="Self.MEMBER" Multiplicity="*" Role="MEMBER" />
+          <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEETING">
               <PropertyRef Name="Meeting_id" />
@@ -298,10 +297,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OTHER ACCOUNT_AspNetUsers">
-          <End Type="Self.AspNetUsers" Multiplicity="1" Role="AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="Self.OTHER ACCOUNT" Multiplicity="0..1" Role="OTHER ACCOUNT" />
+          <End Role="OTHER ACCOUNT" Type="Self.OTHER ACCOUNT" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -311,23 +310,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TASK_MEETING1">
-          <End Type="Self.MEETING" Multiplicity="1" Role="MEETING">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="Self.TASK" Multiplicity="*" Role="TASK" />
-          <ReferentialConstraint>
-            <Principal Role="MEETING">
-              <PropertyRef Name="Meeting_id" />
-            </Principal>
-            <Dependent Role="TASK">
-              <PropertyRef Name="Meeting_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TASK_MEMBER">
-          <End Type="Self.MEMBER" Multiplicity="1" Role="MEMBER" />
-          <End Type="Self.TASK" Multiplicity="*" Role="TASK" />
+          <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="1" />
+          <End Role="TASK" Type="Self.TASK" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEMBER">
               <PropertyRef Name="Meeting_id" />
@@ -336,6 +321,20 @@
             <Dependent Role="TASK">
               <PropertyRef Name="Meeting_id" />
               <PropertyRef Name="Assignee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TASKLIST_MEETING">
+          <End Role="MEETING" Type="Self.MEETING" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TASK" Type="Self.TASK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEETING">
+              <PropertyRef Name="Meeting_id" />
+            </Principal>
+            <Dependent Role="TASK">
+              <PropertyRef Name="Meeting_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -355,60 +354,60 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TASK" EntityType="Self.TASK" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Attachment_MEETING" Association="Self.FK_Attachment_MEETING">
-            <End EntitySet="MEETING" Role="MEETING" />
-            <End EntitySet="ATTACHMENT" Role="ATTACHMENT" />
+            <End Role="MEETING" EntitySet="MEETING" />
+            <End Role="ATTACHMENT" EntitySet="ATTACHMENT" />
           </AssociationSet>
           <AssociationSet Name="FK_CATEGORY_AspNetUsers" Association="Self.FK_CATEGORY_AspNetUsers">
-            <End EntitySet="AspNetUsers" Role="AspNetUsers" />
-            <End EntitySet="CATEGORY" Role="CATEGORY" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="CATEGORY" EntitySet="CATEGORY" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End EntitySet="AspNetUsers" Role="AspNetUsers" />
-            <End EntitySet="AspNetUserClaims" Role="AspNetUserClaims" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End EntitySet="AspNetUsers" Role="AspNetUsers" />
-            <End EntitySet="AspNetUserLogins" Role="AspNetUserLogins" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-            <End EntitySet="AspNetRoles" Role="AspNetRoles" />
-            <End EntitySet="AspNetUserRoles" Role="AspNetUserRoles" />
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-            <End EntitySet="AspNetUsers" Role="AspNetUsers" />
-            <End EntitySet="AspNetUserRoles" Role="AspNetUserRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_MEETING_AspNetUsers" Association="Self.FK_MEETING_AspNetUsers">
-            <End EntitySet="AspNetUsers" Role="AspNetUsers" />
-            <End EntitySet="MEETING" Role="MEETING" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="MEETING" EntitySet="MEETING" />
           </AssociationSet>
           <AssociationSet Name="FK_Meeting_CATEGORY" Association="Self.FK_Meeting_CATEGORY">
-            <End EntitySet="CATEGORY" Role="CATEGORY" />
-            <End EntitySet="MEETING" Role="MEETING" />
+            <End Role="CATEGORY" EntitySet="CATEGORY" />
+            <End Role="MEETING" EntitySet="MEETING" />
           </AssociationSet>
           <AssociationSet Name="FK_MEETING_MEETING-STATUS" Association="Self.FK_MEETING_MEETING-STATUS">
-            <End EntitySet="MEETING-STATUS" Role="MEETING-STATUS" />
-            <End EntitySet="MEETING" Role="MEETING" />
+            <End Role="MEETING-STATUS" EntitySet="MEETING-STATUS" />
+            <End Role="MEETING" EntitySet="MEETING" />
           </AssociationSet>
           <AssociationSet Name="FK_MEMBER_AspNetUsers" Association="Self.FK_MEMBER_AspNetUsers">
-            <End EntitySet="AspNetUsers" Role="AspNetUsers" />
-            <End EntitySet="MEMBER" Role="MEMBER" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="MEMBER" EntitySet="MEMBER" />
           </AssociationSet>
           <AssociationSet Name="FK_MEMBER_MEETING" Association="Self.FK_MEMBER_MEETING">
-            <End EntitySet="MEETING" Role="MEETING" />
-            <End EntitySet="MEMBER" Role="MEMBER" />
+            <End Role="MEETING" EntitySet="MEETING" />
+            <End Role="MEMBER" EntitySet="MEMBER" />
           </AssociationSet>
           <AssociationSet Name="FK_OTHER ACCOUNT_AspNetUsers" Association="Self.FK_OTHER ACCOUNT_AspNetUsers">
-            <End EntitySet="AspNetUsers" Role="AspNetUsers" />
-            <End EntitySet="OTHER ACCOUNT" Role="OTHER ACCOUNT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TASK_MEETING1" Association="Self.FK_TASK_MEETING1">
-            <End EntitySet="MEETING" Role="MEETING" />
-            <End EntitySet="TASK" Role="TASK" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="OTHER ACCOUNT" EntitySet="OTHER ACCOUNT" />
           </AssociationSet>
           <AssociationSet Name="FK_TASK_MEMBER" Association="Self.FK_TASK_MEMBER">
-            <End EntitySet="MEMBER" Role="MEMBER" />
-            <End EntitySet="TASK" Role="TASK" />
+            <End Role="MEMBER" EntitySet="MEMBER" />
+            <End Role="TASK" EntitySet="TASK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TASKLIST_MEETING" Association="Self.FK_TASKLIST_MEETING">
+            <End Role="MEETING" EntitySet="MEETING" />
+            <End Role="TASK" EntitySet="TASK" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -430,58 +429,58 @@
           <EntitySet Name="OTHER_ACCOUNTs" EntityType="SEP24Team7Model.OTHER_ACCOUNT" />
           <EntitySet Name="TASKs" EntityType="SEP24Team7Model.TASK" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="SEP24Team7Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End EntitySet="AspNetUsers" Role="AspNetUser" />
-            <End EntitySet="AspNetUserClaims" Role="AspNetUserClaim" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="SEP24Team7Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End EntitySet="AspNetUsers" Role="AspNetUser" />
-            <End EntitySet="AspNetUserLogins" Role="AspNetUserLogin" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
           </AssociationSet>
           <AssociationSet Name="FK_CATEGORY_AspNetUsers" Association="SEP24Team7Model.FK_CATEGORY_AspNetUsers">
-            <End EntitySet="AspNetUsers" Role="AspNetUser" />
-            <End EntitySet="CATEGORies" Role="CATEGORY" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="CATEGORY" EntitySet="CATEGORies" />
           </AssociationSet>
           <AssociationSet Name="FK_MEETING_AspNetUsers" Association="SEP24Team7Model.FK_MEETING_AspNetUsers">
-            <End EntitySet="AspNetUsers" Role="AspNetUser" />
-            <End EntitySet="MEETINGs" Role="MEETING" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="MEETING" EntitySet="MEETINGs" />
           </AssociationSet>
           <AssociationSet Name="FK_MEMBER_AspNetUsers" Association="SEP24Team7Model.FK_MEMBER_AspNetUsers">
-            <End EntitySet="AspNetUsers" Role="AspNetUser" />
-            <End EntitySet="MEMBERs" Role="MEMBER" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="MEMBER" EntitySet="MEMBERs" />
           </AssociationSet>
           <AssociationSet Name="FK_OTHER_ACCOUNT_AspNetUsers" Association="SEP24Team7Model.FK_OTHER_ACCOUNT_AspNetUsers">
-            <End EntitySet="AspNetUsers" Role="AspNetUser" />
-            <End EntitySet="OTHER_ACCOUNTs" Role="OTHER_ACCOUNT" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="OTHER_ACCOUNT" EntitySet="OTHER_ACCOUNTs" />
           </AssociationSet>
           <AssociationSet Name="FK_Attachment_MEETING" Association="SEP24Team7Model.FK_Attachment_MEETING">
-            <End EntitySet="MEETINGs" Role="MEETING" />
-            <End EntitySet="ATTACHMENTs" Role="ATTACHMENT" />
+            <End Role="MEETING" EntitySet="MEETINGs" />
+            <End Role="ATTACHMENT" EntitySet="ATTACHMENTs" />
           </AssociationSet>
           <AssociationSet Name="FK_Meeting_CATEGORY" Association="SEP24Team7Model.FK_Meeting_CATEGORY">
-            <End EntitySet="CATEGORies" Role="CATEGORY" />
-            <End EntitySet="MEETINGs" Role="MEETING" />
+            <End Role="CATEGORY" EntitySet="CATEGORies" />
+            <End Role="MEETING" EntitySet="MEETINGs" />
           </AssociationSet>
           <AssociationSet Name="FK_MEETING_MEETING_STATUS" Association="SEP24Team7Model.FK_MEETING_MEETING_STATUS">
-            <End EntitySet="MEETING_STATUS" Role="MEETING_STATUS" />
-            <End EntitySet="MEETINGs" Role="MEETING" />
+            <End Role="MEETING_STATUS" EntitySet="MEETING_STATUS" />
+            <End Role="MEETING" EntitySet="MEETINGs" />
           </AssociationSet>
           <AssociationSet Name="FK_MEMBER_MEETING" Association="SEP24Team7Model.FK_MEMBER_MEETING">
-            <End EntitySet="MEETINGs" Role="MEETING" />
-            <End EntitySet="MEMBERs" Role="MEMBER" />
+            <End Role="MEETING" EntitySet="MEETINGs" />
+            <End Role="MEMBER" EntitySet="MEMBERs" />
           </AssociationSet>
-          <AssociationSet Name="FK_TASK_MEETING1" Association="SEP24Team7Model.FK_TASK_MEETING1">
-            <End EntitySet="MEETINGs" Role="MEETING" />
-            <End EntitySet="TASKs" Role="TASK" />
+          <AssociationSet Name="FK_TASKLIST_MEETING" Association="SEP24Team7Model.FK_TASKLIST_MEETING">
+            <End Role="MEETING" EntitySet="MEETINGs" />
+            <End Role="TASK" EntitySet="TASKs" />
           </AssociationSet>
           <AssociationSet Name="FK_TASK_MEMBER" Association="SEP24Team7Model.FK_TASK_MEMBER">
-            <End EntitySet="MEMBERs" Role="MEMBER" />
-            <End EntitySet="TASKs" Role="TASK" />
+            <End Role="MEMBER" EntitySet="MEMBERs" />
+            <End Role="TASK" EntitySet="TASKs" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="SEP24Team7Model.AspNetUserRoles">
-            <End EntitySet="AspNetRoles" Role="AspNetRole" />
-            <End EntitySet="AspNetUsers" Role="AspNetUser" />
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -497,27 +496,27 @@
             <PropertyRef Name="MigrationId" />
             <PropertyRef Name="ContextKey" />
           </Key>
-          <Property Name="MigrationId" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="ContextKey" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="Model" Nullable="false" MaxLength="Max" FixedLength="false" Type="Binary" />
-          <Property Name="ProductVersion" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="Name" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUsers" Relationship="SEP24Team7Model.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUserClaim">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
-          <Property Name="UserId" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="ClaimType" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="ClaimValue" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="SEP24Team7Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUserLogin">
@@ -526,28 +525,28 @@
             <PropertyRef Name="ProviderKey" />
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="LoginProvider" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="ProviderKey" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="UserId" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="SEP24Team7Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="Email" MaxLength="256" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="EmailConfirmed" Nullable="false" Type="Boolean" />
-          <Property Name="PasswordHash" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="SecurityStamp" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="PhoneNumber" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="PhoneNumberConfirmed" Nullable="false" Type="Boolean" />
-          <Property Name="TwoFactorEnabled" Nullable="false" Type="Boolean" />
-          <Property Name="LockoutEndDateUtc" Precision="3" Type="DateTime" />
-          <Property Name="LockoutEnabled" Nullable="false" Type="Boolean" />
-          <Property Name="AccessFailedCount" Nullable="false" Type="Int32" />
-          <Property Name="UserName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="Full_name" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Full_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="SEP24Team7Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="SEP24Team7Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="CATEGORies" Relationship="SEP24Team7Model.FK_CATEGORY_AspNetUsers" FromRole="AspNetUser" ToRole="CATEGORY" />
@@ -560,20 +559,20 @@
           <Key>
             <PropertyRef Name="Attachment_id" />
           </Key>
-          <Property Name="Meeting_id" Nullable="false" Type="Int32" />
-          <Property Name="Attachment_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
-          <Property Name="Attachment_path" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="Attachment_name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Meeting_id" Type="Int32" Nullable="false" />
+          <Property Name="Attachment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Attachment_path" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Attachment_name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MEETING" Relationship="SEP24Team7Model.FK_Attachment_MEETING" FromRole="ATTACHMENT" ToRole="MEETING" />
         </EntityType>
         <EntityType Name="CATEGORY">
           <Key>
             <PropertyRef Name="Category_id" />
           </Key>
-          <Property Name="Category_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
-          <Property Name="Category_Name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="Category_Content" MaxLength="500" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="Create_by" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Category_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category_Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Category_Content" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Create_by" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="SEP24Team7Model.FK_CATEGORY_AspNetUsers" FromRole="CATEGORY" ToRole="AspNetUser" />
           <NavigationProperty Name="MEETINGs" Relationship="SEP24Team7Model.FK_Meeting_CATEGORY" FromRole="CATEGORY" ToRole="MEETING" />
         </EntityType>
@@ -581,31 +580,32 @@
           <Key>
             <PropertyRef Name="Meeting_id" />
           </Key>
-          <Property Name="Category_id" Nullable="false" Type="Int32" />
-          <Property Name="Meeting_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
-          <Property Name="Meeting_name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="Meeting_content" MaxLength="1000" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="Date_Start" Nullable="false" Precision="0" Type="DateTime" />
-          <Property Name="Time_Start" Precision="7" Type="Time" />
-          <Property Name="Location" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="Status" Nullable="false" Type="Int32" />
-          <Property Name="Meeting_report" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="Date_Create" Precision="0" Type="DateTime" />
-          <Property Name="Create_by" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="Feedback" MaxLength="1000" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Category_id" Type="Int32" Nullable="false" />
+          <Property Name="Meeting_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Meeting_name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Meeting_content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Start" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time_Start" Type="Time" Precision="7" />
+          <Property Name="Location" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Meeting_report" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Create" Type="DateTime" Precision="0" />
+          <Property Name="Create_by" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Feedback" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="AspNetUsers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="SEP24Team7Model.FK_MEETING_AspNetUsers" FromRole="MEETING" ToRole="AspNetUser" />
           <NavigationProperty Name="ATTACHMENTs" Relationship="SEP24Team7Model.FK_Attachment_MEETING" FromRole="MEETING" ToRole="ATTACHMENT" />
           <NavigationProperty Name="CATEGORY" Relationship="SEP24Team7Model.FK_Meeting_CATEGORY" FromRole="MEETING" ToRole="CATEGORY" />
           <NavigationProperty Name="MEETING_STATUS" Relationship="SEP24Team7Model.FK_MEETING_MEETING_STATUS" FromRole="MEETING" ToRole="MEETING_STATUS" />
           <NavigationProperty Name="MEMBERs" Relationship="SEP24Team7Model.FK_MEMBER_MEETING" FromRole="MEETING" ToRole="MEMBER" />
-          <NavigationProperty Name="TASKs" Relationship="SEP24Team7Model.FK_TASK_MEETING1" FromRole="MEETING" ToRole="TASK" />
+          <NavigationProperty Name="TASKs" Relationship="SEP24Team7Model.FK_TASKLIST_MEETING" FromRole="MEETING" ToRole="TASK" />
         </EntityType>
         <EntityType Name="MEETING_STATUS">
           <Key>
             <PropertyRef Name="Status_id" />
           </Key>
-          <Property Name="Status_name" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="Status_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Status_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="MEETINGs" Relationship="SEP24Team7Model.FK_MEETING_MEETING_STATUS" FromRole="MEETING_STATUS" ToRole="MEETING" />
         </EntityType>
         <EntityType Name="MEMBER">
@@ -613,8 +613,8 @@
             <PropertyRef Name="Meeting_id" />
             <PropertyRef Name="Member_id" />
           </Key>
-          <Property Name="Meeting_id" Nullable="false" Type="Int32" />
-          <Property Name="Member_id" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Meeting_id" Type="Int32" Nullable="false" />
+          <Property Name="Member_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="SEP24Team7Model.FK_MEMBER_AspNetUsers" FromRole="MEMBER" ToRole="AspNetUser" />
           <NavigationProperty Name="MEETING" Relationship="SEP24Team7Model.FK_MEMBER_MEETING" FromRole="MEMBER" ToRole="MEETING" />
           <NavigationProperty Name="TASKs" Relationship="SEP24Team7Model.FK_TASK_MEMBER" FromRole="MEMBER" ToRole="TASK" />
@@ -623,32 +623,30 @@
           <Key>
             <PropertyRef Name="othUser_id" />
           </Key>
-          <Property Name="othUser_id" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="othUser_office" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="othUser_Email" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="othUser_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="othUser_office" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="othUser_Email" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="SEP24Team7Model.FK_OTHER_ACCOUNT_AspNetUsers" FromRole="OTHER_ACCOUNT" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="TASK">
           <Key>
             <PropertyRef Name="Task_id" />
-            <PropertyRef Name="Meeting_id" />
-            <PropertyRef Name="Assignee" />
           </Key>
-          <Property Name="Task_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
-          <Property Name="Meeting_id" Nullable="false" Type="Int32" />
-          <Property Name="Task_name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
-          <Property Name="Assignee" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Task_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Meeting_id" Type="Int32" Nullable="false" />
+          <Property Name="Task_name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Assignee" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Task_Status" Type="Boolean" />
-          <Property Name="Task_Deadline" Precision="3" Type="DateTime" />
+          <Property Name="Task_Deadline" Type="DateTime" Precision="3" />
           <Property Name="Notify" Type="Boolean" />
-          <NavigationProperty Name="MEETING" Relationship="SEP24Team7Model.FK_TASK_MEETING1" FromRole="TASK" ToRole="MEETING" />
+          <NavigationProperty Name="MEETING" Relationship="SEP24Team7Model.FK_TASKLIST_MEETING" FromRole="TASK" ToRole="MEETING" />
           <NavigationProperty Name="MEMBER" Relationship="SEP24Team7Model.FK_TASK_MEMBER" FromRole="TASK" ToRole="MEMBER" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Type="SEP24Team7Model.AspNetUser" Multiplicity="1" Role="AspNetUser">
+          <End Type="SEP24Team7Model.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="SEP24Team7Model.AspNetUserClaim" Multiplicity="*" Role="AspNetUserClaim" />
+          <End Type="SEP24Team7Model.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
@@ -659,10 +657,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Type="SEP24Team7Model.AspNetUser" Multiplicity="1" Role="AspNetUser">
+          <End Type="SEP24Team7Model.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="SEP24Team7Model.AspNetUserLogin" Multiplicity="*" Role="AspNetUserLogin" />
+          <End Type="SEP24Team7Model.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
@@ -673,8 +671,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CATEGORY_AspNetUsers">
-          <End Type="SEP24Team7Model.AspNetUser" Multiplicity="0..1" Role="AspNetUser" />
-          <End Type="SEP24Team7Model.CATEGORY" Multiplicity="*" Role="CATEGORY" />
+          <End Type="SEP24Team7Model.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="SEP24Team7Model.CATEGORY" Role="CATEGORY" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
@@ -685,8 +683,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEETING_AspNetUsers">
-          <End Type="SEP24Team7Model.AspNetUser" Multiplicity="0..1" Role="AspNetUser" />
-          <End Type="SEP24Team7Model.MEETING" Multiplicity="*" Role="MEETING" />
+          <End Type="SEP24Team7Model.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="SEP24Team7Model.MEETING" Role="MEETING" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
@@ -697,10 +695,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEMBER_AspNetUsers">
-          <End Type="SEP24Team7Model.AspNetUser" Multiplicity="1" Role="AspNetUser">
+          <End Type="SEP24Team7Model.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="SEP24Team7Model.MEMBER" Multiplicity="*" Role="MEMBER" />
+          <End Type="SEP24Team7Model.MEMBER" Role="MEMBER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
@@ -711,10 +709,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OTHER_ACCOUNT_AspNetUsers">
-          <End Type="SEP24Team7Model.AspNetUser" Multiplicity="1" Role="AspNetUser">
+          <End Type="SEP24Team7Model.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="SEP24Team7Model.OTHER_ACCOUNT" Multiplicity="0..1" Role="OTHER_ACCOUNT" />
+          <End Type="SEP24Team7Model.OTHER_ACCOUNT" Role="OTHER_ACCOUNT" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
@@ -725,10 +723,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Attachment_MEETING">
-          <End Type="SEP24Team7Model.MEETING" Multiplicity="1" Role="MEETING">
+          <End Type="SEP24Team7Model.MEETING" Role="MEETING" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="SEP24Team7Model.ATTACHMENT" Multiplicity="*" Role="ATTACHMENT" />
+          <End Type="SEP24Team7Model.ATTACHMENT" Role="ATTACHMENT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEETING">
               <PropertyRef Name="Meeting_id" />
@@ -739,10 +737,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Meeting_CATEGORY">
-          <End Type="SEP24Team7Model.CATEGORY" Multiplicity="1" Role="CATEGORY">
+          <End Type="SEP24Team7Model.CATEGORY" Role="CATEGORY" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="SEP24Team7Model.MEETING" Multiplicity="*" Role="MEETING" />
+          <End Type="SEP24Team7Model.MEETING" Role="MEETING" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CATEGORY">
               <PropertyRef Name="Category_id" />
@@ -753,8 +751,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEETING_MEETING_STATUS">
-          <End Type="SEP24Team7Model.MEETING_STATUS" Multiplicity="1" Role="MEETING_STATUS" />
-          <End Type="SEP24Team7Model.MEETING" Multiplicity="*" Role="MEETING" />
+          <End Type="SEP24Team7Model.MEETING_STATUS" Role="MEETING_STATUS" Multiplicity="1" />
+          <End Type="SEP24Team7Model.MEETING" Role="MEETING" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEETING_STATUS">
               <PropertyRef Name="Status_id" />
@@ -765,10 +763,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MEMBER_MEETING">
-          <End Type="SEP24Team7Model.MEETING" Multiplicity="1" Role="MEETING">
+          <End Type="SEP24Team7Model.MEETING" Role="MEETING" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="SEP24Team7Model.MEMBER" Multiplicity="*" Role="MEMBER" />
+          <End Type="SEP24Team7Model.MEMBER" Role="MEMBER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEETING">
               <PropertyRef Name="Meeting_id" />
@@ -778,11 +776,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TASK_MEETING1">
-          <End Type="SEP24Team7Model.MEETING" Multiplicity="1" Role="MEETING">
+        <Association Name="FK_TASKLIST_MEETING">
+          <End Type="SEP24Team7Model.MEETING" Role="MEETING" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="SEP24Team7Model.TASK" Multiplicity="*" Role="TASK" />
+          <End Type="SEP24Team7Model.TASK" Role="TASK" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEETING">
               <PropertyRef Name="Meeting_id" />
@@ -793,8 +791,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TASK_MEMBER">
-          <End Type="SEP24Team7Model.MEMBER" Multiplicity="1" Role="MEMBER" />
-          <End Type="SEP24Team7Model.TASK" Multiplicity="*" Role="TASK" />
+          <End Type="SEP24Team7Model.MEMBER" Role="MEMBER" Multiplicity="1" />
+          <End Type="SEP24Team7Model.TASK" Role="TASK" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MEMBER">
               <PropertyRef Name="Meeting_id" />
@@ -807,10 +805,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="AspNetUserRoles">
-          <End Type="SEP24Team7Model.AspNetRole" Multiplicity="*" Role="AspNetRole" />
-          <End Type="SEP24Team7Model.AspNetUser" Multiplicity="*" Role="AspNetUser" />
+          <End Type="SEP24Team7Model.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="SEP24Team7Model.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -906,6 +904,7 @@
           <EntitySetMapping Name="MEETINGs">
             <EntityTypeMapping TypeName="SEP24Team7Model.MEETING">
               <MappingFragment StoreEntitySet="MEETING">
+                <ScalarProperty Name="AspNetUsers" ColumnName="AspNetUsers" />
                 <ScalarProperty Name="Feedback" ColumnName="Feedback" />
                 <ScalarProperty Name="Create_by" ColumnName="Create_by" />
                 <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
