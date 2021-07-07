@@ -26,7 +26,5 @@ namespace MeetingManagement.Controllers
 
             return View();
         }
-      
-      
     }
 }

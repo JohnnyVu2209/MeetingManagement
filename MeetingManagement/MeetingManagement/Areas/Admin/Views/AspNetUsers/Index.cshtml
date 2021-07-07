@@ -1,4 +1,4 @@
-@model IEnumerable<MeetingManagement.Models.AspNetUser>
+﻿@model IEnumerable<MeetingManagement.Models.AspNetUser>
 
 @{
     ViewBag.Title = "Index";
@@ -15,29 +15,29 @@
         </div>
     </div>
 
-
     @*table component*@
     <ul class="nav nav-tabs">
-        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#listAccount">'Danh sách tài khoản'</a></li>
-        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#otherAccount">"Tài khoản khách mời"</a></li>
+        <li class="active"><a data-toggle="tab" href="#listAccount">Danh sách tài khoản</a></li>
+        <li><a data-toggle="tab" href="#otherAccount">Tài khoản khách</a></li>
     </ul>
-
 
     <div class="tab-content">
 
         @*account tab*@
-        <div role="tabpanel" id="listAccount" class="tab-pane active">
+        <div id="listAccount" class="tab-pane fade in active">
             <br />
             <div id="grdUserView"></div>
         </div>
 
-        <div role="tabpanel" id="otherAccount" class="tab-pane ">
+        @*other account tab*@
+        <div id="otherAccount" class="tab-pane fade">
             <br />
             @Html.Action("GetOtherUser", "AspNetUsers")
         </div>
     </div>
     <div id="Popup"></div>
 </div>
+
 
 <style>
     .create-and-search {
@@ -54,15 +54,14 @@
 </style>
 @section scripts{
     <script type="text/javascript">
-
+    $(document).ready(function () {
+        $('#grdUserView').append('#myTable');
+    });
     $(() => {
         getUser();
         $('#txtSearch').on('keyup', () => {
             getUser();
         })
-
-        $('#listAccount').innerText = "Danh sách tài khoản";
-        $('#otherAccount').innerText = "Tài khoản khách mời";
     });
     function getUser() {
         $.ajax({
@@ -77,10 +76,10 @@
                 console.log(err);
             }
         })
-            };
+    }
      function getCreateModal() {
-         $.ajax({
-             url: "@Url.Action("Create","AspNetUsers")",
+        $.ajax({
+            url: "Create",
             datatype: 'html',
             method: 'GET',
             data: {},

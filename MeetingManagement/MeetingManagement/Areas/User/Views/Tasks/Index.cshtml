@@ -1,31 +1,83 @@
-﻿
+﻿@using MeetingManagement.Models;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+    var meetings = ViewBag.meeting as List<MEETING>;
+    var tasks = ViewBag.task as List<TASK>;
+    SEP24Team7Entities db = new SEP24Team7Entities();
 }
+<link href="~/Content/catalog-list.css" rel="stylesheet" />
 
-<h2>Index</h2>
-
-<button type="button" class="btn btn-outline-success" data-toggle="modal" onclick="getCreateModal()" data-target="#staticBackdrop">
+<button type="button" class="btn btn-success" data-toggle="modal" onclick="getCreateModal()" data-target="#staticBackdrop">
     Launch static backdrop modal
 </button>
 
-<button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        @foreach (var meets in meetings)
+        {
+            <div class="panel-heading" role="tab" id="@meets.Meeting_id">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#@(meets.Meeting_id + meets.Category_id)" aria-expanded="true" aria-controls="collapseOne">
+                        @meets.Meeting_name
+                    </a>
 
-<div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
-    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
-        <div class="toast-header">
-            <strong class="mr-auto">Hệ thống</strong>
-            <small>1 mins ago</small>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="toast-body">
-            Bạn vừa hủy tạo công việc.
-        </div>
+
+                </h4>
+            </div>
+
+
+                <div id="@(meets.Meeting_id + meets.Category_id)" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="@meets.Meeting_id">
+                    <div class="panel-body">
+
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                60%
+                            </div>
+                        </div>
+                        @foreach (var task in tasks)
+                        {
+                            <div class="row" style="margin-left:10px;font-size:15px;">
+                                <div class="col-md-3">
+                                    @task.Task_name
+                                </div>
+                                <div class="col-md-3">
+                                    @{
+                                        var Asignee_name = db.AspNetUsers.SingleOrDefault(x => x.Id == task.Assignee).Full_name;
+                                    }
+                                    @Asignee_name
+
+
+                                </div>
+                                <div class="col-md-3">
+                                    @Convert.ToDateTime(task.Task_Deadline).ToString("dd/MM/yyyy")
+                                </div>
+                                <div class="col-md-3" style="display:flex;float:right;">
+
+                                    @if (task.Task_Status == true)
+                                    {
+                                        <div class="complete-status" style="width:50%;">Hoàn thành</div>
+                                    }
+                                    else
+                                    {
+                                        <span class="waiting-status" style="width:50%;">Chưa hoàn thành</span>
+                                    }
+
+
+                                    <button class="btn-outline-dark" style="width:28px;height:28px;margin:auto;"><i class="glyphicon glyphicon-bell" style="font-size:x-large;"></i></button>
+                                </div>
+                            </div>
+                        }
+                        </div>
+                </div>
+            
+        }
     </div>
+                                
 </div>
+
+
+
 
 <div id="Popup"></div>
 <script type="text/javascript">
@@ -45,3 +97,5 @@
          });
     };
 </script>
+
+
