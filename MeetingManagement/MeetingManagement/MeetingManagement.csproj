@@ -214,6 +214,7 @@
     <Compile Include="Models\CATEGORY.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CategoryListVM.cs" />
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -222,6 +223,7 @@
     <Compile Include="Models\MEETING.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MeetingListVM.cs" />
     <Compile Include="Models\MEETING_STATUS.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
