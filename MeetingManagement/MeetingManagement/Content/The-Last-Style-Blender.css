@@ -13,6 +13,11 @@ body {
 }
 
 #yuki-body {
+.body-content{
+    position:absolute;
+    top:0px;
+}
+#yuki-body {
     font-size: 14px;
     font-weight: 300;
     color: #333;
@@ -114,11 +119,11 @@ body {
     height: 45px;
 }
 
-.yuki-login-info {
-    position: absolute;
-    left: 1000px;
-    top: 0px;
-}
+    .yuki-login-info {
+        position: absolute;
+        right: 50px;
+        top: 0px;
+    }
 /*--#table--*/
 .yuki-table-zone {
     position: relative;
@@ -199,7 +204,6 @@ body {
     height: 48px;
     text-align: center;
     border-bottom: 1px solid #e5e5e5;
-    border-top: 1px solid #e5e5e5;
 }
 
 .filter {
@@ -298,10 +302,10 @@ tr:hover td {
 /*--#footer--*/
 #yuki-footer {
     display: block;
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 200px;
-    bottom: -2000px;
+    bottom: 0px;
     background: white;
     border-top: 10px solid #009FE5;
 }
@@ -330,8 +334,9 @@ tr:hover td {
 td .pending-status, .pending-status {
     background: #C0C0C0;
     border-radius: 10px;
-    width: 30%;
+    width: fit-content;
     color: white;
+    padding: 0 5px;
     margin: auto;
     text-align: center;
 }
@@ -339,8 +344,9 @@ td .pending-status, .pending-status {
 td .waiting-status, .waiting-status {
     background: #FFC400;
     border-radius: 10px;
-    width: 30%;
+    width: fit-content;
     color: white;
+    padding: 0 5px;
     margin: auto;
     text-align: center;
 }
@@ -348,8 +354,9 @@ td .waiting-status, .waiting-status {
 td .missing-status, .missing-status {
     background: #F12B2C;
     border-radius: 10px;
-    width: 37%;
+    width: fit-content;
     color: white;
+    padding: 0 5px;
     margin: auto;
     text-align: center;
 }
@@ -357,7 +364,8 @@ td .missing-status, .missing-status {
 td .incomplete-status, .incomplete-status {
     background: #FF9900;
     border-radius: 10px;
-    width: 43%;
+    width: fit-content;
+    padding: 0 5px;
     color: white;
     margin: auto;
     text-align: center;
@@ -366,7 +374,8 @@ td .incomplete-status, .incomplete-status {
 td .complete-status, .complete-status {
     background: #29CC97;
     border-radius: 10px;
-    width: 43%;
+    width: fit-content;
+    padding: 0 5px;
     color: white;
     margin: auto;
     text-align: center;

@@ -147,7 +147,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             var userId = User.Identity.GetUserId();
             List<AspNetUser> model = db.AspNetUsers.Where(x => x.Id != userId).ToList();
             ViewBag.result = model;
-            return View();
+            return PartialView();
         }
         public ActionResult CreateUser2()
         {

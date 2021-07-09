@@ -1,0 +1,71 @@
+﻿@model MeetingManagement.Models.MEETING
+
+@{
+    ViewBag.Title = "MeetingInfo";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+    <link rel="stylesheet" href="~/Content/Meetings/meetingdetail.css" />
+}
+@using (Html.BeginForm())
+{
+@Html.AntiForgeryToken()
+
+<body>
+    <div class="body-navbar">
+        <div class="nav-content-zone">
+            <img src="~/Content/Picture/users_meeting.png" />
+            <div class="lable-zone">
+                <div style="display: inline-flex">
+                    @Html.Label(Model.CATEGORY.Category_Name.ToString())
+                </div>
+                <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-info')">
+                    Chi tiết
+                </div>
+                <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-task')">
+                    Công việc
+                </div>
+                <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-report')">
+                    Báo cáo
+                </div>
+            </div>
+            <div class="button-zone">
+                <a class="btn button-close" onclick="location.href ='@Url.Action("Index", "MEETINGs")';">Close</a>
+            </div>
+        </div>
+    </div>
+    <div id="meeting-info" class="tabcontent">
+        @Html.Action("MeetingInfo", "MEETINGs", new { Model.Meeting_id })
+    </div>
+    <div id="meeting-task" class="tabcontent" style="display:none;">
+        @Html.Action("MeetingTask", "MEETINGs", new { Model.Meeting_id })
+    </div>
+    <div id="meeting-report" class="tabcontent" style="display:none;">
+        @Html.Action("MeetingReport", "MEETINGs", new { Model.Meeting_id })
+    </div>
+</body>
+}
+<script>
+    function openTab(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+<style>
+    .button-close {
+        color: #212529;
+        border-color: #212529;
+    }
+
+        .button-close:hover {
+            background: #f1f1f1;
+        }
+</style>

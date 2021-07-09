@@ -1,5 +1,4 @@
-
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -24,6 +23,28 @@ namespace MeetingManagement.Areas.User.Controllers
 
             var mEETINGs = db.MEETINGs.Include(m => m.CATEGORY);
             return View(mEETINGs.ToList());
+        }
+
+        public ActionResult MeetingDetail(int id)
+        {
+            var meeting = db.MEETINGs.Find(id);
+            return View(meeting);
+        }
+
+        public PartialViewResult MeetingInfo(int id)
+        {
+            var meeting = db.MEETINGs.Find(id);
+            return PartialView(meeting);
+        }
+        public ActionResult MeetingTask(int id)
+        {
+            var task = db.TASKs.Where(x => x.Meeting_id == id).ToList();
+            return PartialView(task);
+        }
+        public ActionResult MeetingReport(int id)
+        {
+            var report = db.MEETINGs.Find(id);
+            return PartialView(report);
         }
 
         // GET: User/MEETINGs/Details/5
@@ -160,7 +181,7 @@ namespace MeetingManagement.Areas.User.Controllers
         {
             MEETING newMeet = new MEETING();
             newMeet.Category_id = id;
-            return View(newMeet);
+            return View("MeetingForm2", newMeet);
         }
 
         [HttpPost]
@@ -184,28 +205,17 @@ namespace MeetingManagement.Areas.User.Controllers
                         newMeet.Create_by = User.Identity.GetUserId();
                         db.MEETINGs.Add(newMeet);
                         db.SaveChanges();
-
-
-
                         //store file
-
-
-
                         MEETING meetings = db.MEETINGs.Where(x => x.Meeting_name == newMeet.Meeting_name).FirstOrDefault();
-
-
-
                         /*foreach(HttpPostedFileBase file in Files)
                         {*/
                         var path = Server.MapPath(File_Path);
                         Files.SaveAs(path + Files.FileName);
 
-
-
                         //store link file to db
                         ATTACHMENT newAtt = new ATTACHMENT();
                         newAtt.Meeting_id = meetings.Meeting_id;
-                        newAtt.Attachment_path =File_Path + Files.FileName;
+                        newAtt.Attachment_path = File_Path + Files.FileName;
                         db.ATTACHMENTs.Add(newAtt);
                         db.SaveChanges();
                         //}
@@ -222,16 +232,8 @@ namespace MeetingManagement.Areas.User.Controllers
                         scope.Complete();
                         return RedirectToAction("Details", "Categories", new { id = model.Category_id });
                     }
-
-
-
-
                 }
                 else ModelState.AddModelError("", "File not found!");
-
-
-
-
             }
             return View(model);
         }
@@ -240,7 +242,7 @@ namespace MeetingManagement.Areas.User.Controllers
         {
             List<AspNetUser> model = db.AspNetUsers.ToList();
             ViewBag.result = model;
-            return View();
+            return PartialView();
         }
         public ActionResult CreateUser2()
         {

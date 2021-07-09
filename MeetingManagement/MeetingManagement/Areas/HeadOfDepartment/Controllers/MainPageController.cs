@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 {
-    [Authorize(Roles = "BCN")]
+    [Authorize/*(Roles = "BCN")*/]
     public class MainPageController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
