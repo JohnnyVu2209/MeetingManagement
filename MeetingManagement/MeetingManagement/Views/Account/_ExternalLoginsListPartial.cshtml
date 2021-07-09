@@ -14,7 +14,7 @@
         </div>
     }
     else {
-        using (Html.BeginForm("ExternalLogin", "Account")) {
+        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl })) {
             @Html.AntiForgeryToken()
             <div id="socialLoginList">
                 <p>

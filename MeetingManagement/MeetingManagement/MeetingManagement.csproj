@@ -46,10 +46,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <Nullable>enable</Nullable>
-    <LangVersion>8.0</LangVersion>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -183,17 +179,19 @@
     <Compile Include="Areas\Admin\Controllers\AspNetRolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetRoleUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
-    <Compile Include="Areas\User\Controllers\categoriesController.cs" />
-    <Compile Include="Areas\HeadOfDepartment\Controllers\CategoriesController.cs" />
-    <Compile Include="Areas\HeadOfDepartment\Controllers\MEETINGsController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\tabCuocHopController.cs" />
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
-    <Compile Include="Areas\HeadOfDepartment\Controllers\MainPageController.cs" />
+    <Compile Include="Areas\User\Controllers\categoriesController.cs" />
     <Compile Include="Areas\User\Controllers\HomePageController.cs" />
-    <Compile Include="Areas\User\Controllers\MEETINGsController.cs" />
+    <Compile Include="Areas\User\Controllers\MeetingsController.cs" />
+    <Compile Include="Areas\HeadOfDepartment\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\HeadOfDepartment\Controllers\MeetingsController.cs" />
+    <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
+    <Compile Include="Areas\User\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\HeadOfDepartment\Controllers\MainPageController.cs" />
+    <Compile Include="Areas\User\Controllers\TasksController.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -356,10 +354,8 @@
     <Content Include="Content\Picture\student_3.jpg" />
     <Content Include="Content\quyhung\css\tabcuochop.css" />
     <Content Include="Content\catalog-list.css" />
-    <Content Include="Content\HomePage.css" />
     <Content Include="Content\normalize.css" />
     <Content Include="Content\Picture\outline_edit_black_24dp.png" />
-    <Content Include="Content\Picture\outline_file_upload_black_24dp.png" />
     <Content Include="Content\Picture\outline_filter_alt_black_24dp.png" />
     <Content Include="Content\Picture\outline_people_black_24dp.png" />
     <Content Include="Content\Picture\outline_person_add_black_24dp.png" />
@@ -421,7 +417,13 @@
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\HeadOfDepartment\Views\web.config" />
     <Content Include="Areas\User\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetUsers\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetUsers\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetUsers\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetUsers\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetUsers\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoles\Create.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoles\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoles\Details.cshtml" />
@@ -524,72 +526,14 @@
     <Content Include="taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Create.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Delete.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Categories\Details.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Edit.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Index.cshtml" />
-    <Content Include="Areas\User\Views\HomePage\Index.cshtml" />
-    <Content Include="Areas\User\Views\HomePage\TaskList.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Categories\Details.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\MeetingList.cshtml" />
-    <Content Include="Areas\User\Views\Categories\Details.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MainPage\Index.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\CreateUser.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\CreateUser2.cshtml" />
-    <Content Include="Areas\User\Views\Categories\CreateUser.cshtml" />
-    <Content Include="Areas\User\Views\Categories\CreateUser2.cshtml" />
-    <Content Include="Areas\User\Views\Categories\Taocuochop.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\MeetingForm.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\Details.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MEETINGs\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\AspNetUsers\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\AspNetUsers\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\AspNetUsers\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\AspNetUsers\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\AspNetUsers\Index.cshtml" />
-    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-brands-400.eot" />
-    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-brands-400.ttf" />
-    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-brands-400.woff" />
-    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-brands-400.woff2" />
-    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-regular-400.eot" />
-    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-regular-400.ttf" />
-    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-regular-400.woff" />
-    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-regular-400.woff2" />
-    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-solid-900.eot" />
-    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-solid-900.ttf" />
-    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-solid-900.woff" />
-    <Content Include="assets\plugins\global\fonts\%40fortawesome\fa-solid-900.woff2" />
-    <Content Include="assets\plugins\global\fonts\flaticon2\Flaticon2.eot" />
-    <Content Include="assets\plugins\global\fonts\flaticon2\Flaticon2.ttf" />
-    <Content Include="assets\plugins\global\fonts\flaticon2\Flaticon2.woff" />
-    <Content Include="assets\plugins\global\fonts\flaticon2\Flaticon2.woff2" />
-    <Content Include="assets\plugins\global\fonts\flaticon\Flaticon.eot" />
-    <Content Include="assets\plugins\global\fonts\flaticon\Flaticon.ttf" />
-    <Content Include="assets\plugins\global\fonts\flaticon\Flaticon.woff" />
-    <Content Include="assets\plugins\global\fonts\keenthemes-icons\Ki.eot" />
-    <Content Include="assets\plugins\global\fonts\keenthemes-icons\Ki.ttf" />
-    <Content Include="assets\plugins\global\fonts\keenthemes-icons\Ki.woff" />
-    <Content Include="assets\plugins\global\fonts\keenthemes-icons\Ki.woff2" />
-    <Content Include="assets\plugins\global\fonts\line-awesome\la-brands-400.eot" />
-    <Content Include="assets\plugins\global\fonts\line-awesome\la-brands-400.ttf" />
-    <Content Include="assets\plugins\global\fonts\line-awesome\la-brands-400.woff" />
-    <Content Include="assets\plugins\global\fonts\line-awesome\la-brands-400.woff2" />
-    <Content Include="assets\plugins\global\fonts\line-awesome\la-regular-400.eot" />
-    <Content Include="assets\plugins\global\fonts\line-awesome\la-regular-400.ttf" />
-    <Content Include="assets\plugins\global\fonts\line-awesome\la-regular-400.woff" />
-    <Content Include="assets\plugins\global\fonts\line-awesome\la-regular-400.woff2" />
-    <Content Include="assets\plugins\global\fonts\line-awesome\la-solid-900.eot" />
-    <Content Include="assets\plugins\global\fonts\line-awesome\la-solid-900.ttf" />
-    <Content Include="assets\plugins\global\fonts\line-awesome\la-solid-900.woff" />
-    <Content Include="assets\plugins\global\fonts\line-awesome\la-solid-900.woff2" />
-    <Content Include="assets\plugins\global\fonts\socicon\socicon.eot" />
-    <Content Include="assets\plugins\global\fonts\socicon\socicon.ttf" />
-    <Content Include="assets\plugins\global\fonts\socicon\socicon.woff" />
-    <Content Include="assets\plugins\global\fonts\summernote\summernote.eot" />
-    <Content Include="assets\plugins\global\fonts\summernote\summernote.ttf" />
-    <Content Include="assets\plugins\global\fonts\summernote\summernote.woff" />
-    <Content Include="assets\plugins\global\fonts\summernote\summernote.woff2" />
+    <Content Include="Areas\User\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\User\Views\Categories\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\ResetPassword.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Categories\Create1.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoleUser\Create.cshtml" />
     <Content Include="Areas\User\Views\HomePage\MeetingList.cshtml" />
     <Content Include="Areas\User\Views\HomePage\IndexCateList.cshtml" />
@@ -605,6 +549,7 @@
     <Content Include="Areas\User\Views\Meetings\Index.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MyMeetingGridView.cshtml" />
     <Content Include="Areas\User\Views\Meetings\JoinedMeetingGridView.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\_ViewStart.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\Index.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\Create.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\VerifyMeeting.cshtml" />

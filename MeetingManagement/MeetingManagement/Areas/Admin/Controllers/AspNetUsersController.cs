@@ -21,8 +21,6 @@ namespace MeetingManagement.Areas.Admin.Controllers
 
         private ApplicationUserManager _userManager;
         private SEP24Team7Entities db = new SEP24Team7Entities();
-        //private ApplicationSignInManager _signInManager;
-
         public ApplicationUserManager UserManager
         {
             get
@@ -79,7 +77,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
              return View(aspNetUser);*/
 
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-            var result = await _userManager.CreateAsync(user, model.Password);
+            var result = await UserManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -105,8 +103,8 @@ namespace MeetingManagement.Areas.Admin.Controllers
             db.OTHER_ACCOUNTs.Add(new OTHER_ACCOUNT
             {
                 othUser_id = user.Id,
-                othUser_office = user.Email
-            }) ;
+                othUser_Email = user.Email
+            });
             db.SaveChanges();
         }
         private void AddErrors(IdentityResult result)
@@ -202,6 +200,14 @@ namespace MeetingManagement.Areas.Admin.Controllers
             return roles;
         }
 
+        public ActionResult GetOtherUser()
+        {
+            var otherUser = from u in db.AspNetUsers
+                            from o in db.OTHER_ACCOUNTs
+                            where u.Id == o.othUser_id
+                            select u;
+            return PartialView("OtherUserGridView", otherUser);
+        }
         [HttpGet]
         public ActionResult ResetPassword(string userID)
         {
@@ -223,7 +229,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var user = db.AspNetUsers.Find(Id);
-                var result = await _userManager.AddPasswordAsync(user.Id, password);
+                var result = await UserManager.AddPasswordAsync(user.Id, password);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index");
@@ -238,6 +244,16 @@ namespace MeetingManagement.Areas.Admin.Controllers
             // If we got this far, something failed, redisplay form
             return View();
 
+        }
+        public ActionResult Send()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Send(Outlook gmail)
+        {
+            gmail.SendMail();
+            return View();
         }
     }
 }
