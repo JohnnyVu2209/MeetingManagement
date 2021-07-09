@@ -15,7 +15,7 @@ using EntityState = System.Data.Entity.EntityState;
 
 namespace MeetingManagement.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AspNetUsersController : Controller
     {
 
