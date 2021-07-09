@@ -1,36 +1,61 @@
 ﻿@model MeetingManagement.Models.TASK
 
-@using (Ajax.BeginForm("Create", "Tasks", new AjaxOptions { HttpMethod = "Post", OnSuccess = "CreateSuccess" }, new { @class = "form-horizontal", @id = "createformid", role = "form" }))
-{
-    <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Tạo công việc</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+
+<link href="~/taocuochop/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/taocuochop/vendor/font-awesome-4.7/css/font-awesome.css" rel="stylesheet" />
+<!-- Font special for pages-->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+<!-- Vendor CSS-->
+<link href="~/taocuochop/vendor/select2/select2.min.css" rel="stylesheet" />
+<link href="~/taocuochop/vendor/datepicker/daterangepicker.css" rel="stylesheet" />
+<!-- Main CSS-->
+<link href="~/taocuochop/css/main.css" rel="stylesheet" />
+
+
+<div class="modal fade" id="TaskCreateModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Tạo công việc</h4>
+            </div>
+            @using (Ajax.BeginForm("Create", "Tasks", new AjaxOptions { HttpMethod = "Post", OnSuccess = "CreateSuccess" }, new { @class = "form-horizontal", @id = "createformid", role = "form" }))
+            {
                 <div class="modal-body">
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary("", new { @class = "text-danger" })
                     <div class="form-group">
-                        <div class="col-md-13">
-                            @Html.TextBoxFor(m => m.Task_name, new { @class = "form-control",@placholder = "Tên công việc" })
-                            @Html.ValidationMessageFor(m => m.Task_name, "", new { @class = "text-danger" });
+                        <div class="col-md-8 col-md-offset-2">
+                            @Html.TextBoxFor(m => m.Task_name, new { @class = "form-control", @placeholder = "Tên công việc" })
+                            @Html.ValidationMessageFor(m => m.Task_name, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-13">
+                    <div class="form-group ">
+                        <div class="col-md-8 col-md-offset-2">
                             @Html.DropDownList("Asignee", (IEnumerable<SelectListItem>)ViewBag.Meeting_id, new { @class = "form-control" })
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-2">
+                            @Html.TextBoxFor(m => m.Task_Deadline, new { @class = "form-control", @type = "date" })
+                        </div>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-primary">Tạo</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Tạo</button>
                 </div>
-            </div>
-        </div>
-    </div>
+            }
 
-}
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script src="~/taocuochop/vendor/jquery/jquery.min.js"></script>
+<!-- Vendor JS-->
+<script src="~/taocuochop/vendor/select2/select2.min.js"></script>
+<script src="~/taocuochop/vendor/datepicker/moment.min.js"></script>
+<script src="~/taocuochop/vendor/datepicker/daterangepicker.js"></script>
+<!-- Main JS-->
+<script src="~/taocuochop/js/global.js"></script>

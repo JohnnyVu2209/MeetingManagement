@@ -17,6 +17,10 @@ namespace MeetingManagement.Areas.User.Controllers
         // GET: User/Tasks
         public ActionResult Index()
         {
+            var userid = "f28b3bb0-99b7-439e-bc90-4c8c15fac1a2";
+            var mEMBER = db.MEMBERs.SingleOrDefault(x => x.Member_id == userid);
+            ViewBag.meeting = db.MEETINGs.Where(x => x.Meeting_id == mEMBER.Meeting_id).ToList();
+            ViewBag.task = db.TASKs.Where(x => x.Meeting_id == mEMBER.Meeting_id && x.Assignee == mEMBER.Member_id).ToList();
             return View();
         }
 
@@ -38,7 +42,7 @@ namespace MeetingManagement.Areas.User.Controllers
         // GET: User/Tasks/Create
         public ActionResult Create()
         {
-            ViewBag.Meeting_id = new SelectList(db.MEMBERs, "Meeting_id", "Member_id");
+            ViewBag.Meeting_id = new SelectList(db.MEMBERs.Where(x => x.Meeting_id == 37), "Member_id", "AspNetUser.Full_name");
             return View();
         }
 

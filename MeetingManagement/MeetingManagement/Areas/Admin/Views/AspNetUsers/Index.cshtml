@@ -1,4 +1,4 @@
-@model IEnumerable<MeetingManagement.Models.AspNetUser>
+﻿@model IEnumerable<MeetingManagement.Models.AspNetUser>
 
 @{
     ViewBag.Title = "Index";
@@ -14,7 +14,6 @@
             <button type="button" class="btn btn-success" data-toggle="modal" onclick="getCreateModal()">Create New</button>
         </div>
     </div>
-
 
     @*table component*@
     <ul class="nav nav-tabs">
@@ -38,6 +37,7 @@
     </div>
     <div id="Popup"></div>
 </div>
+
 
 <style>
     .create-and-search {
@@ -76,7 +76,7 @@
                 console.log(err);
             }
         })
-            };
+    }
      function getCreateModal() {
         $.ajax({
             url: "Create",

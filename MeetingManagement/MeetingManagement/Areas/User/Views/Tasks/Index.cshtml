@@ -1,9 +1,110 @@
-﻿
+﻿@using MeetingManagement.Models;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+    var meetings = ViewBag.meeting as List<MEETING>;
+    var tasks = ViewBag.task as List<TASK>;
+    SEP24Team7Entities db = new SEP24Team7Entities();
+    var percent = 0;
+    foreach(var task in tasks)
+    {
+        if(task.Task_Status == true)
+        {
+            percent += 1;
+        }
+    }
+    var final = (percent * 100) / tasks.Count;
 }
+<link href="~/Content/catalog-list.css" rel="stylesheet" />
 
-<h2>Index</h2>
+<button type="button" class="btn btn-success" data-toggle="modal" onclick="getCreateModal()" data-target="#staticBackdrop">
+    Launch static backdrop modal
+</button>
 
-<button type="button" class="btn btn-outline-success">Success</button>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        @foreach (var meets in meetings)
+        {
+            <div class="panel-heading" role="tab" id="@meets.Meeting_id">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#@(meets.Meeting_id + meets.Category_id)" aria-expanded="true" aria-controls="collapseOne">
+                        @meets.Meeting_name
+                    </a>
+
+
+                </h4>
+            </div>
+
+
+                <div id="@(meets.Meeting_id + meets.Category_id)" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="@meets.Meeting_id">
+                    <div class="panel-body">
+
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: @final%;">
+                                @final%
+                            </div>
+                        </div>
+                        @foreach (var task in tasks)
+                        {
+                            <div class="row" style="margin-left:10px;font-size:15px;">
+                                <div class="col-md-3">
+                                    @task.Task_name
+                                </div>
+                                <div class="col-md-3">
+                                    @{
+                                        var Asignee_name = db.AspNetUsers.SingleOrDefault(x => x.Id == task.Assignee).Full_name;
+                                    }
+                                    @Asignee_name
+
+
+                                </div>
+                                <div class="col-md-3">
+                                    @Convert.ToDateTime(task.Task_Deadline).ToString("dd/MM/yyyy")
+                                </div>
+                                <div class="col-md-3" style="display:flex;float:right;">
+
+                                    @if (task.Task_Status == true)
+                                    {
+                                        <div class="complete-status" style="width:50%;">Hoàn thành</div>
+                                    }
+                                    else
+                                    {
+                                        <span class="waiting-status" style="width:50%;">Chưa hoàn thành</span>
+                                    }
+
+
+                                    <button class="btn-outline-dark" style="width:28px;height:28px;margin:auto;"><i class="glyphicon glyphicon-bell" style="font-size:x-large;"></i></button>
+                                </div>
+                            </div>
+                        }
+                        </div>
+                </div>
+            
+        }
+    </div>
+                                
+</div>
+
+
+
+
+<div id="Popup"></div>
+<script type="text/javascript">
+     function getCreateModal() {
+         $.ajax({
+             url: "@Url.Action("Create","Tasks")",
+             datatype: 'html',
+             method: 'GET',
+             data: {},
+             success: function (data) {
+                 $("#Popup").html(data);
+                 $("#TaskCreateModal").modal("show");
+             },
+             error: function (err) {
+                 console.log(err);
+             }
+         });
+    };
+</script>
+
+
