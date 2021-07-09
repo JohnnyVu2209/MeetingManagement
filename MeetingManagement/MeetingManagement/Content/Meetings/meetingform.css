@@ -1,0 +1,240 @@
+﻿.new-content {
+    margin: 0px;
+}
+
+.tabcontent {
+    position: relative;
+    top: 50px;
+}
+input {
+    max-width: none !important;
+}
+
+textarea {
+    max-width: none !important;
+}
+
+.col-2 {
+    width:50%;
+}
+
+.col-500 {
+    width: 500px;
+    display: inline-block;
+    position: absolute;
+}
+.inline-datetime {
+    display: flex;
+}
+
+.inline-location {
+    margin-left: 50px;
+    position: absolute;
+    display: inline-block;
+    width: 600px;
+    height: 40px;
+}
+
+/*body-navbar*/
+.body-navbar {
+    width: calc(100% - 150px);
+    height: 60px;
+    background: white;
+    border-bottom: 1px solid #f1f1f1;
+    z-index: 10;
+    position: fixed;
+    color: white;
+    top: 50px;
+    left: 150px;
+}
+
+.button-zone {
+    display: inline-block;
+    position: fixed;
+    right: 30px;
+    margin: 3px 0px;
+}
+
+.lable-zone {
+    display: inline-block;
+    position: absolute;
+    left: 50px;
+    color: black;
+    line-height: 40px;
+}
+
+    .lable-zone label {
+        font-size: 18px !important;
+        max-width: 400px;
+        white-space: pre;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: 20px;
+    }
+
+.nav-content-zone {
+    position: absolute;
+    width: calc(100% - 40px);
+    height: 40px;
+    top: 10px;
+    left: 30px;
+}
+
+.body-navbar div img {
+    width: 40px;
+    height: 40px;
+    padding: 2px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    position: absolute;
+    left: 0px;
+}
+
+.detail-tab-btn {
+    padding: 5px;
+    width: fit-content;
+    height: 40px;
+    display: inline-flex;
+    background: white;
+    color: black;
+    align-items: center;
+    cursor: pointer;
+}
+
+.card-body-fixed {
+    position: relative;
+    top: 50px;
+    width: 1300px;
+    height: 800px;
+}
+
+.yuki-card-footer {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.btn-fixed {
+    color: white;
+    font-size: 14px;
+    display: inline-block;
+    width: 8em;
+    height: 4em;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.yuki-btn-blue {
+    background-color: #009FE5 !important;
+}
+
+    .yuki-btn-blue:hover {
+    }
+
+.yuki-btn-gray {
+    background-color: #808080 !important;
+}
+
+    .yuki-btn-gray:hover {
+    }
+
+textarea:focus {
+    outline: 0px !important;
+    border: 2px solid #009fe5 !important;
+}
+.back-button {
+    font-family: Mulish;
+    background: #009FE5;
+    color: white;
+    width: 150px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.card-heading-fixed {
+    background: #009FE5 !important;
+}
+.datetime-inline {
+    width: 500px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.input--style-5-fixed {
+    background: #f1f1f1;
+    height: 40px;
+    border: 2px solid white;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 0 22px;
+    color: #555;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.value-fixed-title {
+    width: calc(1000px - 34px) !important;
+}
+
+.value-fixed-location {
+    width: calc(100% - 34px) !important
+}
+
+.value-fixed {
+    margin-left: 10px;
+}
+
+.form-row-fixed {
+    margin: 0 0 10px 0 !important;
+    display: inline-flex !important;
+    align-items: center;
+}
+
+
+.form-row-fixed-title {
+    width: calc(1000px - 34px);
+}
+
+.form-row img {
+    height: 20px;
+    opacity: 0.7;
+    display: inline-block;
+    width: 20px;
+}
+
+.area-input {
+    margin: 0px;
+    width: calc(1000px - 34px);
+    height: 250px;
+    border: 2px solid white;
+}
+
+.input_fixed {
+    width: 100%;
+    height: 30px;
+}
+
+.row-space-fixed:after {
+    content: none;
+}
+
+.row-space-fixed:before {
+    content: none;
+}
+
+.row-space-fixed {
+    margin: 0px;
+}
+
+.input-new:focus {
+    border: 2px solid #009fe5;
+}
+
+.input--style-5-fixed:focus {
+    border: 2px solid #009fe5;
+}
+
+.input-margin {
+    margin-left: 50px;
+}

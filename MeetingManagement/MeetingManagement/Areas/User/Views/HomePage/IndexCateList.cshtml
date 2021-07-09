@@ -1,13 +1,27 @@
 ﻿@model IEnumerable<MeetingManagement.Models.CATEGORY>
-<div class="catalog-wrapper">
-    <ul class="catalogList">
-        @foreach (var item in Model)
-        {       
-            <li> 
-                <a href="@Url.Action("IndexCateDetail", new { id=item.Category_id})">
-                    @item.Category_Name
-                </a>
-            </li>       
-        }
-    </ul>
+<div class="table-2-zone">
+    <div class="table-head">Danh Sách Danh Mục</div>
+    <div class="catalog-wrapper catalog-wrapper-fixed">
+        <ul class="catalogList ">
+            @foreach (var item in Model)
+            {
+                <li>
+                    <a href="@Url.Action("IndexCateDetail", new { id=item.Category_id})">
+                        @item.Category_Name
+                    </a>
+                </li>
+
+            }
+        </ul>
+    </div>
 </div>
+
+
+<style>
+    .catalog-wrapper-fixed{
+        border: 0.5px solid black;
+    }
+    .table-2-zone{
+        width:98%;
+    }
+</style>
