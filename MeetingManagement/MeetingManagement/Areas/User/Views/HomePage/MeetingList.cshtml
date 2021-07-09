@@ -1,5 +1,9 @@
-﻿@{ 
+﻿
+@{
+    var status3 = "Chưa hoàn thành";
     var status0 = "Chưa họp";
+    var status1 = "Chờ duyệt";
+    var status2 = "Thiếu biên bản";
 }
 
 <table style="border:solid;border-top:none;">
@@ -12,30 +16,32 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
+        <tr>        
             <td>
-                Họp với mentor-Team 1
-            </td>
+                Cuộc Họp          
+            </td>            
+            
             <td>
                 Hương Khôn Vũ
             </td>
             <td>
                 20/6/2021
             </td>
+
             <td>
-                @if(status0 == "Chưa họp")
+                @if (status0 == "Chưa họp")
                 {
                     <div class="waiting-status">@status0</div>
                 }
-                else if(status0 == "Chờ duyệt")
+                else if (status0 == "Chờ duyệt")
                 {
                     <div class="pending-status">@status0</div>
                 }
-                else if(status0 == "Thiếu biên bản")
+                else if (status0 == "Thiếu biên bản")
                 {
                     <div class="missing-status">@status0</div>
                 }
-                else if(status0 == "Chưa hoàn thành")
+                else if (status0 == "Chưa hoàn thành")
                 {
                     <div class="incomplete-status">@status0</div>
                 }

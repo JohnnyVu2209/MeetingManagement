@@ -1,41 +1,57 @@
-﻿@model IEnumerable<MeetingManagement.Models.AspNetUser>
+@model IEnumerable<MeetingManagement.Models.AspNetUser>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<div>
-    @*<div>
-        <div style="margin-bottom:20px" class="form-inline pull-right">
-            @Html.("Create New", "Create")
-            <a href="@Url.Action("Create", "AspNetUsers")">
-                    <input type="button" value="Create New" />
-                </a>
-            <br />
-        </div>
-    </div>*@
 
-    <div class="col-sm-12">
-        @*<header>
-            <script language="JavaScript" type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        </header>*@
-        <div class="row" style="margin-bottom:15px;">
-            <div class="col-sm-12">
-                <div class="form-inline pull-right">
-                    <label>Search</label>
-                    <input type="text" class="form-control" id="txtSearch" />
-                    <button type="button" class="btn btn-success" data-toggle="modal" onclick="getCreateModal()">Create New</button>
-                </div>
-            </div>
+@*search component*@
+<div class="col-sm-12 col-sm-12-fix01">
+    <div class="create-and-search">
+        <div class="form-inline pull-right">
+            <label>Search</label>
+            <input type="text" class="form-control" id="txtSearch" />
+            <button type="button" class="btn btn-success" data-toggle="modal" onclick="getCreateModal()">Create New</button>
         </div>
-        <div id="grdUserView"></div>
-        <div id="Popup"></div>
     </div>
+
+
+    @*table component*@
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#listAccount">Danh sách tài khoản</a></li>
+        <li><a data-toggle="tab" href="#otherAccount">Tài khoản khách</a></li>
+    </ul>
+
+    <div class="tab-content">
+
+        @*account tab*@
+        <div id="listAccount" class="tab-pane fade in active">
+            <br />
+            <div id="grdUserView"></div>
+        </div>
+
+        @*other account tab*@
+        <div id="otherAccount" class="tab-pane fade">
+            <br />
+            @Html.Action("GetOtherUser", "AspNetUsers")
+        </div>
+    </div>
+    <div id="Popup"></div>
 </div>
+
+<style>
+    .create-and-search {
+        padding-left: 0px;
+        padding-right: 0px;
+        width: 1252px;
+        height: 50px;
+    }
+
+    .col-sm-12-fix01 {
+        position: relative;
+        top: 100px;
+    }
+</style>
 @section scripts{
     <script type="text/javascript">
     $(document).ready(function () {
@@ -60,7 +76,7 @@
                 console.log(err);
             }
         })
-    }
+            };
      function getCreateModal() {
         $.ajax({
             url: "Create",
@@ -69,7 +85,6 @@
             data: {},
             success: function (data) {
                 $("#Popup").html(data);
-
                 $("#modalCreate").modal("show");
             },
             error: function (err) {

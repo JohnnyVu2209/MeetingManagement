@@ -22,6 +22,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
         private ApplicationUserManager _userManager;
         private SEP24Team7Entities db = new SEP24Team7Entities();
         //private ApplicationSignInManager _signInManager;
+
         public ApplicationUserManager UserManager
         {
             get
@@ -33,7 +34,6 @@ namespace MeetingManagement.Areas.Admin.Controllers
                 _userManager = value;
             }
         }
-
         // GET: Admin/AspNetUsers
         public ActionResult Index()
         {
@@ -75,11 +75,11 @@ namespace MeetingManagement.Areas.Admin.Controllers
                  db.SaveChanges();
                  return RedirectToAction("Index");
              }
-
+             S
              return View(aspNetUser);*/
 
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-            var result = await UserManager.CreateAsync(user, model.Password);
+            var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -87,7 +87,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
                 // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                 // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                 // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                AddOtherAccount(user.Id);
                 return RedirectToAction("Index", "AspNetUsers");
             }
             else
@@ -95,11 +95,20 @@ namespace MeetingManagement.Areas.Admin.Controllers
                 AddErrors(result);
             }
 
-
             // If we got this far, something failed, redisplay form
             return View();
         }
 
+        private void AddOtherAccount(string id)
+        {
+            var user = db.AspNetUsers.Find(id);
+            db.OTHER_ACCOUNTs.Add(new OTHER_ACCOUNT
+            {
+                othUser_id = user.Id,
+                othUser_Email = user.Email
+            });
+            db.SaveChanges();
+        }
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -182,8 +191,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
 
         public List<AspNetUser> GetUsers()
         {
-            List<AspNetUser> users = new List<AspNetUser>();
-            users = db.AspNetUsers.ToList();
+            List<AspNetUser> users = db.AspNetUsers.ToList();
             return users;
         }
 
@@ -193,6 +201,14 @@ namespace MeetingManagement.Areas.Admin.Controllers
             return roles;
         }
 
+        public ActionResult GetOtherUser()
+        {
+            var otherUser = from u in db.AspNetUsers
+                            from o in db.OTHER_ACCOUNTs
+                            where u.Id == o.othUser_id
+                            select u;
+            return PartialView("OtherUserGridView", otherUser);
+        }
         [HttpGet]
         public ActionResult ResetPassword(string userID)
         {
@@ -214,7 +230,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var user = db.AspNetUsers.Find(Id);
-                var result = await UserManager.AddPasswordAsync(user.Id, password);
+                var result = await _userManager.AddPasswordAsync(user.Id, password);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index");
@@ -223,7 +239,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
                 {
                     AddErrors(result);
                 }
-               
+
             }
 
             // If we got this far, something failed, redisplay form

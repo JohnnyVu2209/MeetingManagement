@@ -1,0 +1,36 @@
+﻿@model MeetingManagement.Models.TASK
+
+@using (Ajax.BeginForm("Create", "Tasks", new AjaxOptions { HttpMethod = "Post", OnSuccess = "CreateSuccess" }, new { @class = "form-horizontal", @id = "createformid", role = "form" }))
+{
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Tạo công việc</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <div class="col-md-13">
+                            @Html.TextBoxFor(m => m.Task_name, new { @class = "form-control",@placholder = "Tên công việc" })
+                            @Html.ValidationMessageFor(m => m.Task_name, "", new { @class = "text-danger" });
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-13">
+                            @Html.DropDownList("Asignee", (IEnumerable<SelectListItem>)ViewBag.Meeting_id, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary">Tạo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

@@ -3,21 +3,28 @@
     Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
-    <div class="col-md-12" style="width:90%">
-        <div class="table-head">Cuộc họp sắp tới</div>
-        @Html.Partial("MeetingList")
-    </div>
-</div>
-<div class="row" style="padding-top:50px;width:90%;">
-    <div class="col-md-6">
-        <div class="table-head">Công việc chưa hoàn thành</div>
-        @Html.Partial("TaskList")
-    </div>
-    <div class="col-md-6">
-        <div class="table-head ">Danh sách danh mục</div>
-        @Html.Action("CategoriesList", "HomePage")
+    <div class="col-md-12" style="width:88%">
+        @Html.Action("IndexMeetingList")
     </div>
 </div>
 
+<div class="row" style="padding-top:50px;width:90%;">
+    <div class="col-md-6">
+        <div class="table-head">Danh Sách Danh Mục</div>
+        @Html.Action("IndexCateList")
+    </div>
+
+    <div class="col-md-6">
+        <div class="table-head ">Danh Sách Công Việc</div>
+        @Html.Action("IndexTaskList")        
+    </div>
+</div>
+
+<style>
+    .body-content {
+        position: absolute;
+        top: 0px;
+    }
+</style>
 
 

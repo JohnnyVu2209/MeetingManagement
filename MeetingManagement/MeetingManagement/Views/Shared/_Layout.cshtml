@@ -1,16 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@using MeetingManagement.Models;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link rel="stylesheet" href="~/Content/normalize.css" />
     <link rel="stylesheet" href="~/Content/The-Last-Style-Blender.css" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
-<body>
+<body id="yuki-body">
     @*<div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -31,27 +30,43 @@
                 </div>
             </div>
         </div>*@
-    <div id="nav-bar">
+    <div id="yuki-nav-bar">
         <div>
             <a href="@Url.Action("Index","Home",new { Area = "" })"><img src="https://www.vanlanguni.edu.vn/images/2020/HE_THONG_LOGO_CUA_TRUONG-02.png" alt="Văn Lang University"></a>
         </div>
-        <div class="login">
-            @Html.Partial("_LoginPartial")
+        <div class="yuki-login-info">
+            @Html.Partial("_LoginPartial");
         </div>
-    </div>
+    </div><!--Nav-bar-->
 
-    <div id="menu">
+    <div id="yuki-menu">
         <ul>
-            <li><a href="@Url.Action("Index","Home")">Trang chính</a></li>
+            <li><a href="@Url.Action("Index","Home")">Home</a></li>
+            <li><a href="@Url.Action("About","Home")">About</a></li>
+            <li><a href="@Url.Action("Contact","Home")">Contact</a></li>
         </ul>
+        @{
+            var userRoles = Roles.GetRolesForUser(User.Identity.Name);
+        }
+        @foreach (var role in userRoles)
+        {
+            if (role == "BCN")
+            {
+                <ul>
+                    <li><a href="@Url.Action("Index","MainPage")" style="margin-top:10px">Trang chủ</a></li>
+                    <li><a href="@Url.Action("Index","Categories")" style="margin-top:10px">Danh mục</a></li>
+                    <li><a href="@Url.Action("Index","tabCuocHop")" style="margin-top:10px">Cuộc họp</a></li>
+                </ul>
+            }
+        }
     </div> <!--Menu-->
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
+        <footer id="yuki-footer">
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
+    @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
     @Scripts.Render("~/bundles/bootstrap")
 

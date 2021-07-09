@@ -1,0 +1,13 @@
+﻿@model IEnumerable<MeetingManagement.Models.CATEGORY>
+<div class="catalog-wrapper">
+    <ul class="catalogList">
+        @foreach (var item in Model)
+        {       
+            <li> 
+                <a href="@Url.Action("IndexCateDetail", new { id=item.Category_id})">
+                    @item.Category_Name
+                </a>
+            </li>       
+        }
+    </ul>
+</div>

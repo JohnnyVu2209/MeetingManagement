@@ -1,0 +1,87 @@
+﻿@model MeetingManagement.Models.MEETING
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+{
+    <div class="modal fade" id="modalFeedback" method="post" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            @Html.ValidationSummary(true, "", new { @class = "input--style-5-fixed area-input" })
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" style="margin-top:0px" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Lý do hủy cuộc họp</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        @Html.HiddenFor(model => model.Meeting_id)
+                        @Html.HiddenFor(model => model.Status)
+
+                        <label for="comment">Trả lời:</label>
+                        @*<textarea class="form-control" rows="5" id="comment"></textarea>*@
+                        <div class="value">
+                            <div class="input-group input_fixed text-danger">
+                                @*<input type="text" id="meeting_feedback" />*@
+
+                                @Html.TextAreaFor(model => model.Feedback, new { @class = "input--style-5-fixed area-input", @rows = "5", @id = "meeting_feedback" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input onclick="FeedbackEnter()" type="submit" value="Phản Hồi" class="btn btn-fixed yuki-btn-blue" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+<style>
+    .yuki-card-footer {
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    .btn-fixed {
+        color: white;
+        font-size: 14px;
+        display: inline-block;
+        width: 8em;
+        height: 4em;
+        text-align: center;
+        border-radius: 4px;
+    }
+
+    .yuki-btn-blue {
+        background-color: #008CBA !important;
+    }
+
+    .yuki-btn-gray {
+        background-color: #808080 !important;
+    }
+</style>
+<style>
+    .input_fixed {
+        width: 100%;
+        height: 30px;
+    }
+</style>
+<script type="text/javascript">
+    function FeedbackEnter() {
+        var meeting_id = $("#Meeting_id").val();
+        var feedback = $("#meeting_feedback").val();
+        var status = $("#Status").val();
+
+        $.ajax({
+            url: '@Url.Action("Feedback","MainPage")',
+            method: 'POST',
+            data: { meeting_id, feedback,status },
+            success: function (data) {
+                window.location.href = '@Url.Action("Index") '
+                },
+            error: function (err) {
+                        console.log(err);
+                    }
+                })
+    }
+</script>
