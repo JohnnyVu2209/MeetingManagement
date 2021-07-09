@@ -181,7 +181,7 @@ namespace MeetingManagement.Areas.User.Controllers
         {
             MEETING newMeet = new MEETING();
             newMeet.Category_id = id;
-            return View(newMeet);
+            return View("MeetingForm2", newMeet);
         }
 
         [HttpPost]

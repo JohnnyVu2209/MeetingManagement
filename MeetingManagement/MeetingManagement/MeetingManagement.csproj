@@ -350,7 +350,9 @@
     <Content Include="Content\main.css" />
     <Content Include="Content\MeetingInfo.css" />
     <Content Include="Content\Meetings\meetingform.css" />
+    <Content Include="Content\Meetings\meetingdetail.css" />
     <Content Include="Content\outline_filter_alt_black_24dp.png" />
+    <Content Include="Content\Picture\outline_event_black_24dp.png" />
     <Content Include="Content\Picture\outline_notifications_active_black_24dp.png" />
     <Content Include="Content\Picture\student_3.jpg" />
     <Content Include="Content\quyhung\css\tabcuochop.css" />
@@ -667,6 +669,7 @@
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer-fa\theme.scss" />
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer\theme.scss" />
     <Content Include="Areas\User\Views\Meetings\MeetingReport.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\MeetingForm2.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
