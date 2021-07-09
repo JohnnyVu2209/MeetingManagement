@@ -13,19 +13,31 @@
     <div class="body-navbar">
         <div class="nav-content-zone">
             <img src="~/Content/Picture/users_meeting.png" />
-            <div class="lable-zone">
+            <div class="lable-zone" style="display:flex;">
                 <div style="display: inline-flex">
-                    @Html.Label(Model.CATEGORY.Category_Name.ToString())
+                    @Html.Label(Model.CATEGORY.Category_Name)
                 </div>
-                <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-info')">
-                    Chi tiết
-                </div>
-                <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-task')">
-                    Công việc
-                </div>
-                <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-report')">
-                    Báo cáo
-                </div>
+                @if (Model.MEETING_STATUS.Status_id == 1)
+                {
+                    <div class="detail-tab-btn tablinks" style="width:80px;padding:0;" onclick="openTab(event,'meeting-info')">
+                        Chi tiết
+                        
+                    </div>
+                    <div class="pending-status" >@Model.MEETING_STATUS.Status_name</div>
+                }
+                else
+                {
+                    <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-info')">
+                        Chi tiết
+                    </div>
+                    <div class="detail-tab-btn tablinks " onclick="openTab(event,'meeting-task')">
+                        Công việc
+                    </div>
+                    <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-report')">
+                        Báo cáo
+                    </div>
+                }
+
             </div>
             <div class="button-zone">
                 <a class="btn button-close" onclick="location.href ='@Url.Action("Index", "MEETINGs")';">Close</a>

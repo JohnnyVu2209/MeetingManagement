@@ -18,7 +18,7 @@ namespace MeetingManagement.Models
         public int Attachment_id { get; set; }
         public string Attachment_path { get; set; }
         public string Attachment_name { get; set; }
-        public byte[] Attachment_binary { get; set; }
+        public string Attachment_binary { get; set; }
     
         public virtual MEETING MEETING { get; set; }
     }

@@ -6,7 +6,7 @@
 <ul class="catalogList">
     @foreach (var item in Model)
     {
-        <li>
+        <li onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id })';">
             @item.Meeting_name
         </li>
     }
