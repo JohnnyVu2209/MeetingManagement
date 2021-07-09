@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using MeetingManagement.Models;
 using System.Web.Security;
 
+
 namespace MeetingManagement.Controllers
 {
     [Authorize]
