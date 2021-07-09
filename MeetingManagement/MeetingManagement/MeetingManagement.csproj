@@ -403,6 +403,7 @@
     <Content Include="Areas\User\Views\Meetings\CreateUser2.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\ReportList.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

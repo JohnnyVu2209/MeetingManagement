@@ -153,5 +153,11 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         {
             return View();
         }
+
+        public ActionResult ReportList()
+        {
+            ViewBag.meeting = db.MEETINGs.ToList();
+            return View();
+        }
     }
 }
