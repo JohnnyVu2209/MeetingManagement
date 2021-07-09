@@ -36,122 +36,100 @@
 
 <link href="~/taocuochop/css/main.css" rel="stylesheet" />
 
+<form id="createMeeting" method="post" enctype="multipart/form-data">
+     <h2><center>Tạo Cuộc Họp</center></h2>
 
-
-<div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-    <div class="wrapper wrapper--w790">
-        <div class="card card-5">
-            <div class="card-heading">
-                <h2 class="title">Tạo Cuộc Họp</h2>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-row">
+        <div class="name">Tên Cuộc Họp</div>
+        <div class="value">
+            <div class="">
+                @Html.TextBoxFor(model => model.Meeting_name, new { @class = "input--style-5" })
+                @Html.ValidationMessageFor(model => model.Meeting_name, "", new { @class = "text-danger" })
             </div>
-            <form id="createMeeting" method="post" enctype="multipart/form-data">
-
-                <div class="card-body">
-
-
-
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-row">
-                        <div class="name">Tên Cuộc Họp</div>
-                        <div class="value">
-                            <div class="input-group">
-                                @Html.TextBoxFor(model => model.Meeting_name, new { @class = "input--style-5" })
-                                @Html.ValidationMessageFor(model => model.Meeting_name, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <div class="form-row m-b-55">
-                        <div class="name">Ngày/Giờ</div>
-                        <div class="value">
-
-
-
-                            <div class="row row-space">
-                                <div class="col-2">
-                                    <div class="input-group-desc">
-                                        @Html.TextBoxFor(model => model.Date_Start, new { @class = "input--style-5", @type = "date" })
-                                        @Html.ValidationMessageFor(model => model.Date_Start, "", new { @class = "text-danger" })
-                                        <label class="label--desc">Ngày Họp</label>
-                                    </div>
-                                </div>
-                                <div class="col-2">
-                                    <div class="input-group-desc">
-                                        @Html.TextBoxFor(model => model.Time_Start, new { @class = "input--style-5", @type = "time" })
-                                        @Html.ValidationMessageFor(model => model.Time_Start, "", new { @class = "text-danger" })
-
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="name">Địa Điểm</div>
-                        <div class="value">
-                            <div class="input-group">
-                                @Html.TextBoxFor(model => model.Location, new { @class = "input--style-5" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="name">Nội Dung Cuộc Họp</div>
-                        <div class="value">
-                            <div class="input-group">
-                                @Html.TextAreaFor(model => model.Meeting_content, new { @class = "input--style-5", @rows = "5", @id = "comment1", @style = "margin: 0px; width: 400px; height: 73px;" })
-                            </div>
-                            @Html.HiddenFor(m => m.Category_id)
-
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="name">Người Tham Dự:</div>
-                        <div>
-                            <ul class="w3-ul w3-border create-user-scroll" id="pickedUser">
-                                @Html.HiddenFor(m => m.AspNetUsers)
-                            </ul>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" onclick="getCreateModal()">
-                                Thêm
-                            </button>
-
-
-
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="name">Người Ngoài Trường:</div>
-                        <div>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" onclick="getCreateModal2()">
-                                Thêm
-                            </button>
-                        </div>
-
-
-
-                    </div>
-                    <div class="form-row">
-                        <div class="name">Tài Liệu Đính Kèm:</div>
-                        <div>
-                            <div class="form-group">
-                                <input type="file" class="form-control-file border" multiple id="file" name="Files" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                </div>
-                <div>
-                    <button type="submit" class="btn btn--blue btn-lg btn-block" id="create" data-toggle="modal">Tạo</button>
-                </div>
-            </form>
         </div>
     </div>
-</div>
 
+    <div class="form-row">
+        <div class="name">Thời gian/Địa điểm<span class="icon-windows mr-3"></span></div>
+        <div class="value">
+
+            <div class="row row-space">
+                <div class="col-sm-3">
+                    <div class="input-group-desc">
+                        @Html.TextBoxFor(model => model.Date_Start, new { @class = "input--style-5", @type = "date" })
+                        @Html.ValidationMessageFor(model => model.Date_Start, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="input-group-desc">
+                        @Html.TextBoxFor(model => model.Time_Start, new { @class = "input--style-5", @type = "time" })
+                        @Html.ValidationMessageFor(model => model.Time_Start, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="input-group-desc">
+                        @Html.TextBoxFor(model => model.Location, new { @class = "input--style-5" })
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-row">
+        <div class="name">Nội Dung Cuộc Họp</div>
+        <div class="value">
+            <div class="input-group">
+                @Html.TextAreaFor(model => model.Meeting_content, new { @class = "input--style-5", @rows = "5", @id = "comment1", @style = "margin: 0px; width: 1181px; height: 281px; max-width: none" })
+            </div>
+            @Html.HiddenFor(m => m.Category_id)
+
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="name">Người Tham Dự:</div>
+        <div>
+            <ul class="w3-ul w3-border create-user-scroll" id="pickedUser">
+                @Html.HiddenFor(m => m.AspNetUsers)
+            </ul>
+            <button type="button" class="btn btn-primary" data-toggle="modal" onclick="getCreateModal()">
+                Thêm
+            </button>
+
+
+
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="name">Người Ngoài Trường:</div>
+        <div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" onclick="getCreateModal2()">
+                Thêm
+            </button>
+        </div>
+
+
+
+    </div>
+    <div class="form-row">
+        <div class="name">Tài Liệu Đính Kèm:</div>
+        <div>
+            <div class="form-group">
+                <input type="file" class="form-control-file border" multiple id="file" name="Files" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div>
+        <button type="submit" class="btn btn--blue btn-lg btn-block" id="create" data-toggle="modal">Tạo</button>
+    </div>
+</form>
+        <
 
 
 <div id="Popup"></div>

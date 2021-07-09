@@ -2165,6 +2165,30 @@
     <Content Include="assets\plugins\global\fonts\socicon\socicon.svg" />
     <Content Include="assets\plugins\global\plugins.bundle.css" />
     <Content Include="assets\plugins\global\plugins.bundle.js" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="login-form-05\css\bootstrap.min.css" />
+    <Content Include="login-form-05\css\bootstrap\bootstrap-reboot.css" />
+    <Content Include="login-form-05\css\bootstrap\bootstrap.css" />
+    <Content Include="login-form-05\css\owl.carousel.min.css" />
+    <Content Include="login-form-05\css\style.css" />
+    <Content Include="login-form-05\fonts\icomoon\demo-files\demo.css" />
+    <Content Include="login-form-05\fonts\icomoon\demo-files\demo.js" />
+    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.svg" />
+    <Content Include="login-form-05\fonts\icomoon\style.css" />
+    <Content Include="login-form-05\images\logo.png" />
+    <Content Include="login-form-05\images\vanlang.png" />
+    <Content Include="login-form-05\images\vanlang1.png" />
+    <Content Include="login-form-05\js\bootstrap.min.js" />
+    <Content Include="login-form-05\js\jquery-3.3.1.min.js" />
+    <Content Include="login-form-05\js\main.js" />
+    <Content Include="login-form-05\js\owl.carousel.min.js" />
+    <Content Include="login-form-05\js\popper.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="taocuochop\css\main.css" />
     <Content Include="taocuochop\css\main.min.css" />
     <Content Include="taocuochop\js\global.js" />
@@ -2182,17 +2206,12 @@
     <Content Include="taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.svg" />
     <Content Include="taocuochop\vendor\select2\select2.min.css" />
     <Content Include="taocuochop\vendor\select2\select2.min.js" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\catalog-list.css" />
     <Content Include="css\style.css" />
     <Content Include="Content\normalize.css" />
     <Content Include="Content\outline_filter_alt_black_24dp.png" />
     <Content Include="Content\The-Last-Style-Blender.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="imgs\icons8-home-24.png" />
@@ -2205,21 +2224,6 @@
     <Content Include="imgs\logo-vlu-en-8.png" />
     <Content Include="imgs\logoVLU.png" />
     <Content Include="imgs\Walk.gif" />
-    <Content Include="login-form-05\css\bootstrap.min.css" />
-    <Content Include="login-form-05\css\bootstrap\bootstrap-reboot.css" />
-    <Content Include="login-form-05\css\bootstrap\bootstrap.css" />
-    <Content Include="login-form-05\css\owl.carousel.min.css" />
-    <Content Include="login-form-05\css\style.css" />
-    <Content Include="login-form-05\fonts\icomoon\demo-files\demo.css" />
-    <Content Include="login-form-05\fonts\icomoon\demo-files\demo.js" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.svg" />
-    <Content Include="login-form-05\fonts\icomoon\Read Me.txt" />
-    <Content Include="login-form-05\fonts\icomoon\style.css" />
-    <Content Include="login-form-05\js\bootstrap.min.js" />
-    <Content Include="login-form-05\js\jquery-3.3.1.min.js" />
-    <Content Include="login-form-05\js\main.js" />
-    <Content Include="login-form-05\js\owl.carousel.min.js" />
-    <Content Include="login-form-05\js\popper.min.js" />
     <Content Include="Models\Models.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Models.edmx</DependentUpon>
@@ -2230,8 +2234,6 @@
       <DependentUpon>Models.edmx</DependentUpon>
       <LastGenOutput>Models.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\HeadOfDepartment\Views\web.config" />
     <Content Include="Areas\User\Views\web.config" />
@@ -2255,13 +2257,6 @@
     <Content Include="Areas\Admin\Views\AspNetRoles\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\UserGridView.cshtml" />
-    <Content Include="login-form-05\css\.DS_Store" />
-    <Content Include="login-form-05\css\bootstrap.min.css.map" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.eot" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.ttf" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.woff" />
-    <Content Include="login-form-05\fonts\icomoon\selection.json" />
-    <Content Include="login-form-05\images\.DS_Store" />
     <Content Include="Areas\User\Views\_ViewStart.cshtml" />
     <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
     <Content Include="taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.eot" />
@@ -2334,6 +2329,22 @@
     <Content Include="Areas\User\Views\MEETINGs\CreateUser2.cshtml" />
     <Content Include="Areas\User\Views\Categories\MeetingList.cshtml" />
     <Content Include="Areas\User\Views\Categories\Details.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="login-form-05\css\.DS_Store" />
+    <Content Include="login-form-05\css\bootstrap.min.css.map" />
+    <Content Include="login-form-05\fonts\.DS_Store" />
+    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.eot" />
+    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.ttf" />
+    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.woff" />
+    <Content Include="login-form-05\fonts\icomoon\selection.json" />
+    <Content Include="login-form-05\images\.DS_Store" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -2396,14 +2407,6 @@
     <Folder Include="Upload\Attachments\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
