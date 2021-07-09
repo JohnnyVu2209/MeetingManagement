@@ -75,6 +75,7 @@
           <Property Name="Attachment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Attachment_path" Type="nvarchar" MaxLength="128" />
           <Property Name="Attachment_name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Attachment_binary" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="CATEGORY">
           <Key>
@@ -565,6 +566,7 @@
           <Property Name="Attachment_path" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Attachment_name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MEETING" Relationship="SEP24Team7Model.FK_Attachment_MEETING" FromRole="ATTACHMENT" ToRole="MEETING" />
+          <Property Name="Attachment_binary" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="CATEGORY">
           <Key>
@@ -885,6 +887,7 @@
           <EntitySetMapping Name="ATTACHMENTs">
             <EntityTypeMapping TypeName="SEP24Team7Model.ATTACHMENT">
               <MappingFragment StoreEntitySet="ATTACHMENT">
+                <ScalarProperty Name="Attachment_binary" ColumnName="Attachment_binary" />
                 <ScalarProperty Name="Attachment_name" ColumnName="Attachment_name" />
                 <ScalarProperty Name="Attachment_path" ColumnName="Attachment_path" />
                 <ScalarProperty Name="Attachment_id" ColumnName="Attachment_id" />

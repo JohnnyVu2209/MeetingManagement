@@ -5,185 +5,139 @@
     ViewBag.Title = "MeetingForm";
     Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
 }
-
-
-
 <!-- Icons font CSS-->
-
-
-
 <link href="~/taocuochop/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" />
 <link href="~/taocuochop/vendor/font-awesome-4.7/css/font-awesome.css" rel="stylesheet" />
-
-
 
 <!-- Font special for pages-->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!-- Vendor CSS-->
 
-
-
-<link href="~/taocuochop/vendor/select2/select2.min.css" rel="stylesheet" />
-
-
-
-
-<link href="~/taocuochop/vendor/datepicker/daterangepicker.css" rel="stylesheet" />
 <!-- Main CSS-->
-
-
-
 <link href="~/taocuochop/css/main.css" rel="stylesheet" />
 
-
-
-<div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-    <div class="wrapper wrapper--w790">
-        <div class="card card-5">
-            <div class="card-heading">
-                <h2 class="title">Tạo Cuộc Họp</h2>
+<div class="body-navbar">
+    <div class="nav-content-zone">
+        <img src="~/Content/Picture/users_meeting.png" />
+        <div class="lable-zone">
+            New Meeting
+            @*<div style="display: inline-flex">
+                    @Html.Label(Model.CATEGORY.Category_Name.ToString())
+                </div>
+                <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-info')">
+                    Chi tiết
+                </div>
+                <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-task')">
+                    Công việc
+                </div>*@
+            <div>
             </div>
-            <form id="createMeeting" method="post" enctype="multipart/form-data">
-
-                <div class="card-body">
-
-
-
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-row">
-                        <div class="name">Tên Cuộc Họp</div>
-                        <div class="value">
-                            <div class="input-group">
-                                @Html.TextBoxFor(model => model.Meeting_name, new { @class = "input--style-5" })
-                                @Html.ValidationMessageFor(model => model.Meeting_name, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <div class="form-row m-b-55">
-                        <div class="name">Ngày/Giờ</div>
-                        <div class="value">
-
-
-
-                            <div class="row row-space">
-                                <div class="col-2">
-                                    <div class="input-group-desc">
-                                        @Html.TextBoxFor(model => model.Date_Start, new { @class = "input--style-5", @type = "date" })
-                                        @Html.ValidationMessageFor(model => model.Date_Start, "", new { @class = "text-danger" })
-                                        <label class="label--desc">Ngày Họp</label>
-                                    </div>
-                                </div>
-                                <div class="col-2">
-                                    <div class="input-group-desc">
-                                        @Html.TextBoxFor(model => model.Time_Start, new { @class = "input--style-5", @type = "time" })
-                                        @Html.ValidationMessageFor(model => model.Time_Start, "", new { @class = "text-danger" })
-
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="name">Địa Điểm</div>
-                        <div class="value">
-                            <div class="input-group">
-                                @Html.TextBoxFor(model => model.Location, new { @class = "input--style-5" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="name">Nội Dung Cuộc Họp</div>
-                        <div class="value">
-                            <div class="input-group">
-                                @Html.TextAreaFor(model => model.Meeting_content, new { @class = "input--style-5", @rows = "5", @id = "comment1", @style = "margin: 0px; width: 400px; height: 73px;" })
-                            </div>
-                            @Html.HiddenFor(m => m.Category_id)
-
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="name">Người Tham Dự:</div>
-                        <div>
-                            <ul class="w3-ul w3-border create-user-scroll" id="pickedUser">
-                                @Html.HiddenFor(m => m.AspNetUser.Full_name)
-                            </ul>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" onclick="getCreateModal()">
-                                Thêm
-                            </button>
-
-
-
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="name">Người Ngoài Trường:</div>
-                        <div>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" onclick="getCreateModal2()">
-                                Thêm
-                            </button>
-                        </div>
-
-
-
-                    </div>
-                    <div class="form-row">
-                        <div class="name">Tài Liệu Đính Kèm:</div>
-                        <div>
-                            <div class="form-group">
-                                <input type="file" class="form-control-file border" multiple id="file" name="Files" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                </div>
-                <div>
-                    <button type="submit" class="btn btn--blue btn-lg btn-block" id="create" data-toggle="modal">Tạo</button>
-                </div>
-            </form>
+        </div>
+        <div class="button-zone">
+            <a class="btn button-close" onclick="location.href ='@Url.Action("Index", "MEETINGs")';">Close</a>
         </div>
     </div>
 </div>
+<form id="createMeeting" method="post" enctype="multipart/form-data" style=" position: absolute; top: 100px">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-row form-row-fixed form-row-fixed-title">
+        <img src="~/Content/Picture/outline_title_black_24dp.png" />
+        @*<div class="name">Tên Cuộc Họp</div>*@
+        <div class="value value-fixed ">
+            <div class="input-group input_fixed value-fixed-title">
+                @Html.TextBoxFor(model => model.Meeting_name, new { @class = "input--style-5 input_fixed value-fixed-title" })
+                @Html.ValidationMessageFor(model => model.Meeting_name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="form-row form-row-fixed datetime-inline">
+        @*<div class="name">Ngày/Giờ</div>*@
+        <img src="~/Content/Picture/outline_schedule_black_24dp.png" />
+        <div class="value value-fixed" style="width: calc(100% - 34px)">
+            <div class="inline-datetime">
+                <div class="col-2">
+                    <div class="input-group-desc">
+                        @Html.TextBoxFor(model => model.Date_Start, new { @class = "input--style-5", @type = "date" })
+                        @Html.ValidationMessageFor(model => model.Date_Start, "", new { @class = "text-danger" })
+                        @*<label class="label--desc">Ngày Họp</label>*@
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="input-group-desc">
+                        @Html.TextBoxFor(model => model.Time_Start, new { @class = "input--style-5", @type = "time" })
+                        @Html.ValidationMessageFor(model => model.Time_Start, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="name">Địa Điểm</div>
+        <div class="value">
+            <div class="input-group">
+                @Html.TextBoxFor(model => model.Location, new { @class = "input--style-5" })
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="name">Nội Dung Cuộc Họp</div>
+        <div class="value">
+            <div class="input-group">
+                @Html.TextAreaFor(model => model.Meeting_content, new { @class = "input--style-5", @rows = "5", @id = "comment1", @style = "margin: 0px; width: 400px; height: 73px;" })
+            </div>
+            @Html.HiddenFor(m => m.Category_id)
 
-
-
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="name">Người Tham Dự:</div>
+        <div>
+            <ul class="w3-ul w3-border create-user-scroll" id="pickedUser">
+                @Html.HiddenFor(m => m.AspNetUser.Full_name)
+            </ul>
+            <button type="button" class="btn btn-primary" data-toggle="modal" onclick="getCreateModal()">
+                Thêm
+            </button>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="name">Người Ngoài Trường:</div>
+        <div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" onclick="getCreateModal2()">
+                Thêm
+            </button>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="name">Tài Liệu Đính Kèm:</div>
+        <div>
+            <div class="form-group">
+                <input type="file" class="form-control-file border" multiple id="file" name="Files" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+            </div>
+        </div>
+    </div>
+    <div>
+        <button type="submit" class="btn btn--blue btn-lg btn-block" id="create" data-toggle="modal">Tạo</button>
+    </div>
+</form>
 <div id="Popup"></div>
 <div id="Popup2"></div>
+<style>
+    .button-close {
+        color: #212529;
+        border-color: #212529;
+    }
 
+        .button-close:hover {
+            background: #f1f1f1;
+        }
 
+        new-input{
+            height:30px;
+            line-height:normal;
+        }
+</style>
 
-
-
-<!-- Jquery JS-->
-
-
-
-<script src="~/taocuochop/vendor/jquery/jquery.min.js"></script>
-<!-- Vendor JS-->
-
-
-
-<script src="~/taocuochop/vendor/select2/select2.min.js"></script>
-
-
-
-<script src="~/taocuochop/vendor/datepicker/moment.min.js"></script>
-
-
-
-<script src="~/taocuochop/vendor/datepicker/daterangepicker.js"></script>
-<!-- Main JS-->
-
-
-
-<script src="~/taocuochop/js/global.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type="text/javascript">
     $(() => {
@@ -224,4 +178,108 @@
         });
     }
     ;
+
 </script>
+@section scripts{
+    <script type="text/javascript">
+        $(() => {
+            $('#txtSearch').on('keyup', () => {
+                var input, filter, ul, li, i, txtValue;
+                input = document.getElementById("txtSearch");
+                filter = input.value.toUpperCase();
+                ul = document.getElementById("userbox");
+                li = ul.getElementsByTagName("li");
+                for (i = 0; i < li.length; i++) {
+                    txtValue = li[i].textContent || li[i].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        li[i].style.display = "flex";
+                    } else {
+                        li[i].style.display = "none";
+                    }
+                }
+
+
+
+            });
+            $("#modalCreate").on("hidden.bs.modal", function () {
+                sessionStorage.clear();
+            });
+        });
+
+
+
+        $(() => {
+
+
+
+            if (sessionStorage.getItem("user") != null) {
+
+
+
+                var user = JSON.parse(sessionStorage.getItem("user"));
+                var user_length = Object.keys(user).length;
+                for (var i = 0; i < user_length; i++) {
+                    $("#pickbox").append('<li id= "li' + i + '">' + JSON.parse(sessionStorage.getItem("user"))[i] + '</li>')
+
+
+
+                }
+            }
+            $("#hiden").hide();
+        });
+        function AddUser() {
+            if (sessionStorage.getItem("user") != null) {
+                var user = JSON.parse(sessionStorage.getItem("user"));
+                var user_length = Object.keys(user).length;
+                for (var i = 0; i < user_length; i++) {
+                    $("#pickedUser").append('<li id= "li' + i + '">' + JSON.parse(sessionStorage.getItem("user"))[i] + '</li>')
+
+                }
+                var userArr = [];
+                ul = document.getElementById("pickedUser");
+                li = ul.getElementsByTagName("li");
+                for (var i = 0; i < li.length; i++) {
+                    userArr.push(li[i].innerText)
+                }
+                $("#AspNetUsers").val(userArr);
+                $("#modalCreate").modal("hide");
+            }
+            else {
+                alert("Bạn chưa thêm người tham dự");
+            }
+        }
+        function getchecked(id) {
+            var userArray = [];
+            var item = $('#' + id);
+            if (item.prop("checked") == false) {
+                item.prop("checked", true);
+                userArray.push(item.val());
+                sessionStorage.setItem("user", JSON.stringify(userArray));
+                $("#pickbox").append('<li id= "li' + id + '">' + item.val() + '</li>');
+                $("#hiden").show();
+
+            }
+            else if (item.prop("checked") == true) {
+                item.prop("checked", false);
+                var remove_item = item.val();
+                $("#li" + id).remove();
+                userArray = $.grep(userArray, function (value) {
+                    return value != remove_item;
+                });
+                if (userArray == 0) {
+                    $("#hiden").hide();
+                }
+                sessionStorage.setItem("user", JSON.stringify(userArray));
+            }
+        }
+    </script>
+}
+
+<!-- Jquery JS-->
+<script src="~/taocuochop/vendor/jquery/jquery.min.js"></script>
+
+<!-- Vendor JS-->
+<script src="~/taocuochop/vendor/select2/select2.min.js"></script>
+<script src="~/taocuochop/vendor/datepicker/moment.min.js"></script>
+<script src="~/taocuochop/vendor/datepicker/daterangepicker.js"></script>
+
