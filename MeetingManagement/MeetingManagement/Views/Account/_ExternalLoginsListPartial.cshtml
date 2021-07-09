@@ -2,7 +2,7 @@
 @using Microsoft.Owin.Security
 
 
-<hr />
+
 @{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
     if (loginProviders.Count() == 0) {
@@ -18,12 +18,15 @@
             @Html.AntiForgeryToken()
             <div id="socialLoginList">
                 <p>
-                    @foreach (AuthenticationDescription p in loginProviders) {
-                        <button type="submit" class="btn col-md-6 btn-primary" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
-                        
+                    @foreach (AuthenticationDescription p in loginProviders)
+                    {
+
+                        <button type="submit"  class="btn btn-block py-2 btn-vanlang" id ="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><span class="icon-windows mr-3"></span>Account VanLang </button>
+                       
                     }
                 </p>
             </div>
         }
     }
 }
+    
