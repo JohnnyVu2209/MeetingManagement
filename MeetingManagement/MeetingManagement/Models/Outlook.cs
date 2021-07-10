@@ -11,12 +11,14 @@ namespace MeetingManagement.Models
         public string Subject { get; set; }
         public string Body { get; set; }
 
+
         public Outlook(string To, string Subject, string Body)
         {
             this.To = To;
             this.Subject = Subject;
             this.Body = Body;
         }
+
         public void SendMail()
         {
             try

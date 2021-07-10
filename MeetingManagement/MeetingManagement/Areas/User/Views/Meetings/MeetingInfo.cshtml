@@ -4,7 +4,9 @@
 @Html.HiddenFor(model => model.Meeting_id, new { @id = "meeting_id" })
 @Html.HiddenFor(model => model.Status, new { @id = "status" })
 @Html.HiddenFor(model => model.Create_by)
-
+@{ 
+    int i = 0;
+}
 
 <style>
     #myfile:hover div {
@@ -17,87 +19,82 @@
         position: relative;
         left: 34px;
     }
-    }
 </style>
-<div class="form-row form-row-fixed">
+<div class="form-row-fixed">
     @*<img src="~/Content/Picture/outline_file_upload_black_24dp.png" />*@
     @*<label class="icon-zone" for="input-ficons-1"><i class="fa fa-plus"></i></label>*@
-    @foreach (var item in Model.ATTACHMENTs)
+    @if (Model.ATTACHMENTs.Count != 0)
     {
-        <a id="myfile" href="@item.Attachment_path" download>
-            <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
-                <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
-                    <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
+        foreach (var item in Model.ATTACHMENTs)
+        {
+            <a id="myfile" href="@item.Attachment_path" download>
+                <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
+                    <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                        <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
+                    </div>
+                    <div style="width:75%; padding:0 5px; color:black">
+                        <p>
+                            @item.Attachment_name
+                        </p>
+                        <p style="font-size:10px">
+                            @item.Attachment_binary
+                        </p>
+                    </div>
                 </div>
-                <div style="width:75%; padding:0 5px; color:black">
-                    <p>
-                        @item.Attachment_name
-                    </p>
-                    <p style="font-size:10px">
-                        14,4 KB
-                    </p>
-                </div>
-            </div>
-        </a>
+            </a>
+        }
     }
     <div class="value-fixed">
         <div class="space"></div>
     </div>
 </div>
-<div class="form-row form-row-fixed form-row-fixed-title">
-    <div>
-        <img src="~/Content/Picture/outline_title_black_24dp.png" />
-    </div>
+<div class="form-row-fixed form-row-fixed-title" style="width:100%;">
+    <img src="~/Content/Picture/outline_title_black_24dp.png" />
     <div class="value value-fixed">
-        <div class="input-group input_fixed value-fixed-title">
-            @Html.LabelFor(model => model.Meeting_name, new { @class = "input-fixed", @id = "meeting_name" })
+        <div class="input-group input_fixed value-fixed-title" style="width: 800px !important;">
+            @Html.DisplayFor(m => m.Meeting_name, new { @class = "input-fixed", @id = "meeting_name" })
         </div>
     </div>
 </div>
-<div class="form-row form-row-fixed datetime-inline">
-    <img src="~/Content/Picture/outline_schedule_black_24dp.png" />
-    <div class="value value-fixed" style="width: calc(100% - 34px); padding-right: 50px;">
-        <div class="input_fixed">
-            <div class="input-group-desc" style="display:flex ;height: 100%;">
-                @Html.Label(Model.Date_Start.ToShortDateString() + " - " + Model.Time_Start.ToString(), new { @class = "input-fixed" })
-            </div>
-        </div>
-    </div>
-</div>
-<!--
--->
-<div class="form-row form-row-fixed datetime-inline">
-    <img src="~/Content/Picture/outline_place_black_24dp.png" />
+<div class="form-row-fixed datetime-inline">
+    <img src="~/Content/Picture/outline_event_black_24dp.png" />
     <div class="value value-fixed value-fixed-location">
-        <div style="width:100%">
-            <div class="input-group input_fixed">
-                @*@Html.TextAreaFor(model => model.Location, new { @class = "input--style-5-fixed", @id = "location" })*@
-                @Html.Label(Model.Location.ToString(), new { @class = "input-fixed" })
+        <div class="input-group input_fixed">
+            <div class="input-group-desc" style="display:flex ;height: 100%;">
+                @Html.Label(Model.Date_Start.ToShortDateString(), new { @class = "input-fixed" })
             </div>
         </div>
     </div>
-</div>
-<div class="form-row form-row-fixed" style="align-items: flex-start !important;">
-    <div> <img src="~/Content/Picture/outline_edit_black_24dp.png" /></div>
-    <div class="value value-fixed" style="border: 2px solid; border-radius: 5px;">
+</div><!--
+--><div class="form-row-fixed datetime-inline">
+    <img src="~/Content/Picture/outline_schedule_black_24dp.png" />
+    <div class="value value-fixed value-fixed-location">
         <div class="input-group input_fixed">
-            @*@Html.TextAreaFor(model => model.Meeting_content, new { @class = "input--style-5-fixed area-input", @rows = "5", @id = "content" })*@
-            @Html.Label(Model.Meeting_content.ToString(), new { @class = "input--style-5-fixed area-input", @rows = "20", })
+            <div class="input-group-desc" style="display:flex ;height: 100%;">
+                @Html.Label(Model.Time_Start.ToString(), new { @class = "input-fixed" })
+            </div>
         </div>
     </div>
+</div><!--
+--><div class="form-row-fixed datetime-inline" style="width:100%;">
+       <img src="~/Content/Picture/outline_place_black_24dp.png" />
+       <div class="value value-fixed value-fixed-location">
+            <div class="input-group input_fixed" style="width:800px">
+                <div class="input-group-desc" style="display:flex ;height: 100%;">
+                    @Html.Label(Model.Location.ToString(), new { @class = "input-fixed" })
+                </div>
+            </div>
+       </div>
 </div>
-<div class="form-row form-row-fixed">
-    @*<div>
-            <img src="~/Content/Picture/outline_people_black_24dp.png" />
-        </div>*@
-    <div class="value-fixed">
-        <div class="space" id="Popup"></div>
+
+<div class="form-row-fixed" style="align-items: flex-start !important; width: 100%; margin-top: 20px !important; ">
+    <img src="~/Content/Picture/outline_edit_black_24dp.png" />
+    <div class="value value-fixed" style="border: 1px solid #e5e5e5; border-radius: 5px; width: 966px;">
+        <div class="input-group" style=" width: 100%; background: white;">
+            @*@Html.Label(Model.Meeting_content, new { @class = "area-input", @rows = "20" })*@
+            @Html.DisplayFor(m => m.Meeting_content)
+        </div>
     </div>
-    @*<div>
-            <button type="button" class="btn btn-primary" data-toggle="modal" onclick="getGrdMemberListModal(@Model.Meeting_id)">
-            Chi tiết
-            </button>
-        </div>*@
 </div>
 <a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member" aria-expanded="false" aria-controls="Member">
     Danh sách thành viên
@@ -116,19 +113,19 @@
             </tr>
         </thead>
         <tbody>
-            @for (int i = 1; i <= 10; i++)
+            @foreach(var member in Model.MEMBERs)
             {
                 <tr>
-                    <td>@i</td>
-                    <td class="col-align">Thái Minh Hiếu</td>
-                    <td class="col-align">heiu.187pm13916</td>
+                    <td>@(++i)</td>
+                    <td class="col-align">@member.AspNetUser.Full_name</td>
+                    <td class="col-align">@member.AspNetUser.Email</td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
 <div style="height:50px;"></div>
-<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member2" aria-expanded="false" aria-controls="Member">
+<!--<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member2" aria-expanded="false" aria-controls="Member">
     Ngoài nhà trường
 </a>
 <div class="collapse" id="Member2" style="width:1000px;">
@@ -140,19 +137,18 @@
                 <th class="col-align" scope="col">Email</th>
             </tr>
         </thead>
-        <tbody>
-            @for (int i = 1; i <= 10; i++)
+        <tbody>-->
+           @* @for (int i = 1; i <= 10; i++)
             {
                 <tr>
                     <td>@i</td>
                     <td class="col-align">Trần Đức Bo</td>
                     <td class="col-align">bo.187pm66666</td>
                 </tr>
-            }
-        </tbody>
+            }*@
+        <!--</tbody>
     </table>
-</div>
-@*Cho table*@
+</div>-->
 
 <style>
     .btn-primary-fixed {
@@ -174,47 +170,10 @@
         height: 50px;
     }
 
-    .input-fixed {
-        background: white;
-        border-bottom: 2px solid;
-        color: #555;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: flex-end;
-    }
-
-    .form-row-fixed {
-        align-items: flex-end;
-    }
-
     .area-input {
-        margin: 0px;
-        width: calc(1000px - 34px);
         height: fit-content;
         min-height: 250px;
-        border: 2px solid white;
-        display: flex;
-        align-items: flex-start;
-        padding: 1px;
-        word-break: break-all;
-    }
-
-    .form-row-fixed {
-        align-items: flex-end;
-    }
-    /*    .icon-zone {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 50px;
-        height: 50px;
-        border: 0.5px solid;
-        margin: 10px;
-        cursor: pointer;
-    }*/
-    .input--style-5-fixed {
-        background-color: white;
+        padding: 5px;
     }
 </style>
 

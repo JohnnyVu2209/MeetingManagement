@@ -1,8 +1,8 @@
 ﻿
 html, body {
     overflow-x: hidden;
-}
-
+} 
+    
 /*Detail*/
 .tabcontent {
     position: relative;
@@ -194,14 +194,15 @@ textarea:focus {
     align-items: center;
 }
 
-    .form-row-fixed img {
-        height: 20px;
-        opacity: 0.7;
-        display: inline-block;
-        width: 20px;
-    }
+.form-row-fixed img {
+    height: 20px;
+    opacity: 0.7;
+    display: inline-block;
+    width: 20px;
+}
 
 .input_fixed {
+    background: white;
     border-bottom: 2px solid #e5e5e5;
     color: #555;
     width: 100%;
@@ -210,14 +211,8 @@ textarea:focus {
     align-items: flex-end;
 }
 
-    .input_fixed input {
-        background-color: #f1f1f1;
-        height: 30px;
-        padding: 0px 10px;
-    }
-
 .input-fixed {
-    margin-bottom: 0px;
+    margin-bottom:0px;
 }
 
 .row-space-fixed:after {

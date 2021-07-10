@@ -217,9 +217,6 @@
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoryListVM.cs" />
-    <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MEETING.cs">
@@ -251,9 +248,6 @@
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Outlook.cs" />
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TASK.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -263,9 +257,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\User\Views\Categories\Index.cshtml" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Details.css" />
+    <Content Include="Content\HomePage.css" />
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\css\fileinput-rtl.css" />
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\css\fileinput-rtl.min.css" />
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\css\fileinput.css" />
@@ -346,10 +342,11 @@
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\themes\fa\theme.min.js" />
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\themes\gly\theme.js" />
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\themes\gly\theme.min.js" />
-    <Content Include="Content\main.css" />
     <Content Include="Content\MeetingInfo.css" />
     <Content Include="Content\Meetings\meetingform.css" />
+    <Content Include="Content\Meetings\meetingdetail.css" />
     <Content Include="Content\outline_filter_alt_black_24dp.png" />
+    <Content Include="Content\Picture\outline_event_black_24dp.png" />
     <Content Include="Content\Picture\outline_notifications_active_black_24dp.png" />
     <Content Include="Content\Picture\student_3.jpg" />
     <Content Include="Content\quyhung\css\tabcuochop.css" />
@@ -404,16 +401,6 @@
     <Content Include="login-form-05\js\main.js" />
     <Content Include="login-form-05\js\owl.carousel.min.js" />
     <Content Include="login-form-05\js\popper.min.js" />
-    <Content Include="Models\Models.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Models.edmx</DependentUpon>
-      <LastGenOutput>Models.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Models.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Models.edmx</DependentUpon>
-      <LastGenOutput>Models.cs</LastGenOutput>
-    </Content>
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\HeadOfDepartment\Views\web.config" />
     <Content Include="Areas\User\Views\web.config" />
@@ -439,6 +426,16 @@
     <Content Include="login-form-05\images\.DS_Store" />
     <Content Include="Areas\User\Views\_ViewStart.cshtml" />
     <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
+    <Content Include="Models\Models.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Models.edmx</DependentUpon>
+      <LastGenOutput>Models.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Models.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Models.edmx</DependentUpon>
+      <LastGenOutput>Models.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -564,17 +561,9 @@
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\GrdMemberTable.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
-    <Content Include="Areas\User\Views\MEETINGs\MeetingForm.cshtml" />
     <Content Include="Areas\User\Views\MEETINGs\CreateUser.cshtml" />
     <Content Include="Areas\User\Views\MEETINGs\CreateUser2.cshtml" />
     <Content Include="Areas\User\Views\Categories\MeetingList.cshtml" />
-    <EntityDeploy Include="Models\Models.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Models.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Models.edmx.diagram">
-      <DependentUpon>Models.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\User\Views\Meetings\MeetingDetail.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingInfo.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingTask.cshtml" />
@@ -613,6 +602,30 @@
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer-fa\theme.scss" />
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer\theme.scss" />
     <Content Include="Areas\User\Views\Meetings\MeetingReport.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\MeetingForm.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser2.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Details.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Edit.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingForm.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingList.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\ReportList.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MainPage\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetUsers\OtherUserGridView.cshtml" />
+    <Content Include="Areas\Admin\Views\AspNetUsers\Send.cshtml" />
+    <Content Include="Areas\User\Views\Tasks\Create.cshtml" />
+    <Content Include="Areas\User\Views\Tasks\Index.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\Index.cshtml" />
+    <Content Include="Areas\User\Views\Categories\Details.cshtml" />
+    <EntityDeploy Include="Models\Models.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Models.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Models.edmx.diagram">
+      <DependentUpon>Models.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

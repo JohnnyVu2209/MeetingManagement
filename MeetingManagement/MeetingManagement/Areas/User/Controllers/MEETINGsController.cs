@@ -216,10 +216,12 @@ namespace MeetingManagement.Areas.User.Controllers
                         ATTACHMENT newAtt = new ATTACHMENT();
                         newAtt.Meeting_id = meetings.Meeting_id;
                         newAtt.Attachment_path = File_Path + Files.FileName;
+                        newAtt.Attachment_name = Files.FileName;
+                        newAtt.Attachment_binary = ((Double)Files.ContentLength / 1024).ToString()+ "KB";
                         db.ATTACHMENTs.Add(newAtt);
                         db.SaveChanges();
                         //}
-                        string[] users = model.AspNetUser.ToString().Split(',');
+                        string[] users = model.AspNetUsers.ToString().Split(',');
                         foreach (string user in users)
                         {
                             AspNetUser account = db.AspNetUsers.Where(x => x.Email == user).FirstOrDefault();
@@ -238,6 +240,8 @@ namespace MeetingManagement.Areas.User.Controllers
             return View(model);
         }
         private const string File_Path = "~/Upload/Attachments/";
+
+        [HttpGet]
         public ActionResult CreateUser()
         {
             List<AspNetUser> model = db.AspNetUsers.ToList();
