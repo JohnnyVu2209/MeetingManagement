@@ -7,52 +7,60 @@
 
 <link href="~/Content/catalog-list.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<header>
-    Danh mục
-    <button class="btn modal-btn" onclick="ShowCreatePopUp();">
-        Tạo
-    </button>
-</header>
-<div class="wrapper">
-    <ul class="catalogList">
-        @foreach (var item in Model)
-        {
-            <li style="display:flex";>
+<div id="container">
+    <div class="user-ctg-index-header" style="display:flex;">
+        <h2 style="position:relative;">Danh mục</h2>
+        <button style="color:white;position:relative;left:1000px;" onclick="ShowCreatePopUp()" class="btn yuki-btn-blue">
+            <p style="margin:0;">
+                Tạo
+            </p>
+        </button>
+    </div>
+    <div id="time-table" class="user-ctg-index-table-zone">
+        <div class="table user-ctg-index-table">
+            @foreach (var item in Model)
+            {
+                <div style="display:flex;">
+                    <h5 onclick="location.href = '@Url.Action("Details","Categories", new { id = item.Category_id})';">
+                        @item.Category_Name
+                    </h5>
+                    <span id="option">
+                        <i class="fa fa-ellipsis-h">
+                            <ul class="sublist">
+                                <li>
+                                    <button onclick="ShowEditPopUp(@item.Category_id)" class="edit-btn" data-modal="modal1">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        Sửa
+                                    </button>
+                                </li>
+                                <li>
+                                    <button onclick="ShowDeletePopUp(@item.Category_id)" class="delete-btn" data-modal="modald1">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                        Xóa
+                                    </button>
+                                </li>
+                            </ul>
+                        </i>
+                    </span>
+                </div>
 
-                <div onclick="location.href = '@Url.Action("Details","Categories", new { id = item.Category_id})';">@item.Category_Name</div>
-                <span>
-                    <i class="fa fa-ellipsis-h"> 
-                        <ul class="sublist">
-                            <li>
-                                <button onclick="ShowEditPopUp(@item.Category_id)" class="edit-btn" data-modal="modal1">
-                                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                                    Sửa
-                                </button>
-                            </li>
-                            <li>
-                                <button onclick="ShowDeletePopUp(@item.Category_id)" class="delete-btn" data-modal="modald1">
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                    Xóa
-                                </button>
-                            </li>
-                        </ul>
-                    </i>
-                </span>
-            </li>
-
-        }
-        </ul>
+            }
+        </div>
+    </div>
 </div>
-        <style>
+<div id="show-popup"></div>
+<style>
+    .yuki-btn-blue {
+        background-color: #009FE5 !important;
+    }
+    .user-ctg-index-table div:hover {
+        background-color: #66c2ff;
+    }
 
-            .user-ctg-index-table div:hover {
-                background-color: #66c2ff;
-            }
-
-            .user-ctg-index-table div p {
-                font-weight: bold;
-                font-size: 16px;
-            }
+    .user-ctg-index-table div p {
+        font-weight: bold;
+        font-size: 16px;
+    }
 
 
     /*.user-ctg-index-table tbody tr:hover td {
@@ -101,7 +109,7 @@
             </li>
         </ul>
     </i>*@
-<div> id="show-popup"></div>
+
 
 
 <script type="text/javascript">
@@ -123,7 +131,7 @@
     function ShowEditPopUp(categoryID) {
         $.ajax({
             type: "GET",
-            url: "Edit",
+            url: '@Url.Action("Edit", "Categories")',
             data: { categoryID },
             dataType: "html",
             success: function (data) {
@@ -139,7 +147,7 @@
         $("#loader-div")
         $.ajax({
             type: "GET",
-            url: "Delete",
+            url: '@Url.Action("Delete", "Categories")',
             data: { id: categoryID },
             dataType: "html",
             success: function (data) {

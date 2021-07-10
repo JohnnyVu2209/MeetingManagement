@@ -36,7 +36,7 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr class="yuki-column-4">
+                <tr class="yuki-column-4" >
                     <td>
                         @item.MeetingName
                     </td>
@@ -49,11 +49,11 @@
                     <td>
                         @if (@item.Status == 1)
                         {
-                            <div class="waiting-status">@item.StatusName</div>
+                            <div class="pending-status">@item.StatusName</div>
                         }
                         else if (@item.Status == 2)
                         {
-                            <div class="pending-status">@item.StatusName</div>
+                            <div class="waiting-status">@item.StatusName</div>
                         }
                         else if (@item.Status == 3)
                         {
