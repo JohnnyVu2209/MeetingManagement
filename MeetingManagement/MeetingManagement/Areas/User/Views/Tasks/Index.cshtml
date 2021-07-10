@@ -18,6 +18,11 @@
 <link href="~/Content/catalog-list.css" rel="stylesheet" />
 
 
+<button type="button" class="btn btn-success" data-toggle="modal" onclick="getCreateModal()" data-target="#staticBackdrop">
+    Launch static backdrop modal
+</button>
+
+
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
         @foreach (var meets in meetings)
@@ -27,6 +32,7 @@
                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#@(meets.Meeting_id + meets.Category_id)" aria-expanded="true" aria-controls="collapseOne">
                         @meets.Meeting_name
                     </a>
+
                 </h4>
             </div>
 
@@ -39,11 +45,9 @@
                                 @final%
                             </div>
                         </div>
-                       
-                        
+
                         @foreach (var task in tasks)
                         {
-
                             <div class="row" style="margin-left:10px;font-size:15px;">
                                 <div class="col-md-3">
                                     @task.Task_name
@@ -68,12 +72,14 @@
                                     else
                                     {
                                         <span class="waiting-status" style="width:50%;">Chưa hoàn thành</span>
+
                                         <button class="btn-dark" style="width:28px;height:28px;margin:0px 140px 0px 200px;"><i class="glyphicon glyphicon-bell" style="font-size:x-large;"></i></button>
                                     }
                                 </div>
                             </div>
                         }
                     </div>
+
                 </div>
             
         }
@@ -81,5 +87,22 @@
                                 
 </div>
 
-
+<div id="Popup"></div>
+<script type="text/javascript">
+     function getCreateModal() {
+         $.ajax({
+             url: "@Url.Action("Create","Tasks")",
+             datatype: 'html',
+             method: 'GET',
+             data: {},
+             success: function (data) {
+                 $("#Popup").html(data);
+                 $("#TaskCreateModal").modal("show");
+             },
+             error: function (err) {
+                 console.log(err);
+             }
+         });
+    };
+</script>
 
