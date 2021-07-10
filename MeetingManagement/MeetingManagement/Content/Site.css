@@ -12,7 +12,8 @@
     padding-right: 0px ;
     padding-left: 0px ;
     width: calc(100% - 150px ) ;
-    height: fit-content;
+    height: 100%;
+    min-height:1500px;
     margin-left: 150px !important;
     margin-top: 50px ;
     padding: 30px;

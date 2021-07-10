@@ -1,0 +1,44 @@
+﻿@using MeetingManagement.Models;
+@{
+    ViewBag.Title = "ReportList";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+    var meetings = ViewBag.meeting as List<MEETING>;
+}
+
+<h2>ReportList</h2>
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        @foreach (var meets in meetings)
+        {
+            <div class="panel-heading" role="tab" id="@meets.Meeting_id">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#@(meets.Meeting_id)Name" aria-expanded="true" aria-controls="collapseOne">
+                        @meets.Meeting_name
+                    </a>
+
+
+                </h4>
+            </div>
+
+
+            <div id="@(meets.Meeting_id)Name" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="@meets.Meeting_id">
+                <div class="panel-body">
+
+
+                    @foreach (var atach in meets.ATTACHMENTs)
+                    {
+                        <div class="row" style="margin-left:10px;font-size:15px;">
+                            <div class="col-md-12">
+                                @atach.Attachment_name
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        }
+    </div>
+
+</div>
+

@@ -1,175 +1,385 @@
 ﻿@model MeetingManagement.Models.MEETING
 @{
-    var userArr = new List<string>();
-    ViewBag.Title = "MeetingForm";
-    Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Tạo cuộc họp";
 }
+
 
 <!-- Icons font CSS-->
 
-<link href="~/taocuochop/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" />
-<link href="~/taocuochop/vendor/font-awesome-4.7/css/font-awesome.css" rel="stylesheet" />
+<link href="~/Content/taocuochop/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/taocuochop/vendor/font-awesome-4.7/css/font-awesome.css" rel="stylesheet" />
 
 <!-- Font special for pages-->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Vendor CSS-->
 
-<link href="~/taocuochop/vendor/select2/select2.min.css" rel="stylesheet" />
+<link href="~/Content/taocuochop/vendor/select2/select2.min.css" rel="stylesheet" />
 
-
-<link href="~/taocuochop/vendor/datepicker/daterangepicker.css" rel="stylesheet" />
+<link href="~/Content/taocuochop/vendor/datepicker/daterangepicker.css" rel="stylesheet" />
 <!-- Main CSS-->
 
-<link href="~/taocuochop/css/main.css" rel="stylesheet" />
+<link href="~/Content//taocuochop/css/main.css" rel="stylesheet" />
 
-<div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-    <div class="wrapper wrapper--w790">
-        <div class="card card-5">
-            <div class="card-heading">
-                <h2 class="title">Tạo Cuộc Họp</h2>
-            </div>
-            <form id="createMeeting" method="post" enctype="multipart/form-data">
+@*override site.css*@
+<style>
+    input {
+        max-width: none;
+    }
 
-                <div class="card-body">
+    textarea {
+        max-width: none;
+    }
 
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-row">
-                        <div class="name">Tên Cuộc Họp</div>
-                        <div class="value">
-                            <div class="input-group">
-                                @Html.TextBoxFor(model => model.Meeting_name, new { @class = "input--style-5" })
-                                @Html.ValidationMessageFor(model => model.Meeting_name, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
+    .col-2 {
+        width: 150px;
+        display: inline-block;
+    }
 
-                    <div class="form-row m-b-55">
-                        <div class="name">Ngày/Giờ</div>
-                        <div class="value">
+    .col-500 {
+        width: 500px;
+        display: inline-block;
+        position: absolute;
+    }
+</style>
 
-                            <div class="row row-space">
-                                <div class="col-2">
-                                    <div class="input-group-desc">
-                                        @Html.TextBoxFor(model => model.Date_Start, new { @class = "input--style-5", @type = "date" })
-                                        @Html.ValidationMessageFor(model => model.Date_Start, "", new { @class = "text-danger" })
-                                        <label class="label--desc">Ngày Họp</label>
-                                    </div>
-                                </div>
-                                <div class="col-2">
-                                    <div class="input-group-desc">
-                                        @Html.TextBoxFor(model => model.Time_Start, new { @class = "input--style-5", @type = "time" })
-                                        @Html.ValidationMessageFor(model => model.Time_Start, "", new { @class = "text-danger" })
+@*override button.less*@
+<style>
+    .inline-datetime {
+        display: inline-flex;
+    }
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="name">Địa Điểm</div>
-                        <div class="value">
-                            <div class="input-group">
-                                @Html.TextBoxFor(model => model.Location, new { @class = "input--style-5" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="name">Nội Dung Cuộc Họp</div>
-                        <div class="value">
-                            <div class="input-group">
-                                @Html.TextAreaFor(model => model.Meeting_content, new { @class = "input--style-5", @rows = "5", @id = "comment1", @style = "margin: 0px; width: 400px; height: 73px;" })
-                            </div>
-                            @Html.HiddenFor(m => m.Category_id)
+    .inline-location {
+        margin-left: 50px;
+        position: absolute;
+        display: inline-block;
+        width: 600px;
+        height: 40px;
+    }
 
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="name">Người Tham Dự:</div>
-                        <div>
-                            <ul class="w3-ul w3-border create-user-scroll" id="pickedUser">
-                                @Html.HiddenFor(m => m.AspNetUser)
-                            </ul>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" onclick="getCreateModal()">
-                                Thêm
-                            </button>
+    .button-zone {
+        display: inline-block;
+        position: absolute;
+        right: 30px;
+        margin: 3px 0px;
+    }
 
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="name">Người Ngoài Trường:</div>
-                        <div>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" onclick="getCreateModal2()">
-                                Thêm
-                            </button>
-                        </div>
+    .lable-zone {
+        display: inline-block;
+        position: absolute;
+        left: 80px;
+        color: black;
+        line-height: 40px;
+    }
 
-                    </div>
-                    <div class="form-row">
-                        <div class="name">Tài Liệu Đính Kèm:</div>
-                        <div>
-                            <div class="form-group">
-                                <input type="file" class="form-control-file border" multiple id="file"  name="Files" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-                                @Html.ValidationMessage("File", "", new { @class = "text-danger" , @id ="ValidateFile" })
-                            </div>
-                        </div>
-                    </div>
+        .lable-zone label {
+            font-size: 18px !important;
+        }
 
-                </div>
-                <div>
-                    <button type="submit" class="btn btn--blue btn-lg btn-block" id="create" data-toggle="modal">Tạo</button>
-                </div>
-            </form>
+    .body-navbar {
+        width: calc(100% - 150px);
+        height: 60px;
+        background: white;
+        border-bottom: 1px solid #f1f1f1;
+        z-index: 10;
+        position: fixed;
+        color: white;
+        top: 50px;
+        left: 150px;
+    }
+
+    .nav-content-zone {
+        position: relative;
+        top: 10px;
+        left: 20px;
+    }
+
+    .body-navbar div img {
+        width: 40px;
+        height: 40px;
+        padding: 2px;
+        border: 1px solid grey;
+        border-radius: 10px;
+        position: absolute;
+        left: 30px;
+    }
+
+    .card-body-fixed {
+        position: relative;
+        top: 50px;
+        width: 1300px;
+        height: 800px;
+        z-index:1;
+    }
+
+    .yuki-card-footer {
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    .btn-fixed {
+        color: white;
+        font-size: 14px;
+        display: inline-block;
+        width: 8em;
+        height: 4em;
+        text-align: center;
+        border-radius: 4px;
+    }
+
+    .yuki-btn-blue {
+        background-color: #009FE5 !important;
+    }
+
+    .yuki-btn-gray {
+        background-color: #808080 !important;
+    }
+
+        .yuki-btn-gray:hover {
+        }
+</style>
+<style>
+    textarea:focus {
+        outline: 0px !important;
+        border: 2px solid #009fe5 !important;
+    }
+</style>
+<style>
+    .back-button {
+        font-family: Mulish;
+        background: #009FE5;
+        color: white;
+        width: 150px;
+        height: 50px;
+        border-radius: 10px;
+    }
+
+    .card-heading-fixed {
+        background: #009FE5 !important;
+    }
+</style>
+<style>
+    .datetime-inline {
+        width: 500px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .input--style-5-fixed {
+        background: #f1f1f1;
+        height: 40px;
+        line-height: 40px;
+        border: 2px solid white;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        padding: 0 22px;
+        color: #555;
+    }
+
+    .value-fixed-title {
+        width: calc(1000px - 34px) !important;
+    }
+
+    .value-fixed-location {
+        width: calc(100% - 34px) !important
+    }
+
+    .value-fixed {
+        margin-left: 10px;
+    }
+
+    .form-row-fixed {
+        margin: 0 0 15px 0;
+    }
+
+    .form-row-fixed-title {
+        width: calc(1000px - 34px);
+    }
+
+    .form-row img {
+        height: 24px;
+        opacity: 0.7;
+        display: inline-block;
+        width: 24px;
+    }
+
+    .area-input {
+        margin: 0px;
+        width: calc(1000px - 34px);
+        height: 250px;
+        border: 2px solid white;
+    }
+
+    .input_fixed {
+        width: 100%;
+        height: 30px;
+    }
+
+    .row-space-fixed:after {
+        content: none;
+    }
+
+    .row-space-fixed:before {
+        content: none;
+    }
+
+    .row-space-fixed {
+        margin: 0px;
+    }
+
+    .input-new:focus {
+        border: 2px solid #009fe5;
+    }
+
+    .input--style-5-fixed:focus {
+        border: 2px solid #009fe5;
+    }
+
+    .input-margin {
+        margin-left: 50px;
+    }
+    /*    .body-content {
+        background-image: url("https://img.wallpapersafari.com/desktop/1920/1080/51/78/dltnIv.jpg");
+    }*/
+</style>
+
+
+
+
+<div class="body-navbar">
+    @*<button type="button" onclick="window.location.href='@Url.Action("Index", "MainPage")'" class="btn yuki-btn-blue>
+        ❮   Back to List
+        </button>*@
+    <div class="nav-content-zone">
+        <img src="~/Content/Picture/users_meeting.png" />
+        <div class="lable-zone">
+            New Meeting
         </div>
     </div>
+
 </div>
+@using (Html.BeginForm("MeetingForm", "Meetings", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div class="card-body card-body-fixed">
 
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Category_id, new { @id = "category_id" })
+    <div class="form-row form-row-fixed form-row-fixed-title">
+        <div>
+            <img src="~/Content/Picture/outline_title_black_24dp.png" />
+        </div>
+        <div class="value value-fixed">
+            <div class="input-group input_fixed value-fixed-title">
+                @Html.TextBoxFor(model => model.Meeting_name, new { @class = "input--style-5-fixed", @id = "meeting_name" })
+                @Html.ValidationMessageFor(model => model.Meeting_name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="form-row form-row-fixed datetime-inline">
+        <img src="~/Content/Picture/outline_schedule_black_24dp.png" />
+        <div class="value value-fixed" style="width: calc(100% - 34px);height:40px;">
+            <div class="row inline-datetime">
+                <div class="col-md-2" style="width:50%;">
+                    <div class="input-group-desc">
+                        @Html.TextBoxFor(model => model.Date_Start, new { @class = "input--style-5-fixed", @type = "date" })
+                        @Html.ValidationMessageFor(model => model.Date_Start, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-2" style="width:50%;">
+                    <div class="input-group-desc">
+                        @Html.TextBoxFor(model => model.Time_Start, new { @class = "input--style-5-fixed", @type = "time" })
+                        @Html.ValidationMessageFor(model => model.Time_Start, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--
+    -->
+    <div class="form-row form-row-fixed datetime-inline">
+        <img src="~/Content/Picture/outline_place_black_24dp.png" />
+        <div class="value value-fixed value-fixed-location">
+            <div style="width:100%">
+                <div class="input-group input_fixed">
+                    @Html.TextBoxFor(model => model.Location, new { @class = "input--style-5-fixed", @id = "location" })
+                    @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row form-row-fixed">
+        <div> <img src="~/Content/Picture/outline_edit_black_24dp.png" /></div>
+        <div class="value value-fixed">
+            <div class="input-group input_fixed">
+                @Html.TextAreaFor(model => model.Meeting_content, new { @class = "input--style-5-fixed area-input", @rows = "5", @id = "content" })
+            </div>
+        </div>
+    </div>
+    <div class="form-row" style="margin-bottom:20px;">
+        <img src="~/Content/Picture/outline_people_black_24dp.png" />
+        <div style="margin-left:10px;">
+            <div style="display: flex;">
+                <p style="padding-top:10px;">Người tham dự</p>
+                <button type="button" style="color: white; margin-left: 10px;" data-toggle="modal" onclick="getCreateModal()" class="btn yuki-btn-blue">
+                    <p>
+                        Thêm
+                    </p>
+                </button>
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.AspNetUsers)
+    <ul style="width:50%" class="w3-ul create-user-scroll" id="MEMBERs" name="MEMBERs" >
+    </ul>
+
+
+    <div class="form-row">
+        <input style="width: fit-content; margin-right: 10px;" type="checkbox" class="btn btn-info" data-toggle="collapse" data-target="#demo" value="Simple collapsible" />
+        <div>
+            <div style="display: inline-flex; align-items: center; position: relative; left: 10px; ">
+                <p>Người ngoài trường</p>
+                <div style="margin-left: 20px;" id="demo" class="collapse">
+                    <button style="color:white" onclick="" class="btn yuki-btn-blue">
+                        <p>
+                            Thêm
+                        </p>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="name">Tài Liệu Đính Kèm:</div>
+        <div>
+            <div class="form-group">
+                <input type="file" class="form-control-file border" multiple id="file" name="Files" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+            </div>
+        </div>
+    </div>
+
+</div>  
+    <div>
+        <button type="submit" style="position:relative; z-index:2;" class="btn btn--blue btn-lg btn-block">Tạo</button>
+    </div>
+}
 <div id="Popup"></div>
-<div id="Popup2"></div>
 
 
 
-<!-- Jquery JS-->
-
-<script src="~/taocuochop/vendor/jquery/jquery.min.js"></script>
-<!-- Vendor JS-->
-
-<script src="~/taocuochop/vendor/select2/select2.min.js"></script>
-
-<script src="~/taocuochop/vendor/datepicker/moment.min.js"></script>
-
-<script src="~/taocuochop/vendor/datepicker/daterangepicker.js"></script>
-<!-- Main JS-->
-
-<script src="~/taocuochop/js/global.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script>
+<script type="text/javascript">
     $(() => {
         if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
             sessionStorage.clear();
         }
-        $('#file').bind('change', function () {
-            var maxsize = 5 * 1024 * 1024;
-            if ($('#file')[0].files[0].size <= maxsize) {
-                $('#file').prop('disabled', false);
-                return true;
-            }
-            else {
-                $('#ValidateFile').text("Không thể upload quá 5MB");
-                return false;
-            }
-        });
     });
-    function setUploadButtonState() {
-
-        
-    };
     function getCreateModal() {
         $.ajax({
-            url: "@Url.Action("CreateUSer", "MEETINGs")",
+            url: "@Url.Action("CreateUser", "Meetings")",
             datatype: 'html',
             method: 'GET',
-            data: {},
             success: function (data) {
                 $("#Popup").html(data);
 
@@ -178,8 +388,9 @@
             error: function (err) {
                 console.log(err);
             }
-        })
-    };
+        });
+    }
+    ;
     function getCreateModal2() {
         $.ajax({
             url: "CreateUser2",
@@ -194,6 +405,8 @@
             error: function (err) {
                 console.log(err);
             }
-        })
-    };
+        });
+    }
+    ;
+
 </script>

@@ -65,7 +65,7 @@
           <Property Name="Attachment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Attachment_path" Type="nvarchar" MaxLength="128" />
           <Property Name="Attachment_name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Attachment_binary" Type="varbinary(max)" />
+          <Property Name="Attachment_binary" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="CATEGORY">
           <Key>
@@ -389,8 +389,7 @@
             <End Role="TASK" EntitySet="TASK" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SEP24Team7Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
