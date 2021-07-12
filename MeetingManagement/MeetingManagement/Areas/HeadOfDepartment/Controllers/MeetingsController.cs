@@ -120,6 +120,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
                 db.SaveChanges();
             }
         }
+
         private bool ValidateFile(HttpPostedFileBase files)
         {
             var filesize = files.ContentLength;

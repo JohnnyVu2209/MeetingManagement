@@ -202,6 +202,12 @@
     <Compile Include="Models\AspNetUser.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AspNetUserClaim.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ATTACHMENT.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -627,10 +633,6 @@
     <Content Include="Areas\User\Views\Tasks\Index.cshtml" />
     <Content Include="Areas\User\Views\HomePage\Index.cshtml" />
     <Content Include="Areas\User\Views\Categories\Details.cshtml" />
-    <EntityDeploy Include="Models\Models.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Models.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <Content Include="Models\Models.edmx.diagram">
       <DependentUpon>Models.edmx</DependentUpon>
     </Content>
