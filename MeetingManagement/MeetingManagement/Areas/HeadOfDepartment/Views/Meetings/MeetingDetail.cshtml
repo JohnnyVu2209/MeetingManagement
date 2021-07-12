@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "MeetingInfo";
-    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
     <link rel="stylesheet" href="~/Content/Meetings/meetingdetail.css" />
 }
 @using (Html.BeginForm())
@@ -29,9 +29,6 @@
                 {
                     <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-info')">
                         Chi tiết
-                    </div>
-                    <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-member')">
-                        Thành viên
                     </div>
                     <div class="detail-tab-btn tablinks " onclick="openTab(event,'meeting-task')">
                         Công việc

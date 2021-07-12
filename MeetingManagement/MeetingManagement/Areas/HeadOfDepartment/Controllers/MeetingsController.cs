@@ -159,5 +159,25 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             ViewBag.meeting = db.MEETINGs.ToList();
             return View();
         }
+        public ActionResult MeetingDetail(int id)
+        {
+            var meeting = db.MEETINGs.Find(id);
+            return View(meeting);
+        }
+        public PartialViewResult MeetingInfo(int id)
+        {
+            var meeting = db.MEETINGs.Find(id);
+            return PartialView(meeting);
+        }
+        public ActionResult MeetingTask(int id)
+        {
+            var task = db.TASKs.Where(x => x.Meeting_id == id).ToList();
+            return PartialView(task);
+        }
+        public ActionResult MeetingReport(int id)
+        {
+            var report = db.MEETINGs.Find(id);
+            return PartialView(report);
+        }
     }
 }
