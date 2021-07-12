@@ -12,13 +12,14 @@ namespace MeetingManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetUserClaim
+    public partial class REPORT
     {
-        public int Id { get; set; }
-        public string UserId { get; set; }
-        public string ClaimType { get; set; }
-        public string ClaimValue { get; set; }
+        public int Meeting_id { get; set; }
+        public string Report_name { get; set; }
+        public string Report_link { get; set; }
+        public string Report_type { get; set; }
+        public string Report_binary { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual MEETING MEETING { get; set; }
     }
 }
