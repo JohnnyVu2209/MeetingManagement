@@ -33,7 +33,7 @@
                         <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
                     </div>
                     <div style="width:75%; padding:0 5px; color:black">
-                        <p>
+                        <p style="text-overflow: ellipsis; overflow: hidden; width: 140px; height: 20px; white-space: nowrap; " >
                             @item.Attachment_name
                         </p>
                         <p style="font-size:10px">
@@ -90,9 +90,12 @@
 <div class="form-row-fixed" style="align-items: flex-start !important; width: 100%; margin-top: 20px !important; ">
     <img src="~/Content/Picture/outline_edit_black_24dp.png" />
     <div class="value value-fixed" style="border: 1px solid #e5e5e5; border-radius: 5px; width: 966px; min-height: 200px;">
-        <div class="input-group" style=" width: 100%; background: white; white-space: pre;">
+        <div class="input-group" style=" width: 100%; background: white; white-space: pre-line;">
             @*@Html.Label(Model.Meeting_content, new { @class = "area-input", @rows = "20" })*@
-            @Html.DisplayFor(m => m.Meeting_content)
+            <p style="margin-left: 10px;">
+                @Html.DisplayFor(m => m.Meeting_content)
+
+            </p>
         </div>
     </div>
 </div>

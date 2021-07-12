@@ -3,29 +3,24 @@
     ViewBag.Title = "Chi tiết cuộc hop";
     int i = 0;
 }
-<!DOCTYPE html>
-<html lang="en">
+<link rel="stylesheet" href="~/Content/Meetings/meetingdetail.css" />
 
-<head>
-    <link rel="stylesheet" href="~/Content/Meetings/meetingdetail.css" />
+<!-- Icons font CSS-->
 
-    <!-- Icons font CSS-->
+<link href="~/Content/taocuochop/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/taocuochop/vendor/font-awesome-4.7/css/font-awesome.css" rel="stylesheet" />
 
-    <link href="~/Content/taocuochop/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/Content/taocuochop/vendor/font-awesome-4.7/css/font-awesome.css" rel="stylesheet" />
+<!-- Font special for pages-->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- Vendor CSS-->
 
-    <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <!-- Vendor CSS-->
+<link href="~/Content/taocuochop/vendor/select2/select2.min.css" rel="stylesheet" />
 
-    <link href="~/Content/taocuochop/vendor/select2/select2.min.css" rel="stylesheet" />
+<link href="~/Content/taocuochop/vendor/datepicker/daterangepicker.css" rel="stylesheet" />
+<!-- Main CSS-->
 
-    <link href="~/Content/taocuochop/vendor/datepicker/daterangepicker.css" rel="stylesheet" />
-    <!-- Main CSS-->
-
-    <link href="~/Content//taocuochop/css/main.css" rel="stylesheet" />
-</head>
+<link href="~/Content//taocuochop/css/main.css" rel="stylesheet" />
 
 @using (Html.BeginForm())
 {
@@ -104,8 +99,10 @@
                         </div>
                     </div>
                 </div>
-            </div><!--
-            --><div class="form-row-fixed datetime-inline">
+            </div>
+            <!--
+            -->
+            <div class="form-row-fixed datetime-inline">
                 <img src="~/Content/Picture/outline_schedule_black_24dp.png" />
                 <div class="value value-fixed value-fixed-location">
                     <div class="input-group input_fixed">
@@ -114,8 +111,10 @@
                         </div>
                     </div>
                 </div>
-            </div><!--
-            --><div class="form-row-fixed datetime-inline" style="width:100%;">
+            </div>
+            <!--
+            -->
+            <div class="form-row-fixed datetime-inline" style="width:100%;">
                 <img src="~/Content/Picture/outline_place_black_24dp.png" />
                 <div class="value value-fixed value-fixed-location">
                     <div class="input-group input_fixed" style="width:800px">
@@ -167,8 +166,7 @@
         </div>
         <div id="Feedback"></div>
     </body>
-    }
-</html>
+}
 <style>
     .btn-primary-fixed {
         color: #fff;
@@ -206,6 +204,7 @@
         position: relative;
         left: 34px;
     }
+
     input {
         max-width: none;
     }

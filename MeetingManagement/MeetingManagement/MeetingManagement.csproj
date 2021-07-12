@@ -535,7 +535,6 @@
     <Content Include="Areas\User\Views\Meetings\Create.cshtml" />
     <Content Include="Areas\User\Views\Meetings\Delete.cshtml" />
     <Content Include="Areas\User\Views\Meetings\Details.cshtml" />
-    <Content Include="Areas\User\Views\Meetings\Edit.cshtml" />
     <Content Include="Areas\User\Views\Meetings\Index.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MyMeetingGridView.cshtml" />
     <Content Include="Areas\User\Views\Meetings\JoinedMeetingGridView.cshtml" />
@@ -599,7 +598,6 @@
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser2.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\Details.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Edit.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingList.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\ReportList.cshtml" />
@@ -623,6 +621,8 @@
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingTask.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingInfo.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingReport.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Edit.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\MeetingEdit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

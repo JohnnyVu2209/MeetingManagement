@@ -31,6 +31,12 @@ namespace MeetingManagement.Areas.User.Controllers
             return View(meeting);
         }
 
+        public ActionResult MeetingEdit(int id)
+        {
+            MEETING meeting = db.MEETINGs.Find(id);
+            return View(meeting);
+        }
+
         public PartialViewResult MeetingInfo(int id)
         {
             var meeting = db.MEETINGs.Find(id);
