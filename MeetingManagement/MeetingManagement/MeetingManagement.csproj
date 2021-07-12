@@ -251,6 +251,11 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MainPage\GrdMemberTable.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MainPage\VerifyMeeting.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Create.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Index.cshtml" />
     <Content Include="Areas\User\Views\Categories\Index.cshtml" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -539,9 +544,6 @@
     <Content Include="Areas\User\Views\Meetings\MyMeetingGridView.cshtml" />
     <Content Include="Areas\User\Views\Meetings\JoinedMeetingGridView.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Index.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Create.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MainPage\VerifyMeeting.cshtml" />
     <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.woff" />
@@ -551,6 +553,7 @@
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.ttf" />
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff" />
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
+    <Content Include="Areas\User\Views\MEETINGs\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\GrdMemberTable.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
     <Content Include="Areas\User\Views\MEETINGs\CreateUser.cshtml" />
@@ -594,6 +597,22 @@
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer-fa\theme.scss" />
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer\theme.scss" />
     <Content Include="Areas\User\Views\Meetings\MeetingReport.cshtml" />
+    <Content Include="Areas\User\Views\Tasks\Create.cshtml" />
+    <Content Include="Areas\User\Views\Tasks\Index.cshtml" />
+    <EntityDeploy Include="Models\Models.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Models.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Models.edmx.diagram">
+      <DependentUpon>Models.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser2.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Details.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Edit.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingForm.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingList.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MainPage\Index.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser2.cshtml" />
