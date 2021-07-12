@@ -181,12 +181,10 @@
     <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\tabCuocHopController.cs" />
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
-    <Compile Include="Areas\User\Controllers\categoriesController.cs" />
     <Compile Include="Areas\User\Controllers\HomePageController.cs" />
     <Compile Include="Areas\User\Controllers\MeetingsController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\MeetingsController.cs" />
-    <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\MainPageController.cs" />
     <Compile Include="Areas\User\Controllers\TasksController.cs" />
@@ -424,8 +422,6 @@
     <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.woff" />
     <Content Include="login-form-05\fonts\icomoon\selection.json" />
     <Content Include="login-form-05\images\.DS_Store" />
-    <Content Include="Areas\User\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
     <Content Include="Models\Models.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Models.edmx</DependentUpon>
@@ -626,6 +622,10 @@
     </Content>
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingDetail.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingTask.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingInfo.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingReport.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

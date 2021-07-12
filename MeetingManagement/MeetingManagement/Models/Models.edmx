@@ -65,7 +65,7 @@
           <Property Name="Attachment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Attachment_path" Type="nvarchar" MaxLength="128" />
           <Property Name="Attachment_name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Attachment_binary" Type="varchar" MaxLength="10" />
+          <Property Name="Attachment_binary" Type="varchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="CATEGORY">
           <Key>
@@ -520,7 +520,7 @@
           <Property Name="Attachment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Attachment_path" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Attachment_name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Attachment_binary" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Attachment_binary" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="MEETING" Relationship="SEP24Team7Model.FK_Attachment_MEETING" FromRole="ATTACHMENT" ToRole="MEETING" />
         </EntityType>
         <EntityType Name="CATEGORY">
