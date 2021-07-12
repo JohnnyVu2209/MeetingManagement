@@ -43,7 +43,7 @@ namespace MeetingManagement.Areas.User.Controllers
         public ActionResult Create()
         {
             ViewBag.Meeting_id = new SelectList(db.MEMBERs.Where(x => x.Meeting_id == 37), "Member_id", "AspNetUser.Full_name");
-            return View();
+            return PartialView();
         }
 
         // POST: User/Tasks/Create

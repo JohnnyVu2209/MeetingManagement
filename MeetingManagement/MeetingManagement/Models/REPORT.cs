@@ -12,14 +12,13 @@ namespace MeetingManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ATTACHMENT
+    public partial class REPORT
     {
         public int Meeting_id { get; set; }
-        public int Attachment_id { get; set; }
-        public string Attachment_path { get; set; }
-        public string Attachment_name { get; set; }
-        public string Attachment_binary { get; set; }
-        public string Attachment_type { get; set; }
+        public string Report_name { get; set; }
+        public string Report_link { get; set; }
+        public string Report_type { get; set; }
+        public string Report_binary { get; set; }
     
         public virtual MEETING MEETING { get; set; }
     }

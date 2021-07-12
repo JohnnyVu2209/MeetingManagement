@@ -248,6 +248,9 @@
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Outlook.cs" />
+    <Compile Include="Models\REPORT.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TASK.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -512,15 +515,6 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.eot" />
-    <Content Include="taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.ttf" />
-    <Content Include="taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.woff" />
-    <Content Include="taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.woff2" />
-    <Content Include="taocuochop\vendor\font-awesome-4.7\fonts\FontAwesome.otf" />
-    <Content Include="taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.eot" />
-    <Content Include="taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.ttf" />
-    <Content Include="taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff" />
-    <Content Include="taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Create.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Delete.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Details.cshtml" />
@@ -617,6 +611,8 @@
     <Content Include="Areas\User\Views\Tasks\Index.cshtml" />
     <Content Include="Areas\User\Views\HomePage\Index.cshtml" />
     <Content Include="Areas\User\Views\Categories\Details.cshtml" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <EntityDeploy Include="Models\Models.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Models.Designer.cs</LastGenOutput>
@@ -624,8 +620,6 @@
     <Content Include="Models\Models.edmx.diagram">
       <DependentUpon>Models.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -697,6 +691,7 @@
     <Folder Include="Content\login\" />
     <Folder Include="Content\quyhung\img\" />
     <Folder Include="Content\quyhung\js\" />
+    <Folder Include="Upload\Reports\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

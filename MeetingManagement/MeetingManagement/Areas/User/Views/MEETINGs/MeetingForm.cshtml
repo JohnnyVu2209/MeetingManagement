@@ -1,6 +1,8 @@
-﻿@model MeetingManagement.Models.MEETING
+﻿@using MeetingManagement.Models;
 @{
     ViewBag.Title = "Chi tiết cuộc hop";
+    var newMeet = ViewBag.newMeet as MEETING;
+    var userList = ViewBag.userList as List<AspNetUser>;
 }
 
 
@@ -264,15 +266,15 @@
 <div class="card-body card-body-fixed">
 
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.Category_id, new { @id = "category_id" })
+    @Html.Hidden("Category_id", newMeet.Category_id)
     <div class="form-row form-row-fixed form-row-fixed-title">
         <div>
             <img src="~/Content/Picture/outline_title_black_24dp.png" />
         </div>
         <div class="value value-fixed">
             <div class="input-group input_fixed value-fixed-title">
-                @Html.TextBoxFor(model => model.Meeting_name, new { @class = "input--style-5-fixed", @id = "meeting_name" })
-                @Html.ValidationMessageFor(model => model.Meeting_name, "", new { @class = "text-danger" })
+                @Html.TextBox("Meeting_name", newMeet.Meeting_name, new { @class = "input--style-5-fixed", @id = "meeting_name" })
+                @Html.ValidationMessage("Date_Start", "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
@@ -282,14 +284,14 @@
             <div class="row inline-datetime">
                 <div class="col-md-2" style="width:50%;">
                     <div class="input-group-desc">
-                        @Html.TextBoxFor(model => model.Date_Start, new { @class = "input--style-5-fixed", @type = "date" })
-                        @Html.ValidationMessageFor(model => model.Date_Start, "", new { @class = "text-danger" })
+                        @Html.TextBox("Date_Start", newMeet.Time_Start, new { @class = "input--style-5-fixed", @type = "date" })
+                        @Html.ValidationMessage("Date_Start", "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="col-md-2" style="width:50%;">
                     <div class="input-group-desc">
-                        @Html.TextBoxFor(model => model.Time_Start, new { @class = "input--style-5-fixed", @type = "time" })
-                        @Html.ValidationMessageFor(model => model.Time_Start, "", new { @class = "text-danger" })
+                        @Html.TextBox("Time_Start", newMeet.Time_Start, new { @class = "input--style-5-fixed", @type = "time" })
+                        @Html.ValidationMessage("Time_Start", "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -302,8 +304,8 @@
         <div class="value value-fixed value-fixed-location">
             <div style="width:100%">
                 <div class="input-group input_fixed">
-                    @Html.TextBoxFor(model => model.Location, new { @class = "input--style-5-fixed", @id = "location" })
-                    @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                    @Html.TextBox("Location", newMeet.Location, new { @class = "input--style-5-fixed", @id = "location" })
+                    @Html.ValidationMessage("Location", "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -312,7 +314,7 @@
         <div> <img src="~/Content/Picture/outline_edit_black_24dp.png" /></div>
         <div class="value value-fixed">
             <div class="input-group input_fixed">
-                @Html.TextAreaFor(model => model.Meeting_content, new { @class = "input--style-5-fixed area-input", @rows = "5", @id = "content" })
+                @Html.TextArea("Meeting_content", newMeet.Meeting_content, new { @class = "input--style-5-fixed area-input", @rows = "5", @id = "content" })
             </div>
         </div>
     </div>
@@ -321,16 +323,21 @@
         <div style="margin-left:10px;">
             <div style="display: flex;">
                 <p style="padding-top:10px;">Người tham dự</p>
+                <input type="text" class="form-control" id="txtSearch" />
                 <button type="button" style="color: white; margin-left: 10px;" data-toggle="modal" onclick="getCreateModal()" class="btn yuki-btn-blue">
                     <p>
                         Thêm
                     </p>
                 </button>
+
             </div>
         </div>
     </div>
-    @Html.HiddenFor(m => m.AspNetUsers)
     <ul style="width:50%" class="w3-ul w3-border create-user-scroll" id="MEMBERs" name="MEMBERs" >
+        @foreach(var user in userList)
+        {
+            <li>@user.Email</li>
+        } 
     </ul>
 
 
@@ -354,7 +361,7 @@
         <div class="name">Tài Liệu Đính Kèm:</div>
         <div>
             <div class="form-group">
-                <input type="file" class="form-control-file border" multiple id="file" name="Files" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                <input type="file" class="form-control-file border" multiple id="file" name="Files" accept=".zip,.pdf,.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
             </div>
         </div>
     </div>
