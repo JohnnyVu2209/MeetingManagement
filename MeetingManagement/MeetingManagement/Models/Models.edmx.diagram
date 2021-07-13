@@ -31,6 +31,7 @@
         <AssociationConnector Association="SEP24Team7Model.FK_TASKLIST_MEETING" ManuallyRouted="false" />
         <AssociationConnector Association="SEP24Team7Model.FK_TASK_MEMBER" ManuallyRouted="false" />
         <AssociationConnector Association="SEP24Team7Model.AspNetUserRoles" ManuallyRouted="false" />
+
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -19,7 +19,7 @@
     <ul class="catalogList">
         @foreach (var item in ViewBag.pendingMeeting)
         {
-            <li>
+            <li onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = item.Meeting_id })';">
                 @item.Meeting_name
             </li>
         }

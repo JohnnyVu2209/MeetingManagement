@@ -26,16 +26,43 @@ namespace MeetingManagement.Areas.User.Controllers
             return View(mEETINGs.ToList());
         }
 
-        public ActionResult MeetingDetail(int id)
+        public ActionResult MeetingDetail(int id, bool modify)
         {
+            ViewBag.modify = modify;
             var meeting = db.MEETINGs.Find(id);
             return View(meeting);
         }
 
-        public PartialViewResult MeetingInfo(int id)
+        public ActionResult MeetingEdit(int id)
         {
             var meeting = db.MEETINGs.Find(id);
             return PartialView(meeting);
+        }
+
+        [HttpPost]
+        public ActionResult MeetingEdit(MEETING meeting)
+        {
+            db.Entry(meeting).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("MeetingDetail", "Meetings", new { id = meeting.Meeting_id, modify = false });
+        }
+
+        public PartialViewResult MeetingInfo(int id)
+        {
+            ViewBag.user_identity = User.Identity.GetUserId();
+            var meeting = db.MEETINGs.Find(id);
+            return PartialView(meeting);
+        }
+
+        public PartialViewResult MeetingMember(int id)
+        {
+            var meeting = db.MEETINGs.Find(id);
+            ViewBag.meeting_host = meeting.Create_by;
+            ViewBag.meeting_create = meeting.AspNetUser.Full_name;
+            ViewBag.meeting_user = meeting.AspNetUser.Email;
+            var member = db.MEMBERs.Where(x => x.Meeting_id == id).ToList();
+            return PartialView(member);
         }
         public ActionResult MeetingTask(int id)
         {
@@ -196,6 +223,7 @@ namespace MeetingManagement.Areas.User.Controllers
         public ActionResult MyMeeting()
         {
             currentUser = User.Identity.GetUserId();
+            ViewBag.user_identity = currentUser;
             var result = db.MEETINGs.ToList();
             result = result.Where(m => m.Create_by.ToLower().Contains(currentUser)).ToList();
             return PartialView("MyMeetingGridView", result);
@@ -204,6 +232,7 @@ namespace MeetingManagement.Areas.User.Controllers
         public ActionResult JoinedMeeting()
         {
             currentUser = User.Identity.GetUserId();
+            ViewBag.user_identity = currentUser;
             var meetings = from u in db.MEMBERs.Where(m => m.Member_id.ToLower().Contains(currentUser))
                            from m in db.MEETINGs
                            where u.Meeting_id == m.Meeting_id

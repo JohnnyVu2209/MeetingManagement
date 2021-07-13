@@ -79,6 +79,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             category.Create_by = cate.Create_by;
             return PartialView(category);
         }
+
         [HttpPost]
         public ActionResult Edit(CATEGORY cg)
         {
