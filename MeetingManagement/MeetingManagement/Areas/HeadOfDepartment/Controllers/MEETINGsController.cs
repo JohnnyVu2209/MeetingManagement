@@ -41,12 +41,8 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             {
                 if (Files != null)
                 {
-
-
                     using (var scope = new TransactionScope())
                     {
-
-
                         if (ValidateFile(Files))
                         {
                             AddMeeting(model);
@@ -69,13 +65,8 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
                             scope.Complete();
                             return RedirectToAction("Details", "Categories", new { id = model.Category_id });
                         }
-
                         ModelState.AddModelError("File", "Dung lượng tối đa cho phép là 5MB");
-
-
                     }
-
-
                 }
                 else
                 {

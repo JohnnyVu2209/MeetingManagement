@@ -4,8 +4,113 @@
     Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
     var meetings = ViewBag.meeting as List<MEETING>;
 }
+<style>
+    .inline-datetime {
+        display: inline-flex;
+    }
 
-<h2>ReportList</h2>
+    .inline-location {
+        margin-left: 50px;
+        position: absolute;
+        display: inline-block;
+        width: 600px;
+        height: 40px;
+    }
+
+    .button-zone {
+        display: inline-block;
+        position: absolute;
+        right: 30px;
+        margin: 3px 0px;
+    }
+
+    .lable-zone {
+        display: inline-block;
+        position: absolute;
+        left: 80px;
+        color: black;
+        line-height: 40px;
+    }
+
+        .lable-zone label {
+            font-size: 18px !important;
+        }
+
+    .body-navbar {
+        width: calc(100% - 150px);
+        height: 60px;
+        background: white;
+        border-bottom: 1px solid #f1f1f1;
+        z-index: 10;
+        position: fixed;
+        color: white;
+        top: 50px;
+        left: 150px;
+    }
+
+    .nav-content-zone {
+        position: relative;
+        top: 10px;
+        left: 20px;
+    }
+
+    .body-navbar div img {
+        width: 40px;
+        height: 40px;
+        padding: 2px;
+        border: 1px solid grey;
+        border-radius: 10px;
+        position: absolute;
+        left: 30px;
+    }
+
+    .card-body-fixed {
+        position: relative;
+        top: 50px;
+        width: 1300px;
+        height: 800px;
+        z-index: 1;
+    }
+
+    .yuki-card-footer {
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    .btn-fixed {
+        color: white;
+        font-size: 14px;
+        display: inline-block;
+        width: 8em;
+        height: 4em;
+        text-align: center;
+        border-radius: 4px;
+    }
+
+    .yuki-btn-blue {
+        background-color: #009FE5 !important;
+    }
+
+    .yuki-btn-gray {
+        background-color: #808080 !important;
+    }
+
+        .yuki-btn-gray:hover {
+        }
+</style>
+<div class="body-navbar">
+    @*<button type="button" onclick="window.location.href='@Url.Action("Index", "MainPage")'" class="btn yuki-btn-blue>
+        ❮   Back to List
+        </button>*@
+    <div class="nav-content-zone">
+        <img src="~/Content/Picture/users_meeting.png" />
+        <div class="lable-zone">
+            Report List
+        </div>
+    </div>
+
+</div>
+
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
@@ -24,16 +129,11 @@
 
             <div id="@(meets.Meeting_id)Name" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="@meets.Meeting_id">
                 <div class="panel-body">
-
-
-                    @foreach (var atach in meets.ATTACHMENTs)
-                    {
-                        <div class="row" style="margin-left:10px;font-size:15px;">
-                            <div class="col-md-12">
-                                @atach.Attachment_name
-                            </div>
+                    <div class="row" style="margin-left:10px;font-size:15px;">
+                        <div class="col-md-12">
+                            
                         </div>
-                    }
+                    </div>
                 </div>
             </div>
 

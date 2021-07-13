@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<MeetingManagement.Models.TASK>
-
 <div id="container">
     <div class="progress-bar-zone">
         <p>Tiến độ</p>
@@ -8,7 +7,8 @@
         </div>
     </div>
     <div class="button-zone" style=" position: absolute; top: -10px; right: 0px;">
-        <a class="btn button-create" style="background-color:#009fe5; color:white; display:inline-flex;" onclick="">Tạo</a>
+
+        <a class="btn button-create" style="background-color:#009fe5; color:white; display:inline-flex;" onclick="getCreateModal()">Tạo</a>
     </div>
     <div class="table-pos">
         <table class="table">
@@ -150,3 +150,22 @@
         }
     </style>
 </div>
+<div id="Popup"></div>
+
+<script type="text/javascript">
+     function getCreateModal() {
+         $.ajax({
+             url: "@Url.Action("Create","Tasks")",
+             datatype: 'html',
+             method: 'GET',
+             data: {},
+             success: function (data) {
+                 $("#Popup").html(data);
+                 $("#TaskCreateModal").modal("show");
+             },
+             error: function (err) {
+                 console.log(err);
+             }
+         });
+    };
+</script>
