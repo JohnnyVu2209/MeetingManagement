@@ -73,7 +73,7 @@
                                 {
                                     <span class="waiting-status" style="width:50%;">Chưa hoàn thành</span>
                                     <a type="button"
-                                       href="@Html.Action("RemindTask","Tasks",new {AsigneeID = task.Assignee,MeetingID = task.Meeting_id,TaskName = task.Task_name })"
+                                       @*href="@Html.Action("RemindTask","Tasks",new {AsigneeID = task.Assignee,MeetingID = task.Meeting_id,TaskName = task.Task_name })"*@
                                        class="btn-dark"
                                        onclick="return confirm('Bạn có muốn gửi thông báo ?')"
                                        style="width:28px;height:28px;margin:0px 140px 0px 200px;">
