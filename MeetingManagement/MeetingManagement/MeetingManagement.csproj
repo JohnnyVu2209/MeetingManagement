@@ -257,8 +257,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MainPage\GrdMemberTable.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\VerifyMeeting.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\Create.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\Index.cshtml" />
@@ -353,8 +351,10 @@
     <Content Include="Content\Meetings\meetingdetail.css" />
     <Content Include="Content\outline_filter_alt_black_24dp.png" />
     <Content Include="Content\Picture\outline_event_black_24dp.png" />
+    <Content Include="Content\Picture\outline_manage_accounts_black_24dp.png" />
     <Content Include="Content\Picture\outline_notifications_active_black_24dp.png" />
     <Content Include="Content\Picture\student_3.jpg" />
+    <Content Include="Content\Picture\users_meeting.png" />
     <Content Include="Content\quyhung\css\tabcuochop.css" />
     <Content Include="Content\catalog-list.css" />
     <Content Include="Content\normalize.css" />
@@ -365,7 +365,6 @@
     <Content Include="Content\Picture\outline_place_black_24dp.png" />
     <Content Include="Content\Picture\outline_schedule_black_24dp.png" />
     <Content Include="Content\Picture\outline_title_black_24dp.png" />
-    <Content Include="Content\Picture\users_meeting.png" />
     <Content Include="Content\style.css" />
     <Content Include="Content\taocuochop\css\main.css" />
     <Content Include="Content\taocuochop\css\main.min.css" />
@@ -542,7 +541,6 @@
     <Content Include="Areas\HeadOfDepartment\Views\tabCuocHop\Index.cshtml" />
     <Content Include="Areas\User\Views\HomePage\IndexCateDetail.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Shared\Error.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Categories\Create1.cshtml" />
     <Content Include="Areas\User\Views\Meetings\Create.cshtml" />
     <Content Include="Areas\User\Views\Meetings\Delete.cshtml" />
     <Content Include="Areas\User\Views\Meetings\Details.cshtml" />
@@ -603,8 +601,6 @@
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer-fa\theme.scss" />
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer\theme.scss" />
     <Content Include="Areas\User\Views\Meetings\MeetingReport.cshtml" />
-    <Content Include="Areas\User\Views\Tasks\Create.cshtml" />
-    <Content Include="Areas\User\Views\Tasks\Index.cshtml" />
     <EntityDeploy Include="Models\Models.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Models.Designer.cs</LastGenOutput>
@@ -612,14 +608,6 @@
     <Content Include="Models\Models.edmx.diagram">
       <DependentUpon>Models.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser2.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Details.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Edit.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingForm.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingList.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MainPage\Index.cshtml" />
-    <Content Include="Areas\User\Views\Meetings\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser2.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\Details.cshtml" />
@@ -644,6 +632,7 @@
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingReport.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\Edit.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingEdit.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\MeetingMember.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

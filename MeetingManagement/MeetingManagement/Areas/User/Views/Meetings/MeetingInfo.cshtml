@@ -4,9 +4,10 @@
 @Html.HiddenFor(model => model.Meeting_id, new { @id = "meeting_id" })
 @Html.HiddenFor(model => model.Status, new { @id = "status" })
 @Html.HiddenFor(model => model.Create_by)
-@{ 
-    int i = 0;
+@{
+    
 }
+<link rel="stylesheet" href="~/Content/Meetings/meetingdetail.css" />
 
 <style>
     #myfile:hover div {
@@ -20,6 +21,14 @@
         left: 34px;
     }
 </style>
+@if (Model.Create_by.ToString() == ViewBag.user_identity)
+{
+    <div style="position: absolute; right: 0px;">
+        <a onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = Model.Meeting_id, modify = true } )'" style="width: 100px; height: 40px; background-color: #f1f1f1; color: black; display:inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor: pointer ">
+            Thay đổi
+        </a>
+    </div>
+}
 <div class="form-row-fixed">
     @*<img src="~/Content/Picture/outline_file_upload_black_24dp.png" />*@
     @*<label class="icon-zone" for="input-ficons-1"><i class="fa fa-plus"></i></label>*@
@@ -33,7 +42,7 @@
                         <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
                     </div>
                     <div style="width:75%; padding:0 5px; color:black">
-                        <p style="text-overflow: ellipsis; overflow: hidden; width: 140px; height: 20px; white-space: nowrap; " >
+                        <p style="text-overflow: ellipsis; overflow: hidden; width: 140px; height: 20px; white-space: nowrap; ">
                             @item.Attachment_name
                         </p>
                         <p style="font-size:10px">
@@ -44,6 +53,8 @@
             </a>
         }
     }
+
+
     <div class="value-fixed">
         <div class="space"></div>
     </div>
@@ -56,6 +67,14 @@
         </div>
     </div>
 </div>
+<div class="form-row-fixed form-row-fixed-title" style="width:100%;">
+    <img src="~/Content/Picture/outline_manage_accounts_black_24dp.png" />
+    <div class="value value-fixed">
+        <div class="input-group input_fixed value-fixed-title" style="width: 800px !important;">
+            @Html.DisplayFor(m => m.AspNetUser.Full_name, new { @class = "input-fixed", @id = "Create_by" })
+        </div>
+    </div>
+</div>
 <div class="form-row-fixed datetime-inline">
     <img src="~/Content/Picture/outline_event_black_24dp.png" />
     <div class="value value-fixed value-fixed-location">
@@ -65,8 +84,10 @@
             </div>
         </div>
     </div>
-</div><!--
---><div class="form-row-fixed datetime-inline">
+</div>
+<!--
+-->
+<div class="form-row-fixed datetime-inline">
     <img src="~/Content/Picture/outline_schedule_black_24dp.png" />
     <div class="value value-fixed value-fixed-location">
         <div class="input-group input_fixed">
@@ -75,58 +96,59 @@
             </div>
         </div>
     </div>
-</div><!--
---><div class="form-row-fixed datetime-inline" style="width:100%;">
-       <img src="~/Content/Picture/outline_place_black_24dp.png" />
-       <div class="value value-fixed value-fixed-location">
-            <div class="input-group input_fixed" style="width:800px">
-                <div class="input-group-desc" style="display:flex ;height: 100%;">
-                    @Html.Label(Model.Location.ToString(), new { @class = "input-fixed" })
-                </div>
+</div>
+<!--
+-->
+<div class="form-row-fixed datetime-inline" style="width:100%;">
+    <img src="~/Content/Picture/outline_place_black_24dp.png" />
+    <div class="value value-fixed value-fixed-location">
+        <div class="input-group input_fixed" style="width:800px">
+            <div class="input-group-desc" style="display:flex ;height: 100%;">
+                @Html.Label(Model.Location.ToString(), new { @class = "input-fixed" })
             </div>
-       </div>
+        </div>
+    </div>
 </div>
 
 <div class="form-row-fixed" style="align-items: flex-start !important; width: 100%; margin-top: 20px !important; ">
     <img src="~/Content/Picture/outline_edit_black_24dp.png" />
     <div class="value value-fixed" style="border: 1px solid #e5e5e5; border-radius: 5px; width: 966px; min-height: 200px;">
-        <div class="input-group" style=" width: 100%; background: white; white-space: pre-line;">
+        <div class="input-group" style=" width: 100%; background: white; white-space: pre-wrap;">
             @*@Html.Label(Model.Meeting_content, new { @class = "area-input", @rows = "20" })*@
-            <p style="margin-left: 10px;">
+            <p style="margin-left: 10px; word-break: break-all;">
                 @Html.DisplayFor(m => m.Meeting_content)
-
             </p>
         </div>
     </div>
 </div>
-<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member" aria-expanded="false" aria-controls="Member">
-    Danh sách thành viên
-</a>
+@*<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member" aria-expanded="false" aria-controls="Member">
+        Danh sách thành viên
+    </a>*@
 
 @*<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Button with data-target
-</button>*@
-<div class="collapse" id="Member" style="width:1000px;">
-    <table class="table">
-        <thead >
-            <tr style="background-color:#f1f1f1; color:black;">
-                <th scope="col">#</th>
-                <th class="col-align" scope="col">Tên thành viên</th>
-                <th class="col-align" scope="col">Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var member in Model.MEMBERs)
-            {
-                <tr>
-                    <td>@(++i)</td>
-                    <td class="col-align">@member.AspNetUser.Full_name</td>
-                    <td class="col-align">@member.AspNetUser.Email</td>
+        Button with data-target
+    </button>*@
+@*<div class="collapse" id="Member" style="width:1000px;">
+        <table class="table">
+            <thead >
+                <tr style="background-color:#f1f1f1; color:black;">
+                    <th scope="col">#</th>
+                    <th class="col-align" scope="col">Tên thành viên</th>
+                    <th class="col-align" scope="col">Email</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach(var member in Model.MEMBERs)
+                {
+                    <tr>
+                        <td>@(++i)</td>
+                        <td class="col-align">@member.AspNetUser.Full_name</td>
+                        <td class="col-align">@member.AspNetUser.Email</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>*@
 <div style="height:50px;"></div>
 <!--<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member2" aria-expanded="false" aria-controls="Member">
     Ngoài nhà trường
@@ -141,15 +163,15 @@
             </tr>
         </thead>
         <tbody>-->
-           @* @for (int i = 1; i <= 10; i++)
-            {
-                <tr>
-                    <td>@i</td>
-                    <td class="col-align">Trần Đức Bo</td>
-                    <td class="col-align">bo.187pm66666</td>
-                </tr>
-            }*@
-        <!--</tbody>
+@* @for (int i = 1; i <= 10; i++)
+    {
+        <tr>
+            <td>@i</td>
+            <td class="col-align">Trần Đức Bo</td>
+            <td class="col-align">bo.187pm66666</td>
+        </tr>
+    }*@
+<!--</tbody>
     </table>
 </div>-->
 
@@ -163,6 +185,7 @@
         width: 1000px;
         border-radius: 4px 4px 0px 0px;
     }
+
     .space {
         width: 966px;
     }

@@ -3,10 +3,10 @@
 @{
     ViewBag.Title = "MeetingInfo";
     Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
-    <link rel="stylesheet" href="~/Content/Meetings/meetingdetail.css" />
+    var is_modify = (ViewBag.modify == true) ? "" : "display:none";
+    var is_preview = (ViewBag.modify == false) ? "" : "display:none";
 }
-@using (Html.BeginForm())
-{
+
 @Html.AntiForgeryToken()
 
 <body>
@@ -19,11 +19,19 @@
                 </div>
                 @if (Model.MEETING_STATUS.Status_id == 1)
                 {
-                    <div class="detail-tab-btn tablinks" style="width:80px;padding:0;" onclick="openTab(event,'meeting-info')">
-                        Chi tiết
-                        
-                    </div>
-                    <div class="pending-status" >@Model.MEETING_STATUS.Status_name</div>
+                    if (ViewBag.modify == false)
+                    {
+                        <div class="detail-tab-btn tablinks" style="width:80px;padding:0;" onclick="openTab(event,'meeting-info')">
+                            Chi tiết
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="detail-tab-btn tablinks" style="width:80px;padding:0;" onclick="openTab(event,'meeting-info-edit')">
+                            Chi tiết
+                        </div>
+                    }
+                    <div class="pending-status">@Model.MEETING_STATUS.Status_name</div>
                 }
                 else
                 {
@@ -47,8 +55,11 @@
             </div>*@
         </div>
     </div>
-    <div id="meeting-info" class="tabcontent">
+    <div id="meeting-info" class="tabcontent" style="@is_preview">
         @Html.Action("MeetingInfo", "Meetings", new { Model.Meeting_id })
+    </div>
+    <div id="meeting-member" class="tabcontent" style="display:none">
+        @Html.Action("MeetingMember", "Meetings", new { Model.Meeting_id })
     </div>
     <div id="meeting-task" class="tabcontent" style="display:none;">
         @Html.Action("MeetingTask", "Meetings", new { Model.Meeting_id })
@@ -56,8 +67,11 @@
     <div id="meeting-report" class="tabcontent" style="display:none;">
         @Html.Action("MeetingReport", "Meetings", new { Model.Meeting_id })
     </div>
+    <div id="meeting-info-edit" class="tabcontent" style="@is_modify">
+        @Html.Action("MeetingEdit", "Meetings", new { Model.Meeting_id})
+    </div>
 </body>
-}
+
 <script>
     function openTab(evt, cityName) {
         var i, tabcontent, tablinks;

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f0042cb4f90e4889a3590c0b887d3574" Name="Diagram1" ZoomLevel="29">
+      <Diagram DiagramId="f0042cb4f90e4889a3590c0b887d3574" Name="Diagram1" ZoomLevel="42">
         <EntityTypeShape EntityType="SEP24Team7Model.REPORT" Width="1.5" PointX="9.75" PointY="4.5" />
         <AssociationConnector Association="SEP24Team7Model.FK_REPORT_MEETING" />
         <EntityTypeShape EntityType="SEP24Team7Model.AspNetRole" Width="1.5" PointX="0.75" PointY="4.75" />
@@ -24,7 +24,6 @@
         <AssociationConnector Association="SEP24Team7Model.FK_Meeting_CATEGORY" />
         <AssociationConnector Association="SEP24Team7Model.FK_MEETING_MEETING_STATUS" />
         <AssociationConnector Association="SEP24Team7Model.FK_MEMBER_MEETING" />
-        <AssociationConnector Association="SEP24Team7Model.FK_REPORT_MEETING" />
         <AssociationConnector Association="SEP24Team7Model.FK_TASKLIST_MEETING" />
         <AssociationConnector Association="SEP24Team7Model.FK_TASK_MEMBER" />
         <AssociationConnector Association="SEP24Team7Model.AspNetUserRoles" />

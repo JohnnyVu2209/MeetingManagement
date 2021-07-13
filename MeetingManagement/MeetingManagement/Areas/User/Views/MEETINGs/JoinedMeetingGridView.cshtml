@@ -11,9 +11,19 @@
     <ul class="catalogList">
         @foreach (var item in Model)
         {
-            <li onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id })';">
+            if (item.Create_by == ViewBag.user_identity)
+            {
+            <li style="display: flex; align-items: center;" onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id, modify = false })';">
                 @item.Meeting_name
+                <i style="position:absolute; left:0px;" class="fas fa-edit"></i>
             </li>
+            }
+            else
+            {
+                <li onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id, modify = false })';">
+                    @item.Meeting_name
+                </li>
+            }
         }
     </ul>
 </body>
@@ -21,5 +31,9 @@
 <style>
     .catalogList > li:hover {
         transform: none !important;
+    }
+
+    .catalogList > li {
+        padding: 0 25px;
     }
 </style>
