@@ -1,15 +1,15 @@
 ﻿@model MeetingManagement.Models.TASK
 
 
-<link href="~/taocuochop/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" />
-<link href="~/taocuochop/vendor/font-awesome-4.7/css/font-awesome.css" rel="stylesheet" />
+<link href="~/Content/taocuochop/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/taocuochop/vendor/font-awesome-4.7/css/font-awesome.css" rel="stylesheet" />
 <!-- Font special for pages-->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
 <!-- Vendor CSS-->
-<link href="~/taocuochop/vendor/select2/select2.min.css" rel="stylesheet" />
-<link href="~/taocuochop/vendor/datepicker/daterangepicker.css" rel="stylesheet" />
+<link href="~/Content/taocuochop/vendor/select2/select2.min.css" rel="stylesheet" />
+<link href="~/Content/taocuochop/vendor/datepicker/daterangepicker.css" rel="stylesheet" />
 <!-- Main CSS-->
-<link href="~/taocuochop/css/main.css" rel="stylesheet" />
+<link href="~/Content/taocuochop/css/main.css" rel="stylesheet" />
 
 
 <div class="modal fade" id="TaskCreateModal" tabindex="-1" role="dialog">
@@ -24,6 +24,8 @@
                 <div class="modal-body">
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                    @Html.HiddenFor(m => m.Meeting_id)
                     <div class="form-group">
                         <div class="col-md-8 col-md-offset-2">
                             @Html.TextBoxFor(m => m.Task_name, new { @class = "form-control", @placeholder = "Tên công việc" })

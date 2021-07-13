@@ -39,6 +39,7 @@ namespace MeetingManagement.Areas.User.Controllers
         public ActionResult MeetingTask(int id)
         {
             var task = db.TASKs.Where(x => x.Meeting_id == id).ToList();
+            ViewBag.Meeting = id;
             return PartialView(task);
         }
         public ActionResult MeetingReport(int id)

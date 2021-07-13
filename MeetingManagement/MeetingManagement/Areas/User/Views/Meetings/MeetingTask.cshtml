@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<MeetingManagement.Models.TASK>
-
+@{ 
+    var meeting_id = ViewBag.Meeting;
+}
 <div id="container">
     <div class="progress-bar-zone">
         <p>Tiến độ</p>
@@ -8,7 +10,7 @@
         </div>
     </div>
     <div class="button-zone" style=" position: absolute; top: -10px; right: 0px;">
-        <a class="btn button-create" style="background-color:#009fe5; color:white; display:inline-flex;" onclick="">Tạo</a>
+        <a class="btn button-create" style="background-color:#009fe5; color:white; display:inline-flex;" onclick="getCreateModal(@meeting_id)" >Tạo</a>
     </div>
     <div class="table-pos">
         <table class="table">
@@ -20,6 +22,7 @@
                     <th class="col-align" scope="col">Giao cho</th>
                     <th class="col-align" scope="col">Ngày đến hạn</th>
                     <th class="col-align" scope="col">Tình trạng</th>
+                    <th class="col-align" scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -51,6 +54,7 @@
                                 <div class="finished-status">Hoàn thành</div>
                             }
                         </td>
+
                     </tr>
                 }
             </tbody>
@@ -150,3 +154,21 @@
         }
     </style>
 </div>
+<div id="Popup"></div>
+<script type="text/javascript">
+     function getCreateModal(id) {
+         $.ajax({
+             url: "@Url.Action("Create","Tasks")",
+             datatype: 'html',
+             method: 'GET',
+             data: { MeetingID: id },
+             success: function (data) {
+                 $("#Popup").html(data);
+                 $("#TaskCreateModal").modal("show");
+             },
+             error: function (err) {
+                 console.log(err);
+             }
+         });
+    };
+</script>
