@@ -3,7 +3,6 @@
     margin: 0 auto;
     overflow: hidden;
     border-radius: 4px;
- 
 }
 
 .contentBox {
@@ -31,7 +30,7 @@
 
 .content {
     background-color: #ffff;
-    padding: 0 ;
+    padding: 0;
     max-height: 0;
     overflow: hidden;
     transition: all 0.5s ease-in-out;
@@ -44,7 +43,7 @@
 
 
 
-    /*table*/
+/*table*/
 th, td {
     padding: 15px;
     text-align: left;
@@ -59,3 +58,5 @@ table {
     border-collapse: collapse;
     width: 100%;
 }
+
+© 2021 GitHub, Inc.

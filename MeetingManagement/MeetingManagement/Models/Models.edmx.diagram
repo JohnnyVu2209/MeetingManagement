@@ -5,32 +5,34 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="38260d792d1f41b69411a2bd28a199dd" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="SEP24Team7Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEP24Team7Model.AspNetRole" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEP24Team7Model.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEP24Team7Model.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEP24Team7Model.AspNetUser" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEP24Team7Model.ATTACHMENT" Width="1.5" PointX="9.75" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEP24Team7Model.CATEGORY" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEP24Team7Model.MEETING" Width="1.5" PointX="7.5" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEP24Team7Model.MEETING_STATUS" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEP24Team7Model.MEMBER" Width="1.5" PointX="9.75" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEP24Team7Model.OTHER_ACCOUNT" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEP24Team7Model.sysdiagram" Width="1.5" PointX="7.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEP24Team7Model.TASK" Width="1.5" PointX="12" PointY="8" IsExpanded="true" />
-        <AssociationConnector Association="SEP24Team7Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="SEP24Team7Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="SEP24Team7Model.FK_CATEGORY_AspNetUsers" ManuallyRouted="false" />
-        <AssociationConnector Association="SEP24Team7Model.FK_MEETING_AspNetUsers" ManuallyRouted="false" />
-        <AssociationConnector Association="SEP24Team7Model.FK_MEMBER_AspNetUsers" ManuallyRouted="false" />
-        <AssociationConnector Association="SEP24Team7Model.FK_OTHER_ACCOUNT_AspNetUsers" ManuallyRouted="false" />
-        <AssociationConnector Association="SEP24Team7Model.FK_Attachment_MEETING" ManuallyRouted="false" />
-        <AssociationConnector Association="SEP24Team7Model.FK_Meeting_CATEGORY" ManuallyRouted="false" />
-        <AssociationConnector Association="SEP24Team7Model.FK_MEETING_MEETING_STATUS" ManuallyRouted="false" />
-        <AssociationConnector Association="SEP24Team7Model.FK_MEMBER_MEETING" ManuallyRouted="false" />
-        <AssociationConnector Association="SEP24Team7Model.FK_TASKLIST_MEETING" ManuallyRouted="false" />
-        <AssociationConnector Association="SEP24Team7Model.FK_TASK_MEMBER" ManuallyRouted="false" />
-        <AssociationConnector Association="SEP24Team7Model.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SEP24Team7Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SEP24Team7Model.AspNetRole" Width="1.5" PointX="0.75" PointY="9.125" />
+        <EntityTypeShape EntityType="SEP24Team7Model.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="7.5" />
+        <EntityTypeShape EntityType="SEP24Team7Model.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="5" />
+        <EntityTypeShape EntityType="SEP24Team7Model.AspNetUser" Width="1.5" PointX="3" PointY="7.5" />
+        <EntityTypeShape EntityType="SEP24Team7Model.ATTACHMENT" Width="1.5" PointX="9.75" PointY="8.625" />
+        <EntityTypeShape EntityType="SEP24Team7Model.CATEGORY" Width="1.5" PointX="5.25" PointY="12.75" />
+        <EntityTypeShape EntityType="SEP24Team7Model.MEETING" Width="1.5" PointX="7.5" PointY="8.75" />
+        <EntityTypeShape EntityType="SEP24Team7Model.MEETING_STATUS" Width="1.5" PointX="5.25" PointY="16.375" />
+        <EntityTypeShape EntityType="SEP24Team7Model.MEMBER" Width="1.5" PointX="12.75" PointY="9.625" />
+        <EntityTypeShape EntityType="SEP24Team7Model.OTHER_ACCOUNT" Width="1.5" PointX="5.25" PointY="10.25" />
+        <EntityTypeShape EntityType="SEP24Team7Model.REPORT" Width="1.5" PointX="9.75" PointY="14.375" />
+        <EntityTypeShape EntityType="SEP24Team7Model.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SEP24Team7Model.TASK" Width="1.5" PointX="15" PointY="9.875" />
+        <AssociationConnector Association="SEP24Team7Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="SEP24Team7Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="SEP24Team7Model.FK_CATEGORY_AspNetUsers" />
+        <AssociationConnector Association="SEP24Team7Model.FK_MEETING_AspNetUsers" />
+        <AssociationConnector Association="SEP24Team7Model.FK_MEMBER_AspNetUsers" />
+        <AssociationConnector Association="SEP24Team7Model.FK_OTHER_ACCOUNT_AspNetUsers" />
+        <AssociationConnector Association="SEP24Team7Model.FK_Attachment_MEETING" />
+        <AssociationConnector Association="SEP24Team7Model.FK_Meeting_CATEGORY" />
+        <AssociationConnector Association="SEP24Team7Model.FK_MEETING_MEETING_STATUS" />
+        <AssociationConnector Association="SEP24Team7Model.FK_MEMBER_MEETING" />
+        <AssociationConnector Association="SEP24Team7Model.FK_REPORT_MEETING" />
+        <AssociationConnector Association="SEP24Team7Model.FK_TASKLIST_MEETING" />
+        <AssociationConnector Association="SEP24Team7Model.FK_TASK_MEMBER" />
+        <AssociationConnector Association="SEP24Team7Model.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
