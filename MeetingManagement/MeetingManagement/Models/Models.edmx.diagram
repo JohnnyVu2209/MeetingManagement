@@ -4,7 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="31c284d84513448a997be8664dc5c3dc" Name="Diagram1">
+      <Diagram DiagramId="a540d87dc0b0406bac3179919c167651" Name="Diagram1">
+        <EntityTypeShape EntityType="SEP24Team7Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SEP24Team7Model.AspNetRole" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SEP24Team7Model.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="SEP24Team7Model.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
@@ -16,6 +17,7 @@
         <EntityTypeShape EntityType="SEP24Team7Model.MEMBER" Width="1.5" PointX="12.75" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="SEP24Team7Model.OTHER_ACCOUNT" Width="1.5" PointX="5.25" PointY="13.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SEP24Team7Model.REPORT" Width="1.5" PointX="9.75" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEP24Team7Model.sysdiagram" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SEP24Team7Model.TASK" Width="1.5" PointX="15" PointY="8.625" IsExpanded="true" />
         <AssociationConnector Association="SEP24Team7Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="SEP24Team7Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
@@ -31,7 +33,6 @@
         <AssociationConnector Association="SEP24Team7Model.FK_TASKLIST_MEETING" ManuallyRouted="false" />
         <AssociationConnector Association="SEP24Team7Model.FK_TASK_MEMBER" ManuallyRouted="false" />
         <AssociationConnector Association="SEP24Team7Model.AspNetUserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="SEP24Team7Model.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

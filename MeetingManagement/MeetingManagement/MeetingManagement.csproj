@@ -215,6 +215,9 @@
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoryListVM.cs" />
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MEETING.cs">
@@ -595,13 +598,6 @@
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer-fa\theme.scss" />
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer\theme.scss" />
     <Content Include="Areas\User\Views\Meetings\MeetingReport.cshtml" />
-    <EntityDeploy Include="Models\Models.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Models.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Models.edmx.diagram">
-      <DependentUpon>Models.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser2.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\Details.cshtml" />
@@ -617,16 +613,6 @@
     <Content Include="Areas\User\Views\Categories\Details.cshtml" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <EntityDeploy Include="Models\Models.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Models.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Models.edmx.diagram">
-      <DependentUpon>Models.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\Models.edmx.diagram">
-      <DependentUpon>Models.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingDetail.cshtml" />
@@ -636,6 +622,13 @@
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\Edit.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingEdit.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingMember.cshtml" />
+    <EntityDeploy Include="Models\Models.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Models.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Models.edmx.diagram">
+      <DependentUpon>Models.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
