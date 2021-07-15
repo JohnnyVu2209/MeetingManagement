@@ -37,5 +37,6 @@ namespace MeetingManagement.Models
         public virtual DbSet<OTHER_ACCOUNT> OTHER_ACCOUNTs { get; set; }
         public virtual DbSet<REPORT> REPORTs { get; set; }
         public virtual DbSet<TASK> TASKs { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

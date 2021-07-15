@@ -319,11 +319,21 @@
         </div>
     </div>
     <div class="form-row" style="margin-bottom:20px;">
-        <img src="~/Content/Picture/outline_people_black_24dp.png" />
+        <div class="col-sm-1" style="width:fit-content;padding-left:0;">
+            <img src="~/Content/Picture/outline_people_black_24dp.png" />
+        </div>
+        <div class="col-md-2" style="width:fit-content;">
+            <p style="padding-top:10px;">Người tham dự</p>
+        </div>
+        <div class="col-md-3">
+            <input type="text" class="form-control" id="txtSearch" autocomplete="off" />
+            <ul style="width:50%" id="MEMBERs" name="MEMBERs">
+                <li>user 1</li>
+                <li>user 2</li>
+            </ul>
+        </div>
         <div style="margin-left:10px;">
-            <div style="display: flex;">
-                <p style="padding-top:10px;">Người tham dự</p>
-                <input type="text" class="form-control" id="txtSearch" />
+            <div style="display: flex;">     
                 <button type="button" style="color: white; margin-left: 10px;" data-toggle="modal" onclick="getCreateModal()" class="btn yuki-btn-blue">
                     <p>
                         Thêm
@@ -333,12 +343,7 @@
             </div>
         </div>
     </div>
-    <ul style="width:50%" class="w3-ul w3-border create-user-scroll" id="MEMBERs" name="MEMBERs" >
-        @foreach(var user in userList)
-        {
-            <li>@user.Email</li>
-        } 
-    </ul>
+    
 
 
     <div class="form-row">

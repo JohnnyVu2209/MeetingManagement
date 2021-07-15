@@ -150,5 +150,15 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             ViewBag.meeting = db.MEETINGs.ToList();
             return View();
         }
+        public FileResult DownloadFile(int meeting_id)
+        {
+            var meeting = db.MEETINGs.Find(meeting_id);
+
+            var path = Server.MapPath(meeting.REPORT.Report_link);
+
+            var bytes = System.IO.File.ReadAllBytes(path);
+
+            return File(bytes, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", meeting.REPORT.Report_name);
+        }
     }
 }
