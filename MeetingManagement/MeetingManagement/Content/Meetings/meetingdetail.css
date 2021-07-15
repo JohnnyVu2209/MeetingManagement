@@ -139,7 +139,7 @@ textarea {
 
 textarea:focus {
     outline: 0px !important;
-    border: 2px solid #009fe5 !important;
+    border: 1px solid #009fe5 !important;
 }
 
 .back-button {
@@ -209,6 +209,7 @@ textarea:focus {
     height: 100%;
     display: flex;
     align-items: flex-end;
+    min-height: 22px;
 }
 
 .input-fixed {
@@ -228,11 +229,11 @@ textarea:focus {
 }
 
 .input-new:focus {
-    border: 2px solid #009fe5;
+    border: 1px solid #009fe5;
 }
 
 .input--style-5-fixed:focus {
-    border: 2px solid #009fe5;
+    border: 1px solid #009fe5;
 }
 
 .input-margin {

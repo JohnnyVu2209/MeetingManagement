@@ -181,12 +181,10 @@
     <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\tabCuocHopController.cs" />
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
-    <Compile Include="Areas\User\Controllers\categoriesController.cs" />
     <Compile Include="Areas\User\Controllers\HomePageController.cs" />
     <Compile Include="Areas\User\Controllers\MeetingsController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\MeetingsController.cs" />
-    <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\MainPageController.cs" />
     <Compile Include="Areas\User\Controllers\TasksController.cs" />
@@ -262,6 +260,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\HeadOfDepartment\Views\MainPage\VerifyMeeting.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Create.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Index.cshtml" />
     <Content Include="Areas\User\Views\Categories\Index.cshtml" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -353,8 +354,10 @@
     <Content Include="Content\Meetings\meetingdetail.css" />
     <Content Include="Content\outline_filter_alt_black_24dp.png" />
     <Content Include="Content\Picture\outline_event_black_24dp.png" />
+    <Content Include="Content\Picture\outline_manage_accounts_black_24dp.png" />
     <Content Include="Content\Picture\outline_notifications_active_black_24dp.png" />
     <Content Include="Content\Picture\student_3.jpg" />
+    <Content Include="Content\Picture\users_meeting.png" />
     <Content Include="Content\quyhung\css\tabcuochop.css" />
     <Content Include="Content\catalog-list.css" />
     <Content Include="Content\normalize.css" />
@@ -365,7 +368,6 @@
     <Content Include="Content\Picture\outline_place_black_24dp.png" />
     <Content Include="Content\Picture\outline_schedule_black_24dp.png" />
     <Content Include="Content\Picture\outline_title_black_24dp.png" />
-    <Content Include="Content\Picture\users_meeting.png" />
     <Content Include="Content\style.css" />
     <Content Include="Content\taocuochop\css\main.css" />
     <Content Include="Content\taocuochop\css\main.min.css" />
@@ -430,8 +432,6 @@
     <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.woff" />
     <Content Include="login-form-05\fonts\icomoon\selection.json" />
     <Content Include="login-form-05\images\.DS_Store" />
-    <Content Include="Areas\User\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
     <Content Include="Models\Models.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Models.edmx</DependentUpon>
@@ -535,18 +535,13 @@
     <Content Include="Areas\HeadOfDepartment\Views\tabCuocHop\Index.cshtml" />
     <Content Include="Areas\User\Views\HomePage\IndexCateDetail.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Shared\Error.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Categories\Create1.cshtml" />
     <Content Include="Areas\User\Views\Meetings\Create.cshtml" />
     <Content Include="Areas\User\Views\Meetings\Delete.cshtml" />
     <Content Include="Areas\User\Views\Meetings\Details.cshtml" />
-    <Content Include="Areas\User\Views\Meetings\Edit.cshtml" />
     <Content Include="Areas\User\Views\Meetings\Index.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MyMeetingGridView.cshtml" />
     <Content Include="Areas\User\Views\Meetings\JoinedMeetingGridView.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Index.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Create.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MainPage\VerifyMeeting.cshtml" />
     <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.woff" />
@@ -556,6 +551,7 @@
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.ttf" />
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff" />
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
+    <Content Include="Areas\User\Views\MEETINGs\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\GrdMemberTable.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
     <Content Include="Areas\User\Views\MEETINGs\CreateUser.cshtml" />
@@ -599,11 +595,16 @@
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer-fa\theme.scss" />
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer\theme.scss" />
     <Content Include="Areas\User\Views\Meetings\MeetingReport.cshtml" />
-    <Content Include="Areas\User\Views\Meetings\MeetingForm.cshtml" />
+    <EntityDeploy Include="Models\Models.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Models.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Models.edmx.diagram">
+      <DependentUpon>Models.edmx</DependentUpon>
+    </Content>
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser2.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\Details.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Edit.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingList.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\ReportList.cshtml" />
@@ -623,6 +624,18 @@
     <Content Include="Models\Models.edmx.diagram">
       <DependentUpon>Models.edmx</DependentUpon>
     </Content>
+    <Content Include="Models\Models.edmx.diagram">
+      <DependentUpon>Models.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingDetail.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingTask.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingInfo.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingReport.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Edit.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\MeetingEdit.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\MeetingMember.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

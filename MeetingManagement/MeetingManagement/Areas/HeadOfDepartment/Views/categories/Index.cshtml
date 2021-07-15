@@ -2,8 +2,22 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
 }
+
+@*scroll show up, position not change*@
+<style>
+    .modal-open .yuki-login-info {
+        margin-right: 16.8px;
+    }
+
+    .modal-open #yuki-nav-bar img {
+        left: calc((100% - 58px)/2 - 16.8px/2);
+    }
+
+    .modal-open #option {
+        right: calc(160px + 16.8px);
+    }
+</style>
 
 <link href="~/Content/catalog-list.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -53,6 +67,7 @@
     .yuki-btn-blue {
         background-color: #009FE5 !important;
     }
+
     .user-ctg-index-table div:hover {
         background-color: #66c2ff;
     }

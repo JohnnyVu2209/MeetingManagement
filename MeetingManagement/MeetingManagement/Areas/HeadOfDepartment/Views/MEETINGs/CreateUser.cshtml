@@ -5,41 +5,38 @@
 
 }
 <div class="modal fade" id="modalCreate" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header create-user-modalheader">
-                <h4 class="modal-title">Thêm Thành Phần Tham Dự</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div class="form-inline">
-                    <label>Mời bạn nhập tên Email vào đây.</label>
-                    <input type="text" class="form-control" id="txtSearch" />
-                    <button type="button" class="btn btn-success" id="adduser" onclick="AddUser();" data-toggle="modal">Thêm</button>
-                </div>
-                <div class="w3-container my-container" id="usertable">
-                    <ul class="w3-ul w3-border create-user-scroll" id="userbox">
-                        @foreach (var users in ViewBag.result)
-                        {
-                            <li style="cursor: pointer; display:flex;" onclick="getchecked(@(++i))">
-                                @users.Email <input type="checkbox" id="@i" style="width:fit-content; margin-left: auto;" value="@users.Email" />
-                            </li>
-                        }
-                    </ul>
-                    <div id="hiden">
-                        <label>Tài khoản đã chọn</label>
-                        <ul class="w3-ul w3-border create-user-scroll" id="pickbox">
-                        </ul>
-                    </div>
-                </div>
-                @* <div id="grdUserView"></div>*@
-                @* @Html.Partial("SearchUser")*@
-            </div>
-
+    <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header create-user-modalheader">
+            <h4 class="modal-title">Thêm Thành Phần Tham Dự</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="form-inline">
+                <label>Mời bạn nhập tên Email vào đây.</label>
+                <input type="text" class="form-control" id="txtSearch" />
+                <button type="button" class="btn btn-success" id="adduser" onclick="AddUser();" data-toggle="modal">Thêm</button>
+            </div>
+            <div class="w3-container my-container" id="usertable">
+                <ul class="w3-ul w3-border create-user-scroll" id="userbox">
+                    @foreach (var users in ViewBag.result)
+                    {
+                        <li style="cursor: pointer; display:flex;" onclick="getchecked(@(++i))">
+                            @users.Email <input type="checkbox" id="@i" style="width:fit-content; margin-left: auto;" value="@users.Email" />
+                        </li>
+                    }
+                </ul>
+                <div id="hiden">
+                    <label>Tài khoản đã chọn</label>
+                    <ul class="w3-ul w3-border create-user-scroll" id="pickbox">
+                    </ul>
+                </div>
+            </div>
+            @* <div id="grdUserView"></div>*@
+            @* @Html.Partial("SearchUser")*@
+        </div>
+
     </div>
 </div>
 

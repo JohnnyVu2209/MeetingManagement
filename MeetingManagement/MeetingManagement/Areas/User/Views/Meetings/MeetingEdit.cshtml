@@ -1,0 +1,221 @@
+﻿@model MeetingManagement.Models.MEETING
+@{
+    ViewBag.Title = "Chi tiết cuộc hop";
+}
+<style>
+    #myfile:hover div {
+        background-color: #f1f1f1;
+        text-decoration: none;
+    }
+
+    #myfile {
+        text-decoration: none !important;
+        position: relative;
+        left: 34px;
+    }
+
+    .edit_fixed {
+        padding-left: 5px;
+        width: 100%;
+        max-width: none;
+        border: 0px;
+    }
+</style>
+@using (Html.BeginForm("MeetingEdit", "Meetings", FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+{
+    <div class="form-row-fixed">
+        @*<img src="~/Content/Picture/outline_file_upload_black_24dp.png" />*@
+        @*<label class="icon-zone" for="input-ficons-1"><i class="fa fa-plus"></i></label>*@
+        @if (Model.ATTACHMENTs.Count != 0)
+        {
+            foreach (var item in Model.ATTACHMENTs)
+            {
+                <a id="myfile" href="@item.Attachment_path" style="margin-right:20px;" download>
+                    <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
+                        <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                            <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
+                        </div>
+                        <div style="width:75%; padding:0 5px; color:black">
+                            <p style="text-overflow: ellipsis; overflow: hidden; width: 140px; height: 20px; white-space: nowrap; ">
+                                @item.Attachment_name
+                            </p>
+                            <p style="font-size:10px">
+                                @item.Attachment_binary
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            }
+        }
+        <div class="value-fixed">
+            <div class="space"></div>
+        </div>
+    </div>
+    @Html.HiddenFor(model => model.Category_id)
+    @Html.HiddenFor(model => model.Meeting_id)
+    <div class="form-row-fixed form-row-fixed-title" style="width:100%;">
+        <img src="~/Content/Picture/outline_title_black_24dp.png" />
+        <div class="value value-fixed">
+            <div class="input-group input_fixed value-fixed-title" style="width: 800px !important;">
+                @Html.TextBoxFor(m => m.Meeting_name, new { @class = "edit_fixed", @id = "meeting_name" })
+            </div>
+        </div>
+    </div>
+    <div class="form-row-fixed datetime-inline">
+        <img src="~/Content/Picture/outline_event_black_24dp.png" />
+        <div class="value value-fixed value-fixed-location">
+            <div class="input-group input_fixed">
+                <div class="input-group-desc" style="display: flex; height: 100%; width: 100%;">
+                    @Html.TextBoxFor(m => m.Date_Start, "{0:yyyy-MM-dd}", new { @class = "input--style-5-fixed", @type = "date", @id = "date_start", @style = "width: 100%; border:0px; padding-left: 5px;" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--
+    -->
+    <div class="form-row-fixed datetime-inline">
+        <img src="~/Content/Picture/outline_schedule_black_24dp.png" />
+        <div class="value value-fixed value-fixed-location">
+            <div class="input-group input_fixed">
+                <div class="input-group-desc" style="display: flex; height: 100%; width: 100%;">
+                    @Html.TextBoxFor(model => model.Time_Start, new { @class = "input-fixed", @type = "time", @style = "width: 100%; border:0px; padding-left: 5px;" })
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--
+    -->
+    <div class="form-row-fixed datetime-inline" style="width:100%;">
+        <img src="~/Content/Picture/outline_place_black_24dp.png" />
+        <div class="value value-fixed value-fixed-location">
+            <div class="input-group input_fixed" style="width:800px">
+                <div class="input-group-desc" style="display: flex; height: 100%; width: 100%;">
+                    @Html.TextBoxFor(model => model.Location, new { @class = "edit_fixed" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row-fixed" style="align-items: flex-start !important; width: 100%; margin-top: 20px !important; ">
+        <img src="~/Content/Picture/outline_edit_black_24dp.png" />
+        <div class="value value-fixed" style="border: 1px solid #e5e5e5; border-radius: 5px; width: 966px; min-height: 200px;">
+            <div class="input-group" style="height: 300px; width: 100%; background: white; white-space: pre-line;">
+                @*@Html.Label(Model.Meeting_content, new { @class = "area-input", @rows = "20" })*@
+                @Html.TextAreaFor(model => model.Meeting_content, new { @class = "input-fixed", @style = "width:100%; height: 100%;padding-left: 5px;", @id="hrere_content" })
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(model => model.Create_by)
+    @Html.HiddenFor(model => model.Date_Create)
+    @Html.HiddenFor(model => model.Status)
+    <div style=" width: 966px; display: flex; justify-content: center;">
+        <button type="submit" style="width: 100px; height: 40px; background-color: #009fe5; color: white; display: inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor:pointer">
+            Lưu
+        </button>
+        <a onclick="location.href = '@Url.Action("MeetingDetail", "Meetings", new { id = Model.Meeting_id, modify = false })'" style="width: 100px; height: 40px; background-color: #f1f1f1; color: black; display:inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor: pointer ">
+            Hủy
+        </a>
+    </div>
+}
+    @*<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member" aria-expanded="false" aria-controls="Member">
+            Danh sách thành viên
+        </a>*@
+
+    @*<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Button with data-target
+        </button>*@
+    @*<div class="collapse" id="Member" style="width:1000px;">
+            <table class="table">
+                <thead >
+                    <tr style="background-color:#f1f1f1; color:black;">
+                        <th scope="col">#</th>
+                        <th class="col-align" scope="col">Tên thành viên</th>
+                        <th class="col-align" scope="col">Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var member in Model.MEMBERs)
+                    {
+                        <tr>
+                            <td>@(++i)</td>
+                            <td class="col-align">@member.AspNetUser.Full_name</td>
+                            <td class="col-align">@member.AspNetUser.Email</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>*@
+    <!--<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member2" aria-expanded="false" aria-controls="Member">
+        Ngoài nhà trường
+    </a>
+    <div class="collapse" id="Member2" style="width:1000px;">
+        <table class="table">
+            <thead>
+                <tr style="background-color:#f1f1f1; color:black;">
+                    <th scope="col">#</th>
+                    <th class="col-align" scope="col">Tên thành viên</th>
+                    <th class="col-align" scope="col">Email</th>
+                </tr>
+            </thead>
+            <tbody>-->
+    @* @for (int i = 1; i <= 10; i++)
+        {
+            <tr>
+                <td>@i</td>
+                <td class="col-align">Trần Đức Bo</td>
+                <td class="col-align">bo.187pm66666</td>
+            </tr>
+        }*@
+    <!--</tbody>
+        </table>
+    </div>-->
+    <style>
+        .btn-primary-fixed {
+            color: #fff;
+            background-color: #009fe5;
+            /* border-color: #2e6da4; */
+            position: relative;
+            left: 0px;
+            width: 1000px;
+            border-radius: 4px 4px 0px 0px;
+        }
+
+        .space {
+            width: 966px;
+        }
+
+        .file-zone {
+            margin-left: 34px;
+            width: 300px;
+            height: 50px;
+        }
+
+        .area-input {
+            height: fit-content;
+            min-height: 250px;
+            padding: 5px;
+        }
+    </style>
+
+    <script type="text/javascript">
+    function Edit() {
+        var meeting_id = $("#Meeting_id").val();
+        var meeting_name = $("#meeting_name").val();
+        var date_start = $("#date_start").val();
+        var time_start = $("#Time_Start").val();
+        var location = $("#Location").val();
+        var meet_content = $("#hrere_content").val();
+        alert(meet_content);
+        $.ajax({
+            url: '@Url.Action("MeetingEdit", "Meetings")',
+            method: 'POST',
+            data: (meeting_id, meeting_name, meet_content, date_start , time_start, location),
+            success: function (data) {
+            window.location.href = '@Url.Action("MeetingDetail", "Meetings", new { id = Model.Meeting_id, modify = false }) ' },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    }
+    </script>

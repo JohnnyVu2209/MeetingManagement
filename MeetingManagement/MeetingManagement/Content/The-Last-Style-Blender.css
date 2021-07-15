@@ -114,7 +114,7 @@ body {
 
 #yuki-nav-bar img {
     position: fixed;
-    left: 750px;
+    left: calc((100% - 58px)/2);
     width: 116.537px;
     height: 45px;
 }

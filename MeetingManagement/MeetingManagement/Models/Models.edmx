@@ -126,7 +126,8 @@
           <Property Name="Meeting_id" Type="int" Nullable="false" />
           <Property Name="Report_name" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Report_link" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Report_type" Type="nvarchar" MaxLength="20" />
+
+          <Property Name="Report_type" Type="nvarchar" MaxLength="100" />
           <Property Name="Report_binary" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -435,6 +436,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SEP24Team7Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -464,6 +466,7 @@
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
         </EntityType>
+
         <EntityType Name="AspNetUser">
           <Key>
             <PropertyRef Name="Id" />
@@ -500,6 +503,7 @@
           <Property Name="Attachment_binary" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Attachment_type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MEETING" Relationship="Self.FK_Attachment_MEETING" FromRole="ATTACHMENT" ToRole="MEETING" />
+
         </EntityType>
         <EntityType Name="CATEGORY">
           <Key>
