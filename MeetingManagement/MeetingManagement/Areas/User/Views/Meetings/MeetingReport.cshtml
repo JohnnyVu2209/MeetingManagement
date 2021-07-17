@@ -1,0 +1,74 @@
+﻿@{ 
+    int id_meeting = ViewBag.Meeting_id;
+}
+<div class="row">
+    <div class="panel-heading">
+        <div class="col-md-8">
+            <h3>
+                <i class="fa fa-file-text-o"></i>
+                <span>Biên bản báo cáo buổi họp</span>
+            </h3>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="row">
+    <div class="col-md-6 col-md-push-2">
+        <section>
+            @using (Html.BeginForm("MeetingReport", "Meetings", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="well bs-component" style="height:140px;">
+                    <br />
+                    @Html.Hidden("Meeting_id", id_meeting)
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-8 col-md-push-2">
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <span class="form-group btn btn-default btn-file">
+                                            Browse…
+                                            <input type="file" name="ReportFile" id="ReportFile" class="form-control" accept=".zip,.pdf,.doc,.docx,.xml,application/msword" />
+                                        </span>
+                                    </span>
+                                    <input type="text" id="ReportName" class="form-control" readonly>
+                                </div>
+                                @Html.ValidationMessage("FileAttach", "", new { @class = "text-danger custom-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-5 col-md-10">
+                            <input type="submit" class="btn btn-danger" value="Upload" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </section>
+    </div>
+</div>  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(() => {
+        $('#ReportFile').on("change", function () {
+            var fileUpload = document.getElementById("ReportFile");
+            $('#ReportName').val(fileUpload.files[0].name);
+        });
+    });
+</script>
+<style>
+    .file-caption {
+        width: fit-content;
+        position: absolute;
+        right: 0px;
+    }
+
+</style>

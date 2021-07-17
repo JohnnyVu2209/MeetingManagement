@@ -19,9 +19,7 @@
                     </div>
                     @Html.HiddenFor(m => m.Create_by);
                 }
-
-
-                </div>
+            </div>
             <div class="modal-footer">
                 <button class="btn btn--primary" onclick="EditCat()">Sửa</button>
                 <button class="btn btn-normal " data-dismiss="modal">Hủy</button>
@@ -29,7 +27,9 @@
         </div>
     </div>
 </div>
+<style>
 
+</style>
 <script>
     function EditCat() {
         $.ajax({
@@ -37,9 +37,9 @@
             url: '@Url.Action("Edit", "categories")',
             data: $("#editformid").serialize(),
             success: function () {
-    $("#myEditModal").modal("hide");
-alert("Sửa Thành Công");
-}
+            $("#myEditModal").modal("hide");
+            alert("Sửa Thành Công");
+        }
 })
 }
 </script>

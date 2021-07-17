@@ -2,18 +2,19 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
 }
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <div id="container">
     <div style="text-transform: uppercase;font-size:20px;margin-bottom:20px" ; class="header">
         @Html.Label(Model.Category_Name)
-        <button style="float: right; width: 90px; height: 45px; background-color: #009FE5; color: white; border-radius: 5px;font-size:16px">Tạo</button>
+        <button style="float: right; width: 90px; height: 45px; background-color: #009FE5; color: white; border-radius: 5px;font-size:16px" onclick="location.href = '@Url.Action("MeetingForm","MEETINGs", new { id = Model.Category_id})';">Tạo</button>
         <!--</ul>-->
     </div>
     <div style="margin-left:20px;margin-bottom:10px" id="time-table">
         @Html.DisplayFor(m => m.Category_Content)
+
     </div>
 </div>
-@Html.Action("MeetingList", "Categories", new { id = Model.Category_id })
+@Html.Action("MeetingList", "MEETINGs", new { id = Model.Category_id })

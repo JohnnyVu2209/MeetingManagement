@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MeetingManagement.Models.MEETING>
+@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "Index";
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/catalog-list.css" rel="stylesheet" />
+</head>
+<body>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#joinedMeetings">Cuộc họp tham dự</a></li>
+        <li><a data-toggle="tab" href="#myMeetings">Cuộc họp của tôi</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="joinedMeetings" class="tab-pane fade in active">
+            <br />
+            <div id="joinedMeetingGrd">
+                @Html.Action("JoinedMeeting", "MEETINGs")
+            </div>
+        </div>
+        <div id="myMeetings" class="tab-pane fade">
+            <br />
+            <div id="myMeetingGrd">
+                @Html.Action("MyMeeting", "MEETINGs")
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script type="text/javascript">
+    $('#nav-joined-tab a').on('click', function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+    $('#nav-my-tab a').on('click', function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+</script>

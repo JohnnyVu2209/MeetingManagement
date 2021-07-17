@@ -1,0 +1,28 @@
+﻿@model IEnumerable<MeetingManagement.Models.CATEGORY>
+@{
+    ViewBag.Title = "CateDetail";
+    Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
+}
+
+<table style="border:solid;border-top:none;">
+    <thead>
+        <tr>
+            <th>Tên</th>
+            <th>Content</th>
+            <th>Create By</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+               @Html.DisplayNameFor(model => model.Category_Name)
+            <td>
+                @Html.DisplayNameFor(model => model.Category_Content)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.AspNetUser.Email)
+            </td>
+            }
+        </tr>
+    </tbody>
+</table>
+

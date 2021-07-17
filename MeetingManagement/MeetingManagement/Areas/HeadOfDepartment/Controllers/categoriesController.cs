@@ -8,9 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using MeetingManagement.Models;
 using EntityState = System.Data.Entity.EntityState;
+using Microsoft.AspNet.Identity;
 
 namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 {
+    [Authorize]
     public class CategoriesController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
@@ -18,21 +20,20 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         // GET: HeadOfDepartment/categories
         public ActionResult Index()
         {
-            var cATEGORies = db.CATEGORies;
-            return View(cATEGORies.ToList());
+            var categories = db.CATEGORies.ToList();
+            return View(categories);
         }
-
-        // GET: HeadOfDepartment/categories/Details/5
+        [HandleError]
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception();
             }
             CATEGORY cATEGORY = db.CATEGORies.Find(id);
             if (cATEGORY == null)
             {
-                return HttpNotFound();
+                throw new Exception();
             }
             return View(cATEGORY);
 
@@ -43,6 +44,9 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             var meetings = db.MEETINGs.Where(x => x.Category_id == id).ToList(); 
             return PartialView(meetings) ;
         }
+
+
+
 
         // GET: HeadOfDepartment/categories/Create
         public PartialViewResult Create()
@@ -57,11 +61,9 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         {
             /*link huong dan de lam phan nay https://www.youtube.com/watch?v=2ktFobQ4VmM */
             /*SEP24Team7Entities db = new SEP24Team7Entities();*/
-            cg.Create_by = "48e5a0b4-76ea-4619-bd6b-771bb9954c96";
+            cg.Create_by = HttpContext.User.Identity.GetUserId();
             db.CATEGORies.Add(cg);
-           
             db.SaveChanges();
-            
             return Json(cg, JsonRequestBehavior.AllowGet);
         }
 
@@ -77,6 +79,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             category.Create_by = cate.Create_by;
             return PartialView(category);
         }
+
         [HttpPost]
         public ActionResult Edit(CATEGORY cg)
         {
@@ -97,7 +100,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         public ActionResult DeleteConfirm(int id)
         {
             CATEGORY cat = db.CATEGORies.Find(id);
-            if (cat != null) {
+           if (cat != null) {
                 db.CATEGORies.Remove(cat);
                 db.SaveChanges();
             }
@@ -105,5 +108,6 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return RedirectToAction("Index");
 
         }
+
     }
 }

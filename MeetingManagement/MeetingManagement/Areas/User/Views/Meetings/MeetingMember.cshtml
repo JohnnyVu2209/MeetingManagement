@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MeetingManagement.Models.MEMBER>
+<div class="table-pos">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th class="col-align" scope="col">Tên thành viên</th>
+                <th class="col-align" scope="col">Email</th>
+                <th class="col-align" scope="col">Vai trò</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Select((value, i) => new { i, value }))
+            {
+                var value = item.value;
+                var index = item.i + 1;
+                if (value.Member_id == ViewBag.meeting_host)
+                {
+                    <tr>
+                        <td>@index</td>
+                        <td class="col-align">
+                            @ViewBag.meeting_create
+                        </td>
+                        <td class="col-align">
+                            @ViewBag.meeting_user
+                        </td>
+                        <td class="col-align">
+                            Người chủ trì
+                        </td>
+                    </tr>
+                }
+                else if (item.value.Member_id != ViewBag.meeting_host)
+                {
+                    <tr>
+                        <td>@index</td>
+                        <td class="col-align">@value.AspNetUser.Full_name</td>
+                        <td class="col-align">@value.AspNetUser.Email</td>
+                        <td class="col-align">
+                            Thành viên
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

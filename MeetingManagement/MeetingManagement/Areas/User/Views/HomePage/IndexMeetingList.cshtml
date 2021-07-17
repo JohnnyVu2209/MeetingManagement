@@ -1,0 +1,150 @@
+﻿@model IEnumerable<MeetingManagement.Models.MeetingListVM>
+@{
+    Layout = null;
+}
+<div class="yuki-table-zone yuki-table-zone-fixed">
+    <div class="table-head">Cuộc họp sắp tới</div><!--
+    --><div class="yuki-table-out-header">
+        <ul class="yuki-column-4 add-border">
+            <li>
+                Tên cuộc họp
+                @*<button class="filter">
+                        <img src="~/Content/outline_filter_alt_black_24dp.png">
+                    </button>*@
+            </li>
+            <li>
+                Người chủ trì
+                @*<button class="filter">
+                        <img src="~/Content/outline_filter_alt_black_24dp.png">
+                    </button>*@
+            </li>
+            <li>
+                Ngày diễn ra
+                @*<button class="filter">
+                        <img src="~/Content/outline_filter_alt_black_24dp.png">
+                    </button>*@
+            </li>
+            <li>
+                Tình trạng
+                @*<button class="filter">
+                        <img src="~/Content/outline_filter_alt_black_24dp.png">
+                    </button>*@
+            </li>
+        </ul>
+    </div>
+    <table class="ml-table">
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="yuki-column-4" >
+                    <td>
+                        @item.MeetingName
+                    </td>
+                    <td>
+                        @item.FullName
+                    </td>
+                    <td>
+                        @item.DateStart
+                    </td>
+                    <td>
+                        @if (@item.Status == 1)
+                        {
+                            <div class="pending-status">@item.StatusName</div>
+                        }
+                        else if (@item.Status == 2)
+                        {
+                            <div class="waiting-status">@item.StatusName</div>
+                        }
+                        else if (@item.Status == 3)
+                        {
+                            <div class="missing-status">@item.StatusName</div>
+                        }
+                        else if (@item.Status == 4)
+                        {
+                            <div class="incomplete-status">@item.StatusName</div>
+                        }
+                        else if (@item.Status == 5)
+                        {
+                            <div class="complete-status complete-status-fixed">@item.StatusName</div>
+                        }
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+
+    <style>
+            .ml-table {
+                width: 100%;
+                border: 1px solid black;
+                border-top: none;
+            }
+
+                .ml-table tbody tr td {
+                    display: flex !important;
+                    line-height: normal !important;
+                    align-items: center;
+                    justify-content: center;
+                }
+            .ml-table thead {
+            }
+
+            .ml-table thead tr {
+            }
+
+                .ml-table thead tr th {
+                    text-align: center;
+                }
+
+            .ml-table tbody {
+            }
+
+                .ml-table tbody tr {
+                    column-count: 4;
+                }
+            /*    .complete-status-fixed {
+            background: #29CC97;
+            border-radius: 10px;
+            color: white;
+            margin: auto;
+            display: inline-block;
+            width: 100px;
+            height: 40px;
+            text-align: center;
+            line-height: 2.8;
+        }*/
+            .add-border {
+                border: 1px solid black;
+            }
+    </style>
+    <style>
+        .yuki-table-zone-fixed {
+            padding-top: 0px;
+            left: 0px;
+            margin: 0px auto;
+            height: 100%;
+        }
+
+    </style>
+    @*@if (@item.Status == "1")
+        {
+            <div class="waiting-status">@item.StatusName</div>
+        }
+        else if (@item.Status == "2")
+        {
+            <div class="pending-status">@item.StatusName</div>
+        }
+        else if (@item.Status == 3)
+        {
+            <div class="missing-status">@item.StatusName</div>
+        }
+        else if (@item.Status == 4)
+        {
+            <div class="incomplete-status">@item.StatusName</div>
+        }
+        else if (@item.Status == 5)
+        {
+            <div class="incomplete-status">@item.StatusName</div>
+        }*@
