@@ -50,7 +50,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return RedirectToAction("Index");
         }
 
-        
+
         //public PartialViewResult GrdOtherTable()
         //{
         //    var member = db.OTHER_ACCOUNTs.ToList();
@@ -76,6 +76,15 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         }
 
 
+
+        public ActionResult StaticticBCN() {
+
+
+
+
+            return View();
+
+        }
         //private void AddErrors(object result)
         //{
         //    throw new NotImplementedException();

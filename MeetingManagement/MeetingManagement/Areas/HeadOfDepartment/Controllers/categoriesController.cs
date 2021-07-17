@@ -46,6 +46,12 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         }
 
 
+        public ActionResult statisticTask()
+        {
+            var task = db.TASKs.ToList();
+            return View(task);
+        }
+
 
 
         // GET: HeadOfDepartment/categories/Create

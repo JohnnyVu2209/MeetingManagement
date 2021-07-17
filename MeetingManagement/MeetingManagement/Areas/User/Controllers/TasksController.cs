@@ -17,8 +17,8 @@ namespace MeetingManagement.Areas.User.Controllers
         // GET: User/Tasks
         public ActionResult Index()
         {
-            var userid = "f28b3bb0-99b7-439e-bc90-4c8c15fac1a2";
-            var mEMBER = db.MEMBERs.SingleOrDefault(x => x.Member_id == userid);
+            var userid = "48e5a0b4-76ea-4619-bd6b-771bb9954c96";
+            var mEMBER = db.MEMBERs.FirstOrDefault(x => x.Member_id == userid);
             ViewBag.meeting = db.MEETINGs.Where(x => x.Meeting_id == mEMBER.Meeting_id).ToList();
             ViewBag.task = db.TASKs.Where(x => x.Meeting_id == mEMBER.Meeting_id && x.Assignee == mEMBER.Member_id).ToList();
             return View();

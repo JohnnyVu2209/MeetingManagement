@@ -25,17 +25,17 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
                 MeetingName = x.MEETING.Meeting_name
             }).ToList();
             return View(tasksBCNVNList);
-            /*List<TASK> taskBCN = db.TASKs.ToList();
-            TasksBCN taskBCNVM = new TasksBCN();
-            List<TasksBCN> taskBCNVMList = taskBCN.Select(x => new TasksBCN
-            {
-                FullName = x.MEETING.AspNetUser.Full_name,
-                MeetingName = x.MEETING.Meeting_name,
-                DueDate = (DateTime)x.Task_Deadline,
-                Status = (bool)x.Task_Status,
-                TaskName = x.Task_name
-            }).ToList();
-            return View(taskBCNVMList);*/
+
+        }
+
+
+        public ActionResult IndexBCNTask()
+        {
+            var userid = "f28b3bb0-99b7-439e-bc90-4c8c15fac1a2";
+            var mEMBER = db.MEMBERs.FirstOrDefault(x => x.Member_id == userid);
+            ViewBag.meeting = db.MEETINGs.Where(x => x.Meeting_id == mEMBER.Meeting_id).ToList();
+            ViewBag.task = db.TASKs.Where(x => x.Meeting_id == mEMBER.Meeting_id && x.Assignee == mEMBER.Member_id).ToList();
+            return View();
         }
     }
 }
