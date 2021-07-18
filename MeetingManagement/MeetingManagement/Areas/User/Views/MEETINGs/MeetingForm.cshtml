@@ -417,10 +417,10 @@
                 </div>
             </div>
         </div>
-        @if (newMeet.MEMBERs.Count != 0)
+        @if (Model.MEMBERs.Count != 0)
         {
 
-            foreach (var member in newMeet.MEMBERs)
+            foreach (var member in Model.MEMBERs)
             {
                 var u = db.AspNetUsers.SingleOrDefault(x => x.Id == member.Member_id);
                 m.Add(u);

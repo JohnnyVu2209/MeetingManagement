@@ -154,22 +154,10 @@ namespace MeetingManagement.Areas.User.Controllers
         {
             GetMeeting();
             var current = User.Identity.GetUserId();
-            ViewBag.newMeet = new MEETING();
             var userList = db.AspNetUsers.Where(x=> x.Id != current).Select(selector: x => x.Email).ToList();
-            if (meeting != null)
-            {
-                ViewBag.newMeet = meeting;
-                if (meeting.MEMBERs.Count != 0)
-                {
-                    foreach(var member in meeting.MEMBERs)
-                    {
-                        userList.Remove(db.AspNetUsers.SingleOrDefault(x => x.Id == member.Member_id).Email);
-                    }
-                }
-            }
+       
             meeting.Category_id = id;
             ViewBag.userList = userList;
-            ViewBag.newMeet.Category_id = id;
             return View(meeting);
         }
 
@@ -218,6 +206,9 @@ namespace MeetingManagement.Areas.User.Controllers
                     }
                 }
             }
+            var current = User.Identity.GetUserId();
+            var userList = db.AspNetUsers.Where(x => x.Id != current).Select(selector: x => x.Email).ToList();
+            ViewBag.userList = userList;
             return View(model);
         }
         private void AddMeeting(MEETING model)
@@ -261,16 +252,26 @@ namespace MeetingManagement.Areas.User.Controllers
         public ActionResult AddUser(MEETING model, string email)
         {
             GetMeeting();
+            bool checkExist = false;
             AspNetUser user = db.AspNetUsers.SingleOrDefault(x => x.Email == email);
-            MEMBER member = new MEMBER(); 
-            member.Member_id = user.Id;
-            if (meeting.MEMBERs.Count != 0)
+            foreach(var m in meeting.MEMBERs.ToList())
             {
-                model.MEMBERs = meeting.MEMBERs;
+                if (m.Member_id == user.Id)
+                    checkExist = true;
             }
-            model.MEMBERs.Add(member);
-            meeting = model;
-            Session["Meeting"] = meeting;
+            if(checkExist != true)
+            {
+                MEMBER member = new MEMBER();
+                member.Member_id = user.Id;
+
+                if (meeting.MEMBERs.Count != 0)
+                {
+                    model.MEMBERs = meeting.MEMBERs;
+                }
+                model.MEMBERs.Add(member);
+                meeting = model;
+                Session["Meeting"] = meeting;
+            }
             return RedirectToAction("MeetingForm", new { id = model.Category_id });
         }
         public ActionResult RemoveUser(string userId)
