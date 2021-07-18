@@ -7,14 +7,14 @@
       <Diagram DiagramId="7f353b4d8e9f41858d446117d4bb7d9b" Name="Diagram1" ZoomLevel="53">
         <AssociationConnector Association="SEP24Team7Model.FK_MEETING_USERS" />
         <EntityTypeShape EntityType="SEP24Team7Model.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SEP24Team7Model.sysdiagram" Width="1.5" PointX="9.75" PointY="0.75" />
         <EntityTypeShape EntityType="SEP24Team7Model.ATTACHMENT" Width="1.5" PointX="5.25" PointY="1.625" />
         <EntityTypeShape EntityType="SEP24Team7Model.CATEGORY" Width="1.5" PointX="0.75" PointY="1.625" />
         <EntityTypeShape EntityType="SEP24Team7Model.MEETING" Width="1.5" PointX="3" PointY="3.125" />
         <EntityTypeShape EntityType="SEP24Team7Model.MEETING_STATUS" Width="1.5" PointX="0.75" PointY="4.875" />
         <EntityTypeShape EntityType="SEP24Team7Model.MEMBER" Width="1.5" PointX="5.25" PointY="4.75" />
-        <EntityTypeShape EntityType="SEP24Team7Model.OTHER_ACCOUNT" Width="1.5" PointX="7.75" PointY="8.75" />
+        <EntityTypeShape EntityType="SEP24Team7Model.OTHER_ACCOUNT" Width="1.5" PointX="7.75" PointY="0.75" />
         <EntityTypeShape EntityType="SEP24Team7Model.REPORT" Width="1.5" PointX="5.25" PointY="7.5" />
-        <EntityTypeShape EntityType="SEP24Team7Model.sysdiagram" Width="1.5" PointX="9.75" PointY="0.75" />
         <EntityTypeShape EntityType="SEP24Team7Model.TASK" Width="1.5" PointX="7.5" PointY="4.25" />
         <AssociationConnector Association="SEP24Team7Model.FK_Attachment_MEETING" />
         <AssociationConnector Association="SEP24Team7Model.FK_Meeting_CATEGORY" />
