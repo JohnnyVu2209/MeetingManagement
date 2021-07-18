@@ -20,37 +20,133 @@
         max-width: none;
         border: 0px;
     }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
 </style>
+
+<div class="form-row-fixed">
+    @*<img src="~/Content/Picture/outline_file_upload_black_24dp.png" />*@
+    @*<label class="icon-zone" for="input-ficons-1"><i class="fa fa-plus"></i></label>*@
+    @if (Model.ATTACHMENTs.Count != 0)
+    {
+        foreach (var item in Model.ATTACHMENTs)
+        {
+            <a id="myfile" href="@item.Attachment_path" style="margin-right:20px; margin-bottom:30px" download>
+                <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
+                    <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                        <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
+                    </div>
+                    <div style="width:75%; padding:0 5px; color:black">
+                        <p style="text-overflow: ellipsis; overflow: hidden; width: 140px; height: 20px; white-space: nowrap; ">
+                            @item.Attachment_name
+                        </p>
+                        <p style="font-size:10px">
+                            @item.Attachment_binary
+                        </p>
+                    </div>
+                </div>
+            </a>
+            <div style="position:relative;cursor:pointer; font-size:20px" onclick="ShowDeletePopUp(@item.Attachment_id)">x</div>
+        }
+    }
+    @*<div id="delete-confirm-modal" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+        <form class="modal-content" style="display: inline;">
+            <div class="container" style=" background-color: white; width: 500px; height: 200px; position: relative; top: 60px; border: 1px solid; text-align:center; }">
+                <h1>Xóa file</h1>
+                <p>Bạn sẽ không thể khôi phục lại file sau khi bấm xóa</p>
+                <div>
+                    <a style="width:50px; height:30px;" onclick="document.getElementById('delete-confirm-modal').style.display='none'" class="cancelbtn">Hủy</a>
+                    <a style="width: 50px; height: 30px; background-color: #f44336; color: white" type="button" onclick="document.getElementById('delete-confirm-modal').style.display='none'" class="deletebtn">Xóa</a>
+                </div>
+            </div>
+        </form>
+    </div>*@
+    @*<div id="delete-confirm-modal" class="modal" role="dialog">
+        <div class="modal-dialog" style="width:500px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Xóa tài liệu</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="Delete">
+                        Sau khi xóa sẽ không thể khôi phục lại tài liệu này?
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn--delete">Xóa</button>
+                    <button class="btn btn-normal" data-dismiss="modal">Hủy</button>
+                </div>
+            </div>
+            <div style="text-align:center;display:none" id="loader-div">
+                <img src="~/imgs/Walk.gif" style="height:100px;width:100px" />
+            </div>
+        </div>
+    </div>*@
+    <div class="value-fixed">
+        <div class="space"></div>
+    </div>
+</div>
 @using (Html.BeginForm("MeetingEdit", "Meetings", FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
 {
-    <div class="form-row-fixed">
-        @*<img src="~/Content/Picture/outline_file_upload_black_24dp.png" />*@
-        @*<label class="icon-zone" for="input-ficons-1"><i class="fa fa-plus"></i></label>*@
-        @if (Model.ATTACHMENTs.Count != 0)
-        {
-            foreach (var item in Model.ATTACHMENTs)
-            {
-                <a id="myfile" href="@item.Attachment_path" style="margin-right:20px;" download>
-                    <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
-                        <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
-                            <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
-                        </div>
-                        <div style="width:75%; padding:0 5px; color:black">
-                            <p style="text-overflow: ellipsis; overflow: hidden; width: 140px; height: 20px; white-space: nowrap; ">
-                                @item.Attachment_name
-                            </p>
-                            <p style="font-size:10px">
-                                @item.Attachment_binary
-                            </p>
-                        </div>
-                    </div>
-                </a>
-            }
-        }
-        <div class="value-fixed">
-            <div class="space"></div>
-        </div>
-    </div>
     @Html.HiddenFor(model => model.Category_id)
     @Html.HiddenFor(model => model.Meeting_id)
     <div class="form-row-fixed form-row-fixed-title" style="width:100%;">
@@ -58,6 +154,14 @@
         <div class="value value-fixed">
             <div class="input-group input_fixed value-fixed-title" style="width: 800px !important;">
                 @Html.TextBoxFor(m => m.Meeting_name, new { @class = "edit_fixed", @id = "meeting_name" })
+            </div>
+        </div>
+    </div>
+    <div class="form-row-fixed form-row-fixed-title" style="width:100%;">
+        <img src="~/Content/Picture/outline_manage_accounts_black_24dp.png" />
+        <div class="value value-fixed">
+            <div class="input-group input_fixed value-fixed-title" style="width: 800px !important; background-color: #f1f1f1; padding-left: 5px">
+                @Html.DisplayFor(m => m.AspNetUser.Full_name, new { @class = "input-fixed", @id = "Create_by" })
             </div>
         </div>
     </div>
@@ -70,10 +174,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!--
-    -->
-    <div class="form-row-fixed datetime-inline">
+    </div><!--
+    --><div class="form-row-fixed datetime-inline">
         <img src="~/Content/Picture/outline_schedule_black_24dp.png" />
         <div class="value value-fixed value-fixed-location">
             <div class="input-group input_fixed">
@@ -96,13 +198,12 @@
             </div>
         </div>
     </div>
-
     <div class="form-row-fixed" style="align-items: flex-start !important; width: 100%; margin-top: 20px !important; ">
         <img src="~/Content/Picture/outline_edit_black_24dp.png" />
-        <div class="value value-fixed" style="border: 1px solid #e5e5e5; border-radius: 5px; width: 966px; min-height: 200px;">
+        <div class="value value-fixed" style="width: 966px; min-height: 200px; border: 0px;">
             <div class="input-group" style="height: 300px; width: 100%; background: white; white-space: pre-line;">
                 @*@Html.Label(Model.Meeting_content, new { @class = "area-input", @rows = "20" })*@
-                @Html.TextAreaFor(model => model.Meeting_content, new { @class = "input-fixed", @style = "width:100%; height: 100%;padding-left: 5px;", @id="hrere_content" })
+                @Html.TextAreaFor(model => model.Meeting_content, new { @class = "input-fixed", @style = "width:100%; height: 100%;padding-left: 5px;", @id = "hrere_content" })
             </div>
         </div>
     </div>
@@ -110,95 +211,143 @@
     @Html.HiddenFor(model => model.Date_Create)
     @Html.HiddenFor(model => model.Status)
     <div style=" width: 966px; display: flex; justify-content: center;">
-        <button type="submit" style="width: 100px; height: 40px; background-color: #009fe5; color: white; display: inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor:pointer">
+        <button type="submit" style="border:0px; width: 100px; height: 40px; background-color: #009fe5; color: white; display: inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor:pointer">
             Lưu
         </button>
-        <a onclick="location.href = '@Url.Action("MeetingDetail", "Meetings", new { id = Model.Meeting_id, modify = false })'" style="width: 100px; height: 40px; background-color: #f1f1f1; color: black; display:inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor: pointer ">
+        <a id="cancel-btn" onclick="location.href = '@Url.Action("Index", "Meetings")'" style="width: 100px; height: 40px; background-color: #f1f1f1; color: black; display:inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor: pointer ">
             Hủy
         </a>
-    </div>
-}
-    @*<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member" aria-expanded="false" aria-controls="Member">
-            Danh sách thành viên
-        </a>*@
 
-    @*<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            Button with data-target
-        </button>*@
-    @*<div class="collapse" id="Member" style="width:1000px;">
-            <table class="table">
-                <thead >
-                    <tr style="background-color:#f1f1f1; color:black;">
-                        <th scope="col">#</th>
-                        <th class="col-align" scope="col">Tên thành viên</th>
-                        <th class="col-align" scope="col">Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach(var member in Model.MEMBERs)
-                    {
-                        <tr>
-                            <td>@(++i)</td>
-                            <td class="col-align">@member.AspNetUser.Full_name</td>
-                            <td class="col-align">@member.AspNetUser.Email</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+    </div>
+    @*<div style="width: 300px; height: 100%; background-color: wheat; position: absolute; top: -50px; right: 0px;">
+
         </div>*@
-    <!--<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member2" aria-expanded="false" aria-controls="Member">
-        Ngoài nhà trường
-    </a>
-    <div class="collapse" id="Member2" style="width:1000px;">
+}
+<div id="show-popup"></div>
+@*<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member" aria-expanded="false" aria-controls="Member">
+        Danh sách thành viên
+    </a>*@
+
+@*<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Button with data-target
+    </button>*@
+@*<div class="collapse" id="Member" style="width:1000px;">
         <table class="table">
-            <thead>
+            <thead >
                 <tr style="background-color:#f1f1f1; color:black;">
                     <th scope="col">#</th>
                     <th class="col-align" scope="col">Tên thành viên</th>
                     <th class="col-align" scope="col">Email</th>
                 </tr>
             </thead>
-            <tbody>-->
-    @* @for (int i = 1; i <= 10; i++)
-        {
-            <tr>
-                <td>@i</td>
-                <td class="col-align">Trần Đức Bo</td>
-                <td class="col-align">bo.187pm66666</td>
-            </tr>
-        }*@
-    <!--</tbody>
+            <tbody>
+                @foreach(var member in Model.MEMBERs)
+                {
+                    <tr>
+                        <td>@(++i)</td>
+                        <td class="col-align">@member.AspNetUser.Full_name</td>
+                        <td class="col-align">@member.AspNetUser.Email</td>
+                    </tr>
+                }
+            </tbody>
         </table>
-    </div>-->
-    <style>
-        .btn-primary-fixed {
-            color: #fff;
-            background-color: #009fe5;
-            /* border-color: #2e6da4; */
-            position: relative;
-            left: 0px;
-            width: 1000px;
-            border-radius: 4px 4px 0px 0px;
-        }
+    </div>*@
+<!--<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member2" aria-expanded="false" aria-controls="Member">
+    Ngoài nhà trường
+</a>
+<div class="collapse" id="Member2" style="width:1000px;">
+    <table class="table">
+        <thead>
+            <tr style="background-color:#f1f1f1; color:black;">
+                <th scope="col">#</th>
+                <th class="col-align" scope="col">Tên thành viên</th>
+                <th class="col-align" scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>-->
+@* @for (int i = 1; i <= 10; i++)
+    {
+        <tr>
+            <td>@i</td>
+            <td class="col-align">Trần Đức Bo</td>
+            <td class="col-align">bo.187pm66666</td>
+        </tr>
+    }*@
+<!--</tbody>
+    </table>
+</div>-->
+<style>
+    .btn_catalog {
+        min-width: 142px;
+        height: 36px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+    }
 
-        .space {
-            width: 966px;
-        }
+    .btn--delete{
+        background: #e74c3c;
+        font-family: Mulish;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 18px;
+        text-align: center;
+        color: #FFFFFF;
+        margin-right: 8px;
+    }
+    
 
-        .file-zone {
-            margin-left: 34px;
-            width: 300px;
-            height: 50px;
-        }
 
-        .area-input {
-            height: fit-content;
-            min-height: 250px;
-            padding: 5px;
-        }
-    </style>
+    .btn-primary-fixed {
+        color: #fff;
+        background-color: #009fe5;
+        /* border-color: #2e6da4; */
+        position: relative;
+        left: 0px;
+        width: 1000px;
+        border-radius: 4px 4px 0px 0px;
+    }
 
-    <script type="text/javascript">
+    .space {
+        width: 966px;
+    }
+
+    .file-zone {
+        margin-left: 34px;
+        width: 300px;
+        height: 50px;
+    }
+
+    .area-input {
+        height: fit-content;
+        min-height: 250px;
+        padding: 5px;
+    }
+
+    #cancel-btn:hover {
+        text-decoration: none;
+    }
+</style>
+
+<script>
+        function ShowDeletePopUp(id) {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("DeleteAttachment", "Meetings")',
+            data: { id },
+            dataType: "html",
+            success: function (data) {
+                $("#show-popup").html(data);
+                $("#myDeleteModal").modal("show");
+            },
+            error: function (data) {
+                return false;
+            }
+        });
+    };
+</script>
+@*<script type="text/javascript">
     function Edit() {
         var meeting_id = $("#Meeting_id").val();
         var meeting_name = $("#meeting_name").val();
@@ -217,5 +366,19 @@
                 console.log(err);
             }
         })
-    }
+        }
+    </script>*@
+@*<script>
+        function file_hidden(id)
+        {
+            var file = document.getElementsByClassName("myfile-" + id);
+            var x = document.getElementsByClassName("x-" + id);
+            $(file).addClass('hidden');
+            $(x).addClass('hidden');
+        }
     </script>
+    <style>
+        .hidden {
+            display:none;
+        }
+    </style>*@

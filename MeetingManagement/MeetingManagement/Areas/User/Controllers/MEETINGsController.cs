@@ -29,8 +29,52 @@ namespace MeetingManagement.Areas.User.Controllers
         public ActionResult MeetingDetail(int id, bool modify)
         {
             ViewBag.modify = modify;
+            ViewBag.user_identity = User.Identity.GetUserId();
             var meeting = db.MEETINGs.Find(id);
             return View(meeting);
+        }
+
+        public ActionResult CancelModel(int id)
+        {
+            var meeting = db.MEETINGs.Find(id);
+            return PartialView(meeting);
+        }
+
+        [HttpPost]
+        public ActionResult CancelModel(int Meeting_id, string Feedback)
+        {
+            var meeting = db.MEETINGs.Find(Meeting_id);
+            meeting.Feedback = Feedback;
+            meeting.Status = 7;
+
+            db.Entry(meeting).State = EntityState.Modified;
+            db.SaveChanges();
+
+            //string To = db.AspNetUsers.Find(meeting.Create_by).Email;
+            //string Subject = meeting.Meeting_name;
+            //string Body = REFUSE_MEETING + feedback;
+            //Outlook mail = new Outlook(To, Subject, Body);
+            //mail.SendMail();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult DeleteAttachment(int id)
+        {
+            ATTACHMENT attachment = db.ATTACHMENTs.Find(id);
+            return PartialView(attachment);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteAttachmentConfirm(int id)
+        {
+            ATTACHMENT att = db.ATTACHMENTs.Find(id);
+            if (att != null)
+            {
+                db.ATTACHMENTs.Remove(att);
+                db.SaveChanges();
+            }
+            //link huong dan https://www.youtube.com/watch?v=YQnCkMAYDsQ
+            return RedirectToAction("Index");
         }
 
         public ActionResult MeetingEdit(int id)
@@ -45,7 +89,7 @@ namespace MeetingManagement.Areas.User.Controllers
             db.Entry(meeting).State = EntityState.Modified;
             db.SaveChanges();
 
-            return RedirectToAction("MeetingDetail", "Meetings", new { id = meeting.Meeting_id, modify = false });
+            return RedirectToAction("Index", "Meetings");
         }
 
         public PartialViewResult MeetingInfo(int id)
@@ -66,6 +110,9 @@ namespace MeetingManagement.Areas.User.Controllers
         }
         public ActionResult MeetingTask(int id)
         {
+            ViewBag.create_by = db.MEETINGs.Find(id).Create_by;
+            ViewBag.user_identity = User.Identity.GetUserId();
+            ViewBag.meeting_status = db.MEETINGs.Find(id).Status;
             var task = db.TASKs.Where(x => x.Meeting_id == id).ToList();
             return PartialView(task);
         }
@@ -86,14 +133,17 @@ namespace MeetingManagement.Areas.User.Controllers
                 {
                     if (ValidateFile(ReportFile))
                     {
+                        var path = Server.MapPath(File_Path_Report);
+                        string extension = Path.GetExtension(ReportFile.FileName);
+                        ReportFile.SaveAs(path + ReportFile.FileName);
+
                         REPORT report = new REPORT();
-                        report.Meeting_id = Meeting_id;
+                        report.MEETING = db.MEETINGs.Find(Meeting_id);
                         report.Report_name = ReportFile.FileName;
-                        report.Report_binary = ((Double)ReportFile.ContentLength / 1024).ToString() + "KB";
+                        report.Report_binary = Math.Round(((Double)ReportFile.ContentLength / 1024),2).ToString() + "KB";
                         report.Report_type = ReportFile.ContentType;
-                        report.Report_link = File_Path_Report + ReportFile;
+                        report.Report_link = File_Path_Report + ReportFile.FileName;
                         db.REPORTs.Add(report);
-                        db.SaveChanges();
 
                         var meeting = db.MEETINGs.Find(Meeting_id);
                         meeting.Check_report = true;
@@ -101,15 +151,14 @@ namespace MeetingManagement.Areas.User.Controllers
                         db.Entry(meeting).State = EntityState.Modified;
                         db.SaveChanges();
 
-                        var path = Server.MapPath(File_Path_Report);
-                        string extension = Path.GetExtension(ReportFile.FileName);
-                        ReportFile.SaveAs(path + ReportFile);
+                        scope.Complete();
+                        return View("MeetingDetail", db.MEETINGs.Find(Meeting_id));
                     }
                     ModelState.AddModelError("File", "Dung lượng tối đa cho phép là 5MB");
                 }
             }
             ModelState.AddModelError("FileAttach", "Chưa nộp báo cáo!");
-            return View("MeetingDetail",db.MEETINGs.Find(Meeting_id));
+            return View();
         }
         /*----------Meeting Report-------------*/
 
@@ -200,6 +249,18 @@ namespace MeetingManagement.Areas.User.Controllers
             return View(mEETING);
         }
 
+        public ActionResult Delete_Attachment(int id)
+        {
+            ATTACHMENT attachment  = db.ATTACHMENTs.Find(id);
+            if (attachment == null)
+            {
+                return HttpNotFound();
+            }
+            db.ATTACHMENTs.Remove(attachment);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         // POST: User/MEETINGs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -226,7 +287,8 @@ namespace MeetingManagement.Areas.User.Controllers
             ViewBag.user_identity = currentUser;
             var result = db.MEETINGs.ToList();
             result = result.Where(m => m.Create_by.ToLower().Contains(currentUser)).ToList();
-            return PartialView("MyMeetingGridView", result);
+            var notpending_result = result.Where(n => n.Status > 1);
+            return PartialView("MyMeetingGridView", notpending_result);
         }
 
         public ActionResult JoinedMeeting()
@@ -237,8 +299,20 @@ namespace MeetingManagement.Areas.User.Controllers
                            from m in db.MEETINGs
                            where u.Meeting_id == m.Meeting_id
                            select m;
-            return PartialView("JoinedMeetingGridView", meetings);
+            var notpending_meetings = meetings.Where(n => n.Status > 1);
+            return PartialView("JoinedMeetingGridView", notpending_meetings);
         }
+
+        public ActionResult PendingMeeting()
+        {
+            currentUser = User.Identity.GetUserId();
+            ViewBag.user_identity = currentUser;
+            var meetings = db.MEETINGs.ToList();
+            meetings = meetings.Where(m => m.Create_by.ToLower().Contains(currentUser)).ToList();
+            var meetings_1 = meetings.Where(n => n.Status == 1);
+            return PartialView(meetings_1);
+        }
+
         public ActionResult MeetingList(int id)
         {
             var all = db.MEETINGs.Where(x => x.Category_id == id).ToList();

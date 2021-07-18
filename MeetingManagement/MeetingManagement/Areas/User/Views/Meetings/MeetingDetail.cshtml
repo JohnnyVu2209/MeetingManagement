@@ -18,50 +18,67 @@
                 <div style="display: inline-flex">
                     @Html.Label(Model.CATEGORY.Category_Name)
                 </div>
-                @if (Model.MEETING_STATUS.Status_id == 1)
+                @if (Model.MEETING_STATUS.Status_id == 1 && ViewBag.modify == false)
                 {
-                    if (ViewBag.modify == false)
-                    {
-                        <div class="detail-tab-btn tablinks" style="width:80px;padding:0;" onclick="openTab(event,'meeting-info')">
-                            Chi tiết
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="detail-tab-btn tablinks" style="width:80px;padding:0;" onclick="openTab(event,'meeting-info-edit')">
-                            Chi tiết
-                        </div>
-                    }
+                    <div class="detail-tab-btn tablinks" style="width:80px;padding:0;" onclick="openTab(event,'meeting-info')">
+                        Chi tiết
+                    </div>
                     <div class="pending-status">@Model.MEETING_STATUS.Status_name</div>
                 }
-                else
+                @if (Model.MEETING_STATUS.Status_id == 7)
+                {
+                    <div class="detail-tab-btn tablinks" style="width:80px;padding:0;" onclick="openTab(event,'meeting-info')">
+                        Chi tiết
+                    </div>
+                    <div class="detail-tab-btn tablinks " style="width:115px;padding:0;" onclick="openTab(event,'meeting-task')">
+                        Công việc
+                    </div>
+                    <div class="cancel-status">@Model.MEETING_STATUS.Status_name</div>
+                }
+                else if (Model.MEETING_STATUS.Status_id != 1 && ViewBag.modify == false)
                 {
                     <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-info')">
                         Chi tiết
                     </div>
-                    <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-member')">
-                        Thành viên
-                    </div>
                     <div class="detail-tab-btn tablinks " onclick="openTab(event,'meeting-task')">
                         Công việc
                     </div>
-                    <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-report')">
+                    @*<div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-report')">
                         Báo cáo
+                    </div>*@
+                }
+                else if (ViewBag.modify == true)
+                {
+                    <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-info-edit')">
+                        Chi tiết
+                    </div>
+                    @*<div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-member')">
+                            Thành viên
+                        </div>*@
+                    <div class="detail-tab-btn tablinks " onclick="openTab(event,'meeting-task')">
+                        Công việc
+                    </div>
+                    @*<div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-report')">
+                        Báo cáo
+                    </div>*@
+                    <div onclick="getCancelModel(@Model.Meeting_id)" style="right: calc( 0% + 30px ); position: fixed;">
+                        <a class="cancel-btn">
+                            Hủy cuộc họp
+                        </a>
                     </div>
                 }
-
             </div>
             @*<div class="button-zone">
-                <a class="btn button-close" onclick="location.href ='@Url.Action("Index", "MEETINGs")';">Close</a>
-            </div>*@
+                    <a class="btn button-close" onclick="location.href ='@Url.Action("Index", "MEETINGs")';">Close</a>
+                </div>*@
         </div>
     </div>
     <div id="meeting-info" class="tabcontent" style="@is_preview">
         @Html.Action("MeetingInfo", "Meetings", new { Model.Meeting_id })
     </div>
-    <div id="meeting-member" class="tabcontent" style="display:none">
-        @Html.Action("MeetingMember", "Meetings", new { Model.Meeting_id })
-    </div>
+    @*<div id="meeting-member" class="tabcontent" style="display:none">
+            @Html.Action("MeetingMember", "Meetings", new { Model.Meeting_id })
+        </div>*@
     <div id="meeting-task" class="tabcontent" style="display:none;">
         @Html.Action("MeetingTask", "Meetings", new { Model.Meeting_id })
     </div>
@@ -69,9 +86,10 @@
         @Html.Action("MeetingReport", "Meetings", new { Model.Meeting_id })
     </div>
     <div id="meeting-info-edit" class="tabcontent" style="@is_modify">
-        @Html.Action("MeetingEdit", "Meetings", new { Model.Meeting_id})
+        @Html.Action("MeetingEdit", "Meetings", new { Model.Meeting_id })
     </div>
 </body>
+<div id="Feedback"></div>
 
 <script>
     function openTab(evt, cityName) {
@@ -87,17 +105,52 @@
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " active";
     }
+
+    function getCancelModel(id) {
+            $.ajax({
+                url: '@Url.Action("CancelModel", "Meetings")',
+                method: 'GET',
+                data: { id },
+                success: function (data) {
+                    $("#Feedback").html(data);
+                    $("#modalFeedback").modal("show");
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+            }
 </script>
 
 <style>
-    .button-close {
+    /*cancel-btn*/
+    .cancel-btn {
+        width: 100px;
+        height: 40px;
+        background-color: #ff4d4d;
+        color: white;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        cursor: pointer
+    }
+
+        .cancel-btn:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+
+
+    /*    .button-close {
         color: #212529;
         border-color: #212529;
     }
 
         .button-close:hover {
             background: #f1f1f1;
-        }
+        }*/
 
     .detail-tab-btn {
         margin-right: 10px;

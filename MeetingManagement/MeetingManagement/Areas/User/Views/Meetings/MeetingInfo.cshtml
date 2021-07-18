@@ -5,7 +5,7 @@
 @Html.HiddenFor(model => model.Status, new { @id = "status" })
 @Html.HiddenFor(model => model.Create_by)
 @{
-    
+
 }
 <link rel="stylesheet" href="~/Content/Meetings/meetingdetail.css" />
 
@@ -23,7 +23,7 @@
 </style>
 @if (Model.Create_by.ToString() == ViewBag.user_identity)
 {
-    <div style="position: absolute; right: 0px;">
+    <div style="position: absolute; right: 0px;display:none;">
         <a onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = Model.Meeting_id, modify = true } )'" style="width: 100px; height: 40px; background-color: #f1f1f1; color: black; display:inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor: pointer ">
             Thay đổi
         </a>
@@ -62,7 +62,7 @@
 <div class="form-row-fixed form-row-fixed-title" style="width:100%;">
     <img src="~/Content/Picture/outline_title_black_24dp.png" />
     <div class="value value-fixed">
-        <div class="input-group input_fixed value-fixed-title" style="width: 800px !important;">
+        <div class="input-group input_fixed value-fixed-title" style="width: 800px !important; padding-left: 5px; ">
             @Html.DisplayFor(m => m.Meeting_name, new { @class = "input-fixed", @id = "meeting_name" })
         </div>
     </div>
@@ -70,7 +70,7 @@
 <div class="form-row-fixed form-row-fixed-title" style="width:100%;">
     <img src="~/Content/Picture/outline_manage_accounts_black_24dp.png" />
     <div class="value value-fixed">
-        <div class="input-group input_fixed value-fixed-title" style="width: 800px !important;">
+        <div class="input-group input_fixed value-fixed-title" style="width: 800px !important; padding-left: 5px;">
             @Html.DisplayFor(m => m.AspNetUser.Full_name, new { @class = "input-fixed", @id = "Create_by" })
         </div>
     </div>
@@ -79,7 +79,7 @@
     <img src="~/Content/Picture/outline_event_black_24dp.png" />
     <div class="value value-fixed value-fixed-location">
         <div class="input-group input_fixed">
-            <div class="input-group-desc" style="display:flex ;height: 100%;">
+            <div class="input-group-desc" style="display: flex; height: 100%; padding-left: 5px;">
                 @Html.Label(Model.Date_Start.ToShortDateString(), new { @class = "input-fixed" })
             </div>
         </div>
@@ -90,7 +90,7 @@
 <div class="form-row-fixed datetime-inline">
     <img src="~/Content/Picture/outline_schedule_black_24dp.png" />
     <div class="value value-fixed value-fixed-location">
-        <div class="input-group input_fixed">
+        <div class="input-group input_fixed" style="padding-left: 5px;">
             <div class="input-group-desc" style="display:flex ;height: 100%;">
                 @Html.Label(Model.Time_Start.ToString(), new { @class = "input-fixed" })
             </div>
@@ -102,7 +102,7 @@
 <div class="form-row-fixed datetime-inline" style="width:100%;">
     <img src="~/Content/Picture/outline_place_black_24dp.png" />
     <div class="value value-fixed value-fixed-location">
-        <div class="input-group input_fixed" style="width:800px">
+        <div class="input-group input_fixed" style="width:800px;padding-left: 5px;">
             <div class="input-group-desc" style="display:flex ;height: 100%;">
                 @Html.Label(Model.Location.ToString(), new { @class = "input-fixed" })
             </div>
@@ -112,8 +112,8 @@
 
 <div class="form-row-fixed" style="align-items: flex-start !important; width: 100%; margin-top: 20px !important; ">
     <img src="~/Content/Picture/outline_edit_black_24dp.png" />
-    <div class="value value-fixed" style="border: 1px solid #e5e5e5; border-radius: 5px; width: 966px; min-height: 200px;">
-        <div class="input-group" style=" width: 100%; background: white; white-space: pre-wrap;">
+    <div class="value value-fixed" style="border: 1px solid #e5e5e5; border-radius: 5px; width: 970px; min-height: 200px;">
+        <div class="input-group" style=" width: 100%; background: white; white-space: pre-line;">
             @*@Html.Label(Model.Meeting_content, new { @class = "area-input", @rows = "20" })*@
             <p style="margin-left: 10px; word-break: break-all;">
                 @Html.DisplayFor(m => m.Meeting_content)
@@ -121,6 +121,9 @@
         </div>
     </div>
 </div>
+@Html.Action("MeetingMember", "Meetings")
+<div style="height:50px;"></div>
+@Html.Action("MeetingReport", "Meetings")
 @*<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member" aria-expanded="false" aria-controls="Member">
         Danh sách thành viên
     </a>*@
@@ -149,7 +152,7 @@
             </tbody>
         </table>
     </div>*@
-<div style="height:50px;"></div>
+
 <!--<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member2" aria-expanded="false" aria-controls="Member">
     Ngoài nhà trường
 </a>
