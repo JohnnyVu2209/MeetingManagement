@@ -18,6 +18,17 @@ namespace MeetingManagement.Areas.User.Controllers
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
         private string currentUser;
+        private MEETING meeting = null;
+        private void GetMeeting()
+        {
+            if (Session["Meeting"] != null)
+                meeting = Session["Meeting"] as MEETING;
+            else
+            {
+                meeting = new MEETING();
+                Session["Meeting"] = meeting;
+            }
+        }
         // GET: User/MEETINGs
         public ActionResult Index()
         {
@@ -113,112 +124,6 @@ namespace MeetingManagement.Areas.User.Controllers
         }
         /*----------Meeting Report-------------*/
 
-        // GET: User/MEETINGs/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MEETING mEETING = db.MEETINGs.Find(id);
-            if (mEETING == null)
-            {
-                return HttpNotFound();
-            }
-            return View(mEETING);
-        }
-
-        // GET: User/MEETINGs/Create
-        public ActionResult Create()
-        {
-            ViewBag.Category_id = new SelectList(db.CATEGORies, "Category_id", "Create_by");
-            return View();
-        }
-
-        // POST: User/MEETINGs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(MEETING mEETING)
-        {
-            if (ModelState.IsValid)
-            {
-                db.MEETINGs.Add(mEETING);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.Category_id = new SelectList(db.CATEGORies, "Category_id", "Create_by", mEETING.Category_id);
-            return View(mEETING);
-        }
-
-        // GET: User/MEETINGs/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MEETING mEETING = db.MEETINGs.Find(id);
-            if (mEETING == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Category_id = new SelectList(db.CATEGORies, "Category_id", "Create_by", mEETING.Category_id);
-            return View(mEETING);
-        }
-
-        // POST: User/MEETINGs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        public ActionResult Edit([Bind(Include = "CreateBy_id,Meeting_name,Date_Start,Date_End,Meeting_Confirmed,Category_id,Meeting_id,Lacation,Status,Meeting_report")] MEETING mEETING)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(mEETING).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.Category_id = new SelectList(db.CATEGORies, "Category_id", "Create_by", mEETING.Category_id);
-            return View(mEETING);
-        }
-
-        // GET: User/MEETINGs/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MEETING mEETING = db.MEETINGs.Find(id);
-            if (mEETING == null)
-            {
-                return HttpNotFound();
-            }
-            return View(mEETING);
-        }
-
-        // POST: User/MEETINGs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            MEETING mEETING = db.MEETINGs.Find(id);
-            db.MEETINGs.Remove(mEETING);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
 
         public ActionResult MyMeeting()
         {
@@ -244,12 +149,28 @@ namespace MeetingManagement.Areas.User.Controllers
             var all = db.MEETINGs.Where(x => x.Category_id == id).ToList();
             return PartialView(all);
         }
+        [HttpGet]
         public ActionResult MeetingForm(int id)
         {
+            GetMeeting();
+            var current = User.Identity.GetUserId();
             ViewBag.newMeet = new MEETING();
+            var userList = db.AspNetUsers.Where(x=> x.Id != current).Select(selector: x => x.Email).ToList();
+            if (meeting != null)
+            {
+                ViewBag.newMeet = meeting;
+                if (meeting.MEMBERs.Count != 0)
+                {
+                    foreach(var member in meeting.MEMBERs)
+                    {
+                        userList.Remove(db.AspNetUsers.SingleOrDefault(x => x.Id == member.Member_id).Email);
+                    }
+                }
+            }
+            meeting.Category_id = id;
+            ViewBag.userList = userList;
             ViewBag.newMeet.Category_id = id;
-            ViewBag.userList = db.AspNetUsers.ToList();
-            return View();
+            return View(meeting);
         }
 
         [HttpPost]
@@ -301,6 +222,7 @@ namespace MeetingManagement.Areas.User.Controllers
         }
         private void AddMeeting(MEETING model)
         {
+            GetMeeting();
             MEETING newMeet = new MEETING();
             newMeet.Category_id = model.Category_id;
             newMeet.Meeting_name = model.Meeting_name;
@@ -314,17 +236,15 @@ namespace MeetingManagement.Areas.User.Controllers
             db.MEETINGs.Add(newMeet);
             db.SaveChanges();
 
-            var meeting = db.MEETINGs.Where(x => x.Meeting_name == newMeet.Meeting_name).FirstOrDefault();
-            string[] users = model.AspNetUsers.Split(',');
-            foreach (string user in users)
+            var newMeeting = db.MEETINGs.Where(x => x.Meeting_name == newMeet.Meeting_name).FirstOrDefault();
+            foreach(var member in meeting.MEMBERs.ToList())
             {
-                AspNetUser account = db.AspNetUsers.Where(x => x.Email == user).FirstOrDefault();
-                MEMBER member = new MEMBER();
-                member.Meeting_id = meeting.Meeting_id;
-                member.Member_id = account.Id;
+                member.Meeting_id = newMeeting.Meeting_id;
                 db.MEMBERs.Add(member);
                 db.SaveChanges();
             }
+            meeting = new MEETING();
+            Session["Meeting"] = meeting;
         }
         private bool ValidateFile(HttpPostedFileBase files)
         {
@@ -338,11 +258,31 @@ namespace MeetingManagement.Areas.User.Controllers
         private const string File_Path_Report = "~/Upload/Reports/";
         
         [HttpGet]
-        public ActionResult CreateUser()
+        public ActionResult AddUser(MEETING model, string email)
         {
-            List<AspNetUser> model = db.AspNetUsers.ToList();
-            ViewBag.result = model;
-            return PartialView();
+            GetMeeting();
+            AspNetUser user = db.AspNetUsers.SingleOrDefault(x => x.Email == email);
+            MEMBER member = new MEMBER(); 
+            member.Member_id = user.Id;
+            if (meeting.MEMBERs.Count != 0)
+            {
+                model.MEMBERs = meeting.MEMBERs;
+            }
+            model.MEMBERs.Add(member);
+            meeting = model;
+            Session["Meeting"] = meeting;
+            return RedirectToAction("MeetingForm", new { id = model.Category_id });
+        }
+        public ActionResult RemoveUser(string userId)
+        {
+            GetMeeting();
+            foreach(var member in meeting.MEMBERs.ToList())
+            {
+                if (member.Member_id == userId)
+                    meeting.MEMBERs.Remove(member);
+            }
+            Session["Meeting"] = meeting;
+            return RedirectToAction("MeetingForm", new { id = meeting.Category_id });
         }
         public ActionResult CreateUser2()
         {
