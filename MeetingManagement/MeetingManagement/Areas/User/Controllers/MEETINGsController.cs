@@ -46,7 +46,18 @@ namespace MeetingManagement.Areas.User.Controllers
         {
             var task = db.TASKs.Where(x => x.Meeting_id == id).ToList();
             ViewBag.Meeting = id;
+            ViewBag.IsCreateBy = isCreateBy(id);
             return PartialView(task);
+        }
+        private bool isCreateBy(int id)
+        {
+            var create_by = db.MEETINGs.Find(id).Create_by.ToString();
+            var current_user = User.Identity.GetUserId().ToString();
+            if (currentUser == create_by)
+            {
+                return true;
+            }
+            return false;
         }
         public ActionResult MeetingReport(int id)
         {
@@ -224,7 +235,7 @@ namespace MeetingManagement.Areas.User.Controllers
                         newAtt.Meeting_id = meetings.Meeting_id;
                         newAtt.Attachment_path = File_Path + Files.FileName;
                         newAtt.Attachment_name = Files.FileName;
-                        newAtt.Attachment_binary = ((Double)Files.ContentLength / 1024).ToString()+ "KB";
+                        newAtt.Attachment_binary = ((Double)Files.ContentLength / 1024).ToString() + "KB";
                         db.ATTACHMENTs.Add(newAtt);
                         db.SaveChanges();
                         //}

@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MeetingManagement.Models;
-
 namespace MeetingManagement.Areas.User.Controllers
 {
     public class TasksController : Controller
@@ -55,20 +54,14 @@ namespace MeetingManagement.Areas.User.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(TASK tASK, string Asignee)
-        {
-            //if (ModelState.IsValid)
-            //{
-            //    db.TASKs.Add(tASK);
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
+        {            
             db.TASKs.Add(new TASK
             {
-                Meeting_id = tASK.Meeting_id,
                 Task_name = tASK.Task_name,
                 Assignee = Asignee,
                 Task_Deadline = tASK.Task_Deadline,
-                Task_Status = false
+                Task_Status = false,
+                Meeting_id = tASK.Meeting_id
             });
             db.SaveChanges();
             var meetingid = db.MEETINGs.Find(tASK.Meeting_id).Meeting_name.ToString();
@@ -83,20 +76,11 @@ namespace MeetingManagement.Areas.User.Controllers
         }
 
         // GET: User/Tasks/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int TaskID)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TASK tASK = db.TASKs.Find(id);
-            if (tASK == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Meeting_id = new SelectList(db.MEETINGs, "Meeting_id", "Meeting_name", tASK.Meeting_id);
-            ViewBag.Meeting_id = new SelectList(db.MEMBERs, "Meeting_id", "Member_id", tASK.Meeting_id);
-            return View(tASK);
+            var task = db.TASKs.Find(TaskID);
+            ViewBag.Member = new SelectList(db.MEMBERs.Where(t => t.Meeting_id == task.Meeting_id), "Member_id", "AspNetUser.Email");
+            return PartialView(task);
         }
 
         // POST: User/Tasks/Edit/5
@@ -104,32 +88,28 @@ namespace MeetingManagement.Areas.User.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Task_id,Meeting_id,Task_name,Assignee,Task_Status,Task_Deadline,Notify")] TASK tASK)
+        public ActionResult Edit(TASK tASK, string Asignee)
         {
             if (ModelState.IsValid)
             {
+                tASK.Assignee = Asignee;
                 db.Entry(tASK).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("MeetingDetail", "Meetings", new { id = tASK.Meeting_id });
             }
             ViewBag.Meeting_id = new SelectList(db.MEETINGs, "Meeting_id", "Meeting_name", tASK.Meeting_id);
             ViewBag.Meeting_id = new SelectList(db.MEMBERs, "Meeting_id", "Member_id", tASK.Meeting_id);
-            return View(tASK);
+            return RedirectToAction("MeetingDetail", "Meetings", new { id = tASK.Meeting_id });
         }
 
         // GET: User/Tasks/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int TaskID)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TASK tASK = db.TASKs.Find(id);
-            if (tASK == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tASK);
+            var task = db.TASKs.Find(TaskID);
+            var meeting_id = task.Meeting_id;
+            db.TASKs.Remove(task);
+            db.SaveChanges();
+            return RedirectToAction("MeetingDetail", "Meetings", new { id = meeting_id });
         }
 
         // POST: User/Tasks/Delete/5
@@ -152,13 +132,17 @@ namespace MeetingManagement.Areas.User.Controllers
             base.Dispose(disposing);
         }
 
-        public void RemindTask(string AsigneeID, int MeetingID, string TaskName)
+        [HttpGet]
+        public ActionResult RemindTask(string AsigneeID, int MeetingID, string TaskName)
         {
             var receiver = db.AspNetUsers.Find(AsigneeID).Email.ToString();
             var subject = db.MEETINGs.Find(MeetingID).Meeting_name.ToString();
             var body = REMIND_TASK + TaskName;
             var mail = new Outlook(receiver, subject, body);
             mail.SendMail();
+            //return RedirectToAction("Index", "Tasks");
+            return new EmptyResult();
         }
+
     }
 }

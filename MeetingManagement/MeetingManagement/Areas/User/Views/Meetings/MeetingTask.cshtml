@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<MeetingManagement.Models.TASK>
-@{ 
+@{
     var meeting_id = ViewBag.Meeting;
+    var create_by = ViewBag.IsCreateBy;
+
 }
 <div id="container">
     <div class="progress-bar-zone">
@@ -10,7 +12,7 @@
         </div>
     </div>
     <div class="button-zone" style=" position: absolute; top: -10px; right: 0px;">
-        <a class="btn button-create" style="background-color:#009fe5; color:white; display:inline-flex;" onclick="getCreateModal(@meeting_id)" >Tạo</a>
+        <a class="btn button-create" style="background-color:#009fe5; color:white; display:inline-flex;" onclick="getCreateModal(@meeting_id)">Tạo</a>
     </div>
     <div class="table-pos">
         <table class="table">
@@ -54,7 +56,28 @@
                                 <div class="finished-status">Hoàn thành</div>
                             }
                         </td>
+                        <td class="col-align">
+                            @if (create_by)
+                            {
 
+                            }
+                            else
+                            {
+                                if (@value.Task_Status == false)
+                                {
+                                    <a onclick="getEditModal(@value.Task_id)"
+                                       @*href="@Url.Action("Edit","Tasks",new {TaskID = value.Task_id })"*@>Edit</a>
+
+                                    <a onclick="return confirm('Bạn có muốn xoá công việc này?')"
+                                       href="@Url.Action("Delete","Tasks",new {TaskID = value.Task_id })">Delete</a>
+                                    <!--<a role="button"-->
+                                    @*href="@Html.Action("RemindTask","Tasks",new {AsigneeID = value.Assignee,MeetingID = value.Meeting_id,TaskName = value.Task_name })"*@
+                                    <!--class="btn-dark">
+                                        <i class="glyphicon glyphicon-bell" style="font-size:x-large;"></i>
+                                    </a>-->
+                                }
+                            }
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -171,4 +194,20 @@
              }
          });
     };
+
+    function getEditModal(id) {
+        $.ajax({
+            url:"@Url.Action("Edit","Tasks")",
+            datatype: 'html',
+            method: 'GET',
+            data: { TaskID: id },
+            success: function (data) {
+                $("#Popup").html(data);
+                $("#TaskEditModal").modal("show");
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    }
 </script>

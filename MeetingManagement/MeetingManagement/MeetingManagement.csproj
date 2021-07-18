@@ -202,6 +202,12 @@
     <Compile Include="Models\AspNetUser.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AspNetUserClaim.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ATTACHMENT.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -622,13 +628,6 @@
     <Content Include="Areas\User\Views\Categories\Details.cshtml" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <EntityDeploy Include="Models\Models.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Models.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Models.edmx.diagram">
-      <DependentUpon>Models.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingDetail.cshtml" />
@@ -637,6 +636,14 @@
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingReport.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\Edit.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingEdit.cshtml" />
+    <EntityDeploy Include="Models\Models.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Models.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Models.edmx.diagram">
+      <DependentUpon>Models.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\User\Views\Tasks\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
