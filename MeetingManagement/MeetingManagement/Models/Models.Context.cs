@@ -25,9 +25,10 @@ namespace MeetingManagement.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<ATTACHMENT> ATTACHMENTs { get; set; }
         public virtual DbSet<CATEGORY> CATEGORies { get; set; }
@@ -36,6 +37,7 @@ namespace MeetingManagement.Models
         public virtual DbSet<MEMBER> MEMBERs { get; set; }
         public virtual DbSet<OTHER_ACCOUNT> OTHER_ACCOUNTs { get; set; }
         public virtual DbSet<REPORT> REPORTs { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TASK> TASKs { get; set; }
     }
 }

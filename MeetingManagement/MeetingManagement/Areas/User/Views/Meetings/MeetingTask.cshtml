@@ -6,10 +6,12 @@
             <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
     </div>
-    <div class="button-zone" style=" position: absolute; top: -10px; right: 0px;">
-
-        <a class="btn button-create" style="background-color:#009fe5; color:white; display:inline-flex;" onclick="getCreateModal()">Tạo</a>
-    </div>
+    @if (ViewBag.create_by == ViewBag.user_identity && ViewBag.meeting_status != 7)
+    {
+        <div class="button-zone" style=" position: absolute; top: -10px; right: 0px;">
+            <a class="btn button-create" style="background-color:#009fe5; color:white; display:inline-flex;" onclick="getCreateModal()">Tạo</a>
+        </div>
+    }
     <div class="table-pos">
         <table class="table">
             <thead>
