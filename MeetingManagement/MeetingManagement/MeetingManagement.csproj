@@ -178,7 +178,6 @@
     <Compile Include="Areas\Admin\Controllers\AspNetRoleUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\CategoriesController.cs" />
-    <Compile Include="Areas\HeadOfDepartment\Controllers\MEETINGsController.cs" />
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\MainPageController.cs" />
@@ -239,6 +238,9 @@
       <DependentUpon>Models.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\OTHER_ACCOUNT.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\REPORT.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
@@ -2212,8 +2214,6 @@
       <DependentUpon>Models.edmx</DependentUpon>
       <LastGenOutput>Models.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\HeadOfDepartment\Views\web.config" />
     <Content Include="Areas\User\Views\web.config" />
@@ -2295,7 +2295,17 @@
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Details.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\MeetingList.cshtml" />
     <Content Include="Areas\User\Views\Categories\Details.cshtml" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2352,19 +2362,10 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\HeadOfDepartment\Data\" />
-    <Folder Include="Areas\HeadOfDepartment\Views\MEETINGs\" />
     <Folder Include="Areas\User\Data\" />
     <Folder Include="Content\login\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />

@@ -73,7 +73,10 @@
           </Key>
           <Property Name="Meeting_id" Type="int" Nullable="false" />
           <Property Name="Attachment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Attachment_path" Type="nvarchar" MaxLength="128" />
+          <Property Name="Attachment_path" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Attachment_name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Attachment_binary" Type="nvarchar" MaxLength="20" />
+          <Property Name="Attachment_type" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="CATEGORY">
           <Key>
@@ -96,10 +99,12 @@
           <Property Name="Time_Start" Type="time" Precision="7" />
           <Property Name="Location" Type="nvarchar" MaxLength="128" />
           <Property Name="Status" Type="int" Nullable="false" />
-          <Property Name="Meeting_report" Type="nvarchar" MaxLength="128" />
+          <Property Name="Check_report" Type="bit" />
           <Property Name="Date_Create" Type="date" />
           <Property Name="Create_by" Type="nvarchar" MaxLength="128" />
           <Property Name="Feedback" Type="nvarchar" MaxLength="1000" />
+          <Property Name="AspNetUsers" Type="nvarchar(max)" />
+          <Property Name="Check_Task" Type="bit" />
         </EntityType>
         <EntityType Name="MEETING-STATUS">
           <Key>
@@ -122,6 +127,17 @@
           </Key>
           <Property Name="othUser_id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="othUser_office" Type="nvarchar" MaxLength="128" />
+          <Property Name="othUser_Email" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="REPORT">
+          <Key>
+            <PropertyRef Name="Meeting_id" />
+          </Key>
+          <Property Name="Meeting_id" Type="int" Nullable="false" />
+          <Property Name="Report_name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Report_link" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Report_type" Type="nvarchar" MaxLength="100" />
+          <Property Name="Report_binary" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -136,8 +152,6 @@
         <EntityType Name="TASK">
           <Key>
             <PropertyRef Name="Task_id" />
-            <PropertyRef Name="Meeting_id" />
-            <PropertyRef Name="Assignee" />
           </Key>
           <Property Name="Task_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Meeting_id" Type="int" Nullable="false" />
@@ -309,16 +323,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TASK_MEETING1">
+        <Association Name="FK_REPORT_MEETING">
           <End Role="MEETING" Type="Self.MEETING" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="TASK" Type="Self.TASK" Multiplicity="*" />
+          <End Role="REPORT" Type="Self.REPORT" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="MEETING">
               <PropertyRef Name="Meeting_id" />
             </Principal>
-            <Dependent Role="TASK">
+            <Dependent Role="REPORT">
               <PropertyRef Name="Meeting_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -337,6 +351,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TASKLIST_MEETING">
+          <End Role="MEETING" Type="Self.MEETING" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TASK" Type="Self.TASK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEETING">
+              <PropertyRef Name="Meeting_id" />
+            </Principal>
+            <Dependent Role="TASK">
+              <PropertyRef Name="Meeting_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="SEP24Team7ModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -350,6 +378,7 @@
           <EntitySet Name="MEETING-STATUS" EntityType="Self.MEETING-STATUS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MEMBER" EntityType="Self.MEMBER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OTHER ACCOUNT" EntityType="Self.OTHER ACCOUNT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REPORT" EntityType="Self.REPORT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TASK" EntityType="Self.TASK" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Attachment_MEETING" Association="Self.FK_Attachment_MEETING">
@@ -400,12 +429,16 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="OTHER ACCOUNT" EntitySet="OTHER ACCOUNT" />
           </AssociationSet>
-          <AssociationSet Name="FK_TASK_MEETING1" Association="Self.FK_TASK_MEETING1">
+          <AssociationSet Name="FK_REPORT_MEETING" Association="Self.FK_REPORT_MEETING">
             <End Role="MEETING" EntitySet="MEETING" />
-            <End Role="TASK" EntitySet="TASK" />
+            <End Role="REPORT" EntitySet="REPORT" />
           </AssociationSet>
           <AssociationSet Name="FK_TASK_MEMBER" Association="Self.FK_TASK_MEMBER">
             <End Role="MEMBER" EntitySet="MEMBER" />
+            <End Role="TASK" EntitySet="TASK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TASKLIST_MEETING" Association="Self.FK_TASKLIST_MEETING">
+            <End Role="MEETING" EntitySet="MEETING" />
             <End Role="TASK" EntitySet="TASK" />
           </AssociationSet>
         </EntityContainer>
@@ -437,6 +470,7 @@
           <EntitySet Name="MEETING_STATUS" EntityType="SEP24Team7Model.MEETING_STATUS" />
           <EntitySet Name="MEMBERs" EntityType="SEP24Team7Model.MEMBER" />
           <EntitySet Name="OTHER_ACCOUNTs" EntityType="SEP24Team7Model.OTHER_ACCOUNT" />
+          <EntitySet Name="REPORTs" EntityType="SEP24Team7Model.REPORT" />
           <EntitySet Name="sysdiagrams" EntityType="SEP24Team7Model.sysdiagram" />
           <EntitySet Name="TASKs" EntityType="SEP24Team7Model.TASK" />
           <AssociationSet Name="FK_CATEGORY_AspNetUsers" Association="SEP24Team7Model.FK_CATEGORY_AspNetUsers">
@@ -471,7 +505,11 @@
             <End Role="MEETING" EntitySet="MEETINGs" />
             <End Role="MEMBER" EntitySet="MEMBERs" />
           </AssociationSet>
-          <AssociationSet Name="FK_TASK_MEETING1" Association="SEP24Team7Model.FK_TASK_MEETING1">
+          <AssociationSet Name="FK_REPORT_MEETING" Association="SEP24Team7Model.FK_REPORT_MEETING">
+            <End Role="MEETING" EntitySet="MEETINGs" />
+            <End Role="REPORT" EntitySet="REPORTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TASKLIST_MEETING" Association="SEP24Team7Model.FK_TASKLIST_MEETING">
             <End Role="MEETING" EntitySet="MEETINGs" />
             <End Role="TASK" EntitySet="TASKs" />
           </AssociationSet>
@@ -582,7 +620,10 @@
           </Key>
           <Property Name="Meeting_id" Type="Int32" Nullable="false" />
           <Property Name="Attachment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Attachment_path" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Attachment_path" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Attachment_name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Attachment_binary" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Attachment_type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MEETING" Relationship="SEP24Team7Model.FK_Attachment_MEETING" FromRole="ATTACHMENT" ToRole="MEETING" />
         </EntityType>
         <EntityType Name="CATEGORY">
@@ -608,16 +649,19 @@
           <Property Name="Time_Start" Type="Time" Precision="7" />
           <Property Name="Location" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <Property Name="Meeting_report" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Check_report" Type="Boolean" />
           <Property Name="Date_Create" Type="DateTime" Precision="0" />
           <Property Name="Create_by" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Feedback" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="AspNetUsers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Check_Task" Type="Boolean" />
           <NavigationProperty Name="AspNetUser" Relationship="SEP24Team7Model.FK_MEETING_AspNetUsers" FromRole="MEETING" ToRole="AspNetUser" />
           <NavigationProperty Name="ATTACHMENTs" Relationship="SEP24Team7Model.FK_Attachment_MEETING" FromRole="MEETING" ToRole="ATTACHMENT" />
           <NavigationProperty Name="CATEGORY" Relationship="SEP24Team7Model.FK_Meeting_CATEGORY" FromRole="MEETING" ToRole="CATEGORY" />
           <NavigationProperty Name="MEETING_STATUS" Relationship="SEP24Team7Model.FK_MEETING_MEETING_STATUS" FromRole="MEETING" ToRole="MEETING_STATUS" />
           <NavigationProperty Name="MEMBERs" Relationship="SEP24Team7Model.FK_MEMBER_MEETING" FromRole="MEETING" ToRole="MEMBER" />
-          <NavigationProperty Name="TASKs" Relationship="SEP24Team7Model.FK_TASK_MEETING1" FromRole="MEETING" ToRole="TASK" />
+          <NavigationProperty Name="REPORT" Relationship="SEP24Team7Model.FK_REPORT_MEETING" FromRole="MEETING" ToRole="REPORT" />
+          <NavigationProperty Name="TASKs" Relationship="SEP24Team7Model.FK_TASKLIST_MEETING" FromRole="MEETING" ToRole="TASK" />
         </EntityType>
         <EntityType Name="MEETING_STATUS">
           <Key>
@@ -644,7 +688,19 @@
           </Key>
           <Property Name="othUser_id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="othUser_office" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="othUser_Email" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="SEP24Team7Model.FK_OTHER_ACCOUNT_AspNetUsers" FromRole="OTHER_ACCOUNT" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="REPORT">
+          <Key>
+            <PropertyRef Name="Meeting_id" />
+          </Key>
+          <Property Name="Meeting_id" Type="Int32" Nullable="false" />
+          <Property Name="Report_name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Report_link" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Report_type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Report_binary" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MEETING" Relationship="SEP24Team7Model.FK_REPORT_MEETING" FromRole="REPORT" ToRole="MEETING" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -659,8 +715,6 @@
         <EntityType Name="TASK">
           <Key>
             <PropertyRef Name="Task_id" />
-            <PropertyRef Name="Meeting_id" />
-            <PropertyRef Name="Assignee" />
           </Key>
           <Property Name="Task_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Meeting_id" Type="Int32" Nullable="false" />
@@ -669,7 +723,7 @@
           <Property Name="Task_Status" Type="Boolean" />
           <Property Name="Task_Deadline" Type="DateTime" Precision="3" />
           <Property Name="Notify" Type="Boolean" />
-          <NavigationProperty Name="MEETING" Relationship="SEP24Team7Model.FK_TASK_MEETING1" FromRole="TASK" ToRole="MEETING" />
+          <NavigationProperty Name="MEETING" Relationship="SEP24Team7Model.FK_TASKLIST_MEETING" FromRole="TASK" ToRole="MEETING" />
           <NavigationProperty Name="MEMBER" Relationship="SEP24Team7Model.FK_TASK_MEMBER" FromRole="TASK" ToRole="MEMBER" />
         </EntityType>
         <Association Name="FK_CATEGORY_AspNetUsers">
@@ -778,7 +832,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TASK_MEETING1">
+        <Association Name="FK_REPORT_MEETING">
+          <End Type="SEP24Team7Model.MEETING" Role="MEETING" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SEP24Team7Model.REPORT" Role="REPORT" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MEETING">
+              <PropertyRef Name="Meeting_id" />
+            </Principal>
+            <Dependent Role="REPORT">
+              <PropertyRef Name="Meeting_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TASKLIST_MEETING">
           <End Type="SEP24Team7Model.MEETING" Role="MEETING" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -879,6 +947,9 @@
           <EntitySetMapping Name="ATTACHMENTs">
             <EntityTypeMapping TypeName="SEP24Team7Model.ATTACHMENT">
               <MappingFragment StoreEntitySet="ATTACHMENT">
+                <ScalarProperty Name="Attachment_type" ColumnName="Attachment_type" />
+                <ScalarProperty Name="Attachment_binary" ColumnName="Attachment_binary" />
+                <ScalarProperty Name="Attachment_name" ColumnName="Attachment_name" />
                 <ScalarProperty Name="Attachment_path" ColumnName="Attachment_path" />
                 <ScalarProperty Name="Attachment_id" ColumnName="Attachment_id" />
                 <ScalarProperty Name="Meeting_id" ColumnName="Meeting_id" />
@@ -898,10 +969,12 @@
           <EntitySetMapping Name="MEETINGs">
             <EntityTypeMapping TypeName="SEP24Team7Model.MEETING">
               <MappingFragment StoreEntitySet="MEETING">
+                <ScalarProperty Name="Check_Task" ColumnName="Check_Task" />
+                <ScalarProperty Name="AspNetUsers" ColumnName="AspNetUsers" />
                 <ScalarProperty Name="Feedback" ColumnName="Feedback" />
                 <ScalarProperty Name="Create_by" ColumnName="Create_by" />
                 <ScalarProperty Name="Date_Create" ColumnName="Date_Create" />
-                <ScalarProperty Name="Meeting_report" ColumnName="Meeting_report" />
+                <ScalarProperty Name="Check_report" ColumnName="Check_report" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="Time_Start" ColumnName="Time_Start" />
@@ -932,8 +1005,20 @@
           <EntitySetMapping Name="OTHER_ACCOUNTs">
             <EntityTypeMapping TypeName="SEP24Team7Model.OTHER_ACCOUNT">
               <MappingFragment StoreEntitySet="OTHER ACCOUNT">
+                <ScalarProperty Name="othUser_Email" ColumnName="othUser_Email" />
                 <ScalarProperty Name="othUser_office" ColumnName="othUser_office" />
                 <ScalarProperty Name="othUser_id" ColumnName="othUser_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REPORTs">
+            <EntityTypeMapping TypeName="SEP24Team7Model.REPORT">
+              <MappingFragment StoreEntitySet="REPORT">
+                <ScalarProperty Name="Report_binary" ColumnName="Report_binary" />
+                <ScalarProperty Name="Report_type" ColumnName="Report_type" />
+                <ScalarProperty Name="Report_link" ColumnName="Report_link" />
+                <ScalarProperty Name="Report_name" ColumnName="Report_name" />
+                <ScalarProperty Name="Meeting_id" ColumnName="Meeting_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
