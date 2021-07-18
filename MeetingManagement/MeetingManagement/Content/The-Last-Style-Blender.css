@@ -337,6 +337,15 @@ td .pending-status, .pending-status {
     text-align: center;
 }
 
+td .cancel-status, .cancel-status {
+    background: #ff4d4d;
+    border-radius: 10px;
+    width: 30%;
+    color: white;
+    margin: auto;
+    text-align: center;
+}
+
 td .waiting-status, .waiting-status {
     background: #FFC400;
     border-radius: 10px;

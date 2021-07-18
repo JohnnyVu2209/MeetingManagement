@@ -17,7 +17,7 @@
                         <label for="comment">Trả lời:</label>
                         @*<textarea class="form-control" rows="5" id="comment"></textarea>*@
                         <div class="value">
-                            <div class="input-group input_fixed text-danger">
+                            <div class="input-group feedback-input text-danger">
                                 @*<input type="text" id="meeting_feedback" />*@
 
                                 @Html.TextAreaFor(model => model.Feedback, new { @class = "input--style-5-fixed area-input area-feedback", @rows = "5", @id = "meeting_feedback" })
@@ -34,9 +34,11 @@
 }
 
 
-
-
 <style>
+    .feedback-input {
+        width:100%;
+    }
+
     .area-feedback {
         width: 100% !important;
     }
