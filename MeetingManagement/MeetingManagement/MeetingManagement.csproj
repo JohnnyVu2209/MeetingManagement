@@ -180,7 +180,6 @@
     <Compile Include="Areas\Admin\Controllers\AspNetRoleUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\tabCuocHopController.cs" />
-    <Compile Include="Areas\HeadOfDepartment\Controllers\MEETINGsController.cs" />
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\HomePageController.cs" />
     <Compile Include="Areas\User\Controllers\MeetingsController.cs" />
@@ -216,6 +215,9 @@
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoryListVM.cs" />
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MEETING.cs">
@@ -245,8 +247,11 @@
     </Compile>
     <Compile Include="Models\OTHER_ACCOUNT.cs">
       <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Outlook.cs" />
     <Compile Include="Models\REPORT.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -261,7 +266,6 @@
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\VerifyMeeting.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\Create.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\Index.cshtml" />
-    <Content Include="Areas\User\Views\Categories\Index.cshtml" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -406,9 +410,7 @@
     <Content Include="login-form-05\js\jquery-3.3.1.min.js" />
     <Content Include="login-form-05\js\main.js" />
     <Content Include="login-form-05\js\owl.carousel.min.js" />
-    </Content>
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="login-form-05\js\popper.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\HeadOfDepartment\Views\web.config" />
     <Content Include="Areas\User\Views\web.config" />
@@ -612,15 +614,11 @@
     <Content Include="Areas\Admin\Views\AspNetUsers\OtherUserGridView.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\Send.cshtml" />
     <Content Include="Areas\User\Views\Tasks\Create.cshtml" />
+    <Content Include="Areas\User\Views\Tasks\Index.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\Index.cshtml" />
+    <Content Include="Areas\User\Views\Categories\Details.cshtml" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <EntityDeploy Include="Models\Models.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Models.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Models.edmx.diagram">
-      <DependentUpon>Models.edmx</DependentUpon>
-    </Content>
     <Content Include="Models\Models.edmx.diagram">
       <DependentUpon>Models.edmx</DependentUpon>
     </Content>
@@ -633,12 +631,10 @@
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\Edit.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingEdit.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingMember.cshtml" />
-    <Content Include="Areas\User\Views\Tasks\Index.cshtml" />
-    <Content Include="Areas\User\Views\HomePage\Index.cshtml" />
-    <Content Include="Areas\User\Views\Categories\Details.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\PendingMeeting.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\CancelModel.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\DeleteAttachment.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -700,6 +696,10 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Upload\Attachments\css.docx" />
+    <Content Include="Upload\Reports\css.docx" />
+    <Content Include="Upload\Attachments\Assignment.docx" />
+    <Content Include="Upload\Attachments\Communication-Plan.docx" />
+    <Content Include="Upload\Attachments\Teamwork Spirit Development - handouts.docx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -709,7 +709,6 @@
     <Folder Include="Content\login\" />
     <Folder Include="Content\quyhung\img\" />
     <Folder Include="Content\quyhung\js\" />
-    <Folder Include="Upload\Reports\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
