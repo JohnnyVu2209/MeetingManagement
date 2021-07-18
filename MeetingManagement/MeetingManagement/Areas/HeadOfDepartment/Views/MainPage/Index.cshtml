@@ -1,46 +1,111 @@
-﻿@model IEnumerable<MeetingManagement.Models.CATEGORY>
+﻿@model IEnumerable<MeetingManagement.Models.MEETING>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
+        ViewBag.Title = "Trang Chính";
 }
+    <body id="yuki-body">
+        @*<div class="row" style="margin-bottom:15px;">
+            <div class="col-sm-12">
+                <div class="form-inline pull-right">
+                    <label>Search</label>
+                    <input type="text" class="form-control" id="txtSearch" />
+                    <button type="button" class="btn btn-success" data-toggle="modal" onclick="getCreateModal()">Create New</button>
+                </div>
+            </div>
+        </div>*@
+        <div class="yuki-table-zone">
+            <div class="yuki-table-title">
+                <p>Cuộc Họp Chờ Duyệt</p>
+            </div>
+            <div class="yuki-table-out-header">
+                <ul class="yuki-column-4">
+                    <li>
+                        Danh mục
+                        @*<button class="filter">
+                        <img src="~/Content/outline_filter_alt_black_24dp.png">
+                    </button>*@
+                    </li>
+                    <li>
+                        Cuộc họp
+                        @*<button class="filter">
+                        <img src="~/Content/outline_filter_alt_black_24dp.png">
+                    </button>*@
+                    </li>
+                    <li>
+                        Người chủ trì
+                        @*<button class="filter">
+                        <img src="~/Content/outline_filter_alt_black_24dp.png">
+                    </button>*@
+                    </li>
+                    <li>
+                        Ngày tạo
+                        @*<button class="filter">
+                        <img src="~/Content/outline_filter_alt_black_24dp.png">
+                    </button>*@
+                    </li>
+                </ul>
+            </div>
+            <table class="yuki-table">
+                @foreach (var meeting in Model)
+                {
+                    if (meeting.Status == 1)
+                    {
+                        <tr class="yuki-column-4" onclick="location.href = '@Url.Action("VerifyMeeting","MainPage", new { id = meeting.Meeting_id })';" style="cursor: pointer;">
+                            <td>@meeting.CATEGORY.Category_Name</td>
+                            <td>@meeting.Meeting_name</td>
+                            <td>@meeting.AspNetUser.Full_name</td>
+                            <td>@meeting.Date_Create.GetValueOrDefault().ToShortDateString()</td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div> <!---Table 1-->
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Category_Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category_Content)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.USER.Full_name)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category_Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category_Content)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.USER.Full_name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Category_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Category_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Category_id })
-        </td>
-    </tr>
-}
-
-</table>
+        <div class="yuki-table-zone">
+            <div class="yuki-table-title">
+                <p>Cuộc Họp Chưa Hoàn Thành</p>
+            </div>
+            <div class="yuki-table-out-header">
+                <ul class="yuki-column-4">
+                    <li>
+                        Danh mục
+                        @*<button class="filter">
+                            <img src="~/Content/outline_filter_alt_black_24dp.png">
+                        </button>*@
+                    </li>
+                    <li>
+                        Cuộc họp
+                        @*<button class="filter">
+                            <img src="~/Content/outline_filter_alt_black_24dp.png">
+                        </button>*@
+                    </li>
+                    <li>
+                        Ngày đến hạn
+                        @*<button class="filter">
+                            <img src="~/Content/outline_filter_alt_black_24dp.png">
+                        </button>*@
+                    </li>
+                    <li>
+                        Tình trạng
+                        @*<button class="filter">
+                            <img src="~/Content/outline_filter_alt_black_24dp.png">
+                        </button>*@
+                    </li>
+                </ul>
+            </div>
+            <table class="yuki-table">
+                @foreach (var meeting in Model)
+                {
+                    if (meeting.Status > 2 && meeting.Status < 5)
+                    {
+                    <tr class="yuki-column-4" onclick="location.href = '@Url.Action("VerifyMeeting", "MainPage", new { id = meeting.Meeting_id })';" style="cursor: pointer;">
+                        <td>@meeting.CATEGORY.Category_Name</td>
+                        <td>@meeting.Meeting_name</td>
+                        <td>@meeting.Date_Start.ToShortDateString()</td>
+                        <td>@meeting.MEETING_STATUS.Status_name</td>
+                    </tr>
+                    }
+                }
+            </table>
+        </div> <!---Table 2-->
+    </body>

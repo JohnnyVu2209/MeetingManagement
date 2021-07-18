@@ -1,0 +1,90 @@
+﻿@*@model MeetingManagement.Models.MEETING
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MEETING</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Meeting_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Meeting_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_Start)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_Start)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_End)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_End)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Meeting_Confirmed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Meeting_Confirmed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lacation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lacation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Meeting_report)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Meeting_report)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CATEGORY.Create_by)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CATEGORY.Create_by)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Meeting_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@

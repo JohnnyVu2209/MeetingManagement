@@ -15,25 +15,23 @@ using EntityState = System.Data.Entity.EntityState;
 
 namespace MeetingManagement.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AspNetUsersController : Controller
     {
 
         private ApplicationUserManager _userManager;
         private SEP24Team7Entities db = new SEP24Team7Entities();
-        //private ApplicationSignInManager _signInManager;
-        //public ApplicationUserManager UserManager
-        //{
-        //    get
-        //    {
-        //        return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-        //    }
-        //    private set
-        //    {
-        //        _userManager = value;
-        //    }
-        //}
-
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
         // GET: Admin/AspNetUsers
         public ActionResult Index()
         {
@@ -75,7 +73,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
                  db.SaveChanges();
                  return RedirectToAction("Index");
              }
-
+             S
              return View(aspNetUser);*/
 
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
@@ -87,7 +85,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
                 // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                 // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                 // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                AddOtherAccount(user.Id);
                 return RedirectToAction("Index", "AspNetUsers");
             }
             else
@@ -95,11 +93,20 @@ namespace MeetingManagement.Areas.Admin.Controllers
                 AddErrors(result);
             }
 
-
             // If we got this far, something failed, redisplay form
             return View();
         }
 
+        private void AddOtherAccount(string id)
+        {
+            var user = db.AspNetUsers.Find(id);
+            db.OTHER_ACCOUNTs.Add(new OTHER_ACCOUNT
+            {
+                othUser_id = user.Id,
+                othUser_Email = user.Email
+            });
+            db.SaveChanges();
+        }
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -193,22 +200,19 @@ namespace MeetingManagement.Areas.Admin.Controllers
             return roles;
         }
 
+        public ActionResult GetOtherUser()
+        {
+            var otherUser = from u in db.AspNetUsers
+                            from o in db.OTHER_ACCOUNTs
+                            where u.Id == o.othUser_id
+                            select u;
+            return PartialView("OtherUserGridView", otherUser);
+        }
         [HttpGet]
         public ActionResult ResetPassword(string userID)
         {
             AspNetUser ac = db.AspNetUsers.Find(userID);
             return PartialView(ac);
-        }
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
         }
 
         //
@@ -234,19 +238,22 @@ namespace MeetingManagement.Areas.Admin.Controllers
                 {
                     AddErrors(result);
                 }
-               
+
             }
 
             // If we got this far, something failed, redisplay form
             return View();
 
         }
-        //private void AddErrors(IdentityResult result)
-        //{
-        //    foreach (var error in result.Errors)
-        //    {
-        //        ModelState.AddModelError("", error);
-        //    }
-        //}
+        public ActionResult Send()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Send(Outlook gmail)
+        {
+            gmail.SendMail();
+            return View();
+        }
     }
 }

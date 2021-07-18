@@ -10,11 +10,9 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="~/Content/normalize.css" />
     <link href="~/Content/The-Last-Style-Blender.css" rel="stylesheet"/>
     <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-
 
 
     <link href="~/login-form-05/css/style.css" rel="stylesheet" />
@@ -23,21 +21,16 @@
     <!-- Bootstrap CSS -->
 
     <link href="~/login-form-05/css/bootstrap.min.css" rel="stylesheet" />
-
     <!-- Style -->
    
-
     <link href="~/login-form-05/fonts/icomoon/style.css" rel="stylesheet" />
     <title>Login </title>
 </head>
-<body class="me-body">
-    <div id="nav-bar">
+<body>
+    <div id="yuki-nav-bar">
         <div>
             <a href="@Url.Action("Index","Home",new { Area = "" })"><img src="https://www.vanlanguni.edu.vn/images/2020/HE_THONG_LOGO_CUA_TRUONG-02.png" alt="Văn Lang University"></a>
         </div>
-        @*<div class="login">
-            @Html.Partial("_LoginPartial")
-        </div>*@
     </div>
     <div class="container content">
         <div class="row align-items-center justify-content-center">
@@ -46,59 +39,43 @@
                     <div class="text-center mb-5">
                         <h3 class="text-uppercase"> Đăng Nhập Tài Khoản</h3>
                     </div>
-                    <form action="@Url.Action("Login","Account")" method="post">
-                        @Html.AntiForgeryToken()
-                        <div class="form-group first">
-                            @Html.LabelFor(m => m.Email)
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    <section id="loginForm">
+                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group first">
+                                @Html.LabelFor(m => m.Email)
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
 
-                        </div>
-                        <div class="form-group last mb-3">
-                            @Html.LabelFor(m => m.Password)
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        </div>
+                            </div>
+                            <div class="form-group last mb-3">
+                                @Html.LabelFor(m => m.Password)
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            </div>
 
-                        <div class="d-sm-flex mb-5 align-items-center">
-                            <label class="control control--checkbox mb-3 mb-sm-0">
+                            <div class="d-sm-flex mb-5 align-items-center">
+                                <label class="control control--checkbox mb-3 mb-sm-0">
 
-                                @Html.CheckBoxFor(m => m.RememberMe)
-                                @Html.LabelFor(m => m.RememberMe)
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe)
 
-                                @*<div class="control__indicator"></div>*@
-                            </label>
+                                    @*<div class="control__indicator"></div>*@
+                                </label>
 
-                        </div>
+                            </div>
 
-                        <div class="form-inline pull-right">
+                            <div class="form-inline pull-right">
 
-                            <button type="submit" value="Log In" class="btn col-md-6 btn-success">Đăng Nhập</button>
+                                <button type="submit" value="Log In" class="btn col-md-6 btn-success">Đăng Nhập</button>
+                            </div>
+                        }
+                    </section>
+                 </div>
 
-                            @*login with Vanlang
-                                <a href="#" class="btn col-md-6 btn-primary">
-                                    <span class="icon-windows mr-3"></span>  Emai Van Lang
-                                </a>*@
-
-
-
-                            @*</div>
-                                <button type="submit" value="Log In" class="btn col-md-6 btn-primary">Primary</button>
-                                <span class="text-center my-3 d-block">or</span>
-
-
-                                <div class="">
-
-                                    <a href="#socialLoginForm" class="btn btn-block py-2 btn-facebook">
-                                        <span class="icon-facebook mr-3"></span> Use your VanLang email.
-                                    </a>*@
-
-                        </div>
-                    </form>
-                </div>
             </div>
         </div>
     </div>
-
-
 
     <div class="col-md-4">
         <section id="socialLoginForm">
@@ -106,14 +83,9 @@
         </section>
     </div>
 
-
     <script src="~/login-form-05/js/jquery-3.3.1.min.js"></script>
-
     <script src="~/login-form-05/js/popper.min.js"></script>
-
-
     <script src="~/login-form-05/js/bootstrap.min.js"></script>
-
     <script src="~/login-form-05/js/owl.carousel.min.js"></script>
     <script src="~/login-form-05/js/main.js"></script>
 </body>
