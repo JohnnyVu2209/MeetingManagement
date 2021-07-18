@@ -1,5 +1,8 @@
 ﻿@model MeetingManagement.Models.CATEGORY
-
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
 
 <div id="myCreateModal" class="modal fade" role="dialog">
     <div class="modal-dialog" style="width:460px;">
@@ -10,7 +13,7 @@
             <div class="modal-body" style="margin-left:35px">
                 @using (Ajax.BeginForm("Create", "categories", new AjaxOptions { HttpMethod = "Post", OnSuccess = "CreateSuccess" }, new { @class = "form-horizontal", @id = "createformid", role = "form" }))
                 {
-                  @*@Html.HiddenFor(model => model.Category_id)*@
+                    @*@Html.HiddenFor(model => model.Category_id)*@
                     @Html.HiddenFor(model => model.Create_by)
                     <div class="catalog-form_group form-group">
                         @Html.TextBoxFor(model => model.Category_Name, new { @class = "catalog-form_input", @placeholder = "Tên danh mục" })

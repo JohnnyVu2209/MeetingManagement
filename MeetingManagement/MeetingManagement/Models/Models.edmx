@@ -571,17 +571,6 @@
           <Property Name="Report_binary" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MEETING" Relationship="Self.FK_REPORT_MEETING" FromRole="REPORT" ToRole="MEETING" />
         </EntityType>
-        <EntityType Name="REPORT">
-          <Key>
-            <PropertyRef Name="Meeting_id" />
-          </Key>
-          <Property Name="Meeting_id" Type="Int32" Nullable="false" />
-          <Property Name="Report_name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Report_link" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Report_type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Report_binary" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="MEETING" Relationship="SEP24Team7Model.FK_REPORT_MEETING" FromRole="REPORT" ToRole="MEETING" />
-        </EntityType>
         <EntityType Name="TASK">
           <Key>
             <PropertyRef Name="Task_id" />
