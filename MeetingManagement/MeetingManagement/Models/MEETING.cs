@@ -21,7 +21,7 @@ namespace MeetingManagement.Models
             this.MEMBERs = new HashSet<MEMBER>();
             this.TASKs = new HashSet<TASK>();
         }
-        public string AspNetUsers { get; set; }
+    
         public int Category_id { get; set; }
         public int Meeting_id { get; set; }
         public string Meeting_name { get; set; }
@@ -30,10 +30,12 @@ namespace MeetingManagement.Models
         public Nullable<System.TimeSpan> Time_Start { get; set; }
         public string Location { get; set; }
         public int Status { get; set; }
-        public string Meeting_report { get; set; }
+        public Nullable<bool> Check_report { get; set; }
         public Nullable<System.DateTime> Date_Create { get; set; }
         public string Create_by { get; set; }
         public string Feedback { get; set; }
+        public string AspNetUsers { get; set; }
+        public Nullable<bool> Check_Task { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -42,6 +44,7 @@ namespace MeetingManagement.Models
         public virtual MEETING_STATUS MEETING_STATUS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MEMBER> MEMBERs { get; set; }
+        public virtual REPORT REPORT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TASK> TASKs { get; set; }
     }

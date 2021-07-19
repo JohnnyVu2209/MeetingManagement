@@ -43,8 +43,5 @@ namespace MeetingManagement.Areas.User.Controllers
                 StatusName = x.MEETING_STATUS.Status_name }).ToList();
             return View(meetingListVMList);
         }
-        
-
-        
     }
 }
