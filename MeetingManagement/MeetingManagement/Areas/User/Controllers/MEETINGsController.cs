@@ -164,6 +164,7 @@ namespace MeetingManagement.Areas.User.Controllers
         [HttpPost]
         public ActionResult MeetingForm(MEETING model, HttpPostedFileBase Files)
         {
+            GetMeeting();
             if (ModelState.IsValid)
             {
                 if (Files != null)
@@ -209,6 +210,7 @@ namespace MeetingManagement.Areas.User.Controllers
             var current = User.Identity.GetUserId();
             var userList = db.AspNetUsers.Where(x => x.Id != current).Select(selector: x => x.Email).ToList();
             ViewBag.userList = userList;
+            model.MEMBERs = meeting.MEMBERs;
             return View(model);
         }
         private void AddMeeting(MEETING model)
@@ -221,13 +223,15 @@ namespace MeetingManagement.Areas.User.Controllers
             newMeet.Date_Start = model.Date_Start;
             newMeet.Time_Start = model.Time_Start;
             newMeet.Location = model.Location;
-            newMeet.Status = 2;
+            newMeet.Status = 1;
             newMeet.Date_Create = DateTime.Today;
             newMeet.Create_by = User.Identity.GetUserId();
             db.MEETINGs.Add(newMeet);
             db.SaveChanges();
 
-            var newMeeting = db.MEETINGs.Where(x => x.Meeting_name == newMeet.Meeting_name).FirstOrDefault();
+            var newMeeting = db.MEETINGs.Where(x => x.Meeting_name == newMeet.Meeting_name 
+                                                &&  x.Date_Start   == newMeet.Date_Start
+                                                &&  x.Time_Start   == newMeet.Time_Start).FirstOrDefault();
             foreach(var member in meeting.MEMBERs.ToList())
             {
                 member.Meeting_id = newMeeting.Meeting_id;
@@ -269,9 +273,10 @@ namespace MeetingManagement.Areas.User.Controllers
                     model.MEMBERs = meeting.MEMBERs;
                 }
                 model.MEMBERs.Add(member);
-                meeting = model;
-                Session["Meeting"] = meeting;
+                
             }
+            meeting = model;
+            Session["Meeting"] = meeting;
             return RedirectToAction("MeetingForm", new { id = model.Category_id });
         }
         public ActionResult RemoveUser(string userId)

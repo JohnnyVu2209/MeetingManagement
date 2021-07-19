@@ -3,11 +3,11 @@
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-	<PropertyGroup>
-		<Nullable>enable</Nullable>
-		<LangVersion>8.0</LangVersion>
-	</PropertyGroup>
-	<PropertyGroup>
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>
@@ -268,8 +268,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\VerifyMeeting.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Create.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Index.cshtml" />
     <Content Include="Areas\User\Views\Categories\Index.cshtml" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -542,9 +540,6 @@
     <Content Include="Areas\HeadOfDepartment\Views\tabCuocHop\Index.cshtml" />
     <Content Include="Areas\User\Views\HomePage\IndexCateDetail.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Shared\Error.cshtml" />
-    <Content Include="Areas\User\Views\Meetings\Create.cshtml" />
-    <Content Include="Areas\User\Views\Meetings\Delete.cshtml" />
-    <Content Include="Areas\User\Views\Meetings\Details.cshtml" />
     <Content Include="Areas\User\Views\Meetings\Index.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MyMeetingGridView.cshtml" />
     <Content Include="Areas\User\Views\Meetings\JoinedMeetingGridView.cshtml" />
@@ -561,7 +556,6 @@
     <Content Include="Areas\User\Views\MEETINGs\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\GrdMemberTable.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
-    <Content Include="Areas\User\Views\MEETINGs\CreateUser.cshtml" />
     <Content Include="Areas\User\Views\MEETINGs\CreateUser2.cshtml" />
     <Content Include="Areas\User\Views\Categories\MeetingList.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingDetail.cshtml" />
@@ -602,9 +596,7 @@
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer-fa\theme.scss" />
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer\theme.scss" />
     <Content Include="Areas\User\Views\Meetings\MeetingReport.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser2.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Details.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingList.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\ReportList.cshtml" />
@@ -623,7 +615,6 @@
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingTask.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingInfo.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingReport.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Edit.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingEdit.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingMember.cshtml" />
     <EntityDeploy Include="Models\Models.edmx">
