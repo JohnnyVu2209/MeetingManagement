@@ -3,8 +3,8 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
-
 }
+
 <link href="~/Content/catalog-list.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <header>
@@ -17,11 +17,11 @@
     <ul class="catalogList">
         @foreach (var item in Model)
         {
-            <li>
-                @item.Category_Name
-                <span>
-                    <i class="fa fa-ellipsis-h">
+            <li style="display:flex";>
 
+                <div onclick="location.href = '@Url.Action("Details","Categories", new { id = item.Category_id})';">@item.Category_Name</div>
+                <span>
+                    <i class="fa fa-ellipsis-h"> 
                         <ul class="sublist">
                             <li>
                                 <button onclick="ShowEditPopUp(@item.Category_id)" class="edit-btn" data-modal="modal1">
@@ -39,12 +39,65 @@
                     </i>
                 </span>
             </li>
+
         }
 
-    </ul>
-</div>
+            .user-ctg-index-table div:hover {
+                background-color: #66c2ff;
+            }
+
+            .user-ctg-index-table div p {
+                font-weight: bold;
+                font-size: 16px;
+            }
 
 
+    /*.user-ctg-index-table tbody tr:hover td {
+                background-color: #f1f1f1;
+            }*/
+    .user-ctg-index-button {
+        float: right;
+        width: 60px;
+        height: 30px;
+        background-color: #009FE5;
+        color: white;
+        border-radius: 5px;
+        margin-top: -30px;
+        border: 0px;
+    }
+
+    .user-ctg-index-header {
+        width: 1300px;
+        margin: 20px 0px;
+    }
+
+        .user-ctg-index-header h1, h2, h3, h4, h5, h6 {
+            margin: 0px;
+        }
+
+    .user-ctg-index-manipulation {
+        float: right;
+        margin: 0px 2.5px;
+        color: black;
+    }
+</style>
+
+@*<i class="fa fa-ellipsis-h">
+        <ul class="sublist">
+            <li>
+                <button onclick="ShowEditPopUp(@item.Category_id)" class="edit-btn" data-modal="modal1">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                    Sửa
+                </button>
+            </li>
+            <li>
+                <button onclick="ShowDeletePopUp(@item.Category_id)" class="delete-btn" data-modal="modald1">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    Xóa
+                </button>
+            </li>
+        </ul>
+    </i>*@
 <div id="show-popup"></div>
 
 
@@ -52,7 +105,7 @@
     function ShowCreatePopUp() {
         $.ajax({
             type: "GET",
-            url: "Create",
+            url: '@Url.Action("Create", "Categories")',
             data: {},
             dataType: "html",
             success: function (data) {
@@ -80,7 +133,7 @@
         });
     };
     function ShowDeletePopUp(categoryID) {
-        $("#loader-div")       
+        $("#loader-div")
         $.ajax({
             type: "GET",
             url: "Delete",

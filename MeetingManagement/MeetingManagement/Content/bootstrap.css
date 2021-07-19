@@ -2429,9 +2429,9 @@ th {
 .table-striped > tbody > tr:nth-of-type(odd) {
   background-color: #f9f9f9;
 }
-.table-hover > tbody > tr:hover {
+/*.table-hover > tbody > tr:hover {
   background-color: #f5f5f5;
-}
+}*/
 .table > thead > tr > td.active,
 .table > tbody > tr > td.active,
 .table > tfoot > tr > td.active,
@@ -2446,13 +2446,13 @@ th {
 .table > tfoot > tr.active > th {
   background-color: #f5f5f5;
 }
-.table-hover > tbody > tr > td.active:hover,
+/*.table-hover > tbody > tr > td.active:hover,
 .table-hover > tbody > tr > th.active:hover,
 .table-hover > tbody > tr.active:hover > td,
 .table-hover > tbody > tr:hover > .active,
 .table-hover > tbody > tr.active:hover > th {
   background-color: #e8e8e8;
-}
+}*/
 .table > thead > tr > td.success,
 .table > tbody > tr > td.success,
 .table > tfoot > tr > td.success,
@@ -2467,13 +2467,13 @@ th {
 .table > tfoot > tr.success > th {
   background-color: #dff0d8;
 }
-.table-hover > tbody > tr > td.success:hover,
+/*.table-hover > tbody > tr > td.success:hover,
 .table-hover > tbody > tr > th.success:hover,
 .table-hover > tbody > tr.success:hover > td,
 .table-hover > tbody > tr:hover > .success,
 .table-hover > tbody > tr.success:hover > th {
   background-color: #d0e9c6;
-}
+}*/
 .table > thead > tr > td.info,
 .table > tbody > tr > td.info,
 .table > tfoot > tr > td.info,

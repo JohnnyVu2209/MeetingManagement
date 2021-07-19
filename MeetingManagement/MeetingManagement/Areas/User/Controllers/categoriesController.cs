@@ -13,15 +13,32 @@ using Microsoft.AspNet.Identity;
 
 namespace MeetingManagement.Areas.User.Controllers
 {
+    [Authorize]
     public class CategoriesController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
         // GET: User/categories
         public ActionResult Index()
-        {
-            var cATEGORies = db.CATEGORies.ToList();
+        {            var cATEGORies = db.CATEGORies.ToList();
             return View(cATEGORies);
         }
+        public ActionResult CategoriesListDetail(int id)
+        {
+            List<CATEGORY> cate = db.CATEGORies.ToList();
+            CategoryListVM categoryListVM = new CategoryListVM();
+            List<CategoryListVM> categoryListVMList = cate.Select(x => new CategoryListVM
+            {
+                CateContent = x.Category_Content,
+                CateId = x.Category_id,
+                CateName = x.Category_Name,
+                CateCreateBy = x.Create_by
+            }).ToList();
+            return View(categoryListVMList);
+        }
+
+    }
+
+}
         public ActionResult Home()
         {
             return View();

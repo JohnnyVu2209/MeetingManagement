@@ -4,31 +4,37 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link rel="stylesheet" href="~/Content/normalize.css" />
+    <link rel="stylesheet" href="~/Content/The-Last-Style-Blender.css" />
+    @*<link href="~/Content/catalog-list.css" rel="stylesheet" />*@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @*<link href="~/Content/catalog-list.css" rel="stylesheet" />*@
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
+<body id="yuki-body">
+    <div id="yuki-nav-bar">
+        <div>
+            <a href="#"><img src="https://www.vanlanguni.edu.vn/images/2020/HE_THONG_LOGO_CUA_TRUONG-02.png" alt="Văn Lang University"></a>
+        </div>
+        <div class="yuki-login-info">
+            @Html.Partial("_LoginPartial")
         </div>
     </div>
 
+    <div id="yuki-menu">
+        <ul>
+            <li><a href="@Url.Action("Index","MainPage")">Trang chính</a></li>
+            <li><a href="@Url.Action("Index","Categories")">Danh mục</a></li>
+            <li><a href="@Url.Action("Index","Meetings")">Cuộc họp</a></li>
+        </ul>
+    </div> <!--Menu-->
+
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
+        <footer id="yuki-footer">
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
@@ -36,5 +42,15 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
 </body>
 </html>
+
+@*    <div id="menu">
+        <ul>
+            <li><a href="@Url.Action("Index","Home")"style="margin-top:10px">Trang chủ</a></li>
+            <li><a href="@Url.Action("Index","Home")" style="margin-top:10px">Công việc</a></li>
+            <li><a href="@Url.Action("Index","Home")" style="margin-top:10px">Hồ sơ</a></li>
+        </ul>
+    </div>*@
+
