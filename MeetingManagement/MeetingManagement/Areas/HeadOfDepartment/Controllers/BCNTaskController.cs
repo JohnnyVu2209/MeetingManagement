@@ -22,7 +22,9 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
                 TaskName = x.Task_name,
                 DueDate = (DateTime)x.Task_Deadline,
                 Status = (bool)x.Task_Status,
-                MeetingName = x.MEETING.Meeting_name
+                MeetingName = x.MEETING.Meeting_name,
+                Meeting_id = x.Meeting_id,
+                Meeting_idd = x.MEETING.Meeting_id
             }).ToList();
             return View(tasksBCNVNList);
 
@@ -31,11 +33,19 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 
         public ActionResult IndexBCNTask()
         {
-            var userid = "f28b3bb0-99b7-439e-bc90-4c8c15fac1a2";
+            var userid = "a5d77817-16aa-4cc3-bbb2-de403c65bb4e";
             var mEMBER = db.MEMBERs.FirstOrDefault(x => x.Member_id == userid);
             ViewBag.meeting = db.MEETINGs.Where(x => x.Meeting_id == mEMBER.Meeting_id).ToList();
             ViewBag.task = db.TASKs.Where(x => x.Meeting_id == mEMBER.Meeting_id && x.Assignee == mEMBER.Member_id).ToList();
             return View();
+        }
+
+
+
+        public ActionResult IndexBCNTask2()
+        {
+            var task = db.TASKs.ToList();
+            return View(task);
         }
     }
 }

@@ -19,7 +19,9 @@
         {
             <li style="display:flex";>
 
-                <div onclick="location.href = '@Url.Action("Details","Categories", new { id = item.Category_id})';">@item.Category_Name</div>
+                <div onclick="location.href = '@Url.Action("Details","Categories", new { id = item.Category_id})';">
+                @item.Category_Name
+                </div>
                 <span>
                     <i class="fa fa-ellipsis-h"> 
                         <ul class="sublist">

@@ -1,23 +1,32 @@
 ﻿@model IEnumerable<MeetingManagement.Models.MEETING>
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+
+
+
 <div id="table-content">
     <table class="table">
-        <thead >
-            <tr >
-                <th style="background-color: #009FE5;color:white"; scope="col">Tên cuộc họp</th>
-                <th style="background-color: #009FE5;color:white"; scope="col">Người chủ trì</th>
-                <th style="background-color: #009FE5;color:white"; scope="col">Ngày họp</th>
-                <th style="background-color: #009FE5;color:white"; scope="col">Trình trạng</th>
+        <thead>
+            <tr>
+                <th style="background-color: #009FE5;color:white" ; scope="col">Tên cuộc họp</th>
+                <th style="background-color: #009FE5;color:white" ; scope="col">Người chủ trì</th>
+                <th style="background-color: #009FE5;color:white" ; scope="col">Ngày họp</th>
+                <th style="background-color: #009FE5;color:white" ; scope="col">Trình trạng</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
-            {   
+            {
                 <tr class="w400">
-                    
-                
-                
-                    <td>@item.Meeting_name</td>
+                    <td>
+                        @*<a href="#" data-toggle="modal" data-target="#myModal">*@
+                            @item.Meeting_name
+                        @*</a>*@
+                    </td>
                     <td>@item.AspNetUser.Full_name</td>
                     <td>@Convert.ToDateTime(item.Date_Start).ToString("dd/MM/yyyy")</td>
                     <td>
@@ -44,16 +53,39 @@
 
                     </td>
                 </tr>
-                
-                
+
             }
         </tbody>
 
-            
+
     </table>
 </div>
 <style>
     .w400 td {
-        width:400px;
+        width: 400px;
     }
 </style>
+
+
+
+
+<!--Modal--->
+<!--<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">-->
+
+        <!-- Modal content-->
+        <!--<div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>-->
