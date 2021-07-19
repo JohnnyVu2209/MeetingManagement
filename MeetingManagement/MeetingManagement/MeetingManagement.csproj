@@ -183,6 +183,7 @@
     <Compile Include="Areas\Admin\Controllers\AspNetRolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetRoleUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
+    <Compile Include="Areas\HeadOfDepartment\Controllers\MeetingsController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\tabCuocHopController.cs" />
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\categoriesController.cs" />
@@ -190,7 +191,6 @@
     <Compile Include="Areas\User\Controllers\HomePageController.cs" />
     <Compile Include="Areas\User\Controllers\MeetingsController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\CategoriesController.cs" />
-    <Compile Include="Areas\HeadOfDepartment\Controllers\MeetingsController.cs" />
     <Compile Include="Areas\User\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\MainPageController.cs" />
     <Compile Include="Areas\User\Controllers\TasksController.cs" />
@@ -255,7 +255,6 @@
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Outlook.cs" />
-    <Compile Include="Models\REPORT.cs">
     <Compile Include="Models\REPORT.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -2719,8 +2718,6 @@
     <Folder Include="Content\login\" />
     <Folder Include="Content\quyhung\img\" />
     <Folder Include="Content\quyhung\js\" />
-    <Folder Include="Upload\Attachments\" />
-    <Folder Include="Upload\Attachments\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -127,12 +127,6 @@
     <None Include="Scripts\umd\popper.min.js.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MeetingManagement\MeetingManagement.csproj">
-      <Project>{03fdbee0-b3aa-45d9-a0b3-3fbbf0ead586}</Project>
-      <Name>MeetingManagement</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>

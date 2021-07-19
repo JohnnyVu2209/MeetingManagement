@@ -63,12 +63,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MeetingManagement\MeetingManagement.csproj">
-      <Project>{03FDBEE0-B3AA-45D9-A0B3-3FBBF0EAD586}</Project>
-      <Name>MeetingManagement</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
