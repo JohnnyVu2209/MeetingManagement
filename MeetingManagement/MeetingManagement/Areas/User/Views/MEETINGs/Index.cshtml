@@ -3,34 +3,52 @@
 @{
     ViewBag.Title = "Index";
 }
-<link href="~/Content/catalog-list.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
-<h2>
-    Đồ án thực hành ứng dụng - SEP
-</h2>
-<br />
-<ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#joinedMeetings">Cuộc họp tham dự</a></li>
-    <li><a data-toggle="tab" href="#myMeetings">Cuộc họp của tôi</a></li>
-</ul>
+<!doctype html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/catalog-list.css" rel="stylesheet" />
+</head>
+<body>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#joinedMeetings">Cuộc họp tham dự</a></li>
+        <li><a data-toggle="tab" href="#myMeetings">Cuộc họp của tôi</a></li>
+        <li><a data-toggle="tab" href="#pendingMeetings">Cuộc họp chờ duyệt</a></li>
 
-<div class="tab-content">
-    <div id="joinedMeetings" class="tab-pane fade in active">
-        <br />
-        <div id="joinedMeetingGrd">
-            @Html.Action("JoinedMeeting", "MEETINGs")
+    </ul>
+
+    <div class="tab-content">
+        <div id="joinedMeetings" class="tab-pane fade in active">
+            <br />
+            <div id="joinedMeetingGrd">
+                @Html.Action("JoinedMeeting", "MEETINGs")
+            </div>
+        </div>
+        <div id="myMeetings" class="tab-pane fade">
+            <br />
+            <div id="myMeetingGrd">
+                @Html.Action("MyMeeting", "MEETINGs")
+            </div>
+        </div>
+        <div id="pendingMeetings" class="tab-pane fade">
+            <br />
+            <div id="pendingGrd">
+                @Html.Action("PendingMeeting", "MEETINGs")
+            </div>
         </div>
     </div>
-    <div id="myMeetings" class="tab-pane fade">
-        <br />
-        <div id="myMeetingGrd">
-            @Html.Action("MyMeeting", "MEETINGs")
-        </div>
-    </div>
-</div>
-<p>
-    @ViewBag.userID
-</p>
+</body>
+</html>
+
+<script type="text/javascript">
+    $('#nav-joined-tab a').on('click', function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+    $('#nav-my-tab a').on('click', function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+</script>

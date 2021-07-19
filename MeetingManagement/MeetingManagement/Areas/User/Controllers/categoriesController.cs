@@ -19,10 +19,11 @@ namespace MeetingManagement.Areas.User.Controllers
         private SEP24Team7Entities db = new SEP24Team7Entities();
         // GET: User/categories
         public ActionResult Index()
-        {            var cATEGORies = db.CATEGORies.ToList();
-            return View(cATEGORies);
+        {
+            var cATEGORies = db.CATEGORies;
+            return View(cATEGORies.ToList());
         }
-        public ActionResult CategoriesListDetail(int id)
+        /*public ActionResult CategoriesListDetail(int id)
         {
             List<CATEGORY> cate = db.CATEGORies.ToList();
             CategoryListVM categoryListVM = new CategoryListVM();
@@ -34,11 +35,8 @@ namespace MeetingManagement.Areas.User.Controllers
                 CateCreateBy = x.Create_by
             }).ToList();
             return View(categoryListVMList);
-        }
-        public ActionResult Home()
-        {
-            return View();
-        }
+        }*/
+
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -62,6 +60,5 @@ namespace MeetingManagement.Areas.User.Controllers
         }
 
     }
-}  
 
-        
+}

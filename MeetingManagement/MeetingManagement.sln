@@ -5,6 +5,7 @@ VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingManagement", "MeetingManagement\MeetingManagement.csproj", "{03FDBEE0-B3AA-45D9-A0B3-3FBBF0EAD586}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingManagement.Tests", "MeetingManagement.Tests\MeetingManagement.Tests.csproj", "{295BB393-D44E-4DDD-9FB1-80BDD79E307B}"
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingManagementTests", "MeetingManagementTests\MeetingManagementTests.csproj", "{044D3172-8F19-4696-BC76-5B36D70D15BA}"
 EndProject
 Global
@@ -17,6 +18,10 @@ Global
 		{03FDBEE0-B3AA-45D9-A0B3-3FBBF0EAD586}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03FDBEE0-B3AA-45D9-A0B3-3FBBF0EAD586}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03FDBEE0-B3AA-45D9-A0B3-3FBBF0EAD586}.Release|Any CPU.Build.0 = Release|Any CPU
+		{295BB393-D44E-4DDD-9FB1-80BDD79E307B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{295BB393-D44E-4DDD-9FB1-80BDD79E307B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{295BB393-D44E-4DDD-9FB1-80BDD79E307B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{295BB393-D44E-4DDD-9FB1-80BDD79E307B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{044D3172-8F19-4696-BC76-5B36D70D15BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{044D3172-8F19-4696-BC76-5B36D70D15BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{044D3172-8F19-4696-BC76-5B36D70D15BA}.Release|Any CPU.ActiveCfg = Release|Any CPU

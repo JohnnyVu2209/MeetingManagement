@@ -1,35 +1,24 @@
 ﻿@using MeetingManagement.Models;
 @{
     ViewBag.Title = "CreateUser";
-    Layout = "~/Views/Shared/_Layout.cshtml";
     var i = 0;
+
 }
 <div class="modal fade" id="modalCreate" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
 
-
-
             <!-- Modal Header -->
             <div class="modal-header create-user-modalheader">
-                <h4 class="modal-title"><center>Thêm Thành Phần Tham Dự</center></h4>
+                <h4 class="modal-title">Thêm Thành Phần Tham Dự</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-
-
-
             <!-- Modal body -->
             <div class="modal-body">
                 <div class="form-inline">
-
-
-
                     <label>Mời bạn nhập tên Email vào đây.</label>
                     <input type="text" class="form-control" id="txtSearch" />
                     <button type="button" class="btn btn-success" id="adduser" onclick="AddUser();" data-toggle="modal">Thêm</button>
-
-
-
                 </div>
                 <div class="w3-container my-container" id="usertable">
                     <ul class="w3-ul w3-border create-user-scroll" id="userbox">
@@ -38,9 +27,6 @@
                             <li style="cursor: pointer; display:flex;" onclick="getchecked(@(++i))">
                                 @users.Email <input type="checkbox" id="@i" style="width:fit-content; margin-left: auto;" value="@users.Email" />
                             </li>
-
-
-
                         }
                     </ul>
                     <div id="hiden">
@@ -48,24 +34,10 @@
                         <ul class="w3-ul w3-border create-user-scroll" id="pickbox">
                         </ul>
                     </div>
-
-
-
                 </div>
                 @* <div id="grdUserView"></div>*@
                 @* @Html.Partial("SearchUser")*@
             </div>
-
-
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-
-
-
-            </div>
-
-
 
         </div>
     </div>
@@ -74,12 +46,6 @@
 
 
 <style>
-    .my-container {
-        margin-top: 30px;
-    }
-
-
-
 
     .create-user-header {
         background: #009FE5;
@@ -144,106 +110,87 @@
             right: 20px;
         }
 </style>
-@section scripts{
-    <script type="text/javascript">
 
 
-
-        $(() => {
-            $('#txtSearch').on('keyup', () => {
-                var input, filter, ul, li, i, txtValue;
-                input = document.getElementById("txtSearch");
-                filter = input.value.toUpperCase();
-                ul = document.getElementById("userbox");
-                li = ul.getElementsByTagName("li");
-                for (i = 0; i < li.length; i++) {
-                    txtValue = li[i].textContent || li[i].innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        li[i].style.display = "flex";
-                    } else {
-                        li[i].style.display = "none";
-                    }
+<script type="text/javascript">
+    $(() => {
+        $('#txtSearch').on('keyup', () => {
+            var input, filter, ul, li, i, txtValue;
+            input = document.getElementById("txtSearch");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("userbox");
+            li = ul.getElementsByTagName("li");
+            for (i = 0; i < li.length; i++) {
+                txtValue = li[i].textContent || li[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "flex";
+                } else {
+                    li[i].style.display = "none";
                 }
-
-
-
-            });
-            $("#modalCreate").on("hidden.bs.modal", function () {
-                sessionStorage.clear();
-            });
+            }
         });
-
-
-
-        $(() => {
-
-
-
-            if (sessionStorage.getItem("user") != null) {
-
-
-
-                var user = JSON.parse(sessionStorage.getItem("user"));
-                var user_length = Object.keys(user).length;
-                for (var i = 0; i < user_length; i++) {
-                    $("#pickbox").append('<li id= "li' + i + '">' + JSON.parse(sessionStorage.getItem("user"))[i] + '</li>')
-
-
-
-                }
-            }
-            $("#hiden").hide();
+        $("#modalCreate").on("hidden.bs.modal", function () {
+            sessionStorage.clear();
         });
-        function AddUser() {
-            if (sessionStorage.getItem("user") != null) {
-                var user = JSON.parse(sessionStorage.getItem("user"));
-                var user_length = Object.keys(user).length;
-                for (var i = 0; i < user_length; i++) {
-                    $("#pickedUser").append('<li id= "li' + i + '">' + JSON.parse(sessionStorage.getItem("user"))[i] + '</li>')
-
-                }
-                var userArr = [];
-                ul = document.getElementById("pickedUser");
-                li = ul.getElementsByTagName("li");
-                for (var i = 0; i < li.length; i++) {
-                    userArr.push(li[i].innerText)
-                }
-                $("#AspNetUsers").val(userArr);
-                $("#modalCreate").modal("hide");
-            }
-            else {
-                alert("Bạn chưa thêm người tham dự");
-            }
-        }
-        var userArray = [];
-        function getchecked(id) {
-            var item = $('#' + id);
-            if (item.prop("checked") == false) {
-                item.prop("checked", true);
-                userArray.push(item.val());
-                sessionStorage.setItem("user", JSON.stringify(userArray));
-                $("#pickbox").append('<li id= "li' + id + '">' + item.val() + '</li>');
-                $("#hiden").show();
-
-            }
-            else if (item.prop("checked") == true) {
-                item.prop("checked", false);
-                var remove_item = item.val();
-                $("#li" + id).remove();
-                userArray = $.grep(userArray, function (value) {
-                    return value != remove_item;
-                });
-                if (userArray == 0) {
-                    $("#hiden").hide();
-                }
-                sessionStorage.setItem("user", JSON.stringify(userArray));
+    });
 
 
+
+    $(() => {
+        if (sessionStorage.getItem("user") != null) {
+       var user = JSON.parse(sessionStorage.getItem("user"));
+            var user_length = Object.keys(user).length;
+            for (var i = 0; i < user_length; i++) {
+                $("#pickbox").append('<li id= "li' + i + '">' + JSON.parse(sessionStorage.getItem("user"))[i] + '</li>')
 
             }
         }
+        $("#hiden").hide();
+    });
+    function AddUser() {
+        if (sessionStorage.getItem("user") != null) {
+            var user = JSON.parse(sessionStorage.getItem("user"));
+            var user_length = Object.keys(user).length;
+            for (var i = 0; i < user_length; i++) {
+                $("#MEMBERs").append('<li id= "li' + i + '" name ="Member_id">' + JSON.parse(sessionStorage.getItem("user"))[i] + '</li>')
 
+            }
+            var userArr = [];
+            ul = document.getElementById("MEMBERs");
+            li = ul.getElementsByTagName("li");
+            for (var i = 0; i < li.length; i++) {
+                userArr.push(li[i].innerText)
+            }
+            $("#AspNetUsers").val(userArr);
+            $("#modalCreate").modal("hide");
+        }
+        else {
+            alert("Bạn chưa thêm người tham dự");
+        }
+    }
+    var userArray = [];
+    function getchecked(id) {
+        
+        var item = $('#' + id);
+        if (item.prop("checked") == false) {
+            item.prop("checked", true);
+            userArray.push(item.val());
+            sessionStorage.setItem("user", JSON.stringify(userArray));
+            $("#pickbox").append('<li id= "li' + id + '">' + item.val() + '</li>');
+            $("#hiden").show();
 
-
-    </script>
-}
+        }
+        else if (item.prop("checked") == true) {
+            item.prop("checked", false);
+            var remove_item = item.val();
+            $("#li" + id).remove();
+            userArray = $.grep(userArray, function (value) {
+                return value != remove_item;
+            });
+            if (userArray == 0) {
+                $("#hiden").hide();
+            }
+            sessionStorage.setItem("user", JSON.stringify(userArray));
+        }
+    }
+</script>

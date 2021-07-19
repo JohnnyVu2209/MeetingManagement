@@ -1,4 +1,4 @@
-.navbar navbar-inverse navbar-fixed-top {
+.top-nav {
     background: #0073A5;
     color: #0073A5;
 }
@@ -42,7 +42,6 @@
 
 .wrapper .menu-btn i {
     position: absolute;
-    transform:;
     font-size: 23px;
     transition: all 0.3s ease;
 }
