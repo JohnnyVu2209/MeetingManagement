@@ -304,7 +304,7 @@
         <div class="value value-fixed value-fixed-location">
             <div style="width:100%">
                 <div class="input-group input_fixed">
-                    @Html.TextBox("Location", newMeet.Location, new { @class = "input--style-5-fixed", @id = "location" })
+                    @Html.TextBox("Location", newMeet.Location, new { @class = "input--style-5-fixed", @id = "location", @type ="datetime-local" })
                     @Html.ValidationMessage("Location", "", new { @class = "text-danger" })
                 </div>
             </div>
