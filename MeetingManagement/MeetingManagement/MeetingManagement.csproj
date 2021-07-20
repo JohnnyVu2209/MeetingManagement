@@ -259,12 +259,7 @@
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OTHER_ACCOUNT.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\sysdiagrams.cs" />
     <Compile Include="Models\TASK.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -2184,7 +2179,6 @@
     <Content Include="assets\plugins\global\fonts\socicon\socicon.svg" />
     <Content Include="assets\plugins\global\plugins.bundle.css" />
     <Content Include="assets\plugins\global\plugins.bundle.js" />
-    <Content Include="Areas\HeadOfDepartment\Views\MainPage\VerifyMeeting.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\Create.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\Index.cshtml" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -2491,8 +2485,6 @@
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Details.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Edit.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Index.cshtml" />
-    <Content Include="Areas\User\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\User\Views\Categories\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\ResetPassword.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Create1.cshtml" />
@@ -2509,8 +2501,6 @@
     <Content Include="Areas\User\Views\Meetings\Index.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MyMeetingGridView.cshtml" />
     <Content Include="Areas\User\Views\Meetings\JoinedMeetingGridView.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Index.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Create.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\VerifyMeeting.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\_ViewStart.cshtml" />
     <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.eot" />
