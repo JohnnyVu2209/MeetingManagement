@@ -1,13 +1,40 @@
 ﻿@model IEnumerable<MeetingManagement.Models.MEETING>
 
-<link href="~/Content/catalog-list.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/catalog-list.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 
-<ul class="catalogList">
-    @foreach (var item in Model)
-    {
-        <li>
-            @item.Meeting_name
-        </li>
+<body>
+    <ul class="catalogList">
+        @foreach (var item in Model)
+        {
+            var is_cancel = (item.Status == 7) ? "background-color:grey" : "";
+            if (item.Create_by != ViewBag.user_identity)
+            { 
+                <li style="@is_cancel; display: flex; align-items: center;" onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id, modify = false })';">
+                    @item.Meeting_name
+                </li>
+            }
+        }
+    </ul>
+</body>
+</html>
+<script>
+    function f() {
+        alert("Xác nhận thay đổi nội dung cuộc họp?")
     }
-</ul>
+</script>
+<style>
+    .catalogList > li:hover {
+        transform: none !important;
+    }
+
+    .catalogList > li {
+        padding: 0 25px;
+    }
+</style>

@@ -6,9 +6,29 @@
 <ul class="catalogList">
     @foreach (var item in Model)
     {
-        <li>
-            @item.Meeting_name
-        </li>
+        var is_cancel = (item.Status == 7) ? "background-color:grey" : "";
+        if (item.Create_by == ViewBag.user_identity && item.Status != 7)
+        {
+            <li style="@is_cancel; display: flex; align-items: center;">
+                <p style="margin: 0px; width: 90%;" onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id, modify = true })';">@item.Meeting_name</p>
+                @*<i style="position:absolute; left:0px;" class="fas fa-edit"></i>*@
+                <a style="position:absolute; right:50px;" onclick="f()">Thay đổi</a>
+            </li>
+        }
+        else
+        {
+            <li style="@is_cancel; display: flex; align-items: center;" onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id, modify = false })';">
+                @item.Meeting_name
+            </li>
+        }
     }
 </ul>
+<style>
+    .catalogList > li:hover {
+        transform: none !important;
+    }
 
+    .catalogList > li {
+        padding: 0 25px;
+    }
+</style>

@@ -59,9 +59,9 @@ header .modal-btn{
     font-family:'Open Sans', sans-serif;
     cursor: pointer;
 }
-.catalogList li span{
+div span{
     position: absolute;
-    right: 0px;
+    right: 160px;
     width: 45px;
     text-align: center;
 }
@@ -102,7 +102,7 @@ span .fa ul.sublist{
     height: 45px;
     text-align: center;
 }
-.catalogList li span:hover .sublist {
+div span:hover .sublist {
     display: block;
 }
 .sublist li a i{

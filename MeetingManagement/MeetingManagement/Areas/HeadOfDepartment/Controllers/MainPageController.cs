@@ -6,12 +6,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-
 namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 {
-    [Authorize(Roles = "BCN")]
+    [Authorize/*(Roles = "BCN")*/]
+
     public class MainPageController : Controller
     {
+        string VERIFY_MEETING = "Cuộc họp của bạn đã được duyệt.";
+        string REFUSE_MEETING = "Cuộc họp của bạn đã bị từ chối. Lý do: ";
         private SEP24Team7Entities db = new SEP24Team7Entities();
         // GET: HeadOfDepartment/Home
         public ActionResult Index()
@@ -47,10 +49,16 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 
             db.Entry(meeting).State = EntityState.Modified;
             db.SaveChanges();
+
+            string To = db.AspNetUsers.Find(meeting.Create_by).Email;
+            string Subject = meeting.Meeting_name;
+            string Body = VERIFY_MEETING;
+            Outlook mail = new Outlook(To,Subject,Body);
+            mail.SendMail();
             return RedirectToAction("Index");
         }
 
-        
+
         //public PartialViewResult GrdOtherTable()
         //{
         //    var member = db.OTHER_ACCOUNTs.ToList();
@@ -72,6 +80,12 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 
             db.Entry(meeting).State = EntityState.Modified;
             db.SaveChanges();
+
+            string To = db.AspNetUsers.Find(meeting.Create_by).Email;
+            string Subject = meeting.Meeting_name;
+            string Body = REFUSE_MEETING + feedback;
+            Outlook mail = new Outlook(To, Subject, Body);
+            mail.SendMail();
             return RedirectToAction("Index");
         }
 

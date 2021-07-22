@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MeetingManagement.Models;
+using Microsoft.AspNet.Identity;
 
 namespace MeetingManagement.Areas.User.Controllers
 {
@@ -44,7 +45,22 @@ namespace MeetingManagement.Areas.User.Controllers
 
         public ActionResult IndexMeetingList()
         {
-            List<MEETING> meeting = db.MEETINGs.ToList();
+            var userID = User.Identity.GetUserId();
+            var meeting = (from u in db.MEMBERs
+                            from m in db.MEETINGs
+                            where u.Meeting_id == m.Meeting_id && u.Member_id == userID
+                           select m) as List<MEETING>;
+            if(meeting != null)
+            {
+                foreach (var myMeet in db.MEETINGs.Where(x => x.Create_by == userID))
+                {
+                    meeting.Add(myMeet);
+                }
+            }
+            else
+            {
+                meeting = db.MEETINGs.Where(x => x.Create_by == userID).ToList();
+            }
             MeetingListVM meetingListVM = new MeetingListVM();
             List<MeetingListVM> meetingListVMList = meeting.Select(x => new MeetingListVM
             {

@@ -16,7 +16,7 @@
                 
                 <tr class="w400">
                     <td>@item.Meeting_name</td>
-                    <td>@item.AspNetUser.Full_name</td>
+                    <td>@item.AspNetUser.Email</td>
                     <td>@Convert.ToDateTime(item.Date_Start).ToString("dd/MM/yyyy")</td>
 
                     <td>
@@ -42,12 +42,15 @@
                 </tr>
             }
         </tbody>
-            
     </table>
 </div>
 
 <style>
+    .table thead th{
+        text-align:center;
+    }
     .w400 td {
         width:400px;
+        text-align:center;
     }
 </style>

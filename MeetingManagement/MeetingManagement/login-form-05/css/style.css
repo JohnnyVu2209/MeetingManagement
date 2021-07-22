@@ -27,11 +27,12 @@ h2 {
   height: 100vh;
   min-height: 700px; }
 
-.half .contents {
-  background: #f6f7fc; }
+    .half .contents {
+        background: #fff;
+    }
 
 .half .bg {
-  width: 25%; }
+  width: 200%; }
   @media (max-width: 767.98px) {
     .half .bg {
       width: 100%;
@@ -73,7 +74,7 @@ h2 {
 .form-block {
   background: #fff;
   padding: 40px;
-  max-width: 500px;
+  max-width: 400px;
   -webkit-box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
   box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2); }
   @media (max-width: 767.98px) {
@@ -156,10 +157,12 @@ h2 {
 
 .btn {
   text-decoration: none !important; }
-  .btn.btn-facebook {
-    display: block;
-    background: #3b5998;
-    color: #fff; }
-  .btn.btn-google {
-    background: #ea4335;
-    color: #fff; }
+    .btn.btn-Login {
+        display: block;
+        background: #4ca0d2;
+        color: #fff;
+    }
+    .btn.btn-vanlang {
+        background: #fb771a;
+        color: #fff;
+    }
