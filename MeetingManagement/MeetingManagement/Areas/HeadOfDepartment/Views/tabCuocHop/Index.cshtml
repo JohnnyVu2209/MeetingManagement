@@ -9,13 +9,15 @@
 
 <br />
 <div class="tab">
-    <button class="tablinks" onclick="openTab(event, 'mycate')">Cuộc họp chờ duyệt</button>
-    <button class="tablinks" onclick="openTab(event, 'mymeeting')">Cuộc họp tham dự</button>
-    <button class="tablinks" onclick="openTab(event, 'mywork')">Cuộc họp của tôi</button>
+    <button class="tablinks" onclick="openTab(event, 'waitmeeting')">Cuộc họp chờ duyệt</button>
+    <button class="tablinks" onclick="openTab(event, 'myjoymeeting')">Cuộc họp tham dự</button>
+    <button class="tablinks" onclick="openTab(event, 'mycremeeting')">Cuộc họp của tôi</button>
 </div>
 
 
-<div id="mycate" class="tabcontent active">
+
+<div id="waitmeeting" class="tabcontent">
+
     <ul class="catalogList">
         @foreach (var item in ViewBag.pendingMeeting)
         {
@@ -26,7 +28,8 @@
     </ul>
 </div>
 
-<div id="mymeeting" class="tabcontent">
+<div id="myjoymeeting" class="tabcontent active">
+
     <ul class="catalogList">
         @foreach (var item in ViewBag.attendMeeting)
         {
@@ -38,7 +41,7 @@
 </div>
 
 
-<div id="mywork" class="tabcontent">
+<div id="mycremeeting" class="tabcontent">
     <ul class="catalogList">
         @foreach (var item in ViewBag.myMeeting)
         {
@@ -48,6 +51,9 @@
         }
     </ul>
 </div>
+
+
+
 
 
 

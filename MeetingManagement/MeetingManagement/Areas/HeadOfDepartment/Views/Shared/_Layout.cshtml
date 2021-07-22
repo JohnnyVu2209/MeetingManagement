@@ -8,6 +8,10 @@
     @*<link href="~/Content/catalog-list.css" rel="stylesheet" />*@
 
     <link rel="stylesheet" href="~/Content/The-Last-Style-Blender.css" />
+    <link href="~/Content/quyhung/css/accodion-css.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
     @*<link href="~/Content/catalog-list.css" rel="stylesheet" />*@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -41,6 +45,8 @@
             <li><a href="@Url.Action("Index","MainPage")">Trang chính</a></li>
             <li><a href="@Url.Action("Index","Categories")">Danh mục</a></li>
             <li><a href="@Url.Action("Index","tabCuocHop")">Cuộc họp</a></li>
+            <li><a href="@Url.Action("IndexTaskBCN","tabCuocHop")">Việc cuộc họp</a></li>
+
         </ul>
     </div> <!--Menu-->
 
