@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
-
 }
 
 <link href="~/Content/quyhung/css/accodion-css.css" rel="stylesheet" />
@@ -11,8 +10,6 @@
     @foreach (var tm in Model)
     {
     <div class="boxItem">
-        @if (tm.Meeting_id == tm.Meeting_idd)
-        {
             <button class="contentBox">
                 <strong>@tm.MeetingName</strong><i class="fas fa-angle-down"></i>
             </button>
@@ -54,7 +51,7 @@
                     </div>
                 </div>
             </div>
-        }
+        
 
         </div>
     }

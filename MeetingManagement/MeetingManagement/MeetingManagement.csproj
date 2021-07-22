@@ -178,7 +178,6 @@
     <Compile Include="Areas\Admin\Controllers\AspNetRoleUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\BCNTaskController.cs" />
-    <Compile Include="Areas\HeadOfDepartment\Controllers\StatisticController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\tabCuocHopController.cs" />
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\categoriesController.cs" />
@@ -285,6 +284,7 @@
     <Content Include="Content\quyhung\css\tabcuochop.css" />
     <Content Include="Content\quyhung\img\icons8-bell.gif" />
     <Content Include="Content\quyhung\img\icons8-notification-30.png" />
+    <Content Include="Content\quyhung\img\logo.png" />
     <Content Include="Content\quyhung\js\outplay.js" />
     <Content Include="Content\quyhung\js\accodion-scripts.js" />
     <Content Include="Content\style.css" />
@@ -395,9 +395,8 @@
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\Index.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\IndexBCNTask.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Shared\outplay.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Statistic\Index.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Statistic\statisticTask.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Categories\statisticTask.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Statistic.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\BCNTask\indexTask.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

@@ -21,6 +21,16 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             var all = db.MEETINGs.Where(x => x.Category_id == id).ToList();
             return PartialView(all);
         }
+
+
+        [HttpGet]
+        public ActionResult Statistic(int id)
+        {
+            var task = db.TASKs.Where(x => x.Meeting_id == id).ToList();
+            return View(task);
+        }
+
+
         public ActionResult MeetingForm(int id)
         {
             MEETING newMeet = new MEETING();

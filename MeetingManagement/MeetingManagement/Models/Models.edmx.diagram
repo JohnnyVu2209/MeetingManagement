@@ -7,15 +7,15 @@
       <Diagram DiagramId="38260d792d1f41b69411a2bd28a199dd" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="SEP24Team7Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="SEP24Team7Model.AspNetRole" Width="1.5" PointX="0.75" PointY="9.125" />
-        <EntityTypeShape EntityType="SEP24Team7Model.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="7.5" />
-        <EntityTypeShape EntityType="SEP24Team7Model.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="13.125" />
+        <EntityTypeShape EntityType="SEP24Team7Model.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="5" />
+        <EntityTypeShape EntityType="SEP24Team7Model.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="10.625" />
         <EntityTypeShape EntityType="SEP24Team7Model.AspNetUser" Width="1.5" PointX="3" PointY="7.5" />
-        <EntityTypeShape EntityType="SEP24Team7Model.ATTACHMENT" Width="1.5" PointX="9.75" PointY="7.375" />
-        <EntityTypeShape EntityType="SEP24Team7Model.CATEGORY" Width="1.5" PointX="5.25" PointY="10.25" />
+        <EntityTypeShape EntityType="SEP24Team7Model.ATTACHMENT" Width="1.5" PointX="9.75" PointY="7.25" />
+        <EntityTypeShape EntityType="SEP24Team7Model.CATEGORY" Width="1.5" PointX="5.25" PointY="7.75" />
         <EntityTypeShape EntityType="SEP24Team7Model.MEETING" Width="1.5" PointX="7.5" PointY="7.375" />
         <EntityTypeShape EntityType="SEP24Team7Model.MEETING_STATUS" Width="1.5" PointX="5.25" PointY="2.125" />
         <EntityTypeShape EntityType="SEP24Team7Model.MEMBER" Width="1.5" PointX="12.75" PointY="9" />
-        <EntityTypeShape EntityType="SEP24Team7Model.OTHER_ACCOUNT" Width="1.5" PointX="5.25" PointY="5" />
+        <EntityTypeShape EntityType="SEP24Team7Model.OTHER_ACCOUNT" Width="1.5" PointX="5.25" PointY="13.125" />
         <EntityTypeShape EntityType="SEP24Team7Model.REPORT" Width="1.5" PointX="9.75" PointY="13.125" />
         <EntityTypeShape EntityType="SEP24Team7Model.sysdiagram" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="SEP24Team7Model.TASK" Width="1.5" PointX="15" PointY="8.625" />

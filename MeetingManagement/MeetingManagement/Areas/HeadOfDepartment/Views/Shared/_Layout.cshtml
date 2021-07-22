@@ -6,7 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link rel="stylesheet" href="~/Content/normalize.css" />
     <link rel="stylesheet" href="~/Content/The-Last-Style-Blender.css" />
-    <link href="~/Content/quyhung/css/accodion-css.css" rel="stylesheet" />
+    @*<link href="~/Content/quyhung/css/accodion-css.css" rel="stylesheet" />*@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
@@ -33,7 +33,7 @@
             <li><a href="@Url.Action("Index","MainPage")">Trang chính</a></li>
             <li><a href="@Url.Action("Index","Categories")">Danh mục</a></li>
             <li><a href="@Url.Action("Index","tabCuocHop")">Cuộc họp</a></li>
-            <li><a href="@Url.Action("IndexTaskBCN","tabCuocHop")">Việc cuộc họp</a></li>
+            <li><a href="@Url.Action("indexTask","BCNTask")">Thống kê</a></li>
 
         </ul>
     </div> <!--Menu-->
@@ -51,12 +51,4 @@
 
 </body>
 </html>
-
-@*    <div id="menu">
-        <ul>
-            <li><a href="@Url.Action("Index","Home")"style="margin-top:10px">Trang chủ</a></li>
-            <li><a href="@Url.Action("Index","Home")" style="margin-top:10px">Công việc</a></li>
-            <li><a href="@Url.Action("Index","Home")" style="margin-top:10px">Hồ sơ</a></li>
-        </ul>
-    </div>*@
 

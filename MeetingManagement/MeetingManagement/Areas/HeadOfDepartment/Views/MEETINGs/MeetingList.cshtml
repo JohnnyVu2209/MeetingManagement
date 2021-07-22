@@ -3,11 +3,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-
-
-
-
 <div id="table-content">
     <table class="table">
         <thead>
@@ -22,10 +17,10 @@
             @foreach (var item in Model)
             {
                 <tr class="w400">
-                    <td>
-                        @*<a href="#" data-toggle="modal" data-target="#myModal">*@
-                            @item.Meeting_name
-                        @*</a>*@
+                    <td>  
+                        <a href="'@Url.Action("Statistic","Meetings", new { id = item.Meeting_id})">
+                                 @item.Meeting_name
+                        </a>
                     </td>
                     <td>@item.AspNetUser.Full_name</td>
                     <td>@Convert.ToDateTime(item.Date_Start).ToString("dd/MM/yyyy")</td>
@@ -44,7 +39,7 @@
                         }
                         else if (@item.Status == 4)
                         {
-                            <div class="incomplete-status">@item.MEETING_STATUS.Status_name</div>
+                            <div class="incomplete-status" style="width:125px">@item.MEETING_STATUS.Status_name</div>
                         }
                         else if (@item.Status == 5)
                         {
@@ -69,23 +64,3 @@
 
 
 
-<!--Modal--->
-<!--<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">-->
-
-        <!-- Modal content-->
-        <!--<div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
-            </div>
-            <div class="modal-body">
-                <p>Some text in the modal.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-
-    </div>
-</div>-->

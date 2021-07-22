@@ -2,14 +2,16 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
-}
 
+}
 <link href="~/Content/catalog-list.css" rel="stylesheet" />
 <link href="~/Content/quyhung/css/tabcuochop.css" rel="stylesheet" />
 
+
 <br />
+
 <div class="tab">
-    <button class="tablinks" onclick="openTab(event, 'waitmeeting')">Cuộc họp chờ duyệt</button>
+    <button id="defaultOpen" class="tablinks" onclick="openTab(event, 'waitmeeting')">Cuộc họp chờ duyệt</button>
     <button class="tablinks" onclick="openTab(event, 'myjoymeeting')">Cuộc họp tham dự</button>
     <button class="tablinks" onclick="openTab(event, 'mycremeeting')">Cuộc họp của tôi</button>
 </div>
@@ -30,9 +32,9 @@
     <ul class="catalogList">
         @foreach (var item in ViewBag.attendMeeting)
         {
-        <li>
-            @item.Meeting_name
-        </li>
+            <li>
+                @item.Meeting_name
+            </li>
         }
     </ul>
 </div>
@@ -49,11 +51,6 @@
     </ul>
 </div>
 
-
-
-
-
-
 <script>
     function openTab(evt, tabName) {
         var i, tabcontent, tablinks;
@@ -68,6 +65,6 @@
         document.getElementById(tabName).style.display = "block";
         evt.currentTarget.className += " active";
     }
+    document.getElementById("defaultOpen").click();
 </script>
-
-
+<br>

@@ -12,23 +12,23 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
         // GET: HeadOfDepartment/BCNTask
-        public ActionResult Index()
-        {
-            List<TASK> taskBCN = db.TASKs.ToList();
-            TasksBCN tasksBCNVM = new TasksBCN();
-            List<TasksBCN> tasksBCNVNList = taskBCN.Select(x => new TasksBCN
-            {
-                FullName = x.MEETING.AspNetUser.Full_name,
-                TaskName = x.Task_name,
-                DueDate = (DateTime)x.Task_Deadline,
-                Status = (bool)x.Task_Status,
-                MeetingName = x.MEETING.Meeting_name,
-                Meeting_id = x.Meeting_id,
-                Meeting_idd = x.MEETING.Meeting_id
-            }).ToList();
-            return View(tasksBCNVNList);
+        /*        public ActionResult Index()
+                {
+                    List<TASK> taskBCN = db.TASKs.ToList();
+                    TasksBCN tasksBCNVM = new TasksBCN();
+                    List<TasksBCN> tasksBCNVNList = taskBCN.Select(x => new TasksBCN
+                    {
+                        FullName = x.MEETING.AspNetUser.Full_name,
+                        TaskName = x.Task_name,
+                        DueDate = (DateTime)x.Task_Deadline,
+                        Status = (bool)x.Task_Status,
+                        MeetingName = x.MEETING.Meeting_name,
+                        Meeting_id = x.Meeting_id,
+                        Meeting_idd = x.MEETING.Meeting_id
+                    }).ToList();
+                    return View(tasksBCNVNList);
 
-        }
+                }*/
 
 
         public ActionResult IndexBCNTask()
@@ -40,12 +40,12 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return View();
         }
 
-
-
-        public ActionResult IndexBCNTask2()
+        public ActionResult indexTask()
         {
             var task = db.TASKs.ToList();
             return View(task);
         }
+        
+       
     }
 }
