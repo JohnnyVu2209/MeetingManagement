@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MeetingManagement.Models;
+using Microsoft.AspNet.Identity;
+
 
 namespace MeetingManagement.Areas.User.Controllers
 {
@@ -17,10 +19,10 @@ namespace MeetingManagement.Areas.User.Controllers
         // GET: User/Tasks
         public ActionResult Index()
         {
-            var userid = "48e5a0b4-76ea-4619-bd6b-771bb9954c96";
+            var userid = User.Identity.GetUserId();
             var mEMBER = db.MEMBERs.FirstOrDefault(x => x.Member_id == userid);
             ViewBag.meeting = db.MEETINGs.Where(x => x.Meeting_id == mEMBER.Meeting_id).ToList();
-            ViewBag.task = db.TASKs.Where(x => x.Meeting_id == mEMBER.Meeting_id && x.Assignee == mEMBER.Member_id).ToList();
+            ViewBag.task = db.TASKs.Where(x => x.Meeting_id == mEMBER.Meeting_id && x.Assignee == mEMBER.Member_id).OrderBy(x=> x.Task_Status == true).ToList();
             return View();
         }
 
@@ -43,7 +45,7 @@ namespace MeetingManagement.Areas.User.Controllers
         public ActionResult Create()
         {
             ViewBag.Meeting_id = new SelectList(db.MEMBERs.Where(x => x.Meeting_id == 37), "Member_id", "AspNetUser.Full_name");
-            return View();
+            return PartialView();
         }
 
         // POST: User/Tasks/Create

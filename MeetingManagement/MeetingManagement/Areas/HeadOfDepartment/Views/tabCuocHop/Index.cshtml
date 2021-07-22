@@ -17,11 +17,13 @@
 </div>
 
 
+
 <div id="waitmeeting" class="tabcontent">
+
     <ul class="catalogList">
         @foreach (var item in ViewBag.pendingMeeting)
         {
-            <li>
+            <li onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = item.Meeting_id })';">
                 @item.Meeting_name
             </li>
         }
@@ -29,9 +31,13 @@
 </div>
 
 <div id="myjoymeeting" class="tabcontent active">
+
     <ul class="catalogList">
         @foreach (var item in ViewBag.attendMeeting)
         {
+        <li onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id })';">
+            @item.Meeting_name
+        </li>
             <li>
                 @item.Meeting_name
             </li>
@@ -44,7 +50,7 @@
     <ul class="catalogList">
         @foreach (var item in ViewBag.myMeeting)
         {
-            <li>
+            <li onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id })';">
                 @item.Meeting_name
             </li>
         }

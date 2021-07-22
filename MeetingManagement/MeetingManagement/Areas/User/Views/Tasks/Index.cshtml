@@ -17,9 +17,11 @@
 }
 <link href="~/Content/catalog-list.css" rel="stylesheet" />
 
+
 <button type="button" class="btn btn-success" data-toggle="modal" onclick="getCreateModal()" data-target="#staticBackdrop">
     Launch static backdrop modal
 </button>
+
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
@@ -31,7 +33,6 @@
                         @meets.Meeting_name
                     </a>
 
-
                 </h4>
             </div>
                 <div id="@(meets.Meeting_id + meets.Category_id)" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="@meets.Meeting_id">
@@ -42,6 +43,7 @@
                                 @final%
                             </div>
                         </div>
+
                         @foreach (var task in tasks)
                         {
                             <div class="row" style="margin-left:10px;font-size:15px;">
@@ -68,21 +70,20 @@
                                     else
                                     {
                                         <span class="waiting-status" style="width:50%;">Chưa hoàn thành</span>
+
+                                        <button class="btn-dark" style="width:28px;height:28px;margin:0px 140px 0px 200px;"><i class="glyphicon glyphicon-bell" style="font-size:x-large;"></i></button>
                                     }
-
-
-                                    <button class="btn-outline-dark" style="width:28px;height:28px;margin:auto;"><i class="glyphicon glyphicon-bell" style="font-size:x-large;"></i></button>
                                 </div>
                             </div>
                         }
-                        </div>
+                    </div>
+
                 </div>
             
         }
     </div>
                                 
 </div>
-
 
 <div id="Popup"></div>
 <script type="text/javascript">
@@ -102,5 +103,4 @@
          });
     };
 </script>
-
 

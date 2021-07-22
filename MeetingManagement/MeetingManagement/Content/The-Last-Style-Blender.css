@@ -12,6 +12,11 @@
 body {
 }
 
+.body-content {
+    position: absolute;
+    top: 0px;
+}
+
 #yuki-body {
     font-size: 14px;
     font-weight: 300;
@@ -109,14 +114,16 @@ body {
 
 #yuki-nav-bar img {
     position: fixed;
-    left: 750px;
+    left: calc((100% - 58px)/2);
     width: 116.537px;
     height: 45px;
 }
 
 .yuki-login-info {
     position: absolute;
-    left: 1000px;
+
+    right: 50px;
+
     top: 0px;
 }
 /*--#table--*/
@@ -199,7 +206,6 @@ body {
     height: 48px;
     text-align: center;
     border-bottom: 1px solid #e5e5e5;
-    border-top: 1px solid #e5e5e5;
 }
 
 .filter {
@@ -244,7 +250,6 @@ body {
         color: white;
         margin: auto;
     }
-
     td .waiting-status {
         background: #FFC400;
         border-radius: 10px;
@@ -252,7 +257,6 @@ body {
         color: white;
         margin: auto;
     }
-
     td .missing-status {
         background: #F12B2C;
         border-radius: 10px;
@@ -260,7 +264,6 @@ body {
         color: white;
         margin: auto;
     }
-
     td .incomplete-status {
         background: #FF9900;
         border-radius: 10px;
@@ -268,7 +271,6 @@ body {
         color: white;
         margin: auto;
     }
-
     td .complete-status {
         background: #18e750;
         border-radius: 10px;
@@ -276,7 +278,6 @@ body {
         color: white;
         margin: auto;
     }
-
     td .complete-status {
         background: #29CC97;
         border-radius: 10px;
@@ -298,10 +299,10 @@ tr:hover td {
 /*--#footer--*/
 #yuki-footer {
     display: block;
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 200px;
-    bottom: -2000px;
+    bottom: 0px;
     background: white;
     border-top: 10px solid #009FE5;
 }
@@ -329,6 +330,15 @@ tr:hover td {
 /*Thanh tinh trang*/
 td .pending-status, .pending-status {
     background: #C0C0C0;
+    border-radius: 10px;
+    width: 30%;
+    color: white;
+    margin: auto;
+    text-align: center;
+}
+
+td .cancel-status, .cancel-status {
+    background: #ff4d4d;
     border-radius: 10px;
     width: 30%;
     color: white;
