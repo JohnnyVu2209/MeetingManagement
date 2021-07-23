@@ -1,15 +1,32 @@
-﻿@model IEnumerable<MeetingManagement.Models.TASK>
+﻿@using MeetingManagement.Models;
 @{
     var meeting_id = ViewBag.Meeting;
     var create_by = ViewBag.IsCreateBy;
-
+    var tasks = ViewBag.Task as List<TASK>;
+    var index = 0;
+    var percent = 0;
+    foreach (var task in tasks)
+    {
+        if (task.Task_Status == true)
+        {
+            percent += 1;
+        }
+    }
+    var final = (percent * 100) / tasks.Count;
 }
+<head>
+    <link href="~/Content/catalog-list.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 <div id="container">
     <div class="progress-bar-zone">
         <p>Tiến độ</p>
         <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: @final%;">
+                @final %
+            </div>
         </div>
+
     </div>
     <div class="button-zone" style=" position: absolute; top: -10px; right: 0px;">
         <a class="btn button-create" style="background-color:#009fe5; color:white; display:inline-flex;" onclick="getCreateModal(@meeting_id)">Tạo</a>
@@ -20,38 +37,29 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Tóm lược</th>
-                    @*<th class="col-align"></th>*@
                     <th class="col-align" scope="col">Giao cho</th>
                     <th class="col-align" scope="col">Ngày đến hạn</th>
                     <th class="col-align" scope="col">Tình trạng</th>
-                    <th class="col-align" scope="col"></th>
+                    <th class="col-align" scope="col">Thao tac</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.Select((value, i) => new { i, value }))
+                @foreach (var item in tasks)
                 {
-                    var value = item.value;
-                    var index = item.i + 1;
-                    var tr_bg = (value.Task_Status == true) ? "background-color:#f1f1f1;" : "cursor: pointer;";
+                    index++;
+                    var tr_bg = (item.Task_Status == true) ? "background-color:#f1f1f1;" : "cursor: pointer;";
 
                     <tr id="this_tr" style="@tr_bg">
                         <td>@index</td>
-                        <td>@value.Task_name</td>
-                        @*<td class="col-align">
-                                @if (value.Notify == true)
-                                {
-                                    <img src="~/Content/Picture/outline_notifications_active_black_24dp.png" />
-                                }
-                            </td>*@
-                        <td class="col-align">@value.MEMBER.AspNetUser.Full_name</td>
-                        <td class="col-align">@value.Task_Deadline</td>
-
+                        <td>@item.Task_name</td>
+                        <td class="col-align">@item.MEMBER.AspNetUser.Email</td>
+                        <td class="col-align">@item.Task_Deadline</td>
                         <td class="col-align" id="status">
-                            @if (@value.Task_Status == false)
+                            @if (item.Task_Status == false)
                             {
                                 <div class="unfinished-status">Chưa hoàn thành</div>
                             }
-                            else if (@value.Task_Status == true)
+                            else if (item.Task_Status == true)
                             {
                                 <div class="finished-status">Hoàn thành</div>
                             }
@@ -63,18 +71,28 @@
                             }
                             else
                             {
-                                if (@value.Task_Status == false)
+                                if (item.Task_Status == false)
                                 {
-                                    <a onclick="getEditModal(@value.Task_id)"
-                                       @*href="@Url.Action("Edit","Tasks",new {TaskID = value.Task_id })"*@>Edit</a>
-
-                                    <a onclick="return confirm('Bạn có muốn xoá công việc này?')"
-                                       href="@Url.Action("Delete","Tasks",new {TaskID = value.Task_id })">Delete</a>
-                                    <!--<a role="button"-->
-                                    @*href="@Html.Action("RemindTask","Tasks",new {AsigneeID = value.Assignee,MeetingID = value.Meeting_id,TaskName = value.Task_name })"*@
-                                    <!--class="btn-dark">
-                                        <i class="glyphicon glyphicon-bell" style="font-size:x-large;"></i>
-                                    </a>-->
+                                    <span id="option" >
+                                        <i class="fa fa-ellipsis-h">
+                                            <ul class="sublist">
+                                                <li>
+                                                    <a class="fa fa-bell"></a>
+                                                </li>
+                                                <li>
+                                                    <a aria-hidden="true"
+                                                       class="edit-btn fa fa-pencil-square"
+                                                       onclick="getEditModal(@item.Task_id)"></a>
+                                                </li>
+                                                <li>
+                                                    <a aria-hidden="true"
+                                                       class="fa fa-trash"
+                                                       onclick="return confirm('Bạn có muốn xoá công việc này?')"
+                                                       href="@Url.Action("Delete","Tasks",new {TaskID = item.Task_id })"></a>
+                                                </li>
+                                            </ul>
+                                        </i>
+                                    </span>
                                 }
                             }
                         </td>
@@ -85,6 +103,7 @@
     </div>
 
     <style>
+
         .progress-bar-zone {
             display: inline-flex;
             width: 25%;

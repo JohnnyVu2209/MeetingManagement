@@ -215,6 +215,9 @@
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoryListVM.cs" />
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MEETING.cs">
@@ -247,6 +250,9 @@
     </Compile>
     <Compile Include="Models\Outlook.cs" />
     <Compile Include="Models\REPORT.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TASK.cs">
@@ -636,6 +642,7 @@
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingReport.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\Edit.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingEdit.cshtml" />
+    <Content Include="Areas\User\Views\Tasks\Edit.cshtml" />
     <EntityDeploy Include="Models\Models.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Models.Designer.cs</LastGenOutput>
@@ -643,7 +650,6 @@
     <Content Include="Models\Models.edmx.diagram">
       <DependentUpon>Models.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\User\Views\Tasks\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

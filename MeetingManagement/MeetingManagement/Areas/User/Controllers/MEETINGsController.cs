@@ -45,6 +45,7 @@ namespace MeetingManagement.Areas.User.Controllers
         public ActionResult MeetingTask(int id)
         {
             var task = db.TASKs.Where(x => x.Meeting_id == id).ToList();
+            ViewBag.Task = task;
             ViewBag.Meeting = id;
             ViewBag.IsCreateBy = isCreateBy(id);
             return PartialView(task);
