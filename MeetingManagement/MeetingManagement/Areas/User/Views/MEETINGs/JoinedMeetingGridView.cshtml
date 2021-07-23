@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<MeetingManagement.Models.MEETING>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,19 +8,33 @@
     <link href="~/Content/catalog-list.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
 <body>
     <ul class="catalogList">
         @foreach (var item in Model)
         {
-            <li onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id })';">
-                @item.Meeting_name
-            </li>
+            var is_cancel = (item.Status == 7) ? "background-color:grey" : "";
+            if (item.Create_by != ViewBag.user_identity)
+            { 
+                <li style="@is_cancel; display: flex; align-items: center;" onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id, modify = false })';">
+                    @item.Meeting_name
+                </li>
+            }
         }
     </ul>
 </body>
 </html>
+<script>
+    function f() {
+        alert("Xác nhận thay đổi nội dung cuộc họp?")
+    }
+</script>
 <style>
     .catalogList > li:hover {
         transform: none !important;
+    }
+
+    .catalogList > li {
+        padding: 0 25px;
     }
 </style>

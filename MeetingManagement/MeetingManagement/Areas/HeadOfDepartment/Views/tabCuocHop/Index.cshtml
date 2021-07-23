@@ -8,15 +8,22 @@
 <link href="~/Content/quyhung/css/tabcuochop.css" rel="stylesheet" />
 
 <br />
-<div class="tab">
+@*<div class="tab">
     <button class="tablinks" onclick="openTab(event, 'mycate')">Cuộc họp chờ duyệt</button>
     <button class="tablinks" onclick="openTab(event, 'mymeeting')">Cuộc họp tham dự</button>
     <button class="tablinks" onclick="openTab(event, 'mywork')">Cuộc họp của tôi</button>
-</div>
+</div>*@
+<ul class="nav nav-tabs">
+ 
+    <li><a href="#" class="tablinks" onclick="openTab(event, 'mycate')">Cuộc họp chờ duyệt</a></li>
+    <li><a href="#" class="tablinks" onclick="openTab(event, 'mymeeting')">Cuộc họp tham dự</a></li>
+    <li><a href="#" class="tablinks" onclick="openTab(event, 'mywork')">Cuộc họp của tôi</a></li>
+</ul>
 
 
-<div id="mycate" class="tabcontent">
-    <ul class="catalogList" >
+
+<div id="mycate" class="tabcontent active">
+    <ul class="catalogList">
         @foreach (var item in ViewBag.pendingMeeting)
         {
             <li onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = item.Meeting_id })';">
@@ -26,11 +33,11 @@
     </ul>
 </div>
 
-<div id="mymeeting" class="tabcontent active">
+<div id="mymeeting" class="tabcontent">
     <ul class="catalogList">
         @foreach (var item in ViewBag.attendMeeting)
         {
-        <li onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = item.Meeting_id })';">
+        <li onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id })';">
             @item.Meeting_name
         </li>
         }
@@ -42,7 +49,7 @@
     <ul class="catalogList">
         @foreach (var item in ViewBag.myMeeting)
         {
-            <li onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = item.Meeting_id })';">
+            <li onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id })';">
                 @item.Meeting_name
             </li>
         }

@@ -79,6 +79,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             category.Create_by = cate.Create_by;
             return PartialView(category);
         }
+
         [HttpPost]
         public ActionResult Edit(CATEGORY cg)
         {
@@ -93,7 +94,6 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         {
             CATEGORY cATEGORY = db.CATEGORies.Where(x => x.Category_id == id).FirstOrDefault();
             return PartialView(cATEGORY);
-
         }
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirm(int id)

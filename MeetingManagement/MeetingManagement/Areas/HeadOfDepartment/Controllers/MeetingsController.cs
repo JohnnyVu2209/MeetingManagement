@@ -41,12 +41,8 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             {
                 if (Files != null)
                 {
-
-
                     using (var scope = new TransactionScope())
                     {
-
-
                         if (ValidateFile(Files))
                         {
                             AddMeeting(model);
@@ -69,13 +65,8 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
                             scope.Complete();
                             return RedirectToAction("Details", "Categories", new { id = model.Category_id });
                         }
-
                         ModelState.AddModelError("File", "Dung lượng tối đa cho phép là 5MB");
-
-
                     }
-
-
                 }
                 else
                 {
@@ -120,6 +111,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
                 db.SaveChanges();
             }
         }
+
         private bool ValidateFile(HttpPostedFileBase files)
         {
             var filesize = files.ContentLength;
@@ -163,6 +155,25 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         {
             var meeting = db.MEETINGs.Find(id);
             return View(meeting);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult MeetingDetail(int category_id, int meeting_id, string meeting_name, DateTime date_start, TimeSpan time_start, string location, string content, int status)
+        {
+            MEETING meeting = db.MEETINGs.Find(meeting_id);
+            meeting.Category_id = category_id;
+            meeting.Meeting_name = meeting_name;
+            meeting.Date_Start = date_start;
+            meeting.Time_Start = time_start;
+            meeting.Location = location;
+            meeting.Meeting_content = content;
+            meeting.Status = status;
+
+            db.Entry(meeting).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
         public PartialViewResult MeetingInfo(int id)
         {
