@@ -8,7 +8,9 @@ using Microsoft.AspNet.Identity;
 
 namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 {
+
     [Authorize]
+
     public class tabCuocHopController : Controller
     {
         SEP24Team7Entities db = new SEP24Team7Entities();
@@ -24,5 +26,6 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             ViewBag.myMeeting = db.MEETINGs.Where(x => x.Create_by == userID).ToList();
             return View();
         }
+
     }
 }
