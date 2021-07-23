@@ -140,13 +140,13 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         {
             if (meeting.Date_Start <= DateTime.Today)
             {
-                ModelState.AddModelError("Date_Start", "Không được tạo cuộc họp trong cùng ngày hoặc trước đó");
+                ModelState.AddModelError("Date_Start", "Date is not valid");
             }
             TimeSpan twentyoneHour = new TimeSpan(21, 0, 0);
             TimeSpan seventhHour = new TimeSpan(07, 0, 0);
             if (meeting.Time_Start < seventhHour || meeting.Time_Start >= twentyoneHour)
             {
-                ModelState.AddModelError("Time_Start", "Không thể mở cuộc họp vào thời gian đó");
+                ModelState.AddModelError("Time_Start", "Time is not valid");
             }
         }
         public ActionResult AddUser(MEETING model, string email)

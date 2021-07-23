@@ -471,6 +471,18 @@
         if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
             sessionStorage.clear();
         }
+
+        $("form").on("submit", function () {
+            if ($("span[class='field-validation-error']").length != 0)
+                $("span[class='field-validation-error']").each(function () {
+                    $("span[class='field-validation-error']").addClass("hidden");//Add class hidden to hide  @@Html.ValidationMessageFor(model => model.xyz) if using bootstrap , else use css
+                    var inputID = $("span[class='field-validation-error']").prev("input").attr("id");//get the id of the input field for which this validation prompted
+                    $(this).prev("input select").css("border", "1px solid red");
+                    //  $(this).prev("select").css("border", "1px solid red");
+                    var validationMessage = $("span[class='field-validation-error']").text();//Get validation message for input filed which is prompted
+                    $("#" + inputID).tooltip({ 'trigger': 'hover', 'title': validationMessage });//Trigger the tooltip now, if using bootstrap.
+                });
+        });
     });
     function getCreateModal() {
         var email = $('#myInput').val();
@@ -617,4 +629,6 @@
 
     /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
     autocomplete(document.getElementById("myInput"), countries);
+
+
 </script>
