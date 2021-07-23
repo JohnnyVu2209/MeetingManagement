@@ -215,9 +215,6 @@
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoryListVM.cs" />
-    <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MEETING.cs">
@@ -250,9 +247,6 @@
     </Compile>
     <Compile Include="Models\Outlook.cs" />
     <Compile Include="Models\REPORT.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TASK.cs">
@@ -371,6 +365,7 @@
     <Content Include="Content\Picture\outline_schedule_black_24dp.png" />
     <Content Include="Content\Picture\outline_title_black_24dp.png" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\The-Last-Style-Blender.css" />
     <Content Include="Content\taocuochop\css\main.css" />
     <Content Include="Content\taocuochop\css\main.min.css" />
     <Content Include="Content\taocuochop\js\global.js" />
@@ -388,7 +383,6 @@
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.svg" />
     <Content Include="Content\taocuochop\vendor\select2\select2.min.css" />
     <Content Include="Content\taocuochop\vendor\select2\select2.min.js" />
-    <Content Include="Content\The-Last-Style-Blender.css" />
     <Content Include="Content\quyhung\css\sb-admin-2.css" />
     <Content Include="Content\quyhung\css\sb-admin-2.min.css" />
     <Content Include="Content\quyhung\css\slide-bar.css" />
@@ -396,21 +390,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="login-form-05\css\bootstrap.min.css" />
-    <Content Include="login-form-05\css\bootstrap\bootstrap-reboot.css" />
-    <Content Include="login-form-05\css\bootstrap\bootstrap.css" />
-    <Content Include="login-form-05\css\owl.carousel.min.css" />
-    <Content Include="login-form-05\css\style.css" />
-    <Content Include="login-form-05\fonts\icomoon\demo-files\demo.css" />
-    <Content Include="login-form-05\fonts\icomoon\demo-files\demo.js" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.svg" />
-    <Content Include="login-form-05\fonts\icomoon\Read Me.txt" />
-    <Content Include="login-form-05\fonts\icomoon\style.css" />
-    <Content Include="login-form-05\js\bootstrap.min.js" />
-    <Content Include="login-form-05\js\jquery-3.3.1.min.js" />
-    <Content Include="login-form-05\js\main.js" />
-    <Content Include="login-form-05\js\owl.carousel.min.js" />
-    <Content Include="login-form-05\js\popper.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\HeadOfDepartment\Views\web.config" />
     <Content Include="Areas\User\Views\web.config" />
@@ -427,13 +406,23 @@
     <Content Include="Areas\Admin\Views\AspNetRoles\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\UserGridView.cshtml" />
-    <Content Include="login-form-05\css\.DS_Store" />
-    <Content Include="login-form-05\css\bootstrap.min.css.map" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.eot" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.ttf" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.woff" />
-    <Content Include="login-form-05\fonts\icomoon\selection.json" />
-    <Content Include="login-form-05\images\.DS_Store" />
+    <Content Include="login-form-05\css\bootstrap.min.css" />
+    <Content Include="login-form-05\css\bootstrap\bootstrap-reboot.css" />
+    <Content Include="login-form-05\css\bootstrap\bootstrap.css" />
+    <Content Include="login-form-05\css\owl.carousel.min.css" />
+    <Content Include="login-form-05\css\style.css" />
+    <Content Include="login-form-05\fonts\icomoon\demo-files\demo.css" />
+    <Content Include="login-form-05\fonts\icomoon\demo-files\demo.js" />
+    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.svg" />
+    <Content Include="login-form-05\fonts\icomoon\style.css" />
+    <Content Include="login-form-05\images\logo.png" />
+    <Content Include="login-form-05\images\vanlang.png" />
+    <Content Include="login-form-05\images\vanlang1.png" />
+    <Content Include="login-form-05\js\bootstrap.min.js" />
+    <Content Include="login-form-05\js\jquery-3.3.1.min.js" />
+    <Content Include="login-form-05\js\main.js" />
+    <Content Include="login-form-05\js\owl.carousel.min.js" />
+    <Content Include="login-form-05\js\popper.min.js" />
     <Content Include="Models\Models.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Models.edmx</DependentUpon>
@@ -634,6 +623,14 @@
     <Content Include="Areas\User\Views\Meetings\PendingMeeting.cshtml" />
     <Content Include="Areas\User\Views\Meetings\CancelModel.cshtml" />
     <Content Include="Areas\User\Views\Meetings\DeleteAttachment.cshtml" />
+    <Content Include="login-form-05\css\.DS_Store" />
+    <Content Include="login-form-05\css\bootstrap.min.css.map" />
+    <Content Include="login-form-05\fonts\.DS_Store" />
+    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.eot" />
+    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.ttf" />
+    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.woff" />
+    <Content Include="login-form-05\fonts\icomoon\selection.json" />
+    <Content Include="login-form-05\images\.DS_Store" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
