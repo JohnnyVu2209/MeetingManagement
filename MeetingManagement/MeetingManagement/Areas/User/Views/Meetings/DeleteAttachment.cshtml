@@ -34,6 +34,7 @@
             data: {id},
         success: function () {
             $("#myDeleteModal").modal("hide");
+            window.location.href = '@Url.Action("MeetingDetail","Meetings", new { id = Model.MEETING.Meeting_id, modify = true})'
         }
     })
 }

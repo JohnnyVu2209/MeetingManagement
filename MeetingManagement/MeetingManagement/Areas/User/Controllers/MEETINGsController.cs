@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -10,6 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 using MeetingManagement.Models;
 using Microsoft.AspNet.Identity;
+
 
 namespace MeetingManagement.Areas.User.Controllers
 {
@@ -34,18 +36,32 @@ namespace MeetingManagement.Areas.User.Controllers
             return View(meeting);
         }
 
-        public ActionResult CancelModel(int id)
+
+        public ActionResult CancelModel(int meeting_id, int model_type)
         {
-            var meeting = db.MEETINGs.Find(id);
+            ViewBag.model_type = model_type;
+            var meeting = db.MEETINGs.Find(meeting_id);
+            meeting.Feedback = "";
             return PartialView(meeting);
         }
 
         [HttpPost]
-        public ActionResult CancelModel(int Meeting_id, string Feedback)
-        {
-            var meeting = db.MEETINGs.Find(Meeting_id);
-            meeting.Feedback = Feedback;
-            meeting.Status = 7;
+        public ActionResult CancelModel(int meeting_id, string Feedback, int model_type, string? meeting_name, DateTime meeting_datestart, TimeSpan meeting_timestart, string meeting_location, string meeting_content)
+            {
+            var meeting = db.MEETINGs.Find(meeting_id);
+            if(model_type == 1)
+            {
+                meeting.Status = 7;
+            }
+            else
+            {
+                meeting.Feedback = Feedback;
+                meeting.Meeting_name = meeting_name;
+                meeting.Date_Start = meeting_datestart;
+                meeting.Time_Start = meeting_timestart;
+                meeting.Location = meeting_location;
+                meeting.Meeting_content = meeting_content;
+            }
 
             db.Entry(meeting).State = EntityState.Modified;
             db.SaveChanges();
@@ -86,6 +102,8 @@ namespace MeetingManagement.Areas.User.Controllers
         [HttpPost]
         public ActionResult MeetingEdit(MEETING meeting)
         {
+            ViewBag.date = DateTime.Now.ToShortDateString();
+            ViewBag.time = DateTime.Now.ToShortTimeString();
             db.Entry(meeting).State = EntityState.Modified;
             db.SaveChanges();
 

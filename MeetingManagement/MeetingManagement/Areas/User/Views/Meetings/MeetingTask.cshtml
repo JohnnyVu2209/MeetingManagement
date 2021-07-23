@@ -163,7 +163,7 @@
              data: {},
              success: function (data) {
                  $("#Popup").html(data);
-                 $("#TaskCreateModal").modal("show");
+                 $("#TaskCreateModal").appendTo("body").modal("show");
              },
              error: function (err) {
                  console.log(err);
