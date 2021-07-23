@@ -190,5 +190,15 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             var report = db.MEETINGs.Find(id);
             return PartialView(report);
         }
+        public FileResult DownloadFile(int meeting_id)
+        {
+            var meeting = db.MEETINGs.Find(meeting_id);
+
+            var path = Server.MapPath(meeting.REPORT.Report_link);
+
+            var bytes = System.IO.File.ReadAllBytes(path);
+
+            return File(bytes, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", meeting.REPORT.Report_name);
+        }
     }
 }
