@@ -21,7 +21,7 @@
 
 }
 <head>
-    <link href="~/Content/catalog-list.css" rel="stylesheet" />
+   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 @if (tasks.Count == 0)
@@ -212,8 +212,9 @@ else
             }
         </style>
     </div>
-    <div id="Popup"></div>
+    
 }
+<div id="Popup"></div>
 <script type="text/javascript">
      function getCreateModal(id) {
          $.ajax({
@@ -239,7 +240,7 @@ else
             data: { TaskID: id },
             success: function (data) {
                 $("#Popup").html(data);
-                $("#TaskEditModal").modal("show");
+                $("#TaskEditModal").appendTo("body").modal("show");
             },
             error: function (err) {
                 console.log(err);
