@@ -12,7 +12,6 @@
             <li style="@is_cancel; display: flex; align-items: center;">
                 <p style="margin: 0px; width: 90%;" onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id, modify = true })';">@item.Meeting_name</p>
                 @*<i style="position:absolute; left:0px;" class="fas fa-edit"></i>*@
-                <a style="position:absolute; right:50px;" onclick="f()">Thay đổi</a>
             </li>
         }
         else

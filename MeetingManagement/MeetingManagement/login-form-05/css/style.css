@@ -31,10 +31,8 @@ h2 {
         background: #fff;
     }
 
-    .half .bg {
-        width: 200%;
-        
-    }
+.half .bg {
+  width: 200%; }
   @media (max-width: 767.98px) {
     .half .bg {
       width: 100%;
