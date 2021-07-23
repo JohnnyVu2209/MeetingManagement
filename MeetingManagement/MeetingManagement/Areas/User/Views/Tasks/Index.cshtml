@@ -6,21 +6,27 @@
     var tasks = ViewBag.task as List<TASK>;
     SEP24Team7Entities db = new SEP24Team7Entities();
     var percent = 0;
-    foreach (var task in tasks)
+    var final = 0;
+    if (tasks.Count !=0)
     {
-        if (task.Task_Status == true)
+        foreach (var task in tasks)
         {
-            percent += 1;
+            if (task.Task_Status == true)
+            {
+                percent += 1;
+            }
         }
+        final = (percent * 100) / tasks.Count;
     }
-    var final = (percent * 100) / tasks.Count;
+
 }
 <link href="~/Content/catalog-list.css" rel="stylesheet" />
-
-<button type="button" class="btn btn-success" data-toggle="modal" onclick="getCreateModal()" data-target="#staticBackdrop">
-    Launch static backdrop modal
-</button>
-
+@if(tasks.Count == 0)
+{
+<p>Bạn chưa có task</p>  
+}
+else 
+{
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
         @foreach (var meets in meetings)
@@ -86,8 +92,11 @@
     </div>
 
 </div>
-
 <div id="Popup"></div>
+}
+
+
+
 <script type="text/javascript">
      function getCreateModal() {
          $.ajax({
