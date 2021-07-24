@@ -363,12 +363,11 @@
 
 <!--JSBarChart--->
 <script>
-    @*var xlab = @Html.Raw(Json.Encode(ViewBag.allMeetingStatus));*@
     const ctx = document.getElementById('barChart').getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: xlab,
+            labels: ['Đã duyệt', 'Chưa duyệt', 'Đã xong', 'Chưa xong'],
             datasets: [{
                 label: '# of Votes',
                 data: [12, 19, 3, 5, 2, 3],

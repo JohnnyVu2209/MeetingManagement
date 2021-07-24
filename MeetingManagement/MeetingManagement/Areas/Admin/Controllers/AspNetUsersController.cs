@@ -39,20 +39,6 @@ namespace MeetingManagement.Areas.Admin.Controllers
             return View(db.AspNetUsers.ToList());
         }
 
-        // GET: Admin/AspNetUsers/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
-            if (aspNetUser == null)
-            {
-                return HttpNotFound();
-            }
-            return View(aspNetUser);
-        }
 
         // GET: Admin/AspNetUsers/Create
         public ActionResult Create()

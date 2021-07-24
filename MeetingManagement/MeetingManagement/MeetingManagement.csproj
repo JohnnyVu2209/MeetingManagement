@@ -304,8 +304,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Create.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Index.cshtml" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -508,13 +506,8 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\AspNetUsers\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\AspNetUsers\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\AspNetUsers\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoles\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\AspNetRoles\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\AspNetRoles\Details.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoles\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\UserGridView.cshtml" />
@@ -620,7 +613,6 @@
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Index.cshtml" />
     <Content Include="Areas\User\Views\Categories\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\ResetPassword.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Categories\Create1.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoleUser\Create.cshtml" />
     <Content Include="Areas\User\Views\HomePage\MeetingList.cshtml" />
     <Content Include="Areas\User\Views\HomePage\IndexCateList.cshtml" />
@@ -678,7 +670,6 @@
     <Content Include="Areas\User\Views\Meetings\MeetingReport.cshtml" />
     <Content Include="Areas\User\Views\Tasks\Create.cshtml" />
     <Content Include="Areas\User\Views\Tasks\Index.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser2.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingList.cshtml" />
@@ -724,12 +715,9 @@
     <Content Include="Areas\User\Views\HomePage\IndexMeetingList.cshtml" />
     <Content Include="Areas\User\Views\HomePage\IndexTaskList.cshtml" />
     <Content Include="Areas\User\Views\HomePage\MeetingList.cshtml" />
-    <Content Include="Areas\User\Views\Meetings\CreateUser.cshtml" />
     <Content Include="Areas\User\Views\Meetings\CreateUser2.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\BCNTask\IndexBCNTask.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\BCNTask\Index.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\indexTask.cshtml" />
     <Content Include="Areas\User\Views\Tasks\Edit.cshtml" />
     <EntityDeploy Include="Models\Models.edmx">
@@ -748,6 +736,7 @@
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.ttf" />
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff" />
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
+    <Content Include="Areas\HeadOfDepartment\Views\Shared\outplay.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -809,11 +798,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Upload\Attachments\css.docx" />
-    <Content Include="Upload\Reports\css.docx" />
-    <Content Include="Upload\Attachments\Assignment.docx" />
-    <Content Include="Upload\Attachments\Communication-Plan.docx" />
-    <Content Include="Upload\Attachments\Teamwork Spirit Development - handouts.docx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -821,6 +805,8 @@
     <Folder Include="Areas\HeadOfDepartment\Data\" />
     <Folder Include="Areas\User\Data\" />
     <Folder Include="Content\login\" />
+    <Folder Include="Upload\Attachments\" />
+    <Folder Include="Upload\Reports\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
