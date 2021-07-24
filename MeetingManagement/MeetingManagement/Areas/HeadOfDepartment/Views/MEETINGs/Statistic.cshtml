@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MeetingManagement.Models.TASK>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<div id="table-content">
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="background-color: #009FE5;color:white" ; scope="col">Tên công việc</th>
+                <th style="background-color: #009FE5;color:white" ; scope="col">Người làm</th>
+                <th style="background-color: #009FE5;color:white" ; scope="col">Ngày hết hạn</th>
+                <th style="background-color: #009FE5;color:white" ; scope="col">Trình trạng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="w400">
+                    <td>
+                        @item.Task_name
+                    </td>
+                    <td>@item.Assignee</td>
+                    <td>@item.Task_Deadline</td>
+                    <td>
+                        @if (item.Task_Status == true)
+                        {
+                            <div class="complete-status" style="width:90px">Hoàn thành</div>
+                        }
+                        else
+                        {
+                            <div class="incomplete-status" style="width:130px">Chưa hoàn thành</div>
+                        }
+
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+
+
+    </table>
+</div>
+<style>
+    .w400 td {
+        width: 400px;
+    }
+</style>
+
+
+
+

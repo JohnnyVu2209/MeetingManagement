@@ -327,6 +327,7 @@
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.svg" />
     <Content Include="Content\taocuochop\vendor\select2\select2.min.css" />
     <Content Include="Content\taocuochop\vendor\select2\select2.min.js" />
+    <Content Include="Content\quyhung\img\icons8-pie-chart.gif" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="login-form-05\css\bootstrap.min.css" />
     <Content Include="login-form-05\css\bootstrap\bootstrap-reboot.css" />
@@ -458,13 +459,14 @@
     <Content Include="Content\Picture\outline_place_black_24dp.png" />
     <Content Include="Content\Picture\outline_schedule_black_24dp.png" />
     <Content Include="Content\Picture\outline_title_black_24dp.png" />
-    <Content Include="Content\quyhung\css\sb-admin-2.css" />
-    <Content Include="Content\quyhung\css\sb-admin-2.min.css" />
-    <Content Include="Content\quyhung\css\slide-bar.css" />
+    <Content Include="Content\quyhung\css\outplay.css" />
     <Content Include="Content\quyhung\css\accodion-css.css" />
+    <Content Include="Content\quyhung\css\drop-down-box.css" />
     <Content Include="Content\quyhung\css\tabcuochop.css" />
     <Content Include="Content\quyhung\img\icons8-bell.gif" />
     <Content Include="Content\quyhung\img\icons8-notification-30.png" />
+    <Content Include="Content\quyhung\img\logo.png" />
+    <Content Include="Content\quyhung\js\outplay.js" />
     <Content Include="Content\quyhung\js\accodion-scripts.js" />
     <Content Include="Content\style.css" />
     <Content Include="Content\tabcuochop.css" />
@@ -728,6 +730,7 @@
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\IndexBCNTask.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\Index.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\BCNTask\indexTask.cshtml" />
     <Content Include="Areas\User\Views\Tasks\Edit.cshtml" />
     <EntityDeploy Include="Models\Models.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
