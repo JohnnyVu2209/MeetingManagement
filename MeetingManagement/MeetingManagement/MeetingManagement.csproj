@@ -183,11 +183,8 @@
     <Compile Include="Areas\Admin\Controllers\AspNetRolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetRoleUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
-
     <Compile Include="Areas\HeadOfDepartment\Controllers\MeetingsController.cs" />
-
     <Compile Include="Areas\HeadOfDepartment\Controllers\BCNTaskController.cs" />
-
     <Compile Include="Areas\HeadOfDepartment\Controllers\tabCuocHopController.cs" />
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\HomePageController.cs" />
@@ -2190,6 +2187,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\quyhung\img\icons8-pie-chart.gif" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="login-form-05\css\bootstrap.min.css" />
     <Content Include="login-form-05\css\bootstrap\bootstrap-reboot.css" />
@@ -2522,7 +2520,6 @@
     <Content Include="Areas\User\Views\Meetings\MyMeetingGridView.cshtml" />
     <Content Include="Areas\User\Views\Meetings\JoinedMeetingGridView.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\VerifyMeeting.cshtml" />
-
     <Content Include="Areas\HeadOfDepartment\Views\_ViewStart.cshtml" />
     <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.ttf" />
@@ -2534,7 +2531,6 @@
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff" />
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
     <Content Include="Areas\User\Views\MEETINGs\MeetingForm.cshtml" />
-
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\GrdMemberTable.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
     <Content Include="Areas\User\Views\MEETINGs\CreateUser.cshtml" />
@@ -2597,7 +2593,6 @@
     <Content Include="Areas\User\Views\Tasks\Create.cshtml" />
     <Content Include="Areas\User\Views\Tasks\Index.cshtml" />
     <Content Include="Areas\User\Views\HomePage\Index.cshtml" />
-
     <Content Include="Areas\User\Views\Categories\Details.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -2632,7 +2627,6 @@
     <Content Include="Areas\User\Views\Meetings\PendingMeeting.cshtml" />
     <Content Include="Areas\User\Views\Meetings\CancelModel.cshtml" />
     <Content Include="Areas\User\Views\Meetings\DeleteAttachment.cshtml" />
-
     <Content Include="Areas\User\Views\HomePage\IndexCateDetail.cshtml" />
     <Content Include="Areas\User\Views\HomePage\IndexCateList.cshtml" />
     <Content Include="Areas\User\Views\HomePage\IndexMeetingList.cshtml" />
@@ -2642,10 +2636,9 @@
     <Content Include="Areas\User\Views\Meetings\CreateUser2.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\BCNTask\Index.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\IndexBCNTask.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\Index.cshtml" />
-
+    <Content Include="Areas\HeadOfDepartment\Views\BCNTask\indexTask.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -2719,8 +2712,6 @@
     <Folder Include="Areas\HeadOfDepartment\Data\" />
     <Folder Include="Areas\User\Data\" />
     <Folder Include="Content\login\" />
-    <Folder Include="Content\quyhung\img\" />
-    <Folder Include="Content\quyhung\js\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

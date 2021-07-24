@@ -31,16 +31,6 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Danh sách công việc trong danh mục @Html.Label(Model.Category_Name)</h4>
                     </div>
-                    <div class="modal-body">
-                        <div class="dropdown">
-                            <button class="dropbtn">Chọn</button>
-                            <div class="dropdown-content">
-                                <a href="#">Link 1</a>
-                                <a href="#">Link 2</a>
-                                <a href="#">Link 3</a>
-                            </div>
-                        </div>
-                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
@@ -48,12 +38,6 @@
 
             </div>
         </div>
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"
-                style="float: right; width: 90px;height: 45px;
-        background-color: #009FE5; color: white;margin-right:10px;
-        border-radius: 5px;font-size:16px">
-            Thống kê
-        </button>
     </div>
     @Html.Action("MeetingList", "MEETINGs", new { id = Model.Category_id })
 
