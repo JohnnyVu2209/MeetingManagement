@@ -4,10 +4,24 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" style="margin-top:0px" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">Lý do hủy cuộc họp</h4>
+                @if (ViewBag.model_type == 1)
+                {
+                    <h4 class="modal-title" id="myModalLabel">Lý do hủy cuộc họp</h4>
+                }
+                else if (ViewBag.model_type == 2)
+                {
+                    <h4 class="modal-title" id="myModalLabel">Lý do thay đổi</h4>
+                }
             </div>
             @using (Html.BeginForm("CancelModel", "Meetings", FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
-            {
+            {   
+                @Html.HiddenFor(model => model.Meeting_name)
+                @Html.HiddenFor(model => model.Date_Start)
+                @Html.HiddenFor(model => model.Time_Start)
+                @Html.HiddenFor(model => model.Location)
+                @Html.HiddenFor(model => model.Meeting_content)
+
+                <input type="hidden" value="@ViewBag.modal_type" id="type" />
                 @Html.ValidationSummary(true, "", new { @class = "input--style-5-fixed area-input" })
                 @Html.HiddenFor(model => model.Meeting_id)
                 <div class="modal-body">
@@ -15,14 +29,14 @@
                         <label for="comment">Trả lời:</label>
                         <div class="value">
                             <div class="input-group feedback-input">
-                                @Html.TextAreaFor(model => model.Feedback, new { @class = "input--style-5-fixed area-input area-feedback", @rows = "5", @id = "textarea" })
+                                @Html.TextAreaFor(model => model.Feedback, new { @class = "input--style-5-fixed area-input area-feedback", @rows = "5", @id = "feedback_val" })
                             </div>
                         </div>
                     </div>
                     <span class="textarea_count" id="charNum">0/150 ( Tối thiểu 150 kí tự ).</span>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" style=" width: 100px; height: 50px;" class="btn btn-fixed yuki-btn-blue">Gửi</button>
+                    <div onclick="ConfirmChanges(@ViewBag.model_type)" style=" width: 100px; height: auto;" class="btn btn-fixed yuki-btn-blue">Gửi</div>
                 </div>
             }
         </div>
@@ -72,11 +86,62 @@
     }
 </style>
 <script>
-    var mytextarea = document.getElementById('textarea');
+    //$(document).ready(function () {
+    //    $('feedback_val').val('');
+    //});
+    var mytextarea = document.getElementById('feedback_val');
     var remaincharCharsText = document.getElementById('charNum');
     var max_char = 500;
 
     mytextarea.addEventListener('input', () => {
         remaincharCharsText.textContent = mytextarea.value.length + "/150 ( Tối thiểu 150 kí tự ).";
     });
+
+    if ( @ViewBag.model_type == 1) {
+        function ConfirmChanges(type) {
+            var meeting_id = $("#Meeting_id").val();
+            var feedback = $("#feedback_val").val();
+            var model_type = type;
+            var meeting_name = $("#Meeting_name").val();
+            var meeting_datestart = $("#Date_Start").val();
+            var meeting_timestart = $("#Time_Start").val();
+            var meeting_location = $("#Location").val();
+            var meeting_content = $("#Content").val();
+            $.ajax({
+                url: '@Url.Action("CancelModel", "Meetings")',
+                method: 'POST',
+                data: { meeting_id, feedback, model_type, meeting_name, meeting_datestart, meeting_timestart, meeting_location, meeting_content },
+                success: function (data) {
+                    window.location.href = '@Url.Action("Index") '
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+            }
+    }
+    else {
+        function ConfirmChanges(type) {
+        var meeting_id = $("#Meeting_id").val();
+            var feedback = $("#feedback_val").val();
+            var meeting_name = document.getElementById("meeting_name_val").value;
+            var meeting_datestart = document.getElementById("date_start_val").value;
+            var meeting_timestart = document.getElementById("time_start_val").value;
+            var meeting_location = document.getElementById("location_val").value;
+            var meeting_content = document.getElementById("content_val").value;
+            var model_type = type;
+            $.ajax({
+                url: '@Url.Action("CancelModel", "Meetings")',
+                method: 'POST',
+                data: { meeting_id, feedback, model_type, meeting_name, meeting_datestart, meeting_timestart, meeting_location, meeting_content },
+                success: function (data) {
+                    window.location.href = '@Url.Action("Index") '
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+            }
+    }
+
 </script>

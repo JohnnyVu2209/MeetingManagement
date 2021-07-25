@@ -6,35 +6,39 @@
     var tasks = ViewBag.task as List<TASK>;
     SEP24Team7Entities db = new SEP24Team7Entities();
     var percent = 0;
-    foreach(var task in tasks)
+    var final = 0;
+    if (tasks.Count != 0)
     {
-        if(task.Task_Status == true)
+        foreach (var task in tasks)
         {
-            percent += 1;
+            if (task.Task_Status == true)
+            {
+                percent += 1;
+            }
         }
+        final = (percent * 100) / tasks.Count;
     }
-    var final = (percent * 100) / tasks.Count;
+
 }
 <link href="~/Content/catalog-list.css" rel="stylesheet" />
+@if (tasks.Count == 0)
+{
+    <p>Bạn chưa có task</p>
+}
+else
+{
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            @foreach (var meets in meetings)
+            {
+                <div class="panel-heading" role="tab" id="@meets.Meeting_id">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#@(meets.Meeting_id + meets.Category_id)" aria-expanded="true" aria-controls="collapseOne">
+                            @meets.Meeting_name
+                        </a>
 
-
-<button type="button" class="btn btn-success" data-toggle="modal" onclick="getCreateModal()" data-target="#staticBackdrop">
-    Launch static backdrop modal
-</button>
-
-
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-    <div class="panel panel-default">
-        @foreach (var meets in meetings)
-        {
-            <div class="panel-heading" role="tab" id="@meets.Meeting_id">
-                <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#@(meets.Meeting_id + meets.Category_id)" aria-expanded="true" aria-controls="collapseOne">
-                        @meets.Meeting_name
-                    </a>
-
-                </h4>
-            </div>
+                    </h4>
+                </div>
                 <div id="@(meets.Meeting_id + meets.Category_id)" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="@meets.Meeting_id">
                     <div class="panel-body">
 
@@ -47,8 +51,9 @@
                         @foreach (var task in tasks)
                         {
                             <div class="row" style="margin-left:10px;font-size:15px;">
-                                <div class="col-md-3">
+                                <div class="col-md-3" style=" text-overflow: ellipsis; overflow: hidden; white-space: nowrap; ">
                                     @task.Task_name
+
                                 </div>
                                 <div class="col-md-3">
                                     @{
@@ -70,8 +75,12 @@
                                     else
                                     {
                                         <span class="waiting-status" style="width:50%;">Chưa hoàn thành</span>
-
-                                        <button class="btn-dark" style="width:28px;height:28px;margin:0px 140px 0px 200px;"><i class="glyphicon glyphicon-bell" style="font-size:x-large;"></i></button>
+                                        <a onclick="return confirm('Bạn muốn gửi thông báo? ')"
+                                           href="@Url.Action("RemindTask","Tasks",new {AsigneeID = task.Assignee,MeetingID = task.Meeting_id,TaskName = task.Task_name })"
+                                           class="btn-dark"
+                                           style="width:28px;height:28px;position:absolute;right:0;">
+                                            <i class="glyphicon glyphicon-bell" style="font-size:x-large;"></i>
+                                        </a>
                                     }
                                 </div>
                             </div>
@@ -79,13 +88,17 @@
                     </div>
 
                 </div>
-            
-        }
-    </div>
-                                
-</div>
 
-<div id="Popup"></div>
+            }
+        </div>
+
+    </div>
+    <div id="Popup"></div>
+}
+
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script type="text/javascript">
      function getCreateModal() {
          $.ajax({
