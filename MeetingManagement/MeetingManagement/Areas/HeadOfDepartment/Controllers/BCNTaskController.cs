@@ -46,7 +46,6 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 
         public ActionResult indexTask()
         {           
-            
             var userid = "f28b3bb0-99b7-439e-bc90-4c8c15fac1a2";
             var mEMBER = db.MEMBERs.FirstOrDefault(x => x.Member_id == userid);
             ViewBag.allCate = db.CATEGORies.ToList();
