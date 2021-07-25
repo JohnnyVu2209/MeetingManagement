@@ -39,14 +39,14 @@
 <div id="waitmeeting" class="tabcontent">
     <button type="button" class="btn btn-outline-success"
             style="margin-bottom:10px;font-size:larger;margin-top:10px"
-            data-toggle="modal" data-target="#barChartModal">        
+            data-toggle="modal" data-target="#barChartModal">
         <ion-icon name="bar-chart-outline" style="width:40px;height:25px"></ion-icon>
     </button>
     <button type="button" class="btn btn-outline-warning"
             style="margin-bottom:10px;font-size:larger;margin-top:10px;margin-left:10px"
             data-toggle="modal" data-target="#pieChartModal">
-        <ion-icon name="pie-chart-outline"style="width:40px;height:25px"></ion-icon>  
-    </button>    
+        <ion-icon name="pie-chart-outline" style="width:40px;height:25px"></ion-icon>
+    </button>
     <button type="button" class="btn btn-outline-info"
             style="margin-bottom:10px;font-size:larger;margin-top:10px;margin-left:10px"
             data-toggle="modal" data-target="#statisticTable">
@@ -96,7 +96,6 @@
 
 <!--TabCongViec-->
 <div id="mycremeeting" class="tabcontent">
-
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         <div class="panel panel-default">
             @foreach (var meets in meetings)
@@ -251,12 +250,12 @@
                                     {
                                         <div class="complete-status">@item.MEETING_STATUS.Status_name</div>
                                     }
-                                 </td>
-                            
+                                </td>
+
                             </tr>
                         }
-                        </tbody>
-                </table>              
+                    </tbody>
+                </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal" style="font-size:larger">Ok</button>
@@ -269,7 +268,6 @@
 
 
 <!----JS-->
-
 <!---JSLink-->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
@@ -300,6 +298,8 @@
     }
     document.getElementById("defaultOpen").click();
 </script>
+
+
 
 <!---Sort-->
 <script>
@@ -361,14 +361,15 @@
     }
 </script>
 
+
+
 <!--JSBarChart--->
 <script>
-    @*var xlab = @Html.Raw(Json.Encode(ViewBag.allMeetingStatus));*@
     const ctx = document.getElementById('barChart').getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: xlab,
+            labels: ['Đã duyệt', 'Chưa duyệt', 'Đã xong', 'Chưa xong'],
             datasets: [{
                 label: '# of Votes',
                 data: [12, 19, 3, 5, 2, 3],
@@ -382,7 +383,6 @@
             }]
         },
         options: {
-
             scales: {
                 y: {
                     beginAtZero: true
@@ -401,14 +401,13 @@
             labels: ['Đã duyệt', 'Chưa duyệt', 'Đã xong', 'Chưa xong'],
             datasets: [{
                 label: '# of Votes',
-                data: [12, 19, 3, 5],
+                data: [12, 19, 3, 5, 2, 3],
                 backgroundColor: [
                     '#28d780',
                     '#8E7E71',
                     '#398BC6',
                     '#D2522D',
                 ],
-
             }]
         },
     });

@@ -17,7 +17,6 @@
         right: calc(160px + 16.8px);
     }
 </style>
-
 <link href="~/Content/catalog-list.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div id="container">
@@ -48,15 +47,19 @@
                                 </li>
                                 <li>
                                     <button onclick="ShowDeletePopUp(@item.Category_id)" class="delete-btn" data-modal="modald1">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                        Xóa
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                            Xóa
+                                        </button>
+                                </li>
+                                <li>
+                                    <button onclick="ShowStatisticPopUp()" class="delete-btn" data-modal="modald1">
+                                        <ion-icon name="bar-chart-outline" style="width:50px;height:20px"></ion-icon>
                                     </button>
                                 </li>
                             </ul>
                         </i>
                     </span>
                 </div>
-
             }
         </div>
     </div>
@@ -126,6 +129,9 @@
 
 
 
+<!--JS--->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script type="text/javascript">
     function ShowCreatePopUp() {
         $.ajax({
@@ -167,6 +173,22 @@
             success: function (data) {
                 $("#show-popup").html(data);
                 $("#myDeleteModal").modal("show");
+            },
+            error: function (data) {
+                return false;
+            }
+        });
+    };
+    function ShowStatisticPopUp(categoryID) {
+        $("#loader-div")
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("statisticChart", "Categories")',
+            data: { id: categoryID },
+            dataType: "html",
+            success: function (data) {
+                $("#show-popup").html(data);
+                $("#barChartModal").modal("show");
             },
             error: function (data) {
                 return false;

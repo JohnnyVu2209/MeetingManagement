@@ -2639,6 +2639,7 @@
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\IndexBCNTask.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\Index.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\indexTask.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Categories\statisticChart.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
