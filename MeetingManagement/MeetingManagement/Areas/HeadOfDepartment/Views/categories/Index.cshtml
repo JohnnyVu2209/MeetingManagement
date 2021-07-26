@@ -21,15 +21,24 @@
 
 <link href="~/Content/catalog-list.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<div id="container">
-    <div class="user-ctg-index-header" style="display:flex;">
-        <h2 style="position:relative;">Danh mục</h2>
-        <button style="color:white;position:relative;left:1000px;" onclick="ShowCreatePopUp()" class="btn yuki-btn-blue">
-            <p style="margin:0;">
-                Tạo
-            </p>
-        </button>
+<link href="~/Content/Meetings/meetingdetail.css" rel="stylesheet" />
+<div class="body-navbar">
+
+    <div class="nav-content-zone">
+
+        <div class="lable-zone1">
+            <div style="text-transform: uppercase;font-size:30px;margin-bottom:20px" ; class="header">
+                <label>DANH MỤC</label>
+
+                <button class="create-meeting-btn" onclick="ShowCreatePopUp()">Tạo</button>
+            </div>
+
+        </div>
     </div>
+</div>
+
+
+<div class="card-body card-body-fixed">
     <div id="time-table" class="user-ctg-index-table-zone">
         <div class="table user-ctg-index-table">
             @foreach (var item in Model)
@@ -62,10 +71,17 @@
         </div>
     </div>
 </div>
+
 <div id="show-popup"></div>
 <style>
-    .yuki-btn-blue {
-        background-color: #009FE5 !important;
+    .create-meeting-btn {
+        float: right;
+        width: 90px;
+        height: 45px;
+        background-color: #009FE5;
+        color: white;
+        border-radius: 5px;
+        font-size: 16px
     }
 
     .user-ctg-index-table div:hover {
@@ -81,30 +97,20 @@
     /*.user-ctg-index-table tbody tr:hover td {
                 background-color: #f1f1f1;
             }*/
-    .user-ctg-index-button {
-        float: right;
-        width: 60px;
-        height: 30px;
-        background-color: #009FE5;
-        color: white;
-        border-radius: 5px;
-        margin-top: -30px;
-        border: 0px;
+    
+
+    .card-body-fixed {
+        position: relative;
+        top: 50px;
+        width: 100%;
+        height: 800px;
+        z-index: 1;
     }
 
-    .user-ctg-index-header {
-        width: 1300px;
-        margin: 20px 0px;
-    }
-
-        .user-ctg-index-header h1, h2, h3, h4, h5, h6 {
-            margin: 0px;
-        }
-
-    .user-ctg-index-manipulation {
-        float: right;
-        margin: 0px 2.5px;
+    .lable-zone1 {
+       
         color: black;
+        line-height: 40px;
     }
 </style>
 
