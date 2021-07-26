@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MeetingManagement.Models;
 using Microsoft.AspNet.Identity;
+
 namespace MeetingManagement.Areas.User.Controllers
 {
     public class TasksController : Controller
@@ -73,7 +74,7 @@ namespace MeetingManagement.Areas.User.Controllers
 
             ViewBag.Meeting_id = new SelectList(db.MEETINGs, "Meeting_id", "Meeting_name", tASK.Meeting_id);
             ViewBag.Meeting_id = new SelectList(db.MEMBERs, "Meeting_id", "Member_id", tASK.Meeting_id);
-            return RedirectToAction("MeetingDetail", "Meetings", new { id = tASK.Meeting_id });
+            return RedirectToAction("MeetingDetail", "Meetings", new { id = tASK.Meeting_id, modify = true });
         }
 
         // GET: User/Tasks/Edit/5

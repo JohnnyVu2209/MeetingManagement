@@ -4,6 +4,10 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>
@@ -46,12 +50,25 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MessagePack, Version=2.2.0.0, Culture=neutral, PublicKeyToken=b4a0369545f0a1be, processorArchitecture=MSIL">
+      <HintPath>..\packages\MessagePack.2.2.113\lib\netstandard2.0\MessagePack.dll</HintPath>
+    </Reference>
+    <Reference Include="MessagePack.Annotations, Version=2.2.0.0, Culture=neutral, PublicKeyToken=b4a0369545f0a1be, processorArchitecture=MSIL">
+      <HintPath>..\packages\MessagePack.Annotations.2.2.113\lib\netstandard2.0\MessagePack.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -60,11 +77,33 @@
     <Reference Include="Microsoft.Owin.Security.VanLang, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Capstone.Owin.Security.VanLang.2.0.0.1\lib\net452\Microsoft.Owin.Security.VanLang.dll</HintPath>
     </Reference>
+    <Reference Include="NodaTime, Version=3.0.5.0, Culture=neutral, PublicKeyToken=4226afe0d9b296d1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NodaTime.3.0.5\lib\netstandard2.0\NodaTime.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.3\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -179,12 +218,13 @@
     <Compile Include="Areas\Admin\Controllers\AspNetRolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetRoleUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\AspNetUsersController.cs" />
+    <Compile Include="Areas\HeadOfDepartment\Controllers\MeetingsController.cs" />
+    <Compile Include="Areas\HeadOfDepartment\Controllers\BCNTaskController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\tabCuocHopController.cs" />
     <Compile Include="Areas\HeadOfDepartment\HeadOfDepartmentAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\HomePageController.cs" />
     <Compile Include="Areas\User\Controllers\MeetingsController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\CategoriesController.cs" />
-    <Compile Include="Areas\HeadOfDepartment\Controllers\MeetingsController.cs" />
     <Compile Include="Areas\User\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\HeadOfDepartment\Controllers\MainPageController.cs" />
     <Compile Include="Areas\User\Controllers\TasksController.cs" />
@@ -258,21 +298,65 @@
     <Compile Include="Models\TASK.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TasksBCN.cs" />
     <Compile Include="Password.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MainPage\GrdMemberTable.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MainPage\VerifyMeeting.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Create.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Index.cshtml" />
-    <Content Include="Areas\User\Views\Categories\Index.cshtml" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\taocuochop\css\main.css" />
+    <Content Include="Content\taocuochop\css\main.min.css" />
+    <Content Include="Content\taocuochop\js\global.js" />
+    <Content Include="Content\taocuochop\vendor\datepicker\daterangepicker.css" />
+    <Content Include="Content\taocuochop\vendor\datepicker\daterangepicker.js" />
+    <Content Include="Content\taocuochop\vendor\datepicker\moment.min.js" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\css\font-awesome.css" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\css\font-awesome.min.css" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\HELP-US-OUT.txt" />
+    <Content Include="Content\taocuochop\vendor\jquery\jquery.js" />
+    <Content Include="Content\taocuochop\vendor\jquery\jquery.min.js" />
+    <Content Include="Content\taocuochop\vendor\mdi-font\css\material-design-iconic-font.css" />
+    <Content Include="Content\taocuochop\vendor\mdi-font\css\material-design-iconic-font.min.css" />
+    <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.svg" />
+    <Content Include="Content\taocuochop\vendor\select2\select2.min.css" />
+    <Content Include="Content\taocuochop\vendor\select2\select2.min.js" />
+    <Content Include="Content\quyhung\img\icons8-pie-chart.gif" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="login-form-05\css\bootstrap.min.css" />
+    <Content Include="login-form-05\css\bootstrap\bootstrap-reboot.css" />
+    <Content Include="login-form-05\css\bootstrap\bootstrap.css" />
+    <Content Include="login-form-05\css\owl.carousel.min.css" />
+    <Content Include="login-form-05\css\style.css" />
+    <Content Include="login-form-05\fonts\icomoon\demo-files\demo.css" />
+    <Content Include="login-form-05\fonts\icomoon\demo-files\demo.js" />
+    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.svg" />
+    <Content Include="login-form-05\fonts\icomoon\style.css" />
+    <Content Include="login-form-05\images\logo.png" />
+    <Content Include="login-form-05\images\vanlang.png" />
+    <Content Include="login-form-05\images\vanlang1.png" />
+    <Content Include="login-form-05\js\bootstrap.min.js" />
+    <Content Include="login-form-05\js\jquery-3.3.1.min.js" />
+    <Content Include="login-form-05\js\main.js" />
+    <Content Include="login-form-05\js\owl.carousel.min.js" />
+    <Content Include="login-form-05\js\popper.min.js" />
+    <Content Include="Models\Models.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Models.edmx</DependentUpon>
+      <LastGenOutput>Models.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Models.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Models.edmx</DependentUpon>
+      <LastGenOutput>Models.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\catalog-list.css" />
     <Content Include="Content\HomePage.css" />
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\css\fileinput-rtl.css" />
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\css\fileinput-rtl.min.css" />
@@ -359,8 +443,10 @@
     <Content Include="Content\Meetings\meetingdetail.css" />
     <Content Include="Content\outline_filter_alt_black_24dp.png" />
     <Content Include="Content\Picture\outline_event_black_24dp.png" />
+    <Content Include="Content\Picture\outline_manage_accounts_black_24dp.png" />
     <Content Include="Content\Picture\outline_notifications_active_black_24dp.png" />
     <Content Include="Content\Picture\student_3.jpg" />
+    <Content Include="Content\Picture\users_meeting.png" />
     <Content Include="Content\quyhung\css\tabcuochop.css" />
     <Content Include="Content\catalog-list.css" />
     <Content Include="Content\normalize.css" />
@@ -371,31 +457,22 @@
     <Content Include="Content\Picture\outline_place_black_24dp.png" />
     <Content Include="Content\Picture\outline_schedule_black_24dp.png" />
     <Content Include="Content\Picture\outline_title_black_24dp.png" />
-    <Content Include="Content\Picture\users_meeting.png" />
+    <Content Include="Content\quyhung\css\outplay.css" />
+    <Content Include="Content\quyhung\css\accodion-css.css" />
+    <Content Include="Content\quyhung\css\drop-down-box.css" />
+    <Content Include="Content\quyhung\css\tabcuochop.css" />
+    <Content Include="Content\quyhung\img\icons8-bell.gif" />
+    <Content Include="Content\quyhung\img\icons8-notification-30.png" />
+    <Content Include="Content\quyhung\img\logo.png" />
+    <Content Include="Content\quyhung\js\outplay.js" />
+    <Content Include="Content\quyhung\js\accodion-scripts.js" />
     <Content Include="Content\style.css" />
-    <Content Include="Content\taocuochop\css\main.css" />
-    <Content Include="Content\taocuochop\css\main.min.css" />
-    <Content Include="Content\taocuochop\js\global.js" />
-    <Content Include="Content\taocuochop\vendor\datepicker\daterangepicker.css" />
-    <Content Include="Content\taocuochop\vendor\datepicker\daterangepicker.js" />
-    <Content Include="Content\taocuochop\vendor\datepicker\moment.min.js" />
-    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\css\font-awesome.css" />
-    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\css\font-awesome.min.css" />
-    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\HELP-US-OUT.txt" />
-    <Content Include="Content\taocuochop\vendor\jquery\jquery.js" />
-    <Content Include="Content\taocuochop\vendor\jquery\jquery.min.js" />
-    <Content Include="Content\taocuochop\vendor\mdi-font\css\material-design-iconic-font.css" />
-    <Content Include="Content\taocuochop\vendor\mdi-font\css\material-design-iconic-font.min.css" />
-    <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.svg" />
-    <Content Include="Content\taocuochop\vendor\select2\select2.min.css" />
-    <Content Include="Content\taocuochop\vendor\select2\select2.min.js" />
+    <Content Include="Content\tabcuochop.css" />
     <Content Include="Content\The-Last-Style-Blender.css" />
     <Content Include="Content\quyhung\css\sb-admin-2.css" />
     <Content Include="Content\quyhung\css\sb-admin-2.min.css" />
     <Content Include="Content\quyhung\css\slide-bar.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="login-form-05\css\bootstrap.min.css" />
@@ -413,39 +490,44 @@
     <Content Include="login-form-05\js\main.js" />
     <Content Include="login-form-05\js\owl.carousel.min.js" />
     <Content Include="login-form-05\js\popper.min.js" />
+    <Content Include="imgs\icons8-home-24.png" />
+    <Content Include="imgs\icons8-home-64.png" />
+    <Content Include="imgs\icons8-office-365-48.png" />
+    <Content Include="imgs\icons8-search-64.png" />
+    <Content Include="imgs\icons8-slider-48.png" />
+    <Content Include="imgs\icons8-slider-50 %281%29.png" />
+    <Content Include="imgs\icons8-slider-50.png" />
+    <Content Include="imgs\logo-vlu-en-8.png" />
+    <Content Include="imgs\logoVLU.png" />
+    <Content Include="imgs\Walk.gif" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\HeadOfDepartment\Views\web.config" />
     <Content Include="Areas\User\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\AspNetUsers\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\AspNetUsers\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\AspNetUsers\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoles\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\AspNetRoles\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\AspNetRoles\Details.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoles\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\UserGridView.cshtml" />
-    <Content Include="login-form-05\css\.DS_Store" />
-    <Content Include="login-form-05\css\bootstrap.min.css.map" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.eot" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.ttf" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.woff" />
-    <Content Include="login-form-05\fonts\icomoon\selection.json" />
-    <Content Include="login-form-05\images\.DS_Store" />
-    <Content Include="Models\Models.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Models.edmx</DependentUpon>
-      <LastGenOutput>Models.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Models.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Models.edmx</DependentUpon>
-      <LastGenOutput>Models.cs</LastGenOutput>
-    </Content>
+    <Content Include="login-form-05\css\bootstrap.min.css" />
+    <Content Include="login-form-05\css\bootstrap\bootstrap-reboot.css" />
+    <Content Include="login-form-05\css\bootstrap\bootstrap.css" />
+    <Content Include="login-form-05\css\owl.carousel.min.css" />
+    <Content Include="login-form-05\css\style.css" />
+    <Content Include="login-form-05\fonts\icomoon\demo-files\demo.css" />
+    <Content Include="login-form-05\fonts\icomoon\demo-files\demo.js" />
+    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.svg" />
+    <Content Include="login-form-05\fonts\icomoon\style.css" />
+    <Content Include="login-form-05\images\logo.png" />
+    <Content Include="login-form-05\images\vanlang.png" />
+    <Content Include="login-form-05\images\vanlang1.png" />
+    <Content Include="login-form-05\js\bootstrap.min.js" />
+    <Content Include="login-form-05\js\jquery-3.3.1.min.js" />
+    <Content Include="login-form-05\js\main.js" />
+    <Content Include="login-form-05\js\owl.carousel.min.js" />
+    <Content Include="login-form-05\js\popper.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -522,25 +604,15 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.eot" />
-    <Content Include="taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.ttf" />
-    <Content Include="taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.woff" />
-    <Content Include="taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.woff2" />
-    <Content Include="taocuochop\vendor\font-awesome-4.7\fonts\FontAwesome.otf" />
-    <Content Include="taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.eot" />
-    <Content Include="taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.ttf" />
-    <Content Include="taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff" />
-    <Content Include="taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
+    <Content Include="Areas\User\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Create.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Delete.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Details.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Edit.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Index.cshtml" />
-    <Content Include="Areas\User\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\User\Views\Categories\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\ResetPassword.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Categories\Create1.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoleUser\Create.cshtml" />
     <Content Include="Areas\User\Views\HomePage\MeetingList.cshtml" />
     <Content Include="Areas\User\Views\HomePage\IndexCateList.cshtml" />
@@ -548,27 +620,14 @@
     <Content Include="Areas\HeadOfDepartment\Views\tabCuocHop\Index.cshtml" />
     <Content Include="Areas\User\Views\HomePage\IndexCateDetail.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Shared\Error.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Categories\Create1.cshtml" />
-    <Content Include="Areas\User\Views\Meetings\Create.cshtml" />
-    <Content Include="Areas\User\Views\Meetings\Delete.cshtml" />
-    <Content Include="Areas\User\Views\Meetings\Details.cshtml" />
     <Content Include="Areas\User\Views\Meetings\Index.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MyMeetingGridView.cshtml" />
     <Content Include="Areas\User\Views\Meetings\JoinedMeetingGridView.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MainPage\VerifyMeeting.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\_ViewStart.cshtml" />
-    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\FontAwesome.otf" />
-    <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.eot" />
-    <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.ttf" />
-    <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff" />
-    <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
     <Content Include="Areas\User\Views\MEETINGs\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\GrdMemberTable.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
-    <Content Include="Areas\User\Views\MEETINGs\CreateUser.cshtml" />
     <Content Include="Areas\User\Views\MEETINGs\CreateUser2.cshtml" />
     <Content Include="Areas\User\Views\Categories\MeetingList.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingDetail.cshtml" />
@@ -611,17 +670,7 @@
     <Content Include="Areas\User\Views\Meetings\MeetingReport.cshtml" />
     <Content Include="Areas\User\Views\Tasks\Create.cshtml" />
     <Content Include="Areas\User\Views\Tasks\Index.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser2.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Details.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Edit.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingForm.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingList.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MainPage\Index.cshtml" />
-    <Content Include="Areas\User\Views\Meetings\MeetingForm.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser2.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Details.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingList.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\ReportList.cshtml" />
@@ -632,6 +681,22 @@
     <Content Include="Areas\User\Views\Tasks\Index.cshtml" />
     <Content Include="Areas\User\Views\HomePage\Index.cshtml" />
     <Content Include="Areas\User\Views\Categories\Details.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="login-form-05\css\.DS_Store" />
+    <Content Include="login-form-05\css\bootstrap.min.css.map" />
+    <Content Include="login-form-05\fonts\.DS_Store" />
+    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.eot" />
+    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.ttf" />
+    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.woff" />
+    <Content Include="login-form-05\fonts\icomoon\selection.json" />
+    <Content Include="login-form-05\images\.DS_Store" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
@@ -640,8 +705,21 @@
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingTask.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingInfo.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingReport.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\Edit.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingEdit.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\MeetingMember.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\PendingMeeting.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\CancelModel.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\DeleteAttachment.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\IndexCateDetail.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\IndexCateList.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\IndexMeetingList.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\IndexTaskList.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\MeetingList.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\CreateUser2.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\MeetingForm.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\BCNTask\indexTask.cshtml" />
+
     <Content Include="Areas\User\Views\Tasks\Edit.cshtml" />
     <EntityDeploy Include="Models\Models.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -650,6 +728,18 @@
     <Content Include="Models\Models.edmx.diagram">
       <DependentUpon>Models.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\FontAwesome.otf" />
+    <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.eot" />
+    <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff" />
+    <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
+    <Content Include="Areas\HeadOfDepartment\Views\Shared\outplay.cshtml" />
+    
+    <Content Include="Areas\HeadOfDepartment\Views\Categories\statisticChart.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -711,7 +801,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Upload\Attachments\css.docx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -719,8 +808,8 @@
     <Folder Include="Areas\HeadOfDepartment\Data\" />
     <Folder Include="Areas\User\Data\" />
     <Folder Include="Content\login\" />
-    <Folder Include="Content\quyhung\img\" />
-    <Folder Include="Content\quyhung\js\" />
+    <Folder Include="Upload\Attachments\" />
+    <Folder Include="Upload\Reports\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

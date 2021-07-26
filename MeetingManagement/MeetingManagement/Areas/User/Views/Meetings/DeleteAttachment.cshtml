@@ -1,0 +1,42 @@
+﻿@model MeetingManagement.Models.ATTACHMENT
+
+<div id="myDeleteModal" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width:500px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Xóa danh mục</h4>
+            </div>
+            <div class="modal-body">
+
+                <form action="Delete">
+                    @Html.HiddenFor(m => m.Attachment_id)
+                    Bạn thật sự muốn xóa "@Html.DisplayFor(m => m.Attachment_name)" ?
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn--delete" onclick="DeleteAtt(@Model.Attachment_id)">Xóa</button>
+                <button class="btn btn-normal " data-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+        <div style="text-align:center;display:none" id="loader-div">
+            <img src="~/imgs/Walk.gif" style="height:100px;width:100px" />
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function DeleteAtt(id) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("DeleteAttachmentConfirm", "Meetings")',
+            data: {id},
+        success: function () {
+            $("#myDeleteModal").modal("hide");
+            window.location.href = '@Url.Action("MeetingDetail","Meetings", new { id = Model.MEETING.Meeting_id, modify = true})'
+        }
+    })
+}
+</script>
+
