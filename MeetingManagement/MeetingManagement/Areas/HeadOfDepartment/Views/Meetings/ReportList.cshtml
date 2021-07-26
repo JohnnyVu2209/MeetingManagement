@@ -4,7 +4,7 @@
     Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
     var meetings = ViewBag.meeting as List<MEETING>;
 }
-<style>
+<!--<style>
     .inline-datetime {
         display: inline-flex;
     }
@@ -98,45 +98,55 @@
         .yuki-btn-gray:hover {
         }
 </style>
-<div class="body-navbar">
+<div class="body-navbar">-->
     @*<button type="button" onclick="window.location.href='@Url.Action("Index", "MainPage")'" class="btn yuki-btn-blue>
         ❮   Back to List
         </button>*@
-    <div class="nav-content-zone">
+    <!--<div class="nav-content-zone">
         <img src="~/Content/Picture/users_meeting.png" />
         <div class="lable-zone">
             Report List
         </div>
     </div>
 
-</div>
+</div>-->
 
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
         @foreach (var meets in meetings)
         {
-            <div class="panel-heading" role="tab" id="@meets.Meeting_id">
-                <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#@(meets.Meeting_id)Name" aria-expanded="true" aria-controls="collapseOne">
-                        @meets.Meeting_name
-                    </a>
+            if (meets.Check_report == true)
+            {
+                <div class="panel-heading" role="tab" id="@meets.Meeting_id">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#@(meets.Meeting_id)Name" aria-expanded="true" aria-controls="collapseOne">
+                            @meets.Meeting_name
+                        </a>
 
 
-                </h4>
-            </div>
+                    </h4>
+                </div>
+                <div id="@(meets.Meeting_id)Name" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="@meets.Meeting_id">
+                    <div class="panel-body">
+                        <div class="row" style="margin-left:10px;font-size:15px;">
+                            <div class="col-md-3">
+                                @meets.REPORT.Report_name
+                            </div>
+                            <div class="col-md-3">
+                                @meets.REPORT.Report_binary
+                            </div>
+                            <div class="col-md-3">
+                                @meets.REPORT.Report_type
+                            </div>
+                            <div class="col-md-3">
+                                @Html.ActionLink("Download", "DownloadFile", "Meetings", new { meeting_id = meets.Meeting_id },new { @class = "btn btn-primary" })
+                            </div>
 
-
-            <div id="@(meets.Meeting_id)Name" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="@meets.Meeting_id">
-                <div class="panel-body">
-                    <div class="row" style="margin-left:10px;font-size:15px;">
-                        <div class="col-md-12">
-                            
                         </div>
                     </div>
                 </div>
-            </div>
-
+            }
         }
     </div>
 
