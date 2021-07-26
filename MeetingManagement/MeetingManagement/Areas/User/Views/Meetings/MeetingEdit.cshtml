@@ -1,8 +1,8 @@
 ﻿@model MeetingManagement.Models.MEETING
 @{
     ViewBag.Title = "Chi tiết cuộc hop";
-    var Date = DateTime.Now.ToShortDateString();
-}
+
+}   
 <style>
     .edit_fixed {
         padding-left: 5px;
@@ -73,6 +73,9 @@
         }
 </style>
 <div>
+    @*<p>@Date - @Model.Date_Start </p>
+    <p>@Time - @Model.Time_Start </p>*@
+
     <ul class="progressbar" style="border: 2px solid #e5e5e5; padding: 10px; ">
         @if (Model.Status == 1)
         {
@@ -86,11 +89,7 @@
         {
             <li class="complete">Tạo cuộc họp</li>
             <li class="active">Duyệt</li>
-            <li>
-                <div onclick="alert(@Date)" style="cursor: pointer; height: 60px; width: fit-content; position: relative; display: flex; bottom: 40px; align-items: flex-end; margin: 0 auto;">
-                    Đã họp
-                </div>
-            </li>
+            <li>Đã họp</li>
             <li>Biên bản họp</li>
             <li>Hoàn thành</li>
         }
@@ -381,7 +380,6 @@
 else
 {
     @Html.Action("MeetingReport", "Meetings")
-
 }
 
 @*<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member" aria-expanded="false" aria-controls="Member">

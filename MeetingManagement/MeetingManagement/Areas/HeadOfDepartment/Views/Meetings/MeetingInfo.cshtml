@@ -4,7 +4,7 @@
 @Html.HiddenFor(model => model.Meeting_id, new { @id = "meeting_id" })
 @Html.HiddenFor(model => model.Status, new { @id = "status" })
 @Html.HiddenFor(model => model.Create_by)
-@{ 
+@{
     int i = 0;
 }
 
@@ -20,111 +20,419 @@
         left: 34px;
     }
 </style>
-<div class="form-row-fixed">
-    @*<img src="~/Content/Picture/outline_file_upload_black_24dp.png" />*@
-    @*<label class="icon-zone" for="input-ficons-1"><i class="fa fa-plus"></i></label>*@
-    @if (Model.ATTACHMENTs.Count != 0)
-    {
-        foreach (var item in Model.ATTACHMENTs)
-        {
-            <a id="myfile" href="@item.Attachment_path" style="margin-right:20px;" download>
-                <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
-                    <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
-                        <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
-                    </div>
-                    <div style="width:75%; padding:0 5px; color:black">
-                        <p>
-                            @item.Attachment_name
-                        </p>
-                        <p style="font-size:10px">
-                            @item.Attachment_binary
-                        </p>
-                    </div>
-                </div>
-            </a>
-        }
+<style>
+    /*Attachment*/
+    #myfile:hover div {
+        background-color: #f1f1f1;
+        text-decoration: none;
     }
-    <div class="value-fixed">
-        <div class="space"></div>
+
+    #myfile {
+        text-decoration: none !important;
+        position: relative;
+        left: 5px;
+    }
+
+    /*ProgressBar*/
+    .progressbar {
+        counter-reset: step;
+        padding: 0;
+        /* New */
+        display: table;
+        table-layout: fixed;
+        width: 1000px;
+    }
+
+        .progressbar li {
+            list-style: none;
+            position: relative;
+            text-align: center;
+            /* New */
+            display: table-cell;
+        }
+
+            .progressbar li:before {
+                background: #fff;
+                border: 2px solid #bebebe;
+                border-radius: 50%;
+                color: #bebebe;
+                content: counter(step);
+                counter-increment: step;
+                display: block;
+                font-weight: 700;
+                height: 30px;
+                line-height: 27px;
+                margin: 0 auto 10px;
+                text-align: center;
+                width: 30px;
+                position: relative;
+                z-index: 1;
+            }
+
+
+            .progressbar li.warning:before {
+                background: #fff;
+                border: 2px solid #f40f02;
+                border-radius: 50%;
+                color: #f40f02;
+                content: "!";
+                display: block;
+                font-weight: 700;
+                height: 30px;
+                line-height: 27px;
+                margin: 0 auto 10px;
+                text-align: center;
+                width: 30px;
+            }
+
+            .progressbar li:after {
+                background: #979797;
+                content: '';
+                height: 3px;
+                left: 50%;
+                position: absolute;
+                top: 15px;
+                width: 100%;
+                z-index: 0;
+            }
+
+            .progressbar li:last-child:after {
+                content: none;
+            }
+
+            .progressbar li none:before {
+                background: #979797;
+            }
+
+            .progressbar li none:after {
+                background: #979797;
+            }
+
+            .progressbar li.complete:after {
+                background: #3aac5d;
+            }
+
+            .progressbar li.active:before,
+            .progressbar li.complete:before {
+                background: #3aac5d;
+                border-color: #3aac5d;
+                color: #fff;
+            }
+
+            .progressbar li.active {
+                color: #3aac5d;
+                font-weight: 700;
+            }
+
+            .progressbar li.complete {
+                color: #333;
+                font-weight: 700;
+            }
+</style>
+<h4>Tiến độ:</h4>
+<div>
+    <ul class="progressbar" style="border: 2px solid #e5e5e5; padding: 10px;">
+        @if (Model.Status == 1)
+        {
+            <li class="active">Tạo cuộc họp</li>
+            <li>Duyệt</li>
+            <li>Đã họp</li>
+            <li>Hoàn thành</li>
+            <li>Biên bản họp</li>
+        }
+        else if (Model.Status == 2)
+        {
+            <li class="complete">Tạo cuộc họp</li>
+            <li class="active">Duyệt</li>
+            <li>Đã họp</li>
+            <li>Hoàn thành</li>
+            <li>Biên bản họp</li>
+        }
+        else if (Model.Status == 3)
+        {
+            <li class="complete">Tạo cuộc họp</li>
+            <li class="complete">Duyệt</li>
+            <li class="active">Đã họp</li>
+            <li>Hoàn thành</li>
+            <li>Biên bản họp</li>
+        }
+        else if (Model.Status == 4)
+        {
+            <li class="complete">Tạo cuộc họp</li>
+            <li class="complete">Duyệt</li>
+            <li class="complete">Đã họp</li>
+            <li class="active">Hoàn thành</li>
+            <li>Biên bản họp</li>
+        }
+        else if (Model.Status == 5)
+        {
+            <li class="complete">Tạo cuộc họp</li>
+            <li class="complete">Duyệt</li>
+            <li class="complete">Đã họp</li>
+            <li class="complete">Hoàn thành</li>
+            <li class="active">Biên bản họp</li>
+        }
+        else if (Model.Status == 6)
+        {
+            <li class="warning" style="display: block; height: 60px;">
+                <div onclick="alert('@Model.Feedback')" style="cursor: pointer; height: 60px; width: fit-content; position: relative; display: flex; bottom: 40px; align-items: flex-end; margin: 0 auto; z-index: 3; ">
+                    Không được duyệt
+                </div>
+            </li>
+        }
+        else if (Model.Status == 7)
+        {
+            <li class="warning" style="display: block; height: 60px;">
+                <div onclick="alert('@Model.Feedback')" style="cursor: pointer; height: 60px; width: fit-content; position: relative; display: flex; bottom: 40px; align-items: flex-end; margin: 0 auto; z-index: 3; ">
+                    Đã hủy
+                </div>
+            </li>
+        }
+    </ul>
+</div>
+
+<div style="height:20px;"></div>
+<h4>Tài liệu đính kèm:</h4>
+<div style="border: 2px solid #e5e5e5; padding: 20px; width: 1000px; overflow: overlay;">
+    <div class="form-row-fixed">
+        @*<img src="~/Content/Picture/outline_file_upload_black_24dp.png" />*@
+        @*<label class="icon-zone" for="input-ficons-1"><i class="fa fa-plus"></i></label>*@
+        @if (Model.ATTACHMENTs.Count != 0)
+        {
+            foreach (var item in Model.ATTACHMENTs)
+            {
+                <a id="myfile" href="@item.Attachment_path" style="margin-right:20px;" download>
+                    <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
+                        <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                            @*@switch (item.Attachment_type)
+                                {
+                                    case "xlsx":
+                                        <i style="font-size: 40px; color: #1D6F42;" class="fas fa-file-excel text-primary"></i>
+                                        break;
+                                    case "xls":
+                                        <i style="font-size: 40px; color: #1D6F42;" class="fas fa-file-excel text-primary"></i>
+                                        break;
+                                    case "docx":
+                                        <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
+                                        break;
+                                    case "doc":
+                                        <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
+                                        break;
+                                    case "pdf":
+                                        <i style="font-size: 40px; color: #F40F02;" class="fas fa-file-pdf text-primary"></i>
+                                        break;
+                                    case "jpg":
+                                        <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
+                                        break;
+                                    case "jpeg":
+                                        <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
+                                        break;
+                                    case "pptx":
+                                        <i style="font-size: 40px; color: #D04423" class="fas fa-file-powerpoint text-primary"></i>
+                                        break;
+                                    default:
+                                        <i style="font-size:40px; color:gray" class="fas fa-file text-primary"></i>
+                                        break;
+                                }*@
+
+                            @if (@item.Attachment_type == "xls" || item.Attachment_type == "xlsm" || item.Attachment_type == "xlsx")
+                            {
+                                <i style="font-size: 40px; color: #1d6f42;" class="fas fa-file-excel text-primary"></i>
+                            }
+                            else if (@item.Attachment_type == "pdf")
+                            {
+                                <i style="font-size: 40px; color: #f40f02;" class="fas fa-file-pdf text-primary"></i>
+                            }
+                            else if (@item.Attachment_type == "doc" || item.Attachment_type == "docm" || item.Attachment_type == "docx")
+                            {
+                                <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
+                            }
+                            else if (@item.Attachment_type == "jpg" || item.Attachment_type == "jpeg")
+                            {
+                                <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
+                            }
+                            else if (@item.Attachment_type == "ppt" || item.Attachment_type == "pptm" || item.Attachment_type == "pptx")
+                            {
+                                <i style="font-size: 40px; color: #D04423" class="fas fa-file-powerpoint text-primary"></i>
+                            }
+                            else
+                            {
+                                <i style="font-size:40px; color:gray" class="fas fa-file text-primary"></i>
+                            }
+                        </div>
+                        <div style="width:75%; padding:0 5px; color:black">
+                            <p style="text-overflow: ellipsis; overflow: hidden; width: 140px; height: 20px; white-space: nowrap; ">
+                                @item.Attachment_name
+                            </p>
+                            <p style="font-size:10px">
+                                @item.Attachment_binary
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            }
+        }
     </div>
 </div>
-<div class="form-row-fixed form-row-fixed-title" style="width:100%;">
-    <img src="~/Content/Picture/outline_title_black_24dp.png" />
-    <div class="value value-fixed">
-        <div class="input-group input_fixed value-fixed-title" style="width: 800px !important;">
-            @Html.DisplayFor(m => m.Meeting_name, new { @class = "input-fixed", @id = "meeting_name" })
-        </div>
-    </div>
-</div>
-<div class="form-row-fixed datetime-inline">
-    <img src="~/Content/Picture/outline_event_black_24dp.png" />
-    <div class="value value-fixed value-fixed-location">
-        <div class="input-group input_fixed">
-            <div class="input-group-desc" style="display:flex ;height: 100%;">
-                @Html.Label(Model.Date_Start.ToShortDateString(), new { @class = "input-fixed" })
+<div style="height:20px"></div>
+<h4>Thông tin chi tiết:</h4>
+<div style=" width: 1000px; border: 2px solid #e5e5e5; padding: 10px;">
+    <div class="form-row-fixed form-row-fixed-title" style="width:100%;">
+        <img src="~/Content/Picture/outline_title_black_24dp.png" />
+        <div class="value value-fixed">
+            <div class="input-group input_fixed value-fixed-title" style="width: 800px !important; padding-left: 5px; ">
+                @Html.DisplayFor(m => m.Meeting_name, new { @class = "input-fixed", @id = "meeting_name" })
             </div>
         </div>
     </div>
-</div><!--
---><div class="form-row-fixed datetime-inline">
-    <img src="~/Content/Picture/outline_schedule_black_24dp.png" />
-    <div class="value value-fixed value-fixed-location">
-        <div class="input-group input_fixed">
-            <div class="input-group-desc" style="display:flex ;height: 100%;">
-                @Html.Label(Model.Time_Start.ToString(), new { @class = "input-fixed" })
+    <div class="form-row-fixed form-row-fixed-title" style="width:100%;">
+        <img src="~/Content/Picture/outline_manage_accounts_black_24dp.png" />
+        <div class="value value-fixed">
+            <div class="input-group input_fixed value-fixed-title" style="width: 800px !important; padding-left: 5px;">
+                @Html.DisplayFor(m => m.AspNetUser.Full_name, new { @class = "input-fixed", @id = "Create_by" })
             </div>
         </div>
     </div>
-</div><!--
---><div class="form-row-fixed datetime-inline" style="width:100%;">
-       <img src="~/Content/Picture/outline_place_black_24dp.png" />
-       <div class="value value-fixed value-fixed-location">
-            <div class="input-group input_fixed" style="width:800px">
+    <div class="form-row-fixed datetime-inline">
+        <img src="~/Content/Picture/outline_event_black_24dp.png" />
+        <div class="value value-fixed value-fixed-location">
+            <div class="input-group input_fixed">
+                <div class="input-group-desc" style="display: flex; height: 100%; padding-left: 5px;">
+                    @Html.Label(Model.Date_Start.ToShortDateString(), new { @class = "input-fixed" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--
+    -->
+    <div class="form-row-fixed datetime-inline">
+        <img src="~/Content/Picture/outline_schedule_black_24dp.png" />
+        <div class="value value-fixed value-fixed-location">
+            <div class="input-group input_fixed" style="padding-left: 5px;">
+                <div class="input-group-desc" style="display:flex ;height: 100%;">
+                    @Html.Label(Model.Time_Start.ToString(), new { @class = "input-fixed" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row-fixed datetime-inline" style="width:100%;">
+        <img src="~/Content/Picture/outline_place_black_24dp.png" />
+        <div class="value value-fixed value-fixed-location">
+            <div class="input-group input_fixed" style="width:800px;padding-left: 5px;">
                 <div class="input-group-desc" style="display:flex ;height: 100%;">
                     @Html.Label(Model.Location.ToString(), new { @class = "input-fixed" })
                 </div>
             </div>
-       </div>
-</div>
-
-<div class="form-row-fixed" style="align-items: flex-start !important; width: 100%; margin-top: 20px !important; ">
-    <img src="~/Content/Picture/outline_edit_black_24dp.png" />
-    <div class="value value-fixed" style="border: 1px solid #e5e5e5; border-radius: 5px; width: 966px; min-height: 200px;">
-        <div class="input-group" style=" width: 100%; background: white; white-space: pre;">
-            @*@Html.Label(Model.Meeting_content, new { @class = "area-input", @rows = "20" })*@
-            @Html.DisplayFor(m => m.Meeting_content)
+        </div>
+    </div>
+    <div class="form-row-fixed" style="align-items: flex-start !important; width: 100%; margin-top: 20px !important; ">
+        <img src="~/Content/Picture/outline_edit_black_24dp.png" />
+        <div class="value value-fixed" style="border: 1px solid #e5e5e5; border-radius: 5px; width: 970px; min-height: 200px;">
+            <div class="input-group" style=" width: 100%; background: white; white-space: pre-line;">
+                @*@Html.Label(Model.Meeting_content, new { @class = "area-input", @rows = "20" })*@
+                <p style="margin:0px; margin-left: 10px; word-break: break-all; max-height: 500px; overflow-y: auto;">
+                    @Html.DisplayFor(m => m.Meeting_content)
+                </p>
+            </div>
         </div>
     </div>
 </div>
-<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member" aria-expanded="false" aria-controls="Member">
-    Danh sách thành viên
-</a>
-
-@*<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Button with data-target
-</button>*@
-<div class="collapse" id="Member" style="width:1000px;">
+<div style="height:20px;"></div>
+<h4>Thành viên:</h4>
+<div style="width:1000px">
     <table class="table">
-        <thead >
-            <tr style="background-color:#f1f1f1; color:black;">
+        <thead>
+            <tr>
                 <th scope="col">#</th>
                 <th class="col-align" scope="col">Tên thành viên</th>
                 <th class="col-align" scope="col">Email</th>
+                <th class="col-align" scope="col">Vai trò</th>
             </tr>
         </thead>
         <tbody>
-            @foreach(var member in Model.MEMBERs)
+            @foreach (var item in Model.MEMBERs.Select((value, idx) => new { idx, value }))
             {
-                <tr>
-                    <td>@(++i)</td>
-                    <td class="col-align">@member.AspNetUser.Full_name</td>
-                    <td class="col-align">@member.AspNetUser.Email</td>
-                </tr>
+                var value = item.value;
+                var index = item.idx + 1;
+                if (value.Member_id == ViewBag.meeting_host)
+                {
+                    <tr>
+                        <td>@index</td>
+                        <td class="col-align">
+                            @ViewBag.meeting_create
+                        </td>
+                        <td class="col-align">
+                            @ViewBag.meeting_user
+                        </td>
+                        <td class="col-align">
+                            Người chủ trì
+                        </td>
+                    </tr>
+                }
+                else if (item.value.Member_id != ViewBag.meeting_host)
+                {
+                    <tr>
+                        <td>@index</td>
+                        <td class="col-align">@value.AspNetUser.Full_name</td>
+                        <td class="col-align">@value.AspNetUser.Email</td>
+                        <td class="col-align">
+                            Thành viên
+                        </td>
+                    </tr>
+                }
             }
+            <tr>
+                <td>Test</td>
+                <td class="col-align">Minh Hiếu</td>
+                <td class="col-align">hieu.187pm13916</td>
+                <td class="col-align">
+                    Thành viên
+                </td>
+            </tr>
+            <tr>
+                <td>Test</td>
+                <td class="col-align">Minh Hiếu</td>
+                <td class="col-align">hieu.187pm13916</td>
+                <td class="col-align">
+                    Thành viên
+                </td>
+            </tr>
+            <tr>
+                <td>Test</td>
+                <td class="col-align">Minh Hiếu</td>
+                <td class="col-align">hieu.187pm13916</td>
+                <td class="col-align">
+                    Thành viên
+                </td>
+            </tr>
+            <tr>
+                <td>Test</td>
+                <td class="col-align">Minh Hiếu</td>
+                <td class="col-align">hieu.187pm13916</td>
+                <td class="col-align">
+                    Thành viên
+                </td>
+            </tr>
+            <tr>
+                <td>Test</td>
+                <td class="col-align">Minh Hiếu</td>
+                <td class="col-align">hieu.187pm13916</td>
+                <td class="col-align">
+                    Thành viên
+                </td>
+            </tr>
+            <tr>
+                <td>Test</td>
+                <td class="col-align">Minh Hiếu</td>
+                <td class="col-align">hieu.187pm13916</td>
+                <td class="col-align">
+                    Thành viên
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>
-<div style="height:50px;"></div>
+@Html.Action("MeetingReport", "Meetings", new { id = Model.Meeting_id })
 <!--<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member2" aria-expanded="false" aria-controls="Member">
     Ngoài nhà trường
 </a>
@@ -138,15 +446,15 @@
             </tr>
         </thead>
         <tbody>-->
-           @* @for (int i = 1; i <= 10; i++)
-            {
-                <tr>
-                    <td>@i</td>
-                    <td class="col-align">Trần Đức Bo</td>
-                    <td class="col-align">bo.187pm66666</td>
-                </tr>
-            }*@
-        <!--</tbody>
+@* @for (int i = 1; i <= 10; i++)
+    {
+        <tr>
+            <td>@i</td>
+            <td class="col-align">Trần Đức Bo</td>
+            <td class="col-align">bo.187pm66666</td>
+        </tr>
+    }*@
+<!--</tbody>
     </table>
 </div>-->
 
@@ -160,6 +468,7 @@
         width: 1000px;
         border-radius: 4px 4px 0px 0px;
     }
+
     .space {
         width: 966px;
     }
@@ -176,5 +485,4 @@
         padding: 5px;
     }
 </style>
-
 

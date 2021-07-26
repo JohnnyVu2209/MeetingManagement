@@ -21,9 +21,8 @@
                 {
                     <div class="detail-tab-btn tablinks" style="width:80px;padding:0;" onclick="openTab(event,'meeting-info')">
                         Chi tiết
-                        
                     </div>
-                    <div class="pending-status" >@Model.MEETING_STATUS.Status_name</div>
+                    @*<div class="pending-status" >@Model.MEETING_STATUS.Status_name</div>*@
                 }
                 else
                 {
@@ -32,9 +31,6 @@
                     </div>
                     <div class="detail-tab-btn tablinks " onclick="openTab(event,'meeting-task')">
                         Công việc
-                    </div>
-                    <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-report')">
-                        Báo cáo
                     </div>
                 }
 
@@ -50,9 +46,7 @@
     <div id="meeting-task" class="tabcontent" style="display:none;">
         @Html.Action("MeetingTask", "Meetings", new { Model.Meeting_id })
     </div>
-    <div id="meeting-report" class="tabcontent" style="display:none;">
-        @Html.Action("MeetingReport", "Meetings", new { Model.Meeting_id })
-    </div>
+
 </body>
 }
 <script>

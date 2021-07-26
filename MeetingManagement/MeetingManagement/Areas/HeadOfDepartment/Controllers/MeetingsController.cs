@@ -187,7 +187,8 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         }
         public ActionResult MeetingReport(int id)
         {
-            var report = db.MEETINGs.Find(id);
+            ViewBag.Meeting_id = id;
+            var report = db.REPORTs.Where(x => x.Meeting_id == id).ToList();
             return PartialView(report);
         }
     }

@@ -1,55 +1,80 @@
-﻿<div class="file-loading">
-    <input id="input-ficons-3" name="input-ficons-3[]" multiple type="file">
-</div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
-<!-- piexif.min.js is needed for auto orienting image files OR when restoring exif data in resized images and when you
-    wish to resize images before upload. This must be loaded before fileinput.min.js -->
-<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/js/plugins/piexif.min.js" type="text/javascript"></script>
-<!-- sortable.min.js is only needed if you wish to sort / rearrange files in initial preview.
-    This must be loaded before fileinput.min.js -->
-<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/js/plugins/sortable.min.js" type="text/javascript"></script>
-<!-- bootstrap.bundle.min.js below is needed if you wish to zoom and preview file content in a detail modal
-    dialog. bootstrap 5.x or 4.x is supported. You can also use the bootstrap js 3.3.x versions. -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<!-- the main fileinput plugin script JS file -->
-<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/js/fileinput.min.js"></script>
-@*following theme script is needed to use the Font Awesome 5.x theme (`fas`). Uncomment if needed.*@
-@*<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/themes/fas/theme.min.js"></script>*@
-<!-- optionally if you need translation for your language then include the locale file as mentioned below (replace LANG.js with your language locale) -->
-<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/js/locales/LANG.js"></script>
-<script>
-    $("#myfile").val();
+﻿@model IEnumerable<MeetingManagement.Models.REPORT>
 
-    $("#input-ficons-3").fileinput({
-        uploadUrl: "",
-        previewFileIcon: '<i class="fas fa-file"></i>',
-        allowedPreviewTypes: ['image', 'text'], // allow only preview of image & text files
-        previewFileIconSettings: {
-            'docx': '<i class="fas fa-file-word text-primary"></i>',
-            'xlsx': '<i class="fas fa-file-excel text-success"></i>',
-            'pptx': '<i class="fas fa-file-powerpoint text-danger"></i>',
-            'pdf': '<i class="fas fa-file-pdf text-danger"></i>',
-            'zip': '<i class="fas fa-file-archive text-muted"></i>',
+<div style="height:20px"></div>
+<h4>Biên bản báo cáo:</h4>
+<div style="border: 2px solid #e5e5e5; padding: 20px; width: 1000px; overflow: overlay;">
+    <div class="form-row-fixed">
+        @foreach (var item in Model.ToList())
+        {
+            <a id="myfile" href="@item.Report_link" style="margin-right:20px;" download>
+                <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
+                    <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                        @*@switch (item.Attachment_type)
+                            {
+                                case "xlsx":
+                                    <i style="font-size: 40px; color: #1D6F42;" class="fas fa-file-excel text-primary"></i>
+                                    break;
+                                case "xls":
+                                    <i style="font-size: 40px; color: #1D6F42;" class="fas fa-file-excel text-primary"></i>
+                                    break;
+                                case "docx":
+                                    <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
+                                    break;
+                                case "doc":
+                                    <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
+                                    break;
+                                case "pdf":
+                                    <i style="font-size: 40px; color: #F40F02;" class="fas fa-file-pdf text-primary"></i>
+                                    break;
+                                case "jpg":
+                                    <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
+                                    break;
+                                case "jpeg":
+                                    <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
+                                    break;
+                                case "pptx":
+                                    <i style="font-size: 40px; color: #D04423" class="fas fa-file-powerpoint text-primary"></i>
+                                    break;
+                                default:
+                                    <i style="font-size:40px; color:gray" class="fas fa-file text-primary"></i>
+                                    break;
+                            }*@
+
+                        @if (@item.Report_type == "xls" || item.Report_type == "xlsm" || item.Report_type == "xlsx")
+                        {
+                            <i style="font-size: 40px; color: #1d6f42;" class="fas fa-file-excel text-primary"></i>
+                        }
+                        else if (@item.Report_type == "pdf")
+                        {
+                            <i style="font-size: 40px; color: #f40f02;" class="fas fa-file-pdf text-primary"></i>
+                        }
+                        else if (@item.Report_type == "doc" || item.Report_type == "docm" || item.Report_type == "docx")
+                        {
+                            <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
+                        }
+                        else if (@item.Report_type == "jpg" || item.Report_type == "jpeg")
+                        {
+                            <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
+                        }
+                        else if (@item.Report_type == "ppt" || item.Report_type == "pptm" || item.Report_type == "pptx")
+                        {
+                            <i style="font-size: 40px; color: #D04423" class="fas fa-file-powerpoint text-primary"></i>
+                        }
+                        else
+                        {
+                            <i style="font-size:40px; color:gray" class="fas fa-file text-primary"></i>
+                        }
+                    </div>
+                    <div style="width:75%; padding:0 5px; color:black">
+                        <p style="text-overflow: ellipsis; overflow: hidden; width: 140px; height: 20px; white-space: nowrap; ">
+                            @item.Report_name
+                        </p>
+                        <p style="font-size:10px">
+                            @item.Report_binary
+                        </p>
+                    </div>
+                </div>
+            </a>
         }
-    });
-</script>
-<style>
-    /*upload zone*/
-    .file-caption div {
-        display: flex;
-        overflow: inherit;
-    }
-    .btn-outline-secondary {
-        display: none;
-    }
-    .btn-file input[type=file]{
-        width:100%;
-    }
-
-    .file-caption {
-        width: fit-content;
-        position: absolute;
-        right: 0px;
-    }
-
-</style>
+    </div>
+</div>
