@@ -9,7 +9,6 @@ using System.Web.Mvc;
 using MeetingManagement.Models;
 using Microsoft.AspNet.Identity;
 
-
 namespace MeetingManagement.Areas.User.Controllers
 {
     public class TasksController : Controller
