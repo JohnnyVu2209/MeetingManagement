@@ -4,11 +4,14 @@
     Layout = null;
 }
 
-
+<!doctype html>
+<html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
 
@@ -24,12 +27,12 @@
     <title>Login </title>
 </head>
 <body class="me-body">
-    
+
     <div class="d-md-flex half">
         <div class="bg" style="background-image: url('../../login-form-05/images/vanlang1.png');"></div>
-       
+
         <div class="contents">
-            
+
             <div class="container">
 
                 <div class="row align-items-center justify-content-center">
@@ -38,7 +41,7 @@
                             <div class="text-center">
                                 <img src="~/login-form-05/images/logo.png" />
                             </div>
-                              <hr /><center>----------*.*-----------</center><hr />
+                            <hr /><center>----------*.*-----------</center><hr />
 
                             <form action="@Url.Action("Login","Account")" method="post">
                                 @Html.AntiForgeryToken()
@@ -73,19 +76,14 @@
                         </div>
 
                     </div>
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
-
-    
-
-
-
-    <script src="~/login-form-05/js/jquery-3.3.1.min.js"></script>
-    <script src="~/login-form-05/js/popper.min.js"></script>
     <script src="~/login-form-05/js/bootstrap.min.js"></script>
-    <script src="~/login-form-05/js/owl.carousel.min.js"></script>
+    <script src="~/login-form-05/js/jquery-3.3.1.min.js"></script>
     <script src="~/login-form-05/js/main.js"></script>
+    <script src="~/login-form-05/js/owl.carousel.min.js"></script>
+    <script src="~/login-form-05/js/popper.min.js"></script>
 </body>
