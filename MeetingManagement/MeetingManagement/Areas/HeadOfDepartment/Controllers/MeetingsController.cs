@@ -63,15 +63,18 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
                             MEETING meetings = db.MEETINGs.Where(x => x.Meeting_name == model.Meeting_name).FirstOrDefault();
 
                             ATTACHMENT newAtt = new ATTACHMENT();
+
+                            string extension = Path.GetExtension(Files.FileName);
                             newAtt.Meeting_id = meetings.Meeting_id;
-                            newAtt.Attachment_path = File_Path + meetings.Meeting_id;
+                            newAtt.Attachment_path = File_Path + meetings.Meeting_id+extension;
                             newAtt.Attachment_name = Files.FileName;
+                            newAtt.Attachment_name = Files.FileName;
+                            newAtt.Attachment_binary = Math.Round(((Double)Files.ContentLength / 1024), 2).ToString() + "KB";
                             db.ATTACHMENTs.Add(newAtt);
                             db.SaveChanges();
 
                             //store link file to db
                             var path = Server.MapPath(File_Path);
-                            string extension = Path.GetExtension(Files.FileName);
                             Files.SaveAs(path + meetings.Meeting_id + extension);
                             scope.Complete();
                             return RedirectToAction("Details", "Categories", new { id = model.Category_id });
@@ -146,7 +149,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             TimeSpan seventhHour = new TimeSpan(07, 0, 0);
             if (meeting.Time_Start < seventhHour || meeting.Time_Start >= twentyoneHour)
             {
-                ModelState.AddModelError("Time_Start", "Time is not valid");
+                ModelState.AddModelError("Time_Start", "Không thể mở cuộc họp vào thời gian đó");
             }
         }
         public ActionResult AddUser(MEETING model, string email)
@@ -230,7 +233,6 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             var task = db.TASKs.Where(x => x.Meeting_id == id).ToList();
             return PartialView(task);
         }
-        [HttpGet]
         public ActionResult MeetingReport(int id)
         {
             ViewBag.Meeting_id = id;

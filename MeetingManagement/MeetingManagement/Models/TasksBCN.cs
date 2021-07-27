@@ -12,5 +12,7 @@ namespace MeetingManagement.Models
         public DateTime DueDate  { get; set; }
         public Boolean Status { get; set; }
         public String TaskName { get; set; }
+        public int Meeting_id { get; set; }
+        public int Meeting_idd { get; set; }
     }
 }

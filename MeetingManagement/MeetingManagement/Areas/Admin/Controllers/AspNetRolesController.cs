@@ -23,21 +23,6 @@ namespace MeetingManagement.Areas.Admin.Controllers
             return View(db.AspNetRoles.ToList());
         }
 
-        // GET: Admin/AspNetRoles/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AspNetRole aspNetRole = db.AspNetRoles.Find(id);
-            if (aspNetRole == null)
-            {
-                return HttpNotFound();
-            }
-            return View(aspNetRole);
-        }
-
         // GET: Admin/AspNetRoles/Create
         public ActionResult Create()
         {
@@ -92,39 +77,6 @@ namespace MeetingManagement.Areas.Admin.Controllers
             return View(aspNetRole);
         }
 
-        // GET: Admin/AspNetRoles/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AspNetRole aspNetRole = db.AspNetRoles.Find(id);
-            if (aspNetRole == null)
-            {
-                return HttpNotFound();
-            }
-            return View(aspNetRole);
-        }
-
-        // POST: Admin/AspNetRoles/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            AspNetRole aspNetRole = db.AspNetRoles.Find(id);
-            db.AspNetRoles.Remove(aspNetRole);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        
     }
 }
