@@ -55,7 +55,7 @@
                             Báo cáo
                         </div>*@
                 }
-                else if (ViewBag.modify == true )
+                else if (ViewBag.modify == true)
                 {
                     <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-info-edit')">
                         Chi tiết
@@ -69,7 +69,7 @@
                     @*<div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-report')">
                             Báo cáo
                         </div>*@
-                    if (ViewBag.user_identity == Model.Create_by && Model.Status > 1 && Model.Status < 7)
+                    if (ViewBag.user_identity == Model.Create_by && Model.Status > 1 && Model.Status < 5)
                     {
                         <div onclick="getCancelModel(1)" style="right: calc( 0% + 30px ); position: fixed;">
                             <a class="cancel-btn">
@@ -85,24 +85,11 @@
                 </div>*@
         </div>
     </div>
-    <div id="noti_zone" style="position: relative;
-    height: 35px;">
-        @if (Date == Model.Date_Start && Model.Status == 2)
-        {
-            if (Time >= Model.Time_Start)
-            {
-                <div id="noti" onshow="open_noti()" style="@is_modify; border-bottom: 1px solid #f1f1f1; width: calc(100% - 150px); height: 35px; background-color: #ffffcc; position: fixed; top: 110px; left: 150px; z-index: 10; display: flex; align-items: center; padding-left: 30px">
-                    <p style="margin:0px 10px 0px 0px;">
-                        Hãy cập nhật trạng thái mới cho cuộc họp
-                    </p>
-                    <a style="background-color: #3aac5d; cursor: pointer; width: 90px; padding: 0px 5px; border: 0.5px solid #f1f1f1; text-align: center; color: white">Cập nhật</a>
-                    <div style="position: absolute; width: 50px; right: 30px; cursor:pointer; text-align:center" onclick="getElementById('noti_zone').style.display = 'none'">
-                        x
-                    </div>
-                </div>
-            }
-        }
-        @if (Date > Model.Date_Start & Model.Status == 2)
+
+    @if (Date == Model.Date_Start && Model.Status == 2)
+    {
+        <div id="noti_zone" style="position: relative;height: 35px;"></div>
+        if (Time >= Model.Time_Start)
         {
             <div id="noti" onshow="open_noti()" style="@is_modify; border-bottom: 1px solid #f1f1f1; width: calc(100% - 150px); height: 35px; background-color: #ffffcc; position: fixed; top: 110px; left: 150px; z-index: 10; display: flex; align-items: center; padding-left: 30px">
                 <p style="margin:0px 10px 0px 0px;">
@@ -114,8 +101,20 @@
                 </div>
             </div>
         }
-    </div>
-
+    }
+    @if (Date > Model.Date_Start & Model.Status == 2)
+    {
+        <div id="noti_zone" style="position: relative;height: 35px;"></div>
+        <div id="noti" onshow="open_noti()" style="@is_modify; border-bottom: 1px solid #f1f1f1; width: calc(100% - 150px); height: 35px; background-color: #ffffcc; position: fixed; top: 110px; left: 150px; z-index: 10; display: flex; align-items: center; padding-left: 30px">
+            <p style="margin:0px 10px 0px 0px;">
+                Hãy cập nhật trạng thái mới cho cuộc họp
+            </p>
+            <a onclick="location.href = '@Url.Action("StatusChanges","MEETINGs", new { id = Model.Meeting_id})';" style="background-color: #3aac5d; cursor: pointer; width: 90px; padding: 0px 5px; border: 0.5px solid #f1f1f1; text-align: center; color: white">Cập nhật</a>
+            <div style="position: absolute; width: 50px; right: 30px; cursor:pointer; text-align:center" onclick="getElementById('noti_zone').style.display = 'none'">
+                x
+            </div>
+        </div>
+    }
     <div id="partialview-zone">
         <div id="meeting-info" class="tabcontent" style="@is_preview">
             @Html.Action("MeetingInfo", "Meetings", new { Model.Meeting_id })
@@ -213,6 +212,9 @@
             text-decoration: none;
         }
 
+        #partialview-zone{
+            height:2000px;
+        }
 
 
     /*    .button-close {

@@ -237,7 +237,7 @@ namespace MeetingManagement.Tests.HeadOfDepartment
 
             controller.ControllerContext = new ControllerContext(context.Object, new System.Web.Routing.RouteData(), controller);
 
-            var result = controller.CreateUser() as ViewResult;
+            var result = controller.CreateUser2() as ViewResult;
             Assert.IsNotNull(result);
         }
     }

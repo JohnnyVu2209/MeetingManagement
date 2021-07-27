@@ -45,7 +45,6 @@ namespace MeetingManagement.Areas.User.Controllers
             return View(meeting);
         }
 
-
         public ActionResult CancelModel(int meeting_id, int model_type)
         {
             ViewBag.model_type = model_type;
@@ -82,7 +81,15 @@ namespace MeetingManagement.Areas.User.Controllers
             //mail.SendMail();
             return RedirectToAction("Index");
         }
+        public ActionResult StatusChanges(int id)
+        {
+            var meeting = db.MEETINGs.Find(id);
+            meeting.Status = 3;
+            db.Entry(meeting).State = EntityState.Modified;
+            db.SaveChanges();
 
+            return RedirectToAction("MeetingDetail", "Meetings", new { id = meeting.Meeting_id, modify = false });
+        }
         public ActionResult DeleteAttachment(int id)
         {
             ATTACHMENT attachment = db.ATTACHMENTs.Find(id);
@@ -291,8 +298,7 @@ namespace MeetingManagement.Areas.User.Controllers
             ViewBag.user_identity = currentUser;
             var result = db.MEETINGs.ToList();
             result = result.Where(m => m.Create_by.ToLower().Contains(currentUser)).ToList();
-            var notpending_result = result.Where(n => n.Status > 1);
-            return PartialView("MyMeetingGridView", notpending_result);
+            return PartialView("MyMeetingGridView", result);
         }
 
         public ActionResult JoinedMeeting()
@@ -313,8 +319,7 @@ namespace MeetingManagement.Areas.User.Controllers
             ViewBag.user_identity = currentUser;
             var meetings = db.MEETINGs.ToList();
             meetings = meetings.Where(m => m.Create_by.ToLower().Contains(currentUser)).ToList();
-            var meetings_1 = meetings.Where(n => n.Status == 1);
-            return PartialView(meetings_1);
+            return PartialView(meetings);
         }
 
         public ActionResult MeetingList(int id)

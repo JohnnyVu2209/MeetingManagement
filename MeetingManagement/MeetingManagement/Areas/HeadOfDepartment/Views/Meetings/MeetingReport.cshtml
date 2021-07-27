@@ -1,80 +1,55 @@
-﻿@model IEnumerable<MeetingManagement.Models.REPORT>
+﻿@{ int id_meeting = ViewBag.Meeting_id; }
 
 <div style="height:20px"></div>
-<h4>Biên bản báo cáo:</h4>
-<div style="border: 2px solid #e5e5e5; padding: 20px; width: 1000px; overflow: overlay;">
-    <div class="form-row-fixed">
-        @foreach (var item in Model.ToList())
-        {
-            <a id="myfile" href="@item.Report_link" style="margin-right:20px;" download>
-                <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
-                    <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
-                        @*@switch (item.Attachment_type)
-                            {
-                                case "xlsx":
-                                    <i style="font-size: 40px; color: #1D6F42;" class="fas fa-file-excel text-primary"></i>
-                                    break;
-                                case "xls":
-                                    <i style="font-size: 40px; color: #1D6F42;" class="fas fa-file-excel text-primary"></i>
-                                    break;
-                                case "docx":
-                                    <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
-                                    break;
-                                case "doc":
-                                    <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
-                                    break;
-                                case "pdf":
-                                    <i style="font-size: 40px; color: #F40F02;" class="fas fa-file-pdf text-primary"></i>
-                                    break;
-                                case "jpg":
-                                    <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
-                                    break;
-                                case "jpeg":
-                                    <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
-                                    break;
-                                case "pptx":
-                                    <i style="font-size: 40px; color: #D04423" class="fas fa-file-powerpoint text-primary"></i>
-                                    break;
-                                default:
-                                    <i style="font-size:40px; color:gray" class="fas fa-file text-primary"></i>
-                                    break;
-                            }*@
+<h4>Biên bản họp:</h4>
+<div class="row">
+    <div class="col-md-6 col-md-push-2">
+        <section>
+            @using (Html.BeginForm("MeetingReport", "Meetings", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+            {
+            @Html.AntiForgeryToken()
+                <div class="well bs-component" style="height:140px;">
+                    <br />
+                    @Html.Hidden("Meeting_id", id_meeting)
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="col-md-10 col-md-push-2">
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <span class="form-group btn btn-default btn-file">
+                                            Browse…
+                                            <input type="file" name="ReportFile" id="ReportFile" class="form-control" accept=".zip,.pdf,.doc,.docx,.xml,application/msword" />
+                                        </span>
+                                    </span>
+                                    <input type="text" id="ReportName" class="form-control" readonly>
+                                </div>
+                                @Html.ValidationMessage("FileAttach", "", new { @class = "text-danger custom-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="submit" class="btn btn-danger" value="Upload" />
+                        </div>
+                    </div>
 
-                        @if (@item.Report_type == "xls" || item.Report_type == "xlsm" || item.Report_type == "xlsx")
-                        {
-                            <i style="font-size: 40px; color: #1d6f42;" class="fas fa-file-excel text-primary"></i>
-                        }
-                        else if (@item.Report_type == "pdf")
-                        {
-                            <i style="font-size: 40px; color: #f40f02;" class="fas fa-file-pdf text-primary"></i>
-                        }
-                        else if (@item.Report_type == "doc" || item.Report_type == "docm" || item.Report_type == "docx")
-                        {
-                            <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
-                        }
-                        else if (@item.Report_type == "jpg" || item.Report_type == "jpeg")
-                        {
-                            <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
-                        }
-                        else if (@item.Report_type == "ppt" || item.Report_type == "pptm" || item.Report_type == "pptx")
-                        {
-                            <i style="font-size: 40px; color: #D04423" class="fas fa-file-powerpoint text-primary"></i>
-                        }
-                        else
-                        {
-                            <i style="font-size:40px; color:gray" class="fas fa-file text-primary"></i>
-                        }
+                    <div class="form-group">
+                        <div class="col-md-12">
+                        </div>
                     </div>
-                    <div style="width:75%; padding:0 5px; color:black">
-                        <p style="text-overflow: ellipsis; overflow: hidden; width: 140px; height: 20px; white-space: nowrap; ">
-                            @item.Report_name
-                        </p>
-                        <p style="font-size:10px">
-                            @item.Report_binary
-                        </p>
-                    </div>
-                </div>
-            </a>
-        }
+                </div>}
+        </section>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">$(() => {
+        $('#ReportFile').on("change", function () {
+            var fileUpload = document.getElementById("ReportFile");
+            $('#ReportName').val(fileUpload.files[0].name);
+        });
+    });</script>
+<style>
+    .file-caption {
+        width: fit-content;
+        position: absolute;
+        right: 0px;
+    }
+</style>

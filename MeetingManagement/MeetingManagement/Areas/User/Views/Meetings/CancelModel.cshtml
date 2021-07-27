@@ -33,7 +33,7 @@
                             </div>
                         </div>
                     </div>
-                    <span class="textarea_count" id="charNum">0/150 ( Tối thiểu 150 kí tự ).</span>
+                    <span class="textarea_count" id="charNum">0/1000 kí tự.</span>
                 </div>
                 <div class="modal-footer">
                     <div onclick="ConfirmChanges(@ViewBag.model_type)" style=" width: 100px; height: 50px;" class="btn btn-fixed yuki-btn-blue">Gửi</div>
@@ -94,7 +94,7 @@
     var max_char = 500;
 
     mytextarea.addEventListener('input', () => {
-        remaincharCharsText.textContent = mytextarea.value.length + "/150 ( Tối thiểu 150 kí tự ).";
+        remaincharCharsText.textContent = mytextarea.value.length + "/1000 kí tự.";
     });
 
     if ( @ViewBag.model_type == 1) {
