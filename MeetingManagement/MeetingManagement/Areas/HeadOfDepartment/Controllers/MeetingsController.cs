@@ -230,10 +230,11 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             var task = db.TASKs.Where(x => x.Meeting_id == id).ToList();
             return PartialView(task);
         }
+        [HttpGet]
         public ActionResult MeetingReport(int id)
         {
-            var report = db.MEETINGs.Find(id);
-            return PartialView(report);
+            ViewBag.Meeting_id = id;
+            return PartialView();
         }
         public FileResult DownloadFile(int meeting_id)
         {
