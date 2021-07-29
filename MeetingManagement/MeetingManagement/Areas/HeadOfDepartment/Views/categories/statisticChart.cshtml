@@ -1,20 +1,127 @@
-﻿<div id="barChartModal" class="modal fade" role="dialog">
-    <div class="modal-dialog" style="width:500px;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Xóa danh mục</h4>
-            </div>
-            <div class="modal-body">
+﻿
+@{
+    ViewBag.Title = "statisticChart";
+    Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    .highcharts-figure, .highcharts-data-table table {
+        min-width: 320px;
+        max-width: 800px;
+        margin: 1em auto;
+    }
+
+    .highcharts-data-table table {
+        font-family: Verdana, sans-serif;
+        border-collapse: collapse;
+        border: 1px solid #EBEBEB;
+        margin: 10px auto;
+        text-align: center;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .highcharts-data-table caption {
+        padding: 1em 0;
+        font-size: 1.2em;
+        color: #555;
+    }
+
+    .highcharts-data-table th {
+        font-weight: 600;
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+        background: #f8f8f8;
+    }
+
+    .highcharts-data-table tr:hover {
+        background: #f1f7ff;
+    }
+</style>
 
 
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn--delete" onclick="DeleteCat()">Xóa</button>
-                <button class="btn btn-normal " data-dismiss="modal">Hủy</button>
-            </div>
-        </div>
-        <div style="text-align:center;display:none" id="loader-div">
-            <img src="~/imgs/Walk.gif" style="height:100px;width:100px" />
-        </div>
-    </div>
-</div>
+
+<figure class="highcharts-figure bar">
+    <div id="container-barchart"></div>
+</figure>
+
+
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script>
+    $(document).ready(function () {
+        $.getJSON("/BCNTask/indexPieChart", function (data) {
+                Highcharts.chart('container', {
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    title: {
+                        text: 'Các cuộc họp tháng 7'
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    accessibility: {
+                        point: {
+                            valueSuffix: '%'
+                        }
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Meetings',
+                        colorByPoint: true,
+                        data: [{
+                            name: 'Tạo cuộc họp',
+                            y: data.createM
+@* sliced: true,
+                    selected: true *@
+            }, {
+                name: 'Duyệt',
+                y: data.passM
+            }, {
+                name: 'Đã họp',
+                y: data.doneM
+            }, {
+                name: 'Biên bản',
+                y: data.reportM
+            }, {
+                name: 'Hoàn thành',
+                y: data.doneM
+            }, {
+                name: 'Không duyệt',
+                y: data.nopassM
+            }, {
+                name: 'Đã huỷ',
+                y: data.cancelM
+            }]
+        }]
+    });
+            });
+        });
+
+
+</script>
+
+
