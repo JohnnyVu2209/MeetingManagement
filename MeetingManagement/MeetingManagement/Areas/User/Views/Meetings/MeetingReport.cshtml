@@ -1,7 +1,5 @@
-﻿@{ 
-    int id_meeting = ViewBag.Meeting_id;
-}
-@*<div class="row">
+﻿@{ int id_meeting = ViewBag.Meeting_id; }
+<div class="row">
     <div class="panel-heading">
         <div class="col-md-8">
             <h3>
@@ -11,20 +9,21 @@
         </div>
     </div>
 </div>
-<br />*@
+
+<br />
 
 <div class="row">
     <div class="col-md-6 col-md-push-2">
         <section>
             @using (Html.BeginForm("MeetingReport", "Meetings", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
             {
-                @Html.AntiForgeryToken()
+@Html.AntiForgeryToken()
                 <div class="well bs-component" style="height:140px;">
                     <br />
                     @Html.Hidden("Meeting_id", id_meeting)
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-8 col-md-push-2">
+                        <div class="col-md-10">
+                            <div class="col-md-10 col-md-push-2">
                                 <div class="input-group">
                                     <span class="input-group-btn">
                                         <span class="form-group btn btn-default btn-file">
@@ -37,23 +36,19 @@
                                 @Html.ValidationMessage("FileAttach", "", new { @class = "text-danger custom-danger" })
                             </div>
                         </div>
+                        <div class="col-md-2">
+                            <input type="submit" class="btn btn-danger" value="Upload" />
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-12">
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-5 col-md-10">
-                            <input type="submit" class="btn btn-danger" value="Upload" />
-                        </div>
-                    </div>
-                </div>
-            }
+                </div>}
         </section>
     </div>
-</div>  
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type="text/javascript">
     $(() => {
@@ -69,5 +64,4 @@
         position: absolute;
         right: 0px;
     }
-
 </style>

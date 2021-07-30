@@ -86,12 +86,12 @@
             data: {},
             success: function (data) {
                 $("#Popup").html(data);
-                $("#modalCreate").modal("show");
+                $("#modalCreate").appendTo("body").modal("show");
             },
             error: function (err) {
                 console.log(err);
             }
         })
-        }
+     }
     </script>
 }

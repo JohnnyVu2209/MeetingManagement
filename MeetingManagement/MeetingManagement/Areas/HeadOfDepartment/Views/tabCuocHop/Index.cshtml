@@ -2,20 +2,21 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
-}
 
+}
 <link href="~/Content/catalog-list.css" rel="stylesheet" />
 <link href="~/Content/quyhung/css/tabcuochop.css" rel="stylesheet" />
 
+
 <br />
 @*<div class="tab">
-    <button class="tablinks" onclick="openTab(event, 'mycate')">Cuộc họp chờ duyệt</button>
-    <button class="tablinks" onclick="openTab(event, 'mymeeting')">Cuộc họp tham dự</button>
-    <button class="tablinks" onclick="openTab(event, 'mywork')">Cuộc họp của tôi</button>
-</div>*@
+        <button class="tablinks" onclick="openTab(event, 'mycate')">Cuộc họp chờ duyệt</button>
+        <button class="tablinks" onclick="openTab(event, 'mymeeting')">Cuộc họp tham dự</button>
+        <button class="tablinks" onclick="openTab(event, 'mywork')">Cuộc họp của tôi</button>
+    </div>*@
 <ul class="nav nav-tabs">
- 
-    <li><a href="#" class="tablinks" onclick="openTab(event, 'mycate')">Cuộc họp chờ duyệt</a></li>
+
+    <li><a href="#" id="defaultOpen" onclick="openTab(event, 'mycate')">Cuộc họp chờ duyệt</a></li>
     <li><a href="#" class="tablinks" onclick="openTab(event, 'mymeeting')">Cuộc họp tham dự</a></li>
     <li><a href="#" class="tablinks" onclick="openTab(event, 'mywork')">Cuộc họp của tôi</a></li>
 </ul>
@@ -37,9 +38,9 @@
     <ul class="catalogList">
         @foreach (var item in ViewBag.attendMeeting)
         {
-        <li onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id })';">
-            @item.Meeting_name
-        </li>
+            <li onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id })';">
+                @item.Meeting_name
+            </li>
         }
     </ul>
 </div>
@@ -71,7 +72,5 @@
         }
         document.getElementById(tabName).style.display = "block";
         evt.currentTarget.className += " active";
-    }
+    } document.getElementById("defaultOpen").click();
 </script>
-
-
