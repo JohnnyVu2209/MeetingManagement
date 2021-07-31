@@ -19,7 +19,6 @@
 }
 <!---CSS-->
 <style>
-
     .highcharts-figure, .highcharts-data-table table {
         min-width: 320px;
         max-width: 800px;
@@ -59,6 +58,53 @@
         background: #f1f7ff;
     }
 </style>
+
+
+<style>
+    .highcharts-figure, .highcharts-data-table table {
+        min-width: 310px;
+        max-width: 800px;
+        margin: 1em auto;
+    }
+
+    #container {
+        height: 400px;
+    }
+
+    .highcharts-data-table table {
+        font-family: Verdana, sans-serif;
+        border-collapse: collapse;
+        border: 1px solid #EBEBEB;
+        margin: 10px auto;
+        text-align: center;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .highcharts-data-table caption {
+        padding: 1em 0;
+        font-size: 1.2em;
+        color: #555;
+    }
+
+    .highcharts-data-table th {
+        font-weight: 600;
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+        background: #f8f8f8;
+    }
+
+    .highcharts-data-table tr:hover {
+        background: #f1f7ff;
+    }
+</style>
+
 <link href="~/Content/catalog-list.css" rel="stylesheet" />
 <link href="~/Content/quyhung/css/tabcuochop.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -79,8 +125,7 @@
     <ion-icon name="bar-chart-outline" style="width:40px;height:25px"></ion-icon>
 </button>
 
-
-<!---BangThongKe--->
+<!--BangThongKe-->
 <div style="width:1100px;height:100%">
     <table class="table" id="table-sort">
         <thead style="background: #0d6efd;font-size:medium">
@@ -131,8 +176,12 @@
         </tbody>
     </table>
 </div>
-<!----Modal-->
-<!----PieChart-->
+
+
+
+
+<!--modal-->
+<!--piechart-->
 <div class="modal fade" id="pieChartModal" tabindex="-1" role="dialog" aria-labelledby="pieChartModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -141,7 +190,7 @@
             </div>
             <div class="modal-body">
                 <figure class="highcharts-figure">
-                    <div id="container"></div>
+                    <div id="container-pie"></div>
                 </figure>
             </div>
             <div class="modal-footer">
@@ -151,7 +200,7 @@
     </div>
 </div>
 
-<!----BarChart-->
+<!--barchart-->
 <div class="modal fade" id="barChartModal" tabindex="-1" role="dialog" aria-labelledby="barChartModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -159,9 +208,9 @@
                 <h5 class="modal-title" id="barChartModal" style="font-size:large">Biểu đồ cột</h5>
             </div>
             <div class="modal-body">
-                @*                <figure class="highcharts-figure">
-                        <div id="container"></div>
-                    </figure>*@
+                <figure class="highcharts-figure">
+                    <div id="container-bar"></div>
+                </figure>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal" style="font-size:larger">Đóng</button>
@@ -172,8 +221,7 @@
 
 
 
-<!----JS-->
-<!---JSLink-->
+<!--JS-->
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
@@ -191,57 +239,55 @@
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 
-<!---Sort-->
+<!--Sort-->
 <script>
     function sortTable(n) {
         var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
         table = document.getElementById("table-sort");
         switching = true;
-        //Set the sorting direction to ascending:
+        // Set the sorting direction to ascending:
         dir = "asc";
-        /*Make a loop that will continue until
-        no switching has been done:*/
+        /* Make a loop that will continue until
+        no switching has been done: */
         while (switching) {
-            //start by saying: no switching is done:
+            // Start by saying: no switching is done:
             switching = false;
             rows = table.rows;
-            /*Loop through all table rows (except the
-            first, which contains table headers):*/
+            /* Loop through all table rows (except the
+            first, which contains table headers): */
             for (i = 1; i < (rows.length - 1); i++) {
-                //start by saying there should be no switching:
+                // Start by saying there should be no switching:
                 shouldSwitch = false;
-                /*Get the two elements you want to compare,
-                one from current row and one from the next:*/
+                /* Get the two elements you want to compare,
+                one from current row and one from the next: */
                 x = rows[i].getElementsByTagName("TD")[n];
                 y = rows[i + 1].getElementsByTagName("TD")[n];
-                /*check if the two rows should switch place,
-                based on the direction, asc or desc:*/
+                /* Check if the two rows should switch place,
+                based on the direction, asc or desc: */
                 if (dir == "asc") {
-                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()
-                        @*&& Number(x.innerHTML) > Number(y.innerHTML)*@ ) {
-                        //if so, mark as a switch and break the loop:
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        // If so, mark as a switch and break the loop:
                         shouldSwitch = true;
                         break;
                     }
                 } else if (dir == "desc") {
-                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()
-                        @*&& Number(x.innerHTML) < Number(y.innerHTML)*@) {
-                        //if so, mark as a switch and break the loop:
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        // If so, mark as a switch and break the loop:
                         shouldSwitch = true;
                         break;
                     }
                 }
             }
             if (shouldSwitch) {
-                /*If a switch has been marked, make the switch
-                and mark that a switch has been done:*/
+                /* If a switch has been marked, make the switch
+                and mark that a switch has been done: */
                 rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
                 switching = true;
-                //Each time a switch is done, increase this count by 1:
+                // Each time a switch is done, increase this count by 1:
                 switchcount++;
             } else {
-                /*If no switching has been done AND the direction is "asc",
-                set the direction to "desc" and run the while loop again.*/
+                /* If no switching has been done AND the direction is "asc",
+                set the direction to "desc" and run the while loop again. */
                 if (switchcount == 0 && dir == "asc") {
                     dir = "desc";
                     switching = true;
@@ -256,7 +302,7 @@
 <script>
     $(document).ready(function () {
         $.getJSON("/BCNTask/indexPieChart", function (data) {
-            Highcharts.chart('container', {
+            Highcharts.chart('container-pie', {
                 chart: {
                     plotBackgroundColor: null,
                     plotBorderWidth: null,
@@ -264,7 +310,7 @@
                     type: 'pie'
                 },
                 title: {
-                    text: 'Các cuộc họp tháng 7'
+                    text: 'Cuộc họp'
                 },
                 tooltip: {
                     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -314,75 +360,85 @@
         });
     });
 
+</script>
+
+<!--JSBarChart-->
+<script>
+    $(document).ready(function () {
+        $.getJSON("/BCNTask/indexPieChart", function (data) {
+                Highcharts.chart('container-bar', {
+                    chart: {
+                        type: 'bar'
+                    },
+                    title: {
+                        text: 'Cuộc họp'
+                    },
+                    xAxis: {
+                        categories: ['Tình trạng'],
+                        title: {
+                            text: null
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        max: 20,
+                        labels: {
+                            overflow: 'justify'
+                        }
+                    },
+@*                    tooltip: {
+                        valueSuffix: ' millions'
+                    },*@
+                    plotOptions: {
+                        bar: {
+                            dataLabels: {
+                                enabled: true
+                            }
+                        }
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'top',
+                        x: -60,
+                        y: 80,
+                        floating: true,
+                        borderWidth: 1,
+                        backgroundColor:
+                            Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                        shadow: true
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    series: [{
+                        name: 'Tạo cuộc họp',
+                        data: [data.createM]
+                    }, {
+                        name: 'Duyệt',
+                            data: [data.passM]
+                        },{
+                            name: 'Đã họp',
+                            data: [data.doneM]
+                        }, {
+                            name: 'Biên bản',
+                            data: [data.reportM]
+                        },{
+                            name: 'Hoàn thành',
+                            data: [data.compM]
+                        }, {
+                            name: 'Không duyệt',
+                            data: [data.nopassM]
+                        }, {
+                            name: 'Đã huỷ',
+                            data: [data.cancelM]
+                        }]
+                });
+            });
+        });
 
 </script>
 
-<!--JSBarChart--->
-@*<script>
-        Highcharts.chart('container', {
-            chart: {
-                type: 'bar'
-            },
-            title: {
-                text: 'Historic World Population by Region'
-            },
-            subtitle: {
-                text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
-            },
-            xAxis: {
-                categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
-                title: {
-                    text: null
-                }
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Population (millions)',
-                    align: 'high'
-                },
-                labels: {
-                    overflow: 'justify'
-                }
-            },
-            tooltip: {
-                valueSuffix: ' millions'
-            },
-            plotOptions: {
-                bar: {
-                    dataLabels: {
-                        enabled: true
-                    }
-                }
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'top',
-                x: -40,
-                y: 80,
-                floating: true,
-                borderWidth: 1,
-                backgroundColor:
-                    Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
-                shadow: true
-            },
-            credits: {
-                enabled: false
-            },
-            series: [{
-                name: 'Year 1800',
-                data: [107, 31, 635, 203, 2]
-            }, {
-                name: 'Year 1900',
-                data: [133, 156, 947, 408, 6]
-            }, {
-                name: 'Year 2000',
-                data: [814, 841, 3714, 727, 31]
-            }, {
-                name: 'Year 2016',
-                data: [1216, 1001, 4436, 738, 40]
-            }]
-        });
-    </script>
-*@
+   
+
+
