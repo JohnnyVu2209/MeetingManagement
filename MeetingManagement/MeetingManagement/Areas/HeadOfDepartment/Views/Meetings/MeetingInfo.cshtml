@@ -5,21 +5,10 @@
 @Html.HiddenFor(model => model.Status, new { @id = "status" })
 @Html.HiddenFor(model => model.Create_by)
 @{
-    int i = 0;
+    bool finish = false;
 }
+<link rel="stylesheet" href="~/Content/Meetings/meetingdetail.css" />
 
-<style>
-    #myfile:hover div {
-        background-color: #f1f1f1;
-        text-decoration: none;
-    }
-
-    #myfile {
-        text-decoration: none !important;
-        position: relative;
-        left: 34px;
-    }
-</style>
 <style>
     /*Attachment*/
     #myfile:hover div {
@@ -129,6 +118,15 @@
                 font-weight: 700;
             }
 </style>
+@*@if (Model.Create_by.ToString() == ViewBag.user_identity)
+    {
+        <div style="position: absolute; right: 0px;display:none;">
+            <a onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = Model.Meeting_id, modify = true } )'" style="width: 100px; height: 40px; background-color: #f1f1f1; color: black; display:inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor: pointer ">
+                Thay đổi
+            </a>
+        </div>
+    }*@
+
 <h4>Tiến độ:</h4>
 <div>
     <ul class="progressbar" style="border: 2px solid #e5e5e5; padding: 10px;">
@@ -153,32 +151,24 @@
             <li class="complete">Tạo cuộc họp</li>
             <li class="complete">Duyệt</li>
             <li class="active">Đã họp</li>
-            <li>Hoàn thành</li>
             <li>Biên bản họp</li>
+            <li>Hoàn thành</li>
         }
         else if (Model.Status == 4)
         {
             <li class="complete">Tạo cuộc họp</li>
             <li class="complete">Duyệt</li>
             <li class="complete">Đã họp</li>
-            <li class="active">Hoàn thành</li>
-            <li>Biên bản họp</li>
+            <li class="active">Biên bản họp</li>
+            <li>Hoàn thành</li>
         }
         else if (Model.Status == 5)
         {
             <li class="complete">Tạo cuộc họp</li>
             <li class="complete">Duyệt</li>
             <li class="complete">Đã họp</li>
-            <li class="complete">Hoàn thành</li>
-            <li class="active">Biên bản họp</li>
-        }
-        else if (Model.Status == 6)
-        {
-            <li class="warning" style="display: block; height: 60px;">
-                <div onclick="alert('@Model.Feedback')" style="cursor: pointer; height: 60px; width: fit-content; position: relative; display: flex; bottom: 40px; align-items: flex-end; margin: 0 auto; z-index: 3; ">
-                    Không được duyệt
-                </div>
-            </li>
+            <li class="complete">Biên bản họp</li>
+            <li class="active">Hoàn thành</li>
         }
         else if (Model.Status == 7)
         {
@@ -188,10 +178,17 @@
                 </div>
             </li>
         }
+        else if (Model.Status == 6)
+        {
+            <li class="warning" style="display: block; height: 60px;">
+                <div onclick="alert('@Model.Feedback')" style="cursor: pointer; height: 60px; width: fit-content; position: relative; display: flex; bottom: 40px; align-items: flex-end; margin: 0 auto; z-index: 3; ">
+                    Không được duyệt
+                </div>
+            </li>
+        }
     </ul>
 </div>
-
-<div style="height:20px;"></div>
+<div style="height:20px"></div>
 <h4>Tài liệu đính kèm:</h4>
 <div style="border: 2px solid #e5e5e5; padding: 20px; width: 1000px; overflow: overlay;">
     <div class="form-row-fixed">
@@ -298,7 +295,7 @@
         <div class="value value-fixed value-fixed-location">
             <div class="input-group input_fixed">
                 <div class="input-group-desc" style="display: flex; height: 100%; padding-left: 5px;">
-                    @Html.Label(Model.Date_Start.ToShortDateString(), new { @class = "input-fixed" })
+                    @Html.Label(Model.Date_Start.ToShortDateString(), new { @class = "input-fixed", @style = "font-weight:300" })
                 </div>
             </div>
         </div>
@@ -310,7 +307,7 @@
         <div class="value value-fixed value-fixed-location">
             <div class="input-group input_fixed" style="padding-left: 5px;">
                 <div class="input-group-desc" style="display:flex ;height: 100%;">
-                    @Html.Label(Model.Time_Start.ToString(), new { @class = "input-fixed" })
+                    @Html.DisplayFor(m => m.Time_Start, new { @class = "input-fixed" })
                 </div>
             </div>
         </div>
@@ -320,7 +317,7 @@
         <div class="value value-fixed value-fixed-location">
             <div class="input-group input_fixed" style="width:800px;padding-left: 5px;">
                 <div class="input-group-desc" style="display:flex ;height: 100%;">
-                    @Html.Label(Model.Location.ToString(), new { @class = "input-fixed" })
+                    @Html.DisplayFor(m => m.Location, new { @class = "input-fixed" })
                 </div>
             </div>
         </div>
@@ -337,105 +334,14 @@
         </div>
     </div>
 </div>
-<div style="height:20px;"></div>
-<h4>Thành viên:</h4>
-<div style="width:1000px">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th class="col-align" scope="col">Tên thành viên</th>
-                <th class="col-align" scope="col">Email</th>
-                <th class="col-align" scope="col">Vai trò</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.MEMBERs.Select((value, idx) => new { idx, value }))
-            {
-                var value = item.value;
-                var index = item.idx + 1;
-                if (value.Member_id == ViewBag.meeting_host)
-                {
-                    <tr>
-                        <td>@index</td>
-                        <td class="col-align">
-                            @ViewBag.meeting_create
-                        </td>
-                        <td class="col-align">
-                            @ViewBag.meeting_user
-                        </td>
-                        <td class="col-align">
-                            Người chủ trì
-                        </td>
-                    </tr>
-                }
-                else if (item.value.Member_id != ViewBag.meeting_host)
-                {
-                    <tr>
-                        <td>@index</td>
-                        <td class="col-align">@value.AspNetUser.Full_name</td>
-                        <td class="col-align">@value.AspNetUser.Email</td>
-                        <td class="col-align">
-                            Thành viên
-                        </td>
-                    </tr>
-                }
-            }
-            <tr>
-                <td>Test</td>
-                <td class="col-align">Minh Hiếu</td>
-                <td class="col-align">hieu.187pm13916</td>
-                <td class="col-align">
-                    Thành viên
-                </td>
-            </tr>
-            <tr>
-                <td>Test</td>
-                <td class="col-align">Minh Hiếu</td>
-                <td class="col-align">hieu.187pm13916</td>
-                <td class="col-align">
-                    Thành viên
-                </td>
-            </tr>
-            <tr>
-                <td>Test</td>
-                <td class="col-align">Minh Hiếu</td>
-                <td class="col-align">hieu.187pm13916</td>
-                <td class="col-align">
-                    Thành viên
-                </td>
-            </tr>
-            <tr>
-                <td>Test</td>
-                <td class="col-align">Minh Hiếu</td>
-                <td class="col-align">hieu.187pm13916</td>
-                <td class="col-align">
-                    Thành viên
-                </td>
-            </tr>
-            <tr>
-                <td>Test</td>
-                <td class="col-align">Minh Hiếu</td>
-                <td class="col-align">hieu.187pm13916</td>
-                <td class="col-align">
-                    Thành viên
-                </td>
-            </tr>
-            <tr>
-                <td>Test</td>
-                <td class="col-align">Minh Hiếu</td>
-                <td class="col-align">hieu.187pm13916</td>
-                <td class="col-align">
-                    Thành viên
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+
+@Html.Action("MeetingMember", "Meetings")
 
 <div style="height: 20px"></div>
-@if (Model.Check_report == true)
+@if (Model.Check_report == true && Model.Status >= 3 && Model.Status < 5)
 {
+    <div style="height:20px"></div>
+    <h4>Biên bản họp:</h4>
     <div style="border: 2px solid #e5e5e5; padding: 20px; width: 1000px; overflow: overlay;">
         <div class="form-row-fixed">
             <a id="myfile" href="@Model.REPORT.Report_link" style="margin-right:20px;" download>
@@ -479,6 +385,65 @@
         </div>
     </div>
 }
+else if (Model.Check_report != true && Model.Create_by == ViewBag.user_identity && Model.Status >= 3 && Model.Status < 5)
+{
+    @Html.Action("MeetingReport", "Meetings", new { id = Model.Meeting_id })
+}
+
+@*<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member" aria-expanded="false" aria-controls="Member">
+        Danh sách thành viên
+    </a>*@
+
+@*<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Button with data-target
+    </button>*@
+@*<div class="collapse" id="Member" style="width:1000px;">
+        <table class="table">
+            <thead >
+                <tr style="background-color:#f1f1f1; color:black;">
+                    <th scope="col">#</th>
+                    <th class="col-align" scope="col">Tên thành viên</th>
+                    <th class="col-align" scope="col">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var member in Model.MEMBERs)
+                {
+                    <tr>
+                        <td>@(++i)</td>
+                        <td class="col-align">@member.AspNetUser.Full_name</td>
+                        <td class="col-align">@member.AspNetUser.Email</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>*@
+
+<!--<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member2" aria-expanded="false" aria-controls="Member">
+    Ngoài nhà trường
+</a>
+<div class="collapse" id="Member2" style="width:1000px;">
+    <table class="table">
+        <thead>
+            <tr style="background-color:#f1f1f1; color:black;">
+                <th scope="col">#</th>
+                <th class="col-align" scope="col">Tên thành viên</th>
+                <th class="col-align" scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>-->
+@* @for (int i = 1; i <= 10; i++)
+    {
+        <tr>
+            <td>@i</td>
+            <td class="col-align">Trần Đức Bo</td>
+            <td class="col-align">bo.187pm66666</td>
+        </tr>
+    }*@
+<!--</tbody>
+    </table>
+</div>-->
+
 <style>
     .btn-primary-fixed {
         color: #fff;
@@ -506,4 +471,5 @@
         padding: 5px;
     }
 </style>
+
 

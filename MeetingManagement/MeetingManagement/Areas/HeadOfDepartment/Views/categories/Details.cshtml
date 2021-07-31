@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <img style="width:100px;height:100px" src="https://media1.tenor.com/images/239a102840e57a65543cf5c7b3accd5f/tenor.gif">
-<div id="container">
+<div>
     <div style="text-transform: uppercase;font-size:20px;margin-bottom:20px" ; class="header">
         @Html.Label(Model.Category_Name)
         <button style="float: right; width: 90px;height: 45px;
@@ -47,3 +47,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="~/Content/quyhung/js/accodion-scripts.js"></script>
 
+<style>
+    .container{
+        width: calc(100% - 150px ) !important;
+    }
+</style>

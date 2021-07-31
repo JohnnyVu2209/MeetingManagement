@@ -89,7 +89,25 @@ else
                                 {
                                     if (item.Task_Status == false)
                                     {
-                                        <span id="option">
+
+                                        <ul class="sublist">
+                                            <li>
+                                                <a class="fa fa-bell"></a>
+                                            </li>
+                                            <li>
+                                                <a aria-hidden="true"
+                                                   class="edit-btn fa fa-pencil-square"
+                                                   onclick="getEditModal(@item.Task_id)"></a>
+                                            </li>
+                                            <li>
+                                                <a aria-hidden="true"
+                                                   class="fa fa-trash"
+                                                   onclick="return confirm('Bạn có muốn xoá công việc này?')"
+                                                   href="@Url.Action("Delete","Tasks",new {TaskID = item.Task_id })"></a>
+                                            </li>
+                                        </ul>
+
+                                        @*<span id="option">
                                             <i class="fa fa-ellipsis-h">
                                                 <ul class="sublist">
                                                     <li>
@@ -108,7 +126,7 @@ else
                                                     </li>
                                                 </ul>
                                             </i>
-                                        </span>
+                                        </span>*@
                                     }
                                 }
                             </td>
@@ -180,6 +198,9 @@ else
                         table-layout: fixed;
                     }
 
+                        table tbody tr td{
+                            vertical-align:middle !important;
+                        }
                         table tbody tr td:first-child {
                             width: 50px;
                         }
@@ -209,6 +230,15 @@ else
 
             .col-align {
                 text-align: center;
+            }
+
+            .sublist {
+                list-style-type: none;
+                display: flex;
+                justify-content: center;
+            }
+            .sublist > li{
+                padding:10px;
             }
         </style>
     </div>

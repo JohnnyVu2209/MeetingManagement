@@ -7,24 +7,24 @@
     <table class="table">
         <thead>
             <tr>
-                <th style="background-color: #009FE5;color:white" ; scope="col">Tên cuộc họp</th>
-                <th style="background-color: #009FE5;color:white" ; scope="col">Người chủ trì</th>
-                <th style="background-color: #009FE5;color:white" ; scope="col">Ngày họp</th>
-                <th style="background-color: #009FE5;color:white" ; scope="col">Trình trạng</th>
+                <th class="me-th" scope="col">Tên cuộc họp</th>
+                <th class="me-th" scope="col">Người chủ trì</th>
+                <th class="me-th" scope="col">Ngày họp</th>
+                <th class="me-th" text-align: center; " ; scope="col">Tình trạng</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr class="w400">
-                    <td>  
-                        <a href="'@Url.Action("Statistic","Meetings", new { id = item.Meeting_id})">
-                                 @item.Meeting_name
+                    <td style="vertical-align: middle;font-weight:bold">  
+                        <a href="@Url.Action("MeetingInfo2","Meetings", new { id = item.Meeting_id})">
+                            @item.Meeting_name
                         </a>
                     </td>
-                    <td>@item.AspNetUser.Full_name</td>
-                    <td>@Convert.ToDateTime(item.Date_Start).ToString("dd/MM/yyyy")</td>
-                    <td>
+                    <td style="vertical-align: middle;">@item.AspNetUser.Full_name</td>
+                    <td style="vertical-align: middle;">@Convert.ToDateTime(item.Date_Start).ToString("dd/MM/yyyy")</td>
+                    <td style="vertical-align: middle; font-weight: bold">
                         @if (@item.Status == 1)
                         {
                             <div class="pending-status">@item.MEETING_STATUS.Status_name</div>
@@ -45,7 +45,14 @@
                         {
                             <div class="complete-status">@item.MEETING_STATUS.Status_name</div>
                         }
-
+                        else if (@item.Status == 6)
+                        {
+                            <div class="basic-status" style="background-color: #607d8b">Không duyệt</div>
+                        }
+                        else if (@item.Status == 7)
+                        {
+                            <div class="basic-status" style="background-color: #607d8b">Đã hủy</div>
+                        }
                     </td>
                 </tr>
 
@@ -57,8 +64,24 @@
 </div>
 <style>
     .w400 td {
-        width: 400px;
+        width: auto;
+        text-align: center;
+        vertical-align: middle;
     }
+
+        .w400 td:first-child {
+            text-align: start;
+        }
+
+    .me-th {
+        text-align: center;
+        background-color: #009FE5;
+        color: white
+    }
+
+        .me-th:first-child {
+            text-align: start;
+        }
 </style>
 
 

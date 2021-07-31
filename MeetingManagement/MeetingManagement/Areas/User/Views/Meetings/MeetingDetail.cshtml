@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "MeetingInfo";
-    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
 
     //nếu modify = true thì mở chế độ edit/néu modify = false thì ở chế độ preview
     var is_modify = (ViewBag.modify == true) ? "" : "display:none";
@@ -11,7 +10,7 @@
 
     DateTime Date = DateTime.Now.Date;
     TimeSpan Time = DateTime.Now.TimeOfDay;
-    }
+}
 
 
 
@@ -26,13 +25,6 @@
                 <div style="display: inline-flex">
                     @Html.Label(Model.CATEGORY.Category_Name)
                 </div>
-                @if (Model.MEETING_STATUS.Status_id == 1 && ViewBag.modify == false)
-                {
-                    <div class="detail-tab-btn tablinks" style="width:80px;padding:0;" onclick="openTab(event,'meeting-info')">
-                        Chi tiết
-                    </div>
-                    <div class="pending-status">@Model.MEETING_STATUS.Status_name</div>
-                }
                 @if (Model.MEETING_STATUS.Status_id == 7)
                 {
                     <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-info')">
@@ -43,7 +35,7 @@
                     </div>
                     @*<div class="cancel-status">@Model.MEETING_STATUS.Status_name</div>*@
                 }
-                else if (Model.MEETING_STATUS.Status_id != 1 && ViewBag.modify == false)
+                else if (ViewBag.modify == false)
                 {
                     <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-info')">
                         Chi tiết
@@ -86,7 +78,7 @@
         </div>
     </div>
 
-    @if (Date == Model.Date_Start && Model.Status == 2)
+    @if (Date == Model.Date_Start && Model.Status == 2 && ViewBag.user_identity == Model.Create_by)
     {
         <div id="noti_zone" style="position: relative;height: 35px;"></div>
         if (Time >= Model.Time_Start)
@@ -96,13 +88,13 @@
                     Hãy cập nhật trạng thái mới cho cuộc họp
                 </p>
                 <a style="background-color: #3aac5d; cursor: pointer; width: 90px; padding: 0px 5px; border: 0.5px solid #f1f1f1; text-align: center; color: white">Cập nhật</a>
-                <div style="position: absolute; width: 50px; right: 30px; cursor:pointer; text-align:center" onclick="getElementById('noti_zone').style.display = 'none'">
+                <div style="position: absolute; width: 50px; right: 30px; cursor:pointer; text-align:center" onclick="close_noti()" id="x-btn">
                     x
                 </div>
             </div>
         }
     }
-    @if (Date > Model.Date_Start & Model.Status == 2)
+    @if (Date > Model.Date_Start & Model.Status == 2 && ViewBag.user_identity == Model.Create_by)
     {
         <div id="noti_zone" style="position: relative;height: 35px;"></div>
         <div id="noti" onshow="open_noti()" style="@is_modify; border-bottom: 1px solid #f1f1f1; width: calc(100% - 150px); height: 35px; background-color: #ffffcc; position: fixed; top: 110px; left: 150px; z-index: 10; display: flex; align-items: center; padding-left: 30px">
@@ -110,7 +102,7 @@
                 Hãy cập nhật trạng thái mới cho cuộc họp
             </p>
             <a onclick="location.href = '@Url.Action("StatusChanges","MEETINGs", new { id = Model.Meeting_id})';" style="background-color: #3aac5d; cursor: pointer; width: 90px; padding: 0px 5px; border: 0.5px solid #f1f1f1; text-align: center; color: white">Cập nhật</a>
-            <div style="position: absolute; width: 50px; right: 30px; cursor:pointer; text-align:center" onclick="getElementById('noti_zone').style.display = 'none'">
+            <div style="position: absolute; width: 50px; right: 30px; cursor:pointer; text-align:center" onclick="close_noti()" id="x-btn">
                 x
             </div>
         </div>
@@ -143,6 +135,10 @@
 <div id="Feedback"></div>
 
 <script>
+    function close_noti() {
+        var x = document.getElementById('x-btn').parentElement.style.display = "none";
+        var y = document.getElementById('noti_zone').style.display = "none";
+    }
             function openTab(evt, cityName) {
                 var i, tabcontent, tablinks;
                 tabcontent = document.getElementsByClassName("tabcontent");
@@ -212,9 +208,9 @@
             text-decoration: none;
         }
 
-        #partialview-zone{
-            height:2000px;
-        }
+    #partialview-zone {
+        height: 2000px;
+    }
 
 
     /*    .button-close {

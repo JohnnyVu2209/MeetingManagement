@@ -7,7 +7,7 @@
                     <th style="background-color: #009FE5;color:white" ; scope="col">Tên cuộc họp</th>
                     <th style="background-color: #009FE5;color:white" ; scope="col">Người chủ trì</th>
                     <th style="background-color: #009FE5;color:white" ; scope="col">Ngày họp</th>
-                    <th style="background-color: #009FE5;color:white" ; scope="col">Trình trạng</th>
+                    <th style="background-color: #009FE5;color:white" ; scope="col">Tình trạng</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,7 +36,22 @@
                             {
                                 <div class="incomplete-status">@item.MEETING_STATUS.Status_name</div>
                             }
-
+                            else if (item.Status == 4)
+                            {
+                                <div class="incomplete-status">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (@item.Status == 5)
+                            {
+                                <div class="complete-status complete-status-fixed">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (@item.Status == 6)
+                            {
+                                <div class="basic-status" style="background-color: #607d8b">Không duyệt</div>
+                            }
+                            else if (@item.Status == 7)
+                            {
+                                <div class="basic-status" style="background-color: #607d8b">Đã hủy</div>
+                            }
                         </td>
 
                     </tr>

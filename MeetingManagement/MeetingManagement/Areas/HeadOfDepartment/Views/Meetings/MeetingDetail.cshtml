@@ -2,78 +2,225 @@
 
 @{
     ViewBag.Title = "MeetingInfo";
-    Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
-    <link rel="stylesheet" href="~/Content/Meetings/meetingdetail.css" />
+
+    //nếu modify = true thì mở chế độ edit/néu modify = false thì ở chế độ preview
+    var is_modify = (ViewBag.modify == true) ? "" : "display:none";
+    var is_preview = (ViewBag.modify == false) ? "" : "display:none";
+
+
+    DateTime Date = DateTime.Now.Date;
+    TimeSpan Time = DateTime.Now.TimeOfDay;
 }
-@using (Html.BeginForm())
-{
+
+
+
+
 @Html.AntiForgeryToken()
 
 <body>
-    <div class="body-navbar">
-        <div class="nav-content-zone">
-            <img src="~/Content/Picture/users_meeting.png" />
-            <div class="lable-zone" style="display:flex;">
-                <div style="display: inline-flex">
-                    @Html.Label(Model.CATEGORY.Category_Name)
-                </div>
-                @if (Model.MEETING_STATUS.Status_id == 1)
-                {
-                    <div class="detail-tab-btn tablinks" style="width:80px;padding:0;" onclick="openTab(event,'meeting-info')">
-                        Chi tiết
+        <div class="body-navbar">
+            <div class="nav-content-zone">
+                <img src="~/Content/Picture/users_meeting.png" />
+                <div class="lable-zone" style="display:flex;">
+                    <div style="display: inline-flex">
+                        @Html.Label(Model.CATEGORY.Category_Name)
                     </div>
-                    @*<div class="pending-status" >@Model.MEETING_STATUS.Status_name</div>*@
-                }
-                else
-                {
-                    <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-info')">
-                        Chi tiết
-                    </div>
-                    <div class="detail-tab-btn tablinks " onclick="openTab(event,'meeting-task')">
-                        Công việc
-                    </div>
-                }
+                    @if (Model.MEETING_STATUS.Status_id == 7)
+                    {
+                        <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-info')">
+                            Chi tiết
+                        </div>
+                        <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-task')">
+                            Công việc
+                        </div>
+                        @*<div class="cancel-status">@Model.MEETING_STATUS.Status_name</div>*@
+                    }
+                    else if (ViewBag.modify == false)
+                    {
+                        <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-info')">
+                            Chi tiết
+                        </div>
+                        <div class="detail-tab-btn tablinks " onclick="openTab(event,'meeting-task')">
+                            Công việc
+                        </div>
+                        @*<div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-report')">
+                                Báo cáo
+                            </div>*@
+                    }
+                    else if (ViewBag.modify == true)
+                    {
+                        <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-info-edit')">
+                            Chi tiết
+                        </div>
+                        @*<div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-member')">
+                                Thành viên
+                            </div>*@
+                        <div class="detail-tab-btn tablinks " onclick="openTab(event,'meeting-task')">
+                            Công việc
+                        </div>
+                        @*<div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-report')">
+                                Báo cáo
+                            </div>*@
+                        if (ViewBag.user_identity == Model.Create_by && Model.Status > 1 && Model.Status < 5)
+                        {
+                            <div onclick="getCancelModel(1)" style="right: calc( 0% + 30px ); position: fixed;">
+                                <a class="cancel-btn">
+                                    Hủy cuộc họp
+                                </a>
+                            </div>
+                        }
 
+                    }
+                </div>
+                @*<div class="button-zone">
+                        <a class="btn button-close" onclick="location.href ='@Url.Action("Index", "MEETINGs")';">Close</a>
+                    </div>*@
             </div>
-            @*<div class="button-zone">
-                <a class="btn button-close" onclick="location.href ='@Url.Action("Index", "MEETINGs")';">Close</a>
+        </div>
+
+    @if (Date == Model.Date_Start && Model.Status == 2 && ViewBag.user_identity == Model.Create_by)
+    {
+        <div id="noti_zone" style="position: relative;height: 35px;"></div>
+        if (Time >= Model.Time_Start)
+        {
+            <div id="noti" onshow="open_noti()" style="@is_modify; border-bottom: 1px solid #f1f1f1; width: calc(100% - 150px); height: 35px; background-color: #ffffcc; position: fixed; top: 110px; left: 150px; z-index: 10; display: flex; align-items: center; padding-left: 30px">
+                <p style="margin:0px 10px 0px 0px;">
+                    Hãy cập nhật trạng thái mới cho cuộc họp
+                </p>
+                <a style="background-color: #3aac5d; cursor: pointer; width: 90px; padding: 0px 5px; border: 0.5px solid #f1f1f1; text-align: center; color: white">Cập nhật</a>
+                <div style="position: absolute; width: 50px; right: 30px; cursor:pointer; text-align:center" onclick="close_noti()" id="x-btn">
+                    x
+                </div>
+            </div>
+        }
+    }
+    @if (Date > Model.Date_Start & Model.Status == 2 && ViewBag.user_identity == Model.Create_by)
+    {
+        <div id="noti_zone" style="position: relative;height: 35px;"></div>
+        <div id="noti" onshow="open_noti()" style="@is_modify; border-bottom: 1px solid #f1f1f1; width: calc(100% - 150px); height: 35px; background-color: #ffffcc; position: fixed; top: 110px; left: 150px; z-index: 10; display: flex; align-items: center; padding-left: 30px">
+            <p style="margin:0px 10px 0px 0px;">
+                Hãy cập nhật trạng thái mới cho cuộc họp
+            </p>
+            <a onclick="location.href = '@Url.Action("StatusChanges","MEETINGs", new { id = Model.Meeting_id})';" style="background-color: #3aac5d; cursor: pointer; width: 90px; padding: 0px 5px; border: 0.5px solid #f1f1f1; text-align: center; color: white">Cập nhật</a>
+            <div style="position: absolute; width: 50px; right: 30px; cursor:pointer; text-align:center" onclick="close_noti()" id="x-btn">
+                x
+            </div>
+        </div>
+    }
+    <div id="partialview-zone">
+        <div id="meeting-info" class="tabcontent" style="@is_preview">
+            @Html.Action("MeetingInfo", "Meetings", new { Model.Meeting_id })
+        </div>
+        @*<div id="meeting-member" class="tabcontent" style="display:none">
+                @Html.Action("MeetingMember", "Meetings", new { Model.Meeting_id })
             </div>*@
+        <div id="meeting-task" class="tabcontent" style="display:none;">
+            @Html.Action("MeetingTask", "Meetings", new { Model.Meeting_id })
+        </div>
+        <div id="meeting-report" class="tabcontent" style="display:none;">
+            @Html.Action("MeetingReport", "Meetings", new { Model.Meeting_id })
+        </div>
+        <div id="meeting-info-edit" class="tabcontent" style="@is_modify">
+            @if (ViewBag.user_identity == Model.Create_by && Model.Status < 3)
+            {
+                @Html.Action("MeetingEdit", "Meetings", new { Model.Meeting_id })
+            }
+            else
+            {
+                @Html.Action("MeetingInfo", "Meetings", new { Model.Meeting_id })
+            }
         </div>
     </div>
-    <div id="meeting-info" class="tabcontent">
-        @Html.Action("MeetingInfo", "Meetings", new { Model.Meeting_id })
-    </div>
-    <div id="meeting-task" class="tabcontent" style="display:none;">
-        @Html.Action("MeetingTask", "Meetings", new { Model.Meeting_id })
-    </div>
-
 </body>
-}
+<div id="Feedback"></div>
+
 <script>
-    function openTab(evt, cityName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " active";
+    function close_noti() {
+        var x = document.getElementById('x-btn').parentElement.style.display = "none";
+        var y = document.getElementById('noti_zone').style.display = "none";
     }
+            function openTab(evt, cityName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+
+            function getCancelModel(type) {
+            var meeting_id = $("#Meeting_id").val();
+            var model_type = type;
+            //var meeting_location = document.getElementById("location_val").value;
+            //var meeting_content = document.getElementById("content_val").value;
+        $.ajax({
+            url: '@Url.Action("CancelModel", "Meetings")',
+            method: 'GET',
+            data: { meeting_id, model_type},
+            success: function (data) {
+            $("#Feedback").html(data);
+            $("#modalFeedback").appendTo("body").modal("show");
+            },
+        error: function (err) {
+            console.log(err);
+        }
+    })
+    }
+    @*function getCancelModel(id) {
+            $.ajax({
+                url: '@Url.Action("CancelModel", "Meetings")',
+                method: 'GET',
+                data: { id },
+                success: function (data) {
+                    $("#Feedback").html(data);
+                    $("#modalFeedback").appendTo("body").modal("show");
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+    }*@
+
+
 </script>
 
 <style>
-    .button-close {
+    /*cancel-btn*/
+    .cancel-btn {
+        width: 100px;
+        height: 40px;
+        background-color: #ff4d4d;
+        color: white;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        cursor: pointer
+    }
+
+        .cancel-btn:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+    #partialview-zone {
+        height: 2000px;
+    }
+
+
+    /*    .button-close {
         color: #212529;
         border-color: #212529;
     }
 
         .button-close:hover {
             background: #f1f1f1;
-        }
+        }*/
 
     .detail-tab-btn {
         margin-right: 10px;

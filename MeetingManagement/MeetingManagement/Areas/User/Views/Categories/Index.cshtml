@@ -2,50 +2,38 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
 }
-<link href="~/Content/Meetings/meetingdetail.css" rel="stylesheet" />
-<link href="~/Content/catalog-list.css" rel="stylesheet" />
-@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
-<body>
-
-
-    <div class="body-navbar">
-       
-        <div class="nav-content-zone">
-
-            <div class="lable-zone1">
-                <h2> Danh Mục</h2>
-            </div>
-        </div>
-
-    </div>
-    <div class="card-body card-body-fixed">
-        <div id="time-table" class="user-ctg-index-table-zone">
-            <div class="table user-ctg-index-table">
-                @foreach (var item in Model)
-                {
-                    <div onclick="location.href = '@Url.Action("Details","Categories", new { id = item.Category_id})';">
-                        @item.Category_Name
-                    </div>
-                }
-            </div>
-            @*<div class="wrapper">
-                    <ul class="catalogList">
-                        @foreach (var item in Model)
-                        {
-
-                            <li>
-                                <div onclick="location.href = '@Url.Action("Details","Categories", new { id = item.Category_id})';">@item.Category_Name</div>
-                            </li>
-                        }
-
-                    </ul>
-                </div>*@
+<div class="body-navbar">
+    <div class="nav-content-zone">
+        <div class="lable-zone1">
+            <h2> Danh Mục</h2>
         </div>
     </div>
-   
-</body>
+</div>
+<div class="card-body card-body-fixed">
+    <div id="time-table" class="user-ctg-index-table-zone">
+        <div class="table user-ctg-index-table">
+            @foreach (var item in Model)
+            {
+                <div onclick="location.href = '@Url.Action("Details","Categories", new { id = item.Category_id})';">
+                    @item.Category_Name
+                </div>
+            }
+        </div>
+        @*<div class="wrapper">
+                <ul class="catalogList">
+                    @foreach (var item in Model)
+                    {
+
+                        <li>
+                            <div onclick="location.href = '@Url.Action("Details","Categories", new { id = item.Category_id})';">@item.Category_Name</div>
+                        </li>
+                    }
+
+                </ul>
+            </div>*@
+    </div>
+</div>
 
 <style>
     .user-ctg-index-table-zone {
@@ -64,7 +52,7 @@
             color: black;
             padding: 15px 50px;
             border-radius: 3px;
-            cursor:pointer;
+            cursor: pointer;
         }
 
 
@@ -78,10 +66,6 @@
                 font-size: 16px;
             }
 
-
-    /*.user-ctg-index-table tbody tr:hover td {
-                background-color: #f1f1f1;
-            }*/
     .user-ctg-index-button {
         float: right;
         width: 60px;
@@ -107,6 +91,7 @@
         margin: 0px 2.5px;
         color: black;
     }
+
     .card-body-fixed {
         position: relative;
         top: 50px;
@@ -114,12 +99,12 @@
         height: 800px;
         z-index: 1;
     }
+
     .lable-zone1 {
         display: inline-block;
         position: absolute;
         color: black;
         line-height: 40px;
     }
-
 </style>
 

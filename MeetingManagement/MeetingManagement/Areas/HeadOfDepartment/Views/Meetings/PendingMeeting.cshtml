@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MeetingManagement.Models.MEETING>
+
+<link href="~/Content/catalog-list.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<ul class="catalogList">
+    @foreach (var item in Model)
+    {
+        if (item.Status == 1 || item.Status == 6)
+        {
+            var is_cancel = (item.Status == 7 || item.Status == 6) ? "background-color:grey" : "";
+            if (item.Create_by == ViewBag.user_identity && item.Status == 1)
+            {
+                <li style="@is_cancel; display: flex; align-items: center;">
+                    <p style="margin: 0px; width: 90%;" onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = item.Meeting_id, modify = true })';">@item.Meeting_name</p>
+                    @*<i style="position:absolute; left:0px;" class="fas fa-edit"></i>*@
+                </li>
+            }
+            else
+            {
+                <li style="@is_cancel; display: flex; align-items: center;" onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = item.Meeting_id, modify = false })';">
+                    @item.Meeting_name
+                </li>
+            }
+        }
+
+    }
+</ul>
+<style>
+    .catalogList > li:hover {
+        transform: none !important;
+    }
+
+    .catalogList > li {
+        padding: 0 25px;
+    }
+</style>
+

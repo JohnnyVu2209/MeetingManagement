@@ -126,7 +126,19 @@
             </a>
         </div>
     }*@
-
+<div class="body-navbar">
+    <div class="nav-content-zone">
+        <img src="~/Content/Picture/users_meeting.png" />
+        <div class="lable-zone" style="display:flex;">
+            <div style="display: inline-flex">
+                @Html.Label(Model.CATEGORY.Category_Name)
+            </div>
+            <div class="detail-tab-btn tablinks" style="width:80px;padding:0;" onclick="">
+                Chi tiết
+            </div>
+        </div>
+    </div>
+</div>
 <h4>Tiến độ:</h4>
 <div>
     <ul class="progressbar" style="border: 2px solid #e5e5e5; padding: 10px;">
@@ -169,7 +181,7 @@
             <li class="complete">Đã họp</li>
             <li class="complete">Biên bản họp</li>
             <li class="active">Hoàn thành</li>
- }
+        }
         else if (Model.Status == 7)
         {
             <li class="warning" style="display: block; height: 60px;">
@@ -341,83 +353,83 @@
 @if (Model.Check_report == true && Model.Status >= 3 && Model.Status < 5)
 {
     <div style="height:20px"></div>
-                    <h4>Biên bản họp:</h4>
-                    <div style="border: 2px solid #e5e5e5; padding: 20px; width: 1000px; overflow: overlay;">
-                        <div class="form-row-fixed">
-                            <a id="myfile" href="@Model.REPORT.Report_link" style="margin-right:20px;" download>
-                                <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
-                                    <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
-                                        @if (Model.REPORT.Report_type == "xls" || Model.REPORT.Report_type == "xlsm" || Model.REPORT.Report_type == "xlsx")
-                                        {
-                                            <i style="font-size: 40px; color: #1d6f42;" class="fas fa-file-excel text-primary"></i>
-                                        }
-                                        else if (Model.REPORT.Report_type == "pdf")
-                                        {
-                                            <i style="font-size: 40px; color: #f40f02;" class="fas fa-file-pdf text-primary"></i>
-                                        }
-                                        else if (Model.REPORT.Report_type == "doc" || Model.REPORT.Report_type == "docm" || Model.REPORT.Report_type == "docx")
-                                        {
-                                            <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
-                                        }
-                                        else if (Model.REPORT.Report_type == "jpg" || Model.REPORT.Report_type == "jpeg")
-                                        {
-                                            <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
-                                        }
-                                        else if (Model.REPORT.Report_type == "ppt" || Model.REPORT.Report_type == "pptm" || Model.REPORT.Report_type == "pptx")
-                                        {
-                                            <i style="font-size: 40px; color: #D04423" class="fas fa-file-powerpoint text-primary"></i>
-                                        }
-                                        else
-                                        {
-                                            <i style="font-size:40px; color:gray" class="fas fa-file text-primary"></i>
-                                        }
-                                    </div>
-                                    <div style="width:75%; padding:0 5px; color:black">
-                                        <p style="text-overflow: ellipsis; overflow: hidden; width: 140px; height: 20px; white-space: nowrap; ">
-                                            @Model.REPORT.Report_name
-                                        </p>
-                                        <p style="font-size:10px">
-                                            @Model.REPORT.Report_binary
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+    <h4>Biên bản họp:</h4>
+    <div style="border: 2px solid #e5e5e5; padding: 20px; width: 1000px; overflow: overlay;">
+        <div class="form-row-fixed">
+            <a id="myfile" href="@Model.REPORT.Report_link" style="margin-right:20px;" download>
+                <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
+                    <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                        @if (Model.REPORT.Report_type == "xls" || Model.REPORT.Report_type == "xlsm" || Model.REPORT.Report_type == "xlsx")
+                        {
+                            <i style="font-size: 40px; color: #1d6f42;" class="fas fa-file-excel text-primary"></i>
+                        }
+                        else if (Model.REPORT.Report_type == "pdf")
+                        {
+                            <i style="font-size: 40px; color: #f40f02;" class="fas fa-file-pdf text-primary"></i>
+                        }
+                        else if (Model.REPORT.Report_type == "doc" || Model.REPORT.Report_type == "docm" || Model.REPORT.Report_type == "docx")
+                        {
+                            <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
+                        }
+                        else if (Model.REPORT.Report_type == "jpg" || Model.REPORT.Report_type == "jpeg")
+                        {
+                            <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
+                        }
+                        else if (Model.REPORT.Report_type == "ppt" || Model.REPORT.Report_type == "pptm" || Model.REPORT.Report_type == "pptx")
+                        {
+                            <i style="font-size: 40px; color: #D04423" class="fas fa-file-powerpoint text-primary"></i>
+                        }
+                        else
+                        {
+                            <i style="font-size:40px; color:gray" class="fas fa-file text-primary"></i>
+                        }
                     </div>
+                    <div style="width:75%; padding:0 5px; color:black">
+                        <p style="text-overflow: ellipsis; overflow: hidden; width: 140px; height: 20px; white-space: nowrap; ">
+                            @Model.REPORT.Report_name
+                        </p>
+                        <p style="font-size:10px">
+                            @Model.REPORT.Report_binary
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
 }
 else if (Model.Check_report != true && Model.Create_by == ViewBag.user_identity && Model.Status >= 3 && Model.Status < 5)
 {
-                    @Html.Action("MeetingReport", "Meetings", new { id = Model.Meeting_id })
+    @Html.Action("MeetingReport", "Meetings", new { id = Model.Meeting_id })
+}
+
+@*<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member" aria-expanded="false" aria-controls="Member">
+        Danh sách thành viên
+    </a>*@
+
+@*<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Button with data-target
+    </button>*@
+@*<div class="collapse" id="Member" style="width:1000px;">
+        <table class="table">
+            <thead >
+                <tr style="background-color:#f1f1f1; color:black;">
+                    <th scope="col">#</th>
+                    <th class="col-align" scope="col">Tên thành viên</th>
+                    <th class="col-align" scope="col">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var member in Model.MEMBERs)
+                {
+                    <tr>
+                        <td>@(++i)</td>
+                        <td class="col-align">@member.AspNetUser.Full_name</td>
+                        <td class="col-align">@member.AspNetUser.Email</td>
+                    </tr>
                 }
-
-                @*<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member" aria-expanded="false" aria-controls="Member">
-                        Danh sách thành viên
-                    </a>*@
-
-                @*<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                        Button with data-target
-                    </button>*@
-                @*<div class="collapse" id="Member" style="width:1000px;">
-                        <table class="table">
-                            <thead >
-                                <tr style="background-color:#f1f1f1; color:black;">
-                                    <th scope="col">#</th>
-                                    <th class="col-align" scope="col">Tên thành viên</th>
-                                    <th class="col-align" scope="col">Email</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach(var member in Model.MEMBERs)
-                                {
-                                    <tr>
-                                        <td>@(++i)</td>
-                                        <td class="col-align">@member.AspNetUser.Full_name</td>
-                                        <td class="col-align">@member.AspNetUser.Email</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>*@
+            </tbody>
+        </table>
+    </div>*@
 
 <!--<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member2" aria-expanded="false" aria-controls="Member">
     Ngoài nhà trường

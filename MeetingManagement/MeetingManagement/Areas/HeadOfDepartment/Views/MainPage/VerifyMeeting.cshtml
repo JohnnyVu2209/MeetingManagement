@@ -25,7 +25,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
+    @Html.HiddenFor(m => m.Meeting_id)
     <body class="body-img">
         <div class="body-navbar">
             @*<button type="button" onclick="window.location.href='@Url.Action("Index", "MainPage")'" class="btn yuki-btn-blue>
@@ -52,101 +52,165 @@
         </div>
 
         <div style="position:relative; top:50px;">
-            <div class="form-row-fixed">
-                @*<img src="~/Content/Picture/outline_file_upload_black_24dp.png" />*@
-                @*<label class="icon-zone" for="input-ficons-1"><i class="fa fa-plus"></i></label>*@
-                @if (Model.ATTACHMENTs.Count != 0)
-                {
-                    foreach (var item in Model.ATTACHMENTs)
+            <div style="height:20px"></div>
+            <h4>Tài liệu đính kèm:</h4>
+            <div style="border: 2px solid #e5e5e5; padding: 20px; width: 1000px; overflow: overlay;">
+                <div class="form-row-fixed">
+                    @*<img src="~/Content/Picture/outline_file_upload_black_24dp.png" />*@
+                    @*<label class="icon-zone" for="input-ficons-1"><i class="fa fa-plus"></i></label>*@
+                    @if (Model.ATTACHMENTs.Count != 0)
                     {
-                        <a id="myfile" href="@item.Attachment_path" style="margin-right:20px;" download>
-                            <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
-                                <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
-                                    <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
-                                </div>
-                                <div style="width:75%; padding:0 5px; color:black">
-                                    <p>
-                                        @item.Attachment_name
-                                    </p>
-                                    <p style="font-size:10px">
-                                        @item.Attachment_binary
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
+                        foreach (var item in Model.ATTACHMENTs)
+                        {
+                            <a id="myfile" href="@item.Attachment_path" style="margin-right:20px;" download>
+                                <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
+                                    <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                                        @*@switch (item.Attachment_type)
+                                    {
+                                        case "xlsx":
+                                            <i style="font-size: 40px; color: #1D6F42;" class="fas fa-file-excel text-primary"></i>
+                                            break;
+                                        case "xls":
+                                            <i style="font-size: 40px; color: #1D6F42;" class="fas fa-file-excel text-primary"></i>
+                                            break;
+                                        case "docx":
+                                            <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
+                                            break;
+                                        case "doc":
+                                            <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
+                                            break;
+                                        case "pdf":
+                                            <i style="font-size: 40px; color: #F40F02;" class="fas fa-file-pdf text-primary"></i>
+                                            break;
+                                        case "jpg":
+                                            <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
+                                            break;
+                                        case "jpeg":
+                                            <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
+                                            break;
+                                        case "pptx":
+                                            <i style="font-size: 40px; color: #D04423" class="fas fa-file-powerpoint text-primary"></i>
+                                            break;
+                                        default:
+                                            <i style="font-size:40px; color:gray" class="fas fa-file text-primary"></i>
+                                            break;
+                                    }*@
 
+                                        @if (@item.Attachment_type == "xls" || item.Attachment_type == "xlsm" || item.Attachment_type == "xlsx")
+                                        {
+                                            <i style="font-size: 40px; color: #1d6f42;" class="fas fa-file-excel text-primary"></i>
+                                        }
+                                        else if (@item.Attachment_type == "pdf")
+                                        {
+                                            <i style="font-size: 40px; color: #f40f02;" class="fas fa-file-pdf text-primary"></i>
+                                        }
+                                        else if (@item.Attachment_type == "doc" || item.Attachment_type == "docm" || item.Attachment_type == "docx")
+                                        {
+                                            <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
+                                        }
+                                        else if (@item.Attachment_type == "jpg" || item.Attachment_type == "jpeg")
+                                        {
+                                            <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
+                                        }
+                                        else if (@item.Attachment_type == "ppt" || item.Attachment_type == "pptm" || item.Attachment_type == "pptx")
+                                        {
+                                            <i style="font-size: 40px; color: #D04423" class="fas fa-file-powerpoint text-primary"></i>
+                                        }
+                                        else
+                                        {
+                                            <i style="font-size:40px; color:gray" class="fas fa-file text-primary"></i>
+                                        }
+                                    </div>
+                                    <div style="width:75%; padding:0 5px; color:black">
+                                        <p style="text-overflow: ellipsis; overflow: hidden; width: 140px; height: 20px; white-space: nowrap; ">
+                                            @item.Attachment_name
+                                        </p>
+                                        <p style="font-size:10px">
+                                            @item.Attachment_binary
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
                     }
-
-                }
-                <div class="value-fixed">
-                    <div class="space"></div>
                 </div>
             </div>
-            <div class="form-row-fixed form-row-fixed-title" style="width:100%;">
-                <img src="~/Content/Picture/outline_title_black_24dp.png" />
-                <div class="value value-fixed">
-                    <div class="input-group input_fixed value-fixed-title" style="width: 800px !important;">
-                        @Html.DisplayFor(m => m.Meeting_name, new { @class = "input-fixed", @id = "meeting_name" })
+            <div style="height:20px"></div>
+            <h4>Thông tin chi tiết:</h4>
+            <div style=" width: 1000px; border: 2px solid #e5e5e5; padding: 10px;">
+                <div class="form-row-fixed form-row-fixed-title" style="width:100%;">
+                    <img src="~/Content/Picture/outline_title_black_24dp.png" />
+                    <div class="value value-fixed">
+                        <div class="input-group input_fixed value-fixed-title" style="width: 800px !important; padding-left: 5px; ">
+                            @Html.DisplayFor(m => m.Meeting_name, new { @class = "input-fixed", @id = "meeting_name" })
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-row-fixed datetime-inline">
-                <img src="~/Content/Picture/outline_event_black_24dp.png" />
-                <div class="value value-fixed value-fixed-location">
-                    <div class="input-group input_fixed">
-                        <div class="input-group-desc" style="display:flex ;height: 100%;">
-                            @Html.Label(Model.Date_Start.ToShortDateString(), new { @class = "input-fixed" })
+                <div class="form-row-fixed form-row-fixed-title" style="width:100%;">
+                    <img src="~/Content/Picture/outline_manage_accounts_black_24dp.png" />
+                    <div class="value value-fixed">
+                        <div class="input-group input_fixed value-fixed-title" style="width: 800px !important; padding-left: 5px;">
+                            @Html.DisplayFor(m => m.AspNetUser.Full_name, new { @class = "input-fixed", @id = "Create_by" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row-fixed datetime-inline">
+                    <img src="~/Content/Picture/outline_event_black_24dp.png" />
+                    <div class="value value-fixed value-fixed-location">
+                        <div class="input-group input_fixed">
+                            <div class="input-group-desc" style="display: flex; height: 100%; padding-left: 5px;">
+                                @Html.Label(Model.Date_Start.ToShortDateString(), new { @class = "input-fixed", @style = "font-weight:300;" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--
+        -->
+                <div class="form-row-fixed datetime-inline">
+                    <img src="~/Content/Picture/outline_schedule_black_24dp.png" />
+                    <div class="value value-fixed value-fixed-location">
+                        <div class="input-group input_fixed" style="padding-left: 5px;">
+                            <div class="input-group-desc" style="display:flex ;height: 100%;">
+                                @Html.DisplayFor(m => m.Time_Start, new { @class = "input-fixed" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row-fixed datetime-inline" style="width:100%;">
+                    <img src="~/Content/Picture/outline_place_black_24dp.png" />
+                    <div class="value value-fixed value-fixed-location">
+                        <div class="input-group input_fixed" style="width:800px;padding-left: 5px;">
+                            <div class="input-group-desc" style="display:flex ;height: 100%;">
+                                @Html.DisplayFor(m => m.Location, new { @class = "input-fixed" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row-fixed" style="align-items: flex-start !important; width: 100%; margin-top: 20px !important; ">
+                    <img src="~/Content/Picture/outline_edit_black_24dp.png" />
+                    <div class="value value-fixed" style="border: 1px solid #e5e5e5; border-radius: 5px; width: 970px; min-height: 200px;">
+                        <div class="input-group" style=" width: 100%; background: white; white-space: pre-line;">
+                            @*@Html.Label(Model.Meeting_content, new { @class = "area-input", @rows = "20" })*@
+                            <p style="margin:0px; margin-left: 10px; word-break: break-all; max-height: 500px; overflow-y: auto;">
+                                @Html.DisplayFor(m => m.Meeting_content)
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--
-            -->
-            <div class="form-row-fixed datetime-inline">
-                <img src="~/Content/Picture/outline_schedule_black_24dp.png" />
-                <div class="value value-fixed value-fixed-location">
-                    <div class="input-group input_fixed">
-                        <div class="input-group-desc" style="display:flex ;height: 100%;">
-                            @Html.Label(Model.Time_Start.ToString(), new { @class = "input-fixed" })
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--
-            -->
-            <div class="form-row-fixed datetime-inline" style="width:100%;">
-                <img src="~/Content/Picture/outline_place_black_24dp.png" />
-                <div class="value value-fixed value-fixed-location">
-                    <div class="input-group input_fixed" style="width:800px">
-                        <div class="input-group-desc" style="display:flex ;height: 100%;">
-                            @Html.Label(Model.Location.ToString(), new { @class = "input-fixed" })
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @*Content*@
-            <div class="form-row-fixed" style="align-items: flex-start !important; width: 100%; margin-top: 20px !important; ">
-                <img src="~/Content/Picture/outline_edit_black_24dp.png" />
-                <div class="value value-fixed" style="border: 1px solid #e5e5e5; border-radius: 5px; width: 966px; min-height: 200px;">
-                    <div class="input-group" style="width: 100%; background: white; white-space: pre; ">
-                        @*@Html.Label(Model.Meeting_content, new { @class = "area-input", @rows = "20" })*@
-                        @Html.DisplayFor(m => m.Meeting_content)
-                    </div>
-                </div>
-            </div>
-            <a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member" aria-expanded="false" aria-controls="Member">
+            <div style="height:20px"></div>
+            <h4>
                 Danh sách thành viên
-            </a>
+            </h4>
 
             @*<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                    Button with data-target
-                </button>*@
-            <div class="collapse" id="Member" style="width:1000px;">
+            Button with data-target
+        </button>*@
+            <div id="Member" style="width:1000px;">
                 <table class="table">
                     <thead>
                         <tr style="background-color:#f1f1f1; color:black;">
                             <th scope="col">#</th>
-                            <th class="col-align" scope="col">Tên thành viên</th>
                             <th class="col-align" scope="col">Email</th>
                         </tr>
                     </thead>
@@ -155,7 +219,6 @@
                         {
                             <tr>
                                 <td>@(++i)</td>
-                                <td class="col-align">@member.AspNetUser.Full_name</td>
                                 <td class="col-align">@member.AspNetUser.Email</td>
                             </tr>
                         }
@@ -425,19 +488,11 @@
             })
             }
     function VerifyMeeting() {
-        var category_id = $("#category_id").val();
-        var meeting_id = $("#meeting_id").val();
-        var meeting_name = $("#meeting_name").val();
-        var date_start = $("#date_start").val();
-        var time_start = $("#time_start").val();
-        var location = $("#location").val();
-        var content = $("#content").val();
-        var status = $("#status").val('2');
-
+        var meeting_id = $("#Meeting_id").val();
         $.ajax({
             url: '@Url.Action("VerifyMeeting","MainPage")',
             method: 'POST',
-            data: (category_id, meeting_id, meeting_name, date_start, time_start, location, content, status),
+            data: (meeting_id, status),
             success: function (data) {
             },
             error: function (err) {
