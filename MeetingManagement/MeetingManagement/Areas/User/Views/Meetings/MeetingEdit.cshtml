@@ -305,7 +305,7 @@
 <div class="value-fixed" style="height:10px;">
     <div class="space"></div>
 </div>
-@using (Html.BeginForm("CancelModel", "Meetings", FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+@using (Html.BeginForm("MeetingEdit", "Meetings", FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
 {
     @Html.HiddenFor(model => model.Category_id)
     @Html.HiddenFor(model => model.Meeting_id, new { @id = "meeting_id" })
@@ -388,6 +388,7 @@
                 </button>
             </div>
         </div>
+        
         @Html.HiddenFor(model => model.Create_by)
         @Html.HiddenFor(model => model.Date_Create)
         @Html.HiddenFor(model => model.Status, new { id = "status_val" })
@@ -425,9 +426,9 @@
             </div>
         }
         <div style=" width: 966px; display: flex; justify-content: center;">
-            <div onclick="getCancelModel()" style="border:0px; width: 100px; height: 40px; background-color: #009fe5; color: white; display: inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor:pointer">
+            <button type="submit" style="border:0px; width: 100px; height: 40px; background-color: #009fe5; color: white; display: inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor:pointer">
                 Lưu
-            </div>
+            </button>
             <a id="cancel-btn" onclick="location.href = '@Url.Action("Index", "Meetings")'" style="width: 100px; height: 40px; background-color: #f1f1f1; color: black; display:inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor: pointer ">
                 Hủy
             </a>

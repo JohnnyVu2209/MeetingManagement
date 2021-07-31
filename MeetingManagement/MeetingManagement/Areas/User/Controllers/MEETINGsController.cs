@@ -83,7 +83,6 @@ namespace MeetingManagement.Areas.User.Controllers
         [HttpPost]
         public ActionResult CancelModel(int meeting_id, MEETING model, int model_type)
         {
-            GetMeeting();
             var meeting = db.MEETINGs.Find(meeting_id);
             if (model_type == 1)
             {
@@ -93,74 +92,7 @@ namespace MeetingManagement.Areas.User.Controllers
             else
             {
                 meeting.Feedback = model.Feedback;
-                meeting.Meeting_name = model.Meeting_name;
-                if(meeting.Date_Start != model.Date_Start || meeting.Time_Start != model.Time_Start)
-                {
-                    meeting.Date_Start = model.Date_Start;
-                    meeting.Time_Start = model.Time_Start;
-                }
-                meeting.Location = model.Location;
-                meeting.Meeting_content = model.Meeting_content;
-
-                var updateMemberList = meetingEdit.MEMBERs.ToList();
-                var currentMemeberList = meeting.MEMBERs.ToList();
-
-                //member user
-                if(currentMemeberList.Count > updateMemberList.Count)
-                {
-                    for (int i = 0; i < currentMemeberList.Count; i++)
-                    {
-                        var exists = updateMemberList.Exists(x => x.Member_id == currentMemeberList[i].Member_id);
-                        if (!exists)
-                        {
-                            if(currentMemeberList[i].TASKs.Count != 0)
-                            {
-                                foreach (var task in currentMemeberList[i].TASKs.ToList())
-                                {
-                                    db.TASKs.Remove(task);
-                                }
-                            }
-                            db.MEMBERs.Remove(currentMemeberList[i]);
-                        }
-                    }
-                } //Add member
-                else if(currentMemeberList.Count < updateMemberList.Count)
-                {
-                    for (int i = 0; i < updateMemberList.Count; i++)
-                    {
-                        var exists = currentMemeberList.Exists(x => x.Member_id == updateMemberList[i].Member_id);
-                        if(!exists)
-                        {
-                            updateMemberList[i].Meeting_id = meeting_id;
-                            db.MEMBERs.Add(updateMemberList[i]);
-                        }
-                    }
-                }//Case User add member and remove member at the same time
-                else
-                {
-                    for (int i = 0; i < currentMemeberList.Count; i++)
-                    {
-                        for (int j = 0; j < updateMemberList.Count; j++)
-                        {
-                            var currExists = currentMemeberList.Exists(x => x.Member_id == updateMemberList[j].Member_id);
-                            var updateExists = updateMemberList.Exists(x => x.Member_id == currentMemeberList[i].Member_id);
-                            if(!currExists && !updateExists)
-                            {
-                                if (currentMemeberList[i].TASKs.Count != 0)
-                                {
-                                    foreach (var task in currentMemeberList[i].TASKs.ToList())
-                                    {
-                                        db.TASKs.Remove(task);
-                                    }
-                                }
-                                db.MEMBERs.Remove(currentMemeberList[i]);
-
-                                updateMemberList[i].Meeting_id = meeting_id;
-                                db.MEMBERs.Add(updateMemberList[j]);
-                            }
-                        }
-                    }
-                }
+                
             }
 
             db.Entry(meeting).State = EntityState.Modified;
@@ -203,14 +135,82 @@ namespace MeetingManagement.Areas.User.Controllers
         }
 
         [HttpPost]
-        public ActionResult MeetingEdit(MEETING meeting)
+        public ActionResult MeetingEdit(int meeting_id, MEETING model)
         {
-            ViewBag.date = DateTime.Now.ToShortDateString();
-            ViewBag.time = DateTime.Now.ToShortTimeString();
+            GetMeeting();
+            var meeting = db.MEETINGs.Find(meeting_id);
+            meeting.Meeting_name = model.Meeting_name;
+            if (meeting.Date_Start != model.Date_Start || meeting.Time_Start != model.Time_Start)
+            {
+                meeting.Date_Start = model.Date_Start;
+                meeting.Time_Start = model.Time_Start;
+            }
+            meeting.Location = model.Location;
+            meeting.Meeting_content = model.Meeting_content;
+
+            var updateMemberList = meetingEdit.MEMBERs.ToList();
+            var currentMemeberList = meeting.MEMBERs.ToList();
+
+            //member user
+            if (currentMemeberList.Count > updateMemberList.Count)
+            {
+                for (int i = 0; i < currentMemeberList.Count; i++)
+                {
+                    var exists = updateMemberList.Exists(x => x.Member_id == currentMemeberList[i].Member_id);
+                    if (!exists)
+                    {
+                        if (currentMemeberList[i].TASKs.Count != 0)
+                        {
+                            foreach (var task in currentMemeberList[i].TASKs.ToList())
+                            {
+                                db.TASKs.Remove(task);
+                            }
+                        }
+                        db.MEMBERs.Remove(currentMemeberList[i]);
+                    }
+                }
+            } //Add member
+            else if (currentMemeberList.Count < updateMemberList.Count)
+            {
+                for (int i = 0; i < updateMemberList.Count; i++)
+                {
+                    var exists = currentMemeberList.Exists(x => x.Member_id == updateMemberList[i].Member_id);
+                    if (!exists)
+                    {
+                        updateMemberList[i].Meeting_id = meeting_id;
+                        db.MEMBERs.Add(updateMemberList[i]);
+                    }
+                }
+            }//Case User add member and remove member at the same time
+            else
+            {
+                for (int i = 0; i < currentMemeberList.Count; i++)
+                {
+                    for (int j = 0; j < updateMemberList.Count; j++)
+                    {
+                        var currExists = currentMemeberList.Exists(x => x.Member_id == updateMemberList[j].Member_id);
+                        var updateExists = updateMemberList.Exists(x => x.Member_id == currentMemeberList[i].Member_id);
+                        if (!currExists && !updateExists)
+                        {
+                            if (currentMemeberList[i].TASKs.Count != 0)
+                            {
+                                foreach (var task in currentMemeberList[i].TASKs.ToList())
+                                {
+                                    db.TASKs.Remove(task);
+                                }
+                            }
+                            db.MEMBERs.Remove(currentMemeberList[i]);
+
+                            updateMemberList[i].Meeting_id = meeting_id;
+                            db.MEMBERs.Add(updateMemberList[j]);
+                        }
+                    }
+                }
+            }
             db.Entry(meeting).State = EntityState.Modified;
             db.SaveChanges();
-
-            return RedirectToAction("Index", "Meetings");
+            Session["MeetingEdit"] = meeting;
+            return RedirectToAction("MeetingDetail", new { id = meetingEdit.Meeting_id, modify = true });
         }
 
         public PartialViewResult MeetingInfo(int id)
