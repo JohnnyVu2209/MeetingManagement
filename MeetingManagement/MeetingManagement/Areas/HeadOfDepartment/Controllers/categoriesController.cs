@@ -105,5 +105,16 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 
         }
 
+        public ActionResult statistic()
+        {
+            ViewBag.allCate = db.CATEGORies.ToList();
+            return View();
+        }
+
+        public ActionResult statisticChart()
+        {
+            ViewBag.allCate = db.CATEGORies.ToList();
+            return View();
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
@@ -304,6 +304,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+
+
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -475,21 +477,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="login-form-05\css\bootstrap.min.css" />
-    <Content Include="login-form-05\css\bootstrap\bootstrap-reboot.css" />
-    <Content Include="login-form-05\css\bootstrap\bootstrap.css" />
-    <Content Include="login-form-05\css\owl.carousel.min.css" />
-    <Content Include="login-form-05\css\style.css" />
-    <Content Include="login-form-05\fonts\icomoon\demo-files\demo.css" />
-    <Content Include="login-form-05\fonts\icomoon\demo-files\demo.js" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.svg" />
-    <Content Include="login-form-05\fonts\icomoon\Read Me.txt" />
-    <Content Include="login-form-05\fonts\icomoon\style.css" />
-    <Content Include="login-form-05\js\bootstrap.min.js" />
-    <Content Include="login-form-05\js\jquery-3.3.1.min.js" />
-    <Content Include="login-form-05\js\main.js" />
-    <Content Include="login-form-05\js\owl.carousel.min.js" />
-    <Content Include="login-form-05\js\popper.min.js" />
     <Content Include="imgs\icons8-home-24.png" />
     <Content Include="imgs\icons8-home-64.png" />
     <Content Include="imgs\icons8-office-365-48.png" />
@@ -511,6 +498,7 @@
     <Content Include="Areas\Admin\Views\AspNetRoles\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\UserGridView.cshtml" />
+
     <Content Include="login-form-05\css\bootstrap.min.css" />
     <Content Include="login-form-05\css\bootstrap\bootstrap-reboot.css" />
     <Content Include="login-form-05\css\bootstrap\bootstrap.css" />
@@ -528,6 +516,7 @@
     <Content Include="login-form-05\js\main.js" />
     <Content Include="login-form-05\js\owl.carousel.min.js" />
     <Content Include="login-form-05\js\popper.min.js" />
+
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -668,8 +657,10 @@
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer-fa\theme.scss" />
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer\theme.scss" />
     <Content Include="Areas\User\Views\Meetings\MeetingReport.cshtml" />
+
     <Content Include="Areas\User\Views\Tasks\Create.cshtml" />
     <Content Include="Areas\User\Views\Tasks\Index.cshtml" />
+
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser2.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingList.cshtml" />
@@ -689,14 +680,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="login-form-05\css\.DS_Store" />
-    <Content Include="login-form-05\css\bootstrap.min.css.map" />
-    <Content Include="login-form-05\fonts\.DS_Store" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.eot" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.ttf" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.woff" />
-    <Content Include="login-form-05\fonts\icomoon\selection.json" />
-    <Content Include="login-form-05\images\.DS_Store" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
@@ -709,6 +692,7 @@
     <Content Include="Areas\User\Views\Meetings\PendingMeeting.cshtml" />
     <Content Include="Areas\User\Views\Meetings\CancelModel.cshtml" />
     <Content Include="Areas\User\Views\Meetings\DeleteAttachment.cshtml" />
+
     <Content Include="Areas\User\Views\HomePage\IndexCateDetail.cshtml" />
     <Content Include="Areas\User\Views\HomePage\IndexCateList.cshtml" />
     <Content Include="Areas\User\Views\HomePage\IndexMeetingList.cshtml" />
@@ -718,7 +702,9 @@
     <Content Include="Areas\User\Views\Meetings\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\indexTask.cshtml" />
+
     <Content Include="Areas\User\Views\Tasks\Edit.cshtml" />
+
     <EntityDeploy Include="Models\Models.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Models.Designer.cs</LastGenOutput>
@@ -726,6 +712,7 @@
     <Content Include="Models\Models.edmx.diagram">
       <DependentUpon>Models.edmx</DependentUpon>
     </Content>
+
     <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.woff" />

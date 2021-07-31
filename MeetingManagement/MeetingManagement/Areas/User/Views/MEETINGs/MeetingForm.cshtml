@@ -1,4 +1,4 @@
-﻿@model MeetingManagement.Models.MEETING
+@model MeetingManagement.Models.MEETING
 @using MeetingManagement.Models;
 @{
     ViewBag.Title = "Chi tiết cuộc hop";
@@ -378,6 +378,7 @@
             <div class="value value-fixed">
                 <div class="input-group input_fixed">
                     @Html.TextAreaFor(model => model.Meeting_content, new { @class = "input--style-5-fixed area-input", @rows = "5", @id = "content" })
+
                 </div>
             </div>
         </div>
