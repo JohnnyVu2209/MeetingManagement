@@ -3,13 +3,13 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+<div class="card-body card-body-fixed">
     <div class="yuki-table-zone1">
         <div class="yuki-table-out-header1">
-           
+
             <ul class="yuki-column-4">
                 <li class="yuki-col1">
-                   Tên cuộc họp
+                    Tên cuộc họp
                 </li>
                 <li class="yuki-col2">
                     Người chủ trì
@@ -23,8 +23,8 @@
 
             </ul>
         </div>
-        <table class="ml-table" >
-           
+        <table class="ml-table">
+
             <tbody>
                 @foreach (var item in Model)
                 {
@@ -67,6 +67,7 @@
 
         </table>
     </div>
+</div>
     <style>
 
         tr {
@@ -80,6 +81,7 @@
         ul > li span {
             font-size: 25px;
         }
+
         .ml-table {
             width: 100%;
             border: 1px solid black;
@@ -109,9 +111,6 @@
                 .ml-table tbody tr {
                     column-count: 4;
                 }
-       
-
-   
     </style>
 
 
