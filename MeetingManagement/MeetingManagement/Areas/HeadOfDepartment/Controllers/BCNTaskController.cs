@@ -16,7 +16,6 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
 
-        public ActionResult IndexBCNTask()
         private string ASIGNED_TASK = "Bạn đã được giao việc: ";
         private string REMIND_TASK = "Nhắc nhở hoàn thành công việc: ";
         private string TASK_DEADLINE = "Hạn hoàn thành: ";
@@ -154,19 +153,6 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             public int nopassM { get; set; }
             public int cancelM { get; set; }
         }
-
-        public ActionResult indexTask()
-        {
-            var userid = "f28b3bb0-99b7-439e-bc90-4c8c15fac1a2";
-            var mEMBER = db.MEMBERs.FirstOrDefault(x => x.Member_id == userid);
-            ViewBag.meeting = db.MEETINGs.Where(x => x.Meeting_id == mEMBER.Meeting_id).ToList();
-            ViewBag.task = db.TASKs.Where(x => x.Meeting_id == mEMBER.Meeting_id && x.Assignee == mEMBER.Member_id).ToList();
-            ViewBag.allWork = db.TASKs.ToList();
-/*            DateTime month07 = Convert.ToDateTime("07/dd/yyyy");*/
-            ViewBag.allMeeting = db.MEETINGs.ToList();
-            ViewBag.allCate = db.CATEGORies.ToList();
-            ViewBag.allMeetingStatus = db.MEETING_STATUS.ToList();
-            return View();
 
         [HttpGet]
         public ActionResult RemindTask(string AsigneeID, int MeetingID, string TaskName)
