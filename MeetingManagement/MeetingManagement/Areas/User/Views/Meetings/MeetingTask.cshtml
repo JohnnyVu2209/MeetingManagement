@@ -186,6 +186,9 @@ else
                         table-layout: fixed;
                     }
 
+                        table tbody tr td{
+                            vertical-align:middle !important;
+                        }
                         table tbody tr td:first-child {
                             width: 50px;
                         }
@@ -215,6 +218,15 @@ else
 
             .col-align {
                 text-align: center;
+            }
+
+            .sublist {
+                list-style-type: none;
+                display: flex;
+                justify-content: center;
+            }
+            .sublist > li{
+                padding:10px;
             }
         </style>
     </div>

@@ -5,7 +5,7 @@
         var is_cancel = (item.Status == 7 || item.Status == 6) ? "background-color:grey" : "";
         if (item.Create_by != ViewBag.user_identity)
         {
-            <li style="@is_cancel; display: flex; align-items: center;" onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id, modify = false })';">
+            <li style="@is_cancel; display: flex; align-items: center;" onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = item.Meeting_id, modify = false })';">
                 @item.Meeting_name
             </li>
         }

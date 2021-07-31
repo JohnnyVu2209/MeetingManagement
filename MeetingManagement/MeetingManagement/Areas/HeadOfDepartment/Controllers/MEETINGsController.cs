@@ -16,7 +16,10 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
     public class MEETINGsController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
+        private string currentUser;
         private MEETING meeting = null;
+        private const string File_Path_Attachment = "~/Upload/Attachments/";
+        private const string File_Path_Report = "~/Upload/Reports/";
         private void GetMeeting()
         {
             if (Session["Meeting"] != null)
@@ -62,14 +65,11 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 
                             MEETING meetings = db.MEETINGs.Where(x => x.Meeting_name == model.Meeting_name).FirstOrDefault();
 
-                            ATTACHMENT newAtt = new ATTACHMENT();
-
                             string extension = Path.GetExtension(Files.FileName);
+                            ATTACHMENT newAtt = new ATTACHMENT();
                             newAtt.Meeting_id = meetings.Meeting_id;
                             newAtt.Attachment_path = File_Path + meetings.Meeting_id + extension;
                             newAtt.Attachment_name = Files.FileName;
-                            newAtt.Attachment_name = Files.FileName;
-                            newAtt.Attachment_binary = Math.Round(((Double)Files.ContentLength / 1024), 2).ToString() + "KB";
                             db.ATTACHMENTs.Add(newAtt);
                             db.SaveChanges();
 
@@ -143,13 +143,13 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         {
             if (meeting.Date_Start <= DateTime.Today)
             {
-                ModelState.AddModelError("Date_Start", "Không được tạo cuộc họp trong cùng ngày hoặc trước đó");
+                ModelState.AddModelError("Date_Start", "Date is not valid");
             }
             TimeSpan twentyoneHour = new TimeSpan(21, 0, 0);
             TimeSpan seventhHour = new TimeSpan(07, 0, 0);
             if (meeting.Time_Start < seventhHour || meeting.Time_Start >= twentyoneHour)
             {
-                ModelState.AddModelError("Time_Start", "Không thể mở cuộc họp vào thời gian đó");
+                ModelState.AddModelError("Time_Start", "Time is not valid");
             }
         }
         public ActionResult AddUser(MEETING model, string email)
@@ -199,34 +199,94 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             ViewBag.meeting = db.MEETINGs.ToList();
             return View();
         }
-        public ActionResult MeetingDetail(int id)
+
+        //Meetings
+        public ActionResult MyMeeting()
         {
+            currentUser = User.Identity.GetUserId();
+            ViewBag.user_identity = currentUser;
+            var result = db.MEETINGs.ToList();
+            result = result.Where(m => m.Create_by.ToLower().Contains(currentUser)).ToList();
+            return PartialView("MyMeetingGridView", result);
+        }
+
+        public ActionResult JoinedMeeting()
+        {
+            currentUser = User.Identity.GetUserId();
+            ViewBag.user_identity = currentUser;
+            var meetings = from u in db.MEMBERs.Where(m => m.Member_id.ToLower().Contains(currentUser))
+                           from m in db.MEETINGs
+                           where u.Meeting_id == m.Meeting_id
+                           select m;
+            var notpending_meetings = meetings.Where(n => n.Status > 1);
+            return PartialView("JoinedMeetingGridView", notpending_meetings);
+        }
+
+        public ActionResult PendingMeeting()
+        {
+            currentUser  = User.Identity.GetUserId();
+            ViewBag.user_identity = currentUser;
+            var meetings = db.MEETINGs.ToList();
+            //meetings = meetings.Where(m => m.Create_by.ToLower().Contains(currentUser)).ToList();
+            return PartialView(meetings);
+        }
+
+        public ActionResult MeetingDetail(int id, bool modify)
+        {
+            ViewBag.modify = modify;
+            ViewBag.user_identity = User.Identity.GetUserId();
             var meeting = db.MEETINGs.Find(id);
             return View(meeting);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult MeetingDetail(int category_id, int meeting_id, string meeting_name, DateTime date_start, TimeSpan time_start, string location, string content, int status)
-        {
-            MEETING meeting = db.MEETINGs.Find(meeting_id);
-            meeting.Category_id = category_id;
-            meeting.Meeting_name = meeting_name;
-            meeting.Date_Start = date_start;
-            meeting.Time_Start = time_start;
-            meeting.Location = location;
-            meeting.Meeting_content = content;
-            meeting.Status = status;
-
-            db.Entry(meeting).State = EntityState.Modified;
-            db.SaveChanges();
-
-            return RedirectToAction("Index");
-        }
-        public PartialViewResult MeetingInfo(int id)
+        public ActionResult MeetingEdit(int id)
         {
             var meeting = db.MEETINGs.Find(id);
             return PartialView(meeting);
+        }
+
+        [HttpPost]
+        public ActionResult MeetingEdit(MEETING meeting)
+        {
+            ViewBag.date = DateTime.Now.ToShortDateString();
+            ViewBag.time = DateTime.Now.ToShortTimeString();
+            db.Entry(meeting).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Meetings");
+        }
+
+        public PartialViewResult MeetingInfo(int id)
+        {
+            ViewBag.user_identity = User.Identity.GetUserId();
+            var meeting = db.MEETINGs.Find(id);
+            return PartialView(meeting);
+        }
+
+        public ActionResult MeetingInfoModal(int id)
+        {
+            ViewBag.user_identity = User.Identity.GetUserId();
+            var meeting = db.MEETINGs.Find(id);
+            return View(meeting);
+        }
+        public ActionResult StatusChanges(int id)
+        {
+            var meeting = db.MEETINGs.Find(id);
+            meeting.Status = 3;
+            db.Entry(meeting).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("MeetingDetail", "Meetings", new { id = meeting.Meeting_id, modify = false });
+        }
+
+        public PartialViewResult MeetingMember(int id)
+        {
+            var meeting = db.MEETINGs.Find(id);
+            ViewBag.meeting_host = meeting.Create_by;
+            ViewBag.meeting_create = meeting.AspNetUser.Full_name;
+            ViewBag.meeting_user = meeting.AspNetUser.Email;
+            var member = db.MEMBERs.Where(x => x.Meeting_id == id).ToList();
+            return PartialView(member);
         }
         public ActionResult MeetingTask(int id)
         {
@@ -239,22 +299,101 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             ViewBag.IsCreateBy = isCreateBy(id);
             return PartialView(task);
         }
+
         private bool isCreateBy(int id)
         {
             var create_by = db.MEETINGs.Find(id).Create_by.ToString();
             var current_user = User.Identity.GetUserId().ToString();
-            bool check;
             if (current_user == create_by)
             {
                 return true;
             }
             return false;
         }
+
+        /*----------Meeting Report-------------*/
+        [HttpGet]
         public ActionResult MeetingReport(int id)
         {
-            var report = db.MEETINGs.Find(id);
-            return PartialView(report);
+            ViewBag.Meeting_id = id;
+            return PartialView();
         }
+        [HttpPost]
+        public ActionResult MeetingReport(int Meeting_id, HttpPostedFileBase ReportFile)
+        {
+            if (ReportFile != null)
+            {
+                using (var scope = new TransactionScope())
+                {
+                    if (ValidateFile(ReportFile))
+                    {
+                        REPORT report = new REPORT();
+                        report.Meeting_id = Meeting_id;
+                        report.Report_name = ReportFile.FileName;
+                        report.Report_binary = ((Double)ReportFile.ContentLength / 1024).ToString() + "KB";
+                        report.Report_type = ReportFile.ContentType;
+                        report.Report_link = File_Path_Report + ReportFile;
+                        db.REPORTs.Add(report);
+                        db.SaveChanges();
+
+                        var meeting = db.MEETINGs.Find(Meeting_id);
+                        meeting.Check_report = true;
+                        meeting.Status = 4;
+                        db.Entry(meeting).State = EntityState.Modified;
+                        db.SaveChanges();
+
+                        var path = Server.MapPath(File_Path_Report);
+                        string extension = Path.GetExtension(ReportFile.FileName);
+                        ReportFile.SaveAs(path + ReportFile);
+                    }
+                    ModelState.AddModelError("File", "Dung lượng tối đa cho phép là 5MB");
+                }
+            }
+            ModelState.AddModelError("FileAttach", "Chưa nộp báo cáo!");
+            return View("MeetingDetail", db.MEETINGs.Find(Meeting_id));
+        }
+        /*----------Meeting Report-------------*/
+        //public ActionResult MeetingDetail(int id)
+        //{
+        //    var meeting = db.MEETINGs.Find(id);
+        //    return View(meeting);
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult MeetingDetail(int category_id, int meeting_id, string meeting_name, DateTime date_start, TimeSpan time_start, string location, string content, int status)
+        //{
+        //    MEETING meeting = db.MEETINGs.Find(meeting_id);
+        //    meeting.Category_id = category_id;
+        //    meeting.Meeting_name = meeting_name;
+        //    meeting.Date_Start = date_start;
+        //    meeting.Time_Start = time_start;
+        //    meeting.Location = location;
+        //    meeting.Meeting_content = content;
+        //    meeting.Status = status;
+
+        //    db.Entry(meeting).State = EntityState.Modified;
+        //    db.SaveChanges();
+
+        //    return RedirectToAction("Index");
+        //}
+
+
+        //public PartialViewResult MeetingInfo(int id)
+        //{
+        //    var meeting = db.MEETINGs.Find(id);
+        //    return PartialView(meeting);
+        //}
+        //public ActionResult MeetingTask(int id)
+        //{
+        //    var task = db.TASKs.Where(x => x.Meeting_id == id).ToList();
+        //    return PartialView(task);
+        //}
+        //public ActionResult MeetingReport(int id)
+        //{
+        //    var report = db.MEETINGs.Find(id);
+        //    return PartialView(report);
+        //}
         public FileResult DownloadFile(int meeting_id)
         {
             var meeting = db.MEETINGs.Find(meeting_id);

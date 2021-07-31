@@ -99,7 +99,7 @@
             <table class="yuki-table">
                 @foreach (var meeting in Model)
                 {
-                    if (meeting.Status > 2 && meeting.Status < 5)
+                    if (meeting.Status == 3 || meeting.Status == 4)
                     {
                     <tr class="yuki-column-4" onclick="location.href = '@Url.Action("VerifyMeeting", "MainPage", new { id = meeting.Meeting_id })';" style="cursor: pointer;">
                         <td>@meeting.CATEGORY.Category_Name</td>

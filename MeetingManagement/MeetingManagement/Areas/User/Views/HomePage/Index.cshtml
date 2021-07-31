@@ -5,11 +5,11 @@
 <div class="row">
         @Html.Action("IndexMeetingList")
 </div>
-<div class="row-pos">
-    <div class="col-md-6" style="padding:0px">
+<div class="row">
+    @*<div class="col-md-6" style="padding:0px">
         @Html.Action("IndexCateList")
-    </div>
-    <div class="col-md-6" style="padding:0px">
+    </div>*@
+    <div class="col-md-12" style=" padding: 0px 100px; margin-top: 20px">
         @Html.Action("IndexTaskList")
     </div>
 </div>
@@ -19,13 +19,7 @@
         position: absolute;
         top: 0px;
     }
-   
-    .row-pos{
-        padding-top:20px;
-        width:100%;
-        height: 500px;
-        margin: 0px auto;
-    }
+  
 </style>
 
 

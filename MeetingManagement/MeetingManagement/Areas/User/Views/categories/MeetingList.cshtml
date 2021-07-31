@@ -1,30 +1,20 @@
 ﻿@model IEnumerable<MeetingManagement.Models.MEETING>
 <div class="card-body card-body-fixed">
-    <div class="yuki-table-zone1">
-        <div class="yuki-table-out-header1">
-
-            <ul class="yuki-column-4">
-                <li class="yuki-col1">
-                    Tên cuộc họp
-                </li>
-                <li class="yuki-col2">
-                    Người chủ trì
-                </li>
-                <li class="yuki-col3">
-                    Ngày họp
-                </li>
-                <li class="yuki-col4">
-                    Trình trạng
-                </li>
-
-            </ul>
-        </div>
-        <table class="ml-table">
+    <div id="table-content">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="background-color: #009FE5;color:white" ; scope="col">Tên cuộc họp</th>
+                    <th style="background-color: #009FE5;color:white" ; scope="col">Người chủ trì</th>
+                    <th style="background-color: #009FE5;color:white" ; scope="col">Ngày họp</th>
+                    <th style="background-color: #009FE5;color:white" ; scope="col">Tình trạng</th>
+                </tr>
+            </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
 
-                    <tr class="yuki-column-4">
+                    <tr class="w400">
                         <td>@item.Meeting_name</td>
                         <td>@item.AspNetUser.Email</td>
                         <td>@Convert.ToDateTime(item.Date_Start).ToString("dd/MM/yyyy")</td>
@@ -46,7 +36,22 @@
                             {
                                 <div class="incomplete-status">@item.MEETING_STATUS.Status_name</div>
                             }
-
+                            else if (item.Status == 4)
+                            {
+                                <div class="incomplete-status">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (@item.Status == 5)
+                            {
+                                <div class="complete-status complete-status-fixed">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (@item.Status == 6)
+                            {
+                                <div class="basic-status" style="background-color: #607d8b">Không duyệt</div>
+                            }
+                            else if (@item.Status == 7)
+                            {
+                                <div class="basic-status" style="background-color: #607d8b">Đã hủy</div>
+                            }
                         </td>
 
                     </tr>
@@ -55,8 +60,25 @@
         </table>
     </div>
 </div>
+<style>
+    .table thead th {
+        text-align: center;
+    }
 
-    <style>
+    .w400 td {
+        width: 400px;
+        text-align: center;
+    }
+
+    .card-body-fixed {
+        position: relative;
+        top: 50px;
+        width: 100%;
+        height: 800px;
+        z-index: 1;
+    }
+</style>
+@*<style>
         .table thead th {
             text-align: center;
         }
@@ -72,7 +94,7 @@
         ul > li span {
             font-size: 25px;
         }
-       
+
         .card-body-fixed {
             position: relative;
             top: 50px;
@@ -90,7 +112,7 @@
                 display: flex !important;
                 line-height: normal !important;
                 align-items: center;
-                justify-content: center;
+                justify-content: center;current_user
             }
 
             .ml-table thead {
@@ -109,4 +131,4 @@
                 .ml-table tbody tr {
                     column-count: 4;
                 }
-    </style>
+    </style>*@

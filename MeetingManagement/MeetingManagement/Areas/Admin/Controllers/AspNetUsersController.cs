@@ -94,7 +94,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
             }
         }
 
-        public PartialViewResult SearchUser(String searchText)
+        public PartialViewResult SearchUser(string searchText)
         {
             List<AspNetUser> model = GetUsers();
             var result = model.Where(a => a.UserName.ToLower().Contains(searchText) || a.Email.ToLower().Contains(searchText)).ToList();

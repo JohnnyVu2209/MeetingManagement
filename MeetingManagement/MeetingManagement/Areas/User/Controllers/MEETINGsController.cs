@@ -105,7 +105,15 @@ namespace MeetingManagement.Areas.User.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public ActionResult StatusChanges(int id)
+        {
+            var meeting = db.MEETINGs.Find(id);
+            meeting.Status = 3;
+            db.Entry(meeting).State = EntityState.Modified;
+            db.SaveChanges();
 
+            return RedirectToAction("MeetingDetail", "Meetings", new { id = meeting.Meeting_id, modify = false });
+        }
         public ActionResult DeleteAttachment(int id)
         {
             ATTACHMENT attachment = db.ATTACHMENTs.Find(id);
@@ -300,17 +308,14 @@ namespace MeetingManagement.Areas.User.Controllers
                 {
                     if (ValidateFile(ReportFile))
                     {
-                        var path = Server.MapPath(File_Path_Report);
-                        string extension = Path.GetExtension(ReportFile.FileName);
-                        ReportFile.SaveAs(path + ReportFile.FileName);
-
                         REPORT report = new REPORT();
-                        report.MEETING = db.MEETINGs.Find(Meeting_id);
+                        report.Meeting_id = Meeting_id;
                         report.Report_name = ReportFile.FileName;
                         report.Report_binary = Math.Round(((Double)ReportFile.ContentLength / 1024), 2).ToString() + "KB";
                         report.Report_type = ReportFile.ContentType;
-                        report.Report_link = File_Path_Report + ReportFile.FileName;
+                        report.Report_link = File_Path_Report + ReportFile;
                         db.REPORTs.Add(report);
+                        db.SaveChanges();
 
                         var meeting = db.MEETINGs.Find(Meeting_id);
                         meeting.Check_report = true;
@@ -318,14 +323,15 @@ namespace MeetingManagement.Areas.User.Controllers
                         db.Entry(meeting).State = EntityState.Modified;
                         db.SaveChanges();
 
-                        scope.Complete();
-                        return View("MeetingDetail", db.MEETINGs.Find(Meeting_id));
+                        var path = Server.MapPath(File_Path_Report);
+                        string extension = Path.GetExtension(ReportFile.FileName);
+                        ReportFile.SaveAs(path + ReportFile);
                     }
                     ModelState.AddModelError("File", "Dung lượng tối đa cho phép là 5MB");
                 }
             }
             ModelState.AddModelError("FileAttach", "Chưa nộp báo cáo!");
-            return View();
+            return View("MeetingDetail",db.MEETINGs.Find(Meeting_id));
         }
         /*----------Meeting Report-------------*/
 
@@ -347,8 +353,7 @@ namespace MeetingManagement.Areas.User.Controllers
             ViewBag.user_identity = currentUser;
             var result = db.MEETINGs.ToList();
             result = result.Where(m => m.Create_by.ToLower().Contains(currentUser)).ToList();
-            var notpending_result = result.Where(n => n.Status > 1);
-            return PartialView("MyMeetingGridView", notpending_result);
+            return PartialView("MyMeetingGridView", result);
         }
 
         public ActionResult JoinedMeeting()
@@ -369,8 +374,7 @@ namespace MeetingManagement.Areas.User.Controllers
             ViewBag.user_identity = currentUser;
             var meetings = db.MEETINGs.ToList();
             meetings = meetings.Where(m => m.Create_by.ToLower().Contains(currentUser)).ToList();
-            var meetings_1 = meetings.Where(n => n.Status == 1);
-            return PartialView(meetings_1);
+            return PartialView(meetings);
         }
 
         public ActionResult MeetingList(int id)

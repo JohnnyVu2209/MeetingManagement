@@ -109,12 +109,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 
 
 
-        public ActionResult StaticticBCN()
-        {
-
-
-
-
+        public ActionResult StaticticBCN() {
             return View();
 
         }
