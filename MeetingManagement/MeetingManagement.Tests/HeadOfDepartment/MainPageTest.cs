@@ -83,7 +83,7 @@ namespace MeetingManagement.Tests.HeadOfDepartment
             new_meeting.Status = 2;
 
             //Call function
-            controller.VerifyMeeting(new_meeting.Category_id, new_meeting.Meeting_id,new_meeting.Meeting_name, new_meeting.Date_Start, new_meeting.Time_Start.Value.Add(Timestart.Value), new_meeting.Location, new_meeting.Meeting_content, new_meeting.Status);
+            //controller.VerifyMeeting(new_meeting.Category_id, new_meeting.Meeting_id,new_meeting.Meeting_name, new_meeting.Date_Start, new_meeting.Time_Start.Value.Add(Timestart.Value), new_meeting.Location, new_meeting.Meeting_content, new_meeting.Status);
             db.Entry(meeting).Reload();
             //Check new data
             Assert.AreEqual("Đây là dữ liệu Test mới", db.MEETINGs.Find(34).Meeting_name);

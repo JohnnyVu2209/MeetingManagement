@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Chi tiết cuộc hop";
     var Date = DateTime.Now.ToShortDateString();
+    var meetingID = ViewBag.MeetingID;
 }
 <style>
     .edit_fixed {
@@ -218,36 +219,37 @@
             </div>*@
     </div>
 </div>
-<input style=" position: relative; left: 620px; height: auto;" type="file" name="ReportFile" id="ReportFile" class="form-control" accept=".zip,.pdf,.doc,.docx,.xml,application/msword" />
-<script type="text/javascript">
-    $(() => {
-        $('#ReportFile').on("change", function () {
-            var fileUpload = document.getElementById("ReportFile");
-            $('#ReportName').val(fileUpload.files[0].name);
-        });
-    });
-</script>
-@*<div style="width: 1000px; height: 34px; margin: 0px; display: flex; ">
-        <div class="input-group">
-            <span class="input-group-btn">
-                <span class="form-group btn btn-default btn-file">
-                    Browse…
-                    <input type="file" name="ReportFile" id="ReportFile" class="form-control" accept=".zip,.pdf,.doc,.docx,.xml,application/msword" />
-                </span>
-            </span>
-            <input type="text" id="ReportName" class="form-control" readonly>
-        </div>
-        @Html.ValidationMessage("FileAttach", "", new { @class = "text-danger custom-danger" })
-        <div >
-            <input type="submit" class="btn btn-danger" value="Upload" />
-        </div>
-    </div>*@
-
-<div class="value-fixed" style="height:10px;">
-    <div class="space"></div>
-</div>
-@using (Html.BeginForm("MeetingEdit", "Meetings", FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+@using (Html.BeginForm("MeetingEdit", "Meetings", FormMethod.Post, new { id = "__AjaxAntiForgeryForm", enctype = "multipart/form-data" }))
 {
+    <input style=" position: relative; left: 620px; height: auto;" type="file" name="fileBase" id="ReportFile" class="form-control" accept=".zip,.pdf,.doc,.docx,.xml,application/msword" />
+    <script type="text/javascript">
+        $(() => {
+            $('#ReportFile').on("change", function () {
+                var fileUpload = document.getElementById("ReportFile");
+                $('#ReportName').val(fileUpload.files[0].name);
+            });
+        });
+    </script>
+
+    @*<div style="width: 1000px; height: 34px; margin: 0px; display: flex; ">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <span class="form-group btn btn-default btn-file">
+                        Browse…
+                        <input type="file" name="ReportFile" id="ReportFile" class="form-control" accept=".zip,.pdf,.doc,.docx,.xml,application/msword" />
+                    </span>
+                </span>
+                <input type="text" id="ReportName" class="form-control" readonly>
+            </div>
+            @Html.ValidationMessage("FileAttach", "", new { @class = "text-danger custom-danger" })
+            <div >
+                <input type="submit" class="btn btn-danger" value="Upload" />
+            </div>
+        </div>*@
+
+    <div class="value-fixed" style="height:10px;">
+        <div class="space"></div>
+    </div>
     @Html.HiddenFor(model => model.Category_id)
     @Html.HiddenFor(model => model.Meeting_id, new { @id = "meeting_id" })
     <div style=" width: 1000px; border: 2px solid #e5e5e5; padding: 10px;">
@@ -315,9 +317,8 @@
         @Html.HiddenFor(model => model.Date_Create)
         @Html.HiddenFor(model => model.Status, new { id = "status_val" })
         <div style=" width: 966px; display: flex; justify-content: center;">
-            <div onclick="getCancelModel(2)" style="border:0px; width: 100px; height: 40px; background-color: #009fe5; color: white; display: inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor:pointer">
-                Lưu
-            </div>
+            <input type="submit" value="Save" style="border:0px; width: 100px; height: 40px; background-color: #009fe5; color: white; display: inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor:pointer"/>
+               
             <a id="cancel-btn" onclick="location.href = '@Url.Action("Index", "Meetings")'" style="width: 100px; height: 40px; background-color: #f1f1f1; color: black; display:inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor: pointer ">
                 Hủy
             </a>
@@ -336,44 +337,44 @@
 {
     <div style="border: 2px solid #e5e5e5; padding: 20px; width: 1000px; overflow: overlay;">
         <div class="form-row-fixed">
-                    <a id="myfile" href="@Model.REPORT.Report_link" style="margin-right:20px;" download>
-                        <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
-                            <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
-                                @if (Model.REPORT.Report_type == "xls" || Model.REPORT.Report_type == "xlsm" || Model.REPORT.Report_type == "xlsx")
-                                {
-                                    <i style="font-size: 40px; color: #1d6f42;" class="fas fa-file-excel text-primary"></i>
-                                }
-                                else if (Model.REPORT.Report_type == "pdf")
-                                {
-                                    <i style="font-size: 40px; color: #f40f02;" class="fas fa-file-pdf text-primary"></i>
-                                }
-                                else if (Model.REPORT.Report_type == "doc" || Model.REPORT.Report_type == "docm" || Model.REPORT.Report_type == "docx")
-                                {
-                                    <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
-                                }
-                                else if (Model.REPORT.Report_type == "jpg" || Model.REPORT.Report_type == "jpeg")
-                                {
-                                    <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
-                                }
-                                else if (Model.REPORT.Report_type == "ppt" || Model.REPORT.Report_type == "pptm" || Model.REPORT.Report_type == "pptx")
-                                {
-                                    <i style="font-size: 40px; color: #D04423" class="fas fa-file-powerpoint text-primary"></i>
-                                }
-                                else
-                                {
-                                    <i style="font-size:40px; color:gray" class="fas fa-file text-primary"></i>
-                                }
-                            </div>
-                            <div style="width:75%; padding:0 5px; color:black">
-                                <p style="text-overflow: ellipsis; overflow: hidden; width: 140px; height: 20px; white-space: nowrap; ">
-                                    @Model.REPORT.Report_name
-                                </p>
-                                <p style="font-size:10px">
-                                    @Model.REPORT.Report_binary
-                                </p>
-                            </div>
-                        </div>
-                    </a>
+            <a id="myfile" href="@Model.REPORT.Report_link" style="margin-right:20px;" download>
+                <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
+                    <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                        @if (Model.REPORT.Report_type == "xls" || Model.REPORT.Report_type == "xlsm" || Model.REPORT.Report_type == "xlsx")
+                        {
+                            <i style="font-size: 40px; color: #1d6f42;" class="fas fa-file-excel text-primary"></i>
+                        }
+                        else if (Model.REPORT.Report_type == "pdf")
+                        {
+                            <i style="font-size: 40px; color: #f40f02;" class="fas fa-file-pdf text-primary"></i>
+                        }
+                        else if (Model.REPORT.Report_type == "doc" || Model.REPORT.Report_type == "docm" || Model.REPORT.Report_type == "docx")
+                        {
+                            <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
+                        }
+                        else if (Model.REPORT.Report_type == "jpg" || Model.REPORT.Report_type == "jpeg")
+                        {
+                            <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
+                        }
+                        else if (Model.REPORT.Report_type == "ppt" || Model.REPORT.Report_type == "pptm" || Model.REPORT.Report_type == "pptx")
+                        {
+                            <i style="font-size: 40px; color: #D04423" class="fas fa-file-powerpoint text-primary"></i>
+                        }
+                        else
+                        {
+                            <i style="font-size:40px; color:gray" class="fas fa-file text-primary"></i>
+                        }
+                    </div>
+                    <div style="width:75%; padding:0 5px; color:black">
+                        <p style="text-overflow: ellipsis; overflow: hidden; width: 140px; height: 20px; white-space: nowrap; ">
+                            @Model.REPORT.Report_name
+                        </p>
+                        <p style="font-size:10px">
+                            @Model.REPORT.Report_binary
+                        </p>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
 }

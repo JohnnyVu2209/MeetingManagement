@@ -1,40 +1,54 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-    @Html.AntiForgeryToken()
+    @*using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right" style="display:block">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-            <li class="user-logoff"><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
-    }
+        <ul class="nav navbar-nav navbar-right" style="display:block">
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+                <li class="user-logoff"><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+        }*@
+    <div class="yuki-login-info">
+        @Html.AntiForgeryToken()
+        <form action="/Account/LogOff" class="navbar-right" id="logoutForm" method="post">
+            <input name="__RequestVerificationToken" type="hidden" value="0QsAFnSb3n1zreLkSn-36gjZP0J9SWqcPdmkctdnG2yNSDG_KyWKoMPJAuBKajBKYlzDYICrZiOp4D3KW9bHf-yTKlzczRqy81DPv8On_Cq9lDV0lXYXj5iN34qUCY67wnmOB6PoXqvaleoHvVTh_g2">
+            <div class="nav navbar-nav navbar-right" style="display:block">
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                <a class="user-logoff" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+            </div>
+        </form>
+    </div>
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right login-index index login-index-update">
-        @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
-        <li class="user-login">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    <div class="yuki-login-info navbar-right">
+        <a class="user-login" href="/" id="loginLink">Log in</a>
+    </div>
+    <!--<ul class="nav navbar-nav navbar-right login-index index login-index-update">-->
+    @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+    <!--<li class="user-login">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>-->
 }
 
 <style>
-    .navbar-right > li > a {
+    .navbar-right a {
         color: white;
     }
 
     .user-logoff {
         right: 0%;
+        margin-left: 35px;
     }
 
     .login-index-update {
         width: 363.200px;
     }
+
     .user-login {
         float: right !important;
     }
-    
 </style>

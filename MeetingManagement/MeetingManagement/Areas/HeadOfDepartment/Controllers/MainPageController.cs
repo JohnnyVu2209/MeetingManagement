@@ -12,8 +12,10 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 
     public class MainPageController : Controller
     {
-        string VERIFY_MEETING = "Cuộc họp của bạn đã được duyệt.";
-        string REFUSE_MEETING = "Cuộc họp của bạn đã bị từ chối. Lý do: ";
+        private string VERIFY_MEETING = "Cuộc họp của bạn đã được duyệt.";
+        private string REFUSE_MEETING = "Cuộc họp của bạn đã bị từ chối. Lý do: ";
+        private string MEETING_DATE = "Cuộc họp sẽ diễn ra lúc: ";
+        private string MEETING_ADDRESS = "Nơi diễn ra cuộc họp: ";
         private SEP24Team7Entities db = new SEP24Team7Entities();
         // GET: HeadOfDepartment/Home
         public ActionResult Index()
@@ -36,28 +38,44 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult VerifyMeeting(int category_id, int meeting_id, string meeting_name, DateTime date_start, TimeSpan time_start, string location, string content, int status)
+        public ActionResult VerifyMeeting(MEETING meeting, int meeting_id)
         {
-            MEETING meeting = db.MEETINGs.Find(meeting_id);
-            meeting.Category_id = category_id;
-            meeting.Meeting_name = meeting_name;
-            meeting.Date_Start = date_start;
-            meeting.Time_Start = time_start;
-            meeting.Location = location;
-            meeting.Meeting_content = content;
-            meeting.Status = status;
+            if (ModelState.IsValid)
+            {
+                meeting = db.MEETINGs.Find(meeting_id);
+                meeting.Status = 2;
 
-            db.Entry(meeting).State = EntityState.Modified;
-            db.SaveChanges();
+                db.Entry(meeting).State = EntityState.Modified;
+                db.SaveChanges();
 
-            string To = db.AspNetUsers.Find(meeting.Create_by).Email;
-            string Subject = meeting.Meeting_name;
-            string Body = VERIFY_MEETING;
-            Outlook mail = new Outlook(To,Subject,Body);
-            mail.SendMail();
-            return RedirectToAction("Index");
+                string To = db.AspNetUsers.Find(meeting.Create_by).Email;
+                string Subject = meeting.Meeting_name;
+                string Body = VERIFY_MEETING + Environment.NewLine +
+                                MEETING_DATE + meeting.Date_Start + Environment.NewLine +
+                                MEETING_ADDRESS + meeting.Location ;
+
+                Outlook mail = new Outlook(To, Subject, Body);
+                mail.SendMail();
+                return RedirectToAction("Index");
+            }
+            return null;
         }
 
+        private void sendMailToMembers(MEETING meeting)
+        {
+            var member = from m in db.MEMBERs.Where(m => m.Meeting_id == meeting.Meeting_id)
+                         from u in db.AspNetUsers
+                         where u.Id == m.Member_id
+                         select u;
+            foreach (var item in member)
+            {
+                string Receiver = item.Email;
+                string Subject = meeting.Meeting_name;
+                string Body = MEETING_DATE + meeting.Date_Start + Environment.NewLine + MEETING_ADDRESS + meeting.Location;
+                Outlook mail = new Outlook(Receiver, Subject, Body);
+                mail.SendMail();
+            }
+        }
 
         //public PartialViewResult GrdOtherTable()
         //{
@@ -91,7 +109,8 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 
 
 
-        public ActionResult StaticticBCN() {
+        public ActionResult StaticticBCN()
+        {
 
 
 

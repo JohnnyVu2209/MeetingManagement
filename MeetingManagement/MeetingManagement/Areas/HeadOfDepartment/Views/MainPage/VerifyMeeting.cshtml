@@ -27,21 +27,20 @@
     @Html.AntiForgeryToken()
 
     <body class="body-img">
-        <div class="body-navbar">
-            @*<button type="button" onclick="window.location.href='@Url.Action("Index", "MainPage")'" class="btn yuki-btn-blue>
-                    ❮   Back to List
-                </button>*@
+        @Html.HiddenFor(model=>model.Meeting_id)
+        <div class="body-navbar">            
             <div class="nav-content-zone">
                 <img src="~/Content/Picture/users_meeting.png" />
                 <div class="lable-zone">
                     @Html.Label(Model.CATEGORY.Category_Name.ToString())
                 </div>
                 <div class="button-zone">
-                    <button onclick="VerifyMeeting()" class="btn yuki-btn-blue">
+                    @*<button onclick="VerifyMeeting()" class="btn yuki-btn-blue">
                         <p>
                             Duyệt
                         </p>
-                    </button>
+                    </button>*@
+                    <button type="submit" class="btn btn-primary yuki-btn-blue">Duyệt</button>
                     <button onclick="getFeedbackModal(@Model.Meeting_id)" type="button" class="btn yuki-btn-gray">
                         <p>
                             Không Duyệt
@@ -424,27 +423,6 @@
                 }
             })
             }
-    function VerifyMeeting() {
-        var category_id = $("#category_id").val();
-        var meeting_id = $("#meeting_id").val();
-        var meeting_name = $("#meeting_name").val();
-        var date_start = $("#date_start").val();
-        var time_start = $("#time_start").val();
-        var location = $("#location").val();
-        var content = $("#content").val();
-        var status = $("#status").val('2');
-
-        $.ajax({
-            url: '@Url.Action("VerifyMeeting","MainPage")',
-            method: 'POST',
-            data: (category_id, meeting_id, meeting_name, date_start, time_start, location, content, status),
-            success: function (data) {
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        })
-    }
         //function getCreateModal() {
         //    $.ajax({
         //        url: "GrdMemberTable",

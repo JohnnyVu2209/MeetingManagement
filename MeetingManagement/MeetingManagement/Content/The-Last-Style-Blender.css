@@ -75,9 +75,28 @@ body {
 
             #yuki-menu ul li a {
                 display: block;
-                color: #ffffff;
-                padding: 0px 1em;
-                text-decoration: none;
+                <style> .navbar-right > li > a
+
+{
+    color: white;
+}
+
+.user-logoff {
+    right: 0%;
+}
+
+.login-index-update {
+    width: 363.200px;
+}
+
+.user-login {
+    float: right !important;
+}
+
+</style >
+color: #ffffff;
+padding: 0px 1em;
+text-decoration: none;
             }
 
             #yuki-menu ul li:hover {
@@ -122,7 +141,8 @@ body {
 .yuki-login-info {
     position: absolute;
     right: 50px;
-    top: 0px;
+    top: 8px;
+    width: 300px;
 }
 /*--#table--*/
 .yuki-table-zone {
