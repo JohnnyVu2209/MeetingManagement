@@ -3,63 +3,115 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<div id="table-content">
-    <table class="table">
-        <thead>
-            <tr>
-                <th style="background-color: #009FE5;color:white" ; scope="col">Tên cuộc họp</th>
-                <th style="background-color: #009FE5;color:white" ; scope="col">Người chủ trì</th>
-                <th style="background-color: #009FE5;color:white" ; scope="col">Ngày họp</th>
-                <th style="background-color: #009FE5;color:white" ; scope="col">Trình trạng</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr class="w400">
-                    <td>  
-                        <a href="'@Url.Action("Statistic","Meetings", new { id = item.Meeting_id})">
-                                 @item.Meeting_name
-                        </a>
-                    </td>
-                    <td>@item.AspNetUser.Full_name</td>
-                    <td>@Convert.ToDateTime(item.Date_Start).ToString("dd/MM/yyyy")</td>
-                    <td>
-                        @if (@item.Status == 1)
-                        {
-                            <div class="pending-status">@item.MEETING_STATUS.Status_name</div>
-                        }
-                        else if (@item.Status == 2)
-                        {
-                            <div class="waiting-status">@item.MEETING_STATUS.Status_name</div>
-                        }
-                        else if (@item.Status == 3)
-                        {
-                            <div class="missing-status">@item.MEETING_STATUS.Status_name</div>
-                        }
-                        else if (@item.Status == 4)
-                        {
-                            <div class="incomplete-status" style="width:125px">@item.MEETING_STATUS.Status_name</div>
-                        }
-                        else if (@item.Status == 5)
-                        {
-                            <div class="complete-status">@item.MEETING_STATUS.Status_name</div>
-                        }
+<div class="card-body card-body-fixed">
+    <div class="yuki-table-zone1">
+        <div class="yuki-table-out-header1">
 
-                    </td>
-                </tr>
+            <ul class="yuki-column-4">
+                <li class="yuki-col1">
+                    Tên cuộc họp
+                </li>
+                <li class="yuki-col2">
+                    Người chủ trì
+                </li>
+                <li class="yuki-col3">
+                    Ngày họp
+                </li>
+                <li class="yuki-col4">
+                    Trình trạng
+                </li>
 
-            }
-        </tbody>
+            </ul>
+        </div>
+        <table class="ml-table">
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="yuki-column-4">
+                        <td>
+                            <a href="'@Url.Action("Statistic","Meetings", new { id = item.Meeting_id})">
+                                @item.Meeting_name
+                            </a>
+                        </td>
+                        <td>@item.AspNetUser.Full_name</td>
+                        <td>@Convert.ToDateTime(item.Date_Start).ToString("dd/MM/yyyy")</td>
+                        <td>
+                            @if (@item.Status == 1)
+                            {
+                                <div class="pending-status">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (@item.Status == 2)
+                            {
+                                <div class="waiting-status">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (@item.Status == 3)
+                            {
+                                <div class="missing-status">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (@item.Status == 4)
+                            {
+                                <div class="incomplete-status" style="width:125px">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (@item.Status == 5)
+                            {
+                                <div class="complete-status">@item.MEETING_STATUS.Status_name</div>
+                            }
+
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
 
 
-    </table>
+        </table>
+    </div>
 </div>
-<style>
-    .w400 td {
-        width: 400px;
-    }
-</style>
+    <style>
+
+        tr {
+            height: 48px;
+        }
+
+        table ul li {
+            display: inline;
+        }
+
+        ul > li span {
+            font-size: 25px;
+        }
+
+        .ml-table {
+            width: 100%;
+            border: 1px solid black;
+            border-top: none;
+        }
+
+            .ml-table tbody tr td {
+                display: flex !important;
+                line-height: normal !important;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .ml-table thead {
+            }
+
+                .ml-table thead tr {
+                }
+
+                    .ml-table thead tr th {
+                        text-align: center;
+                    }
+
+            .ml-table tbody {
+            }
+
+                .ml-table tbody tr {
+                    column-count: 4;
+                }
+    </style>
 
 
 

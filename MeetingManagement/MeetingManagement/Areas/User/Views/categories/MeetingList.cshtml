@@ -1,20 +1,30 @@
 ﻿@model IEnumerable<MeetingManagement.Models.MEETING>
 <div class="card-body card-body-fixed">
-    <div id="table-content">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th style="background-color: #009FE5;color:white" ; scope="col">Tên cuộc họp</th>
-                    <th style="background-color: #009FE5;color:white" ; scope="col">Người chủ trì</th>
-                    <th style="background-color: #009FE5;color:white" ; scope="col">Ngày họp</th>
-                    <th style="background-color: #009FE5;color:white" ; scope="col">Trình trạng</th>
-                </tr>
-            </thead>
+    <div class="yuki-table-zone1">
+        <div class="yuki-table-out-header1">
+
+            <ul class="yuki-column-4">
+                <li class="yuki-col1">
+                    Tên cuộc họp
+                </li>
+                <li class="yuki-col2">
+                    Người chủ trì
+                </li>
+                <li class="yuki-col3">
+                    Ngày họp
+                </li>
+                <li class="yuki-col4">
+                    Trình trạng
+                </li>
+
+            </ul>
+        </div>
+        <table class="ml-table">
             <tbody>
                 @foreach (var item in Model)
                 {
 
-                    <tr class="w400">
+                    <tr class="yuki-column-4">
                         <td>@item.Meeting_name</td>
                         <td>@item.AspNetUser.Email</td>
                         <td>@Convert.ToDateTime(item.Date_Start).ToString("dd/MM/yyyy")</td>
@@ -51,10 +61,18 @@
             text-align: center;
         }
 
-        .w400 td {
-            width: 400px;
-            text-align: center;
+        tr {
+            height: 48px;
         }
+
+        table ul li {
+            display: inline;
+        }
+
+        ul > li span {
+            font-size: 25px;
+        }
+       
         .card-body-fixed {
             position: relative;
             top: 50px;
@@ -62,4 +80,33 @@
             height: 800px;
             z-index: 1;
         }
+        .ml-table {
+            width: 100%;
+            border: 1px solid black;
+            border-top: none;
+        }
+
+            .ml-table tbody tr td {
+                display: flex !important;
+                line-height: normal !important;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .ml-table thead {
+            }
+
+                .ml-table thead tr {
+                }
+
+                    .ml-table thead tr th {
+                        text-align: center;
+                    }
+
+            .ml-table tbody {
+            }
+
+                .ml-table tbody tr {
+                    column-count: 4;
+                }
     </style>
