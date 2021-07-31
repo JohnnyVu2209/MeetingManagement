@@ -277,36 +277,37 @@
             </div>*@
     </div>
 </div>
-<input style=" position: relative; left: 620px; height: auto;" type="file" name="ReportFile" id="ReportFile" class="form-control" accept=".zip,.pdf,.doc,.docx,.xml,application/msword" />
-<script type="text/javascript">
-    $(() => {
-        $('#ReportFile').on("change", function () {
-            var fileUpload = document.getElementById("ReportFile");
-            $('#ReportName').val(fileUpload.files[0].name);
-        });
-    });
-</script>
-@*<div style="width: 1000px; height: 34px; margin: 0px; display: flex; ">
-        <div class="input-group">
-            <span class="input-group-btn">
-                <span class="form-group btn btn-default btn-file">
-                    Browse…
-                    <input type="file" name="ReportFile" id="ReportFile" class="form-control" accept=".zip,.pdf,.doc,.docx,.xml,application/msword" />
-                </span>
-            </span>
-            <input type="text" id="ReportName" class="form-control" readonly>
-        </div>
-        @Html.ValidationMessage("FileAttach", "", new { @class = "text-danger custom-danger" })
-        <div >
-            <input type="submit" class="btn btn-danger" value="Upload" />
-        </div>
-    </div>*@
-
-<div class="value-fixed" style="height:10px;">
-    <div class="space"></div>
-</div>
-@using (Html.BeginForm("MeetingEdit", "Meetings", FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+@using (Html.BeginForm("MeetingEdit", "Meetings", FormMethod.Post, new { id = "__AjaxAntiForgeryForm", enctype = "multipart/form-data" }))
 {
+    <input style=" position: relative; left: 620px; height: auto;" type="file" name="fileBase" id="ReportFile" class="form-control" accept=".zip,.pdf,.doc,.docx,.xml,application/msword" />
+    <script type="text/javascript">
+        $(() => {
+            $('#ReportFile').on("change", function () {
+                var fileUpload = document.getElementById("ReportFile");
+                $('#ReportName').val(fileUpload.files[0].name);
+            });
+        });
+    </script>
+
+    @*<div style="width: 1000px; height: 34px; margin: 0px; display: flex; ">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <span class="form-group btn btn-default btn-file">
+                        Browse…
+                        <input type="file" name="ReportFile" id="ReportFile" class="form-control" accept=".zip,.pdf,.doc,.docx,.xml,application/msword" />
+                    </span>
+                </span>
+                <input type="text" id="ReportName" class="form-control" readonly>
+            </div>
+            @Html.ValidationMessage("FileAttach", "", new { @class = "text-danger custom-danger" })
+            <div >
+                <input type="submit" class="btn btn-danger" value="Upload" />
+            </div>
+        </div>*@
+
+    <div class="value-fixed" style="height:10px;">
+        <div class="space"></div>
+    </div>
     @Html.HiddenFor(model => model.Category_id)
     @Html.HiddenFor(model => model.Meeting_id, new { @id = "meeting_id" })
     @Html.HiddenFor(model => model.AspNetUser)

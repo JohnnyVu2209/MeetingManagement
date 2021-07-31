@@ -66,7 +66,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 
                             string extension = Path.GetExtension(Files.FileName);
                             newAtt.Meeting_id = meetings.Meeting_id;
-                            newAtt.Attachment_path = File_Path + meetings.Meeting_id+extension;
+                            newAtt.Attachment_path = File_Path + meetings.Meeting_id + extension;
                             newAtt.Attachment_name = Files.FileName;
                             newAtt.Attachment_name = Files.FileName;
                             newAtt.Attachment_binary = Math.Round(((Double)Files.ContentLength / 1024), 2).ToString() + "KB";
@@ -230,8 +230,25 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         }
         public ActionResult MeetingTask(int id)
         {
+            ViewBag.create_by = db.MEETINGs.Find(id).Create_by;
+            ViewBag.user_identity = User.Identity.GetUserId();
+            ViewBag.meeting_status = db.MEETINGs.Find(id).Status;
             var task = db.TASKs.Where(x => x.Meeting_id == id).ToList();
+            ViewBag.Task = task;
+            ViewBag.Meeting = id;
+            ViewBag.IsCreateBy = isCreateBy(id);
             return PartialView(task);
+        }
+        private bool isCreateBy(int id)
+        {
+            var create_by = db.MEETINGs.Find(id).Create_by.ToString();
+            var current_user = User.Identity.GetUserId().ToString();
+            bool check;
+            if (current_user == create_by)
+            {
+                return true;
+            }
+            return false;
         }
         public ActionResult MeetingReport(int id)
         {

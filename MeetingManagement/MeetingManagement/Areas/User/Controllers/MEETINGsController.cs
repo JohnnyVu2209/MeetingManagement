@@ -20,6 +20,12 @@ namespace MeetingManagement.Areas.User.Controllers
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
         private string currentUser;
+        private MEETING meeting = null;
+        private const string MEETING_TIME = "Thời gian diễn ra cuộc họp: ";
+        private const string MEETING_LOCATION = "Địa điểm diễn ra cuộc họp: ";
+        private const string File_Path_Attachment = "~/Upload/Attachments/";
+        private const string File_Path_Report = "~/Upload/Reports/";
+        private string Old_location;
         private MEETING meetingSS = null;
         private MEETING meetingEdit = null;
         private void GetMeeting()
@@ -97,12 +103,6 @@ namespace MeetingManagement.Areas.User.Controllers
 
             db.Entry(meeting).State = EntityState.Modified;
             db.SaveChanges();
-
-            //string To = db.AspNetUsers.Find(meeting.Create_by).Email;
-            //string Subject = meeting.Meeting_name;
-            //string Body = REFUSE_MEETING + feedback;
-            //Outlook mail = new Outlook(To, Subject, Body);
-            //mail.SendMail();
             return RedirectToAction("Index");
         }
 
@@ -135,17 +135,47 @@ namespace MeetingManagement.Areas.User.Controllers
         }
 
         [HttpPost]
-        public ActionResult MeetingEdit(int meeting_id, MEETING model)
+        public ActionResult MeetingEdit(int meeting_id, MEETING model, HttpPostedFileBase? fileBase)
+        {
+            var meeting = model;
+            if (fileBase != null)
+            {
+                meeting = updateMeeting(meeting_id, model);
+
+                var filename = Path.GetFileName(fileBase.FileName);
+                ATTACHMENT attchment = new ATTACHMENT();
+                attchment.Meeting_id = meeting.Meeting_id;
+                attchment.Attachment_path = File_Path_Attachment + meeting.Meeting_id + filename;
+                attchment.Attachment_name = fileBase.FileName;
+                attchment.Attachment_binary = Math.Round(((Double)fileBase.ContentLength / 1024), 2).ToString() + "KB";
+                db.ATTACHMENTs.Add(attchment);
+                db.SaveChanges();
+
+                var path = Server.MapPath(File_Path_Attachment);
+                fileBase.SaveAs(path + meeting.Meeting_id + filename);
+
+
+            }
+            meeting = updateMeeting(meeting_id, model);
+
+            return RedirectToAction("MeetingDetail", new { id = meetingEdit.Meeting_id, modify = true });
+        }
+
+        private MEETING updateMeeting(int meeting_id, MEETING model)
         {
             GetMeeting();
             var meeting = db.MEETINGs.Find(meeting_id);
+
             meeting.Meeting_name = model.Meeting_name;
             if (meeting.Date_Start != model.Date_Start || meeting.Time_Start != model.Time_Start)
             {
                 meeting.Date_Start = model.Date_Start;
                 meeting.Time_Start = model.Time_Start;
             }
-            meeting.Location = model.Location;
+            if(meeting.Location != model.Location)
+            {
+                meeting.Location = model.Location;
+            }
             meeting.Meeting_content = model.Meeting_content;
 
             var updateMemberList = meetingEdit.MEMBERs.ToList();
@@ -207,10 +237,12 @@ namespace MeetingManagement.Areas.User.Controllers
                     }
                 }
             }
+
             db.Entry(meeting).State = EntityState.Modified;
             db.SaveChanges();
             Session["MeetingEdit"] = meeting;
-            return RedirectToAction("MeetingDetail", new { id = meetingEdit.Meeting_id, modify = true });
+
+            return meeting;
         }
 
         public PartialViewResult MeetingInfo(int id)
@@ -244,7 +276,8 @@ namespace MeetingManagement.Areas.User.Controllers
         {
             var create_by = db.MEETINGs.Find(id).Create_by.ToString();
             var current_user = User.Identity.GetUserId().ToString();
-            if (currentUser == create_by)
+            bool check;
+            if (current_user == create_by)
             {
                 return true;
             }
@@ -295,7 +328,6 @@ namespace MeetingManagement.Areas.User.Controllers
             return View();
         }
         /*----------Meeting Report-------------*/
-
 
         public ActionResult Delete_Attachment(int id)
         {
@@ -447,8 +479,7 @@ namespace MeetingManagement.Areas.User.Controllers
             return true;
         }
 
-        private const string File_Path_Attachment = "~/Upload/Attachments/";
-        private const string File_Path_Report = "~/Upload/Reports/";
+
 
         [HttpGet]
         public ActionResult AddUser(MEETING model, string email)

@@ -1,0 +1,65 @@
+﻿@model MeetingManagement.Models.TASK
+
+<link href="~/Content/taocuochop/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/taocuochop/vendor/font-awesome-4.7/css/font-awesome.css" rel="stylesheet" />
+<!-- Font special for pages-->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+<!-- Vendor CSS-->
+<link href="~/Content/taocuochop/vendor/select2/select2.min.css" rel="stylesheet" />
+<link href="~/Content/taocuochop/vendor/datepicker/daterangepicker.css" rel="stylesheet" />
+<!-- Main CSS-->
+<link href="~/Content/taocuochop/css/main.css" rel="stylesheet" />
+
+<div class="modal fade" id="TaskEditModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Sửa công việc</h4>
+            </div>
+            @using (Ajax.BeginForm("Edit", "Tasks", new AjaxOptions { HttpMethod = "Post", OnSuccess = "CreateSuccess" }, new { @class = "form-horizontal", @id = "createformid", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-body">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Task_id)
+                    @Html.HiddenFor(model => model.Meeting_id)
+                    @Html.HiddenFor(model => model.Task_Status)
+                    @Html.HiddenFor(model => model.Notify)
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-2">
+                            @Html.EditorFor(model => model.Task_name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Task_name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-2">
+                            @Html.DropDownList("Asignee", (IEnumerable<SelectListItem>)ViewBag.Member, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-2">
+                            @Html.EditorFor(model => model.Task_Deadline, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Task_Deadline, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Sửa</button>
+                </div>
+            }
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script src="~/taocuochop/vendor/jquery/jquery.min.js"></script>
+<!-- Vendor JS-->
+<script src="~/taocuochop/vendor/select2/select2.min.js"></script>
+<script src="~/taocuochop/vendor/datepicker/moment.min.js"></script>
+<script src="~/taocuochop/vendor/datepicker/daterangepicker.js"></script>
+<!-- Main JS-->
+<script src="~/taocuochop/js/global.js"></script>
