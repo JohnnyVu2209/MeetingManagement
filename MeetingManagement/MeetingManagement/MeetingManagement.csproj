@@ -705,7 +705,6 @@
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingTask.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingInfo.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingReport.cshtml" />
-    <Content Include="Areas\User\Views\Meetings\MeetingEdit.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingMember.cshtml" />
     <Content Include="Areas\User\Views\Meetings\PendingMeeting.cshtml" />
     <Content Include="Areas\User\Views\Meetings\CancelModel.cshtml" />
@@ -737,6 +736,7 @@
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff" />
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
     <Content Include="Areas\HeadOfDepartment\Views\Shared\outplay.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\MeetingEdit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

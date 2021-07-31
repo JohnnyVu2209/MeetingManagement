@@ -17,7 +17,7 @@
         <section>
             @using (Html.BeginForm("MeetingReport", "Meetings", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
             {
-@Html.AntiForgeryToken()
+                @Html.AntiForgeryToken()
                 <div class="well bs-component" style="height:140px;">
                     <br />
                     @Html.Hidden("Meeting_id", id_meeting)

@@ -1,7 +1,12 @@
 ﻿@model MeetingManagement.Models.MEETING
+@using MeetingManagement.Models;
 @{
     ViewBag.Title = "Chi tiết cuộc hop";
     var Date = DateTime.Now.ToShortDateString();
+    var newMeet = ViewBag.newMeet as MEETING;
+    var userList = ViewBag.userList as List<string>;
+    var db = new SEP24Team7Entities();
+    var m = new List<AspNetUser>();
 }
 <style>
     .edit_fixed {
@@ -71,6 +76,60 @@
         .slider.round:before {
             border-radius: 50%;
         }
+
+    .autocomplete {
+        position: relative;
+        display: inline-block;
+    }
+
+    input {
+        border: 1px solid transparent;
+        background-color: #f1f1f1;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+        input[type=text] {
+            background-color: #f1f1f1;
+            width: 100%;
+        }
+
+        input[type=submit] {
+            background-color: DodgerBlue;
+            color: #fff;
+            cursor: pointer;
+        }
+
+    .autocomplete-items {
+        position: absolute;
+        border: 1px solid #d4d4d4;
+        border-bottom: none;
+        border-top: none;
+        z-index: 99;
+        /*position the autocomplete items to be the same width as the container:*/
+        top: 100%;
+        left: 15px;
+        right: 0;
+        width: 295px;
+    }
+
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: 1px solid #d4d4d4;
+        }
+
+            /*when hovering an item:*/
+            .autocomplete-items div:hover {
+                background-color: #e9e9e9;
+            }
+
+    /*when navigating through the items using the arrow keys:*/
+    .autocomplete-active {
+        background-color: DodgerBlue !important;
+        color: #ffffff;
+    }
 </style>
 <div>
     <ul class="progressbar" style="border: 2px solid #e5e5e5; padding: 10px; ">
@@ -246,16 +305,21 @@
 <div class="value-fixed" style="height:10px;">
     <div class="space"></div>
 </div>
-@using (Html.BeginForm("MeetingEdit", "Meetings", FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+@using (Html.BeginForm("CancelModel", "Meetings", FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
 {
     @Html.HiddenFor(model => model.Category_id)
     @Html.HiddenFor(model => model.Meeting_id, new { @id = "meeting_id" })
+    @Html.HiddenFor(model => model.AspNetUser)
+    foreach (var user in userList)
+    {
+        @Html.Hidden("user", user);
+    }
     <div style=" width: 1000px; border: 2px solid #e5e5e5; padding: 10px;">
         <div class="form-row-fixed form-row-fixed-title" style="width:100%;">
             <img src="~/Content/Picture/outline_title_black_24dp.png" />
             <div class="value value-fixed">
                 <div class="input-group input_fixed value-fixed-title" style="width: 800px !important;">
-                    @Html.TextBoxFor(m => m.Meeting_name, new { @class = "edit_fixed", @id = "meeting_name_val" })
+                    @Html.TextBoxFor(model => model.Meeting_name, new { @class = "edit_fixed", @id = "meeting_name_val" })
                 </div>
             </div>
         </div>
@@ -263,7 +327,7 @@
             <img src="~/Content/Picture/outline_manage_accounts_black_24dp.png" />
             <div class="value value-fixed">
                 <div class="input-group input_fixed value-fixed-title" style="width: 800px !important; background-color: #f1f1f1; padding-left: 5px; height: 30px; display: flex; align-items: center;">
-                    @Html.DisplayFor(m => m.AspNetUser.Full_name, new { @class = "input-fixed", @id = "Create_by" })
+                    @Html.DisplayFor(model => model.AspNetUser.Full_name, new { @class = "input-fixed", @id = "Create_by" })
                 </div>
             </div>
         </div>
@@ -272,7 +336,7 @@
             <div class="value value-fixed value-fixed-location">
                 <div class="input-group input_fixed">
                     <div class="input-group-desc" style="display: flex; height: 100%; width: 100%;">
-                        @Html.TextBoxFor(m => m.Date_Start, "{0:yyyy-MM-dd}", new { @class = "input--style-5-fixed", @type = "date", @id = "date_start_val", @style = "width: 100%; border:0px; padding-left: 5px;height: 30px;" })
+                        @Html.TextBoxFor(model => model.Date_Start, "{0:yyyy-MM-dd}", new { @class = "input--style-5-fixed", @type = "date", @id = "date_start_val", @style = "width: 100%; border:0px; padding-left: 5px;height: 30px;" })
                     </div>
                 </div>
             </div>
@@ -311,11 +375,57 @@
                 </div>
             </div>
         </div>
+        <div class="form-row-fixed" style="margin-bottom:20px;">
+            <div class="col-sm-1" style="width:fit-content;padding-left:0;">
+                <img src="~/Content/Picture/outline_people_black_24dp.png" />
+            </div>
+            <div class="col-md-6 autocomplete">
+                <input type="text" style="width:max-content" class="form-control " id="myInput" autocomplete="off" />
+            </div>
+            <div class="col-md-4" style="margin-left:10px;">
+                <button type="button" style="color: white; margin-left: 10px;" data-toggle="modal" onclick="getCreateModal()" class="btn yuki-btn-blue">
+                    Thêm
+                </button>
+            </div>
+        </div>
         @Html.HiddenFor(model => model.Create_by)
         @Html.HiddenFor(model => model.Date_Create)
         @Html.HiddenFor(model => model.Status, new { id = "status_val" })
+        @Html.HiddenFor(model => model.MEETING_STATUS)
+        @Html.Hidden("model_type", 2)
+        @Html.HiddenFor(model => model.MEMBERs)
+        @if (Model.MEMBERs.Count != 0)
+        {
+
+            foreach (var member in Model.MEMBERs)
+            {
+                var u = db.AspNetUsers.SingleOrDefault(x => x.Id == member.Member_id);
+                m.Add(u);
+            }
+
+            <div class="form-row-fixed" style="padding-left: 50px; width: 65%;">
+                <table class="table" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var pick in m)
+                        {
+                            <tr>
+                                <td><a href="@Url.Action("RemoveEditUser", "Meetings",new { userId = pick.Id})" style="color:red;width:100%;height:100%;"><i class="fa fa-minus-circle fa-lg" aria-hidden="true"></i></a> </td>
+                                <td>@pick.Email</td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+        }
         <div style=" width: 966px; display: flex; justify-content: center;">
-            <div onclick="getCancelModel(2)" style="border:0px; width: 100px; height: 40px; background-color: #009fe5; color: white; display: inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor:pointer">
+            <div onclick="getCancelModel()" style="border:0px; width: 100px; height: 40px; background-color: #009fe5; color: white; display: inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor:pointer">
                 Lưu
             </div>
             <a id="cancel-btn" onclick="location.href = '@Url.Action("Index", "Meetings")'" style="width: 100px; height: 40px; background-color: #f1f1f1; color: black; display:inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor: pointer ">
@@ -336,44 +446,44 @@
 {
     <div style="border: 2px solid #e5e5e5; padding: 20px; width: 1000px; overflow: overlay;">
         <div class="form-row-fixed">
-                    <a id="myfile" href="@Model.REPORT.Report_link" style="margin-right:20px;" download>
-                        <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
-                            <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
-                                @if (Model.REPORT.Report_type == "xls" || Model.REPORT.Report_type == "xlsm" || Model.REPORT.Report_type == "xlsx")
-                                {
-                                    <i style="font-size: 40px; color: #1d6f42;" class="fas fa-file-excel text-primary"></i>
-                                }
-                                else if (Model.REPORT.Report_type == "pdf")
-                                {
-                                    <i style="font-size: 40px; color: #f40f02;" class="fas fa-file-pdf text-primary"></i>
-                                }
-                                else if (Model.REPORT.Report_type == "doc" || Model.REPORT.Report_type == "docm" || Model.REPORT.Report_type == "docx")
-                                {
-                                    <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
-                                }
-                                else if (Model.REPORT.Report_type == "jpg" || Model.REPORT.Report_type == "jpeg")
-                                {
-                                    <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
-                                }
-                                else if (Model.REPORT.Report_type == "ppt" || Model.REPORT.Report_type == "pptm" || Model.REPORT.Report_type == "pptx")
-                                {
-                                    <i style="font-size: 40px; color: #D04423" class="fas fa-file-powerpoint text-primary"></i>
-                                }
-                                else
-                                {
-                                    <i style="font-size:40px; color:gray" class="fas fa-file text-primary"></i>
-                                }
-                            </div>
-                            <div style="width:75%; padding:0 5px; color:black">
-                                <p style="text-overflow: ellipsis; overflow: hidden; width: 140px; height: 20px; white-space: nowrap; ">
-                                    @Model.REPORT.Report_name
-                                </p>
-                                <p style="font-size:10px">
-                                    @Model.REPORT.Report_binary
-                                </p>
-                            </div>
-                        </div>
-                    </a>
+            <a id="myfile" href="@Model.REPORT.Report_link" style="margin-right:20px;" download>
+                <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
+                    <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                        @if (Model.REPORT.Report_type == "xls" || Model.REPORT.Report_type == "xlsm" || Model.REPORT.Report_type == "xlsx")
+                        {
+                            <i style="font-size: 40px; color: #1d6f42;" class="fas fa-file-excel text-primary"></i>
+                        }
+                        else if (Model.REPORT.Report_type == "pdf")
+                        {
+                            <i style="font-size: 40px; color: #f40f02;" class="fas fa-file-pdf text-primary"></i>
+                        }
+                        else if (Model.REPORT.Report_type == "doc" || Model.REPORT.Report_type == "docm" || Model.REPORT.Report_type == "docx")
+                        {
+                            <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
+                        }
+                        else if (Model.REPORT.Report_type == "jpg" || Model.REPORT.Report_type == "jpeg")
+                        {
+                            <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
+                        }
+                        else if (Model.REPORT.Report_type == "ppt" || Model.REPORT.Report_type == "pptm" || Model.REPORT.Report_type == "pptx")
+                        {
+                            <i style="font-size: 40px; color: #D04423" class="fas fa-file-powerpoint text-primary"></i>
+                        }
+                        else
+                        {
+                            <i style="font-size:40px; color:gray" class="fas fa-file text-primary"></i>
+                        }
+                    </div>
+                    <div style="width:75%; padding:0 5px; color:black">
+                        <p style="text-overflow: ellipsis; overflow: hidden; width: 140px; height: 20px; white-space: nowrap; ">
+                            @Model.REPORT.Report_name
+                        </p>
+                        <p style="font-size:10px">
+                            @Model.REPORT.Report_binary
+                        </p>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
 }
@@ -383,58 +493,6 @@ else
 
 }
 
-@*<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member" aria-expanded="false" aria-controls="Member">
-        Danh sách thành viên
-    </a>*@
-
-@*<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        Button with data-target
-    </button>*@
-@*<div class="collapse" id="Member" style="width:1000px;">
-        <table class="table">
-            <thead >
-                <tr style="background-color:#f1f1f1; color:black;">
-                    <th scope="col">#</th>
-                    <th class="col-align" scope="col">Tên thành viên</th>
-                    <th class="col-align" scope="col">Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach(var member in Model.MEMBERs)
-                {
-                    <tr>
-                        <td>@(++i)</td>
-                        <td class="col-align">@member.AspNetUser.Full_name</td>
-                        <td class="col-align">@member.AspNetUser.Email</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>*@
-<!--<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member2" aria-expanded="false" aria-controls="Member">
-    Ngoài nhà trường
-</a>
-<div class="collapse" id="Member2" style="width:1000px;">
-    <table class="table">
-        <thead>
-            <tr style="background-color:#f1f1f1; color:black;">
-                <th scope="col">#</th>
-                <th class="col-align" scope="col">Tên thành viên</th>
-                <th class="col-align" scope="col">Email</th>
-            </tr>
-        </thead>
-        <tbody>-->
-@* @for (int i = 1; i <= 10; i++)
-    {
-        <tr>
-            <td>@i</td>
-            <td class="col-align">Trần Đức Bo</td>
-            <td class="col-align">bo.187pm66666</td>
-        </tr>
-    }*@
-<!--</tbody>
-    </table>
-</div>-->
 <style>
     .btn_catalog {
         min-width: 142px;
@@ -491,15 +549,36 @@ else
 
 
 <script>
-        function getCancelModel(type) {
-            var meeting_id = $("#Meeting_id").val();
-            var model_type = type;
+        function getCreateModal() {
+            var email = $('#myInput').val();
+            if (email.length == 0) {
+                alert("Chưa nhập email");
+            }
+            else {
+                $.ajax({
+                    url: "@Url.Action("AddEditUser", "Meetings")",
+                    datatype: 'html',
+                    method: 'GET',
+                    data: $('form').serialize() + '&email=' + email,
+                    success: function (data) {
+                        location.reload();
+                        $('#myInput').val('');
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+
+        };
+        function getCancelModel() {
+            var model = $("#__AjaxAntiForgeryForm").serialize();
             //var meeting_location = document.getElementById("location_val").value;
             //var meeting_content = document.getElementById("content_val").value;
         $.ajax({
             url: '@Url.Action("CancelModel", "Meetings")',
             method: 'GET',
-            data: { meeting_id, model_type},
+            data: model,
             success: function (data) {
             $("#Feedback").html(data);
             $("#modalFeedback").appendTo("body").modal("show");
@@ -524,6 +603,113 @@ else
             }
         });
     };
+
+    function autocomplete(inp, arr) {
+        /*the autocomplete function takes two arguments,
+        the text field element and an array of possible autocompleted values:*/
+        var currentFocus;
+        /*execute a function when someone writes in the text field:*/
+        inp.addEventListener("input", function (e) {
+            var a, b, i, val = this.value;
+            /*close any already open lists of autocompleted values*/
+            closeAllLists();
+            if (!val) { return false; }
+            currentFocus = -1;
+            /*create a DIV element that will contain the items (values):*/
+            a = document.createElement("DIV");
+            a.setAttribute("id", this.id + "autocomplete-list");
+            a.setAttribute("class", "autocomplete-items");
+            /*append the DIV element as a child of the autocomplete container:*/
+            this.parentNode.appendChild(a);
+            /*for each item in the array...*/
+            for (i = 0; i < arr.length; i++) {
+                /*check if the item starts with the same letters as the text field value:*/
+                if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                    /*create a DIV element for each matching element:*/
+                    b = document.createElement("DIV");
+                    /*make the matching letters bold:*/
+                    b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                    b.innerHTML += arr[i].substr(val.length);
+                    /*insert a input field that will hold the current array item's value:*/
+                    b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                    /*execute a function when someone clicks on the item value (DIV element):*/
+                    b.addEventListener("click", function (e) {
+                        /*insert the value for the autocomplete text field:*/
+                        inp.value = this.getElementsByTagName("input")[0].value;
+                        /*close the list of autocompleted values,
+                        (or any other open lists of autocompleted values:*/
+                        closeAllLists();
+                    });
+                    a.appendChild(b);
+                }
+            }
+        });
+        /*execute a function presses a key on the keyboard:*/
+        inp.addEventListener("keydown", function (e) {
+            var x = document.getElementById(this.id + "autocomplete-list");
+            if (x) x = x.getElementsByTagName("div");
+            if (e.keyCode == 40) {
+                /*If the arrow DOWN key is pressed,
+                increase the currentFocus variable:*/
+                currentFocus++;
+                /*and and make the current item more visible:*/
+                addActive(x);
+            } else if (e.keyCode == 38) { //up
+                /*If the arrow UP key is pressed,
+                decrease the currentFocus variable:*/
+                currentFocus--;
+                /*and and make the current item more visible:*/
+                addActive(x);
+            } else if (e.keyCode == 13) {
+                /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                e.preventDefault();
+                if (currentFocus > -1) {
+                    /*and simulate a click on the "active" item:*/
+                    if (x) x[currentFocus].click();
+                }
+            }
+        });
+        function addActive(x) {
+            /*a function to classify an item as "active":*/
+            if (!x) return false;
+            /*start by removing the "active" class on all items:*/
+            removeActive(x);
+            if (currentFocus >= x.length) currentFocus = 0;
+            if (currentFocus < 0) currentFocus = (x.length - 1);
+            /*add class "autocomplete-active":*/
+            x[currentFocus].classList.add("autocomplete-active");
+        }
+        function removeActive(x) {
+            /*a function to remove the "active" class from all autocomplete items:*/
+            for (var i = 0; i < x.length; i++) {
+                x[i].classList.remove("autocomplete-active");
+            }
+        }
+        function closeAllLists(elmnt) {
+            /*close all autocomplete lists in the document,
+            except the one passed as an argument:*/
+            var x = document.getElementsByClassName("autocomplete-items");
+            for (var i = 0; i < x.length; i++) {
+                if (elmnt != x[i] && elmnt != inp) {
+                    x[i].parentNode.removeChild(x[i]);
+                }
+            }
+        }
+        /*execute a function when someone clicks in the document:*/
+        document.addEventListener("click", function (e) {
+            closeAllLists(e.target);
+        });
+    }
+    var all = $("input[name='user']").map(function () {
+        return this.value
+    }).get();
+
+
+    /*An array containing all the country names in the world:*/
+    var countries = all
+
+    /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+    autocomplete(document.getElementById("myInput"), countries);
 </script>
 @*<script type="text/javascript">
     function Edit() {

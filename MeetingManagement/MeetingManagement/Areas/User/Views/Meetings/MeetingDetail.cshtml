@@ -18,14 +18,14 @@
                 <div style="display: inline-flex">
                     @Html.Label(Model.CATEGORY.Category_Name)
                 </div>
-                @if (Model.MEETING_STATUS.Status_id == 1 && ViewBag.modify == false)
+                @if (Model.Status == 1 && ViewBag.modify == false)
                 {
                     <div class="detail-tab-btn tablinks" style="width:80px;padding:0;" onclick="openTab(event,'meeting-info')">
                         Chi tiết
                     </div>
                     <div class="pending-status">@Model.MEETING_STATUS.Status_name</div>
                 }
-                @if (Model.MEETING_STATUS.Status_id == 7)
+                @if (Model.Status == 7)
                 {
                     <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-info')">
                         Chi tiết
@@ -35,7 +35,7 @@
                     </div>
                     @*<div class="cancel-status">@Model.MEETING_STATUS.Status_name</div>*@
                 }
-                else if (Model.MEETING_STATUS.Status_id != 1 && ViewBag.modify == false)
+                else if (Model.Status != 1 && ViewBag.modify == false)
                 {
                     <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-info')">
                         Chi tiết
