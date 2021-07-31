@@ -27,17 +27,16 @@
 <script>
     function DeleteCat() {
         var id = $("#Category_id").val();
-
         $.ajax({
             type: "POST",
             url: '@Url.Action("Delete", "categories")',
             data: {id:id},
-        success: function () {
-            $("#myDeleteModal").modal("hide");
-        alert("Xoá Thành Công");
+    success: function () {
+        $("#myDeleteModal").modal("hide");
+    alert("Xoá Thành Công");
         }
-        })
-}
+    })
+ }
 </script>
 
 

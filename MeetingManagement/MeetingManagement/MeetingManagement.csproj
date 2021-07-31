@@ -313,6 +313,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\quyhung\chart\exporting.js" />
+    <Content Include="Content\quyhung\chart\highcharts.js" />
     <Content Include="Content\taocuochop\css\main.css" />
     <Content Include="Content\taocuochop\css\main.min.css" />
     <Content Include="Content\taocuochop\js\global.js" />
@@ -604,11 +606,7 @@
     <Content Include="Areas\User\Views\Categories\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\ResetPassword.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoleUser\Create.cshtml" />
-    <Content Include="Areas\User\Views\HomePage\MeetingList.cshtml" />
-    <Content Include="Areas\User\Views\HomePage\IndexCateList.cshtml" />
-    <Content Include="Areas\User\Views\HomePage\IndexMeetingList.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\tabCuocHop\Index.cshtml" />
-    <Content Include="Areas\User\Views\HomePage\IndexCateDetail.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Shared\Error.cshtml" />
     <Content Include="Areas\User\Views\Meetings\Index.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MyMeetingGridView.cshtml" />
@@ -622,7 +620,6 @@
     <Content Include="Areas\User\Views\Meetings\MeetingDetail.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingInfo.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingTask.cshtml" />
-    <Content Include="Areas\User\Views\HomePage\IndexTaskList.cshtml" />
     <Content Include="Scripts\index.js.flow" />
     <Content Include="Scripts\esm\popper.min.js.map" />
     <Content Include="Scripts\esm\popper.js.map" />
@@ -690,6 +687,10 @@
     <Content Include="Areas\User\Views\Meetings\PendingMeeting.cshtml" />
     <Content Include="Areas\User\Views\Meetings\CancelModel.cshtml" />
     <Content Include="Areas\User\Views\Meetings\DeleteAttachment.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\IndexCateDetail.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\IndexCateList.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\IndexMeetingList.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\IndexTaskList.cshtml" />
     <Content Include="Areas\User\Views\Meetings\CreateUser2.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\indexTask.cshtml" />
@@ -722,6 +723,8 @@
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\Create.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\Edit.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingEdit.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Categories\statistic.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\IndexTaskList2.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
