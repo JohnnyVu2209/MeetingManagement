@@ -12,11 +12,9 @@
                 <li class="user-logoff"><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>
         }*@
-    <div class="yuki-login-info">
-        
+    <div class="yuki-login-info">        
         <form action="/Account/LogOff" class="navbar-right" id="logoutForm" method="post">
-            @Html.AntiForgeryToken()
-            
+            @Html.AntiForgeryToken()            
             <div class="nav navbar-nav navbar-right" style="display:block">
                 @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                 <a class="user-logoff" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
