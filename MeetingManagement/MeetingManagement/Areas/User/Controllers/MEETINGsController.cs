@@ -67,6 +67,11 @@ namespace MeetingManagement.Areas.User.Controllers
         public ActionResult MeetingDetail(int id, bool modify)
         {
             GetEditMeeting(id);
+            var myMeeting = db.MEETINGs.Find(id);
+            if (meetingEdit.CATEGORY == null)
+            {
+                meetingEdit = myMeeting;
+            }
             ViewBag.modify = modify;
             ViewBag.user_identity = User.Identity.GetUserId();
             CATEGORY category = db.CATEGORies.Find(meetingEdit.Category_id);
