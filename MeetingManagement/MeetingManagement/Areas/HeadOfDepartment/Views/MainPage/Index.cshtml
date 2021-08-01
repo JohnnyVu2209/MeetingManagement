@@ -56,7 +56,7 @@
                         <tr class="yuki-column-4" onclick="location.href = '@Url.Action("VerifyMeeting","MainPage", new { id = meeting.Meeting_id })';" style="cursor: pointer;">
                             <td>@meeting.CATEGORY.Category_Name</td>
                             <td>@meeting.Meeting_name</td>
-                            <td>@meeting.AspNetUser.Full_name</td>
+                            <td>@meeting.AspNetUser.Email</td>
                             <td>@meeting.Date_Create.GetValueOrDefault().ToShortDateString()</td>
                         </tr>
                     }
