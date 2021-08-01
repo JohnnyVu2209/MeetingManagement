@@ -3,7 +3,8 @@
     ViewBag.Title = "Index";
 }
 
-@*scroll show up, position not change*@
+
+<!---CSS-->
 <style>
     .modal-open .yuki-login-info {
         margin-right: 16.8px;
@@ -16,24 +17,80 @@
     .modal-open #option {
         right: calc(160px + 16.8px);
     }
+
+    .yuki-btn-blue {
+        background-color: #009FE5 !important;
+    }
+        .yuki-btn-sea {
+            background-color: #00E5B8 !important;
+        }
+
+    .user-ctg-index-table div:hover {
+        background-color: #66c2ff;
+    }
+
+    .user-ctg-index-table div p {
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+
+    .user-ctg-index-button {
+        float: right;
+        width: 60px;
+        height: 30px;
+        background-color: #009FE5;
+        color: white;
+        border-radius: 5px;
+        margin-top: -30px;
+        border: 0px;
+    }
+
+    .card-body-fixed {
+        position: relative;
+        top: 50px;
+        width: 100%;
+        height: 800px;
+        z-index: 1;
+    }
+
+    .lable-zone1 {
+       
+        color: black;
+        line-height: 40px;
+    }
 </style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link href="~/Content/catalog-list.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+<!--Content--->
+
 <div id="container">
     <div class="user-ctg-index-header" style="display:flex;">
         <h2 style="position:relative;">Danh mục</h2>
         <button style="color:white;position:relative;left:1000px;" onclick="ShowCreatePopUp()" class="btn yuki-btn-blue">
-            <p style="margin:0;">
+            <p style="margin:0;font-size:medium">
                 Tạo
             </p>
         </button>
+        <button style="color: white;position: relative; left: 700px;font-size: medium"
+                onclick="location.href = '@Url.Action("statistic","Categories")';" class="btn yuki-btn-sea">
+            Thống kê
+        </button>
+
+
     </div>
     <div id="time-table" class="user-ctg-index-table-zone">
         <div class="table user-ctg-index-table">
             @foreach (var item in Model)
             {
-                <div style="display:flex;">
-                    <h5 onclick="location.href = '@Url.Action("Details","Categories", new { id = item.Category_id})';">
+                <div style="display:flex;"
+                     onclick="location.href = '@Url.Action("Details","Categories", new { id = item.Category_id})';">
+                    <h5>
                         @item.Category_Name
                     </h5>
                     <span id="option">
@@ -47,15 +104,15 @@
                                 </li>
                                 <li>
                                     <button onclick="ShowDeletePopUp(@item.Category_id)" class="delete-btn" data-modal="modald1">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                            Xóa
-                                        </button>
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                        Xóa
+                                    </button>
                                 </li>
-                                <li>
+@*                                <li>
                                     <button onclick="ShowStatisticPopUp()" class="delete-btn" data-modal="modald1">
                                         <ion-icon name="bar-chart-outline" style="width:50px;height:20px"></ion-icon>
                                     </button>
-                                </li>
+                                </li>*@
                             </ul>
                         </i>
                     </span>
@@ -65,73 +122,14 @@
     </div>
 </div>
 <div id="show-popup"></div>
-<style>
-    .yuki-btn-blue {
-        background-color: #009FE5 !important;
-    }
 
-    .user-ctg-index-table div:hover {
-        background-color: #66c2ff;
-    }
-
-    .user-ctg-index-table div p {
-        font-weight: bold;
-        font-size: 16px;
-    }
-
-
-    /*.user-ctg-index-table tbody tr:hover td {
-                background-color: #f1f1f1;
-            }*/
-    .user-ctg-index-button {
-        float: right;
-        width: 60px;
-        height: 30px;
-        background-color: #009FE5;
-        color: white;
-        border-radius: 5px;
-        margin-top: -30px;
-        border: 0px;
-    }
-
-    .user-ctg-index-header {
-        width: 1300px;
-        margin: 20px 0px;
-    }
-
-        .user-ctg-index-header h1, h2, h3, h4, h5, h6 {
-            margin: 0px;
-        }
-
-    .user-ctg-index-manipulation {
-        float: right;
-        margin: 0px 2.5px;
-        color: black;
-    }
-</style>
-
-@*<i class="fa fa-ellipsis-h">
-        <ul class="sublist">
-            <li>
-                <button onclick="ShowEditPopUp(@item.Category_id)" class="edit-btn" data-modal="modal1">
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                    Sửa
-                </button>
-            </li>
-            <li>
-                <button onclick="ShowDeletePopUp(@item.Category_id)" class="delete-btn" data-modal="modald1">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                    Xóa
-                </button>
-            </li>
-        </ul>
-    </i>*@
 
 
 
 <!--JS--->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 <script type="text/javascript">
     function ShowCreatePopUp() {
         $.ajax({
@@ -179,20 +177,5 @@
             }
         });
     };
-    function ShowStatisticPopUp(categoryID) {
-        $("#loader-div")
-        $.ajax({
-            type: "GET",
-            url: '@Url.Action("statisticChart", "Categories")',
-            data: { id: categoryID },
-            dataType: "html",
-            success: function (data) {
-                $("#show-popup").html(data);
-                $("#barChartModal").modal("show");
-            },
-            error: function (data) {
-                return false;
-            }
-        });
-    };
+
 </script>

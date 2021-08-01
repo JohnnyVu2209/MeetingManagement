@@ -271,19 +271,24 @@
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Models.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>Models.Context.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Models\Models.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Models\Models.Designer.cs">
+      <DependentUpon>Models.edmx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Models\Models1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Models.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Models.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\OTHER_ACCOUNT.cs">
       <DependentUpon>Models.tt</DependentUpon>
@@ -308,6 +313,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\quyhung\chart\exporting.js" />
+    <Content Include="Content\quyhung\chart\highcharts.js" />
     <Content Include="Content\taocuochop\css\main.css" />
     <Content Include="Content\taocuochop\css\main.min.css" />
     <Content Include="Content\taocuochop\js\global.js" />
@@ -475,21 +482,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="login-form-05\css\bootstrap.min.css" />
-    <Content Include="login-form-05\css\bootstrap\bootstrap-reboot.css" />
-    <Content Include="login-form-05\css\bootstrap\bootstrap.css" />
-    <Content Include="login-form-05\css\owl.carousel.min.css" />
-    <Content Include="login-form-05\css\style.css" />
-    <Content Include="login-form-05\fonts\icomoon\demo-files\demo.css" />
-    <Content Include="login-form-05\fonts\icomoon\demo-files\demo.js" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.svg" />
-    <Content Include="login-form-05\fonts\icomoon\Read Me.txt" />
-    <Content Include="login-form-05\fonts\icomoon\style.css" />
-    <Content Include="login-form-05\js\bootstrap.min.js" />
-    <Content Include="login-form-05\js\jquery-3.3.1.min.js" />
-    <Content Include="login-form-05\js\main.js" />
-    <Content Include="login-form-05\js\owl.carousel.min.js" />
-    <Content Include="login-form-05\js\popper.min.js" />
     <Content Include="imgs\icons8-home-24.png" />
     <Content Include="imgs\icons8-home-64.png" />
     <Content Include="imgs\icons8-office-365-48.png" />
@@ -614,18 +606,13 @@
     <Content Include="Areas\User\Views\Categories\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\ResetPassword.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoleUser\Create.cshtml" />
-    <Content Include="Areas\User\Views\HomePage\MeetingList.cshtml" />
-    <Content Include="Areas\User\Views\HomePage\IndexCateList.cshtml" />
-    <Content Include="Areas\User\Views\HomePage\IndexMeetingList.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\tabCuocHop\Index.cshtml" />
-    <Content Include="Areas\User\Views\HomePage\IndexCateDetail.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Shared\Error.cshtml" />
     <Content Include="Areas\User\Views\Meetings\Index.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MyMeetingGridView.cshtml" />
     <Content Include="Areas\User\Views\Meetings\JoinedMeetingGridView.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\VerifyMeeting.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\User\Views\MEETINGs\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\GrdMemberTable.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
     <Content Include="Areas\User\Views\MEETINGs\CreateUser2.cshtml" />
@@ -633,7 +620,6 @@
     <Content Include="Areas\User\Views\Meetings\MeetingDetail.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingInfo.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingTask.cshtml" />
-    <Content Include="Areas\User\Views\HomePage\IndexTaskList.cshtml" />
     <Content Include="Scripts\index.js.flow" />
     <Content Include="Scripts\esm\popper.min.js.map" />
     <Content Include="Scripts\esm\popper.js.map" />
@@ -689,14 +675,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="login-form-05\css\.DS_Store" />
-    <Content Include="login-form-05\css\bootstrap.min.css.map" />
-    <Content Include="login-form-05\fonts\.DS_Store" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.eot" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.ttf" />
-    <Content Include="login-form-05\fonts\icomoon\fonts\icomoon.woff" />
-    <Content Include="login-form-05\fonts\icomoon\selection.json" />
-    <Content Include="login-form-05\images\.DS_Store" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
@@ -705,7 +683,6 @@
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingTask.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingInfo.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingReport.cshtml" />
-    <Content Include="Areas\User\Views\Meetings\MeetingEdit.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingMember.cshtml" />
     <Content Include="Areas\User\Views\Meetings\PendingMeeting.cshtml" />
     <Content Include="Areas\User\Views\Meetings\CancelModel.cshtml" />
@@ -714,9 +691,7 @@
     <Content Include="Areas\User\Views\HomePage\IndexCateList.cshtml" />
     <Content Include="Areas\User\Views\HomePage\IndexMeetingList.cshtml" />
     <Content Include="Areas\User\Views\HomePage\IndexTaskList.cshtml" />
-    <Content Include="Areas\User\Views\HomePage\MeetingList.cshtml" />
     <Content Include="Areas\User\Views\Meetings\CreateUser2.cshtml" />
-    <Content Include="Areas\User\Views\Meetings\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\indexTask.cshtml" />
     <Content Include="Areas\User\Views\Tasks\Edit.cshtml" />
@@ -738,8 +713,18 @@
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
     <Content Include="Areas\HeadOfDepartment\Views\Shared\outplay.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\statisticChart.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\MeetingForm.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MyMeetingGridView.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\PendingMeeting.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\JoinedMeetingGridView.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingMember.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingEdit.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingInfo2.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\Create.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\Edit.cshtml" />
+    <Content Include="Areas\User\Views\Meetings\MeetingEdit.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Categories\statistic.cshtml" />
+    <Content Include="Areas\User\Views\HomePage\IndexTaskList2.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

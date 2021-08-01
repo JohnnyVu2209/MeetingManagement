@@ -1,40 +1,55 @@
-﻿<div class="file-loading">
-    <input id="input-ficons-3" name="input-ficons-3[]" multiple type="file">
+﻿@{ int id_meeting = ViewBag.Meeting_id; }
+
+<div style="height:20px"></div>
+<h4>Biên bản họp:</h4>
+<div class="row">
+    <div class="col-md-6 col-md-push-2">
+        <section>
+            @using (Html.BeginForm("MeetingReport", "Meetings", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+            {
+            @Html.AntiForgeryToken()
+                <div class="well bs-component" style="height:140px;">
+                    <br />
+                    @Html.Hidden("Meeting_id", id_meeting)
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="col-md-10 col-md-push-2">
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <span class="form-group btn btn-default btn-file">
+                                            Browse…
+                                            <input type="file" name="ReportFile" id="ReportFile" class="form-control" accept=".zip,.pdf,.doc,.docx,.xml,application/msword" />
+                                        </span>
+                                    </span>
+                                    <input type="text" id="ReportName" class="form-control" readonly>
+                                </div>
+                                @Html.ValidationMessage("FileAttach", "", new { @class = "text-danger custom-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="submit" class="btn btn-danger" value="Upload" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+                </div>}
+        </section>
+    </div>
 </div>
-
-<script>
-    $("#myfile").val();
-
-    $("#input-ficons-3").fileinput({
-        uploadUrl: "",
-        previewFileIcon: '<i class="fas fa-file"></i>',
-        allowedPreviewTypes: ['image', 'text'], // allow only preview of image & text files
-        previewFileIconSettings: {
-            'docx': '<i class="fas fa-file-word text-primary"></i>',
-            'xlsx': '<i class="fas fa-file-excel text-success"></i>',
-            'pptx': '<i class="fas fa-file-powerpoint text-danger"></i>',
-            'pdf': '<i class="fas fa-file-pdf text-danger"></i>',
-            'zip': '<i class="fas fa-file-archive text-muted"></i>',
-        }
-    });
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">$(() => {
+        $('#ReportFile').on("change", function () {
+            var fileUpload = document.getElementById("ReportFile");
+            $('#ReportName').val(fileUpload.files[0].name);
+        });
+    });</script>
 <style>
-    /*upload zone*/
-    .file-caption div {
-        display: flex;
-        overflow: inherit;
-    }
-    .btn-outline-secondary {
-        display: none;
-    }
-    .btn-file input[type=file]{
-        width:100%;
-    }
-
     .file-caption {
         width: fit-content;
         position: absolute;
         right: 0px;
     }
-
 </style>

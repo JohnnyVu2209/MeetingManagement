@@ -10,13 +10,13 @@
             var is_cancel = (item.Status == 7) ? "background-color:grey" : "";
             if (item.Create_by == ViewBag.user_identity && item.Status != 7)
             {
-                <li style="@is_cancel; display: flex; align-items: center;" onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id, modify = true })';">
+                <li style="@is_cancel; display: flex; align-items: center;" onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = item.Meeting_id, modify = true })';">
                     @item.Meeting_name
                 </li>
             }
             else
             {
-                <li style="@is_cancel; display: flex; align-items: center;" onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id, modify = false })';">
+                <li style="@is_cancel; display: flex; align-items: center;" onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = item.Meeting_id, modify = false })';">
                     @item.Meeting_name
                 </li>
             }

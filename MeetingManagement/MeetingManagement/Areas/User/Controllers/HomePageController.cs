@@ -23,6 +23,20 @@ namespace MeetingManagement.Areas.User.Controllers
         }
         public ActionResult IndexTaskList()
         {
+            var userid = User.Identity.GetUserId();
+            var mEMBER = db.MEMBERs.FirstOrDefault(x => x.Member_id == userid);
+            ViewBag.meeting = db.MEETINGs.Where(x => x.Meeting_id == mEMBER.Meeting_id).ToList();
+            ViewBag.task = db.TASKs.Where(x => x.Meeting_id == mEMBER.Meeting_id && x.Assignee == mEMBER.Member_id).OrderBy(x => x.Task_Status == true).ToList();
+            return PartialView();
+        }
+
+        public ActionResult IndexTaskList2()
+        {
+            var userid = User.Identity.GetUserId();
+            var mEMBER = db.MEMBERs.FirstOrDefault(x => x.Member_id == userid);
+            ViewBag.meeting = db.MEETINGs.Where(x => x.Meeting_id == mEMBER.Meeting_id).ToList();
+            ViewBag.task = db.TASKs.Where(x => x.Meeting_id == mEMBER.Meeting_id && x.Assignee == mEMBER.Member_id).OrderBy(x => x.Task_Status == true).ToList();
+            ViewBag.myTask = db.TASKs.ToList();
             return PartialView();
         }
         [HttpGet]

@@ -1,5 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@600&display=swap');
-
+﻿﻿@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200&display=swap');
 * {
     padding: 0;
     margin: 0;
@@ -75,28 +74,9 @@ body {
 
             #yuki-menu ul li a {
                 display: block;
-                <style> .navbar-right > li > a
-
-{
-    color: white;
-}
-
-.user-logoff {
-    right: 0%;
-}
-
-.login-index-update {
-    width: 363.200px;
-}
-
-.user-login {
-    float: right !important;
-}
-
-</style >
-color: #ffffff;
-padding: 0px 1em;
-text-decoration: none;
+                color: #ffffff;
+                padding: 0px 1em;
+                text-decoration: none;
             }
 
             #yuki-menu ul li:hover {
@@ -106,7 +86,7 @@ text-decoration: none;
 ==Content==
 .yuki-body-content {
     position: absolute;
-    width:100%;
+    width: 100%;
     height: 100%;
     margin: 0px;
     padding: 0px;
@@ -141,8 +121,7 @@ text-decoration: none;
 .yuki-login-info {
     position: absolute;
     right: 50px;
-    top: 8px;
-    width: 300px;
+    top: 0px;
 }
 /*--#table--*/
 .yuki-table-zone {
@@ -346,10 +325,20 @@ tr:hover td {
             font-size: 14px;
         }
 /*Thanh tinh trang*/
+.basic-status {
+    border-radius: 10px;
+    width: 130px;
+    padding: 0px 20px;
+    color: white;
+    margin: auto;
+    text-align: center;
+}
+
 td .pending-status, .pending-status {
     background: #C0C0C0;
     border-radius: 10px;
-    width: 30%;
+    padding: 0px 20px;
+    width: 130px;
     color: white;
     margin: auto;
     text-align: center;
@@ -358,43 +347,48 @@ td .pending-status, .pending-status {
 td .cancel-status, .cancel-status {
     background: #ff4d4d;
     border-radius: 10px;
-    width: 30%;
+    width: 130px;
+    padding: 0px 20px;
     color: white;
     margin: auto;
     text-align: center;
 }
 
 td .waiting-status, .waiting-status {
-    background: #FFC400;
+    background: #ff9800;
     border-radius: 10px;
-    width: 30%;
+    width: 130px;
+    padding: 0px 20px;
     color: white;
     margin: auto;
     text-align: center;
 }
 
 td .missing-status, .missing-status {
-    background: #F12B2C;
+    background: #03a9f4;
     border-radius: 10px;
-    width: 37%;
+    width: 130px;
+    padding: 0px 20px;
     color: white;
     margin: auto;
     text-align: center;
 }
 
 td .incomplete-status, .incomplete-status {
-    background: #FF9900;
+    background: #536eff;
     border-radius: 10px;
-    width: 43%;
+    width: 130px;
+    padding: 0px 20px;
     color: white;
     margin: auto;
     text-align: center;
 }
 
 td .complete-status, .complete-status {
-    background: #29CC97;
+    background: #29cc76;
     border-radius: 10px;
-    width: 43%;
+    width: 130px;
+    padding: 0px 20px;
     color: white;
     margin: auto;
     text-align: center;

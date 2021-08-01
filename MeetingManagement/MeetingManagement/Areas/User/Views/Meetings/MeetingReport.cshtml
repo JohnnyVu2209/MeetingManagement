@@ -1,17 +1,7 @@
 ﻿@{ int id_meeting = ViewBag.Meeting_id; }
-<div class="row">
-    <div class="panel-heading">
-        <div class="col-md-8">
-            <h3>
-                <i class="fa fa-file-text-o"></i>
-                <span>Biên bản báo cáo buổi họp</span>
-            </h3>
-        </div>
-    </div>
-</div>
 
-<br />
-
+<div style="height:20px"></div>
+<h4>Biên bản họp:</h4>
 <div class="row">
     <div class="col-md-6 col-md-push-2">
         <section>
@@ -32,6 +22,7 @@
                                         </span>
                                     </span>
                                     <input type="text" id="ReportName" class="form-control" readonly>
+
                                 </div>
                                 @Html.ValidationMessage("FileAttach", "", new { @class = "text-danger custom-danger" })
                             </div>
@@ -65,3 +56,6 @@
         right: 0px;
     }
 </style>
+
+
+

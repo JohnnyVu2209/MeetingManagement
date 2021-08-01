@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Administrator\Desktop\SEP_2020-2021\MeetingManagement\MeetingManagement\MeetingManagement\Models\Models.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Thong-PC\Source\Repos\MeetingManagement\MeetingManagement\MeetingManagement\Models\Models.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

@@ -3,63 +3,129 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+<style>
+    .w400 td {
+        width: 400px;
+    }
+</style>
+
 <div id="table-content">
-    <table class="table">
-        <thead>
+    <table class="table" id="table-sort">
+        <thead style="background-color: #009FE5;color:white">
             <tr>
-                <th style="background-color: #009FE5;color:white" ; scope="col">Tên cuộc họp</th>
-                <th style="background-color: #009FE5;color:white" ; scope="col">Người chủ trì</th>
-                <th style="background-color: #009FE5;color:white" ; scope="col">Ngày họp</th>
-                <th style="background-color: #009FE5;color:white" ; scope="col">Trình trạng</th>
+                <th scope="col" onclick="sortTable(0)" style="cursor:pointer">Tên cuộc họp</th>
+                <th scope="col" onclick="sortTable(1)"style="cursor:pointer">Người chủ trì</th>
+                <th scope="col" onclick="sortTable(2)"style="cursor:pointer">Ngày họp</th>
+                <th scope="col" onclick="sortTable(3)"style="cursor:pointer">Trình trạng</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr class="w400">
-                    <td>  
-                        <a href="'@Url.Action("Statistic","Meetings", new { id = item.Meeting_id})">
-                                 @item.Meeting_name
-                        </a>
+                    <td>
+                        @item.Meeting_name
                     </td>
                     <td>@item.AspNetUser.Full_name</td>
-                    <td>@Convert.ToDateTime(item.Date_Start).ToString("dd/MM/yyyy")</td>
+                    <td>@Convert.ToDateTime(item.Date_Start).ToString("MM/dd/yyyy")</td>
                     <td>
                         @if (@item.Status == 1)
                         {
-                            <div class="pending-status">@item.MEETING_STATUS.Status_name</div>
+                            <div class="pending-status" style="width:100px">@item.MEETING_STATUS.Status_name</div>
                         }
                         else if (@item.Status == 2)
                         {
-                            <div class="waiting-status">@item.MEETING_STATUS.Status_name</div>
+                            <div class="waiting-status"style="width:100px">@item.MEETING_STATUS.Status_name</div>
                         }
                         else if (@item.Status == 3)
                         {
-                            <div class="missing-status">@item.MEETING_STATUS.Status_name</div>
+                            <div class="missing-status" style="width:100px">@item.MEETING_STATUS.Status_name</div>
                         }
                         else if (@item.Status == 4)
                         {
-                            <div class="incomplete-status" style="width:125px">@item.MEETING_STATUS.Status_name</div>
+                            <div class="incomplete-status" style="width:100px">@item.MEETING_STATUS.Status_name</div>
                         }
                         else if (@item.Status == 5)
                         {
-                            <div class="complete-status">@item.MEETING_STATUS.Status_name</div>
+                            <div class="complete-status" style="width:100px">@item.MEETING_STATUS.Status_name</div>
                         }
-
+                        else if (@item.Status == 6)
+                        {
+                            <div class="basic-status" style="background-color: #607d8b">Không duyệt</div>
+                        }
+                        else if (@item.Status == 7)
+                        {
+                            <div class="basic-status" style="background-color: #607d8b">Đã hủy</div>
+                        }
                     </td>
                 </tr>
 
-            }
-        </tbody>
-
+                }
+            </tbody>
 
     </table>
 </div>
-<style>
-    .w400 td {
-        width: 400px;
+
+<script>
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("table-sort");
+        switching = true;
+        //Set the sorting direction to ascending:
+        dir = "asc";
+        /*Make a loop that will continue until
+        no switching has been done:*/
+        while (switching) {
+            //start by saying: no switching is done:
+            switching = false;
+            rows = table.rows;
+            /*Loop through all table rows (except the
+            first, which contains table headers):*/
+            for (i = 1; i < (rows.length - 1); i++) {
+                //start by saying there should be no switching:
+                shouldSwitch = false;
+                /*Get the two elements you want to compare,
+                one from current row and one from the next:*/
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                /*check if the two rows should switch place,
+                based on the direction, asc or desc:*/
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()
+                        @*&& Number(x.innerHTML) > Number(y.innerHTML)*@ ) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()
+                        @*&& Number(x.innerHTML) < Number(y.innerHTML)*@) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                /*If a switch has been marked, make the switch
+                and mark that a switch has been done:*/
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                //Each time a switch is done, increase this count by 1:
+                switchcount++;
+            } else {
+                /*If no switching has been done AND the direction is "asc",
+                set the direction to "desc" and run the while loop again.*/
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
     }
-</style>
+</script>
 
 
 

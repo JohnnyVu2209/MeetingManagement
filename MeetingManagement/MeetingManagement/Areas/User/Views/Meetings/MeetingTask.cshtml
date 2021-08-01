@@ -27,7 +27,7 @@
 @if (create_by == true)
 {
     <div class="button-zone" style=" position: absolute; top: -10px; right: 0px;">
-        <a class="btn button-create" style="background-color:#009fe5; color:white; display:inline-flex;" onclick="getCreateModal(@meeting_id)">Tạo</a>
+        <a class="btn button-create" style="background-color:#009fe5; color:white; display:inline-flex;" onclick="getCreateTaskModal(@meeting_id)">Tạo</a>
     </div>
 }
 @if (tasks.Count == 0)
@@ -95,7 +95,7 @@ else
                                         <a style="margin-left:5px"
                                            aria-hidden="true"
                                            class="edit-btn fa fa-pencil-square"
-                                           onclick="getEditModal(@item.Task_id)"></a>
+                                           onclick="getEditTaskModal(@item.Task_id)"></a>
 
                                         <a style="margin-left:5px"
                                            aria-hidden="true"
@@ -186,6 +186,9 @@ else
                         table-layout: fixed;
                     }
 
+                        table tbody tr td{
+                            vertical-align:middle !important;
+                        }
                         table tbody tr td:first-child {
                             width: 50px;
                         }
@@ -216,13 +219,22 @@ else
             .col-align {
                 text-align: center;
             }
+
+            .sublist {
+                list-style-type: none;
+                display: flex;
+                justify-content: center;
+            }
+            .sublist > li{
+                padding:10px;
+            }
         </style>
     </div>
 
 }
 <div id="Popup"></div>
 <script type="text/javascript">
-     function getCreateModal(id) {
+     function getCreateTaskModal(id) {
          $.ajax({
              url: "@Url.Action("Create", "Tasks")",
              datatype: 'html',
@@ -238,7 +250,7 @@ else
          });
     };
 
-    function getEditModal(id) {
+    function getEditTaskModal(id) {
         $.ajax({
             url:"@Url.Action("Edit", "Tasks")",
             datatype: 'html',
