@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 {
     [Authorize/*(Roles = "BCN")*/]
@@ -44,19 +45,22 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             {
                 meeting = db.MEETINGs.Find(meeting_id);
                 meeting.Status = 2;
-
+                meeting.Verify_by = User.Identity.GetUserId();
                 db.Entry(meeting).State = EntityState.Modified;
                 db.SaveChanges();
 
                 string To = db.AspNetUsers.Find(meeting.Create_by).Email;
                 string Subject = meeting.Meeting_name;
+                string DateTime = meeting.Date_Start.ToString("dd/MM/yyyy") + " " + meeting.Time_Start;
                 string Body = VERIFY_MEETING + Environment.NewLine +
-                                MEETING_DATE + meeting.Date_Start + Environment.NewLine +
+                                MEETING_DATE + DateTime + Environment.NewLine +
                                 MEETING_ADDRESS + meeting.Location ;
 
                 Outlook mail = new Outlook(To, Subject, Body);
                 mail.SendMail();
+                sendMailToMembers(meeting);
                 return RedirectToAction("Index");
+                
             }
             return null;
         }
@@ -71,7 +75,8 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             {
                 string Receiver = item.Email;
                 string Subject = meeting.Meeting_name;
-                string Body = MEETING_DATE + meeting.Date_Start + Environment.NewLine + MEETING_ADDRESS + meeting.Location;
+                string DateTime = meeting.Date_Start.ToString("dd/MM/yyyy") + " " + meeting.Time_Start;
+                string Body = MEETING_DATE + DateTime + Environment.NewLine + MEETING_ADDRESS + meeting.Location;
                 Outlook mail = new Outlook(Receiver, Subject, Body);
                 mail.SendMail();
             }
@@ -113,15 +118,5 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return View();
 
         }
-        //private void AddErrors(object result)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public PartialViewResult GetMeetings()
-        //{
-        //    var model = db.MEETINGs.ToList();
-        //    return PartialView("grdMeetingView", model);
-        //}
     }
 }

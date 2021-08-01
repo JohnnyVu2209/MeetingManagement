@@ -23,6 +23,7 @@ namespace MeetingManagement.Areas.User.Controllers
         private MEETING meeting = null;
         private const string MEETING_TIME = "Thời gian diễn ra cuộc họp: ";
         private const string MEETING_LOCATION = "Địa điểm diễn ra cuộc họp: ";
+        private const string MEETING_CANCEL = "Cuộc họp đã bị huỷ vì lý do: ";
         private const string File_Path_Attachment = "~/Upload/Attachments/";
         private const string File_Path_Report = "~/Upload/Reports/";
         private string Old_location;
@@ -86,6 +87,7 @@ namespace MeetingManagement.Areas.User.Controllers
             return PartialView(model);
         }
 
+
         [HttpPost]
         public ActionResult CancelModel(int meeting_id, MEETING model, int model_type)
         {
@@ -98,13 +100,24 @@ namespace MeetingManagement.Areas.User.Controllers
             else
             {
                 meeting.Feedback = model.Feedback;
-                
+
             }
 
             db.Entry(meeting).State = EntityState.Modified;
             db.SaveChanges();
+            sendCancelModel(meeting);
             return RedirectToAction("Index");
         }
+
+        private void sendCancelModel(MEETING meeting)
+        {
+            string Receiver = db.AspNetUsers.Find(meeting.Verify_by).Email;
+            string Subject = meeting.Meeting_name;
+            string Body = MEETING_CANCEL + meeting.Feedback;
+            Outlook mail = new Outlook(Receiver, Subject, Body);
+            mail.SendMail();
+        }
+
         public ActionResult StatusChanges(int id)
         {
             var meeting = db.MEETINGs.Find(id);
@@ -180,7 +193,7 @@ namespace MeetingManagement.Areas.User.Controllers
                 meeting.Date_Start = model.Date_Start;
                 meeting.Time_Start = model.Time_Start;
             }
-            if(meeting.Location != model.Location)
+            if (meeting.Location != model.Location)
             {
                 meeting.Location = model.Location;
             }
@@ -217,6 +230,8 @@ namespace MeetingManagement.Areas.User.Controllers
                     {
                         updateMemberList[i].Meeting_id = meeting_id;
                         db.MEMBERs.Add(updateMemberList[i]);
+                        var email = db.AspNetUsers.Find(updateMemberList[i].Member_id).Email;
+                        sendMailToMember(model, email);
                     }
                 }
             }//Case User add member and remove member at the same time
@@ -241,6 +256,9 @@ namespace MeetingManagement.Areas.User.Controllers
 
                             updateMemberList[i].Meeting_id = meeting_id;
                             db.MEMBERs.Add(updateMemberList[j]);
+
+                            var email = db.AspNetUsers.Find(updateMemberList[i].Member_id).Email;
+                            sendMailToMember(model, email);
                         }
                     }
                 }
@@ -249,8 +267,41 @@ namespace MeetingManagement.Areas.User.Controllers
             db.Entry(meeting).State = EntityState.Modified;
             db.SaveChanges();
             Session["MeetingEdit"] = meeting;
-
+            if (meeting.Date_Start != model.Date_Start || meeting.Time_Start != model.Time_Start)
+            {
+                sendMailToAllMembers(meeting);
+            }
+            if (meeting.Location != model.Location)
+            {
+                sendMailToAllMembers(model);
+            }
             return meeting;
+        }
+
+        private void sendMailToMember(MEETING meeting, string email)
+        {
+            string Receiver = email;
+            string Subject = meeting.Meeting_name;
+            string DateTime = meeting.Date_Start.ToString("dd/MM/yyyy") + " " + meeting.Time_Start;
+            string Body = MEETING_TIME + DateTime + Environment.NewLine + MEETING_LOCATION + meeting.Location;
+            Outlook mail = new Outlook(Receiver, Subject, Body);
+            mail.SendMail();
+        }
+        private void sendMailToAllMembers(MEETING meeting)
+        {
+            var member = from m in db.MEMBERs.Where(m => m.Meeting_id == meeting.Meeting_id)
+                         from u in db.AspNetUsers
+                         where u.Id == m.Member_id
+                         select u;
+            foreach (var item in member)
+            {
+                string Receiver = item.Email;
+                string Subject = meeting.Meeting_name;
+                string DateTime = meeting.Date_Start.ToString("dd/MM/yyyy") + " " + meeting.Time_Start;
+                string Body = MEETING_TIME + DateTime + Environment.NewLine + MEETING_LOCATION + meeting.Location;
+                Outlook mail = new Outlook(Receiver, Subject, Body);
+                mail.SendMail();
+            }
         }
 
         public PartialViewResult MeetingInfo(int id)
@@ -331,7 +382,7 @@ namespace MeetingManagement.Areas.User.Controllers
                 }
             }
             ModelState.AddModelError("FileAttach", "Chưa nộp báo cáo!");
-            return View("MeetingDetail",db.MEETINGs.Find(Meeting_id));
+            return View("MeetingDetail", db.MEETINGs.Find(Meeting_id));
         }
         /*----------Meeting Report-------------*/
 
@@ -465,7 +516,8 @@ namespace MeetingManagement.Areas.User.Controllers
 
             var newMeeting = db.MEETINGs.Where(x => x.Meeting_name == newMeet.Meeting_name
                                                 && x.Date_Start == newMeet.Date_Start
-                                                && x.Time_Start == newMeet.Time_Start).FirstOrDefault();
+                                                && x.Time_Start == newMeet.Time_Start
+                                                && x.Date_Create == newMeet.Date_Create).FirstOrDefault();
             foreach (var member in meetingSS.MEMBERs.ToList())
             {
                 member.Meeting_id = newMeeting.Meeting_id;
@@ -575,5 +627,7 @@ namespace MeetingManagement.Areas.User.Controllers
         {
             return View();
         }
+
+
     }
 }
