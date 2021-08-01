@@ -31,7 +31,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         }
         public ActionResult Create(int MeetingID)
         {
-            ViewBag.Meeting_id = new SelectList(db.MEMBERs.Where(x => x.Meeting_id == MeetingID), "Member_id", "AspNetUser.Full_name");
+            ViewBag.Meeting_id = new SelectList(db.MEMBERs.Where(x => x.Meeting_id == MeetingID), "Member_id", "AspNetUser.Email");
             var task = new TASK();
             task.Meeting_id = MeetingID;
             return PartialView(task);

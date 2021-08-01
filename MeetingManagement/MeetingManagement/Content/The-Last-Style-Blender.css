@@ -125,8 +125,7 @@ body {
 }
 /*--#table--*/
 .yuki-table-zone {
-    position: relative;
-    left: 100px;
+    position: relative;    
     margin-bottom: 20px;
     display: block;
     padding-top: 35px;
