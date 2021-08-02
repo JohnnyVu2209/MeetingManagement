@@ -3,9 +3,9 @@
 @{
     ViewBag.Title = "Trang Chính";
 }
-    
-    <body id="yuki-body">
-        @*<div class="row" style="margin-bottom:15px;">
+
+<body id="yuki-body">
+    @*<div class="row" style="margin-bottom:15px;">
             <div class="col-sm-12">
                 <div class="form-inline pull-right">
                     <label>Search</label>
@@ -14,83 +14,87 @@
                 </div>
             </div>
         </div>*@
-        
-        <div class="yuki-table-zone">
-       
-            <div class="yuki-table-title">
-                <p>Cuộc Họp Chờ Duyệt</p>
-            </div>
-            <div class="yuki-table-out-header">
-                <ul class="yuki-column-4">
-                    <li>
-                        Danh mục
-                        @*<button class="filter">
-                        <img src="~/Content/outline_filter_alt_black_24dp.png">
-                    </button>*@
-                    </li>
-                    <li>
-                        Cuộc họp
-                        @*<button class="filter">
-                        <img src="~/Content/outline_filter_alt_black_24dp.png">
-                    </button>*@
-                    </li>
-                    <li>
-                        Người chủ trì
-                        @*<button class="filter">
-                        <img src="~/Content/outline_filter_alt_black_24dp.png">
-                    </button>*@
-                    </li>
-                    <li>
-                        Ngày tạo
-                        @*<button class="filter">
-                        <img src="~/Content/outline_filter_alt_black_24dp.png">
-                    </button>*@
-                    </li>
-                </ul>
-            </div>
-            <table class="yuki-table">
-                @foreach (var meeting in Model)
-                {
-                    if (meeting.Status == 1)
-                    {
-                        <tr class="yuki-column-4" onclick="location.href = '@Url.Action("VerifyMeeting","MainPage", new { id = meeting.Meeting_id })';" style="cursor: pointer;">
-                            <td>@meeting.CATEGORY.Category_Name</td>
-                            <td>@meeting.Meeting_name</td>
-                            <td>@meeting.AspNetUser.Full_name</td>
-                            <td>@meeting.Date_Create.GetValueOrDefault().ToShortDateString()</td>
-                        </tr>
-                    }
-                }
-            </table>
-        </div> <!---Table 1-->
 
-        <div class="yuki-table-zone">
-            <div class="yuki-table-title">
-                <p>Cuộc Họp Chưa Hoàn Thành</p>
-            </div>
-            <div class="yuki-table-out-header">
-                <ul class="yuki-column-4">
-                    <li>
-                        Danh mục
-                        @*<button class="filter">
+    <div class="yuki-table-zone">
+
+        <div class="yuki-table-title">
+            <p>Cuộc Họp Chờ Duyệt</p>
+        </div>
+        <div class="yuki-table-out-header">
+            <ul class="yuki-column-4">
+                <li  onclick="sortTable(0)">
+                    Danh mục
+                    @*<button class="filter">
                             <img src="~/Content/outline_filter_alt_black_24dp.png">
                         </button>*@
-                    </li>
-                    <li>
-                        Cuộc họp
-                        @*<button class="filter">
+                </li>
+                <li  onclick="sortTable(1)">
+                    Cuộc họp
+                    @*<button class="filter">
                             <img src="~/Content/outline_filter_alt_black_24dp.png">
                         </button>*@
-                    </li>
-                    <li>
-                        Ngày đến hạn
-                        @*<button class="filter">
+                </li>
+                <li onclick="sortTable(2)">
+                    Người chủ trì
+                    @*<button class="filter">
                             <img src="~/Content/outline_filter_alt_black_24dp.png">
                         </button>*@
-                    </li>
-                    <li>
-                        Tình trạng
-                        @*<button class="filter">
+                </li>
+                <li  onclick="sortTable(3)">
+                    Ngày tạo
+
+                    @*<button class="filter">
+                            <img src="~/Content/outline_filter_alt_black_24dp.png">
+                        </button>*@
+                </li>
+            </ul>
+        </div>
+        <table class="yuki-table" id="table-sort">
+            @foreach (var meeting in Model)
+            {
+                if (meeting.Status == 1)
+                {
+                    <tr class="yuki-column-4" onclick="location.href = '@Url.Action("VerifyMeeting","MainPage", new { id = meeting.Meeting_id })';" style="cursor: pointer;">
+                        <td>@meeting.CATEGORY.Category_Name</td>
+                        <td>@meeting.Meeting_name</td>
+                        <td>@meeting.AspNetUser.Email</td>
+                        <td>@meeting.Date_Create.GetValueOrDefault().ToShortDateString()</td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+
+
+    <!---Table 1-->
+
+    <div class="yuki-table-zone">
+        <div class="yuki-table-title">
+            <p>Cuộc Họp Chưa Hoàn Thành</p>
+        </div>
+        <div class="yuki-table-out-header">
+            <ul class="yuki-column-4">
+                <li>
+                    Danh mục
+                    @*<button class="filter">
+                            <img src="~/Content/outline_filter_alt_black_24dp.png">
+                        </button>*@
+                </li>
+                <li>
+                    Cuộc họp
+                    @*<button class="filter">
+                            <img src="~/Content/outline_filter_alt_black_24dp.png">
+                        </button>*@
+                </li>
+                <li>
+                    Ngày đến hạn
+                    @*<button class="filter">
+                            <img src="~/Content/outline_filter_alt_black_24dp.png">
+                        </button>*@
+                </li>
+                <li>
+                    Tình trạng
+                    @*<button class="filter">
                             <img src="~/Content/outline_filter_alt_black_24dp.png">
                         </button>*@
                     </li>
@@ -99,7 +103,7 @@
             <table class="yuki-table">
                 @foreach (var meeting in Model)
                 {
-                    if (meeting.Status > 2 && meeting.Status < 5)
+                    if (meeting.Status == 3 || meeting.Status == 4)
                     {
                     <tr class="yuki-column-4" onclick="location.href = '@Url.Action("VerifyMeeting", "MainPage", new { id = meeting.Meeting_id })';" style="cursor: pointer;">
                         <td>@meeting.CATEGORY.Category_Name</td>
@@ -107,8 +111,68 @@
                         <td>@meeting.Date_Start.ToShortDateString()</td>
                         <td>@meeting.MEETING_STATUS.Status_name</td>
                     </tr>
+                }
+            }
+        </table>
+    </div> <!---Table 2-->
+</body>
+
+
+<script>
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("table-sort");
+        switching = true;
+        //Set the sorting direction to ascending:
+        dir = "asc";
+        /*Make a loop that will continue until
+        no switching has been done:*/
+        while (switching) {
+            //start by saying: no switching is done:
+            switching = false;
+            rows = table.rows;
+            /*Loop through all table rows (except the
+            first, which contains table headers):*/
+            for (i = 1; i < (rows.length - 1); i++) {
+                //start by saying there should be no switching:
+                shouldSwitch = false;
+                /*Get the two elements you want to compare,
+                one from current row and one from the next:*/
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                /*check if the two rows should switch place,
+                based on the direction, asc or desc:*/
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()
+                        @*&& Number(x.innerHTML) > Number(y.innerHTML)*@ ) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()
+                        @*&& Number(x.innerHTML) < Number(y.innerHTML)*@) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
                     }
                 }
-            </table>
-        </div> <!---Table 2-->
-    </body>
+            }
+            if (shouldSwitch) {
+                /*If a switch has been marked, make the switch
+                and mark that a switch has been done:*/
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                //Each time a switch is done, increase this count by 1:
+                switchcount++;
+            } else {
+                /*If no switching has been done AND the direction is "asc",
+                set the direction to "desc" and run the while loop again.*/
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+</script>
