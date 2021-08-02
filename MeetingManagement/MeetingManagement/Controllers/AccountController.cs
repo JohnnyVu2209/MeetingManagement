@@ -79,7 +79,15 @@ namespace MeetingManagement.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    string role = GetUserRole(model.Email);
+                    switch (role)
+                    {
+                        case "BCN":
+                            return RedirectToAction("Index", "MainPage", new { area = "HeadOfDepartment" });
+                        case "Admin":
+                            return RedirectToAction("Index", "AspNetUsers", new { area = "Admin" });
+                    }
+                    return RedirectToAction("Index", "HomePage", new { area = "User" });
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
