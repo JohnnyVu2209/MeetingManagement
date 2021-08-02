@@ -57,7 +57,7 @@
                     <tr class="yuki-column-4" onclick="location.href = '@Url.Action("VerifyMeeting","MainPage", new { id = meeting.Meeting_id })';" style="cursor: pointer;">
                         <td>@meeting.CATEGORY.Category_Name</td>
                         <td>@meeting.Meeting_name</td>
-                        <td>@meeting.AspNetUser.Full_name</td>
+                        <td>@meeting.AspNetUser.Email</td>
                         <td>@meeting.Date_Create.GetValueOrDefault().ToShortDateString()</td>
                     </tr>
                 }
@@ -97,14 +97,14 @@
                     @*<button class="filter">
                             <img src="~/Content/outline_filter_alt_black_24dp.png">
                         </button>*@
-                </li>
-            </ul>
-        </div>
-        <table class="yuki-table">
-            @foreach (var meeting in Model)
-            {
-                if (meeting.Status > 2 && meeting.Status < 5)
+                    </li>
+                </ul>
+            </div>
+            <table class="yuki-table">
+                @foreach (var meeting in Model)
                 {
+                    if (meeting.Status == 3 || meeting.Status == 4)
+                    {
                     <tr class="yuki-column-4" onclick="location.href = '@Url.Action("VerifyMeeting", "MainPage", new { id = meeting.Meeting_id })';" style="cursor: pointer;">
                         <td>@meeting.CATEGORY.Category_Name</td>
                         <td>@meeting.Meeting_name</td>

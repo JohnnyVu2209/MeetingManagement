@@ -1,56 +1,84 @@
 ﻿@model IEnumerable<MeetingManagement.Models.MEETING>
-
-<div id="table-content">
-    <table class="table">
-        <thead >
-            <tr >
-                <th style="background-color: #009FE5;color:white"; scope="col">Tên cuộc họp</th>
-                <th style="background-color: #009FE5;color:white"; scope="col">Người chủ trì</th>
-                <th style="background-color: #009FE5;color:white"; scope="col">Ngày họp</th>
-                <th style="background-color: #009FE5;color:white"; scope="col">Trình trạng</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {   
-                
-                <tr class="w400">
-                    <td>@item.Meeting_name</td>
-                    <td>@item.AspNetUser.Email</td>
-                    <td>@Convert.ToDateTime(item.Date_Start).ToString("dd/MM/yyyy")</td>
-
-                    <td>
-                        @if (item.Status == 1)
-                        {
-                        <div class="pending-status">@item.MEETING_STATUS.Status_name</div>
-                        }
-                        else if (item.Status == 2)
-                        {
-                    <div class="pending-status">@item.MEETING_STATUS.Status_name</div>
-                        }
-                        else if (item.Status == 3)
-                        {
-                    <div class="missing-status">@item.MEETING_STATUS.Status_name</div>
-                        }
-                        else if (item.Status == 4)
-                        {
-                    <div class="incomplete-status">@item.MEETING_STATUS.Status_name</div>
-                        }
-                        
-                    </td>
-
+<div class="card-body card-body-fixed">
+    <div id="table-content">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="background-color: #009FE5;color:white" ; scope="col">Tên cuộc họp</th>
+                    <th style="background-color: #009FE5;color:white" ; scope="col">Người chủ trì</th>
+                    <th style="background-color: #009FE5;color:white" ; scope="col">Ngày họp</th>
+                    <th style="background-color: #009FE5;color:white" ; scope="col">Tình trạng</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
 
+                    <tr class="w400">
+                        <td>@item.Meeting_name</td>
+                        <td>@item.AspNetUser.Email</td>
+                        <td>@Convert.ToDateTime(item.Date_Start).ToString("dd/MM/yyyy")</td>
+
+                        <td>
+                            @if (item.Status == 1)
+                            {
+                                <div class="pending-status">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (item.Status == 2)
+                            {
+                                <div class="pending-status">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (item.Status == 3)
+                            {
+                                <div class="missing-status">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (item.Status == 4)
+                            {
+                                <div class="incomplete-status">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (item.Status == 4)
+                            {
+                                <div class="incomplete-status">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (@item.Status == 5)
+                            {
+                                <div class="complete-status complete-status-fixed">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (@item.Status == 6)
+                            {
+                                <div class="basic-status" style="background-color: #607d8b">Không duyệt</div>
+                            }
+                            else if (@item.Status == 7)
+                            {
+                                <div class="basic-status" style="background-color: #607d8b">Đã hủy</div>
+                            }
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 <style>
-    .table thead th{
-        text-align:center;
+    .table thead th {
+        text-align: center;
     }
-    .w400 td {
-        width:400px;
-        text-align:center;
-    }
-</style>
+
+        .w400  td {
+            width: 400px;
+            text-align: center;
+            vertical-align:middle !important;
+        }
+
+            .w400 td:first-child {
+                text-align: start;
+            }
+        .card-body-fixed {
+            position: relative;
+            top: 50px;
+            width: 100%;
+            height: 800px;
+            z-index: 1;
+        }
+    </style>

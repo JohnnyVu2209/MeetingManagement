@@ -15,7 +15,6 @@
 <link href="~/Content/taocuochop/vendor/font-awesome-4.7/css/font-awesome.css" rel="stylesheet" />
 
 <!-- Font special for pages-->
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Vendor CSS-->
 
@@ -173,12 +172,13 @@
     .input--style-5-fixed {
         background: #f1f1f1;
         height: 40px;
+        width: 200px;
         line-height: 40px;
         border: 2px solid white;
         -webkit-border-radius: 5px;
         -moz-border-radius: 5px;
         border-radius: 5px;
-        padding: 0 22px;
+        padding: 0 22px !important;
         color: #555;
     }
 
@@ -339,7 +339,7 @@
         </div>
     </div>
     <div class="form-row form-row-fixed datetime-inline">
-        <img src="~/Content/Picture/outline_schedule_black_24dp.png" />
+        <img src="~/Content/Picture/outline_event_black_24dp.png" />
         <div class="value value-fixed" style="width: calc(100% - 34px);height:40px;">
             <div class="row inline-datetime">
                 <div class="col-md-2" style="width:50%;">
@@ -382,10 +382,10 @@
         <div class="col-sm-1" style="width:fit-content;padding-left:0;">
             <img src="~/Content/Picture/outline_people_black_24dp.png" />
         </div>
-        <div class="col-md-2" style="width:fit-content;">
-            <p style="padding-top:10px;">Người tham dự</p>
-        </div>
-        <div class="col-md-3 autocomplete">
+        @*<div class="col-md-2" style="width:fit-content;padding:0px">
+                <p style="padding-top:10px;">Người tham dự</p>
+            </div>*@
+        <div class="col-md-3 autocomplete" style="padding:0px">
             <input type="text" class="form-control " id="myInput" autocomplete="off" />
         </div>
         <div style="margin-left:10px;">
@@ -431,38 +431,40 @@
     }
 
 
-    <div class="form-row">
-        <input style="width: fit-content; margin-right: 10px;" type="checkbox" class="btn btn-info" data-toggle="collapse" data-target="#demo" value="Simple collapsible" />
-        <div>
-            <div style="display: inline-flex; align-items: center; position: relative; left: 10px; ">
-                <p>Người ngoài trường</p>
-                <div style="margin-left: 20px;" id="demo" class="collapse">
-                    <button style="color:white" onclick="" class="btn yuki-btn-blue">
-                        <p>
-                            Thêm
-                        </p>
-                    </button>
+    @*<div class="form-row">
+            <input style="width: fit-content; margin-right: 10px;" type="checkbox" class="btn btn-info" data-toggle="collapse" data-target="#demo" value="Simple collapsible" />
+            <div>
+                <div style="display: inline-flex; align-items: center; position: relative; left: 10px; ">
+                    <p>Người ngoài trường</p>
+                    <div style="margin-left: 20px;" id="demo" class="collapse">
+                        <button style="color:white" onclick="" class="btn yuki-btn-blue">
+                            <p>
+                                Thêm
+                            </p>
+                        </button>
+                    </div>
                 </div>
-            </div>
 
-        </div>
-    </div>
+            </div>
+        </div>*@
     <div class="form-row">
-        <div class="name">Tài Liệu Đính Kèm:</div>
+        <div class="col-sm-1" style="width:fit-content;padding-left:0;">
+            <img src="~/Content/Picture/outline_upload_file_black_24dp.png" />
+        </div>
         <div>
             <div class="form-group">
                 <input type="file" class="form-control-file border" multiple id="file" name="Files" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
             </div>
         </div>
     </div>
-    <div>
-        <button type="submit" style="position:relative; z-index:2;" class="btn btn--blue btn-lg btn-block">Tạo</button>
+    <div style="text-align: center; width: 1000px; ">
+        <button type="submit" style="border:0px; width: 100px; height: 40px; background-color: #009fe5; color: white; display: inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor:pointer">Tạo</button>
+        <a id="cancel-btn" onclick="location.href = '@Url.Action("Index", "Meetings")'" style="width: 100px; height: 40px; background-color: #f1f1f1; color: black; display:inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor: pointer ">
+            Hủy
+        </a>
     </div>
-
     <div id="Popup"></div>
-
 </div>
-    
 }
 
 

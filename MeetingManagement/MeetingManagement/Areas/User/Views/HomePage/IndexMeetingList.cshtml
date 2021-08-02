@@ -1,6 +1,9 @@
 ﻿@model IEnumerable<MeetingManagement.Models.MeetingListVM>
+@using MeetingManagement.Models;
 @{
     Layout = null;
+    SEP24Team7Entities db = new SEP24Team7Entities();
+    MEETING meeting = db.MEETINGs.Find(ViewBag.meeting_id);
 }
 <div class="yuki-table-zone yuki-table-zone-fixed">
     <div class="table-head">Cuộc họp sắp tới</div>
@@ -43,7 +46,7 @@
                         @item.MeetingName
                     </td>
                     <td>
-                        @item.FullName
+                        @item.Email
                     </td>
                     <td>
                         @item.DateStart
@@ -69,7 +72,14 @@
                         {
                             <div class="complete-status complete-status-fixed">@item.StatusName</div>
                         }
-
+                        else if (@item.Status == 6)
+                        {
+                            <div class="basic-status" style="background-color: #607d8b">Không duyệt</div>
+                        }
+                        else if (@item.Status == 7)
+                        {
+                            <div class="basic-status" style="background-color: #607d8b">Đã hủy</div>
+                        }
                     </td>
                 </tr>
             }

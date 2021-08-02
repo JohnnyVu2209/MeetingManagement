@@ -44,8 +44,9 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return PartialView(meetings) ;
         }
 
+        [HttpGet]
        // GET: HeadOfDepartment/categories/Create
-        public PartialViewResult Create()
+        public ActionResult Create()
         {
             return PartialView("Create", new Models.CATEGORY());
         }

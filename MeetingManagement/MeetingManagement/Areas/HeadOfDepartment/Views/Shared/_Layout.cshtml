@@ -29,6 +29,23 @@
     <!-- if using RTL (Right-To-Left) orientation, load the RTL CSS file after fileinput.css by uncommenting below -->
     <!-- link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/css/fileinput-rtl.min.css" media="all" rel="stylesheet" type="text/css" /-->
     <!-- the jQuery Library -->
+    <style>
+        .navbar-right > li > a {
+            color: white;
+        }
+
+        .user-logoff {
+            right: 0%;
+        }
+
+        .login-index-update {
+            width: 363.200px;
+        }
+
+        .user-login {
+            float: right !important;
+        }
+    </style>
 </head>
 <body id="yuki-body">
     <div id="yuki-nav-bar">
@@ -52,9 +69,9 @@
 
     <div class="container body-content">
         @RenderBody()
-        <footer id="yuki-footer">
+        @*<footer id="yuki-footer">
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        </footer>*@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
