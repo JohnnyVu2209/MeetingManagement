@@ -1,6 +1,9 @@
 ﻿@model IEnumerable<MeetingManagement.Models.MeetingListVM>
+@using MeetingManagement.Models;
 @{
     Layout = null;
+    SEP24Team7Entities db = new SEP24Team7Entities();
+    MEETING meeting = db.MEETINGs.Find(ViewBag.meeting_id);
 }
 <div class="yuki-table-zone yuki-table-zone-fixed">
     <div class="table-head">Cuộc họp sắp tới</div>
@@ -43,7 +46,7 @@
                         @item.MeetingName
                     </td>
                     <td>
-                        @item.FullName
+                        @item.Email
                     </td>
                     <td>
                         @item.DateStart

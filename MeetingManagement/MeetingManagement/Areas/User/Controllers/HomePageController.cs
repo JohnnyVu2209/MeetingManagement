@@ -78,6 +78,7 @@ namespace MeetingManagement.Areas.User.Controllers
             MeetingListVM meetingListVM = new MeetingListVM();
             List<MeetingListVM> meetingListVMList = meeting.Select(x => new MeetingListVM
             {
+                Email = x.AspNetUser.Email,
                 FullName = x.AspNetUser.Full_name,
                 MeetingName = x.Meeting_name,
                 DateStart = x.Date_Start,

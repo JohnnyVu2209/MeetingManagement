@@ -275,7 +275,7 @@
             <img src="~/Content/Picture/outline_manage_accounts_black_24dp.png" />
             <div class="value value-fixed">
                 <div class="input-group input_fixed value-fixed-title" style="width: 800px !important; background-color: #f1f1f1; padding-left: 5px; height: 30px; display: flex; align-items: center;">
-                    @Html.DisplayFor(model => model.AspNetUser.Full_name, new { @class = "input-fixed", @id = "Create_by" })
+                    @Html.DisplayFor(model => model.AspNetUser.Email, new { @class = "input-fixed", @id = "Create_by" })
                 </div>
             </div>
         </div>
@@ -390,58 +390,6 @@
 <div id="show-popup"></div>
 <div id="Feedback"></div>
 
-
-@if (Model.Check_report == true)
-{
-    <div style="height: 20px"></div>
-    <h3>Biên bản họp</h3>
-    <div style="border: 2px solid #e5e5e5; padding: 20px; width: 1000px; overflow: overlay;">
-        <div class="form-row-fixed">
-            <a id="myfile" href="@Model.REPORT.Report_link" style="margin-right:20px;" download>
-                <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
-                    <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
-                        @if (Model.REPORT.Report_type == "xls" || Model.REPORT.Report_type == "xlsm" || Model.REPORT.Report_type == "xlsx")
-                        {
-                            <i style="font-size: 40px; color: #1d6f42;" class="fas fa-file-excel text-primary"></i>
-                        }
-                        else if (Model.REPORT.Report_type == "pdf")
-                        {
-                            <i style="font-size: 40px; color: #f40f02;" class="fas fa-file-pdf text-primary"></i>
-                        }
-                        else if (Model.REPORT.Report_type == "doc" || Model.REPORT.Report_type == "docm" || Model.REPORT.Report_type == "docx")
-                        {
-                            <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
-                        }
-                        else if (Model.REPORT.Report_type == "jpg" || Model.REPORT.Report_type == "jpeg")
-                        {
-                            <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
-                        }
-                        else if (Model.REPORT.Report_type == "ppt" || Model.REPORT.Report_type == "pptm" || Model.REPORT.Report_type == "pptx")
-                        {
-                            <i style="font-size: 40px; color: #D04423" class="fas fa-file-powerpoint text-primary"></i>
-                        }
-                        else
-                        {
-                            <i style="font-size:40px; color:gray" class="fas fa-file text-primary"></i>
-                        }
-                    </div>
-                    <div style="width:75%; padding:0 5px; color:black">
-                        <p style="text-overflow: ellipsis; overflow: hidden; width: 140px; height: 20px; white-space: nowrap; ">
-                            @Model.REPORT.Report_name
-                        </p>
-                        <p style="font-size:10px">
-                            @Model.REPORT.Report_binary
-                        </p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-}
-else if (Model.Check_report != true && Model.Create_by == ViewBag.user_identity && Model.Status >= 3 && Model.Status < 5)
-{
-    @Html.Action("MeetingReport", "Meetings")
-}
 
 <style>
     .btn_catalog {

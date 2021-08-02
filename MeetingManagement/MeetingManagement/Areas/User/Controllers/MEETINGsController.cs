@@ -67,7 +67,8 @@ namespace MeetingManagement.Areas.User.Controllers
 
         public ActionResult MeetingDetail(int id, bool modify)
         {
-            GetEditMeeting(id);
+            meetingEdit = db.MEETINGs.Find(id);
+            Session["MeetingEdit"] = meetingEdit;
             ViewBag.modify = modify;
             ViewBag.user_identity = User.Identity.GetUserId();
             CATEGORY category = db.CATEGORies.Find(meetingEdit.Category_id);
@@ -145,7 +146,7 @@ namespace MeetingManagement.Areas.User.Controllers
             //link huong dan https://www.youtube.com/watch?v=YQnCkMAYDsQ
             return RedirectToAction("Index");
         }
-
+        [HttpGet]
         public ActionResult MeetingEdit(int id)
         {
             GetEditMeeting(id);
@@ -344,7 +345,6 @@ namespace MeetingManagement.Areas.User.Controllers
         }
 
         /*----------Meeting Report-------------*/
-        [HttpGet]
         public ActionResult MeetingReport(int id)
         {
             ViewBag.Meeting_id = id;

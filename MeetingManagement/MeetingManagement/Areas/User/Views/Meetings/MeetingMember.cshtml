@@ -8,7 +8,6 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th class="col-align" scope="col">Tên thành viên</th>
                 <th class="col-align" scope="col">Email</th>
                 <th class="col-align" scope="col">Vai trò</th>
             </tr>
@@ -23,9 +22,6 @@
                     <tr>
                         <td>@index</td>
                         <td class="col-align">
-                            @ViewBag.meeting_create
-                        </td>
-                        <td class="col-align">
                             @ViewBag.meeting_user
                         </td>
                         <td class="col-align">
@@ -37,7 +33,6 @@
                 {
                     <tr>
                         <td>@index</td>
-                        <td class="col-align">@value.AspNetUser.Full_name</td>
                         <td class="col-align">@value.AspNetUser.Email</td>
                         <td class="col-align">
                             Thành viên
