@@ -10,20 +10,20 @@
     </thead>
     <tbody>
         <tr>
-            @foreach (var ut in ViewBag.task)
+            @foreach (var ut in ViewBag.myTask)
             {
-            <td>
-                @ut.Task_name
-            </td>
-            <td>
-                @foreach (var um in ViewBag.meeting)
-                {
-                    @um.Meeting_name
-                }
-            </td>
-            <td>
-                @Convert.ToDateTime(ut.Task_Deadline).ToString("MM/dd/yyyy")
-            </td>
+                <td>
+                    @ut.Task_name
+                </td>
+                <td>
+                    @foreach (var um in ViewBag.meeting)
+                    {
+                        @um.Meeting_name
+                    }
+                </td>
+                <td>
+                    @Convert.ToDateTime(ut.Task_Deadline).ToString("MM/dd/yyyy")
+                </td>
             }
         </tr>
     </tbody>

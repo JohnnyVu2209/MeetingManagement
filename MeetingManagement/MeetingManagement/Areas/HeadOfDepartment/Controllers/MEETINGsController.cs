@@ -65,16 +65,16 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 
                             MEETING meetings = db.MEETINGs.Where(x => x.Meeting_name == model.Meeting_name).FirstOrDefault();
 
+                            string extension = Path.GetExtension(Files.FileName);
                             ATTACHMENT newAtt = new ATTACHMENT();
                             newAtt.Meeting_id = meetings.Meeting_id;
-                            newAtt.Attachment_path = File_Path + meetings.Meeting_id;
+                            newAtt.Attachment_path = File_Path + meetings.Meeting_id + extension;
                             newAtt.Attachment_name = Files.FileName;
                             db.ATTACHMENTs.Add(newAtt);
                             db.SaveChanges();
 
                             //store link file to db
                             var path = Server.MapPath(File_Path);
-                            string extension = Path.GetExtension(Files.FileName);
                             Files.SaveAs(path + meetings.Meeting_id + extension);
                             scope.Complete();
                             return RedirectToAction("Details", "Categories", new { id = model.Category_id });
@@ -304,7 +304,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         {
             var create_by = db.MEETINGs.Find(id).Create_by.ToString();
             var current_user = User.Identity.GetUserId().ToString();
-            if (currentUser == create_by)
+            if (current_user == create_by)
             {
                 return true;
             }

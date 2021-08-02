@@ -7,7 +7,7 @@
         <section>
             @using (Html.BeginForm("MeetingReport", "Meetings", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
             {
-@Html.AntiForgeryToken()
+                @Html.AntiForgeryToken()
                 <div class="well bs-component" style="height:140px;">
                     <br />
                     @Html.Hidden("Meeting_id", id_meeting)
@@ -22,6 +22,7 @@
                                         </span>
                                     </span>
                                     <input type="text" id="ReportName" class="form-control" readonly>
+
                                 </div>
                                 @Html.ValidationMessage("FileAttach", "", new { @class = "text-danger custom-danger" })
                             </div>
@@ -39,15 +40,7 @@
         </section>
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script type="text/javascript">
-    $(() => {
-        $('#ReportFile').on("change", function () {
-            var fileUpload = document.getElementById("ReportFile");
-            $('#ReportName').val(fileUpload.files[0].name);
-        });
-    });
-</script>
+
 <style>
     .file-caption {
         width: fit-content;
@@ -55,3 +48,6 @@
         right: 0px;
     }
 </style>
+
+
+

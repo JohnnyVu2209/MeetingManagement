@@ -1,10 +1,12 @@
 ﻿@model IEnumerable<MeetingManagement.Models.CATEGORY>
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
 }
 
-@*scroll show up, position not change*@
-@*<style>
+
+<!---CSS-->
+<style>
     .modal-open .yuki-login-info {
         margin-right: 16.8px;
     }
@@ -16,74 +18,13 @@
     .modal-open #option {
         right: calc(160px + 16.8px);
     }
-</style>*@
-<link href="~/Content/catalog-list.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="~/Content/Meetings/meetingdetail.css" rel="stylesheet" />
-<div class="body-navbar">
 
-    <div class="nav-content-zone">
+    .yuki-btn-blue {
+        background-color: #009FE5 !important;
+    }
 
-        <div class="lable-zone1">
-            <div style="text-transform: uppercase;font-size:30px;margin-bottom:20px" ; class="header">
-                <label>DANH MỤC</label>
-
-                <button class="create-meeting-btn" onclick="ShowCreatePopUp()">Tạo</button>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-
-<div class="card-body card-body-fixed">
-    <div id="time-table" class="user-ctg-index-table-zone">
-        <div class="table user-ctg-index-table">
-            @foreach (var item in Model)
-            {
-                <div style="display:flex;">
-                    <h5 onclick="location.href = '@Url.Action("Details","Categories", new { id = item.Category_id})';">
-                        @item.Category_Name
-                    </h5>
-                    <span id="option">
-                        <i class="fa fa-ellipsis-h">
-                            <ul class="sublist">
-                                <li>
-                                    <button onclick="ShowEditPopUp(@item.Category_id)" class="edit-btn" data-modal="modal1">
-                                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                                        Sửa
-                                    </button>
-                                </li>
-                                <li>
-                                    <button onclick="ShowDeletePopUp(@item.Category_id)" class="delete-btn" data-modal="modald1">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                            Xóa
-                                        </button>
-                                </li>
-                                <li>
-                                    <button onclick="ShowStatisticPopUp()" class="delete-btn" data-modal="modald1">
-                                        <ion-icon name="bar-chart-outline" style="width:50px;height:20px"></ion-icon>
-                                    </button>
-                                </li>
-                            </ul>
-                        </i>
-                    </span>
-                </div>
-            }
-        </div>
-    </div>
-</div>
-
-<div id="show-popup"></div>
-<style>
-    .create-meeting-btn {
-        float: right;
-        width: 90px;
-        height: 45px;
-        background-color: #009FE5;
-        color: white;
-        border-radius: 5px;
-        font-size: 16px
+    .yuki-btn-sea {
+        background-color: #00E5B8 !important;
     }
 
     .user-ctg-index-table div:hover {
@@ -96,10 +37,16 @@
     }
 
 
-    /*.user-ctg-index-table tbody tr:hover td {
-                background-color: #f1f1f1;
-            }*/
-    
+    .user-ctg-index-button {
+        float: right;
+        width: 60px;
+        height: 30px;
+        background-color: #009FE5;
+        color: white;
+        border-radius: 5px;
+        margin-top: -30px;
+        border: 0px;
+    }
 
     .card-body-fixed {
         position: relative;
@@ -110,34 +57,100 @@
     }
 
     .lable-zone1 {
-       
         color: black;
         line-height: 40px;
     }
-</style>
 
-@*<i class="fa fa-ellipsis-h">
-        <ul class="sublist">
-            <li>
-                <button onclick="ShowEditPopUp(@item.Category_id)" class="edit-btn" data-modal="modal1">
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                    Sửa
+    .item-list {
+        background: #f2f2f2;
+        border-radius: 5px;
+        height: 45px;
+        cursor: pointer;
+        /* display: flex; */
+        align-items: center;
+        padding: 0 15px;
+        margin: auto;
+        width: 90%;
+    }
+
+        .item-list:hover {
+            background-color: #e7e7e7;
+        }
+
+    .item-name {
+        height: inherit;
+        display: flex;
+        align-items: center;
+    }
+
+        .item-name h5 {
+            font-size: initial;
+        }
+
+    .item-btn {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+        .item-btn button {
+            font-size: medium;
+        }
+
+            .item-btn button i {
+                margin-right: 10px;
+            }
+</style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link href="~/Content/catalog-list.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+<!--Content--->
+
+<div id="container">
+    <div class="user-ctg-index-header" style="display:flex;">
+        <h2 style="position:relative;">Danh mục</h2>
+        <button style="color:white;position:relative;left:1000px;" onclick="ShowCreatePopUp()" class="btn yuki-btn-blue">
+            <p style="margin:0;font-size:medium">
+                Tạo
+            </p>
+        </button>
+        <button style="color: white;position: relative; left: 700px;font-size: medium"
+                onclick="location.href = '@Url.Action("statistic","Categories")';" class="btn yuki-btn-sea">
+            Thống kê
+        </button>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="item-list row" style="margin-left:15px;margin-top:15px;">
+            <div class="col-md-8 item-name" onclick="location.href = '@Url.Action("Details","Categories", new { id = item.Category_id})';">
+                <h5>@item.Category_Name</h5>
+            </div>
+            <div class="col-md-4 item-btn">
+                <button class="btn btn-outline-secondary" onclick="ShowEditPopUp(@item.Category_id)" style="border: 3px solid #6c757d;">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Sửa
                 </button>
-            </li>
-            <li>
-                <button onclick="ShowDeletePopUp(@item.Category_id)" class="delete-btn" data-modal="modald1">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                    Xóa
+                <button class="btn btn-outline-danger" onclick="ShowDeletePopUp(@item.Category_id)" style="border: 3px solid #dc3545; ">
+                    <i class="fa fa-trash" aria-hidden="true"></i>Xóa
                 </button>
-            </li>
-        </ul>
-    </i>*@
+            </div>
+
+        </div>
+    }
+
+    <div id="show-popup"></div>
+</div>
+
+
 
 
 
 <!--JS--->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type="text/javascript">
     function ShowCreatePopUp() {
         $.ajax({
@@ -185,20 +198,5 @@
             }
         });
     };
-    function ShowStatisticPopUp(categoryID) {
-        $("#loader-div")
-        $.ajax({
-            type: "GET",
-            url: '@Url.Action("statisticChart", "Categories")',
-            data: { id: categoryID },
-            dataType: "html",
-            success: function (data) {
-                $("#show-popup").html(data);
-                $("#barChartModal").modal("show");
-            },
-            error: function (data) {
-                return false;
-            }
-        });
-    };
+
 </script>

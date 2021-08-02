@@ -1,4 +1,5 @@
 ﻿@using MeetingManagement.Models;
+@using Microsoft.AspNet.Identity;
 @{
     var meeting_id = ViewBag.Meeting;
     var create_by = ViewBag.IsCreateBy;
@@ -21,10 +22,9 @@
 
 }
 <head>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-@if (tasks.Count == 0)
+@if (create_by == true)
 {
     <p>Cuộc họp chưa có công việc</p>
     if (ViewBag.meeting_status >= 3 && ViewBag.meeting_status <= 5 && ViewBag.user_identity == ViewBag.create_by)
@@ -235,9 +235,9 @@ else
 }
 <div id="Popup"></div>
 <script type="text/javascript">
-     function getCreateModal(id) {
+     function getCreateTaskModal(id) {
          $.ajax({
-             url: "@Url.Action("Create","Tasks")",
+             url: "@Url.Action("Create", "Tasks")",
              datatype: 'html',
              method: 'GET',
              data: { MeetingID: id },
@@ -251,9 +251,9 @@ else
          });
     };
 
-    function getEditModal(id) {
+    function getEditTaskModal(id) {
         $.ajax({
-            url:"@Url.Action("Edit","Tasks")",
+            url:"@Url.Action("Edit", "Tasks")",
             datatype: 'html',
             method: 'GET',
             data: { TaskID: id },

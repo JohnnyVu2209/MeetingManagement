@@ -1,12 +1,13 @@
 ﻿@model MeetingManagement.Models.MEETING
-
+@using MeetingManagement.Models;
 @{
     ViewBag.Title = "MeetingInfo";
 
     //nếu modify = true thì mở chế độ edit/néu modify = false thì ở chế độ preview
     var is_modify = (ViewBag.modify == true) ? "" : "display:none";
     var is_preview = (ViewBag.modify == false) ? "" : "display:none";
-
+    SEP24Team7Entities db = new SEP24Team7Entities();
+    var category = db.CATEGORies.Find(Model.Category_id);
 
     DateTime Date = DateTime.Now.Date;
     TimeSpan Time = DateTime.Now.TimeOfDay;
@@ -23,9 +24,9 @@
             <img src="~/Content/Picture/users_meeting.png" />
             <div class="lable-zone" style="display:flex;">
                 <div style="display: inline-flex">
-                    @Html.Label(Model.CATEGORY.Category_Name)
+                    @Html.DisplayFor(model => model.Meeting_name)
                 </div>
-                @if (Model.MEETING_STATUS.Status_id == 7)
+                @if (Model.Status == 7)
                 {
                     <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-info')">
                         Chi tiết
@@ -40,7 +41,7 @@
                     <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-info')">
                         Chi tiết
                     </div>
-                    <div class="detail-tab-btn tablinks " onclick="openTab(event,'meeting-task')">
+                    <div id="task-layout" class="detail-tab-btn tablinks " onclick="openTab(event,'meeting-task')">
                         Công việc
                     </div>
                     @*<div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-report')">
@@ -109,13 +110,13 @@
     }
     <div id="partialview-zone">
         <div id="meeting-info" class="tabcontent" style="@is_preview">
-            @Html.Action("MeetingInfo", "Meetings", new { Model.Meeting_id })
+            @Html.Action("MeetingInfo", "Meetings", new {id = Model.Meeting_id })
         </div>
         @*<div id="meeting-member" class="tabcontent" style="display:none">
                 @Html.Action("MeetingMember", "Meetings", new { Model.Meeting_id })
             </div>*@
         <div id="meeting-task" class="tabcontent" style="display:none;">
-            @Html.Action("MeetingTask", "Meetings", new { Model.Meeting_id })
+            @Html.Action("MeetingTask", "Meetings", new {id = Model.Meeting_id })
         </div>
         <div id="meeting-report" class="tabcontent" style="display:none;">
             @Html.Action("MeetingReport", "Meetings", new { Model.Meeting_id })
@@ -123,11 +124,11 @@
         <div id="meeting-info-edit" class="tabcontent" style="@is_modify">
             @if (ViewBag.user_identity == Model.Create_by && Model.Status < 3)
             {
-                @Html.Action("MeetingEdit", "Meetings", new { Model.Meeting_id })
+                @Html.Action("MeetingEdit", "Meetings", new { id = Model.Meeting_id })
             }
             else
             {
-                @Html.Action("MeetingInfo", "Meetings", new { Model.Meeting_id })
+                @Html.Action("MeetingInfo", "Meetings", new { id = Model.Meeting_id })
             }
         </div>
     </div>

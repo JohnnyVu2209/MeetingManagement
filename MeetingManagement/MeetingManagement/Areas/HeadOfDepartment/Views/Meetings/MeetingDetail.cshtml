@@ -23,9 +23,8 @@
                 <img src="~/Content/Picture/users_meeting.png" />
                 <div class="lable-zone" style="display:flex;">
                     <div style="display: inline-flex">
-                        @Html.Label(Model.CATEGORY.Category_Name)
                     </div>
-                    @if (Model.MEETING_STATUS.Status_id == 7)
+                    @if (Model.Status == 7)
                     {
                         <div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-info')">
                             Chi tiết
