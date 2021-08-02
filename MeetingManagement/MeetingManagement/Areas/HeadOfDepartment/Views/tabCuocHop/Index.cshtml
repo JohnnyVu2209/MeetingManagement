@@ -1,59 +1,29 @@
 ﻿@model IEnumerable<MeetingManagement.Models.MEETING>
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
-
 }
-<link href="~/Content/catalog-list.css" rel="stylesheet" />
-
-<br />
-
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#joinedMeetings">Cuộc họp tham dự</a></li>
     <li><a data-toggle="tab" href="#myMeetings">Cuộc họp của tôi</a></li>
     <li><a data-toggle="tab" href="#pendingMeetings">Cuộc họp chờ duyệt</a></li>
 </ul>
-
 <div class="tab-content">
     <div id="joinedMeetings" class="tab-pane fade in active">
         <br />
         <div id="joinedMeetingGrd">
-            <ul class="catalogList">
-                @foreach (var item in ViewBag.pendingMeeting)
-                {
-                    <li onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = item.Meeting_id })';">
-                        @item.Meeting_name
-                    </li>
-                }
-            </ul>
+            @Html.Action("JoinedMeeting", "Meetings")
         </div>
     </div>
-
     <div id="myMeetings" class="tab-pane fade">
         <br />
         <div id="myMeetingGrd">
-            <ul class="catalogList">
-                @foreach (var item in ViewBag.attendMeeting)
-                {
-                    <li onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id })';">
-                        @item.Meeting_name
-                    </li>
-                }
-            </ul>
+            @Html.Action("MyMeeting", "Meetings")
         </div>
     </div>
-
     <div id="pendingMeetings" class="tab-pane fade">
         <br />
         <div id="pendingGrd">
-            <ul class="catalogList">
-                @foreach (var item in ViewBag.myMeeting)
-                {
-                    <li onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id })';">
-                        @item.Meeting_name
-                    </li>
-                }
-            </ul>
+            @Html.Action("PendingMeeting", "Meetings")
         </div>
     </div>
 </div>
@@ -68,75 +38,3 @@
         $(this).tab('show')
     })
 </script>
-
-
-
-
-
-
-@*<link href="~/Content/quyhung/css/tabcuochop.css" rel="stylesheet" />
-*@
-
-@*<div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'mycate')">Cuộc họp chờ duyệt</button>
-        <button class="tablinks" onclick="openTab(event, 'mymeeting')">Cuộc họp tham dự</button>
-        <button class="tablinks" onclick="openTab(event, 'mywork')">Cuộc họp của tôi</button>
-    </div>*@
-
-@*<ul class="nav nav-tabs">
-        <li><a href="#" id="defaultOpen" onclick="openTab(event, 'mycate')">Cuộc họp chờ duyệt</a></li>
-        <li><a href="#" class="tablinks" onclick="openTab(event, 'mymeeting')">Cuộc họp tham dự</a></li>
-        <li><a href="#" class="tablinks" onclick="openTab(event, 'mywork')">Cuộc họp của tôi</a></li>
-    </ul>*@
-
-@*<div id="mycate" class="tabcontent active">
-        <ul class="catalogList">
-            @foreach (var item in ViewBag.pendingMeeting)
-            {
-                <li onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = item.Meeting_id })';">
-                    @item.Meeting_name
-                </li>
-            }
-        </ul>
-    </div>
-
-    <div id="mymeeting" class="tabcontent">
-        <ul class="catalogList">
-            @foreach (var item in ViewBag.attendMeeting)
-            {
-                <li onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id })';">
-                    @item.Meeting_name
-                </li>
-            }
-        </ul>
-    </div>
-
-
-    <div id="mywork" class="tabcontent">
-        <ul class="catalogList">
-            @foreach (var item in ViewBag.myMeeting)
-            {
-                <li onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id })';">
-                    @item.Meeting_name
-                </li>
-            }
-        </ul>
-    </div>*@
-
-
-
-@*<script>
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
-        } document.getElementById("defaultOpen").click();
-    </script>*@
