@@ -205,7 +205,7 @@
             </div>
             <div class="modal-body">
                 <table class="table" id="table-sort">
-                    <thead>
+                    <thead style="color:white;background:#0094ff">
                         <tr>
                             <th scope="col" onclick="sortTable(0)" style="cursor:pointer">Tên cuộc họp</th>
                             <th scope="col" onclick="sortTable(1)" style="cursor:pointer">Ngày tạo</th>
@@ -399,6 +399,9 @@
                 title: {
                     text: 'Cuộc họp'
                 },
+                credits: {
+                    enabled: false
+                },
                 tooltip: {
                     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
                 },
@@ -468,7 +471,7 @@
                     },
                     yAxis: {
                         min: 0,
-                        max: 20,
+                        max: 30,
                         labels: {
                             overflow: 'justify'
                         }
@@ -483,7 +486,7 @@
                             }
                         }
                     },
-                    legend: {
+@*                    legend: {
                         layout: 'vertical',
                         align: 'right',
                         verticalAlign: 'top',
@@ -494,7 +497,7 @@
                         backgroundColor:
                             Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
                         shadow: true
-                    },
+                    },*@
                     credits: {
                         enabled: false
                     },
