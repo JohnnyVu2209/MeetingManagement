@@ -72,6 +72,15 @@
         margin: auto;
         width: 90%;
     }
+    .create-meeting-btn {
+        float: right;
+        width: 90px;
+        height: 45px;
+        background-color: #009FE5;
+        color: white;
+        border-radius: 5px;
+        font-size: 16px
+    }
 
         .item-list:hover {
             background-color: #e7e7e7;
@@ -100,28 +109,29 @@
                 margin-right: 10px;
             }
 </style>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 <link href="~/Content/catalog-list.css" rel="stylesheet" />
+<link href="~/Content/Meetings/meetingdetail.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 
 <!--Content--->
+<div class="body-navbar">
 
-<div id="container">
-    <div class="user-ctg-index-header" style="display:flex;">
-        <h2 style="position:relative;">Danh mục</h2>
-        <button style="color:white;position:relative;left:1000px;" onclick="ShowCreatePopUp()" class="btn yuki-btn-blue">
-            <p style="margin:0;font-size:medium">
-                Tạo
-            </p>
-        </button>
-        <button style="color: white;position: relative; left: 700px;font-size: medium"
-                onclick="location.href = '@Url.Action("statistic","Categories")';" class="btn yuki-btn-sea">
-            Thống kê
-        </button>
+    <div class="nav-content-zone">
+
+        <div class="lable-zone1">
+            <div style="text-transform: uppercase;font-size:30px;margin-bottom:20px" ; class="header">
+                <label>DANH MỤC</label>
+
+                <button class="create-meeting-btn" onclick="ShowCreatePopUp()">Tạo</button>
+            </div>
+
+        </div>
     </div>
+</div>
+<div class="card-body card-body-fixed">
     @foreach (var item in Model)
     {
         <div class="item-list row" style="margin-left:15px;margin-top:15px;">

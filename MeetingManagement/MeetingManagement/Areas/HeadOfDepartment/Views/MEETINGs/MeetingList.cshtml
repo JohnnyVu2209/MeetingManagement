@@ -6,66 +6,87 @@
 
 
 <style>
+    .table thead th {
+        text-align: center;
+    }
+
     .w400 td {
         width: 400px;
+        text-align: center;
+        vertical-align: middle !important;
+    }
+
+        .w400 td:first-child {
+            text-align: start;
+        }
+
+    .card-body-fixed {
+        position: relative;
+        top: 50px;
+        width: 100%;
+        height: 800px;
+        z-index: 1;
     }
 </style>
 
-<div id="table-content">
-    <table class="table" id="table-sort">
-        <thead style="background-color: #009FE5;color:white">
-            <tr>
-                <th scope="col" onclick="sortTable(0)" style="cursor:pointer">Tên cuộc họp</th>
-                <th scope="col" onclick="sortTable(1)"style="cursor:pointer">Người chủ trì</th>
-                <th scope="col" onclick="sortTable(2)"style="cursor:pointer">Ngày họp</th>
-                <th scope="col" onclick="sortTable(3)"style="cursor:pointer">Trình trạng</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr class="w400">
-                    <td>
-                        @item.Meeting_name
-                    </td>
-                    <td>@item.AspNetUser.Full_name</td>
-                    <td>@Convert.ToDateTime(item.Date_Start).ToString("MM/dd/yyyy")</td>
-                    <td>
-                        @if (@item.Status == 1)
-                        {
-                            <div class="pending-status" style="width:100px">@item.MEETING_STATUS.Status_name</div>
-                        }
-                        else if (@item.Status == 2)
-                        {
-                            <div class="waiting-status"style="width:100px">@item.MEETING_STATUS.Status_name</div>
-                        }
-                        else if (@item.Status == 3)
-                        {
-                            <div class="missing-status" style="width:100px">@item.MEETING_STATUS.Status_name</div>
-                        }
-                        else if (@item.Status == 4)
-                        {
-                            <div class="incomplete-status" style="width:100px">@item.MEETING_STATUS.Status_name</div>
-                        }
-                        else if (@item.Status == 5)
-                        {
-                            <div class="complete-status" style="width:100px">@item.MEETING_STATUS.Status_name</div>
-                        }
-                        else if (@item.Status == 6)
-                        {
-                            <div class="basic-status" style="background-color: #607d8b">Không duyệt</div>
-                        }
-                        else if (@item.Status == 7)
-                        {
-                            <div class="basic-status" style="background-color: #607d8b">Đã hủy</div>
-                        }
-                    </td>
+<div class="card-body card-body-fixed">
+    <div id="table-content">
+
+        <table class="table" id="table-sort">
+            <thead style="background-color: #009FE5;color:white">
+                <tr>
+                    <th scope="col" onclick="sortTable(0)" style="cursor:pointer">Tên cuộc họp</th>
+                    <th scope="col" onclick="sortTable(1)" style="cursor:pointer">Người chủ trì</th>
+                    <th scope="col" onclick="sortTable(2)" style="cursor:pointer">Ngày họp</th>
+                    <th scope="col" onclick="sortTable(3)" style="cursor:pointer">Trình trạng</th>
                 </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="w400">
+                        <td>
+                            @item.Meeting_name
+                        </td>
+                        <td>@item.AspNetUser.Full_name</td>
+                        <td>@Convert.ToDateTime(item.Date_Start).ToString("MM/dd/yyyy")</td>
+                        <td>
+                            @if (@item.Status == 1)
+                            {
+                                <div class="pending-status">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (@item.Status == 2)
+                            {
+                                <div class="waiting-status">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (@item.Status == 3)
+                            {
+                                <div class="missing-status">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (@item.Status == 4)
+                            {
+                                <div class="incomplete-status">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (@item.Status == 5)
+                            {
+                                <div class="complete-status">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (@item.Status == 6)
+                            {
+                                <div class="basic-status" style="background-color: #607d8b">Không duyệt</div>
+                            }
+                            else if (@item.Status == 7)
+                            {
+                                <div class="basic-status" style="background-color: #607d8b">Đã hủy</div>
+                            }
+                        </td>
+                    </tr>
 
                 }
             </tbody>
 
-    </table>
+        </table>
+    </div>
 </div>
 
 <script>
