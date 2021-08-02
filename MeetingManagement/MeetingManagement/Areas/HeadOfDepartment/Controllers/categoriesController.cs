@@ -113,7 +113,6 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             ViewBag.meeting = db.MEETINGs.Where(x => x.Meeting_id == mEMBER.Meeting_id).ToList();
             ViewBag.task = db.TASKs.Where(x => x.Meeting_id == mEMBER.Meeting_id && x.Assignee == mEMBER.Member_id).ToList();
             ViewBag.allWork = db.TASKs.ToList();
-            /*            DateTime month07 = Convert.ToDateTime("07/dd/yyyy");*/
             ViewBag.allMeeting = db.MEETINGs.ToList();
             ViewBag.allCate = db.CATEGORies.ToList();
             ViewBag.allMeetingStatus = db.MEETING_STATUS.ToList();
