@@ -12,38 +12,44 @@
 }
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link href="~/Content/Meetings/meetingdetail.css" rel="stylesheet" />
 
-<img style="width:100px;height:100px" src="https://media1.tenor.com/images/239a102840e57a65543cf5c7b3accd5f/tenor.gif">
-<div id="container">
-    <div style="text-transform: uppercase;font-size:20px;margin-bottom:20px" ; class="header">
-        @Html.Label(Model.Category_Name)
-        <button style="float: right; width: 90px;height: 45px;
-        background-color: #009FE5; color: white;
-        border-radius: 5px;font-size:16px"
-                onclick="location.href = '@Url.Action("MeetingForm","MEETINGs", new { id = Model.Category_id})';">
-            Tạo
-        </button>
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-                Modal content
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Danh sách công việc trong danh mục @Html.Label(Model.Category_Name)</h4>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
+
+<div class="body-navbar">
+
+    <div class="nav-content-zone">
+
+        <div class="lable-zone1">
+            <div style="text-transform: uppercase;font-size:20px;margin-bottom:20px" ; class="header">
+                @Html.Label(Model.Category_Name)
+                <button class="create-meeting-btn" onclick="location.href = '@Url.Action("MeetingForm","MEETINGs", new { id = Model.Category_id})';">Tạo</button>
 
             </div>
+
         </div>
     </div>
-    @Html.Action("MeetingList", "MEETINGs", new { id = Model.Category_id })
-
 
 </div>
+@Html.Action("MeetingList", "MEETINGs", new { id = Model.Category_id })
+
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="~/Content/quyhung/js/accodion-scripts.js"></script>
+<style>
+    .create-meeting-btn {
+        float: right;
+        width: 90px;
+        height: 45px;
+        background-color: #009FE5;
+        color: white;
+        border-radius: 5px;
+        font-size: 16px
+    }
 
+    .lable-zone1 {
+        color: black;
+        line-height: 40px;
+    }
+</style>

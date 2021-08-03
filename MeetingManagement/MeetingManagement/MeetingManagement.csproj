@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
@@ -255,9 +255,6 @@
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoryListVM.cs" />
-    <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MEETING.cs">
@@ -292,9 +289,6 @@
     <Compile Include="Models\REPORT.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TASK.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -304,8 +298,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-
-
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -498,7 +490,6 @@
     <Content Include="Areas\Admin\Views\AspNetRoles\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\UserGridView.cshtml" />
-
     <Content Include="login-form-05\css\bootstrap.min.css" />
     <Content Include="login-form-05\css\bootstrap\bootstrap-reboot.css" />
     <Content Include="login-form-05\css\bootstrap\bootstrap.css" />
@@ -516,7 +507,6 @@
     <Content Include="login-form-05\js\main.js" />
     <Content Include="login-form-05\js\owl.carousel.min.js" />
     <Content Include="login-form-05\js\popper.min.js" />
-
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -657,10 +647,8 @@
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer-fa\theme.scss" />
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer\theme.scss" />
     <Content Include="Areas\User\Views\Meetings\MeetingReport.cshtml" />
-
     <Content Include="Areas\User\Views\Tasks\Create.cshtml" />
     <Content Include="Areas\User\Views\Tasks\Index.cshtml" />
-
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser2.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingList.cshtml" />
@@ -693,7 +681,6 @@
     <Content Include="Areas\User\Views\Meetings\PendingMeeting.cshtml" />
     <Content Include="Areas\User\Views\Meetings\CancelModel.cshtml" />
     <Content Include="Areas\User\Views\Meetings\DeleteAttachment.cshtml" />
-
     <Content Include="Areas\User\Views\HomePage\IndexCateDetail.cshtml" />
     <Content Include="Areas\User\Views\HomePage\IndexCateList.cshtml" />
     <Content Include="Areas\User\Views\HomePage\IndexMeetingList.cshtml" />
@@ -703,9 +690,7 @@
     <Content Include="Areas\User\Views\Meetings\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\indexTask.cshtml" />
-
     <Content Include="Areas\User\Views\Tasks\Edit.cshtml" />
-
     <EntityDeploy Include="Models\Models.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Models.Designer.cs</LastGenOutput>
@@ -713,7 +698,6 @@
     <Content Include="Models\Models.edmx.diagram">
       <DependentUpon>Models.edmx</DependentUpon>
     </Content>
-
     <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\taocuochop\vendor\font-awesome-4.7\fonts\fontawesome-webfont.woff" />
@@ -724,9 +708,7 @@
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff" />
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
     <Content Include="Areas\HeadOfDepartment\Views\Shared\outplay.cshtml" />
-    
     <Content Include="Areas\HeadOfDepartment\Views\Categories\statisticChart.cshtml" />
-
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

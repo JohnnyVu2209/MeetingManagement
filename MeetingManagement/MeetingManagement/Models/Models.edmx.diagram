@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
 
-      <Diagram DiagramId="a2fed6f0cb9e431f9d1663dc24309753" Name="Diagram1">
+      <Diagram DiagramId="a2fed6f0cb9e431f9d1663dc24309753" Name="Diagram1" ZoomLevel="33">
 
         <EntityTypeShape EntityType="SEP24Team7Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SEP24Team7Model.AspNetRole" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
