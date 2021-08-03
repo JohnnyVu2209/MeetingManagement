@@ -255,6 +255,9 @@
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoryListVM.cs" />
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MEETING.cs">
@@ -282,16 +285,14 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="Models\Models1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\OTHER_ACCOUNT.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Outlook.cs" />
     <Compile Include="Models\REPORT.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TASK.cs">
@@ -646,7 +647,6 @@
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer-fa\theme.scss" />
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer\theme.scss" />
     <Content Include="Areas\User\Views\Meetings\MeetingReport.cshtml" />
-
     <Content Include="Areas\User\Views\Tasks\Create.cshtml" />
     <Content Include="Areas\User\Views\Tasks\Index.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser2.cshtml" />
@@ -705,9 +705,7 @@
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff" />
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
     <Content Include="Areas\HeadOfDepartment\Views\Shared\outplay.cshtml" />
-    
     <Content Include="Areas\HeadOfDepartment\Views\Categories\statisticChart.cshtml" />
-
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
