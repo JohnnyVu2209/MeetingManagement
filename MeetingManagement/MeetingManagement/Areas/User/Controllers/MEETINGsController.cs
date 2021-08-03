@@ -20,13 +20,11 @@ namespace MeetingManagement.Areas.User.Controllers
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
         private string currentUser;
-        private MEETING meeting = null;
         private const string MEETING_TIME = "Thời gian diễn ra cuộc họp: ";
         private const string MEETING_LOCATION = "Địa điểm diễn ra cuộc họp: ";
         private const string MEETING_CANCEL = "Cuộc họp đã bị huỷ vì lý do: ";
         private const string File_Path_Attachment = "~/Upload/Attachments/";
         private const string File_Path_Report = "~/Upload/Reports/";
-        private string Old_location;
         private MEETING meetingSS = null;
         private MEETING meetingEdit = null;
         private void GetMeeting()
@@ -329,7 +327,6 @@ namespace MeetingManagement.Areas.User.Controllers
         {
             var create_by = db.MEETINGs.Find(id).Create_by.ToString();
             var current_user = User.Identity.GetUserId().ToString();
-            bool check;
             if (current_user == create_by)
             {
                 return true;
@@ -338,6 +335,7 @@ namespace MeetingManagement.Areas.User.Controllers
         }
 
         /*----------Meeting Report-------------*/
+        [HttpGet]
         public ActionResult MeetingReport(int id)
         {
             ViewBag.Meeting_id = id;
@@ -352,12 +350,13 @@ namespace MeetingManagement.Areas.User.Controllers
                 {
                     if (ValidateFile(ReportFile))
                     {
+                        string extension = Path.GetExtension(ReportFile.FileName);
                         REPORT report = new REPORT();
                         report.Meeting_id = Meeting_id;
                         report.Report_name = ReportFile.FileName;
                         report.Report_binary = Math.Round(((Double)ReportFile.ContentLength / 1024), 2).ToString() + "KB";
-                        report.Report_type = ReportFile.ContentType;
-                        report.Report_link = File_Path_Report + ReportFile;
+                        report.Report_type = extension;
+                        report.Report_link = File_Path_Report + ReportFile.FileName;
                         db.REPORTs.Add(report);
                         db.SaveChanges();
 
@@ -368,8 +367,9 @@ namespace MeetingManagement.Areas.User.Controllers
                         db.SaveChanges();
 
                         var path = Server.MapPath(File_Path_Report);
-                        string extension = Path.GetExtension(ReportFile.FileName);
-                        ReportFile.SaveAs(path + ReportFile);
+                        ReportFile.SaveAs(path + ReportFile.FileName);
+                        scope.Complete();
+                        return RedirectToAction("MeetingDetail", new { id = Meeting_id, modify = false });
                     }
                     ModelState.AddModelError("File", "Dung lượng tối đa cho phép là 5MB");
                 }
@@ -441,6 +441,7 @@ namespace MeetingManagement.Areas.User.Controllers
         [HttpPost]
         public ActionResult MeetingForm(MEETING model, HttpPostedFileBase Files)
         {
+            ValidateMeeting(model);
             GetMeeting();
             if (ModelState.IsValid)
             {
@@ -527,7 +528,19 @@ namespace MeetingManagement.Areas.User.Controllers
                 return false;
             return true;
         }
-
+        private void ValidateMeeting(MEETING meeting)
+        {
+            if (meeting.Date_Start <= DateTime.Today)
+            {
+                ModelState.AddModelError("Date_Start", "Date is not valid");
+            }
+            TimeSpan twentyoneHour = new TimeSpan(21, 0, 0);
+            TimeSpan seventhHour = new TimeSpan(07, 0, 0);
+            if (meeting.Time_Start < seventhHour || meeting.Time_Start >= twentyoneHour)
+            {
+                ModelState.AddModelError("Time_Start", "Time is not valid");
+            }
+        }
 
 
         [HttpGet]
@@ -539,7 +552,10 @@ namespace MeetingManagement.Areas.User.Controllers
             foreach (var m in meetingSS.MEMBERs.ToList())
             {
                 if (m.Member_id == user.Id)
+                {
                     checkExist = true;
+                    model.MEMBERs = meetingSS.MEMBERs;
+                }
             }
             if (checkExist != true)
             {

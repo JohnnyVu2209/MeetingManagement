@@ -347,23 +347,23 @@
             <a id="myfile" href="@Model.REPORT.Report_link" style="margin-right:20px;" download>
                 <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
                     <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
-                        @if (Model.REPORT.Report_type == "xls" || Model.REPORT.Report_type == "xlsm" || Model.REPORT.Report_type == "xlsx")
+                        @if (Model.REPORT.Report_type == ".xls" || Model.REPORT.Report_type == ".xlsm" || Model.REPORT.Report_type == ".xlsx")
                         {
                             <i style="font-size: 40px; color: #1d6f42;" class="fas fa-file-excel text-primary"></i>
                         }
-                        else if (Model.REPORT.Report_type == "pdf")
+                        else if (Model.REPORT.Report_type == ".pdf")
                         {
                             <i style="font-size: 40px; color: #f40f02;" class="fas fa-file-pdf text-primary"></i>
                         }
-                        else if (Model.REPORT.Report_type == "doc" || Model.REPORT.Report_type == "docm" || Model.REPORT.Report_type == "docx")
+                        else if (Model.REPORT.Report_type == ".doc" || Model.REPORT.Report_type == ".docm" || Model.REPORT.Report_type == ".docx")
                         {
                             <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
                         }
-                        else if (Model.REPORT.Report_type == "jpg" || Model.REPORT.Report_type == "jpeg")
+                        else if (Model.REPORT.Report_type == ".jpg" || Model.REPORT.Report_type == ".jpeg")
                         {
                             <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
                         }
-                        else if (Model.REPORT.Report_type == "ppt" || Model.REPORT.Report_type == "pptm" || Model.REPORT.Report_type == "pptx")
+                        else if (Model.REPORT.Report_type == ".ppt" || Model.REPORT.Report_type == ".pptm" || Model.REPORT.Report_type == ".pptx")
                         {
                             <i style="font-size: 40px; color: #D04423" class="fas fa-file-powerpoint text-primary"></i>
                         }
@@ -389,60 +389,6 @@ else if (Model.Check_report != true && Model.Create_by == ViewBag.user_identity 
 {
     @Html.Action("MeetingReport", "Meetings", new { id = Model.Meeting_id })
 }
-
-@*<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member" aria-expanded="false" aria-controls="Member">
-        Danh sách thành viên
-    </a>*@
-
-@*<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        Button with data-target
-    </button>*@
-@*<div class="collapse" id="Member" style="width:1000px;">
-        <table class="table">
-            <thead >
-                <tr style="background-color:#f1f1f1; color:black;">
-                    <th scope="col">#</th>
-                    <th class="col-align" scope="col">Tên thành viên</th>
-                    <th class="col-align" scope="col">Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach(var member in Model.MEMBERs)
-                {
-                    <tr>
-                        <td>@(++i)</td>
-                        <td class="col-align">@member.AspNetUser.Full_name</td>
-                        <td class="col-align">@member.AspNetUser.Email</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>*@
-
-<!--<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member2" aria-expanded="false" aria-controls="Member">
-    Ngoài nhà trường
-</a>
-<div class="collapse" id="Member2" style="width:1000px;">
-    <table class="table">
-        <thead>
-            <tr style="background-color:#f1f1f1; color:black;">
-                <th scope="col">#</th>
-                <th class="col-align" scope="col">Tên thành viên</th>
-                <th class="col-align" scope="col">Email</th>
-            </tr>
-        </thead>
-        <tbody>-->
-@* @for (int i = 1; i <= 10; i++)
-    {
-        <tr>
-            <td>@i</td>
-            <td class="col-align">Trần Đức Bo</td>
-            <td class="col-align">bo.187pm66666</td>
-        </tr>
-    }*@
-<!--</tbody>
-    </table>
-</div>-->
 
 <style>
     .btn-primary-fixed {
