@@ -231,7 +231,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return PartialView(meetings);
         }
 
-        public ActionResult MeetingDetail(int id, bool modify)
+        public ActionResult MeetingDetail(int id, bool? modify)
         {
             ViewBag.modify = modify;
             ViewBag.user_identity = User.Identity.GetUserId();

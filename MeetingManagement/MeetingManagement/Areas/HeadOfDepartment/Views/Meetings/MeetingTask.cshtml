@@ -27,7 +27,7 @@
 @if (create_by == true)
 {
     <div class="button-zone" style=" position: absolute; top: -10px; right: 0px;">
-        <a class="btn button-create" style="background-color:#009fe5; color:white; display:inline-flex;" onclick="getCreateModal(@meeting_id)">Tạo</a>
+        <a class="btn button-create" style="background-color:#009fe5; color:white; display:inline-flex;" onclick="getCreateTaskModal(@meeting_id)">Tạo</a>
     </div>
 }
 @if (tasks.Count == 0)
@@ -68,7 +68,7 @@ else
                             <td>@index</td>
                             <td>@item.Task_name</td>
                             <td class="col-align">@item.MEMBER.AspNetUser.Email</td>
-                            <td class="col-align">@item.Task_Deadline</td>
+                            <td class="col-align">@item.Task_Deadline.Value.ToShortDateString()</td>
                             <td class="col-align" id="status">
                                 @if (item.Task_Status == false)
                                 {
@@ -84,12 +84,6 @@ else
                                 {
                                     if (create_by == true)
                                     {
-                                        if (item.Assignee == User.Identity.GetUserId())
-                                        {
-                                            <a class="fa fa-check-square"
-                                               href="@Url.Action("CompleteTask", "BCNTask", new { TaskID = item.Task_id })">
-                                            </a>
-                                        }
                                         <a class="fa fa-bell"></a>
 
                                         <a style="margin-left:5px"
@@ -107,8 +101,8 @@ else
                                     {
                                         if (item.Assignee == User.Identity.GetUserId())
                                         {
-                                            <a class="fa fa-check-square"
-                                               href="@Url.Action("CompleteTask", "BCNTask", new { TaskID = item.Task_id })">
+                                            <a href="@Url.Action("CompleteTask", "BCNTask", new { TaskID = item.Task_id })">
+                                                Hoàn thành
                                             </a>
                                         }
                                     }
@@ -220,7 +214,7 @@ else
 }
 <div id="Popup"></div>
 <script type="text/javascript">
-     function getCreateModal(id) {
+     function getCreateTaskModal(id) {
          $.ajax({
              url: "@Url.Action("Create", "BCNTask")",
              datatype: 'html',
