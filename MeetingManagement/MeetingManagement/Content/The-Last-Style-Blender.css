@@ -119,9 +119,9 @@ body {
 }
 
 .yuki-login-info {
-    position: absolute;
-    right: 50px;
-    top: 0px;
+    position: relative;
+    right: 20px;
+    top: 7px;
 }
 /*--#table--*/
 .yuki-table-zone {

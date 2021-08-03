@@ -88,7 +88,7 @@ else
                             <div class="finished-status">Hoàn thành</div>
                         }
                     </td>
-                    @if (ViewBag.meeting_status >= 3 && ViewBag.meeting_status <= 5 && ViewBag.user_identity == ViewBag.create_by)
+                    @if (ViewBag.meeting_status >= 3 && ViewBag.meeting_status <= 5)
                     {
                         if (item.Task_Status == false)
                         {
