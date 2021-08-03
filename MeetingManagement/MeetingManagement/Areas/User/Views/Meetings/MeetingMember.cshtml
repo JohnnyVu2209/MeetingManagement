@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<MeetingManagement.Models.MEMBER>
 @*<div style=" width: calc(100% + 60px); height: 50px; background-color: #e5e5e5; display: flex; position: relative; left: -30px; font-size: 20px; align-items: center; color: black;">
-    <p style="margin:0px">Thành viên</p>
-</div>*@
+        <p style="margin:0px">Thành viên</p>
+    </div>*@
 <div class="table-pos" style="width:1000px">
+    <h4>Thành viên:</h4>
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th class="col-align" scope="col">Tên thành viên</th>
                 <th class="col-align" scope="col">Email</th>
                 <th class="col-align" scope="col">Vai trò</th>
             </tr>
@@ -22,9 +22,6 @@
                     <tr>
                         <td>@index</td>
                         <td class="col-align">
-                            @ViewBag.meeting_create
-                        </td>
-                        <td class="col-align">
                             @ViewBag.meeting_user
                         </td>
                         <td class="col-align">
@@ -36,62 +33,13 @@
                 {
                     <tr>
                         <td>@index</td>
-                        <td class="col-align">@value.AspNetUser.Full_name</td>
                         <td class="col-align">@value.AspNetUser.Email</td>
                         <td class="col-align">
                             Thành viên
                         </td>
                     </tr>
                 }
-            }
-            <tr>
-                <td>Test</td>
-                <td class="col-align">Minh Hiếu</td>
-                <td class="col-align">hieu.187pm13916</td>
-                <td class="col-align">
-                    Thành viên
-                </td>
-            </tr>
-            <tr>
-                <td>Test</td>
-                <td class="col-align">Minh Hiếu</td>
-                <td class="col-align">hieu.187pm13916</td>
-                <td class="col-align">
-                    Thành viên
-                </td>
-            </tr>
-            <tr>
-                <td>Test</td>
-                <td class="col-align">Minh Hiếu</td>
-                <td class="col-align">hieu.187pm13916</td>
-                <td class="col-align">
-                    Thành viên
-                </td>
-            </tr>
-            <tr>
-                <td>Test</td>
-                <td class="col-align">Minh Hiếu</td>
-                <td class="col-align">hieu.187pm13916</td>
-                <td class="col-align">
-                    Thành viên
-                </td>
-            </tr>
-            <tr>
-                <td>Test</td>
-                <td class="col-align">Minh Hiếu</td>
-                <td class="col-align">hieu.187pm13916</td>
-                <td class="col-align">
-                    Thành viên
-                </td>
-            </tr>
-            <tr>
-                <td>Test</td>
-                <td class="col-align">Minh Hiếu</td>
-                <td class="col-align">hieu.187pm13916</td>
-                <td class="col-align">
-                    Thành viên
-                </td>
-            </tr>
+            }            
         </tbody>
     </table>
 </div>

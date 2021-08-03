@@ -16,6 +16,8 @@ namespace MeetingManagement.Areas.User.Controllers
         private SEP24Team7Entities db = new SEP24Team7Entities();
         private string ASIGNED_TASK = "Bạn đã được giao việc: ";
         private string REMIND_TASK = "Nhắc nhở hoàn thành công việc: ";
+        private string TASK_DEADLINE = "Hạn hoàn thành: ";
+        private int Current_Meeting;
         // GET: User/Tasks
         public ActionResult Index()
         {
@@ -44,7 +46,7 @@ namespace MeetingManagement.Areas.User.Controllers
         // GET: User/Tasks/Create
         public ActionResult Create(int MeetingID)
         {
-            ViewBag.Meeting_id = new SelectList(db.MEMBERs.Where(x => x.Meeting_id == MeetingID), "Member_id", "AspNetUser.Full_name");
+            ViewBag.Meeting_id = new SelectList(db.MEMBERs.Where(x => x.Meeting_id == MeetingID), "Member_id", "AspNetUser.Email");
             var task = new TASK();
             task.Meeting_id = MeetingID;
             return PartialView(task);
@@ -56,7 +58,7 @@ namespace MeetingManagement.Areas.User.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(TASK tASK, string Asignee)
-        {            
+        {
             db.TASKs.Add(new TASK
             {
                 Task_name = tASK.Task_name,
@@ -66,9 +68,12 @@ namespace MeetingManagement.Areas.User.Controllers
                 Meeting_id = tASK.Meeting_id
             });
             db.SaveChanges();
-            var meetingid = db.MEETINGs.Find(tASK.Meeting_id).Meeting_name.ToString();
-            var content = ASIGNED_TASK + tASK.Task_name;
+
+            // send assigned email notification
+            var meetingid = db.MEETINGs.Find(tASK.Meeting_id).Meeting_name.ToString();            
             var sender = db.AspNetUsers.Find(Asignee).Email.ToString();
+            var content = ASIGNED_TASK + tASK.Task_name + Environment.NewLine + TASK_DEADLINE + tASK.Task_Deadline ;
+            
             var mail = new Outlook(sender, meetingid, content);
             mail.SendMail();
 
@@ -97,11 +102,11 @@ namespace MeetingManagement.Areas.User.Controllers
                 tASK.Assignee = Asignee;
                 db.Entry(tASK).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("MeetingDetail", "Meetings", new { id = tASK.Meeting_id });
+                return RedirectToAction("MeetingDetail", "Meetings", new { id = tASK.Meeting_id, modify = true});
             }
             ViewBag.Meeting_id = new SelectList(db.MEETINGs, "Meeting_id", "Meeting_name", tASK.Meeting_id);
             ViewBag.Meeting_id = new SelectList(db.MEMBERs, "Meeting_id", "Member_id", tASK.Meeting_id);
-            return RedirectToAction("MeetingDetail", "Meetings", new { id = tASK.Meeting_id });
+            return RedirectToAction("MeetingDetail", "Meetings", new { id = tASK.Meeting_id, modify = true});
         }
 
         // GET: User/Tasks/Delete/5
@@ -111,7 +116,17 @@ namespace MeetingManagement.Areas.User.Controllers
             var meeting_id = task.Meeting_id;
             db.TASKs.Remove(task);
             db.SaveChanges();
-            return RedirectToAction("MeetingDetail", "Meetings", new { id = meeting_id });
+            return RedirectToAction("MeetingDetail", "Meetings", new { id = meeting_id, modify = true });
+        }
+
+        public ActionResult CompleteTask(int TaskID)
+        {
+            var task = db.TASKs.Find(TaskID);
+            Current_Meeting = task.Meeting_id;
+            task.Task_Status = true;
+            db.Entry(task).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("MeetingDetail", "Meetings", new { id = Current_Meeting, modify = false });
         }
 
         // POST: User/Tasks/Delete/5
@@ -125,14 +140,6 @@ namespace MeetingManagement.Areas.User.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
 
         [HttpGet]
         public ActionResult RemindTask(string AsigneeID, int MeetingID, string TaskName)
@@ -145,6 +152,16 @@ namespace MeetingManagement.Areas.User.Controllers
             //return RedirectToAction("Index", "Tasks");
             return new EmptyResult();
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
 
     }
 }

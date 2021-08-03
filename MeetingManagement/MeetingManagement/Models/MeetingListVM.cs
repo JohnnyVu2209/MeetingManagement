@@ -12,5 +12,6 @@ namespace MeetingManagement.Models
         public DateTime DateStart  { get; set; }
         public int Status  { get; set; }
         public String StatusName  { get; set; }
+        public string Email { get; internal set; }
     }
 }

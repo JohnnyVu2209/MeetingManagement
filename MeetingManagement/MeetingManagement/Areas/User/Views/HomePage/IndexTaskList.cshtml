@@ -1,4 +1,5 @@
-﻿<div class="table-head ">Danh Sách Công Việc</div>
+﻿@model IEnumerable<MeetingManagement.Models.TASK>
+<div class="table-head ">Danh Sách Công Việc</div>
 <table class="table tl-table">
     <thead>
         <tr>
@@ -8,17 +9,24 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>
-                Sửa front end
-            </td>
-            <td>
-                Họp với mentor-Team 1
-            </td>
-            <td>
-                20/6/2021
-            </td>
-        </tr>
+        @foreach (var ut in ViewBag.task)
+        {
+            <tr>
+                <td>
+                    @ut.Task_name
+                </td>
+                <td>
+                    @foreach (var um in ViewBag.meeting)
+                    {
+                        @um.Meeting_name
+                    }
+                </td>
+                <td>
+                    @Convert.ToDateTime(ut.Task_Deadline).ToString("MM/dd/yyyy")
+                </td>
+
+            </tr>
+        }
     </tbody>
 </table>
 

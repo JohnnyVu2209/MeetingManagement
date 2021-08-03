@@ -57,7 +57,7 @@ else
                                 </div>
                                 <div class="col-md-3">
                                     @{
-                                        var Asignee_name = db.AspNetUsers.SingleOrDefault(x => x.Id == task.Assignee).Full_name;
+                                        var Asignee_name = db.AspNetUsers.SingleOrDefault(x => x.Id == task.Assignee).Email;
                                     }
                                     @Asignee_name
 
