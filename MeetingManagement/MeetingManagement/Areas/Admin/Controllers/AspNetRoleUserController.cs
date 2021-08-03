@@ -49,6 +49,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
             var user = db.AspNetUsers.Find(userId);
 
             user.AspNetRoles.Remove(role);
+           
             db.Entry(user).State = EntityState.Modified;
             db.SaveChanges();
 

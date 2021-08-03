@@ -90,6 +90,15 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         }
 
 
+
+        public ActionResult StaticticBCN() {
+
+
+
+
+            return View();
+
+        }
         //private void AddErrors(object result)
         //{
         //    throw new NotImplementedException();

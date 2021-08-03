@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
+@*hehe*@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,13 +54,17 @@
             <li><a href="@Url.Action("Index","categories")">Danh mục</a></li>
             <li><a href="@Url.Action("Index","Meetings")">Cuộc họp của tôi</a></li>
             <li><a href="@Url.Action("Index","Tasks")">Công việc</a></li>
+
         </ul>
     </div>
     <div class="container body-content">
         @RenderBody()
+        @*<br />
         <footer id="yuki-footer">
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+            <div style="height: 150px">
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </div>
+        </footer>*@
     </div>
 
 

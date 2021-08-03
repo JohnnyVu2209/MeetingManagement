@@ -1,0 +1,184 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: monospace;
+}
+
+/* header {
+  padding: 10px 10px;
+  align-items: center;
+  margin-right: 200px;
+  margin-left: 200px;
+} */
+
+.main {
+    margin-left: 250px;
+    margin-top: 80px;
+}
+
+.slide-bar {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    bottom: 20px;
+    width: 70px;
+    border-radius: 10px;
+    box-sizing: initial;
+    border-left: 5px solid #1f7be0;
+    background: #1f7be0;
+    transition: width 0.5s;
+    overflow: hidden;
+}
+
+    .slide-bar.active {
+        width: 200px;
+    }
+
+    .slide-bar ul {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding-left: 5px;
+        padding-top: 40px;
+    }
+
+        .slide-bar ul li {
+            list-style: none;
+            position: relative;
+            width: 100%;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+        }
+
+            .slide-bar ul li b:nth-child(1) {
+                position: absolute;
+                top: -20px;
+                height: 20px;
+                width: 100%;
+                background: #fff;
+                display: none;
+            }
+
+                .slide-bar ul li b:nth-child(1)::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    border-bottom-right-radius: 20px;
+                    background: #1f7be0;
+                }
+
+            .slide-bar ul li b:nth-child(2) {
+                position: absolute;
+                display: none;
+                bottom: -20px;
+                height: 20px;
+                width: 100%;
+                background: #fff;
+            }
+
+                .slide-bar ul li b:nth-child(2)::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    border-top-right-radius: 20px;
+                    background: #1f7be0;
+                }
+
+            .slide-bar ul li.active b:nth-child(1),
+            .slide-bar ul li.active b:nth-child(2) {
+                display: block;
+            }
+
+            .slide-bar ul li.active {
+                background: #fff;
+            }
+
+            .slide-bar ul li a {
+                position: relative;
+                display: block;
+                width: 100%;
+                display: flex;
+                text-decoration: none;
+                color: #fff;
+            }
+
+            .slide-bar ul li.active a {
+                color: #000;
+            }
+
+            .slide-bar ul li a .icon {
+                position: relative;
+                display: block;
+                min-width: 60px;
+                height: 60px;
+                line-height: 72px;
+                text-align: center;
+            }
+
+                .slide-bar ul li a .icon ion-icon {
+                    font-size: 1.5em;
+                }
+
+            .slide-bar ul li a .title {
+                position: relative;
+                display: block;
+                padding-left: 10px;
+                height: 60px;
+                line-height: 60px;
+                white-space: normal;
+            }
+
+.toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: #1f7be0;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .toggle.active {
+        background: #e71844;
+    }
+
+    .toggle ion-icon {
+        position: absolute;
+        color: #fff;
+        font-size: 34px;
+        display: none;
+    }
+
+        .toggle ion-icon.open,
+        .toggle.active ion-icon.close {
+            display: block;
+        }
+
+        .toggle ion-icon.close,
+        .toggle.active ion-icon.open {
+            display: none;
+        }
+
+.logo {
+    width: 300px;
+    margin-left: 500px;
+    margin-top: 20px;
+}
+
+.sticky-footer {
+    background: azure;
+    padding: 1rem;
+    color: #000;
+}
