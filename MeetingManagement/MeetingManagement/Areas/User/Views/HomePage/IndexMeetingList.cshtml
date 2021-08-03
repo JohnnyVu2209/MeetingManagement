@@ -1,47 +1,52 @@
 ﻿@model IEnumerable<MeetingManagement.Models.MeetingListVM>
+@using MeetingManagement.Models;
 @{
     Layout = null;
+    SEP24Team7Entities db = new SEP24Team7Entities();
+    MEETING meeting = db.MEETINGs.Find(ViewBag.meeting_id);
 }
 <div class="yuki-table-zone yuki-table-zone-fixed">
-    <div class="table-head">Cuộc họp sắp tới</div><!--
-    --><div class="yuki-table-out-header">
+    <div class="table-head">Cuộc họp sắp tới</div>
+
+    <div class="yuki-table-out-header">
         <ul class="yuki-column-4 add-border">
             <li>
                 Tên cuộc họp
-                @*<button class="filter">
-                        <img src="~/Content/outline_filter_alt_black_24dp.png">
-                    </button>*@
+@*           <button class="filter">
+                    <img src="~/Content/outline_filter_alt_black_24dp.png">
+                </button>*@
             </li>
             <li>
                 Người chủ trì
-                @*<button class="filter">
+@*                <button class="filter">
                         <img src="~/Content/outline_filter_alt_black_24dp.png">
                     </button>*@
             </li>
             <li>
                 Ngày diễn ra
-                @*<button class="filter">
+@*                <button class="filter">
                         <img src="~/Content/outline_filter_alt_black_24dp.png">
                     </button>*@
             </li>
             <li>
                 Tình trạng
-                @*<button class="filter">
+@*                <button class="filter">
                         <img src="~/Content/outline_filter_alt_black_24dp.png">
                     </button>*@
             </li>
         </ul>
     </div>
     <table class="ml-table">
+
         <tbody>
             @foreach (var item in Model)
             {
-                <tr class="yuki-column-4" >
+                <tr class="yuki-column-4">
                     <td>
                         @item.MeetingName
                     </td>
                     <td>
-                        @item.FullName
+                        @item.Email
                     </td>
                     <td>
                         @item.DateStart
@@ -67,29 +72,37 @@
                         {
                             <div class="complete-status complete-status-fixed">@item.StatusName</div>
                         }
-
+                        else if (@item.Status == 6)
+                        {
+                            <div class="basic-status" style="background-color: #607d8b">Không duyệt</div>
+                        }
+                        else if (@item.Status == 7)
+                        {
+                            <div class="basic-status" style="background-color: #607d8b">Đã hủy</div>
+                        }
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-    </div>
+</div>
 
-    <style>
-            .ml-table {
-                width: 100%;
-                border: 1px solid black;
-                border-top: none;
-            }
+<style>
+    .ml-table {
+        width: 100%;
+        border: 1px solid black;
+        border-top: none;
+    }
 
-                .ml-table tbody tr td {
-                    display: flex !important;
-                    line-height: normal !important;
-                    align-items: center;
-                    justify-content: center;
-                }
-            .ml-table thead {
-            }
+        .ml-table tbody tr td {
+            display: flex !important;
+            line-height: normal !important;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ml-table thead {
+        }
 
             .ml-table thead tr {
             }
@@ -98,13 +111,13 @@
                     text-align: center;
                 }
 
-            .ml-table tbody {
-            }
+        .ml-table tbody {
+        }
 
-                .ml-table tbody tr {
-                    column-count: 4;
-                }
-            /*    .complete-status-fixed {
+            .ml-table tbody tr {
+                column-count: 4;
+            }
+    /*    .complete-status-fixed {
             background: #29CC97;
             border-radius: 10px;
             color: white;
@@ -115,36 +128,96 @@
             text-align: center;
             line-height: 2.8;
         }*/
-            .add-border {
-                border: 1px solid black;
-            }
-    </style>
-    <style>
-        .yuki-table-zone-fixed {
-            padding-top: 0px;
-            left: 0px;
-            margin: 0px auto;
-            height: 100%;
-        }
+    .add-border {
+        border: 1px solid black;
+    }
+</style>
+<style>
+    .yuki-table-zone-fixed {
+        padding-top: 0px;
+        left: 0px;
+        margin: 0px auto;
+        height: 100%;
+    }
+</style>
+@*@if (@item.Status == "1")
+    {
+        <div class="waiting-status">@item.StatusName</div>
+    }
+    else if (@item.Status == "2")
+    {
+        <div class="pending-status">@item.StatusName</div>
+    }
+    else if (@item.Status == 3)
+    {
+        <div class="missing-status">@item.StatusName</div>
+    }
+    else if (@item.Status == 4)
+    {
+        <div class="incomplete-status">@item.StatusName</div>
+    }
+    else if (@item.Status == 5)
+    {
+        <div class="incomplete-status">@item.StatusName</div>
+    }*@
 
-    </style>
-    @*@if (@item.Status == "1")
-        {
-            <div class="waiting-status">@item.StatusName</div>
+
+<!---Sort-->
+<script>
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("table-sort");
+        switching = true;
+        //Set the sorting direction to ascending:
+        dir = "asc";
+        /*Make a loop that will continue until
+        no switching has been done:*/
+        while (switching) {
+            //start by saying: no switching is done:
+            switching = false;
+            rows = table.rows;
+            /*Loop through all table rows (except the
+            first, which contains table headers):*/
+            for (i = 1; i < (rows.length - 1); i++) {
+                //start by saying there should be no switching:
+                shouldSwitch = false;
+                /*Get the two elements you want to compare,
+                one from current row and one from the next:*/
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                /*check if the two rows should switch place,
+                based on the direction, asc or desc:*/
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()
+                        @*&& Number(x.innerHTML) > Number(y.innerHTML)*@ ) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()
+                        @*&& Number(x.innerHTML) < Number(y.innerHTML)*@) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                /*If a switch has been marked, make the switch
+                and mark that a switch has been done:*/
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                //Each time a switch is done, increase this count by 1:
+                switchcount++;
+            } else {
+                /*If no switching has been done AND the direction is "asc",
+                set the direction to "desc" and run the while loop again.*/
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
         }
-        else if (@item.Status == "2")
-        {
-            <div class="pending-status">@item.StatusName</div>
-        }
-        else if (@item.Status == 3)
-        {
-            <div class="missing-status">@item.StatusName</div>
-        }
-        else if (@item.Status == 4)
-        {
-            <div class="incomplete-status">@item.StatusName</div>
-        }
-        else if (@item.Status == 5)
-        {
-            <div class="incomplete-status">@item.StatusName</div>
-        }*@
+    }
+</script>

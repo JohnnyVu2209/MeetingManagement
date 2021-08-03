@@ -79,7 +79,15 @@ namespace MeetingManagement.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    string role = GetUserRole(model.Email);
+                    switch (role)
+                    {
+                        case "BCN":
+                            return RedirectToAction("Index", "MainPage", new { area = "HeadOfDepartment" });
+                        case "Admin":
+                            return RedirectToAction("Index", "AspNetUsers", new { area = "Admin" });
+                    }
+                    return RedirectToAction("Index", "HomePage", new { area = "User" });
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -332,7 +340,7 @@ namespace MeetingManagement.Controllers
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
             switch (result)
             {
-                case SignInStatus.Success:
+                case SignInStatus.Success:                    
                     string role = GetUserRole(loginInfo.Email);
                     switch (role)
                     {
@@ -357,9 +365,16 @@ namespace MeetingManagement.Controllers
 
         private string GetUserRole(string email)
         {
-            var UserID = db.AspNetUsers.FirstOrDefault(u => u.Email == email);
-            var role = UserID.AspNetRoles.First().Name;
-            return role;
+            try
+            {
+                var UserID = db.AspNetUsers.FirstOrDefault(u => u.Email == email);
+                var role = UserID.AspNetRoles.First().Name;
+                return role;
+            }
+            catch (Exception ex)
+            {
+                return "User";
+            }
         }
         //
         // POST: /Account/ExternalLoginConfirmation
@@ -406,7 +421,7 @@ namespace MeetingManagement.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //
