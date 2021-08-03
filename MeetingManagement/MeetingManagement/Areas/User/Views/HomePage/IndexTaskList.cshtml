@@ -9,23 +9,24 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            @foreach (var ut in ViewBag.task)
-            {
-            <td>
-                @ut.Task_name
-            </td>
-            <td>
-                @foreach (var um in ViewBag.meeting)
-                {
-                    @um.Meeting_name
-                }
-            </td>
-            <td>
-                @Convert.ToDateTime(ut.Task_Deadline).ToString("MM/dd/yyyy")
-            </td>
-            }
-        </tr>
+        @foreach (var ut in ViewBag.task)
+        {
+            <tr>
+                <td>
+                    @ut.Task_name
+                </td>
+                <td>
+                    @foreach (var um in ViewBag.meeting)
+                    {
+                        @um.Meeting_name
+                    }
+                </td>
+                <td>
+                    @Convert.ToDateTime(ut.Task_Deadline).ToString("MM/dd/yyyy")
+                </td>
+
+            </tr>
+        }
     </tbody>
 </table>
 
