@@ -180,41 +180,45 @@
                 <div style="position:relative;cursor:pointer; font-size:20px; right:32px" onclick="ShowDeletePopUp(@item.Attachment_id)">x</div>
             }
         }
+        else
+        {
+            <p>Cuộc họp chưa có tài liệu</p>
+        }
 
         @*<div id="delete-confirm-modal" class="modal">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
-                <form class="modal-content" style="display: inline;">
-                    <div class="container" style=" background-color: white; width: 500px; height: 200px; position: relative; top: 60px; border: 1px solid; text-align:center; }">
-                        <h1>Xóa file</h1>
-                        <p>Bạn sẽ không thể khôi phục lại file sau khi bấm xóa</p>
-                        <div>
-                            <a style="width:50px; height:30px;" onclick="document.getElementById('delete-confirm-modal').style.display='none'" class="cancelbtn">Hủy</a>
-                            <a style="width: 50px; height: 30px; background-color: #f44336; color: white" type="button" onclick="document.getElementById('delete-confirm-modal').style.display='none'" class="deletebtn">Xóa</a>
-                        </div>
-                    </div>
-                </form>
-            </div>*@
-        @*<div id="delete-confirm-modal" class="modal" role="dialog">
-                <div class="modal-dialog" style="width:500px;">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Xóa tài liệu</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form action="Delete">
-                                Sau khi xóa sẽ không thể khôi phục lại tài liệu này?
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn--delete">Xóa</button>
-                            <button class="btn btn-normal" data-dismiss="modal">Hủy</button>
-                        </div>
-                    </div>
-                    <div style="text-align:center;display:none" id="loader-div">
-                        <img src="~/imgs/Walk.gif" style="height:100px;width:100px" />
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+            <form class="modal-content" style="display: inline;">
+                <div class="container" style=" background-color: white; width: 500px; height: 200px; position: relative; top: 60px; border: 1px solid; text-align:center; }">
+                    <h1>Xóa file</h1>
+                    <p>Bạn sẽ không thể khôi phục lại file sau khi bấm xóa</p>
+                    <div>
+                        <a style="width:50px; height:30px;" onclick="document.getElementById('delete-confirm-modal').style.display='none'" class="cancelbtn">Hủy</a>
+                        <a style="width: 50px; height: 30px; background-color: #f44336; color: white" type="button" onclick="document.getElementById('delete-confirm-modal').style.display='none'" class="deletebtn">Xóa</a>
                     </div>
                 </div>
-            </div>*@
+            </form>
+        </div>*@
+        @*<div id="delete-confirm-modal" class="modal" role="dialog">
+            <div class="modal-dialog" style="width:500px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Xóa tài liệu</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="Delete">
+                            Sau khi xóa sẽ không thể khôi phục lại tài liệu này?
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn--delete">Xóa</button>
+                        <button class="btn btn-normal" data-dismiss="modal">Hủy</button>
+                    </div>
+                </div>
+                <div style="text-align:center;display:none" id="loader-div">
+                    <img src="~/imgs/Walk.gif" style="height:100px;width:100px" />
+                </div>
+            </div>
+        </div>*@
     </div>
 </div>
 <input style=" position: relative; left: 620px; height: auto;" type="file" name="ReportFile" id="ReportFile" class="form-control" accept=".zip,.pdf,.doc,.docx,.xml,application/msword" />
@@ -226,22 +230,6 @@
         });
     });
 </script>
-@*<div style="width: 1000px; height: 34px; margin: 0px; display: flex; ">
-        <div class="input-group">
-            <span class="input-group-btn">
-                <span class="form-group btn btn-default btn-file">
-                    Browse…
-                    <input type="file" name="ReportFile" id="ReportFile" class="form-control" accept=".zip,.pdf,.doc,.docx,.xml,application/msword" />
-                </span>
-            </span>
-            <input type="text" id="ReportName" class="form-control" readonly>
-        </div>
-        @Html.ValidationMessage("FileAttach", "", new { @class = "text-danger custom-danger" })
-        <div >
-            <input type="submit" class="btn btn-danger" value="Upload" />
-        </div>
-    </div>*@
-
 <div class="value-fixed" style="height:10px;">
     <div class="space"></div>
 </div>
@@ -332,56 +320,56 @@
 
 
 @*@if (Model.Check_report == true)
-{   
-    <div style="height: 20px"></div>
-    <h3>Biên bản họp</h3>
-    <div style="border: 2px solid #e5e5e5; padding: 20px; width: 1000px; overflow: overlay;">
-        <div class="form-row-fixed">
-            <a id="myfile" href="@Model.REPORT.Report_link" style="margin-right:20px;" download>
-                <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
-                    <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
-                        @if (Model.REPORT.Report_type == "xls" || Model.REPORT.Report_type == "xlsm" || Model.REPORT.Report_type == "xlsx")
-                        {
-                            <i style="font-size: 40px; color: #1d6f42;" class="fas fa-file-excel text-primary"></i>
-                        }
-                        else if (Model.REPORT.Report_type == "pdf")
-                        {
-                            <i style="font-size: 40px; color: #f40f02;" class="fas fa-file-pdf text-primary"></i>
-                        }
-                        else if (Model.REPORT.Report_type == "doc" || Model.REPORT.Report_type == "docm" || Model.REPORT.Report_type == "docx")
-                        {
-                            <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
-                        }
-                        else if (Model.REPORT.Report_type == "jpg" || Model.REPORT.Report_type == "jpeg")
-                        {
-                            <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
-                        }
-                        else if (Model.REPORT.Report_type == "ppt" || Model.REPORT.Report_type == "pptm" || Model.REPORT.Report_type == "pptx")
-                        {
-                            <i style="font-size: 40px; color: #D04423" class="fas fa-file-powerpoint text-primary"></i>
-                        }
-                        else
-                        {
-                            <i style="font-size:40px; color:gray" class="fas fa-file text-primary"></i>
-                        }
+    {
+        <div style="height: 20px"></div>
+        <h3>Biên bản họp</h3>
+        <div style="border: 2px solid #e5e5e5; padding: 20px; width: 1000px; overflow: overlay;">
+            <div class="form-row-fixed">
+                <a id="myfile" href="@Model.REPORT.Report_link" style="margin-right:20px;" download>
+                    <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
+                        <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                            @if (Model.REPORT.Report_type == "xls" || Model.REPORT.Report_type == "xlsm" || Model.REPORT.Report_type == "xlsx")
+                            {
+                                <i style="font-size: 40px; color: #1d6f42;" class="fas fa-file-excel text-primary"></i>
+                            }
+                            else if (Model.REPORT.Report_type == "pdf")
+                            {
+                                <i style="font-size: 40px; color: #f40f02;" class="fas fa-file-pdf text-primary"></i>
+                            }
+                            else if (Model.REPORT.Report_type == "doc" || Model.REPORT.Report_type == "docm" || Model.REPORT.Report_type == "docx")
+                            {
+                                <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
+                            }
+                            else if (Model.REPORT.Report_type == "jpg" || Model.REPORT.Report_type == "jpeg")
+                            {
+                                <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
+                            }
+                            else if (Model.REPORT.Report_type == "ppt" || Model.REPORT.Report_type == "pptm" || Model.REPORT.Report_type == "pptx")
+                            {
+                                <i style="font-size: 40px; color: #D04423" class="fas fa-file-powerpoint text-primary"></i>
+                            }
+                            else
+                            {
+                                <i style="font-size:40px; color:gray" class="fas fa-file text-primary"></i>
+                            }
+                        </div>
+                        <div style="width:75%; padding:0 5px; color:black">
+                            <p style="text-overflow: ellipsis; overflow: hidden; width: 140px; height: 20px; white-space: nowrap; ">
+                                @Model.REPORT.Report_name
+                            </p>
+                            <p style="font-size:10px">
+                                @Model.REPORT.Report_binary
+                            </p>
+                        </div>
                     </div>
-                    <div style="width:75%; padding:0 5px; color:black">
-                        <p style="text-overflow: ellipsis; overflow: hidden; width: 140px; height: 20px; white-space: nowrap; ">
-                            @Model.REPORT.Report_name
-                        </p>
-                        <p style="font-size:10px">
-                            @Model.REPORT.Report_binary
-                        </p>
-                    </div>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
-    </div>
-}*@
+    }*@
 @*else if (Model.Check_report != true && Model.Create_by == ViewBag.user_identity && Model.Status >= 3 && Model.Status < 5)
-{
-    @Html.Action("MeetingReport", "Meetings")
-}*@
+    {
+        @Html.Action("MeetingReport", "Meetings")
+    }*@
 
 @*<a class="btn btn-primary-fixed" role="button" data-toggle="collapse" href="#Member" aria-expanded="false" aria-controls="Member">
         Danh sách thành viên
