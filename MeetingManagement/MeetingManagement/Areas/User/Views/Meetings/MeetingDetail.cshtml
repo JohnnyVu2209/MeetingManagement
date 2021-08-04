@@ -24,7 +24,7 @@
             <img src="~/Content/Picture/users_meeting.png" />
             <div class="lable-zone" style="display:flex;">
                 <div style="display: inline-flex">
-                    @Html.DisplayFor(model => model.Meeting_name)
+                    @Html.Label(Model.Meeting_name)
                 </div>
                 @if (Model.Status == 7)
                 {
