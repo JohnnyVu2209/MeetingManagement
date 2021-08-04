@@ -1,14 +1,17 @@
 ﻿@model IEnumerable<MeetingManagement.Models.TASK>
 
-    <div class="table-head ">Danh Sách Công Việc</div>
-    <table class="table tl-table">
-        <thead>
-            <tr>
-                <th>Tên công việc</th>
-                <th>Cuộc họp</th>
-                <th>Ngày hoàn thành</th>
-            </tr>
-        </thead>
+
+<div class="yuki-table-zone yuki-table-zone-fixed" style=" border: 1px solid #e5e5e5; ">
+    <div class="table-head">Danh Sách Công Việc</div>
+
+    <div class="yuki-table-out-header">
+        <ul class="yuki-column-3">
+            <li>Tên công việc</li>
+            <li>Cuộc họp</li>
+            <li>Ngày hoàn thành</li>
+        </ul>
+    </div>
+    <table class="ml-table">
         @if (ViewBag.task != null)
         {
             <tbody>
@@ -33,6 +36,7 @@
             </tbody>
         }
     </table>
+</div>
 
 
 <style>

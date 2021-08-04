@@ -25,7 +25,6 @@ namespace MeetingManagement.Areas.User.Controllers
         {
             var userid = User.Identity.GetUserId();
             var mEMBER = db.MEMBERs.FirstOrDefault(x => x.Member_id == userid);
-            ViewBag.task = 0;
             if (mEMBER != null)
             {
                 ViewBag.meeting = db.MEETINGs.Where(x => x.Meeting_id == mEMBER.Meeting_id).ToList();
@@ -76,6 +75,7 @@ namespace MeetingManagement.Areas.User.Controllers
                 FullName = x.AspNetUser.Full_name,
                 MeetingName = x.Meeting_name,
                 DateStart = x.Date_Start,
+                TimeStart = x.Time_Start,
                 Status = x.MEETING_STATUS.Status_id,
                 StatusName = x.MEETING_STATUS.Status_name
             }).ToList();

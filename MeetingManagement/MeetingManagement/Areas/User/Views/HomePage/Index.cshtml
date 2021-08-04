@@ -1,17 +1,17 @@
 ﻿@{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
 }
+<link href="~/Content/HomePage.css" rel="stylesheet" />
+
 <div class="row">
-        @Html.Action("IndexMeetingList")
+    @Html.Action("IndexMeetingList")
 </div>
-<div class="row-pos">
-@*    <div class="col-md-6" style="padding:0px">
-        @Html.Action("IndexCateList")
-    </div>*@
-    <div class="row">
-        @Html.Action("IndexTaskList")
-    </div>
+<div style="height:20px;"></div>
+<div class="row">
+    @*    <div class="col-md-6" style="padding:0px">
+            @Html.Action("IndexCateList")
+        </div>*@
+    @Html.Action("IndexTaskList")
 </div>
 
 <style>
@@ -19,13 +19,13 @@
         position: absolute;
         top: 0px;
     }
-   
-    .row-pos{
+
+    /*    .row-pos{
         padding-top:20px;
         width:1125px;
         height: 500px;
         margin: 0px auto;
-    }
+    }*/
 </style>
 
 

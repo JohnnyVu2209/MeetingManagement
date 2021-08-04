@@ -5,34 +5,40 @@
     SEP24Team7Entities db = new SEP24Team7Entities();
     MEETING meeting = db.MEETINGs.Find(ViewBag.meeting_id);
 }
-<div class="yuki-table-zone yuki-table-zone-fixed">
-    <div class="table-head">Cuộc họp sắp tới</div>
+<div class="yuki-table-zone yuki-table-zone-fixed" style=" border: 1px solid #e5e5e5; ">
+    <div class="table-head">Cuộc Họp Sắp Tới</div>
 
     <div class="yuki-table-out-header">
-        <ul class="yuki-column-4 add-border">
+        <ul class="yuki-column-5">
             <li>
                 Tên cuộc họp
-@*           <button class="filter">
-                    <img src="~/Content/outline_filter_alt_black_24dp.png">
-                </button>*@
+                @*           <button class="filter">
+                <img src="~/Content/outline_filter_alt_black_24dp.png">
+            </button>*@
             </li>
             <li>
                 Người chủ trì
-@*                <button class="filter">
-                        <img src="~/Content/outline_filter_alt_black_24dp.png">
-                    </button>*@
+                @*                <button class="filter">
+                <img src="~/Content/outline_filter_alt_black_24dp.png">
+            </button>*@
             </li>
             <li>
                 Ngày diễn ra
-@*                <button class="filter">
-                        <img src="~/Content/outline_filter_alt_black_24dp.png">
-                    </button>*@
+                @*                <button class="filter">
+                <img src="~/Content/outline_filter_alt_black_24dp.png">
+            </button>*@
+            </li>
+            <li>
+                Thời gian diễn ra
+                @*                <button class="filter">
+                <img src="~/Content/outline_filter_alt_black_24dp.png">
+            </button>*@
             </li>
             <li>
                 Tình trạng
-@*                <button class="filter">
-                        <img src="~/Content/outline_filter_alt_black_24dp.png">
-                    </button>*@
+                @*                <button class="filter">
+                <img src="~/Content/outline_filter_alt_black_24dp.png">
+            </button>*@
             </li>
         </ul>
     </div>
@@ -40,7 +46,7 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr class="yuki-column-4">
+                <tr>
                     <td>
                         @item.MeetingName
                     </td>
@@ -48,7 +54,10 @@
                         @item.Email
                     </td>
                     <td>
-                        @item.DateStart
+                        @item.DateStart.ToShortDateString()
+                    </td>
+                    <td>
+                        @item.TimeStart
                     </td>
                     <td>
                         @if (@item.Status == 1)
@@ -87,10 +96,14 @@
 </div>
 
 <style>
+    .yuki-column-5{
+        column-count: 5;
+    }
+
     .ml-table {
         width: 100%;
-        border: 1px solid black;
-        border-top: none;
+        /*        border: 1px solid #e5e5e5;
+*/ border-top: none;
     }
 
         .ml-table tbody tr td {
@@ -114,7 +127,8 @@
         }
 
             .ml-table tbody tr {
-                column-count: 4;
+                column-count: 5;
+                column-gap: 0;
             }
     /*    .complete-status-fixed {
             background: #29CC97;
@@ -127,9 +141,6 @@
             text-align: center;
             line-height: 2.8;
         }*/
-    .add-border {
-        border: 1px solid black;
-    }
 </style>
 <style>
     .yuki-table-zone-fixed {
@@ -137,6 +148,7 @@
         left: 0px;
         margin: 0px auto;
         height: 100%;
+        border:0px;
     }
 </style>
 @*@if (@item.Status == "1")

@@ -88,7 +88,7 @@
                 <p style="margin:0px 10px 0px 0px;">
                     Hãy cập nhật trạng thái mới cho cuộc họp
                 </p>
-                <a style="background-color: #3aac5d; cursor: pointer; width: 90px; padding: 0px 5px; border: 0.5px solid #f1f1f1; text-align: center; color: white">Cập nhật</a>
+                <a onclick="location.href = '@Url.Action("StatusChanges","MEETINGs", new { id = Model.Meeting_id})';" style="background-color: #3aac5d; cursor: pointer; width: 90px; padding: 0px 5px; border: 0.5px solid #f1f1f1; text-align: center; color: white">Cập nhật</a>
                 <div style="position: absolute; width: 50px; right: 30px; cursor:pointer; text-align:center" onclick="close_noti()" id="x-btn">
                     x
                 </div>
