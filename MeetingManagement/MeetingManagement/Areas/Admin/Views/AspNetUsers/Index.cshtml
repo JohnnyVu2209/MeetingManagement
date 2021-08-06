@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
+<link href="~/Content/The-Last-Style-Blender.css" rel="stylesheet" />
 @*search component*@
 <div class="col-sm-12 col-sm-12-fix01">
     <div class="create-and-search">
@@ -35,21 +35,27 @@
             @Html.Action("GetOtherUser", "AspNetUsers")
         </div>
     </div>
-    <div id="Popup"></div>
 </div>
-
+<div id="Popup"></div>
 
 <style>
     .create-and-search {
         padding-left: 0px;
         padding-right: 0px;
         width: 100%;
-        
     }
 
     .col-sm-12-fix01 {
         position: relative;
-                
+    }
+
+    .yuki-table-zone > table {
+        max-height: none !important;
+        overflow-y: hidden !important;
+    }
+
+    .yuki-table-zone{
+        height:fit-content;
     }
 </style>
 @section scripts{
@@ -85,7 +91,7 @@
             data: {},
             success: function (data) {
                 $("#Popup").html(data);
-                $("#modalCreate").appendTo("body").modal("show");
+                $("#modalCreate").modal("show");
             },
             error: function (err) {
                 console.log(err);

@@ -26,6 +26,15 @@
         padding: 0 15px;
         margin: auto;
     }
+    .create-meeting-btn {
+        float: right;
+        width: 90px;
+        height: 45px;
+        background-color: #009FE5;
+        color: white;
+        border-radius: 5px;
+        font-size: 16px
+    }
 
         .item-list:hover {
             background-color: #e7e7e7;
@@ -72,23 +81,29 @@
             border-color: #dc3545;
         }
 </style>
+
 <link href="~/Content/catalog-list.css" rel="stylesheet" />
+<link href="~/Content/Meetings/meetingdetail.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 
 <!--Content--->
-
 <div class="body-navbar">
-    <div class="user-ctg-index-header" style="display:flex;">
-        <h2>Danh mục</h2>
-        <button style="color:white;position:absolute;left:1000px;" onclick="ShowCreatePopUp()" class="btn yuki-btn-blue">
-            <p style="margin:0;">
-                Tạo
-            </p>
-        </button>
+
+    <div class="nav-content-zone">
+
+        <div class="lable-zone1">
+            <div style="text-transform: uppercase;font-size:30px;margin-bottom:20px" ; class="header">
+                <label>DANH MỤC</label>
+
+                <button class="create-meeting-btn" onclick="ShowCreatePopUp()">Tạo</button>
+            </div>
+
+        </div>
     </div>
-    
+</div>
+<div class="card-body card-body-fixed">
     @foreach (var item in Model)
     {
         <div class="item-list row" style="margin-left:15px;margin-top:15px;">
@@ -149,6 +164,7 @@
         margin: 0px 2.5px;
         color: black;
     }
+    
 </style>
 
 

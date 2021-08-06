@@ -1,34 +1,39 @@
 ﻿@model IEnumerable<MeetingManagement.Models.TASK>
-<div class="table-head ">Danh Sách Công Việc</div>
-<table class="table tl-table">
-    <thead>
-        <tr>
-            <th>Tên công việc</th>
-            <th>Cuộc họp</th>
-            <th>Ngày hoàn thành</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var ut in ViewBag.task)
-        {
-            <tr>
-                <td>
-                    @ut.Task_name
-                </td>
-                <td>
-                    @foreach (var um in ViewBag.meeting)
-                    {
-                        @um.Meeting_name
-                    }
-                </td>
-                <td>
-                    @Convert.ToDateTime(ut.Task_Deadline).ToString("MM/dd/yyyy")
-                </td>
 
+    <div class="table-head ">Danh Sách Công Việc</div>
+    <table class="table tl-table">
+        <thead>
+            <tr>
+                <th>Tên công việc</th>
+                <th>Cuộc họp</th>
+                <th>Ngày hoàn thành</th>
             </tr>
+        </thead>
+        @if (ViewBag.task != null)
+        {
+            <tbody>
+                @foreach (var ut in ViewBag.task)
+                {
+                    <tr>
+                        <td>
+                            @ut.Task_name
+                        </td>
+                        <td>
+                            @foreach (var um in ViewBag.meeting)
+                            {
+                                @um.Meeting_name
+                            }
+                        </td>
+                        <td>
+                            @Convert.ToDateTime(ut.Task_Deadline).ToString("MM/dd/yyyy")
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
         }
-    </tbody>
-</table>
+    </table>
+
 
 <style>
     .tl-table {
