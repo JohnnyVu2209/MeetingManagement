@@ -709,7 +709,6 @@
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff" />
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
     <Content Include="Areas\HeadOfDepartment\Views\Shared\outplay.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Categories\statisticChart.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MyMeetingGridView.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\PendingMeeting.cshtml" />
@@ -773,7 +772,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Error\PageNotFound.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.js.flow" />
@@ -793,6 +791,7 @@
     <Folder Include="Content\login\" />
     <Folder Include="Upload\Attachments\" />
     <Folder Include="Upload\Reports\" />
+    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

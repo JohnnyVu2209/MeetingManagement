@@ -1,11 +1,9 @@
 ﻿@model IEnumerable<MeetingManagement.Models.CATEGORY>
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
 }
 
-
-<!---CSS-->
+@*scroll show up, position not change*@
 <style>
     .modal-open .yuki-login-info {
         margin-right: 16.8px;
@@ -18,49 +16,6 @@
     .modal-open #option {
         right: calc(160px + 16.8px);
     }
-
-    .yuki-btn-blue {
-        background-color: #009FE5 !important;
-    }
-
-    .yuki-btn-sea {
-        background-color: #00E5B8 !important;
-    }
-
-    .user-ctg-index-table div:hover {
-        background-color: #66c2ff;
-    }
-
-    .user-ctg-index-table div p {
-        font-weight: bold;
-        font-size: 16px;
-    }
-
-
-    .user-ctg-index-button {
-        float: right;
-        width: 60px;
-        height: 30px;
-        background-color: #009FE5;
-        color: white;
-        border-radius: 5px;
-        margin-top: -30px;
-        border: 0px;
-    }
-
-    .card-body-fixed {
-        position: relative;
-        top: 50px;
-        width: 100%;
-        height: 800px;
-        z-index: 1;
-    }
-
-    .lable-zone1 {
-        color: black;
-        line-height: 40px;
-    }
-
     .item-list {
         background: #f2f2f2;
         border-radius: 5px;
@@ -70,7 +25,6 @@
         align-items: center;
         padding: 0 15px;
         margin: auto;
-        width: 90%;
     }
 
         .item-list:hover {
@@ -89,7 +43,7 @@
 
     .item-btn {
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-evenly;
     }
 
         .item-btn button {
@@ -99,9 +53,25 @@
             .item-btn button i {
                 margin-right: 10px;
             }
+    .btn-outline-secondary {
+        color: #6c757d;
+        border-color: #6c757d;
+    }
+        .btn-outline-secondary:hover {
+            color: #fff;
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+    .btn-outline-danger {
+        color: #dc3545;
+        border-color: #dc3545;
+    }
+        .btn-outline-danger:hover {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
 </style>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link href="~/Content/catalog-list.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -109,23 +79,20 @@
 
 <!--Content--->
 
-<div id="container">
+<div class="body-navbar">
     <div class="user-ctg-index-header" style="display:flex;">
-        <h2 style="position:relative;">Danh mục</h2>
-        <button style="color:white;position:relative;left:1000px;" onclick="ShowCreatePopUp()" class="btn yuki-btn-blue">
-            <p style="margin:0;font-size:medium">
+        <h2>Danh mục</h2>
+        <button style="color:white;position:absolute;left:1000px;" onclick="ShowCreatePopUp()" class="btn yuki-btn-blue">
+            <p style="margin:0;">
                 Tạo
             </p>
         </button>
-        <button style="color: white;position: relative; left: 700px;font-size: medium"
-                onclick="location.href = '@Url.Action("statistic","Categories")';" class="btn yuki-btn-sea">
-            Thống kê
-        </button>
     </div>
+    
     @foreach (var item in Model)
     {
         <div class="item-list row" style="margin-left:15px;margin-top:15px;">
-            <div class="col-md-8 item-name" onclick="location.href = '@Url.Action("Details","Categories", new { id = item.Category_id})';">
+            <div class="col-md-8 item-name" onclick="location.href ='@Url.Action("Details","Categories", new { id = item.Category_id})';">
                 <h5>@item.Category_Name</h5>
             </div>
             <div class="col-md-4 item-btn">
@@ -139,18 +106,54 @@
 
         </div>
     }
-
-    <div id="show-popup"></div>
 </div>
+<div id="show-popup"></div>
+<style>
+    .yuki-btn-blue {
+        background-color: #009FE5 !important;
+    }
+
+    .user-ctg-index-table div:hover {
+        background-color: #66c2ff;
+    }
+
+    .user-ctg-index-table div p {
+        font-weight: bold;
+        font-size: 16px;
+    }
+    /*.user-ctg-index-table tbody tr:hover td {
+                background-color: #f1f1f1;
+            }*/
+    .user-ctg-index-button {
+        float: right;
+        width: 60px;
+        height: 30px;
+        background-color: #009FE5;
+        color: white;
+        border-radius: 5px;
+        margin-top: -30px;
+        border: 0px;
+    }
+
+    .user-ctg-index-header {
+        width: 1000px;
+        margin: 20px 0px;
+    }
+
+        .user-ctg-index-header h1, h2, h3, h4, h5, h6 {
+            margin: 0px;
+        }
+
+    .user-ctg-index-manipulation {
+        float: right;
+        margin: 0px 2.5px;
+        color: black;
+    }
+</style>
 
 
 
 
-
-<!--JS--->
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type="text/javascript">
     function ShowCreatePopUp() {
         $.ajax({
@@ -198,5 +201,4 @@
             }
         });
     };
-
 </script>

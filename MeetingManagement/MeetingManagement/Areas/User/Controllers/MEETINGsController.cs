@@ -90,19 +90,12 @@ namespace MeetingManagement.Areas.User.Controllers
 
 
         [HttpPost]
-        public ActionResult CancelModel(int meeting_id, MEETING model, int model_type)
+        public ActionResult CancelModel(int meeting_id, MEETING model)
         {
             var meeting = db.MEETINGs.Find(meeting_id);
-            if (model_type == 1)
-            {
-                meeting.Status = 7;
-                meeting.Feedback = model.Feedback;
-            }
-            else
-            {
-                meeting.Feedback = model.Feedback;
-
-            }
+            //change meeting status
+            meeting.Status = 7;
+            meeting.Feedback = model.Feedback;
 
             db.Entry(meeting).State = EntityState.Modified;
             db.SaveChanges();
