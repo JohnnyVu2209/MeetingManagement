@@ -42,11 +42,11 @@
             </li>
         </ul>
     </div>
-    <table class="ml-table">
+    <table class="ml-table" style="min-height: 400px;">
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+                <tr style="cursor:pointer" onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id, modify = false })';">
                     <td>
                         @item.MeetingName
                     </td>

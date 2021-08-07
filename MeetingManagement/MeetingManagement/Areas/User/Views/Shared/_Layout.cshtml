@@ -30,12 +30,11 @@
     </div>
 
     <div id="yuki-menu">
-        <ul>
-            <li><a href="@Url.Action("Index","HomePage")">Trang chính</a></li>
-            <li><a href="@Url.Action("Index","categories")">Danh mục</a></li>
-            <li><a href="@Url.Action("Index","Meetings")">Cuộc họp</a></li>
+        <ul id="nav-ul">
+            <li id="home-page" ><a href="@Url.Action("Index","HomePage")">Trang chính</a></li>
+            <li id="categories"><a href="@Url.Action("Index","Categories")">Danh mục</a></li>
+            <li id="meetings"><a href="@Url.Action("Index","Meetings")">Cuộc họp</a></li>
             @*<li><a href="@Url.Action("Index","Tasks")">Công việc</a></li>*@
-
         </ul>
     </div>
     <div class="container body-content">
@@ -48,10 +47,27 @@
             </footer>*@
     </div>
 
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
 </body>
 </html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+@*<script type="text/javascript">
+    $(document).ready(function () {
+        if (window.location.href.indexOf("HomePage") != -1) {
+            //alert('HomePage')
+            document.getElementById("home-page").style.backgroundColor = "#454545";
+        }
+        if (window.location.href.indexOf("Categories") != -1 ) {
+            //alert('HomePage')
+            document.getElementById("categories").style.backgroundColor = "#454545";
+        }
+        if (window.location.href.indexOf("Meetings") != -1) {
+            //alert('HomePage')
+            document.getElementById("meetings").style.backgroundColor = "#454545";
+        }
+    });
+</script>*@

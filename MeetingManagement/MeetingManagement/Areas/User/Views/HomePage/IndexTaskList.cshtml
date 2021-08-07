@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<MeetingManagement.Models.TASK>
-
+@{ 
+    var has_task = (ViewBag.task_count == 0) ? 0 : 1;
+}
 
 <div class="yuki-table-zone yuki-table-zone-fixed" style=" border: 1px solid #e5e5e5; ">
     <div class="table-head">Danh Sách Công Việc</div>
@@ -11,9 +13,9 @@
             <li>Ngày hoàn thành</li>
         </ul>
     </div>
-    <table class="ml-table">
-        @if (ViewBag.task != null)
-        {
+    @if (has_task == 1)
+    {
+        <table class="ml-table" style=" min-height: 400px;">
             <tbody>
                 @foreach (var ut in ViewBag.task)
                 {
@@ -34,8 +36,21 @@
                     </tr>
                 }
             </tbody>
-        }
-    </table>
+        </table>
+    }
+            else if (has_task == 0)
+            {
+                <div class="ml-table" style="min-height: 300px;">
+                    <div style="opacity:0.3; text-align:center">
+                        <h3 style="font-size:75px">
+                            (^-^*)
+                        </h3>
+                        <h3>
+                            Hiện tại chưa có công việc
+                        </h3>
+                    </div>
+                </div>
+            }
 </div>
 
 
