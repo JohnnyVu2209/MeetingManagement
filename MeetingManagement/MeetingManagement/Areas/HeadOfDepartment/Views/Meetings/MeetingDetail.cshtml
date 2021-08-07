@@ -2,12 +2,9 @@
 
 @{
     ViewBag.Title = "MeetingInfo";
-
     //nếu modify = true thì mở chế độ edit/néu modify = false thì ở chế độ preview
     var is_modify = (ViewBag.modify == true) ? "" : "display:none";
     var is_preview = (ViewBag.modify == false) ? "" : "display:none";
-
-
     DateTime Date = DateTime.Now.Date;
     TimeSpan Time = DateTime.Now.TimeOfDay;
 }
