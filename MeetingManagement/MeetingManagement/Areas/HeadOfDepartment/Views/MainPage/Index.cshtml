@@ -1,8 +1,14 @@
 ﻿@model IEnumerable<MeetingManagement.Models.MEETING>
+@using MeetingManagement.Models;
 
 @{
     ViewBag.Title = "Trang Chính";
+
+    DateTime Date = DateTime.Now.Date;
+
 }
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <body id="yuki-body">
     @*<div class="row" style="margin-bottom:15px;">
@@ -21,35 +27,38 @@
             <p>Cuộc Họp Chờ Duyệt</p>
         </div>
         <div class="yuki-table-out-header">
-            <ul class="yuki-column-4">
-                <li  onclick="sortTable(0)">
+            <ul class="yuki-column-4" style="cursor:pointer">
+                <li onclick="sortTable(0,1)">
                     Danh mục
+                    <i class='fa fa-sort'></i>
                     @*<button class="filter">
                             <img src="~/Content/outline_filter_alt_black_24dp.png">
                         </button>*@
                 </li>
-                <li  onclick="sortTable(1)">
+                <li onclick="sortTable(1,1)">
                     Cuộc họp
+                    <i class='fa fa-sort'></i>
                     @*<button class="filter">
                             <img src="~/Content/outline_filter_alt_black_24dp.png">
                         </button>*@
                 </li>
-                <li onclick="sortTable(2)">
+                <li onclick="sortTable(2,1)">
                     Người chủ trì
+                    <i class='fa fa-sort'></i>
                     @*<button class="filter">
                             <img src="~/Content/outline_filter_alt_black_24dp.png">
                         </button>*@
                 </li>
-                <li  onclick="sortTable(3)">
+                <li onclick="sortTable(3,1)">
                     Ngày tạo
-
+                    <i class='fa fa-sort'></i>
                     @*<button class="filter">
                             <img src="~/Content/outline_filter_alt_black_24dp.png">
                         </button>*@
                 </li>
             </ul>
         </div>
-        <table class="yuki-table" id="table-sort">
+        <table class="yuki-table" id="table-sort-1">
             @foreach (var meeting in Model)
             {
                 if (meeting.Status == 1)
@@ -58,7 +67,8 @@
                         <td>@meeting.CATEGORY.Category_Name</td>
                         <td>@meeting.Meeting_name</td>
                         <td>@meeting.AspNetUser.Email</td>
-                        <td>@meeting.Date_Create.GetValueOrDefault().ToShortDateString()</td>
+                        <td>@Convert.ToDateTime(meeting.Date_Create).ToString("MM/dd/yyyy")</td>
+
                     </tr>
                 }
             }
@@ -72,44 +82,67 @@
         <div class="yuki-table-title">
             <p>Cuộc Họp Chưa Hoàn Thành</p>
         </div>
-        <div class="yuki-table-out-header">
+        <div class="yuki-table-out-header" style="cursor:pointer">
             <ul class="yuki-column-4">
-                <li>
+                <li onclick="sortTable(0,2)">
                     Danh mục
+                    <i id='col1' class='fa fa-sort'></i>
+
                     @*<button class="filter">
                             <img src="~/Content/outline_filter_alt_black_24dp.png">
                         </button>*@
                 </li>
-                <li>
+                <li onclick="sortTable(1,2)">
                     Cuộc họp
+                    <i id='col1' class='fa fa-sort'></i>
+
                     @*<button class="filter">
                             <img src="~/Content/outline_filter_alt_black_24dp.png">
                         </button>*@
                 </li>
-                <li>
-                    Ngày đến hạn
+                <li onclick="sortTable(2,2)">
+                    Ngày họp
+                    <i id='col1' class='fa fa-sort'></i>
+
                     @*<button class="filter">
                             <img src="~/Content/outline_filter_alt_black_24dp.png">
                         </button>*@
                 </li>
-                <li>
+                <li onclick="sortTable(3,2)">
                     Tình trạng
+                    <i id='col1' class='fa fa-sort'></i>
+
                     @*<button class="filter">
                             <img src="~/Content/outline_filter_alt_black_24dp.png">
                         </button>*@
-                    </li>
-                </ul>
-            </div>
-            <table class="yuki-table">
-                @foreach (var meeting in Model)
+                </li>
+            </ul>
+        </div>
+        <table class="yuki-table" id="table-sort-2">
+
+            @foreach (var meeting in Model)
+            {
+                if (meeting.Status == 3 || meeting.Status == 4)
                 {
-                    if (meeting.Status == 3 || meeting.Status == 4)
-                    {
-                    <tr class="yuki-column-4" onclick="location.href = '@Url.Action("VerifyMeeting", "MainPage", new { id = meeting.Meeting_id })';" style="cursor: pointer;">
+                    var check_date = (Date > meeting.Date_Start) ? "color:red" : "";
+                    <tr id="column-tr-meeting" class="yuki-column-4" onclick="location.href = '@Url.Action("VerifyMeeting", "MainPage", new { id = meeting.Meeting_id })';" style="cursor: pointer; ">
                         <td>@meeting.CATEGORY.Category_Name</td>
                         <td>@meeting.Meeting_name</td>
-                        <td>@meeting.Date_Start.ToShortDateString()</td>
-                        <td>@meeting.MEETING_STATUS.Status_name</td>
+                        <td>
+                            @*<i style="z-index:10" onclick="alert('AAAAA')" id="bell" class="fas fa-bell"></i>*@
+                            @Convert.ToDateTime(meeting.Date_Start).ToString("MM/dd/yyyy")
+                        </td>
+                        @*<td>@meeting.MEETING_STATUS.Status_name</td>*@
+                        <td style="line-height: normal; display: flex;">
+                            @if (meeting.Status == 3)
+                            {
+                                <div class="missing-status">@meeting.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (meeting.Status == 4)
+                            {
+                                <div class="incomplete-status">@meeting.MEETING_STATUS.Status_name</div>
+                            }
+                        </td>
                     </tr>
                 }
             }
@@ -119,9 +152,9 @@
 
 
 <script>
-    function sortTable(n) {
+    function sortTable(n,t) {
         var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-        table = document.getElementById("table-sort");
+        table = document.getElementById("table-sort-" + t);
         switching = true;
         //Set the sorting direction to ascending:
         dir = "asc";
@@ -133,7 +166,7 @@
             rows = table.rows;
             /*Loop through all table rows (except the
             first, which contains table headers):*/
-            for (i = 1; i < (rows.length - 1); i++) {
+            for (i = 0; i < (rows.length - 1); i++) {
                 //start by saying there should be no switching:
                 shouldSwitch = false;
                 /*Get the two elements you want to compare,
@@ -176,3 +209,45 @@
         }
     }
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $('#bell').on('click', function () {
+        var e = getElementById('column-tr-meeting');
+        e.preventDefault();
+    //    e.preventDefault(); // Now nothing will happen
+    });
+</script>
+
+@*<script>
+        $(".fa").click(function () {
+
+            var $current = $(this);
+            var sortDefault = 'fa-sort';
+            var sortAsc = 'fa-sort-asc';
+            var sortDesc = 'fa-sort-desc';
+
+            var isSortDefault = $current.hasClass(sortDefault);
+            var isSortAsc = $current.hasClass(sortAsc);
+
+            $current
+                .toggleClass(sortDefault, !isSortDefault && !isSortAsc)
+                .toggleClass(sortAsc, isSortDefault && !isSortAsc)
+                .toggleClass(sortDesc, isSortAsc);
+        });
+    </script>*@
+<style>
+    .body-content {
+        width: calc(100% - 150px ) !important;
+    }
+    /*    .fa.fa-sort:after {
+        content: 'sort_by_alpha';
+    }*/
+    .fa.fa-sort-asc:after {
+        content: 'arrow_drop_down';
+    }
+
+    .fa.fa-sort-desc:after {
+        content: 'arrow_drop_up';
+    }
+</style>

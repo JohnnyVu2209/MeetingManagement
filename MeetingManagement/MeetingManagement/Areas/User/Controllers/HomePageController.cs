@@ -25,14 +25,15 @@ namespace MeetingManagement.Areas.User.Controllers
         {
             var userid = User.Identity.GetUserId();
             var mEMBER = db.MEMBERs.FirstOrDefault(x => x.Member_id == userid);
-            ViewBag.task = 0;
             if (mEMBER != null)
             {
                 ViewBag.meeting = db.MEETINGs.Where(x => x.Meeting_id == mEMBER.Meeting_id).ToList();
                 ViewBag.task = db.TASKs.Where(x => x.Meeting_id == mEMBER.Meeting_id && x.Assignee == mEMBER.Member_id).OrderBy(x => x.Task_Status == true).ToList();
             }
+            ViewBag.task_count = db.TASKs.Where(x => x.Meeting_id == mEMBER.Meeting_id && x.Assignee == mEMBER.Member_id).OrderBy(x => x.Task_Status == true).Count();
             return PartialView();
         }
+
         [HttpGet]
         public ActionResult IndexCateList()
         {
@@ -72,10 +73,12 @@ namespace MeetingManagement.Areas.User.Controllers
             MeetingListVM meetingListVM = new MeetingListVM();
             List<MeetingListVM> meetingListVMList = meeting.Select(x => new MeetingListVM
             {
+                Meeting_id = x.Meeting_id,
                 Email = x.AspNetUser.Email,
                 FullName = x.AspNetUser.Full_name,
                 MeetingName = x.Meeting_name,
                 DateStart = x.Date_Start,
+                TimeStart = x.Time_Start,
                 Status = x.MEETING_STATUS.Status_id,
                 StatusName = x.MEETING_STATUS.Status_name
             }).ToList();
