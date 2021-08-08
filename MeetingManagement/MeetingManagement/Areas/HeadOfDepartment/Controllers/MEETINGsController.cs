@@ -10,6 +10,7 @@ using MeetingManagement.Models;
 using System.Transactions;
 using Microsoft.AspNet.Identity;
 using System.IO;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 {
@@ -47,12 +48,12 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             if (Session["MeetingEdit"] != null)
             {
                 meetingEdit = Session["MeetingEdit"] as MEETING;
-                if(meetingEdit.Meeting_id != id)
+                if (meetingEdit.Meeting_id != id)
                 {
                     meetingEdit = db.MEETINGs.Find(id);
                     Session["MeetingEdit"] = meetingEdit;
                 }
-            }    
+            }
             else
             {
                 meetingEdit = db.MEETINGs.Find(id);
@@ -274,9 +275,10 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return View();
         }
 
-        public ActionResult ReportList()
+        public ActionResult ReportList(int id)
         {
-            ViewBag.meeting = db.MEETINGs.ToList();
+            ViewBag.meeting = db.MEETINGs.Where(x => x.Category_id == id).ToList();
+            ViewBag.categoryId = id;
             return View();
         }
 
@@ -590,6 +592,59 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             var bytes = System.IO.File.ReadAllBytes(path);
 
             return File(bytes, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", meeting.REPORT.Report_name);
+        }
+
+        public FileResult DownloadAllFile(int categoryId)
+        {
+            var meetingByCategory = db.MEETINGs.Where(x => x.Category_id == categoryId && x.Check_report == true).ToList();
+            var category = db.CATEGORies.Find(categoryId);
+            var fileName = string.Format("{0}_ReportFiles.zip", category.Category_Name);
+            var tempOutPutPath = Server.MapPath(File_Path_Report) + fileName;
+            using (ZipOutputStream s = new ZipOutputStream(System.IO.File.Create(tempOutPutPath)))
+            {
+                s.SetLevel(9);
+                byte[] buffer = new byte[4096];
+                for (int i = 0; i < meetingByCategory.Count; i++)
+                {
+                    var path = Server.MapPath(meetingByCategory[i].REPORT.Report_link);
+                    ZipEntry entry = new ZipEntry(meetingByCategory[i].REPORT.Report_name);
+                    entry.DateTime = DateTime.Now;
+                    entry.IsUnicodeText = true;
+                    s.PutNextEntry(entry);
+
+                    using (FileStream fs = System.IO.File.OpenRead(path))
+                    {
+                        int sourceBytes;
+                        do
+                        {
+                            sourceBytes = fs.Read(buffer, 0, buffer.Length);
+                            s.Write(buffer, 0, sourceBytes);
+                        } while (sourceBytes > 0);
+                    }
+                }
+                s.Finish();
+                s.Flush();
+                s.Close();
+            }
+            byte[] finalResult = System.IO.File.ReadAllBytes(tempOutPutPath);
+            if (System.IO.File.Exists(tempOutPutPath))
+                System.IO.File.Delete(tempOutPutPath);
+
+            if (finalResult == null || !finalResult.Any())
+                throw new Exception(String.Format("No Files found with Image"));
+
+            return File(finalResult, "application/zip", fileName);
+        }
+
+        public ActionResult NotiMeeting(int meetingId)
+        {
+            return View("ReportList");
+        }
+
+        public ActionResult NotiAll(int categoryId)
+        {
+            var meetingByCategory = db.MEETINGs.Where(x => x.Category_id == categoryId && x.Check_report != true).ToList();
+            return View("ReportList");
         }
     }
 }
