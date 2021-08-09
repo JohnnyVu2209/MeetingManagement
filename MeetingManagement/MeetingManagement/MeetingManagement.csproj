@@ -718,7 +718,7 @@
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\JoinedMeetingGridView.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingMember.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingEdit.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingInfo2.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingInfoModal.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\Create.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\Edit.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingEdit.cshtml" />

@@ -24,7 +24,7 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr class="w400">
+                <tr class="w400" style="cursor:pointer;" onclick="detailModal(@(item.Meeting_id))">
                     <td>
                         @item.Meeting_name
                     </td>
@@ -67,8 +67,25 @@
 
     </table>
 </div>
+<div id="show-popup"></div>
 
 <script>
+    function detailModal(id) {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("MeetingInfoModal", "Meetings")',
+            data: { id },
+            dataType: "html",
+            success: function (data) {
+                $("#show-popup").html(data);
+                $("#myMeetingModal").appendTo("body").modal("show");
+            },
+            error: function (data) {
+                return false;
+            }
+        });
+    }
+
     function sortTable(n) {
         var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
         table = document.getElementById("table-sort");
