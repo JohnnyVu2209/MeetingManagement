@@ -24,7 +24,9 @@
                     @foreach (AuthenticationDescription p in loginProviders)
                     {
 
-                        <button type="submit" class="btn btn-block py-2 btn-vanlang" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><span class="icon-windows mr-3"></span>Account VanLang </button>
+                        <button type="submit" class="btn btn-block py-2 btn-vanlang" 
+                                id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">
+                    <span class="icon-windows mr-3"></span>Account VanLang </button>
 
                     }
                 </p>

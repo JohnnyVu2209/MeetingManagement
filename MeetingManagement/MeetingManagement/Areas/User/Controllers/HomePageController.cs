@@ -83,28 +83,29 @@ namespace MeetingManagement.Areas.User.Controllers
                 MeetingName = x.Meeting_name,
                 DateStart = x.Date_Start,
                 Status = x.MEETING_STATUS.Status_id,
-                StatusName = x.MEETING_STATUS.Status_name
+                StatusName = x.MEETING_STATUS.Status_name,
+                CateID = x.Meeting_id
             }).ToList();
             return View(meetingListVMList);
         }
-/*        public ActionResult MyMeeting()
-        {
-            currentUser = User.Identity.GetUserId();
-            var result = db.MEETINGs.ToList();
-            result = result.Where(m => m.Create_by.ToLower().Contains(currentUser)).ToList();
-            return PartialView("MyMeetingGridView", result);
-        }
+        /*        public ActionResult MyMeeting()
+                {
+                    currentUser = User.Identity.GetUserId();
+                    var result = db.MEETINGs.ToList();
+                    result = result.Where(m => m.Create_by.ToLower().Contains(currentUser)).ToList();
+                    return PartialView("MyMeetingGridView", result);
+                }
 
-        public ActionResult JoinedMeeting()
-        {
-            currentUser = User.Identity.GetUserId();
-            var meetings = from u in db.MEMBERs.Where(m => m.Member_id.ToLower().Contains(currentUser))
-                           from m in db.MEETINGs
-                           where u.Meeting_id == m.Meeting_id
-                           select m;
-            return PartialView("JoinedMeetingGridView", meetings);
-        }*/
-    
+                public ActionResult JoinedMeeting()
+                {
+                    currentUser = User.Identity.GetUserId();
+                    var meetings = from u in db.MEMBERs.Where(m => m.Member_id.ToLower().Contains(currentUser))
+                                   from m in db.MEETINGs
+                                   where u.Meeting_id == m.Meeting_id
+                                   select m;
+                    return PartialView("JoinedMeetingGridView", meetings);
+                }*/
+        
     }
 }
     

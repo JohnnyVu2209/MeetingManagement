@@ -13,12 +13,12 @@
 
 <div id="table-content">
     <table class="table" id="table-sort">
-        <thead style="background-color: #009FE5;color:white">
+        <thead style="background-color: #009FE5;color:white;cursor:pointer">
             <tr>
-                <th scope="col" onclick="sortTable(0)" style="cursor:pointer">Tên cuộc họp</th>
-                <th scope="col" onclick="sortTable(1)"style="cursor:pointer">Người chủ trì</th>
-                <th scope="col" onclick="sortTable(2)"style="cursor:pointer">Ngày họp</th>
-                <th scope="col" onclick="sortTable(3)"style="cursor:pointer">Trình trạng</th>
+                <th scope="col" onclick="sortTable(0)" >Tên cuộc họp</th>
+                <th scope="col" onclick="sortTable(1)" >Người chủ trì</th>
+                <th scope="col" onclick="sortTable(2)" >Ngày họp</th>
+                <th scope="col" onclick="sortTable(3)" >Tình trạng</th>
             </tr>
         </thead>
         <tbody>
@@ -33,23 +33,23 @@
                     <td>
                         @if (@item.Status == 1)
                         {
-                            <div class="pending-status" style="width:100px">@item.MEETING_STATUS.Status_name</div>
+                            <div class="pending-status">@item.MEETING_STATUS.Status_name</div>
                         }
                         else if (@item.Status == 2)
                         {
-                            <div class="waiting-status"style="width:100px">@item.MEETING_STATUS.Status_name</div>
+                            <div class="waiting-status">@item.MEETING_STATUS.Status_name</div>
                         }
                         else if (@item.Status == 3)
                         {
-                            <div class="missing-status" style="width:100px">@item.MEETING_STATUS.Status_name</div>
+                            <div class="missing-status">@item.MEETING_STATUS.Status_name</div>
                         }
                         else if (@item.Status == 4)
                         {
-                            <div class="incomplete-status" style="width:100px">@item.MEETING_STATUS.Status_name</div>
+                            <div class="incomplete-status">@item.MEETING_STATUS.Status_name</div>
                         }
                         else if (@item.Status == 5)
                         {
-                            <div class="complete-status" style="width:100px">@item.MEETING_STATUS.Status_name</div>
+                            <div class="complete-status">@item.MEETING_STATUS.Status_name</div>
                         }
                         else if (@item.Status == 6)
                         {

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Data.SqlClient;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MeetingManagement.Models;
+using System.Configuration;
 using EntityState = System.Data.Entity.EntityState;
 using Microsoft.AspNet.Identity;
 
@@ -107,21 +109,47 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         }
 
 
-        public ActionResult statistic()
+        public ActionResult statistic(DateTime? batdau, DateTime? ketthuc)
         {
-            var userid = "f28b3bb0-99b7-439e-bc90-4c8c15fac1a2";
-            var mEMBER = db.MEMBERs.FirstOrDefault(x => x.Member_id == userid);
-            ViewBag.meeting = db.MEETINGs.Where(x => x.Meeting_id == mEMBER.Meeting_id).ToList();
-            ViewBag.task = db.TASKs.Where(x => x.Meeting_id == mEMBER.Meeting_id && x.Assignee == mEMBER.Member_id).ToList();
-            ViewBag.allWork = db.TASKs.ToList();
+            string maincom = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            SqlConnection sqlcon = new SqlConnection(maincom);
+            string sqlquery = "select * from [dbo].[MEETING] where Date_Create between ' " + batdau + " ' and ' " + ketthuc + " ' ";
+            SqlCommand sqlcom = new SqlCommand(sqlquery, sqlcon);
+            sqlcon.Open();
+            SqlDataAdapter sqlda = new SqlDataAdapter(sqlcom);
+            DataSet ds = new DataSet();
+            sqlda.Fill(ds);
+            List<statisticV> staV = new List<statisticV>();
+            foreach(DataRow dr in ds.Tables[0].Rows)
+            {
+                staV.Add(new statisticV
+                {
+                    meetingName = Convert.ToString(dr["Meeting_name"]),
+                    DateCre = Convert.ToDateTime(dr["Date_Create"]),
+                    meetingHost = Convert.ToString(dr["Create_by"]),
+                    meetingVerifyBy = Convert.ToString(dr["Verify_by"]),                             
+                    meetingLocaion = Convert.ToString(dr["Location"]),
+                    meetingStatus = Convert.ToInt16(dr["Status"]),
+                    meetingId = Convert.ToInt16(dr["Meeting_id"]),
+                });
+            }
+            sqlcon.Close();
+            ModelState.Clear();
+
+/*            ViewBag.allWork = db.TASKs.ToList();
             ViewBag.allMeeting = db.MEETINGs.ToList();
             ViewBag.allCate = db.CATEGORies.ToList();
-            ViewBag.allMeetingStatus = db.MEETING_STATUS.ToList();
-            return View();
-        } 
+            ViewBag.allMeetingStatus = db.MEETING_STATUS.ToList();*/
+            return View(staV);
+        }        
+        
+        
+
+
 
         public ActionResult statisticChart()
         {
+            /*var all = db.MEETINGs.Where(x => x.Category_id == id).ToList();*/
             int ms1 = db.MEETINGs.Where(x => x.Status == 1).Count();
             int ms2 = db.MEETINGs.Where(x => x.Status == 2).Count();
             int ms3 = db.MEETINGs.Where(x => x.Status == 3).Count();
@@ -149,6 +177,10 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             public int nopassM { get; set; }
             public int cancelM { get; set; }
         }
+
+
+
+
 
     }
 }

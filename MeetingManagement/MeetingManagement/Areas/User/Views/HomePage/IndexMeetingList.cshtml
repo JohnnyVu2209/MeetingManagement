@@ -41,8 +41,8 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr class="yuki-column-4">
-                    <td>
+                <tr class="yuki-column-4" style="cursor:pointer">
+                    <td onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = item.CateID, modify = false })';">
                         @item.MeetingName
                     </td>
                     <td>

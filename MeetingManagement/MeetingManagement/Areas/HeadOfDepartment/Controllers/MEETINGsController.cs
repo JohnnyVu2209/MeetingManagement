@@ -35,6 +35,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             var all = db.MEETINGs.Where(x => x.Category_id == id).ToList();
             return PartialView(all);
         }
+        
         public ActionResult MeetingForm(int id)
         {
             GetMeeting();
