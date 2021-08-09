@@ -64,8 +64,8 @@ namespace MeetingManagement.Areas.Admin.Controllers
             // If we got this far, something failed, redisplay form
 
             ModelState.AddModelError("Email", "User with this email already exists");
-            return PartialView();
-            
+            return PartialView("Create", model);
+
         }
 
         private void AddOtherAccount(string id)

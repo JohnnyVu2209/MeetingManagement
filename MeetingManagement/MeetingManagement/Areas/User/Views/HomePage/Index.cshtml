@@ -4,14 +4,14 @@
 <link href="~/Content/HomePage.css" rel="stylesheet" />
 
 <div class="row">
-    @Html.Action("IndexMeetingList")
+    @Html.Action("IndexMeetingList", "HomePage")
 </div>
 <div style="height:20px;"></div>
 <div class="row">
     @*    <div class="col-md-6" style="padding:0px">
             @Html.Action("IndexCateList")
         </div>*@
-    @Html.Action("IndexTaskList")
+    @Html.Action("IndexTaskList", "HomePage")
 </div>
 
 <style>
