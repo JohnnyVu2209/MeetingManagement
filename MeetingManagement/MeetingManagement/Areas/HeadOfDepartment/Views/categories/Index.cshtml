@@ -69,6 +69,15 @@
             background-color: #dc3545;
             border-color: #dc3545;
         }
+    .btn-outline-info {
+        color: #0dcaf0;
+        border-color: #0dcaf0;
+    }
+    .btn-outline-info:hover {
+        color: #000;
+        background-color: #0dcaf0;
+        border-color: #0dcaf0;
+    }
 </style>
 
 <link href="~/Content/catalog-list.css" rel="stylesheet" />
@@ -100,6 +109,9 @@
                 <h5>@item.Category_Name</h5>
             </div>
             <div class="col-md-4 item-btn">
+                <button class="btn btn-outline-info"  onclick="location.href ='@Url.Action("ReportList","Meetings", new { id = item.Category_id})';">
+                    <i class="fa fa-file" aria-hidden="true"></i>Báo cáo
+                </button>
                 <button class="btn btn-outline-secondary" onclick="ShowEditPopUp(@item.Category_id)" style="border: 3px solid #6c757d;">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Sửa
                 </button>

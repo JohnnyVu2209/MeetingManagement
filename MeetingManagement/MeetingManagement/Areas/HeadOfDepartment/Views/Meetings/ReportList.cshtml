@@ -3,8 +3,9 @@
     ViewBag.Title = "ReportList";
     Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
     var meetings = ViewBag.meeting as List<MEETING>;
+    var categoryId = ViewBag.categoryId;
 }
-<!--<style>
+@*<style>
     .inline-datetime {
         display: inline-flex;
     }
@@ -97,58 +98,60 @@
 
         .yuki-btn-gray:hover {
         }
-</style>
-<div class="body-navbar">-->
-    @*<button type="button" onclick="window.location.href='@Url.Action("Index", "MainPage")'" class="btn yuki-btn-blue>
-        ❮   Back to List
-        </button>*@
-    <!--<div class="nav-content-zone">
-        <img src="~/Content/Picture/users_meeting.png" />
-        <div class="lable-zone">
-            Report List
-        </div>
+</style>*@
+<div class="yuki-table-zone">
+    <div class="yuki-table-title" style="display: flex; justify-content: space-between;">
+        <p>Cuộc họp chưa nộp báo cáo</p>
+        @Html.ActionLink("Nhắc tất cả", "NotiAll", "Meetings", new { categoryId = categoryId }, new { @class = "btn btn-default", @style = "margin-right: 20px;" })
     </div>
-
-</div>-->
-
-
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-    <div class="panel panel-default">
+    <div class="yuki-table-out-header">
+        <ul class="yuki-column-4">
+            <li>Cuộc họp</li>
+            <li>Chủ trì</li>
+            <li>Ngày họp</li>
+            <li></li>
+        </ul>
+    </div>
+    <table class="yuki-table" id="table-sort">
+        @foreach (var meets in meetings)
+        {
+            if (meets.Check_report != true)
+            {
+                <tr class="yuki-column-4">
+                    <td>@meets.Meeting_name</td>
+                    <td>@meets.AspNetUser.Email</td>
+                    <td>@meets.Date_Start.Add(meets.Time_Start.Value)</td>
+                    <td><a href="@Url.Action("NotiMeeting", "Meetings",new { meetingId = meets.Meeting_id})" class="fa fa-bell"></a></td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+<div class="yuki-table-zone">
+    <div class="yuki-table-title" style="display: flex; justify-content: space-between;">
+        <p>Cuộc họp đã nộp báo cáo</p>
+        @Html.ActionLink("Tải tất cả", "DownloadAllFile", "Meetings", new { categoryId = categoryId }, new { @class = "btn btn-default", @style = "margin-right: 20px;" })
+    </div>
+    <div class="yuki-table-out-header">
+        <ul class="yuki-column-4">
+            <li>Cuộc họp</li>
+            <li>Tên file</li>
+            <li>Dung lượng</li>
+            <li></li>
+        </ul>
+    </div>
+    <table class="yuki-table" id="table-sort">
         @foreach (var meets in meetings)
         {
             if (meets.Check_report == true)
             {
-                <div class="panel-heading" role="tab" id="@meets.Meeting_id">
-                    <h4 class="panel-title">
-                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#@(meets.Meeting_id)Name" aria-expanded="true" aria-controls="collapseOne">
-                            @meets.Meeting_name
-                        </a>
-
-
-                    </h4>
-                </div>
-                <div id="@(meets.Meeting_id)Name" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="@meets.Meeting_id">
-                    <div class="panel-body">
-                        <div class="row" style="margin-left:10px;font-size:15px;">
-                            <div class="col-md-3">
-                                @meets.REPORT.Report_name
-                            </div>
-                            <div class="col-md-3">
-                                @meets.REPORT.Report_binary
-                            </div>
-                            <div class="col-md-3">
-                                @meets.REPORT.Report_type
-                            </div>
-                            <div class="col-md-3">
-                                @Html.ActionLink("Download", "DownloadFile", "Meetings", new { meeting_id = meets.Meeting_id },new { @class = "btn btn-primary" })
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+                <tr class="yuki-column-4">
+                    <td>@meets.Meeting_name</td>
+                    <td>@meets.REPORT.Report_name</td>
+                    <td>@meets.REPORT.Report_binary</td>
+                    <td><a href="@Url.Action("DownloadFile","Meetings", new { meeting_id = meets.Meeting_id })" class="fa fa-download"></a></td>
+                </tr>
             }
         }
-    </div>
-
+    </table>
 </div>
-
