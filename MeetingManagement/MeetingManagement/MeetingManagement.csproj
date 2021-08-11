@@ -288,11 +288,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="Models\Models1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\OTHER_ACCOUNT.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>

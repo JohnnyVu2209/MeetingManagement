@@ -293,11 +293,13 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
                 meeting = updateMeeting(meeting_id, model);
 
                 var filename = Path.GetFileName(fileBase.FileName);
+                string extension = Path.GetExtension(fileBase.FileName);
                 ATTACHMENT attchment = new ATTACHMENT();
                 attchment.Meeting_id = meeting.Meeting_id;
                 attchment.Attachment_path = File_Path_Attachment + meeting.Meeting_id + filename;
                 attchment.Attachment_name = fileBase.FileName;
                 attchment.Attachment_binary = Math.Round(((Double)fileBase.ContentLength / 1024), 2).ToString() + "KB";
+                attchment.Attachment_type = extension;
                 db.ATTACHMENTs.Add(attchment);
                 db.SaveChanges();
 
@@ -500,6 +502,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             newMeet.Status = 2;
             newMeet.Date_Create = DateTime.Today;
             newMeet.Create_by = User.Identity.GetUserId();
+            newMeet.Verify_by = User.Identity.GetUserId();
             db.MEETINGs.Add(newMeet);
             db.SaveChanges();
 

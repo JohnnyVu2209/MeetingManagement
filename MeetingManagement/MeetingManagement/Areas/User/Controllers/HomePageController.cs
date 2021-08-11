@@ -31,7 +31,6 @@ namespace MeetingManagement.Areas.User.Controllers
                 ViewBag.task = db.TASKs.Where(x => x.Meeting_id == mEMBER.Meeting_id && x.Assignee == mEMBER.Member_id).OrderBy(x => x.Task_Status == true).ToList();
                 ViewBag.task_count = db.TASKs.Where(x => x.Meeting_id == mEMBER.Meeting_id && x.Assignee == mEMBER.Member_id).OrderBy(x => x.Task_Status == true).Count();
             }
-            
             return PartialView();
         }
 

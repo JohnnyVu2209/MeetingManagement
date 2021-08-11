@@ -8,6 +8,8 @@
     var db = new SEP24Team7Entities();
     var m = new List<AspNetUser>();
 }
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
 <style>
     .edit_fixed {
         padding-left: 5px;
@@ -198,26 +200,26 @@
         {
             foreach (var item in Model.ATTACHMENTs)
             {
-                <a id="myfile" href="@item.Attachment_path" style="margin-right:20px;" download>
+                <a id="myfile" href="@item.Attachment_path" style="margin-right:20px;" tu>
                     <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
                         <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
-                            @if (@item.Attachment_type == "xls" || item.Attachment_type == "xlsm" || item.Attachment_type == "xlsx")
+                            @if (item.Attachment_type == ".xls" || item.Attachment_type == ".xlsm" || item.Attachment_type == ".xlsx")
                             {
                                 <i style="font-size: 40px; color: #1d6f42;" class="fas fa-file-excel text-primary"></i>
                             }
-                            else if (@item.Attachment_type == "pdf")
+                            else if (item.Attachment_type == ".pdf")
                             {
                                 <i style="font-size: 40px; color: #f40f02;" class="fas fa-file-pdf text-primary"></i>
                             }
-                            else if (@item.Attachment_type == "doc" || item.Attachment_type == "docm" || item.Attachment_type == "docx")
+                            else if (item.Attachment_type == ".doc" || item.Attachment_type == ".docm" || item.Attachment_type == ".docx")
                             {
                                 <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
                             }
-                            else if (@item.Attachment_type == "jpg" || item.Attachment_type == "jpeg")
+                            else if (item.Attachment_type == ".jpg" || item.Attachment_type == ".jpeg")
                             {
                                 <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
                             }
-                            else if (@item.Attachment_type == "ppt" || item.Attachment_type == "pptm" || item.Attachment_type == "pptx")
+                            else if (item.Attachment_type == ".ppt" || item.Attachment_type == ".pptm" || item.Attachment_type == ".pptx")
                             {
                                 <i style="font-size: 40px; color: #D04423" class="fas fa-file-powerpoint text-primary"></i>
                             }
