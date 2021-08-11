@@ -31,12 +31,12 @@
 
 <div id="table-content">
     <table class="table" id="table-sort">
-        <thead style="background-color: #009FE5;color:white">
+        <thead style="background-color: #009FE5;color:white;cursor:pointer">
             <tr>
                 <th scope="col" onclick="sortTable(0)" style="cursor:pointer">Tên cuộc họp</th>
                 <th scope="col" onclick="sortTable(1)" style="cursor:pointer">Người chủ trì</th>
                 <th scope="col" onclick="sortTable(2)" style="cursor:pointer">Ngày họp</th>
-                <th scope="col" onclick="sortTable(3)" style="cursor:pointer">Trình trạng</th>
+                <th scope="col" onclick="sortTable(3)" style="cursor:pointer">Tình trạng</th>
             </tr>
         </thead>
         <tbody>
@@ -87,6 +87,8 @@
 </div>
 <div id="show-popup"></div>
 
+
+<!--JSSort-->
 <script>
     function detailModal(id) {
         $.ajax({

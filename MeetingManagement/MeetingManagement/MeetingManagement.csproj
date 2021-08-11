@@ -295,6 +295,7 @@
     <Compile Include="Models\REPORT.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\statisticV.cs" />
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -317,6 +318,11 @@
     <Content Include="Content\Picture\outline_upload_file_black_24dp.png" />
     <Content Include="Content\quyhung\chart\exporting.js" />
     <Content Include="Content\quyhung\chart\highcharts.js" />
+    <Content Include="Content\quyhung\css\btn-hoverme.css" />
+    <Content Include="Content\quyhung\css\fireship.css" />
+    <Content Include="Content\quyhung\img\cating.gif" />
+    <Content Include="Content\quyhung\img\unnamed.png" />
+    <Content Include="Content\quyhung\js\fireship.js" />
     <Content Include="Content\taocuochop\css\main.css" />
     <Content Include="Content\taocuochop\css\main.min.css" />
     <Content Include="Content\taocuochop\js\global.js" />
