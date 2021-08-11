@@ -63,7 +63,7 @@ namespace MeetingManagement.Areas.User.Controllers
             return View(mEETINGs.ToList());
         }
 
-        public ActionResult MeetingDetail(int id, bool modify)
+        public ActionResult MeetingDetail(int id, bool? modify)
         {
             meetingEdit = db.MEETINGs.Find(id);
             Session["MeetingEdit"] = meetingEdit;

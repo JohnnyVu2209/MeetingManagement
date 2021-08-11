@@ -239,6 +239,10 @@
                 <div style="position:relative;cursor:pointer; font-size:20px; right:32px" onclick="ShowDeletePopUp(@item.Attachment_id)">x</div>
             }
         }
+        else
+        {
+            <p>Cuộc họp chưa có tài liệu</p>
+        }
     </div>
 </div>
 @using (Html.BeginForm("MeetingEdit", "Meetings", FormMethod.Post, new { id = "__AjaxAntiForgeryForm", enctype = "multipart/form-data" }))

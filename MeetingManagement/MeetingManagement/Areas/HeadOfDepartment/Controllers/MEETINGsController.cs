@@ -23,6 +23,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         private const string MEETING_TIME = "Thời gian diễn ra cuộc họp: ";
         private const string MEETING_LOCATION = "Địa điểm diễn ra cuộc họp: ";
         private const string MEETING_CANCEL = "Cuộc họp đã bị huỷ vì lý do: ";
+        private const string MEETING_REPORT = "Nhắc nhở nộp báo cáo cho cuộc họp.";
         private MEETING meetingSS = null;
         private MEETING meetingEdit = null;
         /*
@@ -127,6 +128,41 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             meetingEdit.AspNetUser = user;
             meetingEdit.CATEGORY = category;
             return View(meetingEdit);
+        }
+
+        [HttpGet]
+        public ActionResult CancelModel(MEETING model, int model_type)
+        {
+            GetMeeting();
+            ViewBag.model_type = model_type;
+            model.MEMBERs = meetingEdit.MEMBERs;
+            Session["MeetingEdit"] = model;
+            return PartialView(model);
+        }
+
+
+        [HttpPost]
+        public ActionResult CancelModel(int Meeting_id, MEETING model)
+        {
+                var meeting = db.MEETINGs.Find(Meeting_id);
+                //change meeting status
+                meeting.Status = 7;
+                meeting.Feedback = model.Feedback;
+
+                db.Entry(meeting).State = EntityState.Modified;
+                db.SaveChanges();
+                if(meeting.Verify_by!=null)
+                    sendCancelModel(meeting);
+                return RedirectToAction("Index","tabCuocHop");
+        }
+
+        private void sendCancelModel(MEETING meeting)
+        {
+            string Receiver = db.AspNetUsers.Find(meeting.Verify_by).Email;
+            string Subject = meeting.Meeting_name;
+            string Body = MEETING_CANCEL + meeting.Feedback;
+            Outlook mail = new Outlook(Receiver, Subject, Body);
+            mail.SendMail();
         }
 
         public PartialViewResult MeetingInfo(int id)
@@ -560,6 +596,15 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
                 ModelState.AddModelError("Time_Start", "Time is not valid");
             }
         }
+
+        private bool ValidateFeedback(MEETING meeting)
+        {
+            if(meeting.Feedback == null || meeting.Feedback == "")
+            {
+                return true;
+            }
+            return false;
+        }
         /*
          * END
          *************************VALIDATE************************
@@ -727,13 +772,29 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 
         public ActionResult NotiMeeting(int meetingId)
         {
-            return View("ReportList");
+            var meeting = db.MEETINGs.Find(meetingId);
+            string DateTime = meeting.Date_Start.ToString("dd/MM/yyyy") + " " + meeting.Time_Start;
+            var Receiver = db.AspNetUsers.Find(meeting.Create_by).Email;
+            var Subject = meeting.Meeting_name;
+            var Body = MEETING_REPORT + Environment.NewLine + MEETING_TIME + DateTime;
+            Outlook mail = new Outlook(Receiver, Subject, Body);
+            mail.SendMail();
+            return RedirectToAction("ReportList", "Meetings", new { id = meeting.Category_id });
         }
 
         public ActionResult NotiAll(int categoryId)
         {
             var meetingByCategory = db.MEETINGs.Where(x => x.Category_id == categoryId && x.Check_report != true).ToList();
-            return View("ReportList");
+            foreach (var meeting in meetingByCategory)
+            {
+                string DateTime = meeting.Date_Start.ToString("dd/MM/yyyy") + " " + meeting.Time_Start;
+                var Receiver = db.AspNetUsers.Find(meeting.Create_by).Email;
+                var Subject = meeting.Meeting_name;
+                var Body = MEETING_REPORT + Environment.NewLine + MEETING_TIME + DateTime;
+                Outlook mail = new Outlook(Receiver, Subject, Body);
+                mail.SendMail();
+            }
+            return RedirectToAction("ReportList", "Meetings", new { id = categoryId });
         }
     }
 }

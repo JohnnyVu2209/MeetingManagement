@@ -10,31 +10,20 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-
-
     <link href="~/Content/login-form-05/css/style.css" rel="stylesheet" />
-
     <link href="~/Content/login-form-05/css/owl.carousel.min.css" rel="stylesheet" />
     <!-- Bootstrap CSS -->
-
     <link href="~/Content/login-form-05/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Style -->
-   
     <link href="~/Content/login-form-05/fonts/icomoon/style.css" rel="stylesheet" />
     <title>Login </title>
 </head>
 <body class="me-body">
-    
     <div class="d-md-flex half">
-        <div class="bg" style="background-image: url('@Url.Content("~/Content/login-form-05/images/vanlang1.png")');"></div>
-
+        <div class="bg" style="background-image: url('../../Content/login-form-05/images/1-2.jpg');"></div>
         <div class="contents">
-
             <div class="container">
-
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-12">
                         <div class="form-block mx-auto">
@@ -42,7 +31,6 @@
                                 <img src="@Url.Content("~/Content/login-form-05/images/logo.png")">
                             </div>
                             <hr /><center>----------*.*-----------</center><hr />
-
                             <form action="@Url.Action("Login","Account")" method="post">
                                 @Html.AntiForgeryToken()
 
@@ -67,6 +55,8 @@
 
                                 </div>
                                 <button type="submit" value="Log In" class="btn btn-block py-2 btn-Login">Log In</button>
+                                <span class="text-center my-3 d-block">or</span>
+
 
                             </form>
                             <section id="socialLoginForm">
@@ -80,10 +70,20 @@
             </div>
         </div>
     </div>
+    <style>
+        .me-body {
+            line-height: 100%;
+        }
 
+        .col-md-12 {
+            padding-right: 0px;
+            padding-left: 0px;
+        }
+    </style>
     <script src="~/Content/login-form-05/js/bootstrap.min.js"></script>
     <script src="~/Content/login-form-05/js/jquery-3.3.1.min.js"></script>
     <script src="~/Content/login-form-05/js/main.js"></script>
     <script src="~/Content/login-form-05/js/owl.carousel.min.js"></script>
     <script src="~/Content/login-form-05/js/popper.min.js"></script>
 </body>
+
