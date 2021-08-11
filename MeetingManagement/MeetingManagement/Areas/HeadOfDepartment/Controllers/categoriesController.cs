@@ -135,21 +135,20 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             }
             sqlcon.Close();
             ModelState.Clear();
-
-/*            ViewBag.allWork = db.TASKs.ToList();
             ViewBag.allMeeting = db.MEETINGs.ToList();
-            ViewBag.allCate = db.CATEGORies.ToList();
-            ViewBag.allMeetingStatus = db.MEETING_STATUS.ToList();*/
+            ViewBag.date_s = batdau;
+            ViewBag.date_e = ketthuc;
+            DateTime now = DateTime.Now;
+            ViewBag.year_now = now;
             return View(staV);
-        }        
-        
-        
+        }
 
 
 
-        public ActionResult statisticChart()
+
+
+/*        public ActionResult statisticChart(DateTime? batdau, DateTime? ketthuc)
         {
-            /*var all = db.MEETINGs.Where(x => x.Category_id == id).ToList();*/
             int ms1 = db.MEETINGs.Where(x => x.Status == 1).Count();
             int ms2 = db.MEETINGs.Where(x => x.Status == 2).Count();
             int ms3 = db.MEETINGs.Where(x => x.Status == 3).Count();
@@ -176,7 +175,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             public int compM { get; set; }
             public int nopassM { get; set; }
             public int cancelM { get; set; }
-        }
+        }*/
 
 
 

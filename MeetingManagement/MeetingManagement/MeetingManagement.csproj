@@ -319,6 +319,7 @@
     <Content Include="Content\quyhung\chart\highcharts.js" />
     <Content Include="Content\quyhung\css\btn-hoverme.css" />
     <Content Include="Content\quyhung\css\fireship.css" />
+    <Content Include="Content\quyhung\img\cating.gif" />
     <Content Include="Content\quyhung\img\unnamed.png" />
     <Content Include="Content\quyhung\js\fireship.js" />
     <Content Include="Content\taocuochop\css\main.css" />
