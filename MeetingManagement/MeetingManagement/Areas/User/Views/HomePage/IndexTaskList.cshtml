@@ -8,9 +8,11 @@
             <th>Ngày hoàn thành</th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var ut in ViewBag.task)
-        {
+    @if (ViewBag.task != null)
+    {
+        <tbody>
+            @foreach (var ut in ViewBag.task)
+            {
             <tr>
                 <td>
                     @ut.Task_name
@@ -21,13 +23,13 @@
                         @um.Meeting_name
                     }
                 </td>
-                <td>
-                    @Convert.ToDateTime(ut.Task_Deadline).ToString("MM/dd/yyyy")
-                </td>
-
+                    <td>
+                        @Convert.ToDateTime(ut.Task_Deadline).ToString("MM/dd/yyyy")
+                    </td>
             </tr>
+            }
+        </tbody>
         }
-    </tbody>
 </table>
 
 <style>
