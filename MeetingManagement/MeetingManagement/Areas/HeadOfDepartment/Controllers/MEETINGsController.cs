@@ -114,6 +114,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             newMeet.Status = 2;
             newMeet.Date_Create = DateTime.Today;
             newMeet.Create_by = User.Identity.GetUserId();
+            newMeet.Verify_by = User.Identity.GetUserId();
             db.MEETINGs.Add(newMeet);
             db.SaveChanges();
 

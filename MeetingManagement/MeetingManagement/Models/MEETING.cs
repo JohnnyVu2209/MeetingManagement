@@ -37,6 +37,7 @@ namespace MeetingManagement.Models
         public string AspNetUsers { get; set; }
         public Nullable<bool> Check_Task { get; set; }
         public string Verify_by { get; set; }
+        public Nullable<bool> Notify { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

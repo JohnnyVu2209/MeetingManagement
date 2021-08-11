@@ -17,6 +17,9 @@
 <div>
     <div style="text-transform: uppercase;font-size:20px;margin-bottom:20px" ; class="header">
         @Html.Label(Model.Category_Name)
+        <div style="font-size:12px">
+            @Html.DisplayFor(m => m.AspNetUser.UserName)
+        </div>
         <button style="float: right; width: 90px;height: 45px;
         background-color: #009FE5; color: white;
         border-radius: 5px;font-size:16px"
