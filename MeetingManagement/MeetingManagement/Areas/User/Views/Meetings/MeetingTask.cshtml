@@ -57,7 +57,7 @@ else
         @if (ViewBag.meeting_status >= 3 && ViewBag.meeting_status <= 5 && ViewBag.user_identity == ViewBag.create_by)
         {
             <div class="button-zone" style=" position: absolute; top: -10px; right: 0px;">
-                <a class="btn button-create" style="background-color:#009fe5; color:white; display:inline-flex;" onclick="getCreateModal(@meeting_id)">Tạo</a>
+                <a class="btn button-create" style="background-color:#009fe5; color:white; display:inline-flex;" onclick="getCreateTaskModal(@meeting_id)">Tạo</a>
             </div>
         }
         <div class="table-pos">

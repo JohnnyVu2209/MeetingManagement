@@ -1,104 +1,10 @@
 ﻿@using MeetingManagement.Models;
 @{
     ViewBag.Title = "ReportList";
-    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
     var meetings = ViewBag.meeting as List<MEETING>;
     var categoryId = ViewBag.categoryId;
 }
-@*<style>
-    .inline-datetime {
-        display: inline-flex;
-    }
-
-    .inline-location {
-        margin-left: 50px;
-        position: absolute;
-        display: inline-block;
-        width: 600px;
-        height: 40px;
-    }
-
-    .button-zone {
-        display: inline-block;
-        position: absolute;
-        right: 30px;
-        margin: 3px 0px;
-    }
-
-    .lable-zone {
-        display: inline-block;
-        position: absolute;
-        left: 80px;
-        color: black;
-        line-height: 40px;
-    }
-
-        .lable-zone label {
-            font-size: 18px !important;
-        }
-
-    .body-navbar {
-        width: calc(100% - 150px);
-        height: 60px;
-        background: white;
-        border-bottom: 1px solid #f1f1f1;
-        z-index: 10;
-        position: fixed;
-        color: white;
-        top: 50px;
-        left: 150px;
-    }
-
-    .nav-content-zone {
-        position: relative;
-        top: 10px;
-        left: 20px;
-    }
-
-    .body-navbar div img {
-        width: 40px;
-        height: 40px;
-        padding: 2px;
-        border: 1px solid grey;
-        border-radius: 10px;
-        position: absolute;
-        left: 30px;
-    }
-
-    .card-body-fixed {
-        position: relative;
-        top: 50px;
-        width: 1300px;
-        height: 800px;
-        z-index: 1;
-    }
-
-    .yuki-card-footer {
-        text-align: center;
-        padding-bottom: 20px;
-    }
-
-    .btn-fixed {
-        color: white;
-        font-size: 14px;
-        display: inline-block;
-        width: 8em;
-        height: 4em;
-        text-align: center;
-        border-radius: 4px;
-    }
-
-    .yuki-btn-blue {
-        background-color: #009FE5 !important;
-    }
-
-    .yuki-btn-gray {
-        background-color: #808080 !important;
-    }
-
-        .yuki-btn-gray:hover {
-        }
-</style>*@
 <div class="yuki-table-zone">
     <div class="yuki-table-title" style="display: flex; justify-content: space-between;">
         <p>Cuộc họp chưa nộp báo cáo</p>
@@ -113,17 +19,21 @@
         </ul>
     </div>
     <table class="yuki-table" id="table-sort">
-        @foreach (var meets in meetings)
+        @if (meetings != null)
         {
-            if (meets.Check_report != true)
+            foreach (var meets in meetings)
             {
-                <tr class="yuki-column-4">
-                    <td>@meets.Meeting_name</td>
-                    <td>@meets.AspNetUser.Email</td>
-                    <td>@meets.Date_Start.Add(meets.Time_Start.Value)</td>
-                    <td><a href="@Url.Action("NotiMeeting", "Meetings",new { meetingId = meets.Meeting_id})" class="fa fa-bell"></a></td>
-                </tr>
+                if (meets.Check_report != true)
+                {
+                    <tr class="yuki-column-4">
+                        <td>@meets.Meeting_name</td>
+                        <td>@meets.AspNetUser.Email</td>
+                        <td>@meets.Date_Start.Add(meets.Time_Start.Value)</td>
+                        <td><a href="@Url.Action("NotiMeeting", "Meetings",new { meetingId = meets.Meeting_id})" class="fa fa-bell"></a></td>
+                    </tr>
+                }
             }
+
         }
     </table>
 </div>
@@ -141,17 +51,20 @@
         </ul>
     </div>
     <table class="yuki-table" id="table-sort">
-        @foreach (var meets in meetings)
+        @if (meetings != null)
         {
-            if (meets.Check_report == true)
+            foreach (var meets in meetings)
             {
-                <tr class="yuki-column-4">
-                    <td>@meets.Meeting_name</td>
-                    <td>@meets.REPORT.Report_name</td>
-                    <td>@meets.REPORT.Report_binary</td>
-                    <td><a href="@Url.Action("DownloadFile","Meetings", new { meeting_id = meets.Meeting_id })" class="fa fa-download"></a></td>
-                </tr>
+                if (meets.Check_report == true)
+                {
+                    <tr class="yuki-column-4">
+                        <td>@meets.Meeting_name</td>
+                        <td>@meets.REPORT.Report_name</td>
+                        <td>@meets.REPORT.Report_binary</td>
+                        <td><a href="@Url.Action("DownloadFile", "Meetings", new { meeting_id = meets.Meeting_id })" class="fa fa-download"></a></td>
+                    </tr>
+                }
             }
         }
-    </table>
+        </table>
 </div>

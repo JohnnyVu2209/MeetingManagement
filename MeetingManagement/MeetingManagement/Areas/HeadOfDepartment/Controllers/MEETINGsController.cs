@@ -23,6 +23,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         private const string MEETING_TIME = "Thời gian diễn ra cuộc họp: ";
         private const string MEETING_LOCATION = "Địa điểm diễn ra cuộc họp: ";
         private const string MEETING_CANCEL = "Cuộc họp đã bị huỷ vì lý do: ";
+        private const string MEETING_REPORT = "Nhắc nhở nộp báo cáo cho cuộc họp.";
         private MEETING meetingSS = null;
         private MEETING meetingEdit = null;
         private void GetMeeting()
@@ -638,13 +639,29 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 
         public ActionResult NotiMeeting(int meetingId)
         {
-            return View("ReportList");
+            var meeting = db.MEETINGs.Find(meetingId);
+            string DateTime = meeting.Date_Start.ToString("dd/MM/yyyy") + " " + meeting.Time_Start;
+            var Receiver = db.AspNetUsers.Find(meeting.Create_by).Email;
+            var Subject = meeting.Meeting_name;
+            var Body = MEETING_REPORT + Environment.NewLine + MEETING_TIME + DateTime;
+            Outlook mail = new Outlook(Receiver, Subject, Body);
+            mail.SendMail();
+            return RedirectToAction("ReportList", "Meetings", new { id = meeting.Category_id });
         }
 
         public ActionResult NotiAll(int categoryId)
         {
             var meetingByCategory = db.MEETINGs.Where(x => x.Category_id == categoryId && x.Check_report != true).ToList();
-            return View("ReportList");
+            foreach (var meeting in meetingByCategory)
+            {
+                string DateTime = meeting.Date_Start.ToString("dd/MM/yyyy") + " " + meeting.Time_Start;
+                var Receiver = db.AspNetUsers.Find(meeting.Create_by).Email;
+                var Subject = meeting.Meeting_name;
+                var Body = MEETING_REPORT + Environment.NewLine + MEETING_TIME + DateTime;
+                Outlook mail = new Outlook(Receiver, Subject, Body);
+                mail.SendMail();
+            }
+            return RedirectToAction("ReportList", "Meetings", new { id = categoryId });
         }
     }
 }
