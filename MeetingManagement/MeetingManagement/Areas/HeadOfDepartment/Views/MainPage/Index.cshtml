@@ -83,7 +83,7 @@
             <p>Cuộc Họp Chưa Hoàn Thành</p>
         </div>
         <div class="yuki-table-out-header" style="cursor:pointer">
-            <ul class="yuki-column-4">
+            <ul class="yuki-column-5">
                 <li onclick="sortTable(0,2)">
                     Danh mục
                     <i id='col1' class='fa fa-sort'></i>
@@ -116,20 +116,23 @@
                             <img src="~/Content/outline_filter_alt_black_24dp.png">
                         </button>*@
                 </li>
+                <li>
+                    Thao tác
+                </li>
             </ul>
         </div>
         <table class="yuki-table" id="table-sort-2">
 
             @foreach (var meeting in Model)
             {
-                if (meeting.Status == 3 || meeting.Status == 4)
+                if (meeting.Status == 3 || meeting.Status == 4 && meeting.Verify_by == ViewBag.user_identity)
                 {
                     var check_date = (Date > meeting.Date_Start) ? "color:red" : "";
-                    <tr id="column-tr-meeting" class="yuki-column-4" onclick="location.href = '@Url.Action("VerifyMeeting", "MainPage", new { id = meeting.Meeting_id })';" style="cursor: pointer; ">
+                    <tr id="column-tr-meeting" class="yuki-column-5">
                         <td>@meeting.CATEGORY.Category_Name</td>
                         <td>@meeting.Meeting_name</td>
                         <td>
-                            @*<i style="z-index:10" onclick="alert('AAAAA')" id="bell" class="fas fa-bell"></i>*@
+                            @*<i style="z-index:10" onclick="alert('aaaaa')" id="bell" class="fas fa-bell"></i>*@
                             @Convert.ToDateTime(meeting.Date_Start).ToString("MM/dd/yyyy")
                         </td>
                         @*<td>@meeting.MEETING_STATUS.Status_name</td>*@
@@ -142,6 +145,25 @@
                             {
                                 <div class="incomplete-status">@meeting.MEETING_STATUS.Status_name</div>
                             }
+                        </td>
+                        <td>
+                            <a onclick="location.href = '@Url.Action("VerifyMeeting", "MainPage", new { id = meeting.Meeting_id })';" style="cursor: pointer;padding-right:10px ">Chi tiết</a>
+                            @if (meeting.Status == 3)
+                            {
+                                @*<a onclick="notify(@meeting.Meeting_id)" style="cursor: pointer;">Nhắc nhở</a>*@
+                                if (meeting.Notify == true)
+                                {
+                                    <a id="notify" onclick="notify(@meeting.Meeting_id)" style="color:#2c1e1e;cursor: pointer;">Nhắc nhở</a>
+                                }
+                                else
+                                {
+                                    <a id="notify" onclick="notify(@meeting.Meeting_id)" style="cursor: pointer;">Nhắc nhở</a>
+                                }
+                            }
+                            @*@if ( meeting.Status == 4)
+        {
+            <span style="margin: 0px;">Nhắc nhở</span>
+        }*@
                         </td>
                     </tr>
                 }
@@ -209,45 +231,24 @@
         }
     }
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>*@
 
 <script type="text/javascript">
-    $('#bell').on('click', function () {
-        var e = getElementById('column-tr-meeting');
-        e.preventDefault();
-    //    e.preventDefault(); // Now nothing will happen
-    });
+    function notify(id) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Notify", "MainPage")',
+            data: { id },
+            success: function () {
+                alert("Thông báo thành công!")
+                window.location.href = '@Url.Action("Index","MainPage")'
+        }
+    })
+    }
 </script>
-
-@*<script>
-        $(".fa").click(function () {
-
-            var $current = $(this);
-            var sortDefault = 'fa-sort';
-            var sortAsc = 'fa-sort-asc';
-            var sortDesc = 'fa-sort-desc';
-
-            var isSortDefault = $current.hasClass(sortDefault);
-            var isSortAsc = $current.hasClass(sortAsc);
-
-            $current
-                .toggleClass(sortDefault, !isSortDefault && !isSortAsc)
-                .toggleClass(sortAsc, isSortDefault && !isSortAsc)
-                .toggleClass(sortDesc, isSortAsc);
-        });
-    </script>*@
 <style>
     .body-content {
         width: calc(100% - 150px ) !important;
     }
-    /*    .fa.fa-sort:after {
-        content: 'sort_by_alpha';
-    }*/
-    .fa.fa-sort-asc:after {
-        content: 'arrow_drop_down';
-    }
 
-    .fa.fa-sort-desc:after {
-        content: 'arrow_drop_up';
-    }
 </style>

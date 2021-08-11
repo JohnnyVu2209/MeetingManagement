@@ -106,6 +106,7 @@
           <Property Name="AspNetUsers" Type="nvarchar(max)" />
           <Property Name="Check_Task" Type="bit" />
           <Property Name="Verify_by" Type="nvarchar" MaxLength="128" />
+          <Property Name="Notify" Type="bit" />
         </EntityType>
         <EntityType Name="MEETING-STATUS">
           <Key>
@@ -632,6 +633,7 @@
           <NavigationProperty Name="MEMBERs" Relationship="SEP24Team7Model.FK_MEMBER_MEETING" FromRole="MEETING" ToRole="MEMBER" />
           <NavigationProperty Name="REPORT" Relationship="SEP24Team7Model.FK_REPORT_MEETING" FromRole="MEETING" ToRole="REPORT" />
           <NavigationProperty Name="TASKs" Relationship="SEP24Team7Model.FK_TASKLIST_MEETING" FromRole="MEETING" ToRole="TASK" />
+          <Property Name="Notify" Type="Boolean" />
         </EntityType>
         <EntityType Name="MEETING_STATUS">
           <Key>
@@ -963,6 +965,7 @@
           <EntitySetMapping Name="MEETINGs">
             <EntityTypeMapping TypeName="SEP24Team7Model.MEETING">
               <MappingFragment StoreEntitySet="MEETING">
+                <ScalarProperty Name="Notify" ColumnName="Notify" />
                 <ScalarProperty Name="Verify_by" ColumnName="Verify_by" />
                 <ScalarProperty Name="Check_Task" ColumnName="Check_Task" />
                 <ScalarProperty Name="AspNetUsers" ColumnName="AspNetUsers" />
