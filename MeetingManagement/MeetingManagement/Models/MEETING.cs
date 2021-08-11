@@ -11,8 +11,7 @@ namespace MeetingManagement.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class MEETING
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,8 +26,6 @@ namespace MeetingManagement.Models
         public int Meeting_id { get; set; }
         public string Meeting_name { get; set; }
         public string Meeting_content { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public System.DateTime Date_Start { get; set; }
         public Nullable<System.TimeSpan> Time_Start { get; set; }
         public string Location { get; set; }
