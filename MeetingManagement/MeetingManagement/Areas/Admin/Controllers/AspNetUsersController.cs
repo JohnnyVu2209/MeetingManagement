@@ -39,11 +39,10 @@ namespace MeetingManagement.Areas.Admin.Controllers
             return View(db.AspNetUsers.ToList());
         }
 
-
         // GET: Admin/AspNetUsers/Create
         public ActionResult Create()
         {
-            return PartialView();
+            return View();
         }
 
         // POST: Admin/AspNetUsers/Create
@@ -62,9 +61,8 @@ namespace MeetingManagement.Areas.Admin.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-
             ModelState.AddModelError("Email", "User with this email already exists");
-            return PartialView("Create", model);
+            return View(model);
 
         }
 

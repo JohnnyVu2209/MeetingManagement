@@ -723,7 +723,6 @@
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\Edit.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingEdit.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\statistic.cshtml" />
-    <Content Include="Areas\Admin\Views\AspNetUsers\_createUser.cshtml" />
     <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
