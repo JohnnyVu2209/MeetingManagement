@@ -27,73 +27,257 @@
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.Meeting_id)
     <body class="body-img">
-        @Html.HiddenFor(model=>model.Meeting_id)
-        <div class="body-navbar">            
+        @Html.HiddenFor(model => model.Meeting_id)
+        <div class="body-navbar">
+
             <div class="nav-content-zone">
                 <img src="~/Content/Picture/users_meeting.png" />
                 <div class="lable-zone">
                     @Html.Label(Model.CATEGORY.Category_Name.ToString())
                 </div>
-                <div class="button-zone">
-                    @*<button onclick="VerifyMeeting()" class="btn yuki-btn-blue">
-                        <p>
-                            Duyệt
-                        </p>
-                    </button>*@
-                    <button type="submit" class="btn btn-primary yuki-btn-blue">Duyệt</button>
-                    <button onclick="getFeedbackModal(@Model.Meeting_id)" type="button" class="btn yuki-btn-gray">
-                        <p>
-                            Không Duyệt
-                        </p>
-                    </button>
-                </div>
+                @if (Model.Status == 1)
+                {
+                    <div class="button-zone">
+                        @*<button onclick="VerifyMeeting()" class="btn yuki-btn-blue">
+                                <p>
+                                    Duyệt
+                                </p>
+                            </button>*@
+                        <button type="submit" class="btn btn-primary yuki-btn-blue">Duyệt</button>
+                        <button onclick="getFeedbackModal(@Model.Meeting_id)" type="button" class="btn yuki-btn-gray">
+                            <p>
+                                Không Duyệt
+                            </p>
+                        </button>
+                    </div>
+                }
             </div>
         </div>
 
         <div style="position:relative; top:50px;">
+            <style>
+                /*Attachment*/
+                #myfile:hover div {
+                    background-color: #f1f1f1;
+                    text-decoration: none;
+                }
+
+                #myfile {
+                    text-decoration: none !important;
+                    position: relative;
+                    left: 5px;
+                }
+
+                /*ProgressBar*/
+                .progressbar {
+                    counter-reset: step;
+                    padding: 0;
+                    /* New */
+                    display: table;
+                    table-layout: fixed;
+                    width: 1000px;
+                }
+
+                    .progressbar li {
+                        list-style: none;
+                        position: relative;
+                        text-align: center;
+                        /* New */
+                        display: table-cell;
+                    }
+
+                        .progressbar li:before {
+                            background: #fff;
+                            border: 2px solid #bebebe;
+                            border-radius: 50%;
+                            color: #bebebe;
+                            content: counter(step);
+                            counter-increment: step;
+                            display: block;
+                            font-weight: 700;
+                            height: 30px;
+                            line-height: 27px;
+                            margin: 0 auto 10px;
+                            text-align: center;
+                            width: 30px;
+                            position: relative;
+                            z-index: 1;
+                        }
+
+
+                        .progressbar li.warning:before {
+                            background: #fff;
+                            border: 2px solid #f40f02;
+                            border-radius: 50%;
+                            color: #f40f02;
+                            content: "!";
+                            display: block;
+                            font-weight: 700;
+                            height: 30px;
+                            line-height: 27px;
+                            margin: 0 auto 10px;
+                            text-align: center;
+                            width: 30px;
+                        }
+
+                        .progressbar li:after {
+                            background: #979797;
+                            content: '';
+                            height: 3px;
+                            left: 50%;
+                            position: absolute;
+                            top: 15px;
+                            width: 100%;
+                            z-index: 0;
+                        }
+
+                        .progressbar li:last-child:after {
+                            content: none;
+                        }
+
+                        .progressbar li none:before {
+                            background: #979797;
+                        }
+
+                        .progressbar li none:after {
+                            background: #979797;
+                        }
+
+                        .progressbar li.complete:after {
+                            background: #3aac5d;
+                        }
+
+                        .progressbar li.active:before,
+                        .progressbar li.complete:before {
+                            background: #3aac5d;
+                            border-color: #3aac5d;
+                            color: #fff;
+                        }
+
+                        .progressbar li.active {
+                            color: #3aac5d;
+                            font-weight: 700;
+                        }
+
+                        .progressbar li.complete {
+                            color: #333;
+                            font-weight: 700;
+                        }
+            </style>
+            @*@if (Model.Create_by.ToString() == ViewBag.user_identity)
+                {
+                    <div style="position: absolute; right: 0px;display:none;">
+                        <a onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = Model.Meeting_id, modify = true } )'" style="width: 100px; height: 40px; background-color: #f1f1f1; color: black; display:inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor: pointer ">
+                            Thay đổi
+                        </a>
+                    </div>
+                }*@
+
+            <h4>Tiến độ:</h4>
+            <div>
+                <ul class="progressbar" style="border: 2px solid #e5e5e5; padding: 10px;">
+                    @if (Model.Status == 1)
+                    {
+                        <li class="active">Tạo cuộc họp</li>
+                        <li>Duyệt</li>
+                        <li>Đã họp</li>
+                        <li>Hoàn thành</li>
+                        <li>Biên bản họp</li>
+                    }
+                    else if (Model.Status == 2)
+                    {
+                        <li class="complete">Tạo cuộc họp</li>
+                        <li class="active">Duyệt</li>
+                        <li>Đã họp</li>
+                        <li>Hoàn thành</li>
+                        <li>Biên bản họp</li>
+                    }
+                    else if (Model.Status == 3)
+                    {
+                        <li class="complete">Tạo cuộc họp</li>
+                        <li class="complete">Duyệt</li>
+                        <li class="active">Đã họp</li>
+                        <li>Biên bản họp</li>
+                        <li>Hoàn thành</li>
+                    }
+                    else if (Model.Status == 4)
+                    {
+                        <li class="complete">Tạo cuộc họp</li>
+                        <li class="complete">Duyệt</li>
+                        <li class="complete">Đã họp</li>
+                        <li class="active">Biên bản họp</li>
+                        <li>Hoàn thành</li>
+                    }
+                    else if (Model.Status == 5)
+                    {
+                        <li class="complete">Tạo cuộc họp</li>
+                        <li class="complete">Duyệt</li>
+                        <li class="complete">Đã họp</li>
+                        <li class="complete">Biên bản họp</li>
+                        <li class="active">Hoàn thành</li>
+                    }
+                    else if (Model.Status == 7)
+                    {
+                        <li class="warning" style="display: block; height: 60px;">
+                            <div onclick="alert('@Model.Feedback')" style="cursor: pointer; height: 60px; width: fit-content; position: relative; display: flex; bottom: 40px; align-items: flex-end; margin: 0 auto; z-index: 3; ">
+                                Đã hủy
+                            </div>
+                        </li>
+                    }
+                    else if (Model.Status == 6)
+                    {
+                        <li class="warning" style="display: block; height: 60px;">
+                            <div onclick="alert('@Model.Feedback')" style="cursor: pointer; height: 60px; width: fit-content; position: relative; display: flex; bottom: 40px; align-items: flex-end; margin: 0 auto; z-index: 3; ">
+                                Không được duyệt
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
             <div style="height:20px"></div>
             <h4>Tài liệu đính kèm:</h4>
-            <div style="border: 2px solid #e5e5e5; padding: 20px; width: 1000px; overflow: overlay;">
-                <div class="form-row-fixed">
-                    @*<img src="~/Content/Picture/outline_file_upload_black_24dp.png" />*@
-                    @*<label class="icon-zone" for="input-ficons-1"><i class="fa fa-plus"></i></label>*@
-                    @if (Model.ATTACHMENTs.Count != 0)
-                    {
-                        foreach (var item in Model.ATTACHMENTs)
+            @if (Model.ATTACHMENTs.Count != 0)
+            {
+                <div style="border: 2px solid #e5e5e5; padding: 20px; width: 1000px; overflow: overlay;">
+                    <div class="form-row-fixed">
+                        @*<img src="~/Content/Picture/outline_file_upload_black_24dp.png" />*@
+                        @*<label class="icon-zone" for="input-ficons-1"><i class="fa fa-plus"></i></label>*@
+
+                        @foreach (var item in Model.ATTACHMENTs)
                         {
                             <a id="myfile" href="@item.Attachment_path" style="margin-right:20px;" download>
                                 <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
                                     <div style="width: 25%; height: 100%; display: flex; justify-content: center; align-items: center;">
                                         @*@switch (item.Attachment_type)
-                                    {
-                                        case "xlsx":
-                                            <i style="font-size: 40px; color: #1D6F42;" class="fas fa-file-excel text-primary"></i>
-                                            break;
-                                        case "xls":
-                                            <i style="font-size: 40px; color: #1D6F42;" class="fas fa-file-excel text-primary"></i>
-                                            break;
-                                        case "docx":
-                                            <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
-                                            break;
-                                        case "doc":
-                                            <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
-                                            break;
-                                        case "pdf":
-                                            <i style="font-size: 40px; color: #F40F02;" class="fas fa-file-pdf text-primary"></i>
-                                            break;
-                                        case "jpg":
-                                            <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
-                                            break;
-                                        case "jpeg":
-                                            <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
-                                            break;
-                                        case "pptx":
-                                            <i style="font-size: 40px; color: #D04423" class="fas fa-file-powerpoint text-primary"></i>
-                                            break;
-                                        default:
-                                            <i style="font-size:40px; color:gray" class="fas fa-file text-primary"></i>
-                                            break;
-                                    }*@
+                                            {
+                                                case "xlsx":
+                                                    <i style="font-size: 40px; color: #1D6F42;" class="fas fa-file-excel text-primary"></i>
+                                                    break;
+                                                case "xls":
+                                                    <i style="font-size: 40px; color: #1D6F42;" class="fas fa-file-excel text-primary"></i>
+                                                    break;
+                                                case "docx":
+                                                    <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
+                                                    break;
+                                                case "doc":
+                                                    <i style="font-size:40px" class="fas fa-file-word text-primary"></i>
+                                                    break;
+                                                case "pdf":
+                                                    <i style="font-size: 40px; color: #F40F02;" class="fas fa-file-pdf text-primary"></i>
+                                                    break;
+                                                case "jpg":
+                                                    <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
+                                                    break;
+                                                case "jpeg":
+                                                    <i style="font-size: 40px; color: #34a4eb; " class="fas fa-file-image text-primary"></i>
+                                                    break;
+                                                case "pptx":
+                                                    <i style="font-size: 40px; color: #D04423" class="fas fa-file-powerpoint text-primary"></i>
+                                                    break;
+                                                default:
+                                                    <i style="font-size:40px; color:gray" class="fas fa-file text-primary"></i>
+                                                    break;
+                                            }*@
 
                                         @if (@item.Attachment_type == "xls" || item.Attachment_type == "xlsm" || item.Attachment_type == "xlsx")
                                         {
@@ -131,9 +315,14 @@
                                 </div>
                             </a>
                         }
-                    }
+                    </div>
                 </div>
-            </div>
+            }
+            else
+            {
+                <br />
+                <p>Cuộc họp chưa có tài liệu.</p>
+            }
             <div style="height:20px"></div>
             <h4>Thông tin chi tiết:</h4>
             <div style=" width: 1000px; border: 2px solid #e5e5e5; padding: 10px;">
@@ -164,7 +353,7 @@
                     </div>
                 </div>
                 <!--
-        -->
+                -->
                 <div class="form-row-fixed datetime-inline">
                     <img src="~/Content/Picture/outline_schedule_black_24dp.png" />
                     <div class="value value-fixed value-fixed-location">
@@ -203,8 +392,8 @@
             </h4>
 
             @*<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            Button with data-target
-        </button>*@
+                    Button with data-target
+                </button>*@
             <div id="Member" style="width:1000px;">
                 <table class="table">
                     <thead>

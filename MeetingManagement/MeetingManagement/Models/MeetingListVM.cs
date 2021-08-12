@@ -13,6 +13,7 @@ namespace MeetingManagement.Models
         public int Status  { get; set; }
         public String StatusName  { get; set; }
         public string Email { get; internal set; }
-        public int CateID { get; set; }
+        public TimeSpan? TimeStart { get; internal set; }
+        public int Meeting_id { get; internal set; }
     }
 }

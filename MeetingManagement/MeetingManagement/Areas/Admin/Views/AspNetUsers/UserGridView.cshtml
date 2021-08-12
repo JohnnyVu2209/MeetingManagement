@@ -52,7 +52,7 @@
                             @foreach (var role in users.AspNetRoles)
                             {
                                 <a type="submit"
-                                   onclick="return confirm('are you sure you want delete @role.Name from @users.Email ?')"
+                                   onclick="return confirm('Xoá role @role.Name cho @users.Email ?')"
                                    href="@Url.Action("Delete","AspNetRoleUser",new { RoleID = role.Id, UserID = users.Id  })">Delete role</a>
                             }
                         </li>

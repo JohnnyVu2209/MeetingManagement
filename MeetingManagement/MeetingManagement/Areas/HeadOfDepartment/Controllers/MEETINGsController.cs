@@ -10,6 +10,7 @@ using MeetingManagement.Models;
 using System.Transactions;
 using Microsoft.AspNet.Identity;
 using System.IO;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 {
@@ -17,189 +18,65 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
         private string currentUser;
-        private MEETING meeting = null;
         private const string File_Path_Attachment = "~/Upload/Attachments/";
         private const string File_Path_Report = "~/Upload/Reports/";
+        private const string MEETING_TIME = "Thời gian diễn ra cuộc họp: ";
+        private const string MEETING_LOCATION = "Địa điểm diễn ra cuộc họp: ";
+        private const string MEETING_CANCEL = "Cuộc họp đã bị huỷ vì lý do: ";
+        private const string MEETING_REPORT = "Nhắc nhở nộp báo cáo cho cuộc họp.";
+        private MEETING meetingSS = null;
+        private MEETING meetingEdit = null;
+        /*
+         * Session for CREATE meeting
+         */
         private void GetMeeting()
         {
             if (Session["Meeting"] != null)
-                meeting = Session["Meeting"] as MEETING;
+                meetingSS = Session["Meeting"] as MEETING;
             else
             {
-                meeting = new MEETING();
-                Session["Meeting"] = meeting;
+                meetingSS = new MEETING();
+                Session["Meeting"] = meetingSS;
+            }
+            if (Session["MeetingEdit"] != null)
+                meetingEdit = Session["MeetingEdit"] as MEETING;
+            else
+            {
+                meetingEdit = new MEETING();
+                Session["MeetingEdit"] = meetingEdit;
             }
         }
+        /*
+         * Session for EDIT meeting
+         */
+        private void GetEditMeeting(int id)
+        {
+
+            if (Session["MeetingEdit"] != null)
+            {
+                meetingEdit = Session["MeetingEdit"] as MEETING;
+                if (meetingEdit.Meeting_id != id)
+                {
+                    meetingEdit = db.MEETINGs.Find(id);
+                    Session["MeetingEdit"] = meetingEdit;
+                }
+            }
+            else
+            {
+                meetingEdit = db.MEETINGs.Find(id);
+                Session["MeetingEdit"] = meetingEdit;
+            }
+        }
+        /*
+         * START
+         *************************MEETING LIST************************
+         */
         public ActionResult MeetingList(int id)
         {
             var all = db.MEETINGs.Where(x => x.Category_id == id).ToList();
             return PartialView(all);
         }
-        
-        public ActionResult MeetingForm(int id)
-        {
-            GetMeeting();
-            var current = User.Identity.GetUserId();
-            var userList = db.AspNetUsers.Where(x => x.Id != current).Select(selector: x => x.Email).ToList();
 
-            meeting.Category_id = id;
-            ViewBag.userList = userList;
-            return View(meeting);
-        }
-
-        [HttpPost]
-        public ActionResult MeetingForm(MEETING model, HttpPostedFileBase Files)
-        {
-            GetMeeting();
-            ValidateMeeting(model);
-            if (ModelState.IsValid)
-            {
-                if (Files != null)
-                {
-                    using (var scope = new TransactionScope())
-                    {
-                        if (ValidateFile(Files))
-                        {
-                            AddMeeting(model);
-
-                            //store file
-
-                            MEETING meetings = db.MEETINGs.Where(x => x.Meeting_name == model.Meeting_name).FirstOrDefault();
-
-                            string extension = Path.GetExtension(Files.FileName);
-                            ATTACHMENT newAtt = new ATTACHMENT();
-                            newAtt.Meeting_id = meetings.Meeting_id;
-                            newAtt.Attachment_path = File_Path + meetings.Meeting_id + extension;
-                            newAtt.Attachment_name = Files.FileName;
-                            db.ATTACHMENTs.Add(newAtt);
-                            db.SaveChanges();
-
-                            //store link file to db
-                            var path = Server.MapPath(File_Path);
-                            Files.SaveAs(path + meetings.Meeting_id + extension);
-                            scope.Complete();
-                            return RedirectToAction("Details", "Categories", new { id = model.Category_id });
-                        }
-                        ModelState.AddModelError("File", "Dung lượng tối đa cho phép là 5MB");
-                    }
-                }
-                else
-                {
-                    using (var scope = new TransactionScope())
-                    {
-                        AddMeeting(model);
-                        scope.Complete();
-                        return RedirectToAction("Details", "Categories", new { id = model.Category_id });
-                    }
-                }
-
-
-            }
-            var current = User.Identity.GetUserId();
-            var userList = db.AspNetUsers.Where(x => x.Id != current).Select(selector: x => x.Email).ToList();
-            ViewBag.userList = userList;
-            model.MEMBERs = meeting.MEMBERs;
-            return View(model);
-        }
-
-        private void AddMeeting(MEETING model)
-        {
-            GetMeeting();
-            MEETING newMeet = new MEETING();
-            newMeet.Category_id = model.Category_id;
-            newMeet.Meeting_name = model.Meeting_name;
-            newMeet.Meeting_content = model.Meeting_content;
-            newMeet.Date_Start = model.Date_Start;
-            newMeet.Time_Start = model.Time_Start;
-            newMeet.Location = model.Location;
-            newMeet.Status = 2;
-            newMeet.Date_Create = DateTime.Today;
-            newMeet.Create_by = User.Identity.GetUserId();
-            db.MEETINGs.Add(newMeet);
-            db.SaveChanges();
-
-            var newMeeting = db.MEETINGs.Where(x => x.Meeting_name == newMeet.Meeting_name
-                                                && x.Date_Start == newMeet.Date_Start
-                                                && x.Time_Start == newMeet.Time_Start).FirstOrDefault();
-            foreach (var member in meeting.MEMBERs.ToList())
-            {
-                member.Meeting_id = newMeeting.Meeting_id;
-                db.MEMBERs.Add(member);
-                db.SaveChanges();
-            }
-            meeting = new MEETING();
-            Session["Meeting"] = meeting;
-        }
-
-        private bool ValidateFile(HttpPostedFileBase files)
-        {
-            var filesize = files.ContentLength;
-            if (filesize > 5 * 1024 * 1024)
-                return false;
-            return true;
-        }
-
-        private const string File_Path = "~/Upload/Attachments/";
-        private void ValidateMeeting(MEETING meeting)
-        {
-            if (meeting.Date_Start <= DateTime.Today)
-            {
-                ModelState.AddModelError("Date_Start", "Date is not valid");
-            }
-            TimeSpan twentyoneHour = new TimeSpan(21, 0, 0);
-            TimeSpan seventhHour = new TimeSpan(07, 0, 0);
-            if (meeting.Time_Start < seventhHour || meeting.Time_Start >= twentyoneHour)
-            {
-                ModelState.AddModelError("Time_Start", "Time is not valid");
-            }
-        }
-        public ActionResult AddUser(MEETING model, string email)
-        {
-            GetMeeting();
-            bool checkExist = false;
-            AspNetUser user = db.AspNetUsers.SingleOrDefault(x => x.Email == email);
-            foreach (var m in meeting.MEMBERs.ToList())
-            {
-                if (m.Member_id == user.Id)
-                    checkExist = true;
-            }
-            if (checkExist != true)
-            {
-                MEMBER member = new MEMBER();
-                member.Member_id = user.Id;
-
-                if (meeting.MEMBERs.Count != 0)
-                {
-                    model.MEMBERs = meeting.MEMBERs;
-                }
-                model.MEMBERs.Add(member);
-
-            }
-            meeting = model;
-            Session["Meeting"] = meeting;
-            return RedirectToAction("MeetingForm", new { id = model.Category_id });
-        }
-        public ActionResult RemoveUser(string userId)
-        {
-            GetMeeting();
-            foreach (var member in meeting.MEMBERs.ToList())
-            {
-                if (member.Member_id == userId)
-                    meeting.MEMBERs.Remove(member);
-            }
-            Session["Meeting"] = meeting;
-            return RedirectToAction("MeetingForm", new { id = meeting.Category_id });
-        }
-        public ActionResult CreateUser2()
-        {
-            return View();
-        }
-
-        public ActionResult ReportList()
-        {
-            ViewBag.meeting = db.MEETINGs.ToList();
-            return View();
-        }
 
         //Meetings
         public ActionResult MyMeeting()
@@ -225,36 +102,67 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 
         public ActionResult PendingMeeting()
         {
-            currentUser  = User.Identity.GetUserId();
+            currentUser = User.Identity.GetUserId();
             ViewBag.user_identity = currentUser;
             var meetings = db.MEETINGs.ToList();
             //meetings = meetings.Where(m => m.Create_by.ToLower().Contains(currentUser)).ToList();
             return PartialView(meetings);
         }
+        /*
+         * END
+         *****************************MEETING LIST************************
+         */
+
+        /*
+         *START
+         ****************************DETAILS************************
+         */
 
         public ActionResult MeetingDetail(int id, bool modify)
         {
+            GetEditMeeting(id);
             ViewBag.modify = modify;
             ViewBag.user_identity = User.Identity.GetUserId();
-            var meeting = db.MEETINGs.Find(id);
-            return View(meeting);
+            CATEGORY category = db.CATEGORies.Find(meetingEdit.Category_id);
+            AspNetUser user = db.AspNetUsers.Find(meetingEdit.Create_by);
+            meetingEdit.AspNetUser = user;
+            meetingEdit.CATEGORY = category;
+            return View(meetingEdit);
         }
 
-        public ActionResult MeetingEdit(int id)
+        [HttpGet]
+        public ActionResult CancelModel(MEETING model, int model_type)
         {
-            var meeting = db.MEETINGs.Find(id);
-            return PartialView(meeting);
+            GetMeeting();
+            ViewBag.model_type = model_type;
+            model.MEMBERs = meetingEdit.MEMBERs;
+            Session["MeetingEdit"] = model;
+            return PartialView(model);
         }
+
 
         [HttpPost]
-        public ActionResult MeetingEdit(MEETING meeting)
+        public ActionResult CancelModel(int Meeting_id, MEETING model)
         {
-            ViewBag.date = DateTime.Now.ToShortDateString();
-            ViewBag.time = DateTime.Now.ToShortTimeString();
-            db.Entry(meeting).State = EntityState.Modified;
-            db.SaveChanges();
+                var meeting = db.MEETINGs.Find(Meeting_id);
+                //change meeting status
+                meeting.Status = 7;
+                meeting.Feedback = model.Feedback;
 
-            return RedirectToAction("Index", "Meetings");
+                db.Entry(meeting).State = EntityState.Modified;
+                db.SaveChanges();
+                if(meeting.Verify_by!=null)
+                    sendCancelModel(meeting);
+                return RedirectToAction("Index","tabCuocHop");
+        }
+
+        private void sendCancelModel(MEETING meeting)
+        {
+            string Receiver = db.AspNetUsers.Find(meeting.Verify_by).Email;
+            string Subject = meeting.Meeting_name;
+            string Body = MEETING_CANCEL + meeting.Feedback;
+            Outlook mail = new Outlook(Receiver, Subject, Body);
+            mail.SendMail();
         }
 
         public PartialViewResult MeetingInfo(int id)
@@ -268,8 +176,9 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         {
             ViewBag.user_identity = User.Identity.GetUserId();
             var meeting = db.MEETINGs.Find(id);
-            return View(meeting);
+            return PartialView(meeting);
         }
+
         public ActionResult StatusChanges(int id)
         {
             var meeting = db.MEETINGs.Find(id);
@@ -289,6 +198,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             var member = db.MEMBERs.Where(x => x.Meeting_id == id).ToList();
             return PartialView(member);
         }
+
         public ActionResult MeetingTask(int id)
         {
             ViewBag.create_by = db.MEETINGs.Find(id).Create_by;
@@ -312,6 +222,450 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return false;
         }
 
+        /*
+         * *START * *
+         *MEETING EDIT
+         */
+        public ActionResult AddEditUser(MEETING model, string email)
+        {
+            GetMeeting();
+            bool checkExist = false;
+            AspNetUser user = db.AspNetUsers.SingleOrDefault(x => x.Email == email);
+            foreach (var m in meetingEdit.MEMBERs.ToList())
+            {
+                if (m.Member_id == user.Id)
+                {
+                    checkExist = true;
+                    model.MEMBERs = meetingEdit.MEMBERs;
+                }
+            }
+            if (checkExist != true)
+            {
+                MEMBER member = new MEMBER();
+                member.Member_id = user.Id;
+
+                if (meetingEdit.MEMBERs.Count != 0)
+                {
+                    model.MEMBERs = meetingEdit.MEMBERs;
+                }
+                model.MEMBERs.Add(member);
+
+            }
+            CATEGORY category = db.CATEGORies.Find(model.Category_id);
+            model.CATEGORY = category;
+            MEETING_STATUS status = db.MEETING_STATUS.Find(model.Status);
+            model.MEETING_STATUS = status;
+            meetingEdit = model;
+            Session["MeetingEdit"] = meetingEdit;
+            return RedirectToAction("MeetingDetail", new { id = meetingEdit.Meeting_id, modify = true });
+        }
+
+        public ActionResult RemoveEditUser(string userId)
+        {
+            GetMeeting();
+            foreach (var member in meetingEdit.MEMBERs.ToList())
+            {
+                if (member.Member_id == userId)
+                {
+                    meetingEdit.MEMBERs.Remove(member);
+                }
+            }
+            Session["MeetingEdit"] = meetingEdit;
+            return RedirectToAction("MeetingDetail", new { id = meetingEdit.Meeting_id, modify = true });
+        }
+
+        [HttpGet]
+        public ActionResult MeetingEdit(int id)
+        {
+            GetEditMeeting(id);
+            var current = User.Identity.GetUserId();
+            var userList = db.AspNetUsers.Where(x => x.Id != current).Select(selector: x => x.Email).ToList();
+            ViewBag.userList = userList;
+            return PartialView(meetingEdit);
+        }
+
+        [HttpPost]
+        public ActionResult MeetingEdit(int meeting_id, MEETING model, HttpPostedFileBase? fileBase)
+        {
+            var meeting = model;
+            if (fileBase != null)
+            {
+                meeting = updateMeeting(meeting_id, model);
+
+                var filename = Path.GetFileName(fileBase.FileName);
+                string extension = Path.GetExtension(fileBase.FileName);
+                ATTACHMENT attchment = new ATTACHMENT();
+                attchment.Meeting_id = meeting.Meeting_id;
+                attchment.Attachment_path = File_Path_Attachment + meeting.Meeting_id + filename;
+                attchment.Attachment_name = fileBase.FileName;
+                attchment.Attachment_binary = Math.Round(((Double)fileBase.ContentLength / 1024), 2).ToString() + "KB";
+                attchment.Attachment_type = extension;
+                db.ATTACHMENTs.Add(attchment);
+                db.SaveChanges();
+
+                var path = Server.MapPath(File_Path_Attachment);
+                fileBase.SaveAs(path + meeting.Meeting_id + filename);
+
+
+            }
+            meeting = updateMeeting(meeting_id, model);
+
+            return RedirectToAction("MeetingDetail", new { id = meetingEdit.Meeting_id, modify = true });
+        }
+
+        private MEETING updateMeeting(int meeting_id, MEETING model)
+        {
+            GetMeeting();
+            var meeting = db.MEETINGs.Find(meeting_id);
+
+            meeting.Meeting_name = model.Meeting_name;
+            if (meeting.Date_Start != model.Date_Start || meeting.Time_Start != model.Time_Start)
+            {
+                meeting.Date_Start = model.Date_Start;
+                meeting.Time_Start = model.Time_Start;
+            }
+            if (meeting.Location != model.Location)
+            {
+                meeting.Location = model.Location;
+            }
+            meeting.Meeting_content = model.Meeting_content;
+
+            var updateMemberList = meetingEdit.MEMBERs.ToList();
+            var currentMemeberList = meeting.MEMBERs.ToList();
+
+            //member user
+            if (currentMemeberList.Count > updateMemberList.Count)
+            {
+                for (int i = 0; i < currentMemeberList.Count; i++)
+                {
+                    var exists = updateMemberList.Exists(x => x.Member_id == currentMemeberList[i].Member_id);
+                    if (!exists)
+                    {
+                        if (currentMemeberList[i].TASKs.Count != 0)
+                        {
+                            foreach (var task in currentMemeberList[i].TASKs.ToList())
+                            {
+                                db.TASKs.Remove(task);
+                            }
+                        }
+                        db.MEMBERs.Remove(currentMemeberList[i]);
+                    }
+                }
+            } //Add member
+            else if (currentMemeberList.Count < updateMemberList.Count)
+            {
+                for (int i = 0; i < updateMemberList.Count; i++)
+                {
+                    var exists = currentMemeberList.Exists(x => x.Member_id == updateMemberList[i].Member_id);
+                    if (!exists)
+                    {
+                        updateMemberList[i].Meeting_id = meeting_id;
+                        db.MEMBERs.Add(updateMemberList[i]);
+                        var email = db.AspNetUsers.Find(updateMemberList[i].Member_id).Email;
+                        sendMailToMember(model, email);
+                    }
+                }
+            }//Case User add member and remove member at the same time
+            else
+            {
+                for (int i = 0; i < currentMemeberList.Count; i++)
+                {
+                    for (int j = 0; j < updateMemberList.Count; j++)
+                    {
+                        var currExists = currentMemeberList.Exists(x => x.Member_id == updateMemberList[j].Member_id);
+                        var updateExists = updateMemberList.Exists(x => x.Member_id == currentMemeberList[i].Member_id);
+                        if (!currExists && !updateExists)
+                        {
+                            if (currentMemeberList[i].TASKs.Count != 0)
+                            {
+                                foreach (var task in currentMemeberList[i].TASKs.ToList())
+                                {
+                                    db.TASKs.Remove(task);
+                                }
+                            }
+                            db.MEMBERs.Remove(currentMemeberList[i]);
+
+                            updateMemberList[i].Meeting_id = meeting_id;
+                            db.MEMBERs.Add(updateMemberList[j]);
+
+                            var email = db.AspNetUsers.Find(updateMemberList[i].Member_id).Email;
+                            sendMailToMember(model, email);
+                        }
+                    }
+                }
+            }
+
+            db.Entry(meeting).State = EntityState.Modified;
+            db.SaveChanges();
+            Session["MeetingEdit"] = meeting;
+            if (meeting.Date_Start != model.Date_Start || meeting.Time_Start != model.Time_Start)
+            {
+                sendMailToAllMembers(meeting);
+            }
+            if (meeting.Location != model.Location)
+            {
+                sendMailToAllMembers(model);
+            }
+            return meeting;
+        }
+        /*
+        * * END * *
+        *MEETING EDIT
+        */
+
+        /*
+         * END 
+         ****************************DETAILS************************
+         */
+
+        /*
+         * START
+         *****************************CREATE************************
+         */
+
+        public ActionResult MeetingForm(int id)
+        {
+            GetMeeting();
+            var current = User.Identity.GetUserId();
+            var userList = db.AspNetUsers.Where(x => x.Id != current).Select(selector: x => x.Email).ToList();
+
+            meetingSS.Category_id = id;
+            ViewBag.userList = userList;
+            return View(meetingSS);
+        }
+
+        [HttpPost]
+        public ActionResult MeetingForm(MEETING model, HttpPostedFileBase Files)
+        {
+            GetMeeting();
+            ValidateMeeting(model);
+            if (ModelState.IsValid)
+            {
+                if (Files != null)
+                {
+                    using (var scope = new TransactionScope())
+                    {
+                        if (ValidateFile(Files))
+                        {
+                            AddMeeting(model);
+
+                            //store file
+
+                            MEETING meetings = db.MEETINGs.Where(x => x.Meeting_name == model.Meeting_name).FirstOrDefault();
+
+                            string extension = Path.GetExtension(Files.FileName);
+                            ATTACHMENT newAtt = new ATTACHMENT();
+                            newAtt.Meeting_id = meetings.Meeting_id;
+                            newAtt.Attachment_path = File_Path_Attachment + meetings.Meeting_id + extension;
+                            newAtt.Attachment_name = Files.FileName;
+                            db.ATTACHMENTs.Add(newAtt);
+                            db.SaveChanges();
+
+                            //store link file to db
+                            var path = Server.MapPath(File_Path_Attachment);
+                            Files.SaveAs(path + meetings.Meeting_id + extension);
+                            scope.Complete();
+                            return RedirectToAction("Details", "Categories", new { id = model.Category_id });
+                        }
+                        ModelState.AddModelError("File", "Dung lượng tối đa cho phép là 5MB");
+                    }
+                }
+                else
+                {
+                    using (var scope = new TransactionScope())
+                    {
+                        AddMeeting(model);
+                        scope.Complete();
+                        return RedirectToAction("Details", "Categories", new { id = model.Category_id });
+                    }
+                }
+
+
+            }
+            var current = User.Identity.GetUserId();
+            var userList = db.AspNetUsers.Where(x => x.Id != current).Select(selector: x => x.Email).ToList();
+            ViewBag.userList = userList;
+            model.MEMBERs = meetingSS.MEMBERs;
+            return View(model);
+        }
+
+        private void AddMeeting(MEETING model)
+        {
+            GetMeeting();
+            MEETING newMeet = new MEETING();
+            newMeet.Category_id = model.Category_id;
+            newMeet.Meeting_name = model.Meeting_name;
+            newMeet.Meeting_content = model.Meeting_content;
+            newMeet.Date_Start = model.Date_Start;
+            newMeet.Time_Start = model.Time_Start;
+            newMeet.Location = model.Location;
+            newMeet.Status = 2;
+            newMeet.Date_Create = DateTime.Today;
+            newMeet.Create_by = User.Identity.GetUserId();
+            newMeet.Verify_by = User.Identity.GetUserId();
+            db.MEETINGs.Add(newMeet);
+            db.SaveChanges();
+
+            var newMeeting = db.MEETINGs.Where(x => x.Meeting_name == newMeet.Meeting_name
+                                                && x.Date_Start == newMeet.Date_Start
+                                                && x.Time_Start == newMeet.Time_Start).FirstOrDefault();
+            foreach (var member in meetingSS.MEMBERs.ToList())
+            {
+                member.Meeting_id = newMeeting.Meeting_id;
+                db.MEMBERs.Add(member);
+                db.SaveChanges();
+            }
+            meetingSS = new MEETING();
+            Session["Meeting"] = meetingSS;
+        }
+
+        [HttpGet]
+        public ActionResult AddUser(MEETING model, string email)
+        {
+            GetMeeting();
+            bool checkExist = false;
+            AspNetUser user = db.AspNetUsers.SingleOrDefault(x => x.Email == email);
+            foreach (var m in meetingSS.MEMBERs.ToList())
+            {
+                if (m.Member_id == user.Id)
+                {
+                    checkExist = true;
+                    model.MEMBERs = meetingSS.MEMBERs;
+                }
+            }
+            if (checkExist != true)
+            {
+                MEMBER member = new MEMBER();
+                member.Member_id = user.Id;
+
+                if (meetingSS.MEMBERs.Count != 0)
+                {
+                    model.MEMBERs = meetingSS.MEMBERs;
+                }
+                model.MEMBERs.Add(member);
+
+            }
+            meetingSS = model;
+            Session["Meeting"] = meetingSS;
+            return RedirectToAction("MeetingForm", new { id = model.Category_id });
+        }
+
+
+        public ActionResult RemoveUser(string userId)
+        {
+            GetMeeting();
+            foreach (var member in meetingSS.MEMBERs.ToList())
+            {
+                if (member.Member_id == userId)
+                {
+                    meetingSS.MEMBERs.Remove(member);
+                }
+            }
+            Session["Meeting"] = meetingSS;
+            return RedirectToAction("MeetingForm", new { id = meetingSS.Category_id });
+        }
+        public ActionResult CreateUser2()
+        {
+            return View();
+        }
+
+        /*
+         * END
+         *************************CREATE************************
+         */
+
+        /*
+         * START
+         *************************VALIDATE************************
+         */
+        private bool ValidateFile(HttpPostedFileBase files)
+        {
+            var filesize = files.ContentLength;
+            if (filesize > 5 * 1024 * 1024)
+                return false;
+            return true;
+        }
+
+        private void ValidateMeeting(MEETING meeting)
+        {
+            if (meeting.Date_Start <= DateTime.Today)
+            {
+                ModelState.AddModelError("Date_Start", "Date is not valid");
+            }
+            TimeSpan twentyoneHour = new TimeSpan(21, 0, 0);
+            TimeSpan seventhHour = new TimeSpan(07, 0, 0);
+            if (meeting.Time_Start < seventhHour || meeting.Time_Start >= twentyoneHour)
+            {
+                ModelState.AddModelError("Time_Start", "Time is not valid");
+            }
+        }
+
+        private bool ValidateFeedback(MEETING meeting)
+        {
+            if(meeting.Feedback == null || meeting.Feedback == "")
+            {
+                return true;
+            }
+            return false;
+        }
+        /*
+         * END
+         *************************VALIDATE************************
+         */
+
+
+
+
+        public ActionResult ReportList(int id)
+        {
+            ViewBag.meeting = db.MEETINGs.Where(x => x.Category_id == id).ToList();
+            ViewBag.categoryId = id;
+            return View();
+        }
+
+
+
+        /*
+         * START
+         *************************SEND MAIL************************
+         */
+        private void sendMailToMember(MEETING meeting, string email)
+        {
+            string Receiver = email;
+            string Subject = meeting.Meeting_name;
+            string DateTime = meeting.Date_Start.ToString("dd/MM/yyyy") + " " + meeting.Time_Start;
+            string Body = MEETING_TIME + DateTime + Environment.NewLine + MEETING_LOCATION + meeting.Location;
+            Outlook mail = new Outlook(Receiver, Subject, Body);
+            mail.SendMail();
+        }
+        private void sendMailToAllMembers(MEETING meeting)
+        {
+            var member = from m in db.MEMBERs.Where(m => m.Meeting_id == meeting.Meeting_id)
+                         from u in db.AspNetUsers
+                         where u.Id == m.Member_id
+                         select u;
+            foreach (var item in member)
+            {
+                string Receiver = item.Email;
+                string Subject = meeting.Meeting_name;
+                string DateTime = meeting.Date_Start.ToString("dd/MM/yyyy") + " " + meeting.Time_Start;
+                string Body = MEETING_TIME + DateTime + Environment.NewLine + MEETING_LOCATION + meeting.Location;
+                Outlook mail = new Outlook(Receiver, Subject, Body);
+                mail.SendMail();
+            }
+        }
+
+        /*
+         * END
+         *************************SEND MAIL************************
+         */
+
+
+        /*
+         * START
+         *************************REPORT************************
+         */
+
         /*----------Meeting Report-------------*/
         [HttpGet]
         public ActionResult MeetingReport(int id)
@@ -328,12 +682,13 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
                 {
                     if (ValidateFile(ReportFile))
                     {
+                        string extension = Path.GetExtension(ReportFile.FileName);
                         REPORT report = new REPORT();
                         report.Meeting_id = Meeting_id;
                         report.Report_name = ReportFile.FileName;
-                        report.Report_binary = ((Double)ReportFile.ContentLength / 1024).ToString() + "KB";
-                        report.Report_type = ReportFile.ContentType;
-                        report.Report_link = File_Path_Report + ReportFile;
+                        report.Report_binary = Math.Round(((Double)ReportFile.ContentLength / 1024), 2).ToString() + "KB";
+                        report.Report_type = extension;
+                        report.Report_link = File_Path_Report + ReportFile.FileName;
                         db.REPORTs.Add(report);
                         db.SaveChanges();
 
@@ -344,8 +699,9 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
                         db.SaveChanges();
 
                         var path = Server.MapPath(File_Path_Report);
-                        string extension = Path.GetExtension(ReportFile.FileName);
-                        ReportFile.SaveAs(path + ReportFile);
+                        ReportFile.SaveAs(path + ReportFile.FileName);
+                        scope.Complete();
+                        return RedirectToAction("MeetingDetail", new { id = Meeting_id, modify = false });
                     }
                     ModelState.AddModelError("File", "Dung lượng tối đa cho phép là 5MB");
                 }
@@ -354,47 +710,8 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return View("MeetingDetail", db.MEETINGs.Find(Meeting_id));
         }
         /*----------Meeting Report-------------*/
-        //public ActionResult MeetingDetail(int id)
-        //{
-        //    var meeting = db.MEETINGs.Find(id);
-        //    return View(meeting);
-        //}
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult MeetingDetail(int category_id, int meeting_id, string meeting_name, DateTime date_start, TimeSpan time_start, string location, string content, int status)
-        //{
-        //    MEETING meeting = db.MEETINGs.Find(meeting_id);
-        //    meeting.Category_id = category_id;
-        //    meeting.Meeting_name = meeting_name;
-        //    meeting.Date_Start = date_start;
-        //    meeting.Time_Start = time_start;
-        //    meeting.Location = location;
-        //    meeting.Meeting_content = content;
-        //    meeting.Status = status;
-
-        //    db.Entry(meeting).State = EntityState.Modified;
-        //    db.SaveChanges();
-
-        //    return RedirectToAction("Index");
-        //}
-
-
-        //public PartialViewResult MeetingInfo(int id)
-        //{
-        //    var meeting = db.MEETINGs.Find(id);
-        //    return PartialView(meeting);
-        //}
-        //public ActionResult MeetingTask(int id)
-        //{
-        //    var task = db.TASKs.Where(x => x.Meeting_id == id).ToList();
-        //    return PartialView(task);
-        //}
-        //public ActionResult MeetingReport(int id)
-        //{
-        //    var report = db.MEETINGs.Find(id);
-        //    return PartialView(report);
-        //}
+        /*----------DOWNLOAD REPORT-------------*/
         public FileResult DownloadFile(int meeting_id)
         {
             var meeting = db.MEETINGs.Find(meeting_id);
@@ -404,6 +721,83 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             var bytes = System.IO.File.ReadAllBytes(path);
 
             return File(bytes, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", meeting.REPORT.Report_name);
+        }
+
+        public FileResult DownloadAllFile(int categoryId)
+        {
+            var meetingByCategory = db.MEETINGs.Where(x => x.Category_id == categoryId && x.Check_report == true).ToList();
+            var category = db.CATEGORies.Find(categoryId);
+            var fileName = string.Format("{0}_ReportFiles.zip", category.Category_Name);
+            var tempOutPutPath = Server.MapPath(File_Path_Report) + fileName;
+            using (ZipOutputStream s = new ZipOutputStream(System.IO.File.Create(tempOutPutPath)))
+            {
+                s.SetLevel(9);
+                byte[] buffer = new byte[4096];
+                for (int i = 0; i < meetingByCategory.Count; i++)
+                {
+                    var path = Server.MapPath(meetingByCategory[i].REPORT.Report_link);
+                    ZipEntry entry = new ZipEntry(meetingByCategory[i].REPORT.Report_name);
+                    entry.DateTime = DateTime.Now;
+                    entry.IsUnicodeText = true;
+                    s.PutNextEntry(entry);
+
+                    using (FileStream fs = System.IO.File.OpenRead(path))
+                    {
+                        int sourceBytes;
+                        do
+                        {
+                            sourceBytes = fs.Read(buffer, 0, buffer.Length);
+                            s.Write(buffer, 0, sourceBytes);
+                        } while (sourceBytes > 0);
+                    }
+                }
+                s.Finish();
+                s.Flush();
+                s.Close();
+            }
+            byte[] finalResult = System.IO.File.ReadAllBytes(tempOutPutPath);
+            if (System.IO.File.Exists(tempOutPutPath))
+                System.IO.File.Delete(tempOutPutPath);
+
+            if (finalResult == null || !finalResult.Any())
+                throw new Exception(String.Format("No Files found with Image"));
+
+            return File(finalResult, "application/zip", fileName);
+        }
+        /*----------DOWNLOAD REPORT-------------*/
+
+        /*
+         * END
+         *************************REPORT************************
+         */
+
+        
+
+        public ActionResult NotiMeeting(int meetingId)
+        {
+            var meeting = db.MEETINGs.Find(meetingId);
+            string DateTime = meeting.Date_Start.ToString("dd/MM/yyyy") + " " + meeting.Time_Start;
+            var Receiver = db.AspNetUsers.Find(meeting.Create_by).Email;
+            var Subject = meeting.Meeting_name;
+            var Body = MEETING_REPORT + Environment.NewLine + MEETING_TIME + DateTime;
+            Outlook mail = new Outlook(Receiver, Subject, Body);
+            mail.SendMail();
+            return RedirectToAction("ReportList", "Meetings", new { id = meeting.Category_id });
+        }
+
+        public ActionResult NotiAll(int categoryId)
+        {
+            var meetingByCategory = db.MEETINGs.Where(x => x.Category_id == categoryId && x.Check_report != true).ToList();
+            foreach (var meeting in meetingByCategory)
+            {
+                string DateTime = meeting.Date_Start.ToString("dd/MM/yyyy") + " " + meeting.Time_Start;
+                var Receiver = db.AspNetUsers.Find(meeting.Create_by).Email;
+                var Subject = meeting.Meeting_name;
+                var Body = MEETING_REPORT + Environment.NewLine + MEETING_TIME + DateTime;
+                Outlook mail = new Outlook(Receiver, Subject, Body);
+                mail.SendMail();
+            }
+            return RedirectToAction("ReportList", "Meetings", new { id = categoryId });
         }
     }
 }

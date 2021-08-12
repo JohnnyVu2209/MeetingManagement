@@ -1,34 +1,58 @@
 ﻿@model IEnumerable<MeetingManagement.Models.TASK>
-<div class="table-head ">Danh Sách Công Việc</div>
-<table class="table tl-table">
-    <thead>
-        <tr>
-            <th>Tên công việc</th>
-            <th>Cuộc họp</th>
-            <th>Ngày hoàn thành</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var ut in ViewBag.task)
-        {
-            <tr>
-                <td>
-                    @ut.Task_name
-                </td>
-                <td>
-                    @foreach (var um in ViewBag.meeting)
-                    {
-                        @um.Meeting_name
-                    }
-                </td>
-                <td>
-                    @Convert.ToDateTime(ut.Task_Deadline).ToString("MM/dd/yyyy")
-                </td>
+@{ 
+    var has_task = (ViewBag.task_count == null) ? 0 : 1;
+}
 
-            </tr>
-        }
-        </tbody>
-</table>
+<div class="yuki-table-zone yuki-table-zone-fixed" style=" border: 1px solid #e5e5e5; ">
+    <div class="table-head">Danh Sách Công Việc</div>
+
+    <div class="yuki-table-out-header">
+        <ul class="yuki-column-3">
+            <li>Tên công việc</li>
+            <li>Cuộc họp</li>
+            <li>Ngày hoàn thành</li>
+        </ul>
+    </div>
+    @if (has_task == 1)
+    {
+        <table class="ml-table" style=" min-height: 400px;">
+            <tbody>
+                @foreach (var ut in ViewBag.task)
+                {
+                    <tr>
+                        <td>
+                            @ut.Task_name
+                        </td>
+                        <td>
+                            @foreach (var um in ViewBag.meeting)
+                            {
+                                @um.Meeting_name
+                            }
+                        </td>
+                        <td>
+                            @Convert.ToDateTime(ut.Task_Deadline).ToString("MM/dd/yyyy")
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+            else if (has_task == 0)
+            {
+                <div class="ml-table" style="min-height: 300px;">
+                    <div style="opacity:0.3; text-align:center">
+                        <h3 style="font-size:75px">
+                            (^-^*)
+                        </h3>
+                        <h3>
+                            Hiện tại chưa có công việc
+                        </h3>
+                    </div>
+                </div>
+            }
+</div>
+
 
 <style>
     .tl-table {
