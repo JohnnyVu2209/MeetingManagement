@@ -23,8 +23,10 @@
 <img style="width:100px;height:100px" src="https://media1.tenor.com/images/239a102840e57a65543cf5c7b3accd5f/tenor.gif">
 <div>
     <div style="text-transform: uppercase;font-size:20px;margin-bottom:20px" ; class="header">
-        @Html.Label(Model.Category_Name)
-        <div style="font-size:12px">
+        <div style="width:70%">
+            @Html.Label(Model.Category_Name)
+        </div>
+        <div style="font-size:12px; width:70%">
             @Html.DisplayFor(m => m.AspNetUser.UserName)
         </div>
         <button style="float: right; width: 90px;height: 45px;
@@ -33,9 +35,6 @@
                 onclick="location.href = '@Url.Action("MeetingForm","MEETINGs")';">
             Tạo
         </button>
-
-
-
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
                 Modal content
@@ -96,7 +95,6 @@
         </div>
     </div>
 </div>*@
-
 
 <!--JS-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
