@@ -79,7 +79,15 @@ namespace MeetingManagement.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    string role = GetUserRole(model.Email);
+                    switch (role)
+                    {
+                        case "BCN":
+                            return RedirectToAction("Index", "MainPage", new { area = "HeadOfDepartment" });
+                        case "Admin":
+                            return RedirectToAction("Index", "AspNetUsers", new { area = "Admin" });
+                    }
+                    return RedirectToAction("Index", "HomePage", new { area = "User" });
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -163,7 +171,7 @@ namespace MeetingManagement.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "HomePage", new { area = "User" });
                 }
                 AddErrors(result);
             }
@@ -470,7 +478,7 @@ namespace MeetingManagement.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "HomePage", new { area = "User" });
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

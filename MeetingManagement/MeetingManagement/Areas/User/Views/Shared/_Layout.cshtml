@@ -7,38 +7,16 @@
     <title>@ViewBag.Title - VanLangMeeting</title>
     <link rel="stylesheet" href="~/Content/normalize.css" />
     <link rel="stylesheet" href="~/Content/The-Last-Style-Blender.css" />
-    <link href="~/Content/HomePage.css" rel="stylesheet" />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.min.css" crossorigin="anonymous">
+
     <!-- alternatively you can use the font awesome icon library if using with `fas` theme (or Bootstrap 4.x) by uncommenting below. -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" crossorigin="anonymous" />
-    <!-- the fileinput plugin styling CSS file -->
-    <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial");
-            </div>
-        </div>*@
-
     <div id="yuki-nav-bar">
         <div>
             <a href="#"><img src="https://www.vanlanguni.edu.vn/images/2020/HE_THONG_LOGO_CUA_TRUONG-02.png" alt="Văn Lang University"></a>
@@ -49,24 +27,22 @@
     </div>
 
     <div id="yuki-menu">
-        <ul>
-            <li><a href="@Url.Action("Index","HomePage")">Trang chính</a></li>
-            <li><a href="@Url.Action("Index","categories")">Danh mục</a></li>
-            <li><a href="@Url.Action("Index","Meetings")">Cuộc họp của tôi</a></li>
-            <li><a href="@Url.Action("Index","Tasks")">Công việc</a></li>
-
+        <ul id="nav-ul">
+            <li id="home-page" ><a href="@Url.Action("Index","HomePage")">Trang chính</a></li>
+            <li id="categories"><a href="@Url.Action("Index","Categories")">Danh mục</a></li>
+            <li id="meetings"><a href="@Url.Action("Index","Meetings")">Cuộc họp</a></li>
+            @*<li><a href="@Url.Action("Index","Tasks")">Công việc</a></li>*@
         </ul>
     </div>
     <div class="container body-content">
         @RenderBody()
         @*<br />
-        <footer id="yuki-footer">
-            <div style="height: 150px">
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </div>
-        </footer>*@
+            <footer id="yuki-footer">
+                <div style="height: 150px">
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                </div>
+            </footer>*@
     </div>
-
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -74,3 +50,20 @@
 
 </body>
 </html>
+
+@*<script type="text/javascript">
+    $(document).ready(function () {
+        if (window.location.href.indexOf("HomePage") != -1) {
+            //alert('HomePage')
+            document.getElementById("home-page").style.backgroundColor = "#454545";
+        }
+        if (window.location.href.indexOf("Categories") != -1 ) {
+            //alert('HomePage')
+            document.getElementById("categories").style.backgroundColor = "#454545";
+        }
+        if (window.location.href.indexOf("Meetings") != -1) {
+            //alert('HomePage')
+            document.getElementById("meetings").style.backgroundColor = "#454545";
+        }
+    });
+</script>*@

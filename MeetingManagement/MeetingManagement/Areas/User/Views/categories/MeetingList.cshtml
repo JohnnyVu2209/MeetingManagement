@@ -17,7 +17,7 @@
                     <tr class="w400">
                         <td>@item.Meeting_name</td>
                         <td>@item.AspNetUser.Email</td>
-                        <td>@Convert.ToDateTime(item.Date_Start).ToString("dd/MM/yyyy")</td>
+                        <td>@Convert.ToDateTime(item.Date_Start).ToString("MM/dd/yyyy")</td>
 
                         <td>
                             @if (item.Status == 1)

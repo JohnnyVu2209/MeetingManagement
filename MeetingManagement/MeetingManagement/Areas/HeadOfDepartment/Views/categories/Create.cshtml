@@ -30,17 +30,17 @@
 
 
 <script>
-function Create() {
-$.ajax({
-type: "POST",
-url: '@Url.Action("Create", "categories")',
-data: $("#createformid").serialize(),
-success: function () {
-    $("#myCreateModal").modal("hide");
-alert("Tạo Thành Công");
-}
-})
-}
+    function Create() {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Create", "categories")',
+            data: $("#createformid").serialize(),
+            success: function () {
+                $("#myCreateModal").modal("hide");
+                alert("Tạo Thành Công");
+            }
+        })
+    }
 </script>
 
 

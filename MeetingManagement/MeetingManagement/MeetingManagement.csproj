@@ -61,6 +61,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.2.10, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.3.2\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="MessagePack, Version=2.2.0.0, Culture=neutral, PublicKeyToken=b4a0369545f0a1be, processorArchitecture=MSIL">
       <HintPath>..\packages\MessagePack.2.2.113\lib\netstandard2.0\MessagePack.dll</HintPath>
     </Reference>
@@ -285,11 +288,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="Models\Models1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\OTHER_ACCOUNT.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -297,6 +295,7 @@
     <Compile Include="Models\REPORT.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\statisticV.cs" />
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -313,9 +312,31 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\login-form\css\bootstrap.min.css" />
+    <Content Include="Content\login-form\css\bootstrap\mixins\_border-radius.css" />
+    <Content Include="Content\login-form\css\bootstrap\mixins\_reset-text.css" />
+    <Content Include="Content\login-form\css\bootstrap\mixins\_screen-reader.css" />
+    <Content Include="Content\login-form\css\bootstrap\mixins\_text-hide.css" />
+    <Content Include="Content\login-form\css\bootstrap\mixins\_visibility.css" />
+    <Content Include="Content\login-form\css\bootstrap\utilities\_stretched-link.css" />
+    <Content Include="Content\login-form\css\bootstrap\_media.css" />
+    <Content Include="Content\login-form\css\style.css" />
+    <Content Include="Content\login-form\images\1-2.jpg" />
+    <Content Include="Content\login-form\images\bg.jpg" />
+    <Content Include="Content\login-form\images\HE_THONG_LOGO_CUA_TRUONG-02.png" />
+    <Content Include="Content\login-form\js\bootstrap.min.js" />
+    <Content Include="Content\login-form\js\jquery.min.js" />
+    <Content Include="Content\login-form\js\main.js" />
+    <Content Include="Content\login-form\js\popper.js" />
+    <Content Include="Content\Picture\logoOffice365.png" />
     <Content Include="Content\Picture\outline_upload_file_black_24dp.png" />
     <Content Include="Content\quyhung\chart\exporting.js" />
     <Content Include="Content\quyhung\chart\highcharts.js" />
+    <Content Include="Content\quyhung\css\btn-hoverme.css" />
+    <Content Include="Content\quyhung\css\fireship.css" />
+    <Content Include="Content\quyhung\img\cating.gif" />
+    <Content Include="Content\quyhung\img\unnamed.png" />
+    <Content Include="Content\quyhung\js\fireship.js" />
     <Content Include="Content\taocuochop\css\main.css" />
     <Content Include="Content\taocuochop\css\main.min.css" />
     <Content Include="Content\taocuochop\js\global.js" />
@@ -335,23 +356,7 @@
     <Content Include="Content\taocuochop\vendor\select2\select2.min.js" />
     <Content Include="Content\quyhung\img\icons8-pie-chart.gif" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\login-form-05\css\bootstrap.min.css" />
-    <Content Include="Content\login-form-05\css\bootstrap\bootstrap-reboot.css" />
-    <Content Include="Content\login-form-05\css\bootstrap\bootstrap.css" />
-    <Content Include="Content\login-form-05\css\owl.carousel.min.css" />
-    <Content Include="Content\login-form-05\css\style.css" />
-    <Content Include="Content\login-form-05\fonts\icomoon\demo-files\demo.css" />
-    <Content Include="Content\login-form-05\fonts\icomoon\demo-files\demo.js" />
-    <Content Include="Content\login-form-05\fonts\icomoon\fonts\icomoon.svg" />
-    <Content Include="Content\login-form-05\fonts\icomoon\style.css" />
-    <Content Include="Content\login-form-05\images\logo.png" />
-    <Content Include="Content\login-form-05\images\vanlang.png" />
-    <Content Include="Content\login-form-05\images\vanlang1.png" />
-    <Content Include="Content\login-form-05\js\bootstrap.min.js" />
-    <Content Include="Content\login-form-05\js\jquery-3.3.1.min.js" />
-    <Content Include="Content\login-form-05\js\main.js" />
-    <Content Include="Content\login-form-05\js\owl.carousel.min.js" />
-    <Content Include="Content\login-form-05\js\popper.min.js" />
+    <Content Include="Picture\logoOffice365.png" />
     <Content Include="Models\Models.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Models.edmx</DependentUpon>
@@ -480,16 +485,16 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="imgs\icons8-home-24.png" />
-    <Content Include="imgs\icons8-home-64.png" />
-    <Content Include="imgs\icons8-office-365-48.png" />
-    <Content Include="imgs\icons8-search-64.png" />
-    <Content Include="imgs\icons8-slider-48.png" />
-    <Content Include="imgs\icons8-slider-50 %281%29.png" />
-    <Content Include="imgs\icons8-slider-50.png" />
-    <Content Include="imgs\logo-vlu-en-8.png" />
-    <Content Include="imgs\logoVLU.png" />
-    <Content Include="imgs\Walk.gif" />
+    <Content Include="Picture\icons8-home-24.png" />
+    <Content Include="Picture\icons8-home-64.png" />
+    <Content Include="Picture\icons8-office-365-48.png" />
+    <Content Include="Picture\icons8-search-64.png" />
+    <Content Include="Picture\icons8-slider-48.png" />
+    <Content Include="Picture\icons8-slider-50 %281%29.png" />
+    <Content Include="Picture\icons8-slider-50.png" />
+    <Content Include="Picture\logo-vlu-en-8.png" />
+    <Content Include="Picture\logoVLU.png" />
+    <Content Include="Picture\Walk.gif" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\HeadOfDepartment\Views\web.config" />
     <Content Include="Areas\User\Views\web.config" />
@@ -501,23 +506,6 @@
     <Content Include="Areas\Admin\Views\AspNetRoles\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetRoles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\UserGridView.cshtml" />
-    <Content Include="Content\login-form-05\css\bootstrap.min.css" />
-    <Content Include="Content\login-form-05\css\bootstrap\bootstrap-reboot.css" />
-    <Content Include="Content\login-form-05\css\bootstrap\bootstrap.css" />
-    <Content Include="Content\login-form-05\css\owl.carousel.min.css" />
-    <Content Include="Content\login-form-05\css\style.css" />
-    <Content Include="Content\login-form-05\fonts\icomoon\demo-files\demo.css" />
-    <Content Include="Content\login-form-05\fonts\icomoon\demo-files\demo.js" />
-    <Content Include="Content\login-form-05\fonts\icomoon\fonts\icomoon.svg" />
-    <Content Include="Content\login-form-05\fonts\icomoon\style.css" />
-    <Content Include="Content\login-form-05\images\logo.png" />
-    <Content Include="Content\login-form-05\images\vanlang.png" />
-    <Content Include="Content\login-form-05\images\vanlang1.png" />
-    <Content Include="Content\login-form-05\js\bootstrap.min.js" />
-    <Content Include="Content\login-form-05\js\jquery-3.3.1.min.js" />
-    <Content Include="Content\login-form-05\js\main.js" />
-    <Content Include="Content\login-form-05\js\owl.carousel.min.js" />
-    <Content Include="Content\login-form-05\js\popper.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -612,7 +600,6 @@
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\VerifyMeeting.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\_ViewStart.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\GrdMemberTable.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\MainPage\Feedback.cshtml" />
     <Content Include="Areas\User\Views\MEETINGs\CreateUser2.cshtml" />
     <Content Include="Areas\User\Views\Categories\MeetingList.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingDetail.cshtml" />
@@ -652,6 +639,7 @@
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer-fa\theme.scss" />
     <Content Include="Content\kartik-v-bootstrap-fileinput-v5.2.2-7-g48d2b85\kartik-v-bootstrap-fileinput-48d2b85\scss\themes\explorer\theme.scss" />
     <Content Include="Areas\User\Views\Meetings\MeetingReport.cshtml" />
+    <Content Include="Areas\User\Views\Tasks\Create.cshtml" />
     <Content Include="Areas\User\Views\Tasks\Index.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser2.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingForm.cshtml" />
@@ -710,18 +698,24 @@
     <Content Include="Content\taocuochop\vendor\mdi-font\fonts\Material-Design-Iconic-Font.woff2" />
     <Content Include="Areas\HeadOfDepartment\Views\Shared\outplay.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\statisticChart.cshtml" />
+    <Content Include="Content\login-form\css\.DS_Store" />
+    <Content Include="Content\login-form\css\bootstrap\.DS_Store" />
+    <Content Include="Content\login-form\css\bootstrap\mixins\.DS_Store" />
+    <Content Include="Content\login-form\fonts\.DS_Store" />
+    <Content Include="Content\login-form\images\.DS_Store" />
+    <Content Include="Content\login-form\js\.DS_Store" />
     <Content Include="Areas\User\Views\Meetings\MeetingForm.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MyMeetingGridView.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\PendingMeeting.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\JoinedMeetingGridView.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingMember.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingEdit.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingInfo2.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingInfoModal.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\Create.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\Edit.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingEdit.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\statistic.cshtml" />
-    <Content Include="Areas\User\Views\HomePage\IndexTaskList2.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\CancelModel.cshtml" />
     <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -773,7 +767,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Error\PageNotFound.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.js.flow" />
@@ -793,6 +786,7 @@
     <Folder Include="Content\login\" />
     <Folder Include="Upload\Attachments\" />
     <Folder Include="Upload\Reports\" />
+    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

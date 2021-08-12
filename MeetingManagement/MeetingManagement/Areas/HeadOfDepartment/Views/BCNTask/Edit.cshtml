@@ -41,7 +41,7 @@
 
                     <div class="form-group">
                         <div class="col-md-8 col-md-offset-2">
-                            @Html.EditorFor(model => model.Task_Deadline, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.Task_Deadline, new { htmlAttributes = new { @Value = Model.Task_Deadline, @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Task_Deadline, "", new { @class = "text-danger" })
                         </div>
                     </div>
