@@ -1,26 +1,25 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    @*using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-        {
+    using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
         @Html.AntiForgeryToken()
-
         <ul class="nav navbar-nav navbar-right" style="display:block">
             <li>
                 @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
-                <li class="user-logoff"><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            <li class="user-logoff"><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>
-        }*@
-    <div class="yuki-login-info">        
-        <form action="/Account/LogOff" class="navbar-right" id="logoutForm" method="post">
-            @Html.AntiForgeryToken()            
-            <div class="nav navbar-nav navbar-right" style="display:block">
-                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-                <a class="user-logoff" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
-            </div>
-        </form>
-    </div>
+    }
+    @*<div class="yuki-login-info">
+            <form action="/Account/LogOff" class="navbar-right" id="logoutForm" method="post">
+                @Html.AntiForgeryToken()
+                <div class="nav navbar-nav navbar-right" style="display:block">
+                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    <a class="user-logoff" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                </div>
+            </form>
+        </div>*@
 }
 else
 {

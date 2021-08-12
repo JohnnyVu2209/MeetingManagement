@@ -14,8 +14,6 @@
 }
 
 
-
-
 @Html.AntiForgeryToken()
 
 <body>
@@ -62,7 +60,7 @@
                     @*<div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-report')">
                             Báo cáo
                         </div>*@
-                    if (ViewBag.user_identity == Model.Create_by && Model.Status > 1 && Model.Status < 5)
+                    if (ViewBag.user_identity == Model.Create_by && Model.Status > 1 && Model.Status < 3)
                     {
                         <div class="cancel-btn" onclick="getCancelModel(1)" style="right: calc( 0% + 30px ); position: fixed;">
                             
@@ -70,7 +68,6 @@
                             
                         </div>
                     }
-
                 }
             </div>
             @*<div class="button-zone">

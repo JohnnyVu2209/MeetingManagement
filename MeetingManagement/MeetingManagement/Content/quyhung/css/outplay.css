@@ -1,16 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: monospace;
-}
-
-/* header {
-  padding: 10px 10px;
-  align-items: center;
-  margin-right: 200px;
-  margin-left: 200px;
-} */
 
 .main {
     margin-left: 250px;
@@ -171,14 +158,6 @@
             display: none;
         }
 
-.logo {
-    width: 300px;
-    margin-left: 500px;
-    margin-top: 20px;
-}
 
-.sticky-footer {
-    background: azure;
-    padding: 1rem;
-    color: #000;
-}
+
+

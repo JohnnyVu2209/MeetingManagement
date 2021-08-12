@@ -1,0 +1,153 @@
+﻿@model MeetingManagement.Models.MEETING
+<div class="modal fade" style="overflow:hidden" id="modalFeedback" method="post" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" style="margin-top:0px" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                @if (ViewBag.model_type == 1)
+                {
+                    <h4 class="modal-title" id="myModalLabel">Lý do hủy cuộc họp</h4>
+                }
+                else if (ViewBag.model_type == 2)
+                {
+                    <h4 class="modal-title" id="myModalLabel">Lý do thay đổi</h4>
+                }
+            </div>
+            @using (Html.BeginForm("CancelModel", "Meetings", FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+            {
+                @Html.HiddenFor(model => model.Meeting_name)
+                @Html.HiddenFor(model => model.Date_Start)
+                @Html.HiddenFor(model => model.Time_Start)
+                @Html.HiddenFor(model => model.Location)
+                @Html.HiddenFor(model => model.Meeting_content)
+                @Html.Hidden("model_type", 1)
+                <input type="hidden" value="@ViewBag.modal_type" id="type" />
+                @Html.HiddenFor(model => model.Meeting_id)
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="comment">Trả lời:</label>
+                        <div class="value">
+                            <div class="input-group feedback-input">
+                                @Html.TextAreaFor(model => model.Feedback, new { @class = "input--style-5-fixed area-input area-feedback", @rows = "5", @id = "feedback_val" })
+                                @Html.ValidationMessageFor(model => model.Feedback, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <span class="textarea_count" id="charNum">0/1000 kí tự.</span>
+                </div>
+                <div class="modal-footer">
+                    <div  onclick="CancelMeeting()" class="btn btn-primary">Huỷ</div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+    .textarea_count {
+        float: right;
+        position: relative;
+        bottom: 10px;
+        /*color: #ec0f0f;*/
+        color: black
+    }
+
+    .feedback-input {
+        width: 100%;
+    }
+
+    .area-feedback {
+        width: 100% !important;
+    }
+
+    .yuki-card-footer {
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    .btn-fixed {
+        color: white;
+        font-size: 14px;
+        display: inline-block;
+        width: 8em;
+        height: 4em;
+        text-align: center;
+        border-radius: 4px;
+    }
+
+    .yuki-btn-blue {
+        background-color: #008CBA !important;
+    }
+
+    .yuki-btn-gray {
+        background-color: #808080 !important;
+    }
+</style>
+<script>
+    //$(document).ready(function () {
+    //    $('feedback_val').val('');
+    //});
+    var mytextarea = document.getElementById('feedback_val');
+    var remaincharCharsText = document.getElementById('charNum');
+    var max_char = 500;
+
+    mytextarea.addEventListener('input', () => {
+        remaincharCharsText.textContent = mytextarea.value.length + "/1000 kí tự.";
+    });
+
+    @*if ( @ViewBag.model_type == 1) {
+        function ConfirmChanges(type) {
+            var model = $("#__AjaxAntiForgeryForm").serialize();
+            $.ajax({
+                url: '@Url.Action("CancelModel", "Meetings")',
+                method: 'POST',
+                data: model,
+                success: function (data) {
+                    window.location.href = '@Url.Action("Index") '
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+            }
+    }
+    else {
+        function ConfirmChanges(type) {
+            var model = $("#__AjaxAntiForgeryForm").serialize();
+            $.ajax({
+                url: '@Url.Action("CancelModel", "Meetings")',
+                method: 'POST',
+                data: model,
+                success: function (data) {
+                    window.location.href = '@Url.Action("Index") '
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        };
+    }*@
+    function CancelMeeting() {
+        var feedback = $("#feedback_val").val();
+        var model = $("__AjaxAntiForgeryForm").serialize();
+        if (feedback.length == 0) {
+            $("Feedback").val('Hủy phải có lý do');
+        }
+        else {
+            $.ajax({
+                url: "@Url.Action("CancelModel", "Meetings")",
+                datatype: 'html',
+                method: 'POST',
+                data: model + '&model_type=' + 1,
+                success: function (data) {
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+    }
+
+</script>

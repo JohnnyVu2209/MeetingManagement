@@ -8,17 +8,18 @@
     {
         if (item.Status > 1 && item.Status != 6){
             var is_cancel = (item.Status == 7) ? "background-color:grey" : "";
+            var is_notify = (item.Notify == true && item.Status < 4) ? "border: 1px solid red;background: oldlace;" : "";
             if (item.Create_by == ViewBag.user_identity && item.Status != 7)
             {
-                <li style="@is_cancel; display: flex; align-items: center;" onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = item.Meeting_id, modify = true })';">
-                    @item.Meeting_name
-                </li>
-            }
-            else
-            {
-                <li style="@is_cancel; display: flex; align-items: center;" onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = item.Meeting_id, modify = false })';">
-                    @item.Meeting_name
-                </li>
+            <li style="@is_cancel;@is_notify; display: flex; align-items: center;" onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = item.Meeting_id, modify = true })';">
+                @item.Meeting_name
+            </li>
+                    }
+                    else
+                    {
+        <li style="@is_cancel;@is_notify; display: flex; align-items: center;" onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = item.Meeting_id, modify = false })';">
+            @item.Meeting_name
+        </li>
             }
         }
 
@@ -31,5 +32,6 @@
 
     .catalogList > li {
         padding: 0 25px;
+        border: 1px solid black;
     }
 </style>

@@ -6,29 +6,21 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link rel="stylesheet" href="~/Content/normalize.css" />
     @*<link href="~/Content/catalog-list.css" rel="stylesheet" />*@
-
     <link rel="stylesheet" href="~/Content/The-Last-Style-Blender.css" />
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
     @*<link href="~/Content/quyhung/css/accodion-css.css" rel="stylesheet" />*@
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-    @*<link href="~/Content/catalog-list.css" rel="stylesheet" />*@
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @*<link href="~/Content/catalog-list.css" rel="stylesheet" />*@
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- bootstrap 5.x or 4.x is supported. You can also use the bootstrap css 3.3.x versions -->
-    @*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" crossorigin="anonymous">*@
-    <!-- default icons used in the plugin are from Bootstrap 5.x icon library (which can be enabled by loading CSS below) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.min.css" crossorigin="anonymous">
     <!-- alternatively you can use the font awesome icon library if using with `fas` theme (or Bootstrap 4.x) by uncommenting below. -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" crossorigin="anonymous" />
     <!-- the fileinput plugin styling CSS file -->
     <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
-    <!-- if using RTL (Right-To-Left) orientation, load the RTL CSS file after fileinput.css by uncommenting below -->
-    <!-- link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/css/fileinput-rtl.min.css" media="all" rel="stylesheet" type="text/css" /-->
-    <!-- the jQuery Library -->
     <style>
         .navbar-right > li > a {
             color: white;
@@ -47,6 +39,7 @@
         }
     </style>
 </head>
+
 <body id="yuki-body">
     <div id="yuki-nav-bar">
         <div>
@@ -62,22 +55,18 @@
             <li><a href="@Url.Action("Index","MainPage")">Trang chính</a></li>
             <li><a href="@Url.Action("Index","Categories")">Danh mục</a></li>
             <li><a href="@Url.Action("Index","tabCuocHop")">Cuộc họp</a></li>
-@*            <li><a href="@Url.Action("indexTask","BCNTask")">Thống kê</a></li>
-*@
+            @*li><a href="@Url.Action("indexTask","BCNTask")">Thống kê</a></li>*@
         </ul>
-    </div> <!--Menu-->
+    </div>
+
+    <!--Menu-->
 
     <div class="container body-content">
         @RenderBody()
-        @*<footer id="yuki-footer">
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>*@
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-
 </body>
 </html>
 

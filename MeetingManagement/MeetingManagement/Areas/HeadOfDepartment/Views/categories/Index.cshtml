@@ -5,17 +5,6 @@
 
 @*scroll show up, position not change*@
 <style>
-    .modal-open .yuki-login-info {
-        margin-right: 16.8px;
-    }
-
-    .modal-open #yuki-nav-bar img {
-        left: calc((100% - 58px)/2 - 16.8px/2);
-    }
-
-    .modal-open #option {
-        right: calc(160px + 16.8px);
-    }
     .item-list {
         background: #f2f2f2;
         border-radius: 5px;
@@ -62,30 +51,43 @@
             .item-btn button i {
                 margin-right: 10px;
             }
+
     .btn-outline-secondary {
         color: #6c757d;
         border-color: #6c757d;
     }
+
         .btn-outline-secondary:hover {
             color: #fff;
             background-color: #6c757d;
             border-color: #6c757d;
         }
+
     .btn-outline-danger {
         color: #dc3545;
         border-color: #dc3545;
     }
+
         .btn-outline-danger:hover {
             color: #fff;
             background-color: #dc3545;
             border-color: #dc3545;
         }
+    .btn-outline-info {
+        color: #0dcaf0;
+        border-color: #0dcaf0;
+    }
+    .btn-outline-info:hover {
+        color: #000;
+        background-color: #0dcaf0;
+        border-color: #0dcaf0;
+    }
 </style>
-
 <link href="~/Content/catalog-list.css" rel="stylesheet" />
 <link href="~/Content/Meetings/meetingdetail.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+@*<link href="~/Content/quyhung/css/btn-hoverme.css" rel="stylesheet" />
+*@
 
 
 <!--Content--->
@@ -98,12 +100,19 @@
                 <label>DANH MỤC</label>
 
                 <button class="create-meeting-btn" onclick="ShowCreatePopUp()">Tạo</button>
+                <button style="color:white;position:absolute;left:840px;"
+                    onclick="location.href = '@Url.Action("statistic","Categories")'" class="btn yuki-btn-blue">
+                    <p style="margin:0;">
+                        Thống kê
+                    </p>
+                </button>
             </div>
 
         </div>
     </div>
 </div>
 <div class="card-body card-body-fixed">
+
     @foreach (var item in Model)
     {
         <div class="item-list row" style="margin-left:15px;margin-top:15px;">
@@ -111,11 +120,16 @@
                 <h5>@item.Category_Name</h5>
             </div>
             <div class="col-md-4 item-btn">
-                <button class="btn btn-outline-secondary" onclick="ShowEditPopUp(@item.Category_id)" style="border: 3px solid #6c757d;">
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Sửa
+                <button class="btn btn-outline-info" onclick="location.href ='@Url.Action("ReportList","Meetings", new { id = item.Category_id})';">
+                    <i class="fa fa-file" aria-hidden="true"></i>Báo cáo
                 </button>
-                <button class="btn btn-outline-danger" onclick="ShowDeletePopUp(@item.Category_id)" style="border: 3px solid #dc3545; ">
-                    <i class="fa fa-trash" aria-hidden="true"></i>Xóa
+                <button class="btn btn-outline-secondary"
+                        onclick="ShowEditPopUp(@item.Category_id)" style="border: 0.5px solid;align-self:center">
+                    <ion-icon name="pencil-outline" style="width:30px;height:30px"></ion-icon>
+                </button>
+                <button class="btn btn-outline-danger"
+                        onclick="ShowDeletePopUp(@item.Category_id)" style="border: 0.5px solid">
+                    <ion-icon name="close-circle-outline"></ion-icon>
                 </button>
             </div>
 
@@ -167,9 +181,17 @@
     
 </style>
 
+    .user-ctg-index-manipulation {
+        float: right;
+        margin: 0px 2.5px;
+        color: black;
+    }
+</style>
 
 
 
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script type="text/javascript">
     function ShowCreatePopUp() {
         $.ajax({
