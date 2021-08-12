@@ -1,11 +1,61 @@
-﻿@model IEnumerable<MeetingManagement.Models.MEETING>
+﻿@model IEnumerable<MeetingManagement.Models.statisticV>
 @using MeetingManagement.Models
-
 @{
-    ViewBag.Title = "indexTask";
+    ViewBag.Title = "report";
     Layout = "~/Areas/HeadOfDepartment/Views/Shared/_Layout.cshtml";
+    SEP24Team7Entities db = new SEP24Team7Entities();
+    var mymeet = db.MEETINGs;
 }
-<!---CSS-->
+
+
+
+<!---CSS-Bar-->
+<style>
+    .highcharts-figure, .highcharts-data-table table {
+        min-width: 310px;
+        max-width: 800px;
+        margin: 1em auto;
+    }
+
+    #container {
+        height: 400px;
+    }
+
+    .highcharts-data-table table {
+        font-family: Verdana, sans-serif;
+        border-collapse: collapse;
+        border: 1px solid #EBEBEB;
+        margin: 10px auto;
+        text-align: center;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .highcharts-data-table caption {
+        padding: 1em 0;
+        font-size: 1.2em;
+        color: #555;
+    }
+
+    .highcharts-data-table th {
+        font-weight: 600;
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+        background: #f8f8f8;
+    }
+
+    .highcharts-data-table tr:hover {
+        background: #f1f7ff;
+    }
+</style>
+
+<!---CSS-Pie-->
 <style>
     .highcharts-figure, .highcharts-data-table table {
         min-width: 320px;
@@ -45,196 +95,206 @@
     .highcharts-data-table tr:hover {
         background: #f1f7ff;
     }
+
+
+    input[type="number"] {
+        min-width: 50px;
+    }
 </style>
 
+<!--CSS--->
 <style>
-    .highcharts-figure, .highcharts-data-table table {
-        min-width: 310px;
-        max-width: 800px;
-        margin: 1em auto;
+    .btn-search {
+        border: 1px solid #3498db;
+        border-radius: 5px;
+        background: none;
+        padding: 10px 20px;
+        font-size: 15px;
+        cursor: pointer;
+        transition: 0.8s;
+        position: relative;
+        overflow: hidden;
+        color: #3498db;
     }
 
-    #container {
-        height: 800px;
+    .btn-search-click {
+        border: 1px solid #3498db;
+        border-radius: 5px;
+        background: #0094ff;
+        padding: 10px 20px;
+        font-size: 15px;
+        cursor: pointer;
+        margin: 10px;
+        transition: 0.8s;
+        position: relative;
+        overflow: hidden;
+        color: #fff;
     }
 
-    .highcharts-data-table table {
-        font-family: Verdana, sans-serif;
-        border-collapse: collapse;
-        border: 1px solid #EBEBEB;
-        margin: 10px auto;
-        text-align: center;
+    .chart {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+        margin-top: 10px;
+    }
+
+    .chart-container {
+        height: 300px;
+    }
+
+    .chart-container {
         width: 100%;
-        max-width: 500px;
-    }
-
-    .highcharts-data-table caption {
-        padding: 1em 0;
-        font-size: 1.2em;
-        color: #555;
-    }
-
-    .highcharts-data-table th {
-        font-weight: 600;
-        padding: 0.5em;
-    }
-
-    .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
-        padding: 0.5em;
-    }
-
-    .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
-        background: #f8f8f8;
-    }
-
-    .highcharts-data-table tr:hover {
-        background: #f1f7ff;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 5px;
+        border: 0.5px solid #000000;
     }
 </style>
 
 
-<link href="~/Content/catalog-list.css" rel="stylesheet" />
-<link href="~/Content/quyhung/css/tabcuochop.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 
+
+
 <!--Content-->
 
-<button type="button" class="btn btn-info"
-        style="margin-bottom:10px;font-size:larger;margin-top:10px;margin-left:10px"
-        data-toggle="modal" data-target="#statisticTable">
-    <ion-icon name="reader-outline" style="width:40px;height:25px"></ion-icon>
-</button>
-
-
-
-<div style="padding:40px;border:0.5px solid #0072E0;border-radius:5px">
-    <h3>Biểu đồ tròn</h3>
-    <figure class="highcharts-figure">
-        <div id="container-pie"></div>
-    </figure>
-</div>
-
-<div style="padding:40px;border:0.5px solid;margin-top:10px;border-radius:5px">
-    <h3>Biểu đồ cột</h3>
-    <figure class="highcharts-figure">
-        <div id="container-bar"></div>
-    </figure>
-</div>
-
-<!--modal-->
-<div class="modal fade" id="statisticTable" tabindex="-1" role="dialog" aria-labelledby="statisticTable" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="pieChartModal" style="font-size:large">Bảng thống kê cuộc họp</h5>
-            </div>
-            <div class="modal-body">
-                <table class="table" id="table-sort">
-                    <thead>
-                        <tr>
-                            <th scope="col" onclick="sortTable(0)" style="cursor:pointer">Tên cuộc họp</th>
-                            <th scope="col" onclick="sortTable(1)" style="cursor:pointer">Ngày tạo</th>
-                            <th scope="col" onclick="sortTable(2)" style="cursor:pointer">Ngày bắt đầu</th>
-                            <th scope="col" onclick="sortTable(3)" style="cursor:pointer">Tình trạng</th>
+@using (Html.BeginForm("statistic", "Categories", FormMethod.Get))
+{
+    <div style="padding:10px;border:0.5px solid;margin-top:5px;border-radius:5px">
+        @if (ViewBag.date_s == null)
+        {
+            <h3>
+                Chọn khoảng thời gian bạn muốn xem
+            </h3>
+        }
+        else
+        {
+            <h3>
+                Bảng thống kê cuộc họp từ ngày @Convert.ToDateTime(ViewBag.date_s).ToString("MM/dd/yyyy")
+                đến @Convert.ToDateTime(ViewBag.date_e).ToString("MM/dd/yyyy")
+            </h3>
+        }
+        <input class="btn-search" id="date-start" type="date" name="batdau" />
+        <input class="btn-search" id="date-end" type="date" name="ketthuc" />
+        <button class="btn-search-click" type="submit">
+            Xem
+        </button>
+        @if (ViewBag.date_s == null)
+        {
+            <hr />
+        }
+        else
+        {
+            <table class="table" id="datatable">
+                <thead style="color:white;background:#0094ff">
+                    <tr>
+                        <th scope="col">Tên cuộc họp</th>
+                        <th scope="col">Ngày tạo</th>
+                        <th scope="col">Người chủ trì</th>
+@*                                            <th scope="col">Người duyệt</th>
+*@                        <th scope="col">Địa điểm</th>
+                        <th scope="col" style="text-align:center">Tình trạng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr onclick="location.href = '@Url.Action("MeetingDetail", "Meetings", new { id = item.meetingId, modify = false })'"
+                            style="cursor:pointer">
+                            <td>
+                                @item.meetingName
+                            </td>
+                            <td>
+                                @Convert.ToDateTime(item.DateCre).ToString("MM/dd/yyyy")
+                            </td>
+                            <td>
+                                @{
+                                    var host = db.AspNetUsers.SingleOrDefault(x => x.Id == item.meetingHost).Email;
+                                }
+                                @host
+                            </td>
+@*                             <td>
+                                    @{
+                                        var veri= "";
+                                        if (item.meetingVerifyBy != null)
+                                        {
+                                            veri = db.AspNetUsers.SingleOrDefault(x => x.Id == item.meetingVerifyBy).Email;
+                                        }
+                                    }
+                                 @veri
+                              </td>*@
+                            <td>
+                                @item.meetingLocaion
+                            </td>
+                            <td>
+                                @if (@item.meetingStatus == 1)
+                                {
+                                    <div class="pending-status" id="s1">Tạo</div>
+                                }
+                                else if (@item.meetingStatus == 2)
+                                {
+                                    <div class="waiting-status" id="s2">Duyệt</div>
+                                }
+                                else if (@item.meetingStatus == 3)
+                                {
+                                    <div class="missing-status" id="s3">Đã họp</div>
+                                }
+                                else if (@item.meetingStatus == 4)
+                                {
+                                    <div class="incomplete-status" id="s4">Biên bản</div>
+                                }
+                                else if (@item.meetingStatus == 5)
+                                {
+                                    <div class="complete-status" id="s5">Hoàn thành</div>
+                                }
+                                else if (@item.meetingStatus == 6)
+                                {
+                                    <div class="basic-status" style="background-color: #607d8b" id="s6">Không duyệt</div>
+                                }
+                                else if (@item.meetingStatus == 7)
+                                {
+                                    <div class="basic-status" style="background-color: #607d8b" id="s7">Đã hủy</div>
+                                }
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in ViewBag.allMeeting)
-                        {
-                            <tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+}
 
-                                <td>@item.Meeting_name</td>
-                                <td>
-                                    @Convert.ToDateTime(item.Date_Create).ToString("MM/dd/yyyy")
-                                </td>
-                                <td>
-                                    @Convert.ToDateTime(item.Date_Start).ToString("MM/dd/yyyy")
-                                </td>
-                                <td>
-                                    @if (@item.Status == 1)
-                                    {
-                                        <div class="pending-status" style="width:110px">@item.MEETING_STATUS.Status_name</div>
-                                    }
-                                    else if (@item.Status == 2)
-                                    {
-                                        <div class="waiting-status" style="width:110px">@item.MEETING_STATUS.Status_name</div>
-                                    }
-                                    else if (@item.Status == 3)
-                                    {
-                                        <div class="missing-status" style="width:110px">@item.MEETING_STATUS.Status_name</div>
-                                    }
-                                    else if (@item.Status == 4)
-                                    {
-                                        <div class="incomplete-status" style="width:110px">@item.MEETING_STATUS.Status_name</div>
-                                    }
-                                    else if (@item.Status == 5)
-                                    {
-                                        <div class="cancel-status" style="width:110px">@item.MEETING_STATUS.Status_name</div>
-                                    }
-                                    else if (@item.Status == 6)
-                                    {
-                                        <div class="complete-status" style="width:110px">@item.MEETING_STATUS.Status_name</div>
-                                    }
-                                    else if (@item.Status == 7)
-                                    {
-                                        <div class="incomplete-status" style="width:110px">@item.MEETING_STATUS.Status_name</div>
-                                    }
-                                </td>
 
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" style="font-size:larger">Đóng</button>
-            </div>
+@if (ViewBag.date_s == null)
+{
+@*    <div>
+        <h3>Help this cat fix some bug ><</h3>
+        <img src="~/Content/quyhung/img/cating.gif" style="width:200px;height:200px;" />
+    </div>*@
+}
+else
+{
+    <div class="chart">
+        <div class="chart-container">
+            <h3 style="text-align:center">Biểu đồ cột</h3>
+            <figure class="highcharts-figure">
+                <div id="container-bar"></div>
+            </figure>
+        </div>
+        <div class="chart-container">
+            <h3 style="text-align:center">Biểu đồ tròn</h3>
+            <figure class="highcharts-figure">
+                <div id="container-pie"></div>
+            </figure>
         </div>
     </div>
-</div>
+}
 
-<!--piechart-->
-@*<div class="modal fade" id="pieChartModal" tabindex="-1" role="dialog" aria-labelledby="pieChartModal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="pieChartModal" style="font-size:larger">Biểu đồ tròn</h5>
-                </div>
-                <div class="modal-body">
-                    <figure class="highcharts-figure">
-                        <div id="container-pie"></div>
-                    </figure>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" style="font-size:larger">Đóng</button>
-                </div>
-            </div>
-        </div>
-    </div>
-*@
-<!--barchart-->
-@*<div class="modal fade" id="barChartModal" tabindex="-1" role="dialog" aria-labelledby="barChartModal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="barChartModal" style="font-size:large">Biểu đồ cột</h5>
-                </div>
-                <div class="modal-body">
-                    <figure class="highcharts-figure">
-                        <div id="container-bar"></div>
-                    </figure>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" style="font-size:larger">Đóng</button>
-                </div>
-            </div>
-        </div>
-    </div>
-*@
+
 
 
 <!--JS-->
@@ -242,79 +302,84 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+@*<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>*@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 
-<!--Sort-->
+
+<!--JSBarChart-->
 <script>
-    function sortTable(n) {
-        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-        table = document.getElementById("table-sort");
-        switching = true;
-        // Set the sorting direction to ascending:
-        dir = "asc";
-        /* Make a loop that will continue until
-        no switching has been done: */
-        while (switching) {
-            // Start by saying: no switching is done:
-            switching = false;
-            rows = table.rows;
-            /* Loop through all table rows (except the
-            first, which contains table headers): */
-            for (i = 1; i < (rows.length - 1); i++) {
-                // Start by saying there should be no switching:
-                shouldSwitch = false;
-                /* Get the two elements you want to compare,
-                one from current row and one from the next: */
-                x = rows[i].getElementsByTagName("TD")[n];
-                y = rows[i + 1].getElementsByTagName("TD")[n];
-                /* Check if the two rows should switch place,
-                based on the direction, asc or desc: */
-                if (dir == "asc") {
-                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                        // If so, mark as a switch and break the loop:
-                        shouldSwitch = true;
-                        break;
+    const s1 = document.getElementById('s1');
+    console.log(s1);
+    const chartLabell = [
+        'Tình trạng'
+    ];
+    $(document).ready(function () {
+        $.getJSON("/BCNTask/indexPieChart", function (data) {
+            Highcharts.chart('container-bar', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Cuộc họp trong tháng @Convert.ToDateTime(ViewBag.date_s).ToString("MM")'
+                },
+                xAxis: {
+                    categories: chartLabell,
+                    title: {
+                        text: null
                     }
-                } else if (dir == "desc") {
-                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                        // If so, mark as a switch and break the loop:
-                        shouldSwitch = true;
-                        break;
+                },
+                yAxis: {
+                    min: 0,
+                    labels: {
+                        overflow: 'justify'
                     }
-                }
-            }
-            if (shouldSwitch) {
-                /* If a switch has been marked, make the switch
-                and mark that a switch has been done: */
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-                // Each time a switch is done, increase this count by 1:
-                switchcount++;
-            } else {
-                /* If no switching has been done AND the direction is "asc",
-                set the direction to "desc" and run the while loop again. */
-                if (switchcount == 0 && dir == "asc") {
-                    dir = "desc";
-                    switching = true;
-                }
-            }
-        }
-    }
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Tạo cuộc họp',
+                    data: [data.createM]
+                }, {
+                    name: 'Duyệt',
+                    data: [data.passM]
+                }, {
+                    name: 'Đã họp',
+                    data: [data.doneM]
+                }, {
+                    name: 'Biên bản',
+                    data: [data.reportM]
+                }, {
+                    name: 'Hoàn thành',
+                    data: [data.compM]
+                }, {
+                    name: 'Không duyệt',
+                    data: [data.nopassM]
+                }, {
+                    name: 'Đã huỷ',
+                    data: [data.cancelM]
+                }]
+            });
+        });
+    });
 </script>
 
 
-<!--JSPieChart--->
+
+<!---JSPie-->
 <script>
     $(document).ready(function () {
         $.getJSON("/BCNTask/indexPieChart", function (data) {
@@ -326,7 +391,10 @@
                     type: 'pie'
                 },
                 title: {
-                    text: 'Cuộc họp'
+                  text: 'Số lượng cuộc họp trong năm @Convert.ToDateTime(ViewBag.year_now).ToString("yyyy")'
+                },
+                credits: {
+                    enabled: false
                 },
                 tooltip: {
                     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -375,86 +443,92 @@
             });
         });
     });
-
-</script>
-
-<!--JSBarChart-->
-<script>
-    $(document).ready(function () {
-        $.getJSON("/BCNTask/indexPieChart", function (data) {
-                Highcharts.chart('container-bar', {
-                    chart: {
-                        type: 'bar'
-                    },
-                    title: {
-                        text: 'Cuộc họp'
-                    },
-                    xAxis: {
-                        categories: ['Tình trạng'],
-                        title: {
-                            text: null
-                        }
-                    },
-                    yAxis: {
-                        min: 0,
-                        max: 20,
-                        labels: {
-                            overflow: 'justify'
-                        }
-                    },
-@*                    tooltip: {
-                        valueSuffix: ' millions'
-                    },*@
-                    plotOptions: {
-                        bar: {
-                            dataLabels: {
-                                enabled: true
-                            }
-                        }
-                    },
-                    legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'top',
-                        x: -60,
-                        y: 80,
-                        floating: true,
-                        borderWidth: 1,
-                        backgroundColor:
-                            Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
-                        shadow: true
-                    },
-                    credits: {
-                        enabled: false
-                    },
-                    series: [{
-                        name: 'Tạo cuộc họp',
-                        data: [data.createM]
-                    }, {
-                        name: 'Duyệt',
-                            data: [data.passM]
-                        },{
-                            name: 'Đã họp',
-                            data: [data.doneM]
-                        }, {
-                            name: 'Biên bản',
-                            data: [data.reportM]
-                        },{
-                            name: 'Hoàn thành',
-                            data: [data.compM]
-                        }, {
-                            name: 'Không duyệt',
-                            data: [data.nopassM]
-                        }, {
-                            name: 'Đã huỷ',
-                            data: [data.cancelM]
-                        }]
-                });
-            });
-        });
-
 </script>
 
 
+@*<input type="datetime-local" name="startdate" />
+    <input type="datetime-local" name="enddate" id="enddate1" />*@
+@*<select id="select">
+    <option value="Jan">January</option>
+    <option value="Feb">February</option>
+    <option value="Mar">March</option>
+    <option value="Apr">April</option>
+    <option value="May">May</option>
+    <option value="Jun">June</option>
+    <option value="July">July</option>*@
+@*    <option value="August">August</option>
+    <option value="September">September</option>
+    <option value="October">October</option>
+    <option value="November">November</option>
+    <option value="December">December</option>*@
+@*</select>
+    <input type="number" id="numData" />
+    <button onclick="filterChart()">
+        Xem
+    </button>*@
+<!--<script>
+    const chartData = [12, 19, 3, 5, 9, 10, 6];
+    const chartColor = [
+        '#48B763',
+        '#4865B7',
+        '#B7489C',
+        '#B79A48',
+        '#F04D13',
+        '#F0E54A',
+        '#F0B059',
+    ];
+    const chartLabel = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',-->
+@* 'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec' *@
+<!--];
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+data: {
+    labels: chartLabel,
+    datasets: [{
+        label: '# of Votes',
+        data: chartData,
+        backgroundColor: chartColor,
+        borderWidth: 1
+    }]
+},
+    });
+function filterChart() {-->
+@*const mon = document.getElementById('select');*@
+<!--const numData = document.getElementById('numData').value;
+const filterData = myChart.data.datasets[0].data.filter(value => value > numData);
+const filterLabel = [];
+const filterColor = [];
+let i = 0;
+for (i; i < filterData.length; i++) {
+    const rsl = myChart.data.datasets[0].data.indexOf(filterData[i]);
+    const labelrsl = myChart.data.labels[rsl];
+    const colorrsl = myChart.data.datasets[0].backgroundColor[rsl];
+    filterLabel.push(labelrsl);
+    filterColor.push(colorrsl);
+}
+myChart.data.datasets[0].data = filterData;
+myChart.data.labels = filterLabel;
+myChart.data.datasets[0].backgroundColor = filterColor;
+myChart.update();-->
+@*        const xdata = myChart.data.datasets[0].data.fil;
+    console.log(xdata);
+    const filterData = myChart.data.datasets[0].data.filter(value => value > 6);
+    console.log(filterData);
+    const mon = document.getElementById('select');
+    myChart.data.labels(mon.value)*@
 
+<!--}
 
+</script>-->

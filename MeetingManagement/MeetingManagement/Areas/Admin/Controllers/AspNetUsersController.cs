@@ -39,11 +39,10 @@ namespace MeetingManagement.Areas.Admin.Controllers
             return View(db.AspNetUsers.ToList());
         }
 
-
         // GET: Admin/AspNetUsers/Create
         public ActionResult Create()
         {
-            return PartialView();
+            return View();
         }
 
         // POST: Admin/AspNetUsers/Create
@@ -53,27 +52,18 @@ namespace MeetingManagement.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(RegisterViewModel model)
         {
-           
-
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
             var result = await UserManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 AddOtherAccount(user.Id);
                 return RedirectToAction("Index", "AspNetUsers");
             }
-            else
-            {
-                AddErrors(result);
-            }
 
             // If we got this far, something failed, redisplay form
-            return View();
+            ModelState.AddModelError("Email", "User with this email already exists");
+            return View(model);
+
         }
 
         private void AddOtherAccount(string id)
@@ -86,6 +76,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
             });
             db.SaveChanges();
         }
+
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -134,7 +125,7 @@ namespace MeetingManagement.Areas.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> ResetPassword(string Id, string password)
         {
-            
+
             if (ModelState.IsValid)
             {
                 var user = db.AspNetUsers.Find(Id);

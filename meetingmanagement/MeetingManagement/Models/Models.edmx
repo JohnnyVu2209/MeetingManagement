@@ -626,6 +626,7 @@
           <Property Name="AspNetUsers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Check_Task" Type="Boolean" />
           <Property Name="Verify_by" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Notify" Type="Boolean" />
           <NavigationProperty Name="AspNetUser" Relationship="SEP24Team7Model.FK_MEETING_AspNetUsers" FromRole="MEETING" ToRole="AspNetUser" />
           <NavigationProperty Name="ATTACHMENTs" Relationship="SEP24Team7Model.FK_Attachment_MEETING" FromRole="MEETING" ToRole="ATTACHMENT" />
           <NavigationProperty Name="CATEGORY" Relationship="SEP24Team7Model.FK_Meeting_CATEGORY" FromRole="MEETING" ToRole="CATEGORY" />
@@ -633,7 +634,6 @@
           <NavigationProperty Name="MEMBERs" Relationship="SEP24Team7Model.FK_MEMBER_MEETING" FromRole="MEETING" ToRole="MEMBER" />
           <NavigationProperty Name="REPORT" Relationship="SEP24Team7Model.FK_REPORT_MEETING" FromRole="MEETING" ToRole="REPORT" />
           <NavigationProperty Name="TASKs" Relationship="SEP24Team7Model.FK_TASKLIST_MEETING" FromRole="MEETING" ToRole="TASK" />
-          <Property Name="Notify" Type="Boolean" />
         </EntityType>
         <EntityType Name="MEETING_STATUS">
           <Key>

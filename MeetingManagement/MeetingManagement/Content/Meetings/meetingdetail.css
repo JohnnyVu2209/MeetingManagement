@@ -43,7 +43,7 @@ textarea {
     border-bottom: 1px solid #f1f1f1;
     z-index: 10;
     position: fixed;
-    color: white;
+    color: black;
     top: 50px;
     left: 150px;
 }

@@ -11,7 +11,10 @@
         <div class="form-inline pull-right">
             <label>Search</label>
             <input type="text" class="form-control" id="txtSearch" />
-            <button type="button" class="btn btn-success" data-toggle="modal" onclick="getCreateModal()">Create New</button>
+            <button type="button" class="btn btn-success">
+                @Html.ActionLink("Tạo tài khoản","Create", "AspNetUsers")
+            </button>
+            @*<button type="button" class="btn btn-success" data-toggle="modal" onclick="getCreateModal()">Create New</button>*@
         </div>
     </div>
 
@@ -20,6 +23,9 @@
         <li class="active"><a data-toggle="tab" href="#listAccount">Danh sách tài khoản</a></li>
         <li><a data-toggle="tab" href="#otherAccount">Tài khoản khách</a></li>
     </ul>
+
+
+
 
     <div class="tab-content">
 
@@ -54,8 +60,8 @@
         overflow-y: hidden !important;
     }
 
-    .yuki-table-zone{
-        height:fit-content;
+    .yuki-table-zone {
+        height: fit-content;
     }
 </style>
 @section scripts{

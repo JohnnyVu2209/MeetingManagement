@@ -39,6 +39,7 @@
         }
     </style>
 </head>
+
 <body id="yuki-body">
     <div id="yuki-nav-bar">
         <div>
@@ -54,22 +55,18 @@
             <li><a href="@Url.Action("Index","MainPage")">Trang chính</a></li>
             <li><a href="@Url.Action("Index","Categories")">Danh mục</a></li>
             <li><a href="@Url.Action("Index","tabCuocHop")">Cuộc họp</a></li>
-@*            <li><a href="@Url.Action("indexTask","BCNTask")">Thống kê</a></li>
-*@
+            @*li><a href="@Url.Action("indexTask","BCNTask")">Thống kê</a></li>*@
         </ul>
-    </div> <!--Menu-->
+    </div>
+
+    <!--Menu-->
 
     <div class="container body-content">
         @RenderBody()
-        @*<footer id="yuki-footer">
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>*@
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-
 </body>
 </html>
 
