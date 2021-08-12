@@ -4,97 +4,81 @@
     Layout = null;
 }
 
+
 <!doctype html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
+    <title>Đăng Nhập</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-
-
-    <link href="~/Content/login-form-05/css/style.css" rel="stylesheet" />
-
-    <link href="~/Content/login-form-05/css/owl.carousel.min.css" rel="stylesheet" />
-    <!-- Bootstrap CSS -->
-
-    <link href="~/Content/login-form-05/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Style -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
    
-    <link href="~/Content/login-form-05/fonts/icomoon/style.css" rel="stylesheet" />
-    <title>Login </title>
+
+
+    <link href="~/Content/login-form/css/style.css" rel="stylesheet" />
 </head>
-<body class="me-body">
+<body class="img js-fullheight" style="background-image: url('/Content/login-form/images/1-2.jpg'); height:794px">
 
-    <div class="d-md-flex half">
-        <div class="bg" style="background-image: url('../../Content/login-form-05/images/1-2.jpg');"></div>
 
-        <div class="contents">
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
 
-            <div class="container">
-
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-md-12">
-                        <div class="form-block mx-auto">
-                            <div class="text-center">
-                                <img src="~/Content/login-form-05/images/logo.png" />
-                            </div>
-                            <hr /><center>----------*.*-----------</center><hr />
-
-                            <form action="@Url.Action("Login","Account")" method="post">
-                                @Html.AntiForgeryToken()
-
-                                <div class="form-group first">
-                                    @Html.LabelFor(m => m.Email)
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-group last mb-3">
-                                    @Html.LabelFor(m => m.Password)
-                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                                </div>
-
-                                <div class="d-sm-flex mb-5 align-items-center">
-                                    <label class="control control--checkbox mb-3 mb-sm-0">
-
-                                        @Html.CheckBoxFor(m => m.RememberMe)
-                                        @Html.LabelFor(m => m.RememberMe)
-                                        <div class="control__indicator"></div>
-                                    </label>
-
-                                </div>
-                                <button type="submit" value="Log In" class="btn btn-block py-2 btn-Login">Log In</button>
-                                <span class="text-center my-3 d-block">or</span>
+                    <img src="~/Content/login-form/images/HE_THONG_LOGO_CUA_TRUONG-02.png"  style="height:100px"/>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="login-wrap p-0">
+                        
+                        <form action="@Url.Action("Login","Account")" method="post">
+                            @Html.AntiForgeryToken()
+                            <div class="form-group">
                                 
+                                
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" , placeholder = "Tài Khoản" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                               
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Mật Khẩu" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group d-md-flex">
+                                <div class="w-50">
+                                    <label class="checkbox-wrap checkbox-primary">
+                                        Ghi nhớ
+                                        @Html.CheckBoxFor(m => m.RememberMe)
+                                        <span class="checkmark"></span>
 
-                            </form>
-                            <section id="socialLoginForm">
-                                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-                            </section>
+                                    </label>
+                                </div>
 
-                        </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-control btn btn-primary submit px-3">Đăng Nhập</button>
+                            </div>
+
+                        </form>
+                        <p class="w-100 text-center">&mdash; Hoặc &mdash;</p>
+
+                        <section id="socialLoginForm">
+                            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                        </section>
 
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <style>
-        .me-body {
-            line-height: 100%;
-        }
-        .col-md-12 {
-            padding-right: 0px;
-            padding-left: 0px;
-           
-        }
-    </style>
-    <script src="~/Content/login-form-05/js/bootstrap.min.js"></script>
-    <script src="~/Content/login-form-05/js/jquery-3.3.1.min.js"></script>
-    <script src="~/Content/login-form-05/js/main.js"></script>
-    <script src="~/Content/login-form-05/js/owl.carousel.min.js"></script>
-    <script src="~/Content/login-form-05/js/popper.min.js"></script>
+    </section>
+    <script src="~/Content/login-form/js/popper.js"></script>
+    <script src="~/Content/login-form/js/main.js"></script>
+    <script src="~/Content/login-form/js/jquery.min.js"></script>
+    <script src="~/Content/login-form/js/bootstrap.min.js"></script>
 </body>
+</html>
+
