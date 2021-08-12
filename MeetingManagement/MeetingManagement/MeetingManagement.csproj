@@ -328,6 +328,7 @@
     <Content Include="Content\login-form\js\jquery.min.js" />
     <Content Include="Content\login-form\js\main.js" />
     <Content Include="Content\login-form\js\popper.js" />
+    <Content Include="Content\Meetings\Nav-body.css" />
     <Content Include="Content\Picture\logoOffice365.png" />
     <Content Include="Content\Picture\outline_upload_file_black_24dp.png" />
     <Content Include="Content\quyhung\chart\exporting.js" />

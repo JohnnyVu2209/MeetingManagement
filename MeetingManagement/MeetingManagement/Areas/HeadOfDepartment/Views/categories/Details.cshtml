@@ -8,6 +8,21 @@
     var meet = db.MEETINGs;
 }
 
+<style>
+    .btn-hard-code-vl {
+        float: right;
+        width: 90px;
+        height: 45px;
+        background-color: #009FE5;
+        color: white;
+        border-radius: 5px;
+        font-size: 16px;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+    }
+</style>
+
 <!--CSS-->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -22,17 +37,14 @@
 <!--Content-->
 <img style="width:100px;height:100px" src="https://media1.tenor.com/images/239a102840e57a65543cf5c7b3accd5f/tenor.gif">
 <div>
-    <div style="text-transform: uppercase;font-size:20px;margin-bottom:20px" ; class="header">
+    <div style="text-transform: uppercase;font-size:20px;margin-bottom:20px;position:relative" class="header">
         <div style="width:70%">
             @Html.Label(Model.Category_Name)
         </div>
         <div style="font-size:12px; width:70%">
             @Html.DisplayFor(m => m.AspNetUser.UserName)
         </div>
-        <button style="float: right; width: 90px;height: 45px;
-        background-color: #009FE5; color: white;
-        border-radius: 5px;font-size:16px"
-                onclick="location.href = '@Url.Action("MeetingForm","MEETINGs")';">
+        <button class="btn-hard-code-vl" onclick="location.href = '@Url.Action("MeetingForm","MEETINGs")';">
             Tạo
         </button>
         <div class="modal fade" id="myModal" role="dialog">
@@ -47,11 +59,9 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
-
+            </div>
         </div>
     </div>
-
-</div>
     @Html.Action("MeetingList", "MEETINGs", new { id = Model.Category_id })
 </div>
 

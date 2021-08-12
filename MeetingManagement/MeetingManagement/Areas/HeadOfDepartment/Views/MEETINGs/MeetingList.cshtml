@@ -33,10 +33,22 @@
     <table class="table" id="table-sort">
         <thead style="background-color: #009FE5;color:white;cursor:pointer">
             <tr>
-                <th scope="col" onclick="sortTable(0)" style="cursor:pointer">Tên cuộc họp</th>
-                <th scope="col" onclick="sortTable(1)" style="cursor:pointer">Người chủ trì</th>
-                <th scope="col" onclick="sortTable(2)" style="cursor:pointer">Ngày họp</th>
-                <th scope="col" onclick="sortTable(3)" style="cursor:pointer">Tình trạng</th>
+                <th scope="col" onclick="sortTable(0)" style="cursor:pointer">
+                    Tên cuộc họp   
+                    <i class='fa fa-sort'></i>
+                </th>
+                <th scope="col" onclick="sortTable(1)" style="cursor:pointer">
+                    Người chủ trì   
+                    <i class='fa fa-sort'></i>
+                </th>
+                <th scope="col" onclick="sortTable(2)" style="cursor:pointer">
+                    Ngày họp   
+                    <i class='fa fa-sort'></i>
+                </th>
+                <th scope="col" onclick="sortTable(3)" style="cursor:pointer">
+                    Tình trạng   
+                    <i class='fa fa-sort'></i>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -46,7 +58,7 @@
                     <td>
                         @item.Meeting_name
                     </td>
-                    <td>@item.AspNetUser.Full_name</td>
+                    <td>@item.AspNetUser.Email</td>
                     <td>@Convert.ToDateTime(item.Date_Start).ToString("MM/dd/yyyy")</td>
                     <td>
                         @if (@item.Status == 1)
