@@ -136,50 +136,13 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             sqlcon.Close();
             ModelState.Clear();
             ViewBag.allMeeting = db.MEETINGs.ToList();
+            ViewBag.allCate = db.CATEGORies.ToList();
             ViewBag.date_s = batdau;
             ViewBag.date_e = ketthuc;
             DateTime now = DateTime.Now;
-            ViewBag.year_now = now;
+            ViewBag.now = now;
             return View(staV);
         }
-
-
-
-
-
-/*        public ActionResult statisticChart(DateTime? batdau, DateTime? ketthuc)
-        {
-            int ms1 = db.MEETINGs.Where(x => x.Status == 1).Count();
-            int ms2 = db.MEETINGs.Where(x => x.Status == 2).Count();
-            int ms3 = db.MEETINGs.Where(x => x.Status == 3).Count();
-            int ms4 = db.MEETINGs.Where(x => x.Status == 4).Count();
-            int ms5 = db.MEETINGs.Where(x => x.Status == 5).Count();
-            int ms6 = db.MEETINGs.Where(x => x.Status == 6).Count();
-            int ms7 = db.MEETINGs.Where(x => x.Status == 7).Count();
-            PieChart pie = new PieChart();
-            pie.createM = ms1;
-            pie.passM = ms2;
-            pie.doneM = ms3;
-            pie.reportM = ms4;
-            pie.compM = ms5;
-            pie.nopassM = ms6;
-            pie.cancelM = ms7;
-            return Json(pie, JsonRequestBehavior.AllowGet);
-        }
-        public class PieChart
-        {
-            public int createM { get; set; }
-            public int passM { get; set; }
-            public int doneM { get; set; }
-            public int reportM { get; set; }
-            public int compM { get; set; }
-            public int nopassM { get; set; }
-            public int cancelM { get; set; }
-        }*/
-
-
-
-
 
     }
 }

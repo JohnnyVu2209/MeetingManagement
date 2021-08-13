@@ -127,13 +127,15 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 
         public ActionResult indexPieChart()
         {
-            int ms1 = db.MEETINGs.Where(x => x.Status == 1).Count();
-            int ms2 = db.MEETINGs.Where(x => x.Status == 2).Count();
-            int ms3 = db.MEETINGs.Where(x => x.Status == 3).Count();
-            int ms4 = db.MEETINGs.Where(x => x.Status == 4).Count();
-            int ms5 = db.MEETINGs.Where(x => x.Status == 5).Count();
-            int ms6 = db.MEETINGs.Where(x => x.Status == 6).Count();
-            int ms7 = db.MEETINGs.Where(x => x.Status == 7).Count();
+/*            DateTime now = DateTime.Now;
+            DateTime noww = Convert.ToDateTime(now).ToString("MM/dd/yyyy");*/
+            int ms1 = db.MEETINGs.Where(x => x.Status == 1 /*&&  x.Date_Create == now*/ ).Count();
+            int ms2 = db.MEETINGs.Where(x => x.Status == 2/* && x.Date_Create == now*/).Count();
+            int ms3 = db.MEETINGs.Where(x => x.Status == 3/* && x.Date_Create == now*/).Count();
+            int ms4 = db.MEETINGs.Where(x => x.Status == 4/* && x.Date_Create == now*/).Count();
+            int ms5 = db.MEETINGs.Where(x => x.Status == 5/* && x.Date_Create == now*/).Count();
+            int ms6 = db.MEETINGs.Where(x => x.Status == 6/* && x.Date_Create == now*/).Count();
+            int ms7 = db.MEETINGs.Where(x => x.Status == 7/* && x.Date_Create == now*/).Count();
             PieChart pie = new PieChart();
             pie.createM = ms1;
             pie.passM = ms2;
