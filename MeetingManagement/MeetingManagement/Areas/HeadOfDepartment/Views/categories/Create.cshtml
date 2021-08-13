@@ -15,7 +15,7 @@
                         @Html.TextBoxFor(model => model.Category_Name, new { @class = "catalog-form_input", @placeholder = "Tên danh mục" })
                     </div>
                     <div class="catalog-form_group form-group">
-                        @Html.TextAreaFor(model => model.Category_Content, new { @class = "catalog-form_input", @placeholder = "Mô tả", @style = "margin-top: 16px", @rows = "5", @cols = "20" })
+                        @Html.TextAreaFor(model => model.Category_Content, new { @class = "catalog-form_input", @placeholder = "Mô tả", @style = "margin-top: 16px;max-width:380px !important;", @rows = "5", @cols = "20" })
 
                     </div>
                 }

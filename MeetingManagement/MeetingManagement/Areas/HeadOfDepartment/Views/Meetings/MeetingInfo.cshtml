@@ -10,6 +10,32 @@
 <link rel="stylesheet" href="~/Content/Meetings/meetingdetail.css" />
 
 <style>
+    .btn-primary-fixed {
+        color: #fff;
+        background-color: #009fe5;
+        /* border-color: #2e6da4; */
+        position: relative;
+        left: 0px;
+        width: 1000px;
+        border-radius: 4px 4px 0px 0px;
+    }
+
+    .space {
+        width: 966px;
+    }
+
+    .file-zone {
+        margin-left: 34px;
+        width: 300px;
+        height: 50px;
+    }
+
+    .area-input {
+        height: fit-content;
+        min-height: 250px;
+        padding: 5px;
+    }
+
     /*Attachment*/
     #myfile:hover div {
         background-color: #f1f1f1;
@@ -118,73 +144,64 @@
                 font-weight: 700;
             }
 </style>
-@*@if (Model.Create_by.ToString() == ViewBag.user_identity)
-    {
-        <div style="position: absolute; right: 0px;display:none;">
-            <a onclick="location.href = '@Url.Action("MeetingDetail","Meetings", new { id = Model.Meeting_id, modify = true } )'" style="width: 100px; height: 40px; background-color: #f1f1f1; color: black; display:inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor: pointer ">
-                Thay đổi
-            </a>
-        </div>
-    }*@
-
 <h4>Tiến độ:</h4>
 <div>
     <ul class="progressbar" style="border: 2px solid #e5e5e5; padding: 10px;">
         @if (Model.Status == 1)
         {
-            <li class="active">Tạo cuộc họp</li>
-            <li>Duyệt</li>
-            <li>Đã họp</li>
-            <li>Hoàn thành</li>
-            <li>Biên bản họp</li>
+        <li class="active">Tạo cuộc họp</li>
+        <li>Duyệt</li>
+        <li>Đã họp</li>
+        <li>Biên bản họp</li>
+        <li>Hoàn thành</li>
         }
         else if (Model.Status == 2)
         {
-            <li class="complete">Tạo cuộc họp</li>
-            <li class="active">Duyệt</li>
-            <li>Đã họp</li>
-            <li>Hoàn thành</li>
-            <li>Biên bản họp</li>
+        <li class="complete">Tạo cuộc họp</li>
+        <li class="active">Duyệt</li>
+        <li>Đã họp</li>
+        <li>Biên bản họp</li>
+        <li>Hoàn thành</li>
         }
         else if (Model.Status == 3)
         {
-            <li class="complete">Tạo cuộc họp</li>
-            <li class="complete">Duyệt</li>
-            <li class="active">Đã họp</li>
-            <li>Biên bản họp</li>
-            <li>Hoàn thành</li>
+        <li class="complete">Tạo cuộc họp</li>
+        <li class="complete">Duyệt</li>
+        <li class="active">Đã họp</li>
+        <li>Biên bản họp</li>
+        <li>Hoàn thành</li>
         }
         else if (Model.Status == 4)
         {
-            <li class="complete">Tạo cuộc họp</li>
-            <li class="complete">Duyệt</li>
-            <li class="complete">Đã họp</li>
-            <li class="active">Biên bản họp</li>
-            <li>Hoàn thành</li>
+        <li class="complete">Tạo cuộc họp</li>
+        <li class="complete">Duyệt</li>
+        <li class="complete">Đã họp</li>
+        <li class="active">Biên bản họp</li>
+        <li>Hoàn thành</li>
         }
         else if (Model.Status == 5)
         {
-            <li class="complete">Tạo cuộc họp</li>
-            <li class="complete">Duyệt</li>
-            <li class="complete">Đã họp</li>
-            <li class="complete">Biên bản họp</li>
-            <li class="active">Hoàn thành</li>
+        <li class="complete">Tạo cuộc họp</li>
+        <li class="complete">Duyệt</li>
+        <li class="complete">Đã họp</li>
+        <li class="complete">Biên bản họp</li>
+        <li class="active">Hoàn thành</li>
         }
         else if (Model.Status == 7)
         {
-            <li class="warning" style="display: block; height: 60px;">
-                <div onclick="alert('@Model.Feedback')" style="cursor: pointer; height: 60px; width: fit-content; position: relative; display: flex; bottom: 40px; align-items: flex-end; margin: 0 auto; z-index: 3; ">
-                    Đã hủy
-                </div>
-            </li>
+        <li class="warning" style="display: block; height: 60px;">
+            <div onclick="alert('@Model.Feedback')" style="cursor: pointer; height: 60px; width: fit-content; position: relative; display: flex; bottom: 40px; align-items: flex-end; margin: 0 auto; z-index: 3; ">
+                Đã hủy
+            </div>
+        </li>
         }
         else if (Model.Status == 6)
         {
-            <li class="warning" style="display: block; height: 60px;">
-                <div onclick="alert('@Model.Feedback')" style="cursor: pointer; height: 60px; width: fit-content; position: relative; display: flex; bottom: 40px; align-items: flex-end; margin: 0 auto; z-index: 3; ">
-                    Không được duyệt
-                </div>
-            </li>
+        <li class="warning" style="display: block; height: 60px;">
+            <div onclick="alert('@Model.Feedback')" style="cursor: pointer; height: 60px; width: fit-content; position: relative; display: flex; bottom: 40px; align-items: flex-end; margin: 0 auto; z-index: 3; ">
+                Không được duyệt
+            </div>
+        </li>
         }
     </ul>
 </div>
@@ -357,32 +374,6 @@ else if (Model.Check_report != true && Model.Create_by == ViewBag.user_identity 
     @Html.Action("MeetingReport", "Meetings", new { id = Model.Meeting_id })
 }
 
-<style>
-    .btn-primary-fixed {
-        color: #fff;
-        background-color: #009fe5;
-        /* border-color: #2e6da4; */
-        position: relative;
-        left: 0px;
-        width: 1000px;
-        border-radius: 4px 4px 0px 0px;
-    }
 
-    .space {
-        width: 966px;
-    }
-
-    .file-zone {
-        margin-left: 34px;
-        width: 300px;
-        height: 50px;
-    }
-
-    .area-input {
-        height: fit-content;
-        min-height: 250px;
-        padding: 5px;
-    }
-</style>
 
 

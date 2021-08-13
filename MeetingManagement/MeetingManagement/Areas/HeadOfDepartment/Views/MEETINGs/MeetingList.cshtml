@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MeetingManagement.Models.MEETING>
+@model IEnumerable<MeetingManagement.Models.MEETING>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -89,6 +89,77 @@
         z-index: 1;
     }
 </style>
+
+
+<div id="table-content">
+    <table class="table" id="table-sort">
+        <thead style="background-color: #009FE5;color:white;cursor:pointer">
+            <tr>
+                <th scope="col" onclick="sortTable(0)" style="cursor:pointer">
+                    Tên cuộc họp   
+                    <i class='fa fa-sort'></i>
+                </th>
+                <th scope="col" onclick="sortTable(1)" style="cursor:pointer">
+                    Người chủ trì   
+                    <i class='fa fa-sort'></i>
+                </th>
+                <th scope="col" onclick="sortTable(2)" style="cursor:pointer">
+                    Ngày họp   
+                    <i class='fa fa-sort'></i>
+                </th>
+                <th scope="col" onclick="sortTable(3)" style="cursor:pointer">
+                    Tình trạng   
+                    <i class='fa fa-sort'></i>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="w400" style="cursor:pointer;" onclick="detailModal(@(item.Meeting_id))">
+                    <td>
+                        @item.Meeting_name
+                    </td>
+                    <td>@item.AspNetUser.Email</td>
+                    <td>@Convert.ToDateTime(item.Date_Start).ToString("MM/dd/yyyy")</td>
+                    <td>
+                        @if (@item.Status == 1)
+                        {
+                            <div class="pending-status">@item.MEETING_STATUS.Status_name</div>
+                        }
+                        else if (@item.Status == 2)
+                        {
+                            <div class="waiting-status">@item.MEETING_STATUS.Status_name</div>
+                        }
+                        else if (@item.Status == 3)
+                        {
+                            <div class="missing-status">@item.MEETING_STATUS.Status_name</div>
+                        }
+                        else if (@item.Status == 4)
+                        {
+                            <div class="incomplete-status">@item.MEETING_STATUS.Status_name</div>
+                        }
+                        else if (@item.Status == 5)
+                        {
+                            <div class="complete-status">@item.MEETING_STATUS.Status_name</div>
+                        }
+                        else if (@item.Status == 6)
+                        {
+                            <div class="basic-status" style="background-color: #607d8b">Không duyệt</div>
+                        }
+                        else if (@item.Status == 7)
+                        {
+                            <div class="basic-status" style="background-color: #607d8b">Đã hủy</div>
+                        }
+                    </td>
+                </tr>
+
+                }
+            </tbody>
+
+    </table>
+</div>
+
 <div id="show-popup"></div>
 
 

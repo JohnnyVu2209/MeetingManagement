@@ -15,11 +15,11 @@
     </div>
     @if (has_task == 1)
     {
-        <table class="ml-table" style=" min-height: 400px;">
+        <table style=" min-height: 400px;">
             <tbody>
                 @foreach (var ut in ViewBag.task)
                 {
-                    <tr>
+                    <tr style="column-count:3; column-gap:0">
                         <td>
                             @ut.Task_name
                         </td>
@@ -58,4 +58,9 @@
     .tl-table {
             border: 1px solid black;
         }
+
+    .body-content {
+        overflow: hidden;
+        height: fit-content;
+    }
 </style>

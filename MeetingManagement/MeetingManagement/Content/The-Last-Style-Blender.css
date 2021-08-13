@@ -12,6 +12,8 @@ body {
 }
 
 .body-content {
+/*    width: 100% !important;
+    max-width: calc(100% - 150px) !important;*/
     position: absolute;
     top: 0px;
 }
