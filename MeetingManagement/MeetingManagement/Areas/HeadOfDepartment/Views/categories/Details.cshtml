@@ -1,4 +1,4 @@
-﻿@model MeetingManagement.Models.CATEGORY
+@model MeetingManagement.Models.CATEGORY
 @using MeetingManagement.Models
 @{
     ViewBag.Title = "Details";
@@ -7,6 +7,7 @@
     var task = db.TASKs;
     var meet = db.MEETINGs;
 }
+
 
 <style>
     .btn-hard-code-vl {
@@ -32,6 +33,9 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+<link href="~/Content/Meetings/meetingdetail.css" rel="stylesheet" />
+<div class="body-navbar">
 
 
 <!--Content-->
@@ -78,52 +82,30 @@
                     <div id="container-pie"></div>
                 </figure>
                 @Html.Action("MeetingList", "MEETINGs", new { id = Model.Category_id })
+
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" style="font-size:larger">Đóng</button>
-            </div>
+
         </div>
     </div>
-</div>*@
 
+</div>
 
+@Html.Action("MeetingList", "Meetings", new { id = Model.Category_id })
 
-@*<div class="modal fade" id="barChartModal" tabindex="-1" role="dialog" aria-labelledby="barChartModal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="barChartModal" style="font-size:large">Biểu đồ cột của @Html.Label(Model.Category_Name)</h5>
-            </div>
-            <div class="modal-body">
-                <figure class="highcharts-figure">
-                    <div id="container-bar"></div>
-                </figure>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" style="font-size:larger">Đóng</button>
-            </div>
-        </div>
-    </div>
-</div>*@
+<style>
+    .create-meeting-btn {
+        float: right;
+        width: 90px;
+        height: 45px;
+        background-color: #009FE5;
+        color: white;
+        border-radius: 5px;
+        font-size: 16px
+    }
 
-<!--JS-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-
+    .lable-zone1 {
+        color: black;
+        line-height: 40px;
+    }
+</style>
 

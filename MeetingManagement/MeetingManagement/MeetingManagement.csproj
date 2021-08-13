@@ -324,6 +324,7 @@
     <Content Include="Content\login-form\images\1-2.jpg" />
     <Content Include="Content\login-form\images\bg.jpg" />
     <Content Include="Content\login-form\images\HE_THONG_LOGO_CUA_TRUONG-02.png" />
+    <Content Include="Content\login-form\images\logo.png" />
     <Content Include="Content\login-form\js\bootstrap.min.js" />
     <Content Include="Content\login-form\js\jquery.min.js" />
     <Content Include="Content\login-form\js\main.js" />
@@ -716,6 +717,12 @@
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\Edit.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingEdit.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\statistic.cshtml" />
+    <Content Include="Content\login-form\css\.DS_Store" />
+    <Content Include="Content\login-form\css\bootstrap\.DS_Store" />
+    <Content Include="Content\login-form\css\bootstrap\mixins\.DS_Store" />
+    <Content Include="Content\login-form\fonts\.DS_Store" />
+    <Content Include="Content\login-form\images\.DS_Store" />
+    <Content Include="Content\login-form\js\.DS_Store" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\CancelModel.cshtml" />
     <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />

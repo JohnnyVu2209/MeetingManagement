@@ -1,10 +1,71 @@
-﻿@model IEnumerable<MeetingManagement.Models.MEETING>
+@model IEnumerable<MeetingManagement.Models.MEETING>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 
+<div class="card-body card-body-fixed">
+    <div id="table-content">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="background-color: #009FE5;color:white" ; scope="col">Tên cuộc họp</th>
+                    <th style="background-color: #009FE5;color:white" ; scope="col">Người chủ trì</th>
+                    <th style="background-color: #009FE5;color:white" ; scope="col">Ngày họp</th>
+                    <th style="background-color: #009FE5;color:white" ; scope="col">Tình trạng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                    <tr class="w400">
+                        <td>@item.Meeting_name</td>
+                        <td>@item.AspNetUser.Email</td>
+                        <td>@Convert.ToDateTime(item.Date_Start).ToString("MM/dd/yyyy")</td>
+
+                        <td>
+                            @if (item.Status == 1)
+                            {
+                                <div class="pending-status">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (item.Status == 2)
+                            {
+                                <div class="pending-status">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (item.Status == 3)
+                            {
+                                <div class="missing-status">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (item.Status == 4)
+                            {
+                                <div class="incomplete-status">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (item.Status == 4)
+                            {
+                                <div class="incomplete-status">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (@item.Status == 5)
+                            {
+                                <div class="complete-status complete-status-fixed">@item.MEETING_STATUS.Status_name</div>
+                            }
+                            else if (@item.Status == 6)
+                            {
+                                <div class="basic-status" style="background-color: #607d8b">Không duyệt</div>
+                            }
+                            else if (@item.Status == 7)
+                            {
+                                <div class="basic-status" style="background-color: #607d8b">Đã hủy</div>
+                            }
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 <style>
     .table thead th {
         text-align: center;
@@ -28,6 +89,7 @@
         z-index: 1;
     }
 </style>
+
 
 <div id="table-content">
     <table class="table" id="table-sort">
@@ -97,6 +159,7 @@
 
     </table>
 </div>
+
 <div id="show-popup"></div>
 
 
