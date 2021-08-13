@@ -324,10 +324,7 @@
     <Content Include="Content\login-form\images\1-2.jpg" />
     <Content Include="Content\login-form\images\bg.jpg" />
     <Content Include="Content\login-form\images\HE_THONG_LOGO_CUA_TRUONG-02.png" />
-<<<<<<< HEAD
     <Content Include="Content\login-form\images\logo.png" />
-=======
->>>>>>> origin/merge
     <Content Include="Content\login-form\js\bootstrap.min.js" />
     <Content Include="Content\login-form\js\jquery.min.js" />
     <Content Include="Content\login-form\js\main.js" />
@@ -360,10 +357,7 @@
     <Content Include="Content\taocuochop\vendor\select2\select2.min.js" />
     <Content Include="Content\quyhung\img\icons8-pie-chart.gif" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-<<<<<<< HEAD
-=======
     <Content Include="Picture\logoOffice365.png" />
->>>>>>> origin/merge
     <Content Include="Models\Models.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Models.edmx</DependentUpon>
@@ -722,16 +716,13 @@
     <Content Include="Areas\HeadOfDepartment\Views\BCNTask\Edit.cshtml" />
     <Content Include="Areas\User\Views\Meetings\MeetingEdit.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\statistic.cshtml" />
-<<<<<<< HEAD
     <Content Include="Content\login-form\css\.DS_Store" />
     <Content Include="Content\login-form\css\bootstrap\.DS_Store" />
     <Content Include="Content\login-form\css\bootstrap\mixins\.DS_Store" />
     <Content Include="Content\login-form\fonts\.DS_Store" />
     <Content Include="Content\login-form\images\.DS_Store" />
     <Content Include="Content\login-form\js\.DS_Store" />
-=======
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\CancelModel.cshtml" />
->>>>>>> origin/merge
     <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

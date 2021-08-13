@@ -397,3 +397,6 @@ td .complete-status, .complete-status {
     margin: auto;
     text-align: center;
 }
+.body-content {
+    width: calc(100% - 150px ) !important;
+}
