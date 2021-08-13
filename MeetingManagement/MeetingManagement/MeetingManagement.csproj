@@ -588,7 +588,6 @@
     <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Create.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Delete.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Categories\Details.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Edit.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Index.cshtml" />
     <Content Include="Areas\User\Views\Categories\Index.cshtml" />
@@ -645,7 +644,6 @@
     <Content Include="Areas\User\Views\Tasks\Index.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\CreateUser2.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingForm.cshtml" />
-    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingList.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\ReportList.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\MainPage\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AspNetUsers\OtherUserGridView.cshtml" />
@@ -724,6 +722,8 @@
     <Content Include="Content\login-form\images\.DS_Store" />
     <Content Include="Content\login-form\js\.DS_Store" />
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\CancelModel.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingList.cshtml" />
+    <Content Include="Areas\HeadOfDepartment\Views\Categories\Details.cshtml" />
     <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

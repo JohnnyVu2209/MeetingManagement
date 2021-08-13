@@ -1,4 +1,4 @@
-@model MeetingManagement.Models.CATEGORY
+﻿@model MeetingManagement.Models.CATEGORY
 @using MeetingManagement.Models
 @{
     ViewBag.Title = "Details";
@@ -35,8 +35,6 @@
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 <link href="~/Content/Meetings/meetingdetail.css" rel="stylesheet" />
-<div class="body-navbar">
-
 
 <!--Content-->
 <img style="width:100px;height:100px" src="https://media1.tenor.com/images/239a102840e57a65543cf5c7b3accd5f/tenor.gif">
@@ -72,40 +70,40 @@
 
 <!--Modal-->
 @*<div class="modal fade" id="pieChartModal" tabindex="-1" role="dialog" aria-labelledby="pieChartModal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="pieChartModal" style="font-size:larger">Biểu đồ tròn</h5>
-            </div>
-            <div class="modal-body">
-                <figure class="highcharts-figure">
-                    <div id="container-pie"></div>
-                </figure>
-                @Html.Action("MeetingList", "MEETINGs", new { id = Model.Category_id })
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pieChartModal" style="font-size:larger">Biểu đồ tròn</h5>
+                </div>
+                <div class="modal-body">
+                    <figure class="highcharts-figure">
+                        <div id="container-pie"></div>
+                    </figure>
+                    @Html.Action("MeetingList", "MEETINGs", new { id = Model.Category_id })
+
+                </div>
 
             </div>
-
         </div>
+
     </div>
 
-</div>
+    @Html.Action("MeetingList", "Meetings", new { id = Model.Category_id })
 
-@Html.Action("MeetingList", "Meetings", new { id = Model.Category_id })
+    <style>
+        .create-meeting-btn {
+            float: right;
+            width: 90px;
+            height: 45px;
+            background-color: #009FE5;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px
+        }
 
-<style>
-    .create-meeting-btn {
-        float: right;
-        width: 90px;
-        height: 45px;
-        background-color: #009FE5;
-        color: white;
-        border-radius: 5px;
-        font-size: 16px
-    }
-
-    .lable-zone1 {
-        color: black;
-        line-height: 40px;
-    }
-</style>*@
+        .lable-zone1 {
+            color: black;
+            line-height: 40px;
+        }
+    </style>*@
 
