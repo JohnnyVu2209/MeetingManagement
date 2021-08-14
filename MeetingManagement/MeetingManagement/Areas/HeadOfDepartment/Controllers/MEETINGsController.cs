@@ -156,6 +156,15 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
                 return RedirectToAction("Index","tabCuocHop");
         }
 
+        public ActionResult MeetingComplete(int id)
+        {
+            var meeting = db.MEETINGs.Find(id);
+            meeting.Status = 5;
+            db.Entry(meeting).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("MeetingDetail", "Meetings", new { id = meeting.Meeting_id, modify = false });
+        }
         private void sendCancelModel(MEETING meeting)
         {
             string Receiver = db.AspNetUsers.Find(meeting.Verify_by).Email;
