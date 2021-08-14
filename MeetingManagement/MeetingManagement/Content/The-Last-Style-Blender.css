@@ -12,6 +12,10 @@ body {
 }
 
 .body-content {
+    width: calc(100% - 150px ) !important;
+}
+
+.body-content {
     position: absolute;
     top: 0px;
 }
@@ -125,7 +129,7 @@ body {
 }
 /*--#table--*/
 .yuki-table-zone {
-    position: relative;    
+    position: relative;
     margin-bottom: 20px;
     display: block;
     padding-top: 35px;
