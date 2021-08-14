@@ -14,8 +14,6 @@
 }
 
 
-
-
 @Html.AntiForgeryToken()
 
 <body>
@@ -24,7 +22,7 @@
             <img src="~/Content/Picture/users_meeting.png" />
             <div class="lable-zone" style="display:flex;">
                 <div style="display: inline-flex">
-                    @Html.DisplayFor(model => model.Meeting_name)
+                    @Html.Label(Model.Meeting_name)
                 </div>
                 @if (Model.Status == 7)
                 {
@@ -62,7 +60,7 @@
                     @*<div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-report')">
                             Báo cáo
                         </div>*@
-                    if (ViewBag.user_identity == Model.Create_by && Model.Status > 1 && Model.Status < 5)
+                    if (ViewBag.user_identity == Model.Create_by && Model.Status > 1 && Model.Status < 3)
                     {
                         <div class="cancel-btn" onclick="getCancelModel(1)" style="right: calc( 0% + 30px ); position: fixed;">
                             
@@ -70,7 +68,6 @@
                             
                         </div>
                     }
-
                 }
             </div>
             @*<div class="button-zone">
@@ -88,7 +85,7 @@
                 <p style="margin:0px 10px 0px 0px;">
                     Hãy cập nhật trạng thái mới cho cuộc họp
                 </p>
-                <a style="background-color: #3aac5d; cursor: pointer; width: 90px; padding: 0px 5px; border: 0.5px solid #f1f1f1; text-align: center; color: white">Cập nhật</a>
+                <a onclick="location.href = '@Url.Action("StatusChanges","MEETINGs", new { id = Model.Meeting_id})';" style="background-color: #3aac5d; cursor: pointer; width: 90px; padding: 0px 5px; border: 0.5px solid #f1f1f1; text-align: center; color: white">Cập nhật</a>
                 <div style="position: absolute; width: 50px; right: 30px; cursor:pointer; text-align:center" onclick="close_noti()" id="x-btn">
                     x
                 </div>

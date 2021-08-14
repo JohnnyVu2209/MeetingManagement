@@ -190,14 +190,12 @@
     </ul>
 </div>
 <div style="height:20px"></div>
-<h4>Tài liệu đính kèm:</h4>
-<div style="border: 2px solid #e5e5e5; padding: 20px; width: 1000px; overflow: overlay;">
-    <div class="form-row-fixed">
-        @*<img src="~/Content/Picture/outline_file_upload_black_24dp.png" />*@
-        @*<label class="icon-zone" for="input-ficons-1"><i class="fa fa-plus"></i></label>*@
-        @if (Model.ATTACHMENTs.Count != 0)
-        {
-            foreach (var item in Model.ATTACHMENTs)
+@if (Model.ATTACHMENTs.Count != 0)
+{
+    <h4>Tài liệu đính kèm:</h4>
+    <div style="border: 2px solid #e5e5e5; padding: 20px; width: 1000px; overflow: overlay;">
+        <div class="form-row-fixed">
+            @foreach (var item in Model.ATTACHMENTs)
             {
                 <a id="myfile" href="@item.Attachment_path" style="margin-right:20px;" download>
                     <div style="width:200px; height:50px; cursor:pointer; background-color:white; outline:1px solid #e5e5e5; display:inline-flex">
@@ -239,9 +237,9 @@
                     </div>
                 </a>
             }
-        }
+        </div>
     </div>
-</div>
+}
 <div style="height:20px"></div>
 <h4>Thông tin chi tiết:</h4>
 <div style=" width: 1000px; border: 2px solid #e5e5e5; padding: 10px;">
@@ -319,14 +317,14 @@
         <tbody>
             @foreach (var member in Model.MEMBERs.ToList())
             {
-                
-                    <tr>
-                        <td>@(++i)</td>
-                        <td class="col-align">@member.AspNetUser.Email</td>
-                        <td class="col-align">
-                            Thành viên
-                        </td>
-                    </tr>
+
+                <tr>
+                    <td>@(++i)</td>
+                    <td class="col-align">@member.AspNetUser.Email</td>
+                    <td class="col-align">
+                        Thành viên
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

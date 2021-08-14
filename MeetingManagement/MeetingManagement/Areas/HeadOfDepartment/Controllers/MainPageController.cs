@@ -21,6 +21,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         // GET: HeadOfDepartment/Home
         public ActionResult Index()
         {
+            ViewBag.user_identity = User.Identity.GetUserId();
             var model = db.MEETINGs.ToList();
             return View(model);
         }
@@ -112,7 +113,16 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Notify(int id)
+        {
+            var meeting = db.MEETINGs.Find(id);
+            meeting.Notify = true;
 
+            db.Entry(meeting).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Index","MainPage");
+        }
 
         public ActionResult StaticticBCN() {
             return View();

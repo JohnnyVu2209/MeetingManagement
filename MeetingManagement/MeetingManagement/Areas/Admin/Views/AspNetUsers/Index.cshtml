@@ -4,14 +4,17 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
+<link href="~/Content/The-Last-Style-Blender.css" rel="stylesheet" />
 @*search component*@
 <div class="col-sm-12 col-sm-12-fix01">
     <div class="create-and-search">
         <div class="form-inline pull-right">
             <label>Search</label>
             <input type="text" class="form-control" id="txtSearch" />
-            <button type="button" class="btn btn-success" data-toggle="modal" onclick="getCreateModal()">Create New</button>
+            <button type="button" class="btn btn-success">
+                @Html.ActionLink("Tạo tài khoản","Create", "AspNetUsers")
+            </button>
+            @*<button type="button" class="btn btn-success" data-toggle="modal" onclick="getCreateModal()">Create New</button>*@
         </div>
     </div>
 
@@ -20,6 +23,9 @@
         <li class="active"><a data-toggle="tab" href="#listAccount">Danh sách tài khoản</a></li>
         <li><a data-toggle="tab" href="#otherAccount">Tài khoản khách</a></li>
     </ul>
+
+
+
 
     <div class="tab-content">
 
@@ -35,21 +41,27 @@
             @Html.Action("GetOtherUser", "AspNetUsers")
         </div>
     </div>
-    <div id="Popup"></div>
 </div>
-
+<div id="Popup"></div>
 
 <style>
     .create-and-search {
         padding-left: 0px;
         padding-right: 0px;
         width: 100%;
-        
     }
 
     .col-sm-12-fix01 {
         position: relative;
-                
+    }
+
+    .yuki-table-zone > table {
+        max-height: none !important;
+        overflow-y: hidden !important;
+    }
+
+    .yuki-table-zone {
+        height: fit-content;
     }
 </style>
 @section scripts{
@@ -85,7 +97,7 @@
             data: {},
             success: function (data) {
                 $("#Popup").html(data);
-                $("#modalCreate").appendTo("body").modal("show");
+                $("#modalCreate").modal("show");
             },
             error: function (err) {
                 console.log(err);

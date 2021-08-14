@@ -125,7 +125,8 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult indexPieChart() {
+        public ActionResult indexPieChart()
+        {
             int ms1 = db.MEETINGs.Where(x => x.Status == 1).Count();
             int ms2 = db.MEETINGs.Where(x => x.Status == 2).Count();
             int ms3 = db.MEETINGs.Where(x => x.Status == 3).Count();
@@ -141,7 +142,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             pie.compM = ms5;
             pie.nopassM = ms6;
             pie.cancelM = ms7;
-            return Json(pie,JsonRequestBehavior.AllowGet);
+            return Json(pie, JsonRequestBehavior.AllowGet);
         }
         public class PieChart
         {

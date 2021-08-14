@@ -26,167 +26,156 @@
 </head>
 @if (create_by == true)
 {
+    <div class="button-zone" style=" position: absolute; top: -10px; right: 0px;">
+        <a class="btn button-create" style="background-color:#009fe5; color:white; display:inline-flex;" onclick="getCreateTaskModal(@meeting_id)">Tạo</a>
+    </div>
+}
+@if (tasks.Count == 0)
+{
     <p>Cuộc họp chưa có công việc</p>
-    if (ViewBag.meeting_status >= 3 && ViewBag.meeting_status <= 5 && ViewBag.user_identity == ViewBag.create_by)
-    {
-        <div class="button-zone" style=" position: absolute; top: -10px; right: 0px;">
-            <a class="btn button-create" style="background-color:#009fe5; color:white; display:inline-flex;" onclick="getCreateModal(@meeting_id)">Tạo</a>
-        </div>
-    }
 }
 else
 {
 
-<div id="container">
-    <div class="progress-bar-zone">
-        <p>Tiến độ</p>
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: @final%;font-weight: bold;">
-                <p style=" margin: 0px; padding-left: 5px; width: fit-content;">
+    <div id="container">
+        <div class="progress-bar-zone">
+            <p>Tiến độ</p>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: @final%;">
                     @final %
-                </p>
+                </div>
             </div>
         </div>
-
-    </div>
-    @if (ViewBag.meeting_status >= 3 && ViewBag.meeting_status <= 5 && ViewBag.user_identity == ViewBag.create_by)
-    {
-    <div class="button-zone" style=" position: absolute; top: -10px; right: 0px;">
-        <a class="btn button-create" style="background-color:#009fe5; color:white; display:inline-flex;" onclick="getCreateModal(@meeting_id)">Tạo</a>
-    </div>
-    }
-    <div class="table-pos">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Tóm lược</th>
-                    <th class="col-align" scope="col">Giao cho</th>
-                    <th class="col-align" scope="col">Ngày đến hạn</th>
-                    <th class="col-align" scope="col">Tình trạng</th>
-                    <th class="col-align" scope="col">Thao tác</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in tasks)
-                {
-                    index++;    
-                    var tr_bg = (item.Task_Status == true) ? "background-color:#f1f1f1;" : "cursor: pointer;";
-
-                <tr id="this_tr" style="@tr_bg">
-                    <td>@index</td>
-                    <td>@item.Task_name</td>
-                    <td class="col-align">@item.MEMBER.AspNetUser.Email</td>
-                    <td class="col-align">@item.Task_Deadline.Value.ToShortDateString()</td>
-                    <td class="col-align" id="status">
-                        @if (item.Task_Status == false)
-                        {
-                            <div class="unfinished-status">Chưa hoàn thành</div>
-                        }
-                        else if (item.Task_Status == true)
-                        {
-                            <div class="finished-status">Hoàn thành</div>
-                        }
-                    </td>
-                    @if (ViewBag.meeting_status >= 3 && ViewBag.meeting_status <= 5 && ViewBag.user_identity == ViewBag.create_by)
+        <div class="table-pos">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tóm lược</th>
+                        <th class="col-align" scope="col">Giao cho</th>
+                        <th class="col-align" scope="col">Ngày đến hạn</th>
+                        <th class="col-align" scope="col">Tình trạng</th>
+                        <th class="col-align" scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in tasks)
                     {
-                        if (item.Task_Status == false)
-                        {
-                        <td>
-                            <ul class="sublist">
-                                <li>
-                                    <a class="fa fa-bell"></a>
-                                </li>
-                                <li>
-                                    <a aria-hidden="true"
-                                       class="edit-btn fa fa-pencil-square"
-                                       onclick="getEditModal(@item.Task_id)"></a>
-                                </li>
-                                <li>
-                                    <a aria-hidden="true"
-                                       class="fa fa-trash"
-                                       onclick="return confirm('Bạn có muốn xoá công việc này?')"
-                                       href="@Url.Action("Delete", "Tasks", new { TaskID = item.Task_id })"></a>
-                                </li>
-                            </ul>
-                        </td>
+                        index++;
+                        var tr_bg = (item.Task_Status == true) ? "background-color:#f1f1f1;" : "cursor: pointer;";
 
-                            }
-                        }
-                    else
-                    {
-                        <td></td>
+                        <tr id="this_tr" style="@tr_bg">
+                            <td>@index</td>
+                            <td>@item.Task_name</td>
+                            <td class="col-align">@item.MEMBER.AspNetUser.Email</td>
+                            <td class="col-align">@item.Task_Deadline.Value.ToShortDateString()</td>
+                            <td class="col-align" id="status">
+                                @if (item.Task_Status == false)
+                                {
+                                    <div class="unfinished-status">Chưa hoàn thành</div>
+                                }
+                                else if (item.Task_Status == true)
+                                {
+                                    <div class="finished-status">Hoàn thành</div>
+                                }
+                            </td>
+                            <td>
+                                @if (item.Task_Status == false)
+                                {
+                                    if (create_by == true)
+                                    {
+                                        <a class="fa fa-bell"></a>
+
+                                        <a style="margin-left:5px"
+                                           aria-hidden="true"
+                                           class="edit-btn fa fa-pencil-square"
+                                           onclick="getEditModal(@item.Task_id)"></a>
+
+                                        <a style="margin-left:5px"
+                                           aria-hidden="true"
+                                           class="fa fa-trash"
+                                           onclick="return confirm('Bạn có muốn xoá công việc này?')"
+                                           href="@Url.Action("Delete","Tasks",new {TaskID = item.Task_id })"></a>
+                                    }
+                                    else
+                                    {
+                                        if (item.Assignee == User.Identity.GetUserId())
+                                        {
+                                            <a href="@Url.Action("CompleteTask", "Tasks", new { TaskID = item.Task_id })">
+                                                Hoàn thành
+                                            </a>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                }
+                            </td>
+                        </tr>
                     }
-                </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+                </tbody>
+            </table>
+        </div>
 
-    <style>
-
-        .progress-bar-zone {
-            display: inline-flex;
-            width: 25%;
-            position: absolute;
-            left: 0px;
-        }
-
-            .progress-bar-zone p {
-                width: inherit;
-            }
-
-            .progress-bar-zone div {
-                height: 20px;
-                width: 100%;
+        <style>
+            .progress-bar-zone {
                 display: inline-flex;
+                width: 25%;
+                position: absolute;
+                left: 0px;
             }
 
-                .progress-bar-zone div div {
-                    background-color: #009FE5;
+                .progress-bar-zone p {
+                    width: inherit;
                 }
 
-        .w400 td {
-            width: 400px;
-        }
-
-        .table-pos {
-            position: relative;
-            top: 40px;
-        }
-
-        table {
-        }
-
-            table thead {
-                display: table;
-                width: 100%;
-                table-layout: fixed;
-            }
-
-                table thead tr {
-                    background-color: #009FE5;
-                    color: white;
+                .progress-bar-zone div {
+                    height: 20px;
+                    width: 100%;
+                    display: inline-flex;
                 }
 
-                    table thead tr th:first-child {
-                        width: 50px;
+                    .progress-bar-zone div div {
+                        background-color: #009FE5;
                     }
 
-            table tbody {
-                display: block;
-                overflow-y: overlay;
-                max-height: 250px;
+            .w400 td {
+                width: 400px;
             }
 
-                table tbody tr {
+            .table-pos {
+                position: relative;
+                top: 40px;
+            }
+
+            table {
+            }
+
+                table thead {
                     display: table;
                     width: 100%;
                     table-layout: fixed;
                 }
 
-                    table tbody tr td {
-                        vertical-align: middle !important;
+                    table thead tr {
+                        background-color: #009FE5;
+                        color: white;
+                    }
+
+                        table thead tr th:first-child {
+                            width: 50px;
+                        }
+
+                table tbody {
+                    display: block;
+                    overflow-y: overlay;
+                    max-height: 250px;
+                }
+
+                    table tbody tr {
+                        display: table;
+                        width: 100%;
+                        table-layout: fixed;
                     }
 
                         table tbody tr td:first-child {
@@ -197,40 +186,30 @@ else
                             width: 24px;
                         }
 
-        .finished-status {
-            background: #18e750;
-            border-radius: 10px;
-            color: white;
-            margin: auto;
-            text-align: center;
-            width: 100px;
-        }
-
-
-        .unfinished-status {
-            background: #FF9900;
-            border-radius: 10px;
-            color: white;
-            margin: auto;
-            text-align: center;
-            width: 140px;
-        }
-
-        .col-align {
-            text-align: center;
-        }
-
-        .sublist {
-            list-style-type: none;
-            display: flex;
-            justify-content: center;
-        }
-
-            .sublist > li {
-                padding: 10px;
+            .finished-status {
+                background: #18e750;
+                border-radius: 10px;
+                color: white;
+                margin: auto;
+                text-align: center;
+                width: 100px;
             }
-    </style>
-</div>
+
+
+            .unfinished-status {
+                background: #FF9900;
+                border-radius: 10px;
+                color: white;
+                margin: auto;
+                text-align: center;
+                width: 140px;
+            }
+
+            .col-align {
+                text-align: center;
+            }
+        </style>
+    </div>
 
 }
 <div id="Popup"></div>
@@ -251,7 +230,7 @@ else
          });
     };
 
-    function getEditTaskModal(id) {
+    function getEditModal(id) {
         $.ajax({
             url:"@Url.Action("Edit", "Tasks")",
             datatype: 'html',
