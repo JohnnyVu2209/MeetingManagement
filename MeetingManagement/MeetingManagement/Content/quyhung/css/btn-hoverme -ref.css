@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+.btn-h {
+    display: flex;
+    height: 50px;
+    padding: 0;
+    background: #009578;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    overflow: hidden;
+    font-family: 'Open Sans';
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+    .btn-h:hover {
+        background: #008168;
+    }
+
+    .btn-h:active {
+        background: #006e58;
+    }
+
+.btn-h__text,
+.btn-h__icon {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 24px;
+    color: #fff;
+    height: 100%;
+}
+
+.btn-h__icon {
+    font-size: 1.5em;
+    background: rgba(0, 0, 0, 0.08);
+}
