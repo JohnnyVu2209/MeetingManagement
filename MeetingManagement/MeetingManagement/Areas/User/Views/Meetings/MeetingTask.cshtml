@@ -24,7 +24,9 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-@if (create_by == true)
+@*12/08/2021 - Hiếu
+    công việc chỉ được tạo trong giai đoạn số 3*@
+@if (create_by == true && ViewBag.meeting_status == 3)
 {
     <div class="button-zone" style=" position: absolute; top: -10px; right: 0px;">
         <a class="btn button-create" style="background-color:#009fe5; color:white; display:inline-flex;" onclick="getCreateTaskModal(@meeting_id)">Tạo</a>

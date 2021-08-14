@@ -8,34 +8,40 @@
     var meet = db.MEETINGs;
 }
 
-<!--CSS-->
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
+<style>
+    .body-content {
+        width: calc(100% - 150px) !important;
+        max-width: none !important;
+    }
+
+    .btn-hard-code-vl {
+        float: right;
+        width: 90px;
+        height: 45px;
+        background-color: #009FE5;
+        color: white;
+        border-radius: 5px;
+        font-size: 16px;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+    }
+</style>
+<link href="~/Content/Meetings/meetingdetail.css" rel="stylesheet" />
 
 <!--Content-->
-<img style="width:100px;height:100px" src="https://media1.tenor.com/images/239a102840e57a65543cf5c7b3accd5f/tenor.gif">
 <div>
-    <div style="text-transform: uppercase;font-size:20px;margin-bottom:20px" ; class="header">
-        @Html.Label(Model.Category_Name)
-        <div style="font-size:12px">
+    <div style="text-transform: uppercase;font-size:20px;margin-bottom:20px;position:relative" class="header">
+        <div style="width:70%">
+            @Html.Label(Model.Category_Name)
+        </div>
+        <div style="font-size:12px; width:70%">
             @Html.DisplayFor(m => m.AspNetUser.UserName)
         </div>
-        <button style="float: right; width: 90px;height: 45px;
-        background-color: #009FE5; color: white;
-        border-radius: 5px;font-size:16px"
-                onclick="location.href = '@Url.Action("MeetingForm","MEETINGs")';">
+        <button class="btn-hard-code-vl" onclick="location.href = '@Url.Action("MeetingForm","MEETINGs", new {id = Model.Category_id })';">
             Tạo
         </button>
-
-
-
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
                 Modal content
@@ -48,74 +54,8 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
-
+            </div>
         </div>
     </div>
-
-</div>
     @Html.Action("MeetingList", "MEETINGs", new { id = Model.Category_id })
 </div>
-
-
-<!--Modal-->
-@*<div class="modal fade" id="pieChartModal" tabindex="-1" role="dialog" aria-labelledby="pieChartModal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="pieChartModal" style="font-size:larger">Biểu đồ tròn</h5>
-            </div>
-            <div class="modal-body">
-                <figure class="highcharts-figure">
-                    <div id="container-pie"></div>
-                </figure>
-                @Html.Action("MeetingList", "MEETINGs", new { id = Model.Category_id })
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" style="font-size:larger">Đóng</button>
-            </div>
-        </div>
-    </div>
-</div>*@
-
-
-
-@*<div class="modal fade" id="barChartModal" tabindex="-1" role="dialog" aria-labelledby="barChartModal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="barChartModal" style="font-size:large">Biểu đồ cột của @Html.Label(Model.Category_Name)</h5>
-            </div>
-            <div class="modal-body">
-                <figure class="highcharts-figure">
-                    <div id="container-bar"></div>
-                </figure>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" style="font-size:larger">Đóng</button>
-            </div>
-        </div>
-    </div>
-</div>*@
-
-
-<!--JS-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-
-

@@ -319,7 +319,7 @@
         'Tình trạng'
     ];
     $(document).ready(function () {
-        $.getJSON("/BCNTask/indexPieChart", function (data) {
+        $.getJSON(@Url.Action("indexPieChart", "BCNTask"), function (data) {
             Highcharts.chart('container-bar', {
                 chart: {
                     type: 'column'
@@ -375,73 +375,3 @@
         });
     });
 </script>
-
-
-
-<!---JSPie-->
-@*<script>
-    $(document).ready(function () {
-        $.getJSON("/BCNTask/indexPieChart", function (data) {
-            Highcharts.chart('container-pie', {
-                chart: {
-                    plotBackgroundColor: null,
-                    plotBorderWidth: null,
-                    plotShadow: false,
-                    type: 'pie'
-                },
-                title: {
-                  text: 'Số lượng cuộc họp trong năm @Convert.ToDateTime(ViewBag.now).ToString("yyyy")'
-                },
-                credits: {
-                    enabled: false
-                },
-                tooltip: {
-                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                },
-                accessibility: {
-                    point: {
-                        valueSuffix: '%'
-                    }
-                },
-                plotOptions: {
-                    pie: {
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        dataLabels: {
-                            enabled: true,
-                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-                        }
-                    }
-                },
-                series: [{
-                    name: 'Meetings',
-                    colorByPoint: true,
-                    data: [{
-                        name: 'Tạo cuộc họp',
-                        y: data.createM
-                    }, {
-                        name: 'Duyệt',
-                        y: data.passM
-                    }, {
-                        name: 'Đã họp',
-                        y: data.doneM
-                    }, {
-                        name: 'Biên bản',
-                        y: data.reportM
-                    }, {
-                        name: 'Hoàn thành',
-                        y: data.doneM
-                    }, {
-                        name: 'Không duyệt',
-                        y: data.nopassM
-                    }, {
-                        name: 'Đã huỷ',
-                        y: data.cancelM
-                    }]
-                }]
-            });
-        });
-    });
-</script>
-*@
-

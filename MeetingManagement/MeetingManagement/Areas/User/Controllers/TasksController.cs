@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace MeetingManagement.Areas.User.Controllers
 {
+    [Authorize]
     public class TasksController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
@@ -70,10 +71,10 @@ namespace MeetingManagement.Areas.User.Controllers
             db.SaveChanges();
 
             // send assigned email notification
-            var meetingid = db.MEETINGs.Find(tASK.Meeting_id).Meeting_name.ToString();            
+            var meetingid = db.MEETINGs.Find(tASK.Meeting_id).Meeting_name.ToString();
             var sender = db.AspNetUsers.Find(Asignee).Email.ToString();
-            var content = ASIGNED_TASK + tASK.Task_name + Environment.NewLine + TASK_DEADLINE + tASK.Task_Deadline ;
-            
+            var content = ASIGNED_TASK + tASK.Task_name + Environment.NewLine + TASK_DEADLINE + tASK.Task_Deadline;
+
             var mail = new Outlook(sender, meetingid, content);
             mail.SendMail();
 
@@ -102,11 +103,11 @@ namespace MeetingManagement.Areas.User.Controllers
                 tASK.Assignee = Asignee;
                 db.Entry(tASK).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("MeetingDetail", "Meetings", new { id = tASK.Meeting_id, modify = true});
+                return RedirectToAction("MeetingDetail", "Meetings", new { id = tASK.Meeting_id, modify = true });
             }
             ViewBag.Meeting_id = new SelectList(db.MEETINGs, "Meeting_id", "Meeting_name", tASK.Meeting_id);
             ViewBag.Meeting_id = new SelectList(db.MEMBERs, "Meeting_id", "Member_id", tASK.Meeting_id);
-            return RedirectToAction("MeetingDetail", "Meetings", new { id = tASK.Meeting_id, modify = true});
+            return RedirectToAction("MeetingDetail", "Meetings", new { id = tASK.Meeting_id, modify = true });
         }
 
         // GET: User/Tasks/Delete/5

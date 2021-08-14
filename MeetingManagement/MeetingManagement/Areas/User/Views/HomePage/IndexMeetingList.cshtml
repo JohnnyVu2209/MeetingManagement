@@ -8,8 +8,8 @@
 <div class="yuki-table-zone yuki-table-zone-fixed" style=" border: 1px solid #e5e5e5; ">
     <div class="table-head">Cuộc Họp Sắp Tới</div>
 
-    <div class="yuki-table-out-header">
-        <ul class="yuki-column-5">
+    <div class="yuki-table-out-header yuki-column-5">
+        <ul >
             <li>
                 Tên cuộc họp
                 @*           <button class="filter">
@@ -46,7 +46,7 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr style="cursor:pointer" onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id, modify = false })';">
+                <tr style="cursor:pointer; column-count:5" onclick="location.href = '@Url.Action("MeetingDetail","MEETINGs", new { id = item.Meeting_id, modify = false })';">
                     <td>
                         @item.MeetingName
                     </td>

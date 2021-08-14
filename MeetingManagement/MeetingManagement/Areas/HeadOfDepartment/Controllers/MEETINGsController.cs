@@ -14,6 +14,7 @@ using ICSharpCode.SharpZipLib.Zip;
 
 namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 {
+    [Authorize]
     public class MEETINGsController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
@@ -26,7 +27,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         private const string MEETING_REPORT = "Nhắc nhở nộp báo cáo cho cuộc họp.";
         private MEETING meetingSS = null;
         private MEETING meetingEdit = null;
-        /*
+        /*  
          * Session for CREATE meeting
          */
         private void GetMeeting()
@@ -144,16 +145,16 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         [HttpPost]
         public ActionResult CancelModel(int Meeting_id, MEETING model)
         {
-                var meeting = db.MEETINGs.Find(Meeting_id);
-                //change meeting status
-                meeting.Status = 7;
-                meeting.Feedback = model.Feedback;
+            var meeting = db.MEETINGs.Find(Meeting_id);
+            //change meeting status
+            meeting.Status = 7;
+            meeting.Feedback = model.Feedback;
 
-                db.Entry(meeting).State = EntityState.Modified;
-                db.SaveChanges();
-                if(meeting.Verify_by!=null)
-                    sendCancelModel(meeting);
-                return RedirectToAction("Index","tabCuocHop");
+            db.Entry(meeting).State = EntityState.Modified;
+            db.SaveChanges();
+            if (meeting.Verify_by != null)
+                sendCancelModel(meeting);
+            return RedirectToAction("Index", "tabCuocHop");
         }
 
         private void sendCancelModel(MEETING meeting)
@@ -550,7 +551,6 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             return RedirectToAction("MeetingForm", new { id = model.Category_id });
         }
 
-
         public ActionResult RemoveUser(string userId)
         {
             GetMeeting();
@@ -602,7 +602,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 
         private bool ValidateFeedback(MEETING meeting)
         {
-            if(meeting.Feedback == null || meeting.Feedback == "")
+            if (meeting.Feedback == null || meeting.Feedback == "")
             {
                 return true;
             }
@@ -771,7 +771,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
          *************************REPORT************************
          */
 
-        
+
 
         public ActionResult NotiMeeting(int meetingId)
         {
@@ -798,6 +798,14 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
                 mail.SendMail();
             }
             return RedirectToAction("ReportList", "Meetings", new { id = categoryId });
+        }
+        public ActionResult MeetingComplete(int id)
+        {
+            var meeting = db.MEETINGs.Find(id);
+            meeting.Status = 5;
+            db.Entry(meeting).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("MeetingDetail", "Meetings", new { id = meeting.Meeting_id, modify = false });
         }
     }
 }

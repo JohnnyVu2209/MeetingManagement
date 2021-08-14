@@ -12,6 +12,10 @@ body {
 }
 
 .body-content {
+    width: calc(100% - 150px ) !important;
+}
+
+.body-content {
     position: absolute;
     top: 0px;
 }
@@ -120,12 +124,11 @@ body {
 
 .yuki-login-info {
     position: relative;
-    right: 20px;
-    top: 7px;
+    right: 20px;    
 }
 /*--#table--*/
 .yuki-table-zone {
-    position: relative;    
+    position: relative;
     margin-bottom: 20px;
     display: block;
     padding-top: 35px;
@@ -397,4 +400,7 @@ td .complete-status, .complete-status {
     color: white;
     margin: auto;
     text-align: center;
+}
+.body-content {
+    width: calc(100% - 150px ) !important;
 }

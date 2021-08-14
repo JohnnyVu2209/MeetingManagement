@@ -43,8 +43,8 @@
                         Công việc
                     </div>
                     @*<div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-report')">
-                            Báo cáo
-                        </div>*@
+                Báo cáo
+            </div>*@
                 }
                 else if (ViewBag.modify == true)
                 {
@@ -52,20 +52,26 @@
                         Chi tiết
                     </div>
                     @*<div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-member')">
-                            Thành viên
-                        </div>*@
+                Thành viên
+            </div>*@
                     <div class="detail-tab-btn tablinks " onclick="openTab(event,'meeting-task')">
                         Công việc
                     </div>
                     @*<div class="detail-tab-btn tablinks" onclick="openTab(event,'meeting-report')">
-                            Báo cáo
-                        </div>*@
-                    if (ViewBag.user_identity == Model.Create_by && Model.Status > 1 && Model.Status < 3)
+                Báo cáo
+            </div>*@
+                    if (ViewBag.user_identity == Model.Create_by && Model.Status >= 1 && Model.Status < 3)
                     {
                         <div class="cancel-btn" onclick="getCancelModel(1)" style="right: calc( 0% + 30px ); position: fixed;">
-                            
-                                Hủy cuộc họp
-                            
+
+                            Hủy cuộc họp
+
+                        </div>
+                    }
+                    if (ViewBag.user_identity == Model.Create_by && Model.Status >= 4)
+                    {
+                        <div class="cancel-btn" onclick="location.href = '@Url.Action("MeetingComplete","Meetings", new { id = Model.Meeting_id})';" style="right: calc( 0% + 60px ); position: fixed;background-color:forestgreen">
+                            Hoàn thành
                         </div>
                     }
                 }

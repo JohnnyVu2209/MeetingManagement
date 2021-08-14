@@ -636,7 +636,14 @@ namespace MeetingManagement.Areas.User.Controllers
         {
             return View();
         }
-
+        public ActionResult MeetingComplete(int id)
+        {
+            var meeting = db.MEETINGs.Find(id);
+            meeting.Status = 5;
+            db.Entry(meeting).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("MeetingDetail", "Meetings", new { id = meeting.Meeting_id, modify = false });
+        }
 
     }
 }

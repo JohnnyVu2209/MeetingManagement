@@ -11,6 +11,57 @@
 <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
 <style>
+    .btn_catalog {
+        min-width: 142px;
+        height: 36px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn--delete {
+        background: #e74c3c;
+        font-family: Mulish;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 18px;
+        text-align: center;
+        color: #FFFFFF;
+        margin-right: 8px;
+    }
+
+
+
+    .btn-primary-fixed {
+        color: #fff;
+        background-color: #009fe5;
+        /* border-color: #2e6da4; */
+        position: relative;
+        left: 0px;
+        width: 1000px;
+        border-radius: 4px 4px 0px 0px;
+    }
+
+    .space {
+        width: 966px;
+    }
+
+    .file-zone {
+        margin-left: 34px;
+        width: 300px;
+        height: 50px;
+    }
+
+    .area-input {
+        height: fit-content;
+        min-height: 250px;
+        padding: 5px;
+    }
+
+    #cancel-btn:hover {
+        text-decoration: none;
+    }
     .edit_fixed {
         padding-left: 5px;
         width: 100%;
@@ -383,7 +434,7 @@
             <button type="submit" style="border:0px; width: 100px; height: 40px; background-color: #009fe5; color: white; display: inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor:pointer">
                 Lưu
             </button>
-            <a id="cancel-btn" onclick="location.href = '@Url.Action("Index", "Meetings")'" style="width: 100px; height: 40px; background-color: #f1f1f1; color: black; display:inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor: pointer ">
+            <a id="cancel-btn" onclick="location.href = '@Url.Action("Index", "tabCuocHop")'" style="width: 100px; height: 40px; background-color: #f1f1f1; color: black; display:inline-flex; align-items: center; justify-content: center; border-radius: 5px; cursor: pointer ">
                 Hủy
             </a>
 
@@ -395,62 +446,6 @@
 }
 <div id="show-popup"></div>
 <div id="Feedback"></div>
-
-
-<style>
-    .btn_catalog {
-        min-width: 142px;
-        height: 36px;
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-    }
-
-    .btn--delete {
-        background: #e74c3c;
-        font-family: Mulish;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 18px;
-        text-align: center;
-        color: #FFFFFF;
-        margin-right: 8px;
-    }
-
-
-
-    .btn-primary-fixed {
-        color: #fff;
-        background-color: #009fe5;
-        /* border-color: #2e6da4; */
-        position: relative;
-        left: 0px;
-        width: 1000px;
-        border-radius: 4px 4px 0px 0px;
-    }
-
-    .space {
-        width: 966px;
-    }
-
-    .file-zone {
-        margin-left: 34px;
-        width: 300px;
-        height: 50px;
-    }
-
-    .area-input {
-        height: fit-content;
-        min-height: 250px;
-        padding: 5px;
-    }
-
-    #cancel-btn:hover {
-        text-decoration: none;
-    }
-</style>
-
 
 <script>
         function getCreateModal() {

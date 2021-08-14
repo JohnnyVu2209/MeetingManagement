@@ -15,6 +15,7 @@
         padding: 0 15px;
         margin: auto;
     }
+
     .create-meeting-btn {
         float: right;
         width: 90px;
@@ -25,9 +26,9 @@
         font-size: 16px
     }
 
-        .item-list:hover {
-            background-color: #e7e7e7;
-        }
+    .item-list:hover {
+        background-color: #e7e7e7;
+    }
 
     .item-name {
         height: inherit;
@@ -73,18 +74,20 @@
             background-color: #dc3545;
             border-color: #dc3545;
         }
+
     .btn-outline-info {
         color: #0dcaf0;
-        border-color: #0dcaf0;
+        border: 1px solid #0dcaf0 !important;
     }
-    .btn-outline-info:hover {
-        color: #000;
-        background-color: #0dcaf0;
-        border-color: #0dcaf0;
-    }
+
+        .btn-outline-info:hover {
+            color: #000;
+            background-color: #0dcaf0;
+            border-color: #0dcaf0;
+        }
 </style>
 <link href="~/Content/catalog-list.css" rel="stylesheet" />
-<link href="~/Content/Meetings/meetingdetail.css" rel="stylesheet" />
+<link href="~/Content/Meetings/Nav-body.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 @*<link href="~/Content/quyhung/css/btn-hoverme.css" rel="stylesheet" />
 *@
@@ -92,34 +95,37 @@
 
 <!--Content--->
 <div class="body-navbar">
-
     <div class="nav-content-zone">
-
-        <div class="lable-zone1">
+        <div>
             <div style="text-transform: uppercase;font-size:30px;margin-bottom:20px" ; class="header">
-                <label>DANH MỤC</label>
+                <label style=" font-family: 'FontAwesome'; font-weight: 100;">DANH MỤC</label>
 
-                <button class="create-meeting-btn" onclick="ShowCreatePopUp()">Tạo</button>
-                <button style="color:white;position:absolute;left:840px;"
-                    onclick="location.href = '@Url.Action("statistic","Categories")'" class="btn yuki-btn-blue">
+                @*<button class="create-meeting-btn" >Tạo</button>*@
+                <button style="color:white;position:absolute;left:1050px;"
+                        onclick="ShowCreatePopUp()" class="btn yuki-btn-blue">
+                    <p style="margin:0;">
+                        Tạo
+                    </p>
+                </button>
+                <button style="color:white;position:absolute;left:900px;"
+                        onclick="location.href = '@Url.Action("statistic","Categories")'" class="btn yuki-btn-blue">
                     <p style="margin:0;">
                         Thống kê
                     </p>
                 </button>
             </div>
-
         </div>
     </div>
 </div>
 <div class="card-body card-body-fixed">
 
-    @foreach (var item in Model)
-    {
-        <div class="item-list row" style="margin-left:15px;margin-top:15px;">
-            <div class="col-md-8 item-name" onclick="location.href ='@Url.Action("Details","Categories", new { id = item.Category_id})';">
+@foreach (var item in Model)
+{
+    <div class="item-list row" style="margin-left:15px;margin-top:15px;">
+        @*<div class="col-md-8 item-name" onclick="location.href ='@Url.Action("Details","Categories", new { id = item.Category_id})';">
                 <h5>@item.Category_Name</h5>
-            </div>
-            <div class="col-md-4 item-btn">
+            </div>*@
+        @*<div class="col-md-4 item-btn">
                 <button class="btn btn-outline-info" onclick="location.href ='@Url.Action("ReportList","Meetings", new { id = item.Category_id})';">
                     <i class="fa fa-file" aria-hidden="true"></i>Báo cáo
                 </button>
@@ -131,10 +137,26 @@
                         onclick="ShowDeletePopUp(@item.Category_id)" style="border: 0.5px solid">
                     <ion-icon name="close-circle-outline"></ion-icon>
                 </button>
-            </div>
-
+            </div>*@
+        <div class="col-md-7 item-name" onclick="location.href ='@Url.Action("Details","Categories", new { id = item.Category_id})';">
+            <h5>@item.Category_Name</h5>
         </div>
-    }
+        <div class="magic-item-list">
+            <button style="margin-right:2px" class="btn btn-outline-info" onclick="location.href ='@Url.Action("ReportList","Meetings", new { id = item.Category_id})';">
+                <i class="fa fa-file" aria-hidden="true"></i> Báo cáo
+            </button>
+            <button style="margin-right: 2px; border: 1px solid; align-self: center " class="btn btn-outline-secondary"
+                    onclick="ShowEditPopUp(@item.Category_id)">
+                <ion-icon name="pencil-outline" @*style="width:30px;height:30px"*@></ion-icon>Chỉnh sửa
+            </button>
+            <button style="margin-right:2px; border: 1px solid;"  class="btn btn-outline-danger"
+                    onclick="ShowDeletePopUp(@item.Category_id)">
+                <ion-icon name="close-circle-outline"></ion-icon> Xóa
+            </button>
+        </div>
+
+    </div>
+}
 </div>
 <div id="show-popup"></div>
 <style>
@@ -178,13 +200,20 @@
         margin: 0px 2.5px;
         color: black;
     }
-    
-</style>
 
     .user-ctg-index-manipulation {
         float: right;
         margin: 0px 2.5px;
         color: black;
+    }
+</style>
+<style>
+    .magic-item-list {
+        width: fit-content;
+        height: inherit;
+        display: inline-flex;
+        position: absolute;
+        align-items: center;
     }
 </style>
 
