@@ -319,7 +319,7 @@
         'Tình trạng'
     ];
     $(document).ready(function () {
-        $.getJSON(@Url.Action("indexPieChart", "BCNTask"), function (data) {
+        $.getJSON('@Url.Action("indexPieChart", "BCNTask")', function (data) {
             Highcharts.chart('container-bar', {
                 chart: {
                     type: 'column'
