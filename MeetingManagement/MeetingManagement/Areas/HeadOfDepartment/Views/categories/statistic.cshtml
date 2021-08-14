@@ -325,7 +325,7 @@
                     type: 'column'
                 },
                 title: {
-                    text: 'Cuộc họp trong tháng @Convert.ToDateTime(ViewBag.now).ToString("MM")'
+                    text: 'Tình trạng của các cuộc họp trong tháng @Convert.ToDateTime(ViewBag.now).ToString("MM")'
                 },
                 xAxis: {
                     categories: chartLabell,
@@ -379,7 +379,7 @@
 
 
 <!---JSPie-->
-<script>
+@*<script>
     $(document).ready(function () {
         $.getJSON("/BCNTask/indexPieChart", function (data) {
             Highcharts.chart('container-pie', {
@@ -443,91 +443,5 @@
         });
     });
 </script>
+*@
 
-
-@*<input type="datetime-local" name="startdate" />
-    <input type="datetime-local" name="enddate" id="enddate1" />*@
-@*<select id="select">
-    <option value="Jan">January</option>
-    <option value="Feb">February</option>
-    <option value="Mar">March</option>
-    <option value="Apr">April</option>
-    <option value="May">May</option>
-    <option value="Jun">June</option>
-    <option value="July">July</option>*@
-@*    <option value="August">August</option>
-    <option value="September">September</option>
-    <option value="October">October</option>
-    <option value="November">November</option>
-    <option value="December">December</option>*@
-@*</select>
-    <input type="number" id="numData" />
-    <button onclick="filterChart()">
-        Xem
-    </button>*@
-<!--<script>
-    const chartData = [12, 19, 3, 5, 9, 10, 6];
-    const chartColor = [
-        '#48B763',
-        '#4865B7',
-        '#B7489C',
-        '#B79A48',
-        '#F04D13',
-        '#F0E54A',
-        '#F0B059',
-    ];
-    const chartLabel = [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',-->
-@* 'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec' *@
-<!--];
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-data: {
-    labels: chartLabel,
-    datasets: [{
-        label: '# of Votes',
-        data: chartData,
-        backgroundColor: chartColor,
-        borderWidth: 1
-    }]
-},
-    });
-function filterChart() {-->
-@*const mon = document.getElementById('select');*@
-<!--const numData = document.getElementById('numData').value;
-const filterData = myChart.data.datasets[0].data.filter(value => value > numData);
-const filterLabel = [];
-const filterColor = [];
-let i = 0;
-for (i; i < filterData.length; i++) {
-    const rsl = myChart.data.datasets[0].data.indexOf(filterData[i]);
-    const labelrsl = myChart.data.labels[rsl];
-    const colorrsl = myChart.data.datasets[0].backgroundColor[rsl];
-    filterLabel.push(labelrsl);
-    filterColor.push(colorrsl);
-}
-myChart.data.datasets[0].data = filterData;
-myChart.data.labels = filterLabel;
-myChart.data.datasets[0].backgroundColor = filterColor;
-myChart.update();-->
-@*        const xdata = myChart.data.datasets[0].data.fil;
-    console.log(xdata);
-    const filterData = myChart.data.datasets[0].data.filter(value => value > 6);
-    console.log(filterData);
-    const mon = document.getElementById('select');
-    myChart.data.labels(mon.value)*@
-
-<!--}
-
-</script>-->
