@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <body id="yuki-body" style="overflow-x: hidden;">
-@*    <div class="row" style="margin-bottom:15px;">
+    @*    <div class="row" style="margin-bottom:15px;">
             <div class="col-sm-12">
                 <div class="form-inline pull-right">
                     <label>Search</label>
@@ -31,29 +31,29 @@
                     Danh mục
                     <i class='fa fa-sort'></i>
                     @*<button class="filter">
-                <img src="~/Content/outline_filter_alt_black_24dp.png">
-            </button>*@
+                            <img src="~/Content/outline_filter_alt_black_24dp.png">
+                        </button>*@
                 </li>
                 <li onclick="sortTable(1,1)">
                     Cuộc họp
                     <i class='fa fa-sort'></i>
                     @*<button class="filter">
-                <img src="~/Content/outline_filter_alt_black_24dp.png">
-            </button>*@
+                            <img src="~/Content/outline_filter_alt_black_24dp.png">
+                        </button>*@
                 </li>
                 <li onclick="sortTable(2,1)">
                     Người chủ trì
                     <i class='fa fa-sort'></i>
                     @*<button class="filter">
-                <img src="~/Content/outline_filter_alt_black_24dp.png">
-            </button>*@
+                            <img src="~/Content/outline_filter_alt_black_24dp.png">
+                        </button>*@
                 </li>
                 <li onclick="sortTable(3,1)">
                     Ngày tạo
                     <i class='fa fa-sort'></i>
                     @*<button class="filter">
-                <img src="~/Content/outline_filter_alt_black_24dp.png">
-            </button>*@
+                            <img src="~/Content/outline_filter_alt_black_24dp.png">
+                        </button>*@
                 </li>
                 <li>
                     Thao tác
@@ -91,34 +91,18 @@
                 <li onclick="sortTable(0,2)">
                     Danh mục
                     <i id='col1' class='fa fa-sort'></i>
-
-                    @*<button class="filter">
-                            <img src="~/Content/outline_filter_alt_black_24dp.png">
-                        </button>*@
                 </li>
                 <li onclick="sortTable(1,2)">
                     Cuộc họp
                     <i id='col1' class='fa fa-sort'></i>
-
-                    @*<button class="filter">
-                            <img src="~/Content/outline_filter_alt_black_24dp.png">
-                        </button>*@
                 </li>
                 <li onclick="sortTable(2,2)">
                     Ngày họp
                     <i id='col1' class='fa fa-sort'></i>
-
-                    @*<button class="filter">
-                            <img src="~/Content/outline_filter_alt_black_24dp.png">
-                        </button>*@
                 </li>
                 <li onclick="sortTable(3,2)">
                     Tình trạng
                     <i id='col1' class='fa fa-sort'></i>
-
-                    @*<button class="filter">
-                            <img src="~/Content/outline_filter_alt_black_24dp.png">
-                        </button>*@
                 </li>
                 <li>
                     Thao tác
@@ -126,7 +110,6 @@
             </ul>
         </div>
         <table class="yuki-table" id="table-sort-2">
-
             @foreach (var meeting in Model)
             {
                 if (meeting.Status == 3 || meeting.Status == 4 && meeting.Verify_by == ViewBag.user_identity)
@@ -164,10 +147,6 @@
                                     <a id="notify" onclick="notify(@meeting.Meeting_id)" style="cursor: pointer;">Nhắc nhở</a>
                                 }
                             }
-                            @*@if ( meeting.Status == 4)
-        {
-            <span style="margin: 0px;">Nhắc nhở</span>
-        }*@
                         </td>
                     </tr>
                 }
@@ -175,66 +154,6 @@
         </table>
     </div> <!---Table 2-->
 </body>
-
-<!--<script>
-    function sortTable(n) {
-        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-        table = document.getElementById("table-sort2");
-        switching = true;
-        //Set the sorting direction to ascending:
-        dir = "asc";
-        /*Make a loop that will continue until
-        no switching has been done:*/
-        while (switching) {
-            //start by saying: no switching is done:
-            switching = false;
-            rows = table.rows;
-            /*Loop through all table rows (except the
-            first, which contains table headers):*/
-            for (i = 1; i < (rows.length - 1); i++) {
-                //start by saying there should be no switching:
-                shouldSwitch = false;
-                /*Get the two elements you want to compare,
-                one from current row and one from the next:*/
-                x = rows[i].getElementsByTagName("TD")[n];
-                y = rows[i + 1].getElementsByTagName("TD")[n];
-                /*check if the two rows should switch place,
-                based on the direction, asc or desc:*/
-                if (dir == "asc") {
-                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()-->
-                        @*&& Number(x.innerHTML) > Number(y.innerHTML)*@ <!--) {
-                        //if so, mark as a switch and break the loop:
-                        shouldSwitch = true;
-                        break;
-                    }
-                } else if (dir == "desc") {
-                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()-->
-                        @*&& Number(x.innerHTML) < Number(y.innerHTML)*@<!--) {
-                        //if so, mark as a switch and break the loop:
-                        shouldSwitch = true;
-                        break;
-                    }
-                }
-            }
-            if (shouldSwitch) {
-                /*If a switch has been marked, make the switch
-                and mark that a switch has been done:*/
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-                //Each time a switch is done, increase this count by 1:
-                switchcount++;
-            } else {
-                /*If no switching has been done AND the direction is "asc",
-                set the direction to "desc" and run the while loop again.*/
-                if (switchcount == 0 && dir == "asc") {
-                    dir = "desc";
-                    switching = true;
-                }
-            }
-        }
-    }
-</script>-->
-
 <script>
     function sortTable(n,t) {
         var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
