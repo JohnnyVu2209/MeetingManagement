@@ -26,7 +26,7 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         private const string MEETING_REPORT = "Nhắc nhở nộp báo cáo cho cuộc họp.";
         private MEETING meetingSS = null;
         private MEETING meetingEdit = null;
-        /*
+        /*  
          * Session for CREATE meeting
          */
         private void GetMeeting()
@@ -549,7 +549,6 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
             Session["Meeting"] = meetingSS;
             return RedirectToAction("MeetingForm", new { id = model.Category_id });
         }
-
 
         public ActionResult RemoveUser(string userId)
         {
