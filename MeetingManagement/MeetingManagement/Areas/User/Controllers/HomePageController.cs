@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 
 namespace MeetingManagement.Areas.User.Controllers
 {
+    [Authorize]
     public class HomePageController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();

@@ -9,8 +9,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 {
-    [Authorize/*(Roles = "BCN")*/]
-
+    [Authorize]
     public class MainPageController : Controller
     {
         private string VERIFY_MEETING = "Cuộc họp của bạn đã được duyệt.";

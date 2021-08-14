@@ -9,9 +9,7 @@ using Microsoft.AspNet.Identity;
 
 namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 {
-
     [Authorize]
-
     public class BCNTaskController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();

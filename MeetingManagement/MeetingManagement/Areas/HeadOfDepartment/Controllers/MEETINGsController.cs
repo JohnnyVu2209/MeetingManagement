@@ -14,6 +14,7 @@ using ICSharpCode.SharpZipLib.Zip;
 
 namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
 {
+    [Authorize]
     public class MEETINGsController : Controller
     {
         private SEP24Team7Entities db = new SEP24Team7Entities();
