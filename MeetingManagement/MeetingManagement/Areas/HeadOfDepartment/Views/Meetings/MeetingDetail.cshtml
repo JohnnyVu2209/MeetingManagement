@@ -11,6 +11,43 @@
 
 @Html.AntiForgeryToken()
 
+<style>
+    /*cancel-btn*/
+    .cancel-btn {
+        width: 100px;
+        height: 40px;
+        background-color: #ff4d4d;
+        color: white;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        cursor: pointer
+    }
+
+        .cancel-btn:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+    #partialview-zone {
+        height: 2000px;
+    }
+
+
+    /*    .button-close {
+        color: #212529;
+        border-color: #212529;
+    }
+
+        .button-close:hover {
+            background: #f1f1f1;
+        }*/
+
+    .detail-tab-btn {
+        margin-right: 10px;
+    }
+</style>
 <body>
     <div class="body-navbar">
         <div class="nav-content-zone">
@@ -182,40 +219,4 @@
 
 </script>
 
-<style>
-    /*cancel-btn*/
-    .cancel-btn {
-        width: 100px;
-        height: 40px;
-        background-color: #ff4d4d;
-        color: white;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 5px;
-        cursor: pointer
-    }
 
-        .cancel-btn:hover {
-            color: white;
-            text-decoration: none;
-        }
-
-    #partialview-zone {
-        height: 2000px;
-    }
-
-
-    /*    .button-close {
-        color: #212529;
-        border-color: #212529;
-    }
-
-        .button-close:hover {
-            background: #f1f1f1;
-        }*/
-
-    .detail-tab-btn {
-        margin-right: 10px;
-    }
-</style>

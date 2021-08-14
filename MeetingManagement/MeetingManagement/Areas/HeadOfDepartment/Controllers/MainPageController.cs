@@ -16,6 +16,12 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         private string REFUSE_MEETING = "Cuộc họp của bạn đã bị từ chối. Lý do: ";
         private string MEETING_DATE = "Cuộc họp sẽ diễn ra lúc: ";
         private string MEETING_ADDRESS = "Nơi diễn ra cuộc họp: ";
+
+        private const string MEETING_TIME = "Thời gian diễn ra cuộc họp: ";
+        private const string MEETING_LOCATION = "Địa điểm diễn ra cuộc họp: ";
+        private const string MEETING_CANCEL = "Cuộc họp đã bị huỷ vì lý do: ";
+        private const string MEETING_REPORT = "Nhắc nhở nộp báo cáo cho cuộc họp.";
+
         private SEP24Team7Entities db = new SEP24Team7Entities();
         // GET: HeadOfDepartment/Home
         public ActionResult Index()
@@ -116,9 +122,15 @@ namespace MeetingManagement.Areas.HeadOfDepartment.Controllers
         {
             var meeting = db.MEETINGs.Find(id);
             meeting.Notify = true;
-
             db.Entry(meeting).State = EntityState.Modified;
             db.SaveChanges();
+
+            string DateTime = meeting.Date_Start.ToString("dd/MM/yyyy") + " " + meeting.Time_Start;
+            var Receiver = db.AspNetUsers.Find(meeting.Create_by).Email;
+            var Subject = meeting.Meeting_name;
+            var Body = MEETING_REPORT + Environment.NewLine + MEETING_TIME + DateTime;
+            Outlook mail = new Outlook(Receiver, Subject, Body);
+            mail.SendMail();
 
             return RedirectToAction("Index","MainPage");
         }

@@ -10,7 +10,7 @@
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<body id="yuki-body">
+<body id="yuki-body" style="overflow-x: hidden;">
 @*    <div class="row" style="margin-bottom:15px;">
             <div class="col-sm-12">
                 <div class="form-inline pull-right">
@@ -25,35 +25,38 @@
         <div class="yuki-table-title">
             <p>Cuộc Họp Chờ Duyệt</p>
         </div>
-        <div class="yuki-table-out-header">
-            <ul class="yuki-column-4" style="cursor:pointer">
+        <div class="yuki-table-out-header yuki-column-5">
+            <ul style="cursor:pointer">
                 <li onclick="sortTable(0,1)">
                     Danh mục
                     <i class='fa fa-sort'></i>
                     @*<button class="filter">
-                            <img src="~/Content/outline_filter_alt_black_24dp.png">
-                        </button>*@
+                <img src="~/Content/outline_filter_alt_black_24dp.png">
+            </button>*@
                 </li>
                 <li onclick="sortTable(1,1)">
                     Cuộc họp
                     <i class='fa fa-sort'></i>
                     @*<button class="filter">
-                            <img src="~/Content/outline_filter_alt_black_24dp.png">
-                        </button>*@
+                <img src="~/Content/outline_filter_alt_black_24dp.png">
+            </button>*@
                 </li>
                 <li onclick="sortTable(2,1)">
                     Người chủ trì
                     <i class='fa fa-sort'></i>
                     @*<button class="filter">
-                            <img src="~/Content/outline_filter_alt_black_24dp.png">
-                        </button>*@
+                <img src="~/Content/outline_filter_alt_black_24dp.png">
+            </button>*@
                 </li>
                 <li onclick="sortTable(3,1)">
                     Ngày tạo
                     <i class='fa fa-sort'></i>
                     @*<button class="filter">
-                            <img src="~/Content/outline_filter_alt_black_24dp.png">
-                        </button>*@
+                <img src="~/Content/outline_filter_alt_black_24dp.png">
+            </button>*@
+                </li>
+                <li>
+                    Thao tác
                 </li>
             </ul>
         </div>
@@ -62,12 +65,14 @@
             {
                 if (meeting.Status == 1)
                 {
-                    <tr class="yuki-column-4" onclick="location.href = '@Url.Action("VerifyMeeting","MainPage", new { id = meeting.Meeting_id })';" style="cursor: pointer;">
+                    <tr class="yuki-column-5">
                         <td>@meeting.CATEGORY.Category_Name</td>
                         <td>@meeting.Meeting_name</td>
                         <td>@meeting.AspNetUser.Email</td>
                         <td>@Convert.ToDateTime(meeting.Date_Create).ToString("MM/dd/yyyy")</td>
-
+                        <td>
+                            <a style="cursor:pointer;" onclick="location.href = '@Url.Action("VerifyMeeting","MainPage", new { id = meeting.Meeting_id })';">Chi tiết</a>
+                        </td>
                     </tr>
                 }
             }
@@ -307,5 +312,4 @@
     .body-content {
         width: calc(100% - 150px ) !important;
     }
-
 </style>
