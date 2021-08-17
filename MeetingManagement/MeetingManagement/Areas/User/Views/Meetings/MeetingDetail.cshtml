@@ -68,7 +68,7 @@
 
                         </div>
                     }
-                    if (ViewBag.user_identity == Model.Create_by && Model.Status >= 4)
+                    if (ViewBag.user_identity == Model.Create_by && Model.Status == 4)
                     {
                         <div class="cancel-btn" onclick="location.href = '@Url.Action("MeetingComplete","Meetings", new { id = Model.Meeting_id})';" style="right: calc( 0% + 60px ); position: fixed;background-color:forestgreen">
                             Hoàn thành

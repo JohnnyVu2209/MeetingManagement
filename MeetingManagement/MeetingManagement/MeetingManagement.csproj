@@ -369,6 +369,7 @@
       <DependentUpon>Models.edmx</DependentUpon>
       <LastGenOutput>Models.cs</LastGenOutput>
     </Content>
+    <Content Include="Properties\PublishProfiles\FTPProfile.pubxml.user" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\catalog-list.css" />
@@ -724,6 +725,8 @@
     <Content Include="Areas\HeadOfDepartment\Views\Meetings\MeetingList.cshtml" />
     <Content Include="Areas\HeadOfDepartment\Views\Categories\Details.cshtml" />
     <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
+    <Content Include="Properties\serviceDependencies.json" />
+    <Content Include="Properties\serviceDependencies.local.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

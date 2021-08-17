@@ -14,14 +14,14 @@
                     <div class="row">
                         <div class="col-md-10">
                             <div class="col-md-10 col-md-push-2">
-                                <div class="input-group">
+                                <div class="input-group" style="display: table-cell;">
                                     <span class="input-group-btn">
                                         <span class="form-group btn btn-default btn-file">
                                             Browse…
-                                            <input type="file" name="ReportFile" id="ReportFile" class="form-control" accept=".zip,.pdf,.doc,.docx,.xml,application/msword" />
+                                            <input  type="file" name="ReportFile" id="ReportFile" class="form-control" accept=".zip,.pdf,.doc,.docx,.xml,application/msword" />
                                         </span>
                                     </span>
-                                    <input type="text" id="ReportName" class="form-control" readonly>
+                                    <input style=" top: -50px; z-index: -10;"    type="text" id="ReportName" class="form-control" readonly>
 
                                 </div>
                                 @Html.ValidationMessage("FileAttach", "", new { @class = "text-danger custom-danger" })
