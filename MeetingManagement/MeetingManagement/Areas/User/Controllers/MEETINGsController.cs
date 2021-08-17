@@ -44,11 +44,21 @@ namespace MeetingManagement.Areas.User.Controllers
                 Session["MeetingEdit"] = meetingEdit;
             }
         }
+        /*
+         * Session for EDIT meeting
+         */
         private void GetEditMeeting(int id)
         {
 
             if (Session["MeetingEdit"] != null)
+            {
                 meetingEdit = Session["MeetingEdit"] as MEETING;
+                if (meetingEdit.Meeting_id != id)
+                {
+                    meetingEdit = db.MEETINGs.Find(id);
+                    Session["MeetingEdit"] = meetingEdit;
+                }
+            }
             else
             {
                 meetingEdit = db.MEETINGs.Find(id);
@@ -63,10 +73,9 @@ namespace MeetingManagement.Areas.User.Controllers
             return View(mEETINGs.ToList());
         }
 
-        public ActionResult MeetingDetail(int id, bool? modify)
+        public ActionResult MeetingDetail(int id, bool modify)
         {
-            meetingEdit = db.MEETINGs.Find(id);
-            Session["MeetingEdit"] = meetingEdit;
+            GetEditMeeting(id);
             ViewBag.modify = modify;
             ViewBag.user_identity = User.Identity.GetUserId();
             CATEGORY category = db.CATEGORies.Find(meetingEdit.Category_id);
